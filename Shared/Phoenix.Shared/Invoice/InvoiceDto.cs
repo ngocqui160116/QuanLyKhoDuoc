@@ -4,6 +4,7 @@ namespace Phoenix.Shared.Invoice
 {
     public class InvoiceDto
     {
+        
         public string IdInvoice { get; set; }
         public DateTime Date { get; set; }
         public int IdStaff { get; set; }
