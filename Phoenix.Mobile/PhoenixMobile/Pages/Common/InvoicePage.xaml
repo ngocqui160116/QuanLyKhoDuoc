@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common" 
+             xmlns:invoice="clr-namespace:Phoenix.Mobile.Core.Models.Invoice;assembly=Phoenix.Mobile.Core"
+             x:Class="Phoenix.Mobile.Pages.Common.InvoicePage"
+             x:DataType="common:InvoicePageModel"
+             xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
+             NavigationPage.HasNavigationBar="False"
+             ControlTemplate="{StaticResource FullScreenHasBack}">
+    <ContentPage.Content>
+        <StackLayout >
+            <ListView ItemsSource="{Binding Invoices}"
+              xe:Commands.Tap="{Binding AddInvoiceCommand}"
+              HasUnevenRows="True"
+              BackgroundColor="#ecf0f1"
+              SeparatorVisibility="None"
+              HorizontalOptions="FillAndExpand"
+              VerticalOptions="FillAndExpand">
+
+                <ListView.ItemTemplate>
+
+                    <DataTemplate x:DataType="invoice:InvoiceModel">
+                        <ViewCell>
+                            <StackLayout Margin="6,4,6,4"
+                                 BackgroundColor="White">
+                                <Label Text="{Binding IdInvoice}"
+                               Margin="8"
+                               FontAttributes="Bold"
+                               FontSize="Medium" />
+                                <Label Text="{Binding Total}"
+                               Margin="8,2,8,4"
+                               FontSize="Small" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

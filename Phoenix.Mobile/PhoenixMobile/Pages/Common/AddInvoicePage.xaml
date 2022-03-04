@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:invoice="clr-namespace:Phoenix.Mobile.Core.Models.Invoice;assembly=Phoenix.Mobile.Core"
+             xmlns:controls="clr-namespace:Phoenix.Mobile.Controls" 
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="Phoenix.Mobile.Pages.Common.AddInvoicePage"
+             xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
+             ControlTemplate="{StaticResource FullScreenHasBack}">
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="WhiteSmoke">
+            <StackLayout HeightRequest="25"
+                         WidthRequest="50">
+            </StackLayout>
+            <Frame CornerRadius="15" >
+                <StackLayout  BackgroundColor="White">
+                    <Grid x:DataType="invoice:InvoiceModel">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.3*"/>
+                            <ColumnDefinition Width="0.7*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label  Grid.Row="1"
+                                Grid.Column="0" 
+                                Margin="10,5,0,0" 
+                                WidthRequest="95" 
+                                FontSize="Medium" 
+                                Text="Mã NCC"  />
+                        <Entry  Grid.Row="1"
+                                Grid.Column="1"
+                                Placeholder="{Binding IdCustomer}"
+                                WidthRequest="200" 
+                                />
+
+                        <Label  Grid.Row="2"
+                                Grid.Column="0" 
+                                Margin="10,5,0,0"                               
+                                WidthRequest="95" 
+                                FontSize="Medium" 
+                                Text="Tên NCC"/>
+                        <Entry  Grid.Row="2"
+                                Grid.Column="1"
+                                Placeholder="{Binding Date}"
+                                WidthRequest="200" 
+                                 />
+
+                        <Label  Grid.Row="3"
+                                Grid.Column="0" 
+                                Margin="10,5,0,0" 
+                                WidthRequest="95" 
+                                FontSize="Medium" 
+                                Text="Điện thoại"/>
+                        <Entry  Grid.Row="3"
+                                Grid.Column="1" 
+                                Placeholder="{Binding IdStaff}"
+                                WidthRequest="200" 
+                                Keyboard="Numeric"/>
+
+                        <Label  Grid.Row="4"
+                                Grid.Column="0" 
+                                Margin="10,5,0,0" 
+                                WidthRequest="95" 
+                                FontSize="Medium" 
+                                Text="Email"/>
+                        <Entry  Grid.Row="4"
+                                Grid.Column="1"
+                                 Placeholder="{Binding IdCustomer}"
+                                WidthRequest="200" 
+                                Keyboard="Email"/>
+
+                        <Label  Grid.Row="5"
+                                Grid.Column="0" 
+                                Margin="10,5,0,0" 
+                                WidthRequest="95" 
+                                FontSize="Medium" 
+                                Text="Địa chỉ"/>
+                        <Entry  Grid.Row="5"
+                                Grid.Column="1"  
+                                Placeholder="{Binding Total}"
+                                WidthRequest="200"                         
+                                Keyboard="Text"/>
+
+                    </Grid>
+                </StackLayout>
+            </Frame>
+            <StackLayout HeightRequest="25"
+                         WidthRequest="50">
+
+            </StackLayout>
+            <Frame CornerRadius="15">
+                <StackLayout  BackgroundColor="White">
+                    <controls:BorderlessEditor HeightRequest="100" Placeholder="Ghi chú"/>
+                </StackLayout>
+            </Frame>
+
+            <StackLayout Margin="0,10,0,5">
+                <AbsoluteLayout HorizontalOptions="Center">
+                    <Grid xe:TouchEffect.Color="AliceBlue">
+                        <forms:CachedImage Source="btn_Save" 
+                                           Grid.Row="0"
+                                           HeightRequest="50"/>
+                        <Label Grid.Row="0"
+                               FontSize="Medium"
+                               HorizontalOptions="Center"
+                               FontAttributes="Bold"
+                               TextColor="#fff"
+                               Text="Lưu"/>
+                    </Grid>
+                </AbsoluteLayout>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

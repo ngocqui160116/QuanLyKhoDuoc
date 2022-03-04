@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:controls="clr-namespace:Phoenix.Mobile.Controls"
+              xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
+             xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common" 
+             xmlns:vendor="clr-namespace:Phoenix.Mobile.Core.Models.Vendor;assembly=Phoenix.Mobile.Core" xmlns:medicine="clr-namespace:Phoenix.Mobile.Core.Models.Medicine;assembly=Phoenix.Mobile.Core"
+             x:Class="Phoenix.Mobile.Pages.Common.MedicinePage"
+             x:DataType="common:MedicinePageModel"
+             ControlTemplate="{StaticResource FullScreenHasBack}">
+    <ContentPage.Content>
+        <StackLayout >
+            <ListView ItemsSource="{Binding Medicines}"
+                      xe:Commands.Tap="{Binding AddMedicineCommand}"
+              HasUnevenRows="True"
+              BackgroundColor="#ecf0f1"
+              SeparatorVisibility="None"
+              HorizontalOptions="FillAndExpand"
+              VerticalOptions="FillAndExpand">
+
+                <ListView.ItemTemplate>
+
+                    <DataTemplate x:DataType="medicine:MedicineModel">
+                        <ViewCell>
+                            <StackLayout Margin="6,4,6,4"
+                                 BackgroundColor="White">
+                                <Label Text="{Binding Name}"
+                               Margin="8"
+                               FontAttributes="Bold"
+                               FontSize="Medium" />
+                                <Label Text="{Binding Price}"
+                               Margin="8,2,8,4"
+                               FontSize="Small" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

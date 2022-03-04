@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects"
+             xmlns:controls="clr-namespace:Phoenix.Mobile.Controls" 
+             xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common"
+             x:DataType="common:HomePageModel"
+             x:Class="Phoenix.Mobile.Pages.Common.HomePage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid RowSpacing="5" ColumnSpacing="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <controls:RoundFrame WidthRequest="100" 
+                                     HeightRequest="100" 
+                                     Text="Kiểm kho" 
+                                     Grid.Row="0" 
+                                     Grid.Column="0" 
+                                     Icon="icon_kiemkho.png">
+                </controls:RoundFrame>
+                <controls:RoundFrame WidthRequest="100" 
+                                     
+                                     HeightRequest="100" 
+                                     Text="Nhập tồn" 
+                                     xe:Commands.Tap="{Binding InvoiceCommand}" 
+                                     Grid.Row="0" 
+                                     Grid.Column="1" 
+                                     Icon="icon_nhapton.png">
+                </controls:RoundFrame>
+
+                <controls:RoundFrame WidthRequest="100" 
+                                     xe:Commands.Tap="{Binding CustomerCommand}" 
+                                     HeightRequest="100" 
+                                     Text="Nhà cung cấp" 
+                                     Grid.Row="1" 
+                                     Grid.Column="0" 
+                                     Icon="icon_nhacungcap.png">
+                </controls:RoundFrame>
+                <controls:RoundFrame WidthRequest="100" 
+                                     xe:Commands.Tap="{Binding CustomerCommand}"
+                                     HeightRequest="100" 
+                                     Text="Xuất hủy" 
+                                     Grid.Row="1" 
+                                     Grid.Column="1" 
+                                     Icon="icon_xuathuy.png">
+                </controls:RoundFrame>
+
+                <controls:RoundFrame WidthRequest="100" 
+                                     HeightRequest="100" 
+                                     Text="Xuất trả" 
+                                     Grid.Row="2" 
+                                     Grid.Column="0" 
+                                     Icon="icon_xuattra.png">
+                </controls:RoundFrame>
+                <controls:RoundFrame WidthRequest="100" 
+                                    xe:Commands.Tap="{Binding MedicineCommand}" 
+                                     HeightRequest="100" 
+                                     Text="Tồn kho" 
+                                     Grid.Row="2" 
+                                     Grid.Column="1" 
+                                     Icon="icon_tonkho.png">
+                </controls:RoundFrame>
+            </Grid>
+        </StackLayout>
+       
+    </ContentPage.Content>
+</ContentPage>

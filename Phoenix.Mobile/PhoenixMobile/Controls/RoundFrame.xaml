@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Phoenix.Mobile.Controls.RoundFrame">
+  <ContentView.Content>
+        <Grid  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <Image x:Name="imgBG" Source="login_bg.jpg" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Aspect="AspectFill"></Image>
+            <Frame x:Name="frame" HasShadow="True">
+                <StackLayout  VerticalOptions="CenterAndExpand"  HorizontalOptions="CenterAndExpand">
+                    <Image x:Name="img" HorizontalOptions="Center"></Image>
+                    <Label x:Name="lblName" FontAttributes="Bold" VerticalOptions="Center"/>
+                </StackLayout>
+            </Frame>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

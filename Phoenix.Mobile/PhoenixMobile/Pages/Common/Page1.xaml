@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Phoenix.Mobile.Pages.Common.Page1"
+             xmlns:behaviors="clr-namespace:Phoenix.Framework.Core;assembly=Phoenix.Framework"
+             xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:controls="clr-namespace:Phoenix.Mobile.Controls">
+    
+    <ContentPage.Content>
+
+        <StackLayout>
+            <controls:NavigationBar Style="{StaticResource NavigationBarStandard}"
+                                    TitleDisplay="Thêm thuốc">
+            </controls:NavigationBar>
+
+            <StackLayout HeightRequest="25"
+                         WidthRequest="50">
+            </StackLayout>
+            <Frame CornerRadius="15">
+                <StackLayout  BackgroundColor="White">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.3*"/>
+                            <ColumnDefinition Width="0.7*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label  Grid.Row="1"
+                                Grid.Column="0" 
+                                Margin="10,5,0,0" 
+                                WidthRequest="95" 
+                                FontSize="Medium" 
+                                Text="Mã Thuốc"  />
+                        <Entry  Grid.Row="1"
+                                Grid.Column="1"
+                                Placeholder="Mã thuốc"
+                                WidthRequest="200" 
+                                x:Name="txtId"  />
+
+                        <Label  Grid.Row="2"
+                                Grid.Column="0" 
+                                Margin="10,5,0,0" 
+                                WidthRequest="95" 
+                                FontSize="Medium" 
+                                Text="Tên Thuốc"/>
+                        <Entry  Grid.Row="2"
+                                Grid.Column="1"
+                                Placeholder="Tên thuốc"
+                                WidthRequest="200" 
+                                x:Name="txtName"  />
+
+                        <Label  Grid.Row="3"
+                                Grid.Column="0" 
+                                Margin="10,15,0,0" 
+                                WidthRequest="95" 
+                                FontSize="Medium" 
+                                Text="Nhóm thuốc"/>
+                        <Entry  Grid.Row="3"
+                                Grid.Column="1" 
+                                Placeholder="Nhóm thuốc"
+                                WidthRequest="200" 
+                                x:Name="txtNhomThuoc" 
+                                Keyboard="Text"/>
+
+                        <Label  Grid.Row="4"
+                                Grid.Column="0" 
+                                Margin="10,5,0,0" 
+                                WidthRequest="95" 
+                                FontSize="Medium" 
+                                Text="Hoạt chất"/>
+                        <Entry  Grid.Row="4"
+                                Grid.Column="1"
+                                Placeholder="Hoạt chất"
+                                WidthRequest="200" 
+                                x:Name="txtHoatChat" 
+                                Keyboard="Text"/>
+
+                        <Label  Grid.Row="5"
+                                Grid.Column="0" 
+                                Margin="10,5,0,0" 
+                                WidthRequest="95" 
+                                FontSize="Medium" 
+                                Text="Hàm lượng"/>
+                        <Entry  Grid.Row="5"
+                                Grid.Column="1"  
+                                Placeholder="Hàm lượng"
+                                WidthRequest="200" 
+                                x:Name="txtHamLuong" 
+                                Keyboard="Text"/>
+
+                        <Label  Grid.Row="6"
+                                Grid.Column="0" 
+                                Margin="10,5,0,0" 
+                                WidthRequest="95" 
+                                FontSize="Medium" 
+                                Text="QC Đóng gói"/>
+                        <Entry  Grid.Row="6"
+                                Grid.Column="1"  
+                                Placeholder="Đóng gói"
+                                WidthRequest="200" 
+                                x:Name="txtPhone" 
+                                Keyboard="Numeric"/>
+
+                        <Label  Grid.Row="7"
+                                Grid.Column="0" 
+                                Margin="10,5,0,0" 
+                                WidthRequest="95" 
+                                FontSize="Medium" 
+                                Text="Ngày sản xuất"/>
+                        <Entry  Grid.Row="7"
+                                Grid.Column="1"  
+                                Placeholder="25/06/2020"
+                                WidthRequest="200" 
+                                x:Name="txtNgaySanXuat" 
+                                Keyboard="Text"/>
+
+                        <Label  Grid.Row="8"
+                                Grid.Column="0" 
+                                Margin="10,15,0,0" 
+                                WidthRequest="95" 
+                                FontSize="Medium" 
+                                Text="Hạn sử dụng"/>
+                        <Entry  Grid.Row="8"
+                                Grid.Column="1"  
+                                Placeholder="2/3/2022"
+                                WidthRequest="200" 
+                                x:Name="txtHanSuDung" 
+                                Keyboard="Text"/>
+                    </Grid>
+                </StackLayout>
+            </Frame>
+
+
+            <StackLayout Margin="0,10,0,5">
+                <AbsoluteLayout HorizontalOptions="Center">
+                    <Grid xe:TouchEffect.Color="AliceBlue"
+                          xe:Commands.Tap="{Binding LoginCommand}">
+                        <forms:CachedImage Source="btn_Save" 
+                                           Grid.Row="0"
+                                           HeightRequest="50"/>
+                        <Label Grid.Row="0"
+                               FontSize="Medium"
+                               HorizontalOptions="Center"
+                               FontAttributes="Bold"
+                               TextColor="#fff"
+                               Text="Lưu"/>
+                    </Grid>
+                </AbsoluteLayout>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+    
+</ContentPage>
