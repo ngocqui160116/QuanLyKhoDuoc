@@ -9,7 +9,11 @@
              x:DataType="common:CustomerPageModel"
              ControlTemplate="{StaticResource FullScreenHasBack}">
     <ContentPage.Content>
+        
         <StackLayout>
+            <SearchBar TextChanged="SearchBar_TextChanged" Placeholder="Nhập thông tin">
+
+            </SearchBar>
             <ListView ItemsSource="{Binding Customers}"
                       xe:Commands.Tap="{Binding AddCustomerCommand}"
                       ItemSelected="ListView_ItemSelected"

@@ -29,5 +29,10 @@ namespace Phoenix.Mobile.Pages.Common
             var selectedItem = e.SelectedItem as CustomerModel;
             //await Application.Current.MainPage.Navigation.PushModalAsync(new AccountPage(selectedItem.Name));
         }
+
+        private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }
