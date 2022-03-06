@@ -15,11 +15,7 @@
 
     <Application.Resources>
 
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <themes:LightTheme />
-            </ResourceDictionary.MergedDictionaries >
-        </ResourceDictionary>
+ 
         <!-- common -->
         <Color x:Key="MainThemeColor">#4AACC5</Color>
         <Color x:Key="SecondThemeColor">#0066ff</Color>

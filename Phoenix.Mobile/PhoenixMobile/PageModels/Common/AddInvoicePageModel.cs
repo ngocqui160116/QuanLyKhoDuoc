@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Phoenix.Mobile.PageModels.Common
@@ -19,5 +20,15 @@ namespace Phoenix.Mobile.PageModels.Common
             base.ViewIsAppearing(sender, e);
 
         }
+
+        #region StoreCommand
+
+        public Command StoreCommand => new Command(async (p) => await StoreExecute(), (p) => !IsBusy);
+
+        private async Task StoreExecute()
+        {
+            await CoreMethods.PushPageModel<StorePageModel>();
+        }
+        #endregion
     }
 }

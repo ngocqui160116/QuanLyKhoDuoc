@@ -24,5 +24,7 @@ namespace Phoenix.Mobile.Core.Services.Common
             var data = await _CustomerProxy.GetAllCustomer(request);
             return data.MapTo<CustomerModel>();
         }
+
+        
     }
 }

@@ -103,7 +103,8 @@
 
             <StackLayout Margin="0,10,0,5">
                 <AbsoluteLayout HorizontalOptions="Center">
-                    <Grid xe:TouchEffect.Color="AliceBlue">
+                    <Grid xe:TouchEffect.Color="AliceBlue"
+                          xe:Commands.Tap="{Binding StoreCommand}">
                         <forms:CachedImage Source="btn_Save" 
                                            Grid.Row="0"
                                            HeightRequest="50"/>

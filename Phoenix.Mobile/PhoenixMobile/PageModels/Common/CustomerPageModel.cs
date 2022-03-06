@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace Phoenix.Mobile.PageModels.Common
@@ -21,7 +22,7 @@ namespace Phoenix.Mobile.PageModels.Common
             _customerService = customerService;
             _dialogService = dialogService;
         }
-       
+
         public override async void Init(object initData)
         {
             base.Init(initData);
@@ -37,23 +38,24 @@ namespace Phoenix.Mobile.PageModels.Common
         private async Task LoadData()
         {
             var data = await _customerService.GetAllCustomer(request);
-            if(data == null)
+            if (data == null)
             {
                 await _dialogService.AlertAsync("Lỗi kết nối mạng!", "Lỗi", "OK");
-            }    
+            }
             else
             {
                 Customers = data;
                 //RaisePropertyChanged("Customers");
                 RaisePropertyChanged(nameof(Customers));
-            }    
+            }
         }
 
         #region properties
         public List<CustomerModel> Customers { get; set; } = new List<CustomerModel>();
-       
+
         public CustomerRequest request { get; set; } = new CustomerRequest();
 
+        public string SearchText { get; set; }
         #endregion
 
         #region AddCustomerCommand
@@ -65,8 +67,7 @@ namespace Phoenix.Mobile.PageModels.Common
             await CoreMethods.PushPageModel<AddCustomerPageModel>();
         }
         #endregion
+
+       
     }
-
-
-
 }

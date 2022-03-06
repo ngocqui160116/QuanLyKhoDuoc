@@ -10,13 +10,24 @@
              ControlTemplate="{StaticResource FullScreenHasBack}">
     <ContentPage.Content>
         <StackLayout >
+            <StackLayout Orientation="Horizontal">
+                <SearchBar WidthRequest="420"  
+                           x:Name="Search" 
+                           Placeholder="Nhập thông tin">
+                </SearchBar>
+                <ImageButton Margin="5,0,0,0"  
+                             xe:Commands.Tap="{Binding AddInvoiceCommand}"
+                             BackgroundColor="White" 
+                             HorizontalOptions="End" 
+                             Source="icon_add"/>
+            </StackLayout>
+
             <ListView ItemsSource="{Binding Invoices}"
-              xe:Commands.Tap="{Binding AddInvoiceCommand}"
-              HasUnevenRows="True"
-              BackgroundColor="#ecf0f1"
-              SeparatorVisibility="None"
-              HorizontalOptions="FillAndExpand"
-              VerticalOptions="FillAndExpand">
+                      HasUnevenRows="True"
+                      BackgroundColor="#ecf0f1"
+                      SeparatorVisibility="None"
+                      HorizontalOptions="FillAndExpand"
+                      VerticalOptions="FillAndExpand">
 
                 <ListView.ItemTemplate>
 
@@ -25,12 +36,12 @@
                             <StackLayout Margin="6,4,6,4"
                                  BackgroundColor="White">
                                 <Label Text="{Binding IdInvoice}"
-                               Margin="8"
-                               FontAttributes="Bold"
-                               FontSize="Medium" />
+                                   Margin="8"
+                                   FontAttributes="Bold"
+                                   FontSize="Medium" />
                                 <Label Text="{Binding Total}"
-                               Margin="8,2,8,4"
-                               FontSize="Small" />
+                                   Margin="8,2,8,4"
+                                   FontSize="Small" />
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

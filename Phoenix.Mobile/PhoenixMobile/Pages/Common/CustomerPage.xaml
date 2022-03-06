@@ -10,12 +10,20 @@
              ControlTemplate="{StaticResource FullScreenHasBack}">
     <ContentPage.Content>
         
-        <StackLayout>
-            <SearchBar TextChanged="SearchBar_TextChanged" Placeholder="Nhập thông tin">
-
-            </SearchBar>
+        <StackLayout Margin="0,5,0,0">
+            <StackLayout Orientation="Horizontal">
+                <SearchBar WidthRequest="420"  
+                           x:Name="Search" 
+                           Placeholder="Nhập thông tin">
+                </SearchBar>
+                <ImageButton Margin="5,0,0,0"  
+                             xe:Commands.Tap="{Binding AddCustomerCommand}"
+                             BackgroundColor="White" 
+                             HorizontalOptions="End" 
+                             Source="icon_add"/>
+            </StackLayout>
+            
             <ListView ItemsSource="{Binding Customers}"
-                      xe:Commands.Tap="{Binding AddCustomerCommand}"
                       ItemSelected="ListView_ItemSelected"
                       HasUnevenRows="True"
                       BackgroundColor="#ecf0f1"
@@ -27,14 +35,14 @@
                     <DataTemplate x:DataType="customer:CustomerModel">
                         <ViewCell>
                             <StackLayout Margin="6,4,6,4"
-                                 BackgroundColor="White">
+                                        BackgroundColor="White">
                                 <Label Text="{Binding Name}"
-                               Margin="8"
-                               FontAttributes="Bold"
-                               FontSize="Medium" />
+                                       Margin="8"
+                                       FontAttributes="Bold"
+                                       FontSize="Medium" />
                                 <Label Text="{Binding PhoneNumber}"
-                               Margin="8,2,8,4"
-                               FontSize="Small" />
+                                       Margin="8,2,8,4"
+                                       FontSize="Small"/>   
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

@@ -38,6 +38,7 @@
                                 Text="Mã thuốc"  />
                         <Entry  Grid.Row="1"
                                 Grid.Column="1"
+                                TextColor="Black"
                                 Placeholder="{Binding IdMedicine}"
                                 WidthRequest="200" 
                                 />
@@ -50,6 +51,7 @@
                                 Text="Tên thuốc*"/>
                         <Entry  Grid.Row="2"
                                 Grid.Column="1"
+                                TextColor="Black"
                                 Placeholder="{Binding Name}"
                                 WidthRequest="200" 
                                  />
@@ -73,7 +75,8 @@
                                 FontSize="Medium" 
                                 Text="Nhóm thuốc"/>
                         <Entry  Grid.Row="4"
-                                Grid.Column="1"  
+                                Grid.Column="1"
+                                TextColor="Black"
                                 Placeholder="{Binding Active}"
                                 WidthRequest="200"                         
                                 Keyboard="Text"/>
@@ -84,7 +87,8 @@
                                 FontSize="Medium" 
                                 Text="Hoạt chất"/>
                         <Entry  Grid.Row="5"
-                                Grid.Column="1"  
+                                Grid.Column="1"
+                                TextColor="Black"
                                 Placeholder="{Binding Active}"
                                 WidthRequest="200"                         
                                 Keyboard="Text"/>
@@ -96,7 +100,8 @@
                                 FontSize="Medium" 
                                 Text="Hàm lượng"/>
                         <Entry  Grid.Row="6"
-                                Grid.Column="1"  
+                                Grid.Column="1"
+                                TextColor="Black"
                                 Placeholder="{Binding Content}"
                                 WidthRequest="200"                         
                                 Keyboard="Text"/>
@@ -109,6 +114,7 @@
                                 Text="Đóng gói"/>
                         <Entry  Grid.Row="7"
                                 Grid.Column="1"  
+                                TextColor="Black"
                                 Placeholder="{Binding Packing}"
                                 WidthRequest="200"                         
                                 Keyboard="Text"/>
@@ -119,11 +125,14 @@
                                 WidthRequest="115" 
                                 FontSize="Medium" 
                                 Text="Ngày sản xuất"/>
-                        <Entry  Grid.Row="8"
+                        <controls:CustomDatePicker  
+                                Grid.Row="8"
                                 Grid.Column="1"  
-                                Placeholder="{Binding DateOfManufacture}"
-                                WidthRequest="200"                         
-                                Keyboard="Text"/>
+                                Margin="10,5,0,0" 
+                                FontSize="20"
+                                WidthRequest="200"
+                                Format="dd/MM/yyyy"
+                               />
 
                         <Label  Grid.Row="9"
                                 Grid.Column="0" 
@@ -131,11 +140,14 @@
                                 WidthRequest="105" 
                                 FontSize="Medium" 
                                 Text="Hạn sử dụng"/>
-                        <Entry  Grid.Row="9"
+                        <controls:CustomDatePicker  
+                                Grid.Row="9"
                                 Grid.Column="1"  
-                                Placeholder="{Binding DueDate}"
-                                WidthRequest="200"                         
-                                Keyboard="Text"/>
+                                Margin="10,5,0,0" 
+                                FontSize="20"
+                                WidthRequest="200"
+                                Format="dd/MM/yyyy"
+                               />
 
                     </Grid>
                 </StackLayout>
