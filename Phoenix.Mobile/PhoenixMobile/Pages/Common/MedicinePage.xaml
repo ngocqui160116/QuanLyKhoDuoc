@@ -13,7 +13,7 @@
             <StackLayout Orientation="Horizontal">
                 <SearchBar WidthRequest="420"  
                            x:Name="Search" 
-                           Placeholder="Nhập thông tin">
+                           Placeholder="Mã / Tên thuốc">
                 </SearchBar>
                 <ImageButton Margin="5,0,0,0"  
                              xe:Commands.Tap="{Binding AddMedicineCommand}"

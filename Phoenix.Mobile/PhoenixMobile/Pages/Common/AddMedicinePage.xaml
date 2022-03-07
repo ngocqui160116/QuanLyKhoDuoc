@@ -10,10 +10,18 @@
              
              ControlTemplate="{StaticResource FullScreenHasBack}">
     <ContentPage.Content>
+       
         <StackLayout BackgroundColor="WhiteSmoke">
+            <StackLayout Orientation="Horizontal" BackgroundColor="White">
+                <SearchBar WidthRequest="500"  
+                           x:Name="Search" 
+                           Placeholder="Tìm thuốc">
+                </SearchBar>
+            </StackLayout>
             <StackLayout HeightRequest="25"
                          WidthRequest="50">
             </StackLayout>
+           
             <Frame CornerRadius="15" >
                 <StackLayout  BackgroundColor="White">
                     <Grid x:DataType="medicine:MedicineModel">
@@ -30,18 +38,6 @@
                             <ColumnDefinition Width="0.7*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Label  Grid.Row="1"
-                                Grid.Column="0" 
-                                Margin="10,5,0,0" 
-                                WidthRequest="100" 
-                                FontSize="Medium" 
-                                Text="Mã thuốc"  />
-                        <Entry  Grid.Row="1"
-                                Grid.Column="1"
-                                TextColor="Black"
-                                Placeholder="{Binding IdMedicine}"
-                                WidthRequest="200" 
-                                />
 
                         <Label  Grid.Row="2"
                                 Grid.Column="0" 
@@ -119,7 +115,7 @@
                                 WidthRequest="200"                         
                                 Keyboard="Text"/>
 
-                        <Label  Grid.Row="8"
+                        <!--<Label  Grid.Row="8"
                                 Grid.Column="0" 
                                 Margin="10,5,0,0" 
                                 WidthRequest="115" 
@@ -147,7 +143,7 @@
                                 FontSize="20"
                                 WidthRequest="200"
                                 Format="dd/MM/yyyy"
-                               />
+                               />-->
 
                     </Grid>
                 </StackLayout>
@@ -163,7 +159,8 @@
             </Frame>
 
             <StackLayout Margin="0,10,0,5">
-                <AbsoluteLayout HorizontalOptions="Center">
+                <AbsoluteLayout HorizontalOptions="Center"
+                                 xe:Commands.Tap="{Binding StoreCommand}">
                     <Grid xe:TouchEffect.Color="AliceBlue">
                         <forms:CachedImage Source="btn_Save" 
                                            Grid.Row="0"

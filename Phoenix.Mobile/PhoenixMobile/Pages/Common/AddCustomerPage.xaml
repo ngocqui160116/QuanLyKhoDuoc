@@ -74,7 +74,7 @@
                                 Text="Email"/>
                         <Entry  Grid.Row="4"
                                 Grid.Column="1"
-                                 Placeholder="{Binding Email        }"
+                                 Placeholder="{Binding Email}"
                                 WidthRequest="200" 
                                 Keyboard="Email"/>
 
