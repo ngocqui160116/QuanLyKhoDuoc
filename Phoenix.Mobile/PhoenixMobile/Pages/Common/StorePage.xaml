@@ -35,43 +35,27 @@
 
                         <Label  Grid.Row="1"
                                 Grid.Column="0" 
-                                Margin="10,5,0,0" 
-                                WidthRequest="95" 
-                                FontSize="Medium" 
-                                Text="Số lượng"  />
-                        <Entry  Grid.Row="1"
-                                Grid.Column="1"
-                                Placeholder="{Binding IdCustomer}"
-                                WidthRequest="200" 
-                                />
-
-                        <Label  Grid.Row="2"
-                                Grid.Column="0" 
                                 Margin="10,5,0,0"                               
                                 WidthRequest="95" 
                                 FontSize="Medium" 
                                 Text="Số lô"/>
-                        <Entry  Grid.Row="2"
+                        <Entry  Grid.Row="1"
                                 Grid.Column="1"
                                 Placeholder="{Binding Date}"
                                 WidthRequest="200" 
                                  />
-
-                        <Label  Grid.Row="3"
+                        
+                        <Label  Grid.Row="2"
                                 Grid.Column="0" 
                                 Margin="10,5,0,0" 
-                                WidthRequest="115" 
+                                WidthRequest="95" 
                                 FontSize="Medium" 
-                                Text="Ngày nhập"/>
-                        <controls:CustomDatePicker  
-                                Grid.Row="3"
-                                Grid.Column="1"  
-                                Margin="10,10,0,0" 
-                                FontSize="20"
-                                WidthRequest="200"
-                                Format="dd/MM/yyyy"
-                               />
-
+                                Text="Số lượng"  />
+                        <Entry  Grid.Row="2"
+                                Grid.Column="1"
+                                Placeholder="{Binding IdCustomer}"
+                                WidthRequest="200" 
+                                />
                         <Label  Grid.Row="4"
                                 Grid.Column="0" 
                                 Margin="10,5,0,0" 

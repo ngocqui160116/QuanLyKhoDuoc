@@ -40,10 +40,15 @@
                                        Margin="8"
                                        FontAttributes="Bold"
                                        FontSize="Large" />
-                                    <!--<Label Text="{Binding  Unit}"
-                                       Margin="8"
-                                       FontAttributes="Bold"
-                                       FontSize="Large" />-->
+                                    <StackLayout Orientation="Horizontal"
+                                                 HorizontalOptions="EndAndExpand">
+                                        <Label Text="Tồn:"
+                                           Margin="8,2,8,4"
+                                           FontSize="Small" />
+                                        <Label Text="{Binding Amount}"
+                                           Margin="2"
+                                           FontSize="Small" />
+                                    </StackLayout>
                                 </StackLayout>
                                
                                 <StackLayout Orientation="Horizontal">
@@ -57,12 +62,12 @@
                                 </StackLayout>
 
                                 <StackLayout Orientation="Horizontal">
-                                    <Label Text="QC Đóng gói:"
+                                    <Label Text="HSD:"
                                        Margin="8,2,8,4"
                                        FontSize="Small" />
-                                    <Label Text="{Binding Packing}"
+                                    <Label Text="{Binding DueDate}"
                                         Margin="2,2,8,4"
-                                        TextColor="DarkSlateGray"
+                                        TextColor="DarkSlateGray"  
                                         FontSize="Small" />
                                 </StackLayout>
                             </StackLayout>

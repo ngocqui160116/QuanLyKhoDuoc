@@ -1,9 +1,11 @@
 ﻿using Phoenix.Mobile.Core.Infrastructure;
 using Phoenix.Mobile.Core.Models.Medicine;
+using Phoenix.Mobile.Core.Models.Unit;
 using Phoenix.Mobile.Core.Models.Vendor;
 using Phoenix.Mobile.Core.Services.Common;
 using Phoenix.Mobile.Helpers;
 using Phoenix.Shared.Medicine;
+using Phoenix.Shared.Unit;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -30,7 +32,7 @@ namespace Phoenix.Mobile.PageModels.Common
         {
             base.Init(initData);
             NavigationPage.SetHasNavigationBar(CurrentPage, false);
-            CurrentPage.Title = "Danh sách Thuốc";
+            CurrentPage.Title = "Danh sách Tồn Kho";
         }
         protected override async void ViewIsAppearing(object sender, EventArgs e)
         {
@@ -57,6 +59,8 @@ namespace Phoenix.Mobile.PageModels.Common
         public List<MedicineModel> Medicines { get; set; } = new List<MedicineModel>();
         public MedicineRequest request { get; set; } = new MedicineRequest();
 
+        public List<UnitModel> Units { get; set; } = new List<UnitModel>();
+        public UnitRequest Unitrequest { get; set; } = new UnitRequest();
         #endregion
 
         #region AddMedicineCommand
