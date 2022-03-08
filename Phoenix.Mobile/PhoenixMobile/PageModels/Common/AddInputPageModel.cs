@@ -7,13 +7,13 @@ using Xamarin.Forms;
 
 namespace Phoenix.Mobile.PageModels.Common
 {
-    public class AddInvoicePageModel :BasePageModel
+    public class AddInputPageModel :BasePageModel
     {
         public override async void Init(object initData)
         {
             base.Init(initData);
             NavigationPage.SetHasNavigationBar(CurrentPage, false);
-            CurrentPage.Title = "Thêm hóa đơn";
+            CurrentPage.Title = "Thêm phiếu nhập";
         }
         protected override async void ViewIsAppearing(object sender, EventArgs e)
         {

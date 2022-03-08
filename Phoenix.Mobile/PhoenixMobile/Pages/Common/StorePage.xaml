@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Phoenix.Mobile.Pages.Common.StorePage"
              xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
-             xmlns:invoice="clr-namespace:Phoenix.Mobile.Core.Models.Invoice;assembly=Phoenix.Mobile.Core" 
+             xmlns:input="clr-namespace:Phoenix.Mobile.Core.Models.Input;assembly=Phoenix.Mobile.Core" 
              xmlns:controls="clr-namespace:Phoenix.Mobile.Controls" 
              xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              ControlTemplate="{StaticResource FullScreenHasBack}">
@@ -19,7 +19,7 @@
             </StackLayout>
             <Frame CornerRadius="15" >
                 <StackLayout  BackgroundColor="White">
-                    <Grid x:DataType="invoice:InvoiceModel">
+                    <Grid x:DataType="input:InputModel">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -41,7 +41,7 @@
                                 Text="Số lô"/>
                         <Entry  Grid.Row="1"
                                 Grid.Column="1"
-                                Placeholder="{Binding Date}"
+                                Placeholder="{Binding DateInput}"
                                 WidthRequest="200" 
                                  />
                         
@@ -53,7 +53,7 @@
                                 Text="Số lượng"  />
                         <Entry  Grid.Row="2"
                                 Grid.Column="1"
-                                Placeholder="{Binding IdCustomer}"
+                                Placeholder="{Binding Id}"
                                 WidthRequest="200" 
                                 />
                         <Label  Grid.Row="4"
@@ -79,7 +79,7 @@
                                 Text="Đơn vị tính"/>
                         <Entry  Grid.Row="5"
                                 Grid.Column="1" 
-                                Placeholder="{Binding IdStaff}"
+                                Placeholder="{Binding Id}"
                                 WidthRequest="200" 
                                 Keyboard="Numeric"/>
 
@@ -91,7 +91,7 @@
                                 Text="Quy đổi"/>
                         <Entry  Grid.Row="6"
                                 Grid.Column="1" 
-                                Placeholder="{Binding IdStaff}"
+                                Placeholder="{Binding Id}"
                                 WidthRequest="200" 
                                 Keyboard="Numeric"/>
 
@@ -103,7 +103,7 @@
                                 Text="Giá nhập"/>
                         <Entry  Grid.Row="7"
                                 Grid.Column="1" 
-                                Placeholder="{Binding IdStaff}"
+                                Placeholder="{Binding Id}"
                                 WidthRequest="200" 
                                 Keyboard="Numeric"/>
 

@@ -11,10 +11,16 @@ using Phoenix.Shared.Staff;
 using Phoenix.Mobile.Core.Models.Staff;
 using Phoenix.Shared.Customer;
 using Phoenix.Mobile.Core.Models.Customer;
-using Phoenix.Shared.Invoice;
-using Phoenix.Mobile.Core.Models.Invoice;
-using Phoenix.Shared.Invoice_Detail;
-using Phoenix.Mobile.Core.Models.Invoice_Detail;
+using Phoenix.Shared.Input;
+using Phoenix.Mobile.Core.Models.Input;
+using Phoenix.Shared.InputInfo;
+using Phoenix.Mobile.Core.Models.InputInfo;
+using Phoenix.Shared.Output;
+using Phoenix.Mobile.Core.Models.Output;
+using Phoenix.Shared.OutputInfo;
+using Phoenix.Mobile.Core.Models.OutputInfo;
+using Phoenix.Shared.Supplier;
+using Phoenix.Mobile.Core.Models.Supplier;
 using Phoenix.Shared.Group;
 using Phoenix.Mobile.Core.Models.Group;
 using Phoenix.Shared.Unit;
@@ -34,12 +40,13 @@ namespace Phoenix.Mobile.Core.Infrastructure
             //setting
             CreateMap<SettingDto, SettingModel>();
             CreateMap<VendorDto, VendorModel>();
+            CreateMap<CustomerDto, CustomerModel>();
+            CreateMap<GroupDto, GroupModel>();
             CreateMap<MedicineDto, MedicineModel>();
             CreateMap<StaffDto, StaffModel>();
-            CreateMap<CustomerDto, CustomerModel>();
-            CreateMap<InvoiceDto, InvoiceModel>();
-            CreateMap<Invoice_DetailDto, Invoice_DetailModel>();
-            CreateMap<GroupDto, GroupModel>();
+            CreateMap<InputDto, InputModel>();
+            CreateMap<InputInfoDto, InputInfoModel>();
+            CreateMap<SupplierDto, SupplierModel>();
             CreateMap<UnitDto, UnitModel>();
         }
     }

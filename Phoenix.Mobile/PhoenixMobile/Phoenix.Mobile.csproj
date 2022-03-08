@@ -131,7 +131,7 @@
     <EmbeddedResource Update="Pages\Common\AddCustomerPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\Common\AddInvoicePage.xaml">
+    <EmbeddedResource Update="Pages\Common\AddInputPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\Common\AddMedicinePage.xaml">
@@ -146,7 +146,7 @@
     <EmbeddedResource Update="Pages\Common\HomePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\Common\InvoicePage.xaml">
+    <EmbeddedResource Update="Pages\Common\InputPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\Common\MedicinePage.xaml">
@@ -168,5 +168,11 @@
 
   <ItemGroup>
     <Folder Include="DataService\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Pages\Common\AddInputPage.xaml.cs">
+      <DependentUpon>AddInputPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

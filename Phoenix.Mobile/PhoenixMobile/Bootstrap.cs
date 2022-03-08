@@ -63,10 +63,13 @@ namespace Phoenix.Mobile
             FreshIOC.Container.Register<IFileService, FileService>();
             FreshIOC.Container.Register<IVendorService, VendorService>();
             FreshIOC.Container.Register<ICustomerService, CustomerService>();
-            FreshIOC.Container.Register<IInvoiceService, InvoiceService>();
-            FreshIOC.Container.Register<IInvoice_DetailService, Invoice_DetailService>();
+            FreshIOC.Container.Register<IInputService, InputService>();
+            FreshIOC.Container.Register<IInputInfoService, InputInfoService>();
+            FreshIOC.Container.Register<IOutputService, OutputService>();
+            FreshIOC.Container.Register<IOutputInfoService, OutputInfoService>();
             FreshIOC.Container.Register<IMedicineService, MedicineService>();
             FreshIOC.Container.Register<IStaffService, StaffService>();
+            FreshIOC.Container.Register<ISupplierService, SupplierService>();
             FreshIOC.Container.Register<IGroupService, GroupService>();
             FreshIOC.Container.Register<IUnitService, UnitService>();
 
@@ -78,8 +81,11 @@ namespace Phoenix.Mobile
             FreshIOC.Container.Register<IMedicineProxy, MedicineProxy>();
             FreshIOC.Container.Register<IStaffProxy, StaffProxy>();
             FreshIOC.Container.Register<ICustomerProxy, CustomerProxy>();
-            FreshIOC.Container.Register<IInvoiceProxy, InvoiceProxy>();
-            FreshIOC.Container.Register<IInvoice_DetailProxy, Invoice_DetailProxy>();
+            FreshIOC.Container.Register<IInputProxy, InputProxy>();
+            FreshIOC.Container.Register<IInputInfoProxy, InputInfoProxy>();
+            FreshIOC.Container.Register<IOutputProxy, OutputProxy>();
+            FreshIOC.Container.Register<IOutputInfoProxy, OutputInfoProxy>();
+            FreshIOC.Container.Register<ISupplierProxy, SupplierProxy>();
             FreshIOC.Container.Register<IGroupProxy, GroupProxy>();
             FreshIOC.Container.Register<IUnitProxy, UnitProxy>();
         }

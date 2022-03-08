@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Phoenix.Shared.InputInfoDto
+namespace Phoenix.Shared.InputInfo
 {
     public class InputInfoDto
     {

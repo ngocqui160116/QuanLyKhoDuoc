@@ -1,8 +1,8 @@
 ﻿using Phoenix.Mobile.Core.Infrastructure;
-using Phoenix.Mobile.Core.Models.Invoice;
+using Phoenix.Mobile.Core.Models.Input;
 using Phoenix.Mobile.Core.Services.Common;
 using Phoenix.Mobile.Helpers;
-using Phoenix.Shared.Invoice;
+using Phoenix.Shared.Input;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,14 +11,14 @@ using Xamarin.Forms;
 
 namespace Phoenix.Mobile.PageModels.Common
 {
-    public class InvoicePageModel : BasePageModel
+    public class InputPageModel : BasePageModel
     {
-        private readonly IInvoiceService _invoiceService;
+        private readonly IInputService _InputService;
         private readonly IDialogService _dialogService;
 
-        public InvoicePageModel(IInvoiceService invoiceService, IDialogService dialogService)
+        public InputPageModel(IInputService InputService, IDialogService dialogService)
         {
-            _invoiceService = invoiceService;
+            _InputService = InputService;
             _dialogService = dialogService;
 
         }
@@ -27,7 +27,7 @@ namespace Phoenix.Mobile.PageModels.Common
         {
             base.Init(initData);
             NavigationPage.SetHasNavigationBar(CurrentPage, false);
-            CurrentPage.Title = "Danh sách Hóa đơn nhập";
+            CurrentPage.Title = "Danh sách phiếu nhập";
         }
         protected override async void ViewIsAppearing(object sender, EventArgs e)
         {
@@ -37,32 +37,32 @@ namespace Phoenix.Mobile.PageModels.Common
 
         private async Task LoadData()
         {
-            var data = await _invoiceService.GetAllInvoice(request);
+            var data = await _InputService.GetAllInput(request);
             if (data == null)
             {
                 await _dialogService.AlertAsync("Lỗi kết nối mạng!", "Lỗi", "OK");
             }
             else
             {
-                Invoices = data;
+                Inputs = data;
                 //RaisePropertyChanged("Vendors");
-                RaisePropertyChanged(nameof(Invoices));
+                RaisePropertyChanged(nameof(Inputs));
             }
         }
 
         #region properties
-        public List<InvoiceModel> Invoices { get; set; } = new List<InvoiceModel>();
-        public InvoiceRequest request { get; set; } = new InvoiceRequest();
+        public List<InputModel> Inputs { get; set; } = new List<InputModel>();
+        public InputRequest request { get; set; } = new InputRequest();
 
         #endregion
 
-        #region AddInvoiceCommand
+        #region AddInputCommand
 
-        public Command AddInvoiceCommand => new Command(async (p) => await AddInvoiceExecute(), (p) => !IsBusy);
+        public Command AddInputCommand => new Command(async (p) => await AddInputExecute(), (p) => !IsBusy);
 
-        private async Task AddInvoiceExecute()
+        private async Task AddInputExecute()
         {
-            await CoreMethods.PushPageModel<AddInvoicePageModel>();
+            await CoreMethods.PushPageModel<AddInputPageModel>();
         }
         #endregion
     }

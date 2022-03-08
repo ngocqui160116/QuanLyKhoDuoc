@@ -45,7 +45,7 @@ namespace Phoenix.Mobile.PageModels.Common
 
         private async Task InvoiceExecute()
         {
-            await CoreMethods.PushPageModel<InvoicePageModel>();
+            await CoreMethods.PushPageModel<InputPageModel>();
         }
         #endregion
 

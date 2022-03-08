@@ -2,9 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common" 
-             xmlns:invoice="clr-namespace:Phoenix.Mobile.Core.Models.Invoice;assembly=Phoenix.Mobile.Core"
-             x:Class="Phoenix.Mobile.Pages.Common.InvoicePage"
-             x:DataType="common:InvoicePageModel"
+             xmlns:input="clr-namespace:Phoenix.Mobile.Core.Models.Input;assembly=Phoenix.Mobile.Core"
+             x:Class="Phoenix.Mobile.Pages.Common.InputPage"
+             x:DataType="common:InputPageModel"
              xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
              NavigationPage.HasNavigationBar="False"
              ControlTemplate="{StaticResource FullScreenHasBack}">
@@ -16,13 +16,13 @@
                            Placeholder="Nhập thông tin">
                 </SearchBar>
                 <ImageButton Margin="5,0,0,0"  
-                             xe:Commands.Tap="{Binding AddInvoiceCommand}"
+                             xe:Commands.Tap="{Binding AddInputCommand}"
                              BackgroundColor="White" 
                              HorizontalOptions="End" 
                              Source="icon_add"/>
             </StackLayout>
 
-            <ListView ItemsSource="{Binding Invoices}"
+            <ListView ItemsSource="{Binding Inputs}"
                       HasUnevenRows="True"
                       BackgroundColor="#ecf0f1"
                       SeparatorVisibility="None"
@@ -31,15 +31,15 @@
 
                 <ListView.ItemTemplate>
 
-                    <DataTemplate x:DataType="invoice:InvoiceModel">
+                    <DataTemplate x:DataType="input:InputModel">
                         <ViewCell>
                             <StackLayout Margin="6,4,6,4"
                                  BackgroundColor="White">
-                                <Label Text="{Binding IdInvoice}"
+                                <Label Text="{Binding Id}"
                                    Margin="8"
                                    FontAttributes="Bold"
                                    FontSize="Medium" />
-                                <Label Text="{Binding Total}"
+                                <Label Text="{Binding DateInput}"
                                    Margin="8,2,8,4"
                                    FontSize="Small" />
                             </StackLayout>

@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             xmlns:invoice="clr-namespace:Phoenix.Mobile.Core.Models.Invoice;assembly=Phoenix.Mobile.Core"
+             xmlns:input="clr-namespace:Phoenix.Mobile.Core.Models.Input;assembly=Phoenix.Mobile.Core"
              xmlns:controls="clr-namespace:Phoenix.Mobile.Controls" 
              xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             x:Class="Phoenix.Mobile.Pages.Common.AddInvoicePage"
+             x:Class="Phoenix.Mobile.Pages.Common.AddInputPage"
              xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
              ControlTemplate="{StaticResource FullScreenHasBack}">
     <ContentPage.Content>
@@ -14,7 +14,7 @@
             </StackLayout>
             <Frame CornerRadius="15" >
                 <StackLayout  BackgroundColor="White">
-                    <Grid x:DataType="invoice:InvoiceModel">
+                    <Grid x:DataType="input:InputModel">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -36,7 +36,7 @@
                                 Text="Mã NCC"  />
                         <Entry  Grid.Row="1"
                                 Grid.Column="1"
-                                Placeholder="{Binding IdCustomer}"
+                                Placeholder="{Binding Id}"
                                 WidthRequest="200" 
                                 />
 
@@ -48,7 +48,7 @@
                                 Text="Tên NCC"/>
                         <Entry  Grid.Row="2"
                                 Grid.Column="1"
-                                Placeholder="{Binding Date}"
+                                Placeholder="{Binding DateInput}"
                                 WidthRequest="200" 
                                  />
 
@@ -60,7 +60,7 @@
                                 Text="Điện thoại"/>
                         <Entry  Grid.Row="3"
                                 Grid.Column="1" 
-                                Placeholder="{Binding IdStaff}"
+                                Placeholder="{Binding Id}"
                                 WidthRequest="200" 
                                 Keyboard="Numeric"/>
 
@@ -72,7 +72,7 @@
                                 Text="Email"/>
                         <Entry  Grid.Row="4"
                                 Grid.Column="1"
-                                 Placeholder="{Binding IdCustomer}"
+                                 Placeholder="{Binding Id}"
                                 WidthRequest="200" 
                                 Keyboard="Email"/>
 
@@ -84,7 +84,7 @@
                                 Text="Địa chỉ"/>
                         <Entry  Grid.Row="5"
                                 Grid.Column="1"  
-                                Placeholder="{Binding Total}"
+                                Placeholder="{Binding DateInput}"
                                 WidthRequest="200"                         
                                 Keyboard="Text"/>
 
