@@ -7,6 +7,7 @@
              xmlns:medicine="clr-namespace:Phoenix.Mobile.Core.Models.Medicine;assembly=Phoenix.Mobile.Core" 
              xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="Phoenix.Mobile.Pages.Common.UnitPage"
+             x:DataType="common:UnitPageModel"
              ControlTemplate="{StaticResource FullScreenHasBack}">
     <ContentPage.Content>
 
@@ -39,12 +40,11 @@
                                 WidthRequest="115" 
                                 FontSize="Medium" 
                                 Text="Đơn vị cơ bản*"/>
-                        <Picker x:DataType="common:AddMedicinePageModel" 
-                                ItemsSource="{Binding Groups}"
+                        <Picker x:DataType="common:UnitPageModel"
+                                ItemsSource="{Binding Units}"
                                 Grid.Row="2"
                                 Grid.Column="1"
                                 ItemDisplayBinding="{Binding Name}"
-                                
                                 />
 
                         <Label  Grid.Row="3"
@@ -71,7 +71,7 @@
                                 TextColor="Black"
                                 Placeholder="{Binding UnitPrice}"
                                 WidthRequest="200"                         
-                                Keyboard="Text"/>
+                                Keyboard="Numeric"/>
 
                         <Label  Grid.Row="5"
                                 Grid.Column="0" 
@@ -84,7 +84,7 @@
                                 TextColor="Black"
                                 Placeholder="{Binding Content}"
                                 WidthRequest="200"                         
-                                Keyboard="Text"/>
+                                Keyboard="Numeric"/>
 
                     </Grid>
                 </StackLayout>
@@ -94,7 +94,7 @@
                 <AbsoluteLayout HorizontalOptions="Center"
 >
                     <Grid xe:TouchEffect.Color="AliceBlue"
-                          xe:Commands.Tap="{Binding StoreCommand}">
+                          xe:Commands.Tap="{Binding SaveCommand}">
                         <forms:CachedImage Source="btn_Save" 
                                            Grid.Row="0"
                                            HeightRequest="50"/>
@@ -103,7 +103,7 @@
                                HorizontalOptions="Center"
                                FontAttributes="Bold"
                                TextColor="#fff"
-                               Text="Tiếp theo"/>
+                               Text="Lưu"/>
                     </Grid>
                 </AbsoluteLayout>
             </StackLayout>

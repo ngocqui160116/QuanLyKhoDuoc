@@ -54,11 +54,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\Supplier.cs" />
+    <Compile Include="Entity\Output.cs" />
+    <Compile Include="Entity\OutputInfo.cs" />
     <Compile Include="Entity\Unit.cs" />
     <Compile Include="Entity\Staff.cs" />
     <Compile Include="Entity\Group.cs" />
-    <Compile Include="Entity\Invoice_Detail.cs" />
-    <Compile Include="Entity\Invoice.cs" />
+    <Compile Include="Entity\InputInfo.cs" />
+    <Compile Include="Entity\Input.cs" />
     <Compile Include="Entity\Medicine_Image.cs" />
     <Compile Include="Entity\Log.cs" />
     <Compile Include="Entity\Customer.cs" />

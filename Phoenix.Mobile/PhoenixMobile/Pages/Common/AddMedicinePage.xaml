@@ -2,10 +2,11 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:controls="clr-namespace:Phoenix.Mobile.Controls"
-              xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
+             xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
              xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common"  
              xmlns:medicine="clr-namespace:Phoenix.Mobile.Core.Models.Medicine;assembly=Phoenix.Mobile.Core" 
              xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:DataType="common:AddMedicinePageModel"
              x:Class="Phoenix.Mobile.Pages.Common.AddMedicinePage"
              ControlTemplate="{StaticResource FullScreenHasBack}">
     <ContentPage.Content>

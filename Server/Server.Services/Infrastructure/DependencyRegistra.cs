@@ -35,11 +35,14 @@ namespace Phoenix.Server.Services.Infrastructure
             container.Register<SettingService>(Lifestyle.Scoped);
             container.Register<IVendorService, VendorService>(Lifestyle.Scoped);
             container.Register<ICustomerService, CustomerService>(Lifestyle.Scoped);
-            container.Register<IStaffService, StaffService>(Lifestyle.Scoped);
-            container.Register<IMedicineService, MedicineService>(Lifestyle.Scoped);
-            container.Register<IInvoiceService, InvoiceService>(Lifestyle.Scoped);
-            container.Register<IInvoice_DetailService, Invoice_DetailService>(Lifestyle.Scoped);
             container.Register<IGroupService, GroupService>(Lifestyle.Scoped);
+            container.Register<IInputService, InputService>(Lifestyle.Scoped);
+            container.Register<IInputInfoService, InputInfoService>(Lifestyle.Scoped);
+            container.Register<IStaffService, StaffService>(Lifestyle.Scoped);
+            container.Register<IOutputService, OutputService>(Lifestyle.Scoped);
+            container.Register<IOutputInfoService, OutputInfoService>(Lifestyle.Scoped);
+            container.Register<ISupplierService, SupplierService>(Lifestyle.Scoped);
+            container.Register<IMedicineService, MedicineService>(Lifestyle.Scoped);
             container.Register<IUnitService, UnitService>(Lifestyle.Scoped);
 
             EngineContext.Current.Init(new SimpleContainer(container));

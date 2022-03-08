@@ -72,5 +72,18 @@ namespace Phoenix.Mobile.PageModels.Common
             await CoreMethods.PushPageModel<AddMedicinePageModel>();
         }
         #endregion
+
+        #region SelectedItemCommand
+
+        public Command SelectedItemCommand => new Command(async (p) => await SelectedItemCommandExecute(), (p) => !IsBusy);
+
+        private async Task SelectedItemCommandExecute()
+        {
+            await _dialogService.AlertAsync("Bạn đã chọn:", "Thông báo", "OK");
+           // await CoreMethods.PushPageModel<AddMedicinePageModel>();
+        }
+        #endregion
+
+        
     }
 }

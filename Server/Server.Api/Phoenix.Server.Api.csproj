@@ -224,10 +224,13 @@
   <ItemGroup>
     <Compile Include="Api\AuthController.cs" />
     <Compile Include="Api\BaseApiController.cs" />
+    <Compile Include="Api\SupplierController.cs" />
+    <Compile Include="Api\OutputController.cs" />
+    <Compile Include="Api\OutputInfoController.cs" />
     <Compile Include="Api\UnitController.cs" />
     <Compile Include="Api\GroupController.cs" />
-    <Compile Include="Api\Invoice_DetailController.cs" />
-    <Compile Include="Api\InvoiceController.cs" />
+    <Compile Include="Api\InputInfoController.cs" />
+    <Compile Include="Api\InputController.cs" />
     <Compile Include="Api\CustomerController.cs" />
     <Compile Include="Api\StaffController.cs" />
     <Compile Include="Api\MedicineController.cs" />

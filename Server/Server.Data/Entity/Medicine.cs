@@ -17,16 +17,15 @@ namespace Phoenix.Server.Data.Entity
         public string Active { get; set; }
         public string Content { get; set; }
         public string Packing { get; set; }
-        public int IdCustomer { get; set; }
-        [ForeignKey("IdCustomer")]
-        public virtual Customer Customer { get; set; }
-        public DateTime DateOfManufacture { get; set; }
-        public DateTime DueDate { get; set; }
-        public int Unit { get; set; }
-        [ForeignKey("Unit")]
-       public virtual Unit Id { get; set; }
-        public double Price { get; set; }
-        public double UnitPrice { get; set; }
+        public int IdSupplier { get; set; }
+        [ForeignKey("IdSupplier")]
+        public virtual Supplier Supplier { get; set; }
+     
+        public int IdUnit { get; set; }
+        [ForeignKey("IdUnit")]
+       public virtual Unit Unit { get; set; }
+        //public double Price { get; set; }
+        //public double UnitPrice { get; set; }
         public int Amount { get; set; }
         public int? Image { get; set; }
         [ForeignKey("Image")]

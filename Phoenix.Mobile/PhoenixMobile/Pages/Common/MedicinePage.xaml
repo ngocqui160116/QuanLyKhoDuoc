@@ -28,13 +28,14 @@
                       BackgroundColor="#ecf0f1"
                       SeparatorVisibility="None"
                       HorizontalOptions="FillAndExpand"
+                      SelectedItem="{Binding SelectedItemCommand}"
                       VerticalOptions="FillAndExpand">
 
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="medicine:MedicineModel">
                         <ViewCell>
                             <StackLayout Margin="6,4,6,4"
-                                 BackgroundColor="White">
+                                        BackgroundColor="White">
                                 <StackLayout Orientation="Horizontal">
                                     <Label Text="{Binding Name}"
                                        Margin="8"

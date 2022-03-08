@@ -22,13 +22,19 @@ namespace Phoenix.Server.Services.Database
         //modules
 
         public virtual DbSet<Vendor> Vendors { get; set; }
-        public virtual DbSet<Group> Groups { get; set; }
-        public virtual DbSet<Unit> Units { get; set; }
-        public virtual DbSet<Staff> Staffs { get; set; }
-        public virtual DbSet<Medicine> Medicines { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
-        public virtual DbSet<Invoice> Invoices { get; set; }
-        public virtual DbSet<Invoice_Detail> Invoice_Details { get; set; }
+        public virtual DbSet<Group> Groups { get; set; }
+        public virtual DbSet<Input> Inputs { get; set; }
+        public virtual DbSet<InputInfo> InputInfos { get; set; }
+        public virtual DbSet<Medicine> Medicines { get; set; }
+        public virtual DbSet<Output> Outputs { get; set; }
+        public virtual DbSet<OutputInfo> OutputInfos { get; set; }
+        public virtual DbSet<Staff> Staffs { get; set; }
+        public virtual DbSet<Supplier> Suppliers { get; set; }
+        public virtual DbSet<Unit> Units { get; set; }
+       
+       
+     
 
 
 

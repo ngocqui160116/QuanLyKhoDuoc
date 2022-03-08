@@ -412,9 +412,12 @@
     <Compile Include="MainServices\Common\Models\ImageRecordDto.cs" />
     <Compile Include="MainServices\Common\Models\NameValueModel.cs" />
     <Compile Include="MainServices\Common\SettingAdminService.cs" />
+    <Compile Include="MainServices\SupplierService.cs" />
+    <Compile Include="MainServices\OutputInfoService.cs" />
+    <Compile Include="MainServices\OutputService.cs" />
     <Compile Include="MainServices\UnitService.cs" />
     <Compile Include="MainServices\GroupService.cs" />
-    <Compile Include="MainServices\Invoice_DetailService.cs" />
+    <Compile Include="MainServices\InputInfoService.cs" />
     <Compile Include="MainServices\StaffService.cs" />
     <Compile Include="MainServices\PushMessageService.cs" />
     <Compile Include="MainServices\Log\ISmsService.cs" />
@@ -433,7 +436,7 @@
     <Compile Include="MainServices\Tasks\TaskRegistry.cs" />
     <Compile Include="MainServices\MedicineService.cs" />
     <Compile Include="MainServices\CustomerService.cs" />
-    <Compile Include="MainServices\InvoiceService.cs" />
+    <Compile Include="MainServices\InputService.cs" />
     <Compile Include="MainServices\VendorService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\EmailSettings.cs" />

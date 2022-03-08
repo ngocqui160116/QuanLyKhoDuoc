@@ -1,33 +1,34 @@
 ﻿using Falcon.Web.Core.Helpers;
 using Phoenix.Server.Data.Entity;
 using Phoenix.Server.Services.Database;
-using Phoenix.Shared.Invoice_Detail;
+using Phoenix.Shared.InputInfo;
+using Phoenix.Shared.InputInfoDto;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Phoenix.Server.Services.MainServices
 {
-    public interface IInvoice_DetailService
+    public interface IInputInfoService
     {
-        List<Invoice_DetailDto> GetAllInvoice_Detail(Invoice_DetailRequest request);
+        List<InputInfoDto> GetAllInputInfo(InputInfoRequest request);
     }
-    public class Invoice_DetailService : IInvoice_DetailService
+    public class InputInfoService : IInputInfoService
     {
         private readonly DataContext _dataContext;
-        public Invoice_DetailService(DataContext dataContext)
+        public InputInfoService(DataContext dataContext)
         {
             _dataContext = dataContext;
         }
 
         //lấy danh sách nhà cung cấp
-        public List<Invoice_DetailDto> GetAllInvoice_Detail(Invoice_DetailRequest request)
+        public List<InputInfoDto> GetAllInputInfo(InputInfoRequest request)
         {
             //setup query
-            var query = _dataContext.Invoice_Details.AsQueryable().Where(r => !r.Deleted);
+            var query = _dataContext.InputInfos.AsQueryable();
 
-            if (!string.IsNullOrEmpty(request.IdInvoice))
+            if (!string.IsNullOrEmpty(request.IdInputInfo))
             {
-                query = query.Where(d => d.IdInvoice.Contains(request.IdInvoice));
+                query = query.Where(d => d.IdInput.Contains(request.IdInputInfo));
             }
             //if (!string.IsNullOrEmpty(request.IdMedicine.ToString()))
             //{
@@ -40,7 +41,7 @@ namespace Phoenix.Server.Services.MainServices
 
 
             var data = query.ToList();
-            return data.MapTo<Invoice_DetailDto>();
+            return data.MapTo<InputInfoDto>();
         }
     }
 }

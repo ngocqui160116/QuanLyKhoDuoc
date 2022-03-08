@@ -11,12 +11,8 @@ namespace Phoenix.Shared.Medicine
         public string Active { get; set; }
         public string Content { get; set; }
         public string Packing { get; set; }
-        public int IdCustomer { get; set; }
-        public DateTime DateOfManufacture { get; set; }
-        public DateTime DueDate { get; set; }
-        public int Unit { get; set; }
-        public double Price { get; set; }
-        public double UnitPrice { get; set; }
+        public int IdSupplier { get; set; }
+        public int IdUnit { get; set; }
         public int Amount { get; set; }
         public int? Image { get; set; }
         public string Status { get; set; }
