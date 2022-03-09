@@ -7,7 +7,7 @@ using Phoenix.Shared.Staff;
 using Phoenix.Shared.Group;
 using Phoenix.Shared.Unit;
 using Phoenix.Shared.Input;
-using Phoenix.Shared.InputInfoDto;
+using Phoenix.Shared.InputInfo;
 using Phoenix.Shared.Output;
 using Phoenix.Shared.OutputInfo;
 using Phoenix.Shared.Supplier;
