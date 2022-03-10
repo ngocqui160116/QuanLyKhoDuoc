@@ -11,6 +11,7 @@ namespace Phoenix.Server.Services.MainServices
     public interface IMedicineService
     {
         List<MedicineDto> GetAllMedicine(MedicineRequest request);
+      
     }
     public class MedicineService : IMedicineService
     {

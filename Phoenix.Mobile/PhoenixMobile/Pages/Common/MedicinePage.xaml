@@ -66,10 +66,10 @@
                                 </StackLayout>
 
                                 <StackLayout Orientation="Horizontal">
-                                    <Label Text="NCC:"
+                                    <Label Text="Đóng gói:"
                                        Margin="8,2,8,4"
                                        FontSize="Small" />
-                                    <Label Text="{Binding NameSupplier}"
+                                    <Label Text="{Binding Packing}"
                                         Margin="2,2,8,4"
                                         TextColor="DarkSlateGray"  
                                         FontSize="Small" />

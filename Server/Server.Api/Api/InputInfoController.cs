@@ -26,5 +26,6 @@ namespace Phoenix.Server.Api.Api
             return _InputInfoService.GetAllInputInfo(request);
         }
 
+
     }
 }
