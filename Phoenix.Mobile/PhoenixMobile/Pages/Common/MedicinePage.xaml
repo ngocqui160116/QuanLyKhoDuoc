@@ -41,6 +41,9 @@
                                        Margin="8"
                                        FontAttributes="Bold"
                                        FontSize="Large" />
+                                    <Label Text="{Binding NameUnit}"
+                                       Margin="8"
+                                       FontSize="Small" />
                                     <StackLayout Orientation="Horizontal"
                                                  HorizontalOptions="EndAndExpand">
                                         <Label Text="Tồn:"
@@ -63,10 +66,10 @@
                                 </StackLayout>
 
                                 <StackLayout Orientation="Horizontal">
-                                    <Label Text="HSD:"
+                                    <Label Text="NCC:"
                                        Margin="8,2,8,4"
                                        FontSize="Small" />
-                                    <Label Text="{Binding IdSupplier}"
+                                    <Label Text="{Binding NameSupplier}"
                                         Margin="2,2,8,4"
                                         TextColor="DarkSlateGray"  
                                         FontSize="Small" />

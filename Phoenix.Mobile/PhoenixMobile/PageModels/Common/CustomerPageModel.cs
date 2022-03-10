@@ -27,7 +27,7 @@ namespace Phoenix.Mobile.PageModels.Common
         {
             base.Init(initData);
             NavigationPage.SetHasNavigationBar(CurrentPage, false);
-            CurrentPage.Title = "Nhà cung cấp";
+            CurrentPage.Title = "Khách hàng";
         }
         protected override async void ViewIsAppearing(object sender, EventArgs e)
         {

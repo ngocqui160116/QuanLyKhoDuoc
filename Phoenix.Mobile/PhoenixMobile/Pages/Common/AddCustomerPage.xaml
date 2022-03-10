@@ -30,24 +30,12 @@
                             <ColumnDefinition Width="0.7*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Label  Grid.Row="1"
-                                Grid.Column="0" 
-                                Margin="10,5,0,0" 
-                                WidthRequest="95" 
-                                FontSize="Medium" 
-                                Text="Mã NCC"  />
-                        <Entry  Grid.Row="1"
-                                Grid.Column="1"
-                                Placeholder="{Binding IdCustomer}"
-                                WidthRequest="200" 
-                                />
-
                         <Label  Grid.Row="2"
                                 Grid.Column="0" 
                                 Margin="10,5,0,0"                               
-                                WidthRequest="95" 
+                                WidthRequest="130" 
                                 FontSize="Medium" 
-                                Text="Tên NCC"/>
+                                Text="Tên khách hàng"/>
                         <Entry  Grid.Row="2"
                                 Grid.Column="1"
                                 Placeholder="{Binding Name}"

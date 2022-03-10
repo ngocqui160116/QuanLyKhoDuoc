@@ -4,6 +4,6 @@ namespace Phoenix.Shared.Output
 {
     public class OutputRequest
     {
-        public string IdOutput { get; set; }
+        public string Id { get; set; }
     }
 }

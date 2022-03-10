@@ -3,14 +3,27 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:input="clr-namespace:Phoenix.Mobile.Core.Models.Input;assembly=Phoenix.Mobile.Core"
              xmlns:controls="clr-namespace:Phoenix.Mobile.Controls" 
+             xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common"  
              xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="Phoenix.Mobile.Pages.Common.AddInputPage"
+             x:DataType="common:AddInputPageModel"
              xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
              ControlTemplate="{StaticResource FullScreenHasBack}">
     <ContentPage.Content>
         <StackLayout BackgroundColor="WhiteSmoke">
+            <StackLayout Orientation="Horizontal" BackgroundColor="White">
+                <SearchBar WidthRequest="500"  
+                           x:Name="Search" 
+                           Placeholder="Tìm kiếm">
+                </SearchBar>
+            </StackLayout>
             <StackLayout HeightRequest="25"
                          WidthRequest="50">
+                <Label Text="Danh sách sản phẩm"
+                       FontSize="Small"
+                       Margin="5,2,0,0"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"/>
             </StackLayout>
             <Frame CornerRadius="15" >
                 <StackLayout  BackgroundColor="White">
@@ -28,53 +41,62 @@
                             <ColumnDefinition Width="0.7*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Label  Grid.Row="1"
-                                Grid.Column="0" 
+                        <Label HeightRequest="100"
                                 Margin="10,5,0,0" 
                                 WidthRequest="95" 
                                 FontSize="Medium" 
-                                Text="Mã NCC"  />
-                        <Entry  Grid.Row="1"
-                                Grid.Column="1"
-                                Placeholder="{Binding Id}"
-                                WidthRequest="200" 
-                                />
+                                Text="Điện thoại"/>
 
-                        <Label  Grid.Row="2"
-                                Grid.Column="0" 
-                                Margin="10,5,0,0"                               
-                                WidthRequest="95" 
-                                FontSize="Medium" 
-                                Text="Tên NCC"/>
-                        <Entry  Grid.Row="2"
-                                Grid.Column="1"
-                                Placeholder="{Binding DateInput}"
-                                WidthRequest="200" 
-                                 />
+                    </Grid>
+                </StackLayout>
+            </Frame>
+            <StackLayout HeightRequest="25"
+                         WidthRequest="50">
+                <Label Text="Thông tin"
+                       FontSize="Small"
+                       Margin="5,2,0,0"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"/>
+            </StackLayout>
+            <Frame CornerRadius="15" >
+                <StackLayout  BackgroundColor="White">
+                    <Grid x:DataType="input:InputModel">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.3*"/>
+                            <ColumnDefinition Width="0.7*"/>
+                        </Grid.ColumnDefinitions>
 
                         <Label  Grid.Row="3"
                                 Grid.Column="0" 
                                 Margin="10,5,0,0" 
                                 WidthRequest="95" 
                                 FontSize="Medium" 
-                                Text="Điện thoại"/>
-                        <Entry  Grid.Row="3"
-                                Grid.Column="1" 
-                                Placeholder="{Binding Id}"
-                                WidthRequest="200" 
-                                Keyboard="Numeric"/>
+                                Text="Nhà cung cấp"/>
+                        <Picker x:DataType="common:AddInputPageModel"
+                                ItemsSource="{Binding Suppliers}"
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                ItemDisplayBinding="{Binding Name}"
+                                />
 
                         <Label  Grid.Row="4"
                                 Grid.Column="0" 
                                 Margin="10,5,0,0" 
                                 WidthRequest="95" 
                                 FontSize="Medium" 
-                                Text="Email"/>
-                        <Entry  Grid.Row="4"
+                                Text="Ngày nhập"/>
+                        <DatePicker  Grid.Row="4"
+                                Format="dd/MM/yyyy"
                                 Grid.Column="1"
-                                 Placeholder="{Binding Id}"
-                                WidthRequest="200" 
-                                Keyboard="Email"/>
+                                WidthRequest="200" />
 
                         <Label  Grid.Row="5"
                                 Grid.Column="0" 
@@ -107,8 +129,10 @@
                           xe:Commands.Tap="{Binding StoreCommand}">
                         <forms:CachedImage Source="btn_Save" 
                                            Grid.Row="0"
+                                            Grid.Column="0"
                                            HeightRequest="50"/>
                         <Label Grid.Row="0"
+                                Grid.Column="0"
                                FontSize="Medium"
                                HorizontalOptions="Center"
                                FontAttributes="Bold"
@@ -116,6 +140,7 @@
                                Text="Lưu"/>
                     </Grid>
                 </AbsoluteLayout>
+                
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

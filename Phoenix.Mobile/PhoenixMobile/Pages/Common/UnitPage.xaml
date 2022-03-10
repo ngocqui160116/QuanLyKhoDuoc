@@ -69,7 +69,7 @@
                         <Entry  Grid.Row="4"
                                 Grid.Column="1"
                                 TextColor="Black"
-                                Placeholder="{Binding IdUnit }"
+                                Placeholder="{Binding NameUnit }"
                                 WidthRequest="200"                         
                                 Keyboard="Numeric"/>
 

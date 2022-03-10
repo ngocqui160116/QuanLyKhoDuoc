@@ -24,9 +24,9 @@ namespace Phoenix.Server.Services.MainServices
         {
             //setup query
             var query = _dataContext.Outputs.AsQueryable();
-            if (!string.IsNullOrEmpty(request.IdOutput))
+            if (!string.IsNullOrEmpty(request.Id))
             {
-                query = query.Where(d => d.Id.Contains(request.IdOutput));
+                query = query.Where(d => d.Id.Contains(request.Id));
             }
             //if (!string.IsNullOrEmpty(request.IdStaff.ToString()))
             //{

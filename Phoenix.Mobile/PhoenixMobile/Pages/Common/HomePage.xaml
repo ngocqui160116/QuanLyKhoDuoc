@@ -39,7 +39,7 @@
                 <controls:RoundFrame WidthRequest="100" 
                                      xe:Commands.Tap="{Binding CustomerCommand}" 
                                      HeightRequest="100" 
-                                     Text="Nhà cung cấp" 
+                                     Text="Khách hàng" 
                                      Grid.Row="1" 
                                      Grid.Column="0" 
                                      Icon="icon_nhacungcap.png">
