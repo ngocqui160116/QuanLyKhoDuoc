@@ -16,10 +16,10 @@ using Xamarin.Forms.Xaml;
 namespace Phoenix.Mobile.Pages.Common
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CustomerPage : ContentPage
+    public partial class SupplierPage : ContentPage
     {
    
-        public CustomerPage()
+        public SupplierPage()
         {
             InitializeComponent();
         }

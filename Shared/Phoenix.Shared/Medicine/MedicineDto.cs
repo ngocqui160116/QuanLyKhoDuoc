@@ -18,7 +18,6 @@ namespace Phoenix.Shared.Medicine
         public int Amount { get; set; }
         public int? Image { get; set; }
         public string Status { get; set; }
-        public DateTime DueDate { get; set; }
 
     }
 }

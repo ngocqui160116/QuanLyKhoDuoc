@@ -2,13 +2,13 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
-             xmlns:customer="clr-namespace:Phoenix.Mobile.Core.Models.Customer;assembly=Phoenix.Mobile.Core" 
+             xmlns:supplier="clr-namespace:Phoenix.Mobile.Core.Models.Supplier;assembly=Phoenix.Mobile.Core" 
              xmlns:controls="clr-namespace:Phoenix.Mobile.Controls" 
              xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common" 
-             x:DataType="common:AccountPageModel"
+             xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common"
+             x:DataType="common:AddSupplierPageModel"
              ControlTemplate="{StaticResource FullScreenHasBack}"
-             x:Class="Phoenix.Mobile.Pages.Common.AddCustomerPage">
+             x:Class="Phoenix.Mobile.Pages.Common.AddSupplierPage">
     <ContentPage.Content>
         <StackLayout BackgroundColor="WhiteSmoke">
             <StackLayout HeightRequest="25"
@@ -16,7 +16,7 @@
             </StackLayout>
             <Frame CornerRadius="15" >
                 <StackLayout  BackgroundColor="White">
-                    <Grid x:DataType="customer:CustomerModel">
+                    <Grid x:DataType="supplier:SupplierModel">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -35,7 +35,7 @@
                                 Margin="10,5,0,0"                               
                                 WidthRequest="130" 
                                 FontSize="Medium" 
-                                Text="Tên khách hàng"/>
+                                Text="Tên nhà cung cấp"/>
                         <Entry  Grid.Row="2"
                                 Grid.Column="1"
                                 Placeholder="{Binding Name}"
@@ -93,7 +93,8 @@
 
             <StackLayout Margin="0,10,0,5">
                 <AbsoluteLayout HorizontalOptions="Center">
-                    <Grid xe:TouchEffect.Color="AliceBlue">
+                    <Grid xe:TouchEffect.Color="AliceBlue"
+                          xe:Commands.Tap="{Binding SupplierCommand}">
                         <forms:CachedImage Source="btn_Save" 
                                            Grid.Row="0"
                                            HeightRequest="50"/>

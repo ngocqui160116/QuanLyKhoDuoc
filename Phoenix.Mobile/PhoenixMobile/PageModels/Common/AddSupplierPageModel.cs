@@ -2,13 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Phoenix.Mobile.PageModels.Common
 {
-    public class AddCustomerPageModel : BasePageModel
+    public class AddSupplierPageModel : BasePageModel
     {
-        public AddCustomerPageModel()
+        public AddSupplierPageModel()
         {
            
         }
@@ -16,12 +17,22 @@ namespace Phoenix.Mobile.PageModels.Common
         {
             base.Init(initData);
             NavigationPage.SetHasNavigationBar(CurrentPage, false);
-            CurrentPage.Title = "Thêm khách hàng";
+            CurrentPage.Title = "Thêm nhà cung cấp";
         }
         protected override async void ViewIsAppearing(object sender, EventArgs e)
         {
             base.ViewIsAppearing(sender, e);
         }
+
+        #region SupplierCommand
+
+        public Command SupplierCommand => new Command(async (p) => await SupplierExecute(), (p) => !IsBusy);
+
+        private async Task SupplierExecute()
+        {
+            await CoreMethods.PushPageModel<SupplierPageModel>();
+        }
+        #endregion
     }
 
 }

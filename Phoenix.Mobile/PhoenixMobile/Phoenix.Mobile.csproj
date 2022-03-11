@@ -128,7 +128,7 @@
     <EmbeddedResource Update="Pages\Common\AccountPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\Common\AddCustomerPage.xaml">
+    <EmbeddedResource Update="Pages\Common\AddSupplierPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\Common\AddInputPage.xaml">
@@ -140,7 +140,10 @@
     <EmbeddedResource Update="Pages\Common\AlertPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\Common\CustomerPage.xaml">
+    <EmbeddedResource Update="Pages\Common\InventoryPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Common\SupplierPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\Common\HomePage.xaml">
@@ -171,8 +174,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Pages\Common\AddSupplierPage.xaml.cs">
+      <DependentUpon>AddSupplierPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Pages\Common\AddInputPage.xaml.cs">
       <DependentUpon>AddInputPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Common\SupplierPage.xaml.cs">
+      <DependentUpon>SupplierPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>

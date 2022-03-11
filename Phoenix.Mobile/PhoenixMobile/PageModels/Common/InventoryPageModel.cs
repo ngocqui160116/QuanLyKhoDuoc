@@ -1,38 +1,34 @@
 ﻿using Phoenix.Mobile.Core.Infrastructure;
-using Phoenix.Mobile.Core.Models.Medicine;
-using Phoenix.Mobile.Core.Models.Unit;
-using Phoenix.Mobile.Core.Models.Vendor;
+using Phoenix.Mobile.Core.Models.InputInfo;
 using Phoenix.Mobile.Core.Services.Common;
 using Phoenix.Mobile.Helpers;
-using Phoenix.Shared.Medicine;
-using Phoenix.Shared.Unit;
+using Phoenix.Shared.InputInfo;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Phoenix.Mobile.PageModels.Common
 {
-
-    public class MedicinePageModel : BasePageModel
+    public class InventoryPageModel :BasePageModel
     {
-        private readonly IMedicineService _medicineService;
+
+        private readonly IInputInfoService _inputinfoService;
         private readonly IDialogService _dialogService;
-        
-        public MedicinePageModel(IMedicineService medicineService, IDialogService dialogService)
+
+        public InventoryPageModel(IInputInfoService inputinfoService, IDialogService dialogService)
         {
-            _medicineService = medicineService;
+            _inputinfoService = inputinfoService;
             _dialogService = dialogService;
 
         }
-        
+
         public override async void Init(object initData)
         {
             base.Init(initData);
             NavigationPage.SetHasNavigationBar(CurrentPage, false);
-            CurrentPage.Title = "Danh mục thuốc";
+            CurrentPage.Title = "Thuốc tồn kho";
         }
         protected override async void ViewIsAppearing(object sender, EventArgs e)
         {
@@ -42,33 +38,23 @@ namespace Phoenix.Mobile.PageModels.Common
 
         private async Task LoadData()
         {
-            var data = await _medicineService.GetAllMedicine(request);
+            var data = await _inputinfoService.GetAllInputInfo(request);
             if (data == null)
             {
                 await _dialogService.AlertAsync("Lỗi kết nối mạng!", "Lỗi", "OK");
             }
             else
             {
-                Medicines = data;
+                Inventorys = data;
                 //RaisePropertyChanged("Vendors");
-                RaisePropertyChanged(nameof(Medicines));
+                RaisePropertyChanged(nameof(Inventorys));
             }
         }
 
         #region properties
-        public List<MedicineModel> Medicines { get; set; } = new List<MedicineModel>();
-        public MedicineRequest request { get; set; } = new MedicineRequest();
+        public List<InputInfoModel> Inventorys { get; set; } = new List<InputInfoModel>();
+        public InputInfoRequest request { get; set; } = new InputInfoRequest();
 
-        #endregion
-
-        #region AddMedicineCommand
-
-        public Command AddMedicineCommand => new Command(async (p) => await AddMedicineExecute(), (p) => !IsBusy);
-
-        private async Task AddMedicineExecute()
-        {
-            await CoreMethods.PushPageModel<AddMedicinePageModel>();
-        }
         #endregion
 
         #region SelectedItemCommand
@@ -78,10 +64,8 @@ namespace Phoenix.Mobile.PageModels.Common
         private async Task SelectedItemCommandExecute()
         {
             await _dialogService.AlertAsync("Bạn đã chọn:", "Thông báo", "OK");
-           // await CoreMethods.PushPageModel<AddMedicinePageModel>();
+            // await CoreMethods.PushPageModel<AddMedicinePageModel>();
         }
         #endregion
-
-        
     }
 }

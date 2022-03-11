@@ -17,5 +17,6 @@ namespace Phoenix.Shared.InputInfo
         public DateTime DueDate { get; set; }
         public string SDK { get; set; }
         public string Status { get; set; }
+        public int Amount { get; set; }
     }
 }

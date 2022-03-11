@@ -1,8 +1,8 @@
 ﻿using Phoenix.Mobile.Core.Infrastructure;
-using Phoenix.Mobile.Core.Models.Customer;
+using Phoenix.Mobile.Core.Models.Supplier;
 using Phoenix.Mobile.Core.Services.Common;
 using Phoenix.Mobile.Helpers;
-using Phoenix.Shared.Customer;
+using Phoenix.Shared.Supplier;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,13 +13,13 @@ using Xamarin.Forms;
 
 namespace Phoenix.Mobile.PageModels.Common
 {
-    public class CustomerPageModel : BasePageModel
+    public class SupplierPageModel : BasePageModel
     {
-        private readonly ICustomerService _customerService;
+        private readonly ISupplierService _supplierService;
         private readonly IDialogService _dialogService;
-        public CustomerPageModel(ICustomerService customerService, IDialogService dialogService)
+        public SupplierPageModel(ISupplierService supplierService, IDialogService dialogService)
         {
-            _customerService = customerService;
+            _supplierService = supplierService;
             _dialogService = dialogService;
         }
 
@@ -27,7 +27,7 @@ namespace Phoenix.Mobile.PageModels.Common
         {
             base.Init(initData);
             NavigationPage.SetHasNavigationBar(CurrentPage, false);
-            CurrentPage.Title = "Khách hàng";
+            CurrentPage.Title = "Nhà cung cấp";
         }
         protected override async void ViewIsAppearing(object sender, EventArgs e)
         {
@@ -37,34 +37,34 @@ namespace Phoenix.Mobile.PageModels.Common
 
         private async Task LoadData()
         {
-            var data = await _customerService.GetAllCustomer(request);
+            var data = await _supplierService.GetAllSupplier(request);
             if (data == null)
             {
                 await _dialogService.AlertAsync("Lỗi kết nối mạng!", "Lỗi", "OK");
             }
             else
             {
-                Customers = data;
-                //RaisePropertyChanged("Customers");
-                RaisePropertyChanged(nameof(Customers));
+                Suppliers = data;
+                //RaisePropertyChanged("Suppliers");
+                RaisePropertyChanged(nameof(Suppliers));
             }
         }
 
         #region properties
-        public List<CustomerModel> Customers { get; set; } = new List<CustomerModel>();
+        public List<SupplierModel> Suppliers { get; set; } = new List<SupplierModel>();
 
-        public CustomerRequest request { get; set; } = new CustomerRequest();
+        public SupplierRequest request { get; set; } = new SupplierRequest();
 
         public string SearchText { get; set; }
         #endregion
 
-        #region AddCustomerCommand
+        #region AddSupplierCommand
 
-        public Command AddCustomerCommand => new Command(async (p) => await AddCustomerExecute(), (p) => !IsBusy);
+        public Command AddSupplierCommand => new Command(async (p) => await AddSupplierExecute(), (p) => !IsBusy);
 
-        private async Task AddCustomerExecute()
+        private async Task AddSupplierExecute()
         {
-            await CoreMethods.PushPageModel<AddCustomerPageModel>();
+            await CoreMethods.PushPageModel<AddSupplierPageModel>();
         }
         #endregion
 
