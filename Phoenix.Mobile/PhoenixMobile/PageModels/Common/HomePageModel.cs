@@ -54,6 +54,16 @@ namespace Phoenix.Mobile.PageModels.Common
         }
         #endregion
 
+        #region InputCommand
+
+        public Command InputCommand => new Command(async (p) => await InputExecute(), (p) => !IsBusy);
+
+        private async Task InputExecute()
+        {
+            await CoreMethods.PushPageModel<InputPageModel>();
+        }
+        #endregion
+
 
         #region MedicineCommand
 

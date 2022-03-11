@@ -5,7 +5,7 @@
              xmlns:input="clr-namespace:Phoenix.Mobile.Core.Models.Input;assembly=Phoenix.Mobile.Core"
              x:Class="Phoenix.Mobile.Pages.Common.InputPage"
              x:DataType="common:InputPageModel"
-             xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
+             xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" xmlns:inputinfo="clr-namespace:Phoenix.Mobile.Core.Models.InputInfo;assembly=Phoenix.Mobile.Core"
              NavigationPage.HasNavigationBar="False"
              ControlTemplate="{StaticResource FullScreenHasBack}">
     <ContentPage.Content>
@@ -31,17 +31,26 @@
 
                 <ListView.ItemTemplate>
 
-                    <DataTemplate x:DataType="input:InputModel">
+                    <DataTemplate x:DataType="inputinfo:InputInfoModel">
                         <ViewCell>
                             <StackLayout Margin="6,4,6,4"
                                  BackgroundColor="White">
-                                <Label Text="{Binding Id}"
+                                <Label Text="{Binding IdInput}"
                                    Margin="8"
                                    FontAttributes="Bold"
                                    FontSize="Medium" />
-                                <Label Text="{Binding DateInput}"
-                                   Margin="8,2,8,4"
-                                   FontSize="Small" />
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding NameSupplier}"
+                                           Margin="8,2,8,4"
+                                           FontSize="Small" />
+                                    <Label Text="{Binding DateInput}"
+                                           HorizontalOptions="EndAndExpand"
+                                           TextColor="ForestGreen"
+                                           FontAttributes="Bold"
+                                           Margin="2"
+                                           FontSize="Small" />
+                                </StackLayout>
+                               
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

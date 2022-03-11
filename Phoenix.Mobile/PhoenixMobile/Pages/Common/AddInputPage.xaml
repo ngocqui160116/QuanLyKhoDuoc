@@ -24,30 +24,36 @@
                        Margin="5,2,0,0"
                        FontAttributes="Bold"
                        VerticalOptions="Center"/>
+                
             </StackLayout>
             <Frame CornerRadius="15" >
-                <StackLayout  BackgroundColor="White">
-                    <Grid x:DataType="input:InputModel">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.3*"/>
-                            <ColumnDefinition Width="0.7*"/>
-                        </Grid.ColumnDefinitions>
+                <StackLayout  BackgroundColor="Black">
+                    <ListView
+                        
+                              HeightRequest="150"
+                              HasUnevenRows="True"
+                              BackgroundColor="#ecf0f1"
+                              SeparatorVisibility="None"
+                             >
 
-                        <Label HeightRequest="100"
-                                Margin="10,5,0,0" 
-                                WidthRequest="95" 
-                                FontSize="Medium" 
-                                Text="Điện thoại"/>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout Margin="6,4,6,4"
+                                                     BackgroundColor="White">
+                                        <Label Text="Panaldo"
+                                                   Margin="8"
+                                                   FontAttributes="Bold"
+                                                   FontSize="Small" />
 
-                    </Grid>
+                                        <Label Text="HSD"
+                                                       Margin="8,2,8,4"
+                                                       FontSize="Small"/>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
                 </StackLayout>
             </Frame>
             <StackLayout HeightRequest="25"
@@ -74,37 +80,37 @@
                             <ColumnDefinition Width="0.7*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Label  Grid.Row="3"
+                        <Label  Grid.Row="1"
                                 Grid.Column="0" 
                                 Margin="10,5,0,0" 
-                                WidthRequest="95" 
+                                WidthRequest="115" 
                                 FontSize="Medium" 
                                 Text="Nhà cung cấp"/>
                         <Picker x:DataType="common:AddInputPageModel"
                                 ItemsSource="{Binding Suppliers}"
-                                Grid.Row="2"
+                                Grid.Row="1"
                                 Grid.Column="1"
                                 ItemDisplayBinding="{Binding Name}"
                                 />
 
-                        <Label  Grid.Row="4"
+                        <Label  Grid.Row="2"
                                 Grid.Column="0" 
                                 Margin="10,5,0,0" 
                                 WidthRequest="95" 
                                 FontSize="Medium" 
                                 Text="Ngày nhập"/>
-                        <DatePicker  Grid.Row="4"
-                                Format="dd/MM/yyyy"
-                                Grid.Column="1"
-                                WidthRequest="200" />
+                        <DatePicker Grid.Row="2"
+                                    Grid.Column="1"
+                                    Format="dd/MM/yyyy"
+                                    WidthRequest="200" />
 
-                        <Label  Grid.Row="5"
+                        <Label  Grid.Row="3"
                                 Grid.Column="0" 
                                 Margin="10,5,0,0" 
                                 WidthRequest="95" 
                                 FontSize="Medium" 
                                 Text="Địa chỉ"/>
-                        <Entry  Grid.Row="5"
+                        <Entry  Grid.Row="3"
                                 Grid.Column="1"  
                                 Placeholder="{Binding DateInput}"
                                 WidthRequest="200"                         
@@ -137,7 +143,7 @@
                                HorizontalOptions="Center"
                                FontAttributes="Bold"
                                TextColor="#fff"
-                               Text="Lưu"/>
+                               Text="Tiếp theo"/>
                     </Grid>
                 </AbsoluteLayout>
                 
