@@ -21,7 +21,7 @@ namespace Phoenix.Server.Services.Infrastructure
             CreateMap<Customer, CustomerDto>();
             CreateMap<Supplier, SupplierDto>();
             CreateMap<Medicine, MedicineDto>()
-                .ForMember(d => d.SupplierName, o => o.MapFrom(s => s.Supplier.Name))
+                //.ForMember(d => d.SupplierName, o => o.MapFrom(s => s..Name))
                 .ForMember(d => d.GroupName, o => o.MapFrom(s => s.Group.Name)); 
             CreateMap<Group, GroupDto>();
             CreateMap<Staff, StaffDto>();
