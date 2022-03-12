@@ -1,11 +1,13 @@
-﻿using System;
+﻿using Phoenix.Shared.Common;
+using System;
 
 namespace Phoenix.Shared.Supplier
 {
-    public class SupplierRequest
+    public class SupplierRequest : BaseRequest
     {
         public int IdSupplier { get; set; }
         public string Name { get; set; }
+        public string Address { get; set; }
         public bool Deleted { get; set; }
     }
 }

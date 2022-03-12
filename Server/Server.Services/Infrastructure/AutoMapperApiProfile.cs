@@ -7,10 +7,10 @@ using Phoenix.Shared.Staff;
 using Phoenix.Shared.Group;
 using Phoenix.Shared.Unit;
 using Phoenix.Shared.Input;
-using Phoenix.Shared.InputInfo;
 using Phoenix.Shared.Output;
 using Phoenix.Shared.OutputInfo;
 using Phoenix.Shared.Supplier;
+using Phoenix.Shared.InputInfo;
 
 namespace Phoenix.Server.Services.Infrastructure
 {
@@ -28,10 +28,10 @@ namespace Phoenix.Server.Services.Infrastructure
             CreateMap<Input, InputDto>();
     
             CreateMap<InputInfo, InputInfoDto>()
-                .ForMember(d => d.NameSupplier, o => o.MapFrom(s => s.Supplier.Name))
-                .ForMember(d => d.NameMedicine, o => o.MapFrom(s => s.Medicine.Name))
-                .ForMember(d => d.DateInput, o => o.MapFrom(s => s.Input.DateInput))
-                .ForMember(d => d.Amount, o => o.MapFrom(s => s.Medicine.Amount))
+                //.ForMember(d => d.NameSupplier, o => o.MapFrom(s => s.Supplier.Name))
+                //.ForMember(d => d.NameMedicine, o => o.MapFrom(s => s.Medicine.Name))
+                //.ForMember(d => d.DateInput, o => o.MapFrom(s => s.Input.DateInput))
+                //.ForMember(d => d.Amount, o => o.MapFrom(s => s.Medicine.Amount))
                 .ForMember(d => d.SDK, o => o.MapFrom(s => s.Medicine.RegistrationNumber));
             CreateMap<Medicine, MedicineDto>()
                 .ForMember(d => d.NameGroup, o => o.MapFrom(s => s.Group.Name))

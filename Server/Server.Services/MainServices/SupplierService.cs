@@ -1,15 +1,19 @@
 ﻿using Falcon.Web.Core.Helpers;
 using Phoenix.Server.Data.Entity;
 using Phoenix.Server.Services.Database;
+using Phoenix.Shared.Common;
 using Phoenix.Shared.Supplier;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Phoenix.Server.Services.MainServices
 {
     public interface ISupplierService
     {
-        List<SupplierDto> GetAllSupplier(SupplierRequest request);
+        Task<BaseResponse<SupplierDto>> GetAllSupplier(SupplierRequest request);
     }
     public class SupplierService : ISupplierService
     {
@@ -20,26 +24,36 @@ namespace Phoenix.Server.Services.MainServices
         }
 
         //lấy danh sách nhà cung cấp
-        public List<SupplierDto> GetAllSupplier(SupplierRequest request)
+        public async Task<BaseResponse<SupplierDto>> GetAllSupplier(SupplierRequest request)
         {
-            //setup query
-            var query = _dataContext.Suppliers.AsQueryable().Where(r => !r.Deleted);
-
-            //if (!string.IsNullOrEmpty(request.IdSupplier.ToString()))
-            //{
-            //    query = query.Where(d => d.IdSupplier.ToString().Contains(request.IdSupplier.ToString()));
-            //}
-
-            if (!string.IsNullOrEmpty(request.Name))
+            var result = new BaseResponse<SupplierDto>();
+            try
             {
-                query = query.Where(d => d.Name.Contains(request.Name));
-            }
-           
-            
-            //filter
+                // setup query
+                var query = _dataContext.Suppliers.AsQueryable();
 
-            var data = query.ToList();
-            return data.MapTo<SupplierDto>();
+                // filter
+                if (!string.IsNullOrEmpty(request.Name))
+                {
+                    query = query.Where(d => d.Address.Contains(request.Name));
+                }
+                if (!string.IsNullOrEmpty(request.Address))
+                {
+                    query = query.Where(d => d.Address.Contains(request.Address));
+                }
+
+                query = query.OrderByDescending(d => d.IdSupplier);
+
+                var data = await query.Skip(request.Page * request.PageSize).Take(request.PageSize).ToListAsync();
+                result.DataCount = (int)((await query.CountAsync()) / request.PageSize) + 1;
+                result.Data = data.MapTo<SupplierDto>();
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return result;
         }
     }
 }

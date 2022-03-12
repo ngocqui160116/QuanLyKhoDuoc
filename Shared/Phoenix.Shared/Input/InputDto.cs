@@ -6,6 +6,7 @@ namespace Phoenix.Shared.Input
     {
         public string Id { get; set; }
         public DateTime DateInput { get; set; }
+        
 
     }
 }

@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Phoenix.Shared.Common;
+using System;
 
 namespace Phoenix.Shared.Staff
 {
-    public class StaffRequest
+    public class StaffRequest : BaseRequest
     {
         public int IdStaff { get; set; }
         public string Name { get; set; }

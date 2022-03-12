@@ -18,6 +18,7 @@ namespace Phoenix.Shared.Medicine
         public int Amount { get; set; }
         public int? Image { get; set; }
         public string Status { get; set; }
-
+        public string SupplierName { get; set; }
+        public string GroupName { get; set; }
     }
 }

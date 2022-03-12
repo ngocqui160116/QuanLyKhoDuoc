@@ -18,7 +18,7 @@ namespace Phoenix.Server.Services.MainServices.System.Setting
             _dataContext = dataContext;
         }
 
-        public async Task CreateSetting(Falcon.Web.Core.Settings.Setting setting)
+        public async global::System.Threading.Tasks.Task CreateSetting(Falcon.Web.Core.Settings.Setting setting)
         {
             //todo validate before insert
             _dataContext.Settings.Add(setting);
@@ -50,7 +50,7 @@ namespace Phoenix.Server.Services.MainServices.System.Setting
             return setting?.MapTo<SettingModel>();
         }
 
-        public async Task InsertSettings(SettingModel model)
+        public async global::System.Threading.Tasks.Task InsertSettings(SettingModel model)
         {
             _dataContext.Settings.Add(new Falcon.Web.Core.Settings.Setting()
             {
@@ -61,7 +61,7 @@ namespace Phoenix.Server.Services.MainServices.System.Setting
             //await _localApisCacheManagerService.ClearCampusCache(CacheResetTypes.Setting);
         }
 
-        public async Task UpdateSettings(SettingModel model)
+        public async global::System.Threading.Tasks.Task UpdateSettings(SettingModel model)
         {
             var settingsUpdate = _dataContext.Settings.Find(model.Id);
             if (settingsUpdate == null) return;
@@ -73,7 +73,7 @@ namespace Phoenix.Server.Services.MainServices.System.Setting
             //await _localApisCacheManagerService.ClearCampusCache(CacheResetTypes.Setting);
         }
 
-        public async Task DeleteSettings(int id)
+        public async global::System.Threading.Tasks.Task DeleteSettings(int id)
         {
             var settings = _dataContext.Settings.Find(id);
             if (settings == null) return;

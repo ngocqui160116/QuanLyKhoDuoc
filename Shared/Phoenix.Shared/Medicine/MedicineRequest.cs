@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Phoenix.Shared.Common;
+using System;
 
 namespace Phoenix.Shared.Medicine
 {
-    public class MedicineRequest
+    public class MedicineRequest : BaseRequest
     {
         public string RegistrationNumber { get; set; }
         public string Name { get; set; }

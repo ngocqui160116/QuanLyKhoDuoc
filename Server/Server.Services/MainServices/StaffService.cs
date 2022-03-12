@@ -1,15 +1,19 @@
 ﻿using Falcon.Web.Core.Helpers;
 using Phoenix.Server.Data.Entity;
 using Phoenix.Server.Services.Database;
+using Phoenix.Shared.Common;
 using Phoenix.Shared.Staff;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Phoenix.Server.Services.MainServices
 {
     public interface IStaffService
     {
-        List<StaffDto> GetAllStaff(StaffRequest request);
+        Task<BaseResponse<StaffDto>> GetAllStaff(StaffRequest request);
     }
     public class StaffService : IStaffService
     {
@@ -20,34 +24,40 @@ namespace Phoenix.Server.Services.MainServices
         }
 
         //lấy danh sách nhà cung cấp
-        public List<StaffDto> GetAllStaff(StaffRequest request)
+        public async Task<BaseResponse<StaffDto>> GetAllStaff(StaffRequest request)
         {
-            //setup query
-            var query = _dataContext.Staffs.AsQueryable();
-            //filter
+            var result = new BaseResponse<StaffDto>();
+            try
+            {
+                // setup query
+                var query = _dataContext.Staffs.AsQueryable();
 
-            //if (!string.IsNullOrEmpty(request.IdStaff.ToString()))
-            //{
-            //    query = query.Where(d => d.IdStaff.ToString().Contains(request.IdStaff.ToString()));
-            //}
-            if (!string.IsNullOrEmpty(request.Name))
-            {
-                query = query.Where(d => d.Name.Contains(request.Name));
+                // filter
+                if (!string.IsNullOrEmpty(request.Name))
+                {
+                    query = query.Where(d => d.Name.Contains(request.Name));
+                }
+                if (!string.IsNullOrEmpty(request.Gender))
+                {
+                    query = query.Where(d => d.Gender.Contains(request.Gender));
+                }
+                if (!string.IsNullOrEmpty(request.Authority))
+                {
+                    query = query.Where(d => d.Authority.Contains(request.Authority));
+                }
+
+                query = query.OrderByDescending(d => d.IdStaff);
+
+                var data = await query.Skip(request.Page * request.PageSize).Take(request.PageSize).ToListAsync();
+                result.DataCount = (int)((await query.CountAsync()) / request.PageSize) + 1;
+                result.Data = data.MapTo<StaffDto>();
             }
-            
-            if (!string.IsNullOrEmpty(request.Gender))
+            catch (Exception ex)
             {
-                query = query.Where(d => d.Gender.Contains(request.Gender));
+
             }
-          
-            if (!string.IsNullOrEmpty(request.Authority))
-            {
-                query = query.Where(d => d.Authority.Contains(request.Authority));
-            }
-          
-         
-            var data = query.ToList();
-            return data.MapTo<StaffDto>();
+
+            return result;
         }
     }
 }
