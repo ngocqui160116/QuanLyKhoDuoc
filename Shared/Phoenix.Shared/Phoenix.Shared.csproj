@@ -53,6 +53,8 @@
     <Compile Include="Auth\LoginResponse.cs" />
     <Compile Include="Auth\TokenRequest.cs" />
     <Compile Include="Auth\TokenResponse.cs" />
+    <Compile Include="Common\BaseRequest.cs" />
+    <Compile Include="Common\BaseResponse.cs" />
     <Compile Include="Common\ImageResizeModes.cs" />
     <Compile Include="Common\SettingDto.cs" />
     <Compile Include="Common\SettingRequest.cs" />

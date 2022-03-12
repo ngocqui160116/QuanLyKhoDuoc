@@ -12,8 +12,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CongDongBau.Server.Web</RootNamespace>
-    <AssemblyName>CongDongBau.Server.Web</AssemblyName>
+    <RootNamespace>Phoenix.Server.Web</RootNamespace>
+    <AssemblyName>Phoenix.Server.Web</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -742,6 +742,16 @@
     <Content Include="assets\js\kendo\2019.3.1023\jquery.min.js" />
     <Content Include="assets\js\kendo\2019.3.1023\jszip.min.js" />
     <Content Include="Areas\Admin\Views\Shared\_MobileMenu.cshtml" />
+    <Content Include="Areas\Admin\Views\Group\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Staff\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Customer\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Medicine\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Invoice\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Supplier\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Input\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\InputInfo\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Unit\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\OutputInfo\Index.cshtml" />
     <None Include="assets\js\kendo\2019.3.1023\kendo.all-vsdoc.js" />
     <None Include="assets\js\kendo\2019.3.1023\kendo.all.min.intellisense.js" />
     <Content Include="assets\js\kendo\2019.3.1023\kendo.all.min.js" />
@@ -1195,14 +1205,34 @@
     <Compile Include="Areas\Admin\Controllers\AdminAuthorizeAttribute.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CustomerController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UnitController.cs" />
+    <Compile Include="Areas\Admin\Controllers\GroupController.cs" />
+    <Compile Include="Areas\Admin\Controllers\OutputInfoController.cs" />
+    <Compile Include="Areas\Admin\Controllers\OutputController.cs" />
+    <Compile Include="Areas\Admin\Controllers\InputController.cs" />
+    <Compile Include="Areas\Admin\Controllers\InputInfoController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MedicineController.cs" />
     <Compile Include="Areas\Admin\Controllers\SecurityController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Admin\Controllers\StaffController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SupplierController.cs" />
     <Compile Include="Areas\Admin\Models\Account\RoleModel.cs" />
     <Compile Include="Areas\Admin\Models\Account\UserModel.cs" />
     <Compile Include="Areas\Admin\Models\Account\UserRuleModel.cs" />
     <Compile Include="Areas\Admin\Models\BaseModel.cs" />
     <Compile Include="Areas\Admin\Models\Common\LoginModel.cs" />
     <Compile Include="Areas\Admin\Models\Common\MimeTypes.cs" />
+    <Compile Include="Areas\Admin\Models\Customer\CustomerModel.cs" />
+    <Compile Include="Areas\Admin\Models\OutputInfo\OutputInfoModel.cs" />
+    <Compile Include="Areas\Admin\Models\Unit\UnitModel.cs" />
+    <Compile Include="Areas\Admin\Models\Group\GroupModel.cs" />
+    <Compile Include="Areas\Admin\Models\Output\OutputModel.cs" />
+    <Compile Include="Areas\Admin\Models\InputInfo\InputInfoModel.cs" />
+    <Compile Include="Areas\Admin\Models\Input\InputModel.cs" />
+    <Compile Include="Areas\Admin\Models\Medicine\MedicineModel.cs" />
+    <Compile Include="Areas\Admin\Models\Staff\StaffModel.cs" />
+    <Compile Include="Areas\Admin\Models\Supplier\SupplierModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

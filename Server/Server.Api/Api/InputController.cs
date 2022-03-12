@@ -1,6 +1,7 @@
 ﻿using Phoenix.Server.Data.Entity;
 using Phoenix.Server.Services.MainServices;
 using Phoenix.Server.Services.MainServices.Auth;
+using Phoenix.Shared.Common;
 using Phoenix.Shared.Core;
 using Phoenix.Shared.Input;
 using System.Collections.Generic;
@@ -20,9 +21,9 @@ namespace Phoenix.Server.Api.Api
 
         [HttpPost]
         [Route("GetAllInput")]
-        public List<InputDto> GetAllInput([FromBody] InputRequest request)
+        public async Task<BaseResponse<InputDto>> GetAllInput([FromBody] InputRequest request)
         {
-            return _InputService.GetAllInput(request);
+            return await _InputService.GetAllInput(request);
         }
 
     }

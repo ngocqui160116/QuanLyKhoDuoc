@@ -1,15 +1,19 @@
 ﻿using Falcon.Web.Core.Helpers;
 using Phoenix.Server.Data.Entity;
 using Phoenix.Server.Services.Database;
+using Phoenix.Shared.Common;
 using Phoenix.Shared.Customer;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Phoenix.Server.Services.MainServices
 {
     public interface ICustomerService
     {
-        List<CustomerDto> GetAllCustomer(CustomerRequest request);
+        Task<BaseResponse<CustomerDto>> GetAllCustomer(CustomerRequest request);
     }
     public class CustomerService : ICustomerService
     {
@@ -20,26 +24,36 @@ namespace Phoenix.Server.Services.MainServices
         }
 
         //lấy danh sách nhà cung cấp
-        public List<CustomerDto> GetAllCustomer(CustomerRequest request)
+        public async Task<BaseResponse<CustomerDto>> GetAllCustomer(CustomerRequest request)
         {
-            //setup query
-            var query = _dataContext.Customers.AsQueryable().Where(r => !r.Deleted);
-
-            //if (!string.IsNullOrEmpty(request.IdCustomer.ToString()))
-            //{
-            //    query = query.Where(d => d.IdCustomer.ToString().Contains(request.IdCustomer.ToString()));
-            //}
-
-            if (!string.IsNullOrEmpty(request.Name))
+            var result = new BaseResponse<CustomerDto>();
+            try
             {
-                query = query.Where(d => d.Name.Contains(request.Name));
-            }
-           
-            
-            //filter
+                // setup query
+                var query = _dataContext.Customers.AsQueryable();
 
-            var data = query.ToList();
-            return data.MapTo<CustomerDto>();
+                // filter
+                if (!string.IsNullOrEmpty(request.Name))
+                {
+                    query = query.Where(d => d.Address.Contains(request.Name));
+                }
+                if (!string.IsNullOrEmpty(request.Address))
+                {
+                    query = query.Where(d => d.Address.Contains(request.Address));
+                }
+
+                query = query.OrderByDescending(d => d.IdCustomer);
+
+                var data = await query.Skip(request.Page * request.PageSize).Take(request.PageSize).ToListAsync();
+                result.DataCount = (int)((await query.CountAsync()) / request.PageSize) + 1;
+                result.Data = data.MapTo<CustomerDto>();
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return result;
         }
     }
 }

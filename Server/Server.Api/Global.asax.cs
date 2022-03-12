@@ -14,7 +14,7 @@ using SimpleInjector.Integration.Web.Mvc;
 using SimpleInjector.Integration.WebApi;
 using SimpleInjector.Lifestyles;
 using Phoenix.Server.Services.Infrastructure;
-using Phoenix.Server.Services.MainServices.Tasks;
+using Phoenix.Server.Services.MainServices.Task;
 
 namespace Phoenix.Server.Api
 {

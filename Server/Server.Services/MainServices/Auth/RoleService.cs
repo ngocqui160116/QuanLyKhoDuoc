@@ -47,7 +47,7 @@ namespace Phoenix.Server.Services.MainServices.Auth
             var role = _masterContext.Roles.Where(d => roleUser.Contains(d.SystemName));
             return role.ToList();
         }
-        public async Task UpdateRole(Role role)
+        public async global::System.Threading.Tasks.Task UpdateRole(Role role)
         {
             var p = _masterContext.Roles.FirstOrDefault(d => d.SystemName == role.SystemName);
             if (p == null) return;
@@ -57,7 +57,7 @@ namespace Phoenix.Server.Services.MainServices.Auth
             await _masterContext.SaveChangesAsync();
         }
 
-        public async Task DeleteRole(string systemName)
+        public async global::System.Threading.Tasks.Task DeleteRole(string systemName)
         {
             var role = _masterContext.Roles.FirstOrDefault(d => d.SystemName == systemName);
             if (role == null) return;
@@ -94,7 +94,7 @@ namespace Phoenix.Server.Services.MainServices.Auth
             return new PageList<RoleModel>(role.MapTo<RoleModel>(), request.Page, request.PageSize, query.Count());
         }
 
-        public async Task UpdateRole(RoleModel role)
+        public async global::System.Threading.Tasks.Task UpdateRole(RoleModel role)
         {
             var p = _masterContext.Roles.FirstOrDefault(d => d.SystemName == role.SystemName);
             if (p == null) return;
@@ -158,7 +158,7 @@ namespace Phoenix.Server.Services.MainServices.Auth
             return res;
         }
 
-        public async Task UpdateClaimByRole(RoleClaimUpdateModel model)
+        public async global::System.Threading.Tasks.Task UpdateClaimByRole(RoleClaimUpdateModel model)
         {
             var query = model.RoleClaims.GroupBy(d => d.RoleSystemName).ToList();
             var roles = _masterContext.Roles.ToList();

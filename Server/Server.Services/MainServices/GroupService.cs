@@ -1,15 +1,19 @@
 ﻿using Falcon.Web.Core.Helpers;
 using Phoenix.Server.Data.Entity;
 using Phoenix.Server.Services.Database;
+using Phoenix.Shared.Common;
 using Phoenix.Shared.Group;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Phoenix.Server.Services.MainServices
 {
     public interface IGroupService
     {
-        List<GroupDto> GetAllGroup(GroupRequest request);
+        Task<BaseResponse<GroupDto>> GetAllGroup(GroupRequest request);
     }
     public class GroupService : IGroupService
     {
@@ -20,27 +24,32 @@ namespace Phoenix.Server.Services.MainServices
         }
 
         //lấy danh sách nhà cung cấp
-        public List<GroupDto> GetAllGroup(GroupRequest request)
+        public async Task<BaseResponse<GroupDto>> GetAllGroup(GroupRequest request)
         {
-            //setup query
-            var query = _dataContext.Groups.AsQueryable();
-
-            if (!string.IsNullOrEmpty(request.Name))
+            var result = new BaseResponse<GroupDto>();
+            try
             {
-                query = query.Where(d => d.Name.Contains(request.Name));
-            }
-            //if (!string.IsNullOrEmpty(request.IdGroup.ToString()))
-            //{
-            //    query = query.Where(d => d.IdGroup.ToString().Contains(request.IdGroup.ToString()));
-            //}
-           
-            //filter
-            
-           
+                // setup query
+                var query = _dataContext.Groups.AsQueryable();
 
-           
-            var data = query.ToList();
-            return data.MapTo<GroupDto>();
+                // filter
+                if (!string.IsNullOrEmpty(request.Name))
+                {
+                    query = query.Where(d => d.Name.Contains(request.Name));
+                }
+
+                query = query.OrderByDescending(d => d.IdGroup);
+
+                var data = await query.Skip(request.Page * request.PageSize).Take(request.PageSize).ToListAsync();
+                result.DataCount = (int)((await query.CountAsync()) / request.PageSize) + 1;
+                result.Data = data.MapTo<GroupDto>();
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return result;
         }
     }
 }

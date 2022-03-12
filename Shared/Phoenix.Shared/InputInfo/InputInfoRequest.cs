@@ -1,12 +1,14 @@
-﻿using System;
+﻿using Phoenix.Shared.Common;
+using System;
 
 namespace Phoenix.Shared.InputInfo
 {
-    public class InputInfoRequest
+    public class InputInfoRequest : BaseRequest
     {
-        public string IdInputInfo { get; set; }
+        public string IdInput { get; set; }
         public int IdMedicine { get; set; }
         public DateTime DateOfManufacture { get; set; }
         public DateTime DueDate { get; set; }
+        public string MedicineName { get; set; }
     }
 }

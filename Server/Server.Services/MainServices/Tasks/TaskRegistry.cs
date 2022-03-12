@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FluentScheduler;
 
-namespace Phoenix.Server.Services.MainServices.Tasks
+namespace Phoenix.Server.Services.MainServices.Task
 {
 	public class TaskRegistry:Registry
 	{
