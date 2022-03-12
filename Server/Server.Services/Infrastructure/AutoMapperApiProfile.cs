@@ -26,10 +26,18 @@ namespace Phoenix.Server.Services.Infrastructure
             CreateMap<Group, GroupDto>();
 
             CreateMap<Input, InputDto>();
+    
+            CreateMap<InputInfo, InputInfoDto>()
+                .ForMember(d => d.NameSupplier, o => o.MapFrom(s => s.Supplier.Name))
+                .ForMember(d => d.NameMedicine, o => o.MapFrom(s => s.Medicine.Name))
+                .ForMember(d => d.DateInput, o => o.MapFrom(s => s.Input.DateInput))
+                .ForMember(d => d.Amount, o => o.MapFrom(s => s.Medicine.Amount))
+                .ForMember(d => d.SDK, o => o.MapFrom(s => s.Medicine.RegistrationNumber));
+            CreateMap<Medicine, MedicineDto>()
+                .ForMember(d => d.NameGroup, o => o.MapFrom(s => s.Group.Name))
+                .ForMember(d => d.NameUnit, o => o.MapFrom(s => s.Unit.Name));
+               
 
-            CreateMap<InputInfo, InputInfoDto>();
-
-            CreateMap<Medicine, MedicineDto>();
 
             CreateMap<Output, OutputDto>();
 

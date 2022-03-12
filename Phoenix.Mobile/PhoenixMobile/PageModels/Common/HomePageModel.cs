@@ -26,24 +26,39 @@ namespace Phoenix.Mobile.PageModels.Common
             NavigationPage.SetHasNavigationBar(CurrentPage, false);
             CurrentPage.Title = "HomePage";
         }
-
-
-        #region CustomerCommand
-
-        public Command CustomerCommand => new Command(async (p) => await CustomerExecute(), (p) => !IsBusy);
-
-        private async Task CustomerExecute()
+        protected override async void ViewIsAppearing(object sender, EventArgs e)
         {
-            await CoreMethods.PushPageModel<CustomerPageModel>();
+            base.ViewIsAppearing(sender, e);
+
+        }
+
+
+        #region SupplierCommand
+
+        public Command SupplierCommand => new Command(async (p) => await SupplierExecute(), (p) => !IsBusy);
+
+        private async Task SupplierExecute()
+        {
+            await CoreMethods.PushPageModel<SupplierPageModel>();
         }
         #endregion
 
 
-        #region InvoiceCommand
+        #region InventoryCommand
 
-        public Command InvoiceCommand => new Command(async (p) => await InvoiceExecute(), (p) => !IsBusy);
+        public Command InventoryCommand => new Command(async (p) => await InventoryExecute(), (p) => !IsBusy);
 
-        private async Task InvoiceExecute()
+        private async Task InventoryExecute()
+        {
+            await CoreMethods.PushPageModel<InventoryPageModel>();
+        }
+        #endregion
+
+        #region InputCommand
+
+        public Command InputCommand => new Command(async (p) => await InputExecute(), (p) => !IsBusy);
+
+        private async Task InputExecute()
         {
             await CoreMethods.PushPageModel<InputPageModel>();
         }
@@ -61,11 +76,7 @@ namespace Phoenix.Mobile.PageModels.Common
         #endregion
 
 
-        protected override async void ViewIsAppearing(object sender, EventArgs e)
-        {
-            base.ViewIsAppearing(sender, e);
-          
-        }
+       
     }
     
 }

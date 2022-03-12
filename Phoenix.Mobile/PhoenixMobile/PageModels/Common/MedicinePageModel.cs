@@ -32,7 +32,7 @@ namespace Phoenix.Mobile.PageModels.Common
         {
             base.Init(initData);
             NavigationPage.SetHasNavigationBar(CurrentPage, false);
-            CurrentPage.Title = "Danh sách Tồn Kho";
+            CurrentPage.Title = "Danh mục thuốc";
         }
         protected override async void ViewIsAppearing(object sender, EventArgs e)
         {
@@ -59,8 +59,6 @@ namespace Phoenix.Mobile.PageModels.Common
         public List<MedicineModel> Medicines { get; set; } = new List<MedicineModel>();
         public MedicineRequest request { get; set; } = new MedicineRequest();
 
-        public List<UnitModel> Units { get; set; } = new List<UnitModel>();
-        public UnitRequest Unitrequest { get; set; } = new UnitRequest();
         #endregion
 
         #region AddMedicineCommand

@@ -43,9 +43,12 @@ namespace Phoenix.Mobile.Core.Infrastructure
             CreateMap<CustomerDto, CustomerModel>();
             CreateMap<GroupDto, GroupModel>();
             CreateMap<MedicineDto, MedicineModel>();
+              //  .ForMember(d => d.Supplier, o => o.MapFrom(s => s.Supplier.Name));
             CreateMap<StaffDto, StaffModel>();
             CreateMap<InputDto, InputModel>();
             CreateMap<InputInfoDto, InputInfoModel>();
+            CreateMap<OutputDto, OutputModel>();
+            CreateMap<OutputInfoDto, OutputInfoModel>();
             CreateMap<SupplierDto, SupplierModel>();
             CreateMap<UnitDto, UnitModel>();
         }

@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
+             xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common" 
+             xmlns:inputinfo="clr-namespace:Phoenix.Mobile.Core.Models.InputInfo;assembly=Phoenix.Mobile.Core"
+             x:DataType="common:InventoryPageModel"
+             x:Class="Phoenix.Mobile.Pages.Common.InventoryPage"
+             ControlTemplate="{StaticResource FullScreenHasBack}">
+    <ContentPage.Content>
+        <StackLayout >
+            <StackLayout Orientation="Horizontal">
+                <SearchBar WidthRequest="500"  
+                           x:Name="Search" 
+                           Placeholder="Mã / Tên thuốc">
+                </SearchBar>
+            </StackLayout>
+
+            <ListView ItemsSource="{Binding Inventorys}"
+                      HasUnevenRows="True"
+                      BackgroundColor="#ecf0f1"
+                      SeparatorVisibility="None"
+                      HorizontalOptions="FillAndExpand"
+                      SelectedItem="{Binding SelectedItemCommand}"
+                      VerticalOptions="FillAndExpand">
+
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="inputinfo:InputInfoModel">
+                        <ViewCell>
+                            <StackLayout Margin="6,4,6,4"
+                                        BackgroundColor="White">
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding NameMedicine}"
+                                       Margin="8"
+                                       FontAttributes="Bold"
+                                       FontSize="Large" />
+                                    <StackLayout Orientation="Horizontal"
+                                                 HorizontalOptions="EndAndExpand">
+                                        <Label Text="Tồn:"
+                                               Margin="8"
+                                               FontSize="Small" />
+                                        <Label Text="{Binding Amount}"
+                                               Margin="2"
+                                               FontSize="Small" />
+                                    </StackLayout>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Lô:"
+                                       Margin="8,2,2,4"
+                                       FontSize="Small" />
+                                    <Label Text="{Binding IdBatch}"
+                                       Margin="2"
+                                       FontAttributes="Bold"
+                                       FontSize="Small" />
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="HSD:"
+                                               Margin="8,2,2,4"
+                                               FontSize="Small" />
+                                        <Label Text="{Binding DueDate}"
+                                              TextColor="DarkGray"
+                                               Margin="2"
+                                               FontSize="Small" />
+                                    </StackLayout>
+                                </StackLayout>
+
+                                <!--<StackLayout Orientation="Horizontal">
+                                    <Label Text="Lô:"
+                                       Margin="8,2,8,4"
+                                       FontSize="Small" />
+                                    <Label Text="{Binding IdBatch}"
+                                        Margin="2,2,8,4"
+                                        TextColor="DarkSlateGray"
+                                        FontSize="Small" />
+                                </StackLayout>-->
+
+                                <!--<StackLayout Orientation="Horizontal">
+                                    <Label Text="Đóng gói:"
+                                       Margin="8,2,8,4"
+                                       FontSize="Small" />
+                                    <Label Text="{Binding Packing}"
+                                        Margin="2,2,8,4"
+                                        TextColor="DarkSlateGray"  
+                                        FontSize="Small" />
+                                </StackLayout>-->
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

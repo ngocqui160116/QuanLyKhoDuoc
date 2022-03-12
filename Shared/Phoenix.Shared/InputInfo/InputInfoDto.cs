@@ -13,6 +13,7 @@ namespace Phoenix.Shared.InputInfo
         public double OutputPrice { get; set; }
         public DateTime DateOfManufacture { get; set; }
         public DateTime DueDate { get; set; }
+        public string SDK { get; set; }
         public string Status { get; set; }
         public string MedicineName { get; set; }
     }

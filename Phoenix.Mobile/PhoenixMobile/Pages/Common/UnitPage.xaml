@@ -34,7 +34,7 @@
                         </Grid.ColumnDefinitions>
 
 
-                        <Label  Grid.Row="2"
+                        <Label  Grid.Row="1"
                                 Grid.Column="0" 
                                 Margin="10,5,0,0"                               
                                 WidthRequest="115" 
@@ -42,47 +42,35 @@
                                 Text="Đơn vị cơ bản*"/>
                         <Picker x:DataType="common:UnitPageModel"
                                 ItemsSource="{Binding Units}"
-                                Grid.Row="2"
+                                Grid.Row="1"
                                 Grid.Column="1"
                                 ItemDisplayBinding="{Binding Name}"
                                 />
 
-                        <Label  Grid.Row="3"
+                        <Label  Grid.Row="2"
                                 Grid.Column="0" 
                                 Margin="10,5,0,0" 
                                 WidthRequest="100" 
                                 FontSize="Medium" 
                                 Text="Tỉ lệ quy đổi"/>
-                        <Entry  Grid.Row="3"
+                        <Entry  Grid.Row="2"
                                 Grid.Column="1" 
-                                Placeholder="{Binding RegistrationNumber}"
+                                Placeholder="1"
+                                IsReadOnly="True"
                                 WidthRequest="200" 
                                 Keyboard="Numeric"/>
 
 
-                        <Label  Grid.Row="4"
+                        <Label  Grid.Row="3"
                                 Grid.Column="0" 
                                 Margin="10,5,0,0" 
                                 WidthRequest="95" 
                                 FontSize="Medium" 
                                 Text="Giá bán"/>
-                        <Entry  Grid.Row="4"
+                        <Entry  Grid.Row="3"
                                 Grid.Column="1"
                                 TextColor="Black"
-                                Placeholder="{Binding IdUnit }"
-                                WidthRequest="200"                         
-                                Keyboard="Numeric"/>
-
-                        <Label  Grid.Row="5"
-                                Grid.Column="0" 
-                                Margin="10,5,0,0" 
-                                WidthRequest="115" 
-                                FontSize="Medium" 
-                                Text="Cảnh báo tồn"/>
-                        <Entry  Grid.Row="5"
-                                Grid.Column="1"
-                                TextColor="Black"
-                                Placeholder="{Binding Content}"
+                                Placeholder="{Binding Amount}"
                                 WidthRequest="200"                         
                                 Keyboard="Numeric"/>
 

@@ -19,54 +19,64 @@
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <controls:RoundFrame WidthRequest="100" 
+                <controls:RoundFrame Margin="0,5,0,0"
+                                     WidthRequest="100" 
                                      HeightRequest="100" 
                                      Text="Kiểm kho" 
                                      Grid.Row="0" 
                                      Grid.Column="0" 
-                                     Icon="icon_kiemkho.png">
+                                     Icon="icon_inventory.png">
+                </controls:RoundFrame>
+                <controls:RoundFrame WidthRequest="100" 
+                                     Margin="0,5,0,0"
+                                     HeightRequest="100" 
+                                     Text="Nhập kho" 
+                                     xe:Commands.Tap="{Binding InputCommand}" 
+                                     Grid.Row="0" 
+                                     Grid.Column="1" 
+                                     Icon="icon_nhapkho.png">
+                </controls:RoundFrame>
+
+                <controls:RoundFrame WidthRequest="100" 
+                                    
+                                     HeightRequest="100" 
+                                     Text="   Kho" 
+                                     Grid.Row="1" 
+                                     Grid.Column="0" 
+                                     Icon="icon_warehouse.png">
                 </controls:RoundFrame>
                 <controls:RoundFrame WidthRequest="100" 
                                      
                                      HeightRequest="100" 
-                                     Text="Nhập tồn" 
-                                     xe:Commands.Tap="{Binding InvoiceCommand}" 
-                                     Grid.Row="0" 
+                                     Text="Xuất kho" 
+                                     Grid.Row="1" 
                                      Grid.Column="1" 
-                                     Icon="icon_nhapton.png">
+                                     Icon="icon_xuatkho.png">
                 </controls:RoundFrame>
 
                 <controls:RoundFrame WidthRequest="100" 
-                                     xe:Commands.Tap="{Binding CustomerCommand}" 
-                                     HeightRequest="100" 
-                                     Text="Nhà cung cấp" 
-                                     Grid.Row="1" 
-                                     Grid.Column="0" 
-                                     Icon="icon_nhacungcap.png">
-                </controls:RoundFrame>
-                <controls:RoundFrame WidthRequest="100" 
-                                     xe:Commands.Tap="{Binding CustomerCommand}"
-                                     HeightRequest="100" 
-                                     Text="Xuất hủy" 
-                                     Grid.Row="1" 
-                                     Grid.Column="1" 
-                                     Icon="icon_xuathuy.png">
-                </controls:RoundFrame>
-
-                <controls:RoundFrame WidthRequest="100" 
-                                     HeightRequest="100" 
-                                     Text="Xuất trả" 
+                                     HeightRequest="100"
+                                     xe:Commands.Tap="{Binding MedicineCommand}" 
+                                     Text="Danh mục thuốc" 
                                      Grid.Row="2" 
                                      Grid.Column="0" 
-                                     Icon="icon_xuattra.png">
+                                     Icon="icon_medicine.png">
                 </controls:RoundFrame>
                 <controls:RoundFrame WidthRequest="100" 
-                                    xe:Commands.Tap="{Binding MedicineCommand}" 
-                                     HeightRequest="100" 
+                                     HeightRequest="100"
+                                     xe:Commands.Tap="{Binding InventoryCommand}"
                                      Text="Tồn kho" 
                                      Grid.Row="2" 
                                      Grid.Column="1" 
                                      Icon="icon_tonkho.png">
+                </controls:RoundFrame>
+                <controls:RoundFrame WidthRequest="100" 
+                                     HeightRequest="100" 
+                                     xe:Commands.Tap="{Binding SupplierCommand}" 
+                                     Text="Nhà cung cấp" 
+                                     Grid.Row="3" 
+                                     Grid.Column="0" 
+                                     Icon="icon_supplier.png">
                 </controls:RoundFrame>
             </Grid>
         </StackLayout>

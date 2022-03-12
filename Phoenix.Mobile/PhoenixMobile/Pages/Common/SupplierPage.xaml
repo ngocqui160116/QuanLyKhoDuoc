@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:controls="clr-namespace:Phoenix.Mobile.Controls"
+              xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
+             xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common" 
+             xmlns:supplier="clr-namespace:Phoenix.Mobile.Core.Models.Supplier;assembly=Phoenix.Mobile.Core"
+             x:Class="Phoenix.Mobile.Pages.Common.SupplierPage"
+             x:DataType="common:SupplierPageModel"
+             ControlTemplate="{StaticResource FullScreenHasBack}">
+    <ContentPage.Content>
+        
+        <StackLayout Margin="0,5,0,0">
+            <StackLayout Orientation="Horizontal">
+                <SearchBar WidthRequest="420"  
+                           x:Name="Search" 
+                           Placeholder="Nhập thông tin">
+                </SearchBar>
+                <ImageButton Margin="5,0,0,0"  
+                             xe:Commands.Tap="{Binding AddSupplierCommand}"
+                             BackgroundColor="White" 
+                             HorizontalOptions="End" 
+                             Source="icon_add"/>
+            </StackLayout>
+            
+            <ListView ItemsSource="{Binding Suppliers}"
+                      ItemSelected="ListView_ItemSelected"
+                      HasUnevenRows="True"
+                      BackgroundColor="#ecf0f1"
+                      SeparatorVisibility="None"
+                      HorizontalOptions="FillAndExpand"
+                      VerticalOptions="FillAndExpand">
+
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="supplier:SupplierModel">
+                        <ViewCell>
+                            <StackLayout Margin="6,4,6,4"
+                                        BackgroundColor="White">
+                                <Label Text="{Binding Name}"
+                                       Margin="8"
+                                       FontAttributes="Bold"
+                                       FontSize="Medium" />
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Điện thoại:"
+                                       Margin="8,2,8,4"
+                                       FontSize="Small"/>
+                                    <Label Text="{Binding PhoneNumber}"
+                                           TextColor="CadetBlue"
+                                       Margin="0,2,8,4"
+                                       FontSize="Small"/>
+                                </StackLayout>
+                                
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -3,14 +3,66 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:input="clr-namespace:Phoenix.Mobile.Core.Models.Input;assembly=Phoenix.Mobile.Core"
              xmlns:controls="clr-namespace:Phoenix.Mobile.Controls" 
+             xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common"  
              xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="Phoenix.Mobile.Pages.Common.AddInputPage"
+             x:DataType="common:AddInputPageModel"
              xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
              ControlTemplate="{StaticResource FullScreenHasBack}">
     <ContentPage.Content>
         <StackLayout BackgroundColor="WhiteSmoke">
+            <StackLayout Orientation="Horizontal" BackgroundColor="White">
+                <SearchBar WidthRequest="500"  
+                           x:Name="Search" 
+                           Placeholder="Tìm kiếm">
+                </SearchBar>
+            </StackLayout>
             <StackLayout HeightRequest="25"
                          WidthRequest="50">
+                <Label Text="Danh sách sản phẩm"
+                       FontSize="Small"
+                       Margin="5,2,0,0"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"/>
+                
+            </StackLayout>
+            <Frame CornerRadius="15" >
+                <StackLayout  BackgroundColor="Black">
+                    <ListView
+                        
+                              HeightRequest="150"
+                              HasUnevenRows="True"
+                              BackgroundColor="#ecf0f1"
+                              SeparatorVisibility="None"
+                             >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout Margin="6,4,6,4"
+                                                     BackgroundColor="White">
+                                        <Label Text="Panaldo"
+                                                   Margin="8"
+                                                   FontAttributes="Bold"
+                                                   FontSize="Small" />
+
+                                        <Label Text="HSD"
+                                                       Margin="8,2,8,4"
+                                                       FontSize="Small"/>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+            </Frame>
+            <StackLayout HeightRequest="25"
+                         WidthRequest="50">
+                <Label Text="Thông tin"
+                       FontSize="Small"
+                       Margin="5,2,0,0"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"/>
             </StackLayout>
             <Frame CornerRadius="15" >
                 <StackLayout  BackgroundColor="White">
@@ -31,58 +83,34 @@
                         <Label  Grid.Row="1"
                                 Grid.Column="0" 
                                 Margin="10,5,0,0" 
-                                WidthRequest="95" 
+                                WidthRequest="115" 
                                 FontSize="Medium" 
-                                Text="Mã NCC"  />
-                        <Entry  Grid.Row="1"
+                                Text="Nhà cung cấp"/>
+                        <Picker x:DataType="common:AddInputPageModel"
+                                ItemsSource="{Binding Suppliers}"
+                                Grid.Row="1"
                                 Grid.Column="1"
-                                Placeholder="{Binding Id}"
-                                WidthRequest="200" 
+                                ItemDisplayBinding="{Binding Name}"
                                 />
 
                         <Label  Grid.Row="2"
                                 Grid.Column="0" 
-                                Margin="10,5,0,0"                               
+                                Margin="10,5,0,0" 
                                 WidthRequest="95" 
                                 FontSize="Medium" 
-                                Text="Tên NCC"/>
-                        <Entry  Grid.Row="2"
-                                Grid.Column="1"
-                                Placeholder="{Binding DateInput}"
-                                WidthRequest="200" 
-                                 />
+                                Text="Ngày nhập"/>
+                        <DatePicker Grid.Row="2"
+                                    Grid.Column="1"
+                                    Format="dd/MM/yyyy"
+                                    WidthRequest="200" />
 
                         <Label  Grid.Row="3"
                                 Grid.Column="0" 
                                 Margin="10,5,0,0" 
                                 WidthRequest="95" 
                                 FontSize="Medium" 
-                                Text="Điện thoại"/>
-                        <Entry  Grid.Row="3"
-                                Grid.Column="1" 
-                                Placeholder="{Binding Id}"
-                                WidthRequest="200" 
-                                Keyboard="Numeric"/>
-
-                        <Label  Grid.Row="4"
-                                Grid.Column="0" 
-                                Margin="10,5,0,0" 
-                                WidthRequest="95" 
-                                FontSize="Medium" 
-                                Text="Email"/>
-                        <Entry  Grid.Row="4"
-                                Grid.Column="1"
-                                 Placeholder="{Binding Id}"
-                                WidthRequest="200" 
-                                Keyboard="Email"/>
-
-                        <Label  Grid.Row="5"
-                                Grid.Column="0" 
-                                Margin="10,5,0,0" 
-                                WidthRequest="95" 
-                                FontSize="Medium" 
                                 Text="Địa chỉ"/>
-                        <Entry  Grid.Row="5"
+                        <Entry  Grid.Row="3"
                                 Grid.Column="1"  
                                 Placeholder="{Binding DateInput}"
                                 WidthRequest="200"                         
@@ -107,15 +135,18 @@
                           xe:Commands.Tap="{Binding StoreCommand}">
                         <forms:CachedImage Source="btn_Save" 
                                            Grid.Row="0"
+                                            Grid.Column="0"
                                            HeightRequest="50"/>
                         <Label Grid.Row="0"
+                                Grid.Column="0"
                                FontSize="Medium"
                                HorizontalOptions="Center"
                                FontAttributes="Bold"
                                TextColor="#fff"
-                               Text="Lưu"/>
+                               Text="Tiếp theo"/>
                     </Grid>
                 </AbsoluteLayout>
+                
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

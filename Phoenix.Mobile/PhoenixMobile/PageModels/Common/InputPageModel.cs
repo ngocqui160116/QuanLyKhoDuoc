@@ -1,8 +1,10 @@
 ﻿using Phoenix.Mobile.Core.Infrastructure;
 using Phoenix.Mobile.Core.Models.Input;
+using Phoenix.Mobile.Core.Models.InputInfo;
 using Phoenix.Mobile.Core.Services.Common;
 using Phoenix.Mobile.Helpers;
 using Phoenix.Shared.Input;
+using Phoenix.Shared.InputInfo;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,12 +15,12 @@ namespace Phoenix.Mobile.PageModels.Common
 {
     public class InputPageModel : BasePageModel
     {
-        private readonly IInputService _InputService;
+        private readonly IInputInfoService _inputInfoService;
         private readonly IDialogService _dialogService;
 
-        public InputPageModel(IInputService InputService, IDialogService dialogService)
+        public InputPageModel(IInputInfoService InputInfoService, IDialogService dialogService)
         {
-            _InputService = InputService;
+            _inputInfoService = InputInfoService;
             _dialogService = dialogService;
 
         }
@@ -37,7 +39,7 @@ namespace Phoenix.Mobile.PageModels.Common
 
         private async Task LoadData()
         {
-            var data = await _InputService.GetAllInput(request);
+            var data = await _inputInfoService.GetAllInputInfo(request);
             if (data == null)
             {
                 await _dialogService.AlertAsync("Lỗi kết nối mạng!", "Lỗi", "OK");
@@ -51,8 +53,8 @@ namespace Phoenix.Mobile.PageModels.Common
         }
 
         #region properties
-        public List<InputModel> Inputs { get; set; } = new List<InputModel>();
-        public InputRequest request { get; set; } = new InputRequest();
+        public List<InputInfoModel> Inputs { get; set; } = new List<InputInfoModel>();
+        public InputInfoRequest request { get; set; } = new InputInfoRequest();
 
         #endregion
 
