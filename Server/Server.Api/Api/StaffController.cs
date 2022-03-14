@@ -1,6 +1,7 @@
 ﻿using Phoenix.Server.Data.Entity;
 using Phoenix.Server.Services.MainServices;
 using Phoenix.Server.Services.MainServices.Auth;
+using Phoenix.Shared.Common;
 using Phoenix.Shared.Core;
 using Phoenix.Shared.Staff;
 using System.Collections.Generic;
@@ -20,10 +21,10 @@ namespace Phoenix.Server.Api.Api
 
         [HttpPost]
         [Route("GetAllStaff")]
-        public List<StaffDto> GetAllStaff([FromBody] StaffRequest request)
-        {
-            return _StaffService.GetAllStaff(request);
-        }
 
+        public async Task<BaseResponse<StaffDto>> GetAllStaff([FromBody] StaffRequest request)
+        {
+            return await _StaffService.GetAllStaff(request);
+        }
     }
 }

@@ -4,7 +4,7 @@
              xmlns:controls="clr-namespace:Phoenix.Mobile.Controls"
              xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
              xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common" 
-             xmlns:vendor="clr-namespace:Phoenix.Mobile.Core.Models.Vendor;assembly=Phoenix.Mobile.Core" xmlns:medicine="clr-namespace:Phoenix.Mobile.Core.Models.Medicine;assembly=Phoenix.Mobile.Core"
+             xmlns:vendor="clr-namespace:Phoenix.Mobile.Core.Models.Vendor;assembly=Phoenix.Mobile.Core" xmlns:medicine="clr-namespace:Phoenix.Mobile.Core.Models.Medicine;assembly=Phoenix.Mobile.Core" xmlns:behaviors="clr-namespace:Phoenix.Framework.Core;assembly=Phoenix.Framework" xmlns:effects="clr-namespace:Phoenix.Mobile.Effects"
              x:Class="Phoenix.Mobile.Pages.Common.MedicinePage"
              x:DataType="common:MedicinePageModel"
              ControlTemplate="{StaticResource FullScreenHasBack}">
@@ -31,6 +31,12 @@
                       SelectedItem="{Binding SelectedItemCommand}"
                       VerticalOptions="FillAndExpand">
 
+                <ListView.Behaviors>
+                    <behaviors:EventToCommandBehavior EventName="ItemTapped"
+                                      Command="{Binding SelectedItemCommand}"
+                                      CommandParameter="{Binding .}"
+                                     />
+                </ListView.Behaviors>
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="medicine:MedicineModel">
                         <ViewCell>
@@ -78,6 +84,11 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+           
         </StackLayout>
+        
+        
     </ContentPage.Content>
+   
 </ContentPage>
+    

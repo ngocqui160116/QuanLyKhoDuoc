@@ -1,27 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-              x:DataType="common:EditMedicinePageModel"
-              xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
-            
+             x:DataType="common:EditMedicinePageModel"
+              xmlns:controls="clr-namespace:Phoenix.Mobile.Controls"
+             xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
+             ControlTemplate="{StaticResource FullScreenHasBack}"
              xmlns:medicine="clr-namespace:Phoenix.Mobile.Core.Models.Medicine;assembly=Phoenix.Mobile.Core" 
-             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common" xmlns:effects="clr-namespace:Phoenix.Mobile.Effects"
              x:Class="Phoenix.Mobile.Pages.Common.EditMedicinePage">
     <ContentPage.Content>
         <StackLayout BackgroundColor="WhiteSmoke">
-            <StackLayout Orientation="Horizontal" BackgroundColor="White">
-                <SearchBar WidthRequest="500"  
-                           x:Name="Search" 
-                           Placeholder="Tìm thuốc">
-                </SearchBar>
-            </StackLayout>
+
             <StackLayout HeightRequest="25"
                          WidthRequest="50">
             </StackLayout>
 
-            <Frame CornerRadius="15" >
+            <Frame CornerRadius="15"  >
                 <StackLayout  BackgroundColor="White">
-                    <Grid x:DataType="medicine:MedicineModel">
+                    <Grid x:DataType="medicine:MedicineModel" IsEnabled="False" x:Name="Grid">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -35,6 +31,18 @@
                             <ColumnDefinition Width="0.7*"/>
                         </Grid.ColumnDefinitions>
 
+                        <Label  Grid.Row="1"
+                                Grid.Column="0" 
+                                Margin="10,5,0,0"                               
+                                WidthRequest="100" 
+                                FontSize="Medium" 
+                                Text="Mã thuốc"/>
+                        <Entry  Grid.Row="1"
+                                Grid.Column="1"
+                                TextColor="Black"
+                                Placeholder="MT00001"
+                                WidthRequest="200" 
+                                 />
 
                         <Label  Grid.Row="2"
                                 Grid.Column="0" 
@@ -45,7 +53,7 @@
                         <Entry  Grid.Row="2"
                                 Grid.Column="1"
                                 TextColor="Black"
-                                Placeholder="{Binding Name}"
+                                Placeholder="Panaldo"
                                 WidthRequest="200" 
                                  />
 
@@ -56,8 +64,8 @@
                                 FontSize="Medium" 
                                 Text="Số đăng ký"/>
                         <Entry  Grid.Row="3"
-                                Grid.Column="1" 
-                                Placeholder="{Binding RegistrationNumber}"
+                                Grid.Column="1"  
+                                Placeholder="VN-001"
                                 WidthRequest="200" 
                                 Keyboard="Numeric"/>
 
@@ -117,10 +125,9 @@
             </Frame>
 
             <StackLayout Margin="0,50,0,5">
-                <AbsoluteLayout HorizontalOptions="Center"
->
+                <AbsoluteLayout HorizontalOptions="Center">
                     <Grid xe:TouchEffect.Color="AliceBlue"
-                         >
+                          >
                         <forms:CachedImage Source="btn_Save" 
                                            Grid.Row="0"
                                            HeightRequest="50"/>
@@ -133,6 +140,8 @@
                     </Grid>
                 </AbsoluteLayout>
             </StackLayout>
+            
         </StackLayout>
+        
     </ContentPage.Content>
 </ContentPage>

@@ -1,5 +1,6 @@
 ﻿using Phoenix.Mobile.Core.Infrastructure;
 using Phoenix.Mobile.Core.Models.Group;
+using Phoenix.Mobile.Core.Models.Medicine;
 using Phoenix.Mobile.Core.Services.Common;
 using Phoenix.Mobile.Helpers;
 using Phoenix.Shared.Group;
@@ -40,9 +41,6 @@ namespace Phoenix.Mobile.PageModels.Common
             base.ViewIsAppearing(sender, e);
          
         }
-       
-
-       
 
     }
 }

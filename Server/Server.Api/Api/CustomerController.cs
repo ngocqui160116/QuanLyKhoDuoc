@@ -1,6 +1,7 @@
 ﻿using Phoenix.Server.Data.Entity;
 using Phoenix.Server.Services.MainServices;
 using Phoenix.Server.Services.MainServices.Auth;
+using Phoenix.Shared.Common;
 using Phoenix.Shared.Core;
 using Phoenix.Shared.Customer;
 using System.Collections.Generic;
@@ -22,9 +23,9 @@ namespace Phoenix.Server.Api.Api
 
         [HttpPost]
         [Route("GetAllCustomer")]
-        public List<CustomerDto> GetAllCustomer([FromBody] CustomerRequest request)
+        public async Task<BaseResponse<CustomerDto>> GetAllCustomer(CustomerRequest request)
         {
-            return _customerService.GetAllCustomer(request);
+            return await _customerService.GetAllCustomer(request);
         }
 
     }

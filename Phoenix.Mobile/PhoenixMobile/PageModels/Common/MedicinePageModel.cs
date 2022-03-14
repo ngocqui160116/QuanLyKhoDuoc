@@ -77,8 +77,8 @@ namespace Phoenix.Mobile.PageModels.Common
 
         private async Task SelectedItemCommandExecute()
         {
-            await _dialogService.AlertAsync("Bạn đã chọn:", "Thông báo", "OK");
-           // await CoreMethods.PushPageModel<AddMedicinePageModel>();
+            
+            await CoreMethods.PushPageModel<EditMedicinePageModel>(Medicines);
         }
         #endregion
 
