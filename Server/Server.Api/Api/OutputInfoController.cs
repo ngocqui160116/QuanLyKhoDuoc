@@ -21,7 +21,6 @@ namespace Phoenix.Server.Api.Api
 
         [HttpPost]
         [Route("GetAllOutputInfo")]
-
         public async Task<BaseResponse<OutputInfoDto>> GetAllOutputInfo([FromBody] OutputInfoRequest request)
         {
             return await _OutputInfoService.GetAllOutputInfo(request);

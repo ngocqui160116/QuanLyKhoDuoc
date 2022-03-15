@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Phoenix.Server.Data.Entity;
-using Phoenix.Shared.Customer;
+using Phoenix.Shared.Reason;
 using Phoenix.Shared.Group;
 using Phoenix.Shared.Input;
 using Phoenix.Shared.InputInfo;
@@ -18,7 +18,7 @@ namespace Phoenix.Server.Services.Infrastructure
         public AutoMapperWebProfile()
         {
             //Import
-            CreateMap<Customer, CustomerDto>();
+            CreateMap<Reason, ReasonDto>();
             CreateMap<Supplier, SupplierDto>();
             CreateMap<Medicine, MedicineDto>()
                 //.ForMember(d => d.SupplierName, o => o.MapFrom(s => s..Name))

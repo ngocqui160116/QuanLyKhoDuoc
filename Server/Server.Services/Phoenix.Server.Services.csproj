@@ -412,6 +412,7 @@
     <Compile Include="MainServices\Common\Models\ImageRecordDto.cs" />
     <Compile Include="MainServices\Common\Models\NameValueModel.cs" />
     <Compile Include="MainServices\Common\SettingAdminService.cs" />
+    <Compile Include="MainServices\ReasonService.cs" />
     <Compile Include="MainServices\SupplierService.cs" />
     <Compile Include="MainServices\OutputInfoService.cs" />
     <Compile Include="MainServices\OutputService.cs" />
@@ -435,7 +436,6 @@
     <Compile Include="MainServices\System\Setting\SettingService.cs" />
     <Compile Include="MainServices\Tasks\TaskRegistry.cs" />
     <Compile Include="MainServices\MedicineService.cs" />
-    <Compile Include="MainServices\CustomerService.cs" />
     <Compile Include="MainServices\InputService.cs" />
     <Compile Include="MainServices\VendorService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -13,16 +13,13 @@ namespace Phoenix.Server.Data.Entity
         [ForeignKey("IdMedicine")]
         public virtual Medicine Medicine { get; set; }
 
-        public int IdCustomer { get; set; }
-        [ForeignKey("IdCustomer")]
-        public virtual Customer Customer { get; set; }
+        public string IdInputInfo { get; set; }
+        [ForeignKey("IdInputInfo")]
+        public virtual InputInfo InputInfo { get; set; }
         public int Count { get; set; }
+        public double Total { get; set; }
         public string Status { get; set; }
 
-        //public int Amount { get; set; }
-        //public int Unit { get; set; }
-        //[ForeignKey("Unit")]
-        //public virtual Unit Id { get; set; }
-        //public bool Deleted { get; set; }
+       
     }
 }

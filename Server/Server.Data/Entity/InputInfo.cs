@@ -20,15 +20,11 @@ namespace Phoenix.Server.Data.Entity
         public string IdBatch { get; set; }
         public int Count { get; set; }
         public double InputPrice { get; set; }
-        public double OutputPrice { get; set; }
+        public double Total { get; set; }
         public DateTime DateOfManufacture { get; set; }
         public DateTime DueDate { get; set; }
         public string Status { get; set; }
 
-        //public int Amount { get; set; }
-        //public int Unit { get; set; }
-        //[ForeignKey("Unit")]
-        //public virtual Unit Id { get; set; }
-        //public bool Deleted { get; set; }
+       
     }
 }
