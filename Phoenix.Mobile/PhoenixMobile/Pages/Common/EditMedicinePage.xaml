@@ -17,7 +17,7 @@
 
             <Frame CornerRadius="15"  >
                 <StackLayout  BackgroundColor="White">
-                    <Grid x:DataType="medicine:MedicineModel" IsEnabled="False" x:Name="Grid">
+                    <Grid IsEnabled="False" x:Name="Grid">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -40,7 +40,7 @@
                         <Entry  Grid.Row="1"
                                 Grid.Column="1"
                                 TextColor="Black"
-                                Placeholder="MT00001"
+                                Placeholder="{Binding }"
                                 WidthRequest="200" 
                                  />
 
@@ -91,7 +91,7 @@
                         <Entry  Grid.Row="5"
                                 Grid.Column="1"
                                 TextColor="Black"
-                                Placeholder="{Binding Active}"
+                               
                                 WidthRequest="200"                         
                                 Keyboard="Text"/>
 
@@ -104,7 +104,7 @@
                         <Entry  Grid.Row="6"
                                 Grid.Column="1"
                                 TextColor="Black"
-                                Placeholder="{Binding Content}"
+                                
                                 WidthRequest="200"                         
                                 Keyboard="Text"/>
 
@@ -117,7 +117,7 @@
                         <Entry  Grid.Row="7"
                                 Grid.Column="1"  
                                 TextColor="Black"
-                                Placeholder="{Binding Packing}"
+                              
                                 WidthRequest="200"                         
                                 Keyboard="Text"/>
                     </Grid>

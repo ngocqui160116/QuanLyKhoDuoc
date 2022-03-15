@@ -64,6 +64,16 @@ namespace Phoenix.Mobile.PageModels.Common
         }
         #endregion
 
+        #region OutputCommand
+
+        public Command OutputCommand => new Command(async (p) => await OutputExecute(), (p) => !IsBusy);
+
+        private async Task OutputExecute()
+        {
+            await CoreMethods.PushPageModel<OutputPageModel>();
+        }
+        #endregion
+
 
         #region MedicineCommand
 

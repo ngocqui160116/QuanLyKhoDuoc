@@ -50,6 +50,7 @@
                                      HeightRequest="100" 
                                      Text="Xuất kho" 
                                      Grid.Row="1" 
+                                     xe:Commands.Tap="{Binding OutputCommand}" 
                                      Grid.Column="1" 
                                      Icon="icon_xuatkho.png">
                 </controls:RoundFrame>

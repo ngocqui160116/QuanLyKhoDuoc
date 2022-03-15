@@ -16,5 +16,8 @@ namespace Phoenix.Shared.InputInfo
         public string SDK { get; set; }
         public string Status { get; set; }
         public string MedicineName { get; set; }
+        public string SupplierName { get; set; }
+        public string DateInput { get; set; }
+        public int Amount { get; set; }
     }
 }

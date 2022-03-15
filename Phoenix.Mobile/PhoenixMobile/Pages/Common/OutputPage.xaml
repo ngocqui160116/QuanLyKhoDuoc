@@ -1,11 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common" 
-             xmlns:input="clr-namespace:Phoenix.Mobile.Core.Models.Input;assembly=Phoenix.Mobile.Core"
-             x:Class="Phoenix.Mobile.Pages.Common.InputPage"
-             x:DataType="common:InputPageModel"
-             xmlns:inputinfo="clr-namespace:Phoenix.Mobile.Core.Models.InputInfo;assembly=Phoenix.Mobile.Core"
+             xmlns:outputinfo="clr-namespace:Phoenix.Mobile.Core.Models.OutputInfo;assembly=Phoenix.Mobile.Core"
+             x:Class="Phoenix.Mobile.Pages.Common.OutputPage"
              NavigationPage.HasNavigationBar="False"
              xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
              ControlTemplate="{StaticResource FullScreenHasBack}">
@@ -17,13 +14,13 @@
                            Placeholder="Nhập thông tin">
                 </SearchBar>
                 <ImageButton Margin="5,0,0,0"  
-                             xe:Commands.Tap="{Binding AddInputCommand}"
+                            
                              BackgroundColor="White" 
                              HorizontalOptions="End" 
                              Source="icon_add"/>
             </StackLayout>
 
-            <ListView ItemsSource="{Binding Inputs}"
+            <ListView 
                       HasUnevenRows="True"
                       BackgroundColor="#ecf0f1"
                       SeparatorVisibility="None"
@@ -32,26 +29,26 @@
 
                 <ListView.ItemTemplate>
 
-                    <DataTemplate x:DataType="inputinfo:InputInfoModel">
+                    <DataTemplate x:DataType="outputinfo:OutputInfoModel">
                         <ViewCell>
                             <StackLayout Margin="6,4,6,4"
                                  BackgroundColor="White">
-                                <Label Text="{Binding IdInput}"
+                                <Label
                                    Margin="8"
                                    FontAttributes="Bold"
                                    FontSize="Medium" />
                                 <StackLayout Orientation="Horizontal">
-                                    <Label Text="{Binding SupplierName}"
+                                    <Label
                                            Margin="8,2,8,4"
                                            FontSize="Small" />
-                                    <Label Text="{Binding DateInput}"
+                                    <Label 
                                            HorizontalOptions="EndAndExpand"
                                            TextColor="ForestGreen"
                                            FontAttributes="Bold"
                                            Margin="2"
                                            FontSize="Small" />
                                 </StackLayout>
-                               
+
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

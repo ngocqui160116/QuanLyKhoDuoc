@@ -1,4 +1,5 @@
-﻿using Phoenix.Mobile.Core.Infrastructure;
+﻿using FreshMvvm;
+using Phoenix.Mobile.Core.Infrastructure;
 using Phoenix.Mobile.Core.Models.Group;
 using Phoenix.Mobile.Core.Models.Medicine;
 using Phoenix.Mobile.Core.Services.Common;
@@ -30,9 +31,12 @@ namespace Phoenix.Mobile.PageModels.Common
         {
         }
 
+
+        public List<MedicineModel> Medicines { get; set; }
         public override async void Init(object initData)
         {
-            base.Init(initData);
+            //var Medicine = initData as Medicines;
+            //base.Init(initData);
             NavigationPage.SetHasNavigationBar(CurrentPage, false);
             CurrentPage.Title = "Thông tin Thuốc";
         }

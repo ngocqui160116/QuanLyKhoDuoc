@@ -25,6 +25,7 @@ namespace Phoenix.Mobile.PageModels.Common
         {
             _medicineService = medicineService;
             _dialogService = dialogService;
+           
 
         }
         
@@ -54,6 +55,7 @@ namespace Phoenix.Mobile.PageModels.Common
                 RaisePropertyChanged(nameof(Medicines));
             }
         }
+     
 
         #region properties
         public List<MedicineModel> Medicines { get; set; } = new List<MedicineModel>();
