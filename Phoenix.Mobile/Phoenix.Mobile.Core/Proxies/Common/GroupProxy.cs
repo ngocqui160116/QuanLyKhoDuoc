@@ -1,5 +1,6 @@
 ﻿using Phoenix.Framework.Core;
 using Phoenix.Mobile.Core.Framework;
+using Phoenix.Shared.Common;
 using Phoenix.Shared.Group;
 using Refit;
 using System;
@@ -11,31 +12,32 @@ namespace Phoenix.Mobile.Core.Proxies.Common
 {
     public interface IGroupProxy
     {
-        Task<List<GroupDto>> GetAllGroup(GroupRequest request);
+        Task<BaseResponse<GroupDto>> GetAllGroup(GroupRequest request);
     }
 
     public class GroupProxy : BaseProxy, IGroupProxy
     {
-        public async Task<List<GroupDto>> GetAllGroup(GroupRequest request)
+        public async Task<BaseResponse<GroupDto>> GetAllGroup(GroupRequest request)
         {
             try
             {
                 var api = RestService.For<IGroupApi>(GetHttpClient());
-                var result = await api.GetAllGroup(request);
-                if (result == null) return new List<GroupDto>();
-                return result;
+
+                return await api.GetAllGroup(request);
             }
             catch (Exception ex)
             {
                 ExceptionHandler.Handle(new NetworkException(ex), true);
-                return new List<GroupDto>();
+                return null;
             }
         }
+
         public interface IGroupApi
         {
             [Post("/group/GetAllGroup")]
-            Task<List<GroupDto>> GetAllGroup([Body] GroupRequest request);
+            Task<BaseResponse<GroupDto>> GetAllGroup([Body] GroupRequest request);
 
         }
+
     }
 }

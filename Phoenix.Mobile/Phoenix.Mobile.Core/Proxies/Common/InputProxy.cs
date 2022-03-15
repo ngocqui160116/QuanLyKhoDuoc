@@ -1,5 +1,6 @@
 ﻿using Phoenix.Framework.Core;
 using Phoenix.Mobile.Core.Framework;
+using Phoenix.Shared.Common;
 using Phoenix.Shared.Input;
 using Refit;
 using System;
@@ -11,31 +12,32 @@ namespace Phoenix.Mobile.Core.Proxies.Common
 {
     public interface IInputProxy
     {
-        Task<List<InputDto>> GetAllInput(InputRequest request);
+        Task<BaseResponse<InputDto>> GetAllInput(InputRequest request);
     }
 
     public class InputProxy : BaseProxy, IInputProxy
     {
-        public async Task<List<InputDto>> GetAllInput(InputRequest request)
+        public async Task<BaseResponse<InputDto>> GetAllInput(InputRequest request)
         {
             try
             {
                 var api = RestService.For<IInputApi>(GetHttpClient());
-                var result = await api.GetAllInput(request);
-                if (result == null) return new List<InputDto>();
-                return result;
+
+                return await api.GetAllInput(request);
             }
             catch (Exception ex)
             {
                 ExceptionHandler.Handle(new NetworkException(ex), true);
-                return new List<InputDto>();
+                return null;
             }
         }
+
         public interface IInputApi
         {
             [Post("/input/GetAllInput")]
-            Task<List<InputDto>> GetAllInput([Body] InputRequest request);
+            Task<BaseResponse<InputDto>> GetAllInput([Body] InputRequest request);
 
         }
+
     }
 }

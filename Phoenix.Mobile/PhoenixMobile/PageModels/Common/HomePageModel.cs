@@ -44,37 +44,6 @@ namespace Phoenix.Mobile.PageModels.Common
         #endregion
 
 
-        #region InventoryCommand
-
-        public Command InventoryCommand => new Command(async (p) => await InventoryExecute(), (p) => !IsBusy);
-
-        private async Task InventoryExecute()
-        {
-            await CoreMethods.PushPageModel<InventoryPageModel>();
-        }
-        #endregion
-
-        #region InputCommand
-
-        public Command InputCommand => new Command(async (p) => await InputExecute(), (p) => !IsBusy);
-
-        private async Task InputExecute()
-        {
-            await CoreMethods.PushPageModel<InputPageModel>();
-        }
-        #endregion
-
-        #region OutputCommand
-
-        public Command OutputCommand => new Command(async (p) => await OutputExecute(), (p) => !IsBusy);
-
-        private async Task OutputExecute()
-        {
-            await CoreMethods.PushPageModel<OutputPageModel>();
-        }
-        #endregion
-
-
         #region MedicineCommand
 
         public Command MedicineCommand => new Command(async (p) => await MedicineExecute(), (p) => !IsBusy);
@@ -85,8 +54,16 @@ namespace Phoenix.Mobile.PageModels.Common
         }
         #endregion
 
+        #region WarehouseCommand
 
-       
+        public Command WarehouseCommand => new Command(async (p) => await WarehouseExecute(), (p) => !IsBusy);
+
+        private async Task WarehouseExecute()
+        {
+            await CoreMethods.PushPageModel<WarehousePageModel>();
+        }
+        #endregion
+
     }
-    
+
 }

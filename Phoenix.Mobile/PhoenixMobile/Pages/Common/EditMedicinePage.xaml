@@ -40,7 +40,7 @@
                         <Entry  Grid.Row="1"
                                 Grid.Column="1"
                                 TextColor="Black"
-                                Placeholder="{Binding }"
+                                Placeholder="{Binding .}"
                                 WidthRequest="200" 
                                  />
 

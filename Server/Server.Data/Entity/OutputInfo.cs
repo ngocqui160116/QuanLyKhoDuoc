@@ -16,6 +16,9 @@ namespace Phoenix.Server.Data.Entity
         public string IdInputInfo { get; set; }
         [ForeignKey("IdInputInfo")]
         public virtual InputInfo InputInfo { get; set; }
+        public int IdReason { get; set; }
+        [ForeignKey("IdReason")]
+        public virtual Reason Reason { get; set; }
         public int Count { get; set; }
         public double Total { get; set; }
         public string Status { get; set; }

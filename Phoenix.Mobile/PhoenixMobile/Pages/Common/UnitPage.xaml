@@ -70,7 +70,7 @@
                         <Entry  Grid.Row="3"
                                 Grid.Column="1"
                                 TextColor="Black"
-                                Placeholder="{Binding Amount}"
+                                Placeholder="{Binding  Packing}"
                                 WidthRequest="200"                         
                                 Keyboard="Numeric"/>
 

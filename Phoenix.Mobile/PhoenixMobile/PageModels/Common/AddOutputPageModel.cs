@@ -11,12 +11,12 @@ using Xamarin.Forms;
 
 namespace Phoenix.Mobile.PageModels.Common
 {
-    public class AddInputPageModel :BasePageModel
+    public class AddOutputPageModel : BasePageModel
     {
         private readonly ISupplierService _supplierService;
         private readonly IDialogService _dialogService;
 
-        public AddInputPageModel(ISupplierService supplierService, IDialogService dialogService)
+        public AddOutputPageModel(ISupplierService supplierService, IDialogService dialogService)
         {
             _supplierService = supplierService;
             _dialogService = dialogService;
@@ -26,7 +26,7 @@ namespace Phoenix.Mobile.PageModels.Common
         {
             base.Init(initData);
             NavigationPage.SetHasNavigationBar(CurrentPage, false);
-            CurrentPage.Title = "Thêm phiếu nhập";
+            CurrentPage.Title = "Thêm phiếu xuất";
         }
         protected override async void ViewIsAppearing(object sender, EventArgs e)
         {
@@ -55,6 +55,5 @@ namespace Phoenix.Mobile.PageModels.Common
 
         #endregion
 
-       
     }
 }

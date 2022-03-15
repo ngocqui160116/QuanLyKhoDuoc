@@ -42,26 +42,6 @@ namespace Phoenix.Server.Services.MainServices
                     query = query.Where(d => d.RegistrationNumber.Contains(request.RegistrationNumber));
                 }
 
-                //if (!string.IsNullOrEmpty(request.IdGroup.ToString()))
-                //{
-                //    query = query.Where(d => d.IdGroup.ToString().Contains(request.IdGroup.ToString()));
-                //}
-                //if (!string.IsNullOrEmpty(request.Unit.ToString()))
-                //{
-                //    query = query.Where(d => d.Unit.ToString().Contains(request.Unit.ToString()));
-                //}
-                //if (!string.IsNullOrEmpty(request.DateOfManufacture))
-                //{
-                //    query = query.Where(d => d.DateOfManufacture.Contains(request.DateOfManufacture.ToString()));
-                //}
-                //if (!string.IsNullOrEmpty(request.DueDate.ToString()))
-                //{
-                //    query = query.Where(d => d.DueDate.ToString().Contains(request.DueDate.ToString()));
-                //}
-                //if (!string.IsNullOrEmpty(request.IdCustomer.ToString()))
-                //{
-                //    query = query.Where(d => d.IdCustomer.ToString().Contains(request.IdCustomer.ToString()));
-                //}
                 if (!string.IsNullOrEmpty(request.Status))
                 {
                     query = query.Where(d => d.Status.Contains(request.Status));

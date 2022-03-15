@@ -1,11 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects"
-             xmlns:controls="clr-namespace:Phoenix.Mobile.Controls" 
-             xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common"
-             x:DataType="common:HomePageModel"
-             x:Class="Phoenix.Mobile.Pages.Common.HomePage">
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:controls="clr-namespace:Phoenix.Mobile.Controls"
+             x:Class="Phoenix.Mobile.Pages.Common.WarehousePage"
+             xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects">
     <ContentPage.Content>
         <StackLayout>
             <Grid RowSpacing="5" ColumnSpacing="5">
@@ -19,7 +16,7 @@
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <!--<controls:RoundFrame Margin="0,5,0,0"
+                <controls:RoundFrame Margin="0,5,0,0"
                                      WidthRequest="100" 
                                      HeightRequest="100" 
                                      Text="Kiểm kho" 
@@ -42,46 +39,19 @@
                                      Text="Xuất kho" 
                                      Grid.Row="1" 
                                      xe:Commands.Tap="{Binding OutputCommand}" 
-                                     Grid.Column="1" 
+                                     Grid.Column="0" 
                                      Icon="icon_xuatkho.png">
                 </controls:RoundFrame>
                 <controls:RoundFrame WidthRequest="100" 
                                      HeightRequest="100"
                                      xe:Commands.Tap="{Binding InventoryCommand}"
                                      Text="Tồn kho" 
-                                     Grid.Row="2" 
+                                     Grid.Row="1" 
                                      Grid.Column="1" 
                                      Icon="icon_tonkho.png">
-                </controls:RoundFrame>-->
-                <controls:RoundFrame WidthRequest="100" 
-                                     HeightRequest="100" 
-                                     Text="   Kho"
-                                     xe:Commands.Tap="{Binding WarehouseCommand}" 
-                                     Grid.Row="0" 
-                                     Grid.Column="0" 
-                                     Icon="icon_warehouse.png">
                 </controls:RoundFrame>
-              
 
-                <controls:RoundFrame WidthRequest="100" 
-                                     HeightRequest="100"
-                                     xe:Commands.Tap="{Binding MedicineCommand}" 
-                                     Text="Danh mục thuốc" 
-                                     Grid.Row="0" 
-                                     Grid.Column="1" 
-                                     Icon="icon_medicine.png">
-                </controls:RoundFrame>
-               
-                <controls:RoundFrame WidthRequest="100" 
-                                     HeightRequest="100" 
-                                     xe:Commands.Tap="{Binding SupplierCommand}" 
-                                     Text="Nhà cung cấp" 
-                                     Grid.Row="1" 
-                                     Grid.Column="0" 
-                                     Icon="icon_supplier.png">
-                </controls:RoundFrame>
             </Grid>
         </StackLayout>
-       
     </ContentPage.Content>
 </ContentPage>

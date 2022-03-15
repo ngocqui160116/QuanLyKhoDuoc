@@ -35,8 +35,6 @@ namespace Phoenix.Server.Services.Infrastructure
             CreateMap<Medicine, MedicineDto>()
                 .ForMember(d => d.GroupName, o => o.MapFrom(s => s.Group.Name))
                 .ForMember(d => d.NameUnit, o => o.MapFrom(s => s.Unit.Name));
-               
-
 
             CreateMap<Output, OutputDto>()
              .ForMember(d => d.NameStaff, o => o.MapFrom(s => s.Staff.Name));

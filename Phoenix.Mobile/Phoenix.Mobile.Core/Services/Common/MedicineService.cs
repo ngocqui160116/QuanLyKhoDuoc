@@ -21,8 +21,8 @@ namespace Phoenix.Mobile.Core.Services.Common
         }
         public async Task<List<MedicineModel>> GetAllMedicine(MedicineRequest request)
         {
-            var data = await _MedicineProxy.GetAllMedicine(request);
-            return data.MapTo<MedicineModel>();
+            var medicine = await _MedicineProxy.GetAllMedicine(request);
+            return medicine.Data.MapTo<MedicineModel>();
         }
     }
 }

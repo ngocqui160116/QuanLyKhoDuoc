@@ -21,8 +21,8 @@ namespace Phoenix.Mobile.Core.Services.Common
         }
         public async Task<List<SupplierModel>> GetAllSupplier(SupplierRequest request)
         {
-            var data = await _SupplierProxy.GetAllSupplier(request);
-            return data.MapTo<SupplierModel>();
+            var supplier = await _SupplierProxy.GetAllSupplier(request);
+            return supplier.Data.MapTo<SupplierModel>();
         }
 
         
