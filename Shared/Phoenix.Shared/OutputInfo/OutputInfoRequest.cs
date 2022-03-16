@@ -9,5 +9,6 @@ namespace Phoenix.Shared.OutputInfo
         public int IdMedicine { get; set; }
         public int IdCustomer { get; set; }
         public string Status { get; set; }
+
     }
 }

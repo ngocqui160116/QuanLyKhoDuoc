@@ -63,8 +63,8 @@
     <Compile Include="Core\CrudResult.cs" />
     <Compile Include="Core\ListDto.cs" />
     <Compile Include="Core\ResultDto.cs" />
-    <Compile Include="Reason\ReasonDto.cs" />
-    <Compile Include="Reason\ReasonRequest.cs" />
+    <Compile Include="MedicineImage\Medicine_ImageDto.cs" />
+    <Compile Include="MedicineImage\Medicine_ImageRequest.cs" />
     <Compile Include="Supplier\SupplierDto.cs" />
     <Compile Include="Supplier\SupplierRequest.cs" />
     <Compile Include="Output\OutputDto.cs" />
@@ -81,6 +81,8 @@
     <Compile Include="Input\InputRequest.cs" />
     <Compile Include="Media\FileInfoDto.cs" />
     <Compile Include="Media\FileUploadDto.cs" />
+    <Compile Include="Customer\CustomerDto.cs" />
+    <Compile Include="Customer\CustomerRequest.cs" />
     <Compile Include="Staff\StaffDto.cs" />
     <Compile Include="Staff\StaffRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

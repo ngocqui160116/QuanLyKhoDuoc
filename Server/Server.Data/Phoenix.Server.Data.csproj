@@ -54,7 +54,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entity\Reason.cs" />
     <Compile Include="Entity\Supplier.cs" />
     <Compile Include="Entity\Output.cs" />
     <Compile Include="Entity\OutputInfo.cs" />
@@ -65,6 +64,7 @@
     <Compile Include="Entity\Input.cs" />
     <Compile Include="Entity\Medicine_Image.cs" />
     <Compile Include="Entity\Log.cs" />
+    <Compile Include="Entity\Customer.cs" />
     <Compile Include="Entity\Medicine.cs" />
     <Compile Include="Entity\Vendor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

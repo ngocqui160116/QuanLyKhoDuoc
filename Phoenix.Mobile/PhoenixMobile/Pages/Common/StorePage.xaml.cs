@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace Phoenix.Mobile.Pages.Common
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AddOutputPage : ContentPage
+    public partial class StorePage : ContentPage
     {
-        public AddOutputPage()
+        public StorePage()
         {
             InitializeComponent();
         }

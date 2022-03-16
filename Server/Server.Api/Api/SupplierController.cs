@@ -1,7 +1,6 @@
 ﻿using Phoenix.Server.Data.Entity;
 using Phoenix.Server.Services.MainServices;
 using Phoenix.Server.Services.MainServices.Auth;
-using Phoenix.Shared.Common;
 using Phoenix.Shared.Core;
 using Phoenix.Shared.Supplier;
 using System.Collections.Generic;
@@ -23,11 +22,9 @@ namespace Phoenix.Server.Api.Api
 
         [HttpPost]
         [Route("GetAllSupplier")]
-
-
-        public async Task<BaseResponse<SupplierDto>> GetAllSupplier([FromBody] SupplierRequest request)
+        public List<SupplierDto> GetAllSupplier([FromBody] SupplierRequest request)
         {
-            return await _SupplierService.GetAllSupplier(request);
+            return _SupplierService.GetAllSupplier(request);
         }
 
     }

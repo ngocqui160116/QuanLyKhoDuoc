@@ -1,6 +1,5 @@
 ﻿using Phoenix.Framework.Core;
 using Phoenix.Mobile.Core.Framework;
-using Phoenix.Shared.Common;
 using Phoenix.Shared.Supplier;
 using Refit;
 using System;
@@ -12,32 +11,31 @@ namespace Phoenix.Mobile.Core.Proxies.Common
 {
     public interface ISupplierProxy
     {
-        Task<BaseResponse<SupplierDto>> GetAllSupplier(SupplierRequest request);
+        Task<List<SupplierDto>> GetAllSupplier(SupplierRequest request);
     }
 
     public class SupplierProxy : BaseProxy, ISupplierProxy
     {
-        public async Task<BaseResponse<SupplierDto>> GetAllSupplier(SupplierRequest request)
+        public async Task<List<SupplierDto>> GetAllSupplier(SupplierRequest request)
         {
             try
             {
                 var api = RestService.For<ISupplierApi>(GetHttpClient());
-
-                return await api.GetAllSupplier(request);
+                var result = await api.GetAllSupplier(request);
+                if (result == null) return new List<SupplierDto>();
+                return result;
             }
             catch (Exception ex)
             {
                 ExceptionHandler.Handle(new NetworkException(ex), true);
-                return null;
+                return new List<SupplierDto>();
             }
         }
-
         public interface ISupplierApi
         {
             [Post("/supplier/GetAllSupplier")]
-            Task<BaseResponse<SupplierDto>> GetAllSupplier([Body] SupplierRequest request);
+            Task<List<SupplierDto>> GetAllSupplier([Body] SupplierRequest request);
 
         }
-
     }
 }

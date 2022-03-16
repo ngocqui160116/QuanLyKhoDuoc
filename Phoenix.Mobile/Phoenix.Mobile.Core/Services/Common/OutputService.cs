@@ -21,8 +21,8 @@ namespace Phoenix.Mobile.Core.Services.Common
         }
         public async Task<List<OutputModel>> GetAllOutput(OutputRequest request)
         {
-            var output = await _OutputProxy.GetAllOutput(request);
-            return output.Data.MapTo<OutputModel>();
+            var data = await _OutputProxy.GetAllOutput(request);
+            return data.MapTo<OutputModel>();
         }
     }
 }

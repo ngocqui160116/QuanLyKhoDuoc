@@ -21,8 +21,8 @@ namespace Phoenix.Mobile.Core.Services.Common
         }
         public async Task<List<GroupModel>> GetAllGroup(GroupRequest request)
         {
-            var group = await _GroupProxy.GetAllGroup(request);
-            return group.Data.MapTo<GroupModel>();
+            var data = await _GroupProxy.GetAllGroup(request);
+            return data.MapTo<GroupModel>();
         }
     }
 }

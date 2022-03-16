@@ -1,7 +1,6 @@
 ﻿using Phoenix.Server.Data.Entity;
 using Phoenix.Server.Services.MainServices;
 using Phoenix.Server.Services.MainServices.Auth;
-using Phoenix.Shared.Common;
 using Phoenix.Shared.Core;
 using Phoenix.Shared.InputInfo;
 
@@ -22,10 +21,11 @@ namespace Phoenix.Server.Api.Api
 
         [HttpPost]
         [Route("GetAllInputInfo")]
-        public async Task<BaseResponse<InputInfoDto>> GetAllInputInfo([FromBody] InputInfoRequest request)
+        public List<InputInfoDto> GetAllInputInfo([FromBody] InputInfoRequest request)
         {
-            return await _InputInfoService.GetAllInputInfo(request);
+            return _InputInfoService.GetAllInputInfo(request);
         }
+
 
     }
 }

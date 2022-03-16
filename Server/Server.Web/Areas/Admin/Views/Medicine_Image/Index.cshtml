@@ -6,13 +6,13 @@
 @section Breadcrumb{
     <div class="-intro-x breadcrumb mr-auto hidden sm:flex">
         <span>Chương trình</span> <i data-feather="chevron-right" class="breadcrumb__icon"></i>
-        <a href="#" class="breadcrumb--active">Nhập kho</a>
+        <a href="#" class="breadcrumb--active">Thuốc</a>
     </div>
 }
 @Html.AntiForgeryToken()
 <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
     <h2 class="text-lg font-medium mr-auto">
-        Nhập kho
+        Thuốc
     </h2>
     <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
         <a href="@Url.Action("Create","Project")" class="btn btn-primary text-white shadow-md mr-2">Thêm mới</a>
@@ -22,12 +22,8 @@
     <div class="intro-y box p-5">
         <div class="grid grid-cols-12 gap-2">
             <div class="col-span-12 lg:col-span-6">
-                <label>Hóa đơn</label>
+                <label>Thuốc</label>
                 <input type="text" id="Name" class="form-control">
-            </div>
-            <div class="col-span-12 lg:col-span-6">
-                <label>Hóa đơn nhập</label>
-                <input type="text" id="NameStaff" class="form-control">
             </div>
         </div>
         <div class="grid mt-3">
@@ -52,7 +48,7 @@
         }
         var table = new Tabulator("#main-grid", {
             layout: "fitDataFill",
-            ajaxURL: "@Html.Raw(Url.Action("List", "Input"))",
+            ajaxURL: "@Html.Raw(Url.Action("List", "Medicine"))",
             ajaxConfig: "post",
             ajaxRequesting: function (url, params) {
                 params.Name = $('#Name').val();
@@ -74,17 +70,26 @@
             },
             placeholder: "Chưa có dữ liệu",
             columns: [
-                { title: "Mã hóa đơn", field: "IdInvoice", sorter: "string", width: 180 },
+                { title: "Mã thuốc", field: "IdMedicine", sorter: "string", width: 100 },
                 {
-                    title: "Tên", field: "Name", sorter: "string", width: 180, formatter(cell, formatterParams)
+                    title: "Tên thuốc", field: "Name", sorter: "string", width: 200, formatter(cell, formatterParams)
                     {
-                        return `<a href="../Project/Update/${cell.getData().Id}" class="text-theme-1 dark:text-theme-10"> ${cell.getData().NameStaff}</a>`
+                        return `<a href="../Project/Update/${cell.getData().Id}" class="text-theme-1 dark:text-theme-10"> ${cell.getData().Name}</a>`
                     }
                 },
-                { title: "Ngày tạo", field: "Date", sorter: "date", width: 180, formatter: dateFormatter},
-                { title: "Mã nhân viên", field: "IdStaff", sorter: "string", width: 180 },
-                { title: "Mã khách hàng", field: "IdCustomer", sorter: "string", width: 180 },
-                { title: "Giá", field: "Total", sorter: "string", width: 180 },
+                { title: "Số đăng ký", field: "RegistrationNumber", sorter: "string", width: 150 },
+                { title: "Tên nhóm thuốc", field: "GroupName", sorter: "string", width: 300 },
+                { title: "Hoạt chất", field: "Active", sorter: "string", width: 180 },
+                { title: "Hàm lượng", field: "Content", sorter: "string", width: 100 },
+                { title: "Quy cách đóng gói", field: "Packing", sorter: "string", width: 250 },
+               @* { title: "Ngày sản xuất", field: "DateOfManufacture", sorter: "date", width: 180, formatter: dateFormatter },
+                { title: "Hạn sử dụng", field: "DueDate", sorter: "date", width: 180, formatter: dateFormatter},
+                { title: "Đơn vị tính", field: "Unit", sorter: "string", width: 180 },
+                { title: "Giá nhập", field: "Price", sorter: "string", width: 180 },
+                { title: "Đơn giá", field: "UnitPrice", sorter: "string", width: 180 },*@
+                { title: "Số lượng", field: "Amount", sorter: "string", width: 100 },
+                { title: "Hình ảnh", field: "Image", sorter: "string", width: 180 },
+                { title: "Trạng thái", field: "Status", sorter: "string", width: 180 },
                 @*{
                     title: "Ngày tạo", field: "CreatedAt", sorter: "date", width: 180, formatter: dateFormatter
                 },
@@ -97,7 +102,7 @@
             table.setData();
         }
         let onResetSearch = (e) => {
-            $('#NameStaff').val('');
+            $('#Name').val('');
             table.setData();
         }
     </script>

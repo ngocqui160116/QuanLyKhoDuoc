@@ -39,7 +39,7 @@ namespace Phoenix.Server.Services.MainServices
                     query = query.Where(d => d.IdOutput.Contains(request.IdOutput));
                 }
 
-              
+                query = query.OrderByDescending(d => d.IdOutput);
 
                 var data = await query.Skip(request.Page * request.PageSize).Take(request.PageSize).ToListAsync();
                 result.DataCount = (int)((await query.CountAsync()) / request.PageSize) + 1;

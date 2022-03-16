@@ -748,10 +748,16 @@
     <Content Include="Areas\Admin\Views\Medicine\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Invoice\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Supplier\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Input\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\InputInfo\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Unit\Index.cshtml" />
     <Content Include="Areas\Admin\Views\OutputInfo\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\InputInfo\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Medicine_Image\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Customer\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Customer\_CreateOrUpdate.cshtml" />
+    <Content Include="Areas\Admin\Views\Medicine\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Medicine\_CreateOrUpdate.cshtml" />
+    <Content Include="Areas\Admin\Views\Supplier\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Supplier\_CreateOrUpdate.cshtml" />
     <None Include="assets\js\kendo\2019.3.1023\kendo.all-vsdoc.js" />
     <None Include="assets\js\kendo\2019.3.1023\kendo.all.min.intellisense.js" />
     <Content Include="assets\js\kendo\2019.3.1023\kendo.all.min.js" />
@@ -1206,12 +1212,14 @@
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
     <Compile Include="Areas\Admin\Controllers\CustomerController.cs" />
+    <Compile Include="Areas\Admin\Controllers\InputInfoController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Medicine_ImageController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SearchController.cs" />
     <Compile Include="Areas\Admin\Controllers\UnitController.cs" />
     <Compile Include="Areas\Admin\Controllers\GroupController.cs" />
     <Compile Include="Areas\Admin\Controllers\OutputInfoController.cs" />
     <Compile Include="Areas\Admin\Controllers\OutputController.cs" />
     <Compile Include="Areas\Admin\Controllers\InputController.cs" />
-    <Compile Include="Areas\Admin\Controllers\InputInfoController.cs" />
     <Compile Include="Areas\Admin\Controllers\MedicineController.cs" />
     <Compile Include="Areas\Admin\Controllers\SecurityController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
@@ -1224,6 +1232,7 @@
     <Compile Include="Areas\Admin\Models\Common\LoginModel.cs" />
     <Compile Include="Areas\Admin\Models\Common\MimeTypes.cs" />
     <Compile Include="Areas\Admin\Models\Customer\CustomerModel.cs" />
+    <Compile Include="Areas\Admin\Models\Medicine_Image\Medicine_ImageModel.cs" />
     <Compile Include="Areas\Admin\Models\OutputInfo\OutputInfoModel.cs" />
     <Compile Include="Areas\Admin\Models\Unit\UnitModel.cs" />
     <Compile Include="Areas\Admin\Models\Group\GroupModel.cs" />
@@ -1297,6 +1306,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\Export\" />
+    <Folder Include="Areas\Admin\Views\MedicineImage\" />
+    <Folder Include="Areas\Admin\Views\Search\" />
     <Folder Include="Models\Home\" />
   </ItemGroup>
   <ItemGroup>

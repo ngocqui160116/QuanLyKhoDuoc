@@ -25,7 +25,10 @@ namespace Phoenix.Server.Services.MainServices
             //setup query
             var query = _dataContext.Vendors.AsQueryable().Where(r => !r.Deleted);
             //filter
-          
+            if (request.Id.HasValue)
+            {
+                query = query.Where(d => d.Id == request.Id.Value);
+            }
             if (!string.IsNullOrEmpty(request.Name))
             {
                 query = query.Where(d => d.Name.Contains(request.Name));

@@ -55,6 +55,14 @@ namespace Phoenix.Mobile.PageModels.Common
 
         #endregion
 
-       
+        #region StoreCommand
+
+        public Command StoreCommand => new Command(async (p) => await StoreExecute(), (p) => !IsBusy);
+
+        private async Task StoreExecute()
+        {
+            await CoreMethods.PushPageModel<StorePageModel>();
+        }
+        #endregion
     }
 }

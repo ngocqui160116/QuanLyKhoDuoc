@@ -21,8 +21,8 @@ namespace Phoenix.Mobile.Core.Services.Common
         }
         public async Task<List<StaffModel>> GetAllStaff(StaffRequest request)
         {
-            var staff = await _StaffProxy.GetAllStaff(request);
-            return staff.Data.MapTo<StaffModel>();
+            var data = await _StaffProxy.GetAllStaff(request);
+            return data.MapTo<StaffModel>();
         }
     }
 }

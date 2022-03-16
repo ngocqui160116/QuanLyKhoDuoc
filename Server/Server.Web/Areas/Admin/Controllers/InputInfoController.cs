@@ -2,6 +2,7 @@
 using Phoenix.Server.Services.MainServices;
 using Phoenix.Server.Web.Areas.Admin.Models.InputInfo;
 using Phoenix.Shared.InputInfo;
+using Phoenix.Shared.OutputInfo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
 {
     public class InputInfoController : Controller
     {
-        // GET: Admin/InputInfo
+        // GET: Admin/Customer
         private readonly IInputInfoService _inputinfoService;
 
         public InputInfoController(IInputInfoService inputinfoService)

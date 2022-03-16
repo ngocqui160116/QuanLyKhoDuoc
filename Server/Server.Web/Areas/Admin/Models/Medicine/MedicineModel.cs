@@ -10,7 +10,7 @@ namespace Phoenix.Server.Web.Areas.Admin.Models.Medicine
         public int IdMedicine { get; set; }
         public string RegistrationNumber { get; set; }
         public string Name { get; set; }
-        public string IdGroup { get; set; }         //
+        public int IdGroup { get; set; }         //
         public string Active { get; set; }
         public string Content { get; set; }
         public string Packing { get; set; }

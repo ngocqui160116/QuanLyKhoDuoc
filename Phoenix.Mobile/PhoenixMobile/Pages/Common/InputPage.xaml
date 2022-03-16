@@ -5,9 +5,8 @@
              xmlns:input="clr-namespace:Phoenix.Mobile.Core.Models.Input;assembly=Phoenix.Mobile.Core"
              x:Class="Phoenix.Mobile.Pages.Common.InputPage"
              x:DataType="common:InputPageModel"
-             xmlns:inputinfo="clr-namespace:Phoenix.Mobile.Core.Models.InputInfo;assembly=Phoenix.Mobile.Core"
+             xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" xmlns:inputinfo="clr-namespace:Phoenix.Mobile.Core.Models.InputInfo;assembly=Phoenix.Mobile.Core"
              NavigationPage.HasNavigationBar="False"
-             xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
              ControlTemplate="{StaticResource FullScreenHasBack}">
     <ContentPage.Content>
         <StackLayout >
@@ -41,7 +40,7 @@
                                    FontAttributes="Bold"
                                    FontSize="Medium" />
                                 <StackLayout Orientation="Horizontal">
-                                    <Label Text="{Binding SupplierName}"
+                                    <Label Text="{Binding NameSupplier}"
                                            Margin="8,2,8,4"
                                            FontSize="Small" />
                                     <Label Text="{Binding DateInput}"

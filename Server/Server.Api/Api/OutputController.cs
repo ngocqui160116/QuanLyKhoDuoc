@@ -1,7 +1,6 @@
 ﻿using Phoenix.Server.Data.Entity;
 using Phoenix.Server.Services.MainServices;
 using Phoenix.Server.Services.MainServices.Auth;
-using Phoenix.Shared.Common;
 using Phoenix.Shared.Core;
 using Phoenix.Shared.Output;
 using System.Collections.Generic;
@@ -21,10 +20,10 @@ namespace Phoenix.Server.Api.Api
 
         [HttpPost]
         [Route("GetAllOutput")]
-       
-        public async Task<BaseResponse<OutputDto>> GetAllOutput([FromBody] OutputRequest request)
+        public List<OutputDto> GetAllOutput([FromBody] OutputRequest request)
         {
-            return await _OutputService.GetAllOutput(request);
+            return _OutputService.GetAllOutput(request);
         }
+
     }
 }

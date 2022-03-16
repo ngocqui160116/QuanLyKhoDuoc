@@ -23,6 +23,7 @@ namespace Phoenix.Server.Data.Entity
        public virtual Unit Unit { get; set; }
         //public double Price { get; set; }
         //public double UnitPrice { get; set; }
+        public int Amount { get; set; }
         public int? Image { get; set; }
         [ForeignKey("Image")]
         public virtual Medicine_Image Medicine_Image { get; set; }

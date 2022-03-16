@@ -21,8 +21,8 @@ namespace Phoenix.Mobile.Core.Services.Common
         }
         public async Task<List<UnitModel>> GetAllUnit(UnitRequest request)
         {
-            var unit = await _UnitProxy.GetAllUnit(request);
-            return unit.Data.MapTo<UnitModel>();
+            var data = await _UnitProxy.GetAllUnit(request);
+            return data.MapTo<UnitModel>();
         }
     }
 }
