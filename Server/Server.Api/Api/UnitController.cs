@@ -28,6 +28,13 @@ namespace Phoenix.Server.Api.Api
             return await _UnitService.GetAllUnit(request);
         }
 
+        [HttpPost]
+        [Route("CreateUnit")]
+        public Task<CrudResult> CreateUnit([FromBody] UnitRequest request)
+        {
+            return _UnitService.CreateUnit(request);
+        }
+
 
     }
 }

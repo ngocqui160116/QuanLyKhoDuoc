@@ -2,6 +2,7 @@
 using Phoenix.Server.Data.Entity;
 using Phoenix.Server.Services.Database;
 using Phoenix.Shared.Common;
+using Phoenix.Shared.Core;
 using Phoenix.Shared.Input;
 using Phoenix.Shared.Vendor;
 using System;
@@ -15,6 +16,7 @@ namespace Phoenix.Server.Services.MainServices
     public interface IInputService
     {
         Task<BaseResponse<InputDto>> GetAllInput(InputRequest request);
+        Task<CrudResult> CreateInput(InputRequest request);
     }
     public class InputService : IInputService
     {
@@ -48,6 +50,19 @@ namespace Phoenix.Server.Services.MainServices
             }
 
             return result;
+        }
+
+        // Task<CrudResult> CreateInput(InputRequest request);
+        public async Task<CrudResult> CreateInput(InputRequest request)
+        {
+            var Input = new Input();
+            Input.Id = request.Id;
+            Input.IdStaff = request.IdStaff;
+            Input.DateInput = request.DateInput;
+           
+            _dataContext.Inputs.Add(Input);
+            await _dataContext.SaveChangesAsync();
+            return new CrudResult() { IsOk = true };
         }
     }
 }

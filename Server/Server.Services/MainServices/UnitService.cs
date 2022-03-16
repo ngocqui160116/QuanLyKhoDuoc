@@ -2,6 +2,7 @@
 using Phoenix.Server.Data.Entity;
 using Phoenix.Server.Services.Database;
 using Phoenix.Shared.Common;
+using Phoenix.Shared.Core;
 using Phoenix.Shared.Unit;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace Phoenix.Server.Services.MainServices
     public interface IUnitService
     {
         Task<BaseResponse<UnitDto>> GetAllUnit(UnitRequest request);
+        Task<CrudResult> CreateUnit(UnitRequest request);
     }
     public class UnitService : IUnitService
     {
@@ -51,6 +53,16 @@ namespace Phoenix.Server.Services.MainServices
             }
 
             return result;
+        }
+
+         // Task<CrudResult> CreateUnit(UnitRequest request);
+        public async Task<CrudResult> CreateUnit(UnitRequest request)
+        {
+            var Unit = new Unit();
+            Unit.Name = request.Name;
+            _dataContext.Units.Add(Unit);
+            await _dataContext.SaveChangesAsync();
+            return new CrudResult() { IsOk = true };
         }
     }
 }

@@ -26,5 +26,12 @@ namespace Phoenix.Server.Api.Api
         {
             return await _StaffService.GetAllStaff(request);
         }
+
+        [HttpPost]
+        [Route("CreateStaff")]
+        public Task<CrudResult> CreateStaff([FromBody] StaffRequest request)
+        {
+            return _StaffService.CreateStaff(request);
+        }
     }
 }

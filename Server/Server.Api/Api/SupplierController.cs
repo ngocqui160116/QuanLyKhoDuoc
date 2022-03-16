@@ -13,7 +13,6 @@ namespace Phoenix.Server.Api.Api
     [RoutePrefix("api/supplier")]
     public class SupplierController : BaseApiController
     {
-      
 
         private readonly ISupplierService _SupplierService;
         public SupplierController(ISupplierService SupplierService)
@@ -28,12 +27,7 @@ namespace Phoenix.Server.Api.Api
             return await _SupplierService.GetAllSupplier(request);
         }
 
-        //[HttpPost]
-        //[Route("CreateSupplier")]
-        //public async Task<BaseResponse<SupplierDto>> CreateSupplier([FromBody] SupplierRequest request)
-        //{
-        //    return await _SupplierService.GetAllSupplier(request);
-        //}
+      
         [HttpPost]
         [Route("CreateSupplier")]
         public Task<CrudResult> CreateSupplier([FromBody] SupplierRequest request)

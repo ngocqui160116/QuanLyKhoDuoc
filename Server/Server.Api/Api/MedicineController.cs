@@ -27,5 +27,11 @@ namespace Phoenix.Server.Api.Api
             return await _medicineService.GetAllMedicine(request);
         }
 
+        [HttpPost]
+        [Route("CreateMedicine")]
+        public Task<CrudResult> CreateMedicine([FromBody] MedicineRequest request)
+        {
+            return _medicineService.CreateMedicine(request);
+        }
     }
 }

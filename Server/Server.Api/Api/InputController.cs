@@ -26,5 +26,12 @@ namespace Phoenix.Server.Api.Api
             return await _InputService.GetAllInput(request);
         }
 
+        [HttpPost]
+        [Route("CreateInput")]
+        public Task<CrudResult> CreateInput([FromBody] InputRequest request)
+        {
+            return _InputService.CreateInput(request);
+        }
+
     }
 }

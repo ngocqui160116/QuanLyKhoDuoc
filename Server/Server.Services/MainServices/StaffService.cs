@@ -15,6 +15,7 @@ namespace Phoenix.Server.Services.MainServices
     public interface IStaffService
     {
         Task<BaseResponse<StaffDto>> GetAllStaff(StaffRequest request);
+        Task<CrudResult> CreateStaff(StaffRequest request);
     }
     public class StaffService : IStaffService
     {
@@ -47,7 +48,7 @@ namespace Phoenix.Server.Services.MainServices
                     query = query.Where(d => d.Authority.Contains(request.Authority));
                 }
 
-                query = query.OrderBy(d => d.IdStaff);
+                query = query.OrderByDescending(d => d.IdStaff);
 
                 var data = await query.Skip(request.Page * request.PageSize).Take(request.PageSize).ToListAsync();
                 result.DataCount = (int)((await query.CountAsync()) / request.PageSize) + 1;
@@ -60,11 +61,22 @@ namespace Phoenix.Server.Services.MainServices
 
             return result;
         }
+
+        // Task<CrudResult> CreateStaff(StaffRequest request);
+        public async Task<CrudResult> CreateStaff(StaffRequest request)
+        {
+            var Staff = new Staff();
+            Staff.Name = request.Name;
+            Staff.Gender = request.Gender;
+            Staff.Birth = request.Birth;
+            Staff.PhoneNumber = request.PhoneNumber;
+            Staff.Address = request.Address;
+            Staff.Authority = request.Authority;
+
+            _dataContext.Staffs.Add(Staff);
+            await _dataContext.SaveChangesAsync();
+            return new CrudResult() { IsOk = true };
+    }
        
-        //public int IdStaff { get; set; }
-        //public string Name { get; set; }
-        //public string Gender { get; set; }
-        //public string Authority { get; set; }
-        //public bool Deleted { get; set; }
     }
 }

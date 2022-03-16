@@ -28,5 +28,11 @@ namespace Phoenix.Server.Api.Api
             return await _GroupService.GetAllGroup(request);
         }
 
+        [HttpPost]
+        [Route("CreateGroup")]
+        public Task<CrudResult> CreateGroup([FromBody] GroupRequest request)
+        {
+            return _GroupService.CreateGroup(request);
+        }
     }
 }

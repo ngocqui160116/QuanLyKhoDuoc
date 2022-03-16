@@ -11,6 +11,6 @@ namespace Phoenix.Shared.InputInfo
         public string IdBatch { get; set; }
         public DateTime DateOfManufacture { get; set; }
         public DateTime DueDate { get; set; }
-        public string MedicineName { get; set; }
+        //public string MedicineName { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using Falcon.Web.Core.Helpers;
 using Phoenix.Server.Data.Entity;
 using Phoenix.Server.Services.Database;
 using Phoenix.Shared.Common;
+using Phoenix.Shared.Core;
 using Phoenix.Shared.Medicine;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace Phoenix.Server.Services.MainServices
     public interface IMedicineService
     {
         Task<BaseResponse<MedicineDto>> GetAllMedicine(MedicineRequest request);
+        Task<CrudResult> CreateMedicine(MedicineRequest request);
     }
     public class MedicineService : IMedicineService
     {
@@ -59,6 +61,25 @@ namespace Phoenix.Server.Services.MainServices
             }
 
             return result;
+        }
+
+        // Task<CrudResult> CreateMedicine(MedicineRequest request);
+        public async Task<CrudResult> CreateMedicine(MedicineRequest request)
+        {
+            var Medicine = new Medicine();
+            Medicine.RegistrationNumber = request.RegistrationNumber;
+            Medicine.Name = request.Name;
+            Medicine.IdGroup = request.IdGroup;
+            Medicine.IdUnit = request.IdUnit;
+            Medicine.Active = request.Active;
+            Medicine.Content = request.Content;
+            Medicine.Packing = request.Packing;
+            Medicine.Image = request.Image;
+            Medicine.Status = request.Status;
+
+            _dataContext.Medicines.Add(Medicine);
+            await _dataContext.SaveChangesAsync();
+            return new CrudResult() { IsOk = true };
         }
     }
 }

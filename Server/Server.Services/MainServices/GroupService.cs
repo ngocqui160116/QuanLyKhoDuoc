@@ -2,7 +2,9 @@
 using Phoenix.Server.Data.Entity;
 using Phoenix.Server.Services.Database;
 using Phoenix.Shared.Common;
+using Phoenix.Shared.Core;
 using Phoenix.Shared.Group;
+using Phoenix.Shared.Supplier;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -14,6 +16,7 @@ namespace Phoenix.Server.Services.MainServices
     public interface IGroupService
     {
         Task<BaseResponse<GroupDto>> GetAllGroup(GroupRequest request);
+        Task<CrudResult> CreateGroup (GroupRequest request);
     }
     public class GroupService : IGroupService
     {
@@ -50,6 +53,14 @@ namespace Phoenix.Server.Services.MainServices
             }
 
             return result;
+        }
+        public async Task<CrudResult> CreateGroup(GroupRequest request)
+        {
+            var Group = new Group();
+            Group.Name = request.Name;      
+            _dataContext.Groups.Add(Group);
+            await _dataContext.SaveChangesAsync();
+            return new CrudResult() { IsOk = true };
         }
     }
 }

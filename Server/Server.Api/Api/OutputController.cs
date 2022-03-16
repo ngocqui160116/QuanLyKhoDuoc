@@ -21,10 +21,17 @@ namespace Phoenix.Server.Api.Api
 
         [HttpPost]
         [Route("GetAllOutput")]
-       
         public async Task<BaseResponse<OutputDto>> GetAllOutput([FromBody] OutputRequest request)
         {
             return await _OutputService.GetAllOutput(request);
         }
+
+        [HttpPost]
+        [Route("CreateOutput")]
+        public Task<CrudResult> CreateOutput([FromBody] OutputRequest request)
+        {
+            return _OutputService.CreateOutput(request);
+        }
+
     }
 }

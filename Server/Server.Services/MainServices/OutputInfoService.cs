@@ -2,6 +2,7 @@
 using Phoenix.Server.Data.Entity;
 using Phoenix.Server.Services.Database;
 using Phoenix.Shared.Common;
+using Phoenix.Shared.Core;
 using Phoenix.Shared.OutputInfo;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace Phoenix.Server.Services.MainServices
     public interface IOutputInfoService
     {
         Task<BaseResponse<OutputInfoDto>> GetAllOutputInfo(OutputInfoRequest request);
+        Task<CrudResult> CreateOutputInfo(OutputInfoRequest request);
     }
     public class OutputInfoService : IOutputInfoService
     {
@@ -51,6 +53,24 @@ namespace Phoenix.Server.Services.MainServices
             }
 
             return result;
+        }
+
+        // Task<CrudResult> CreateOutputInfo(OutputInfoRequest request);
+        public async Task<CrudResult> CreateOutputInfo(OutputInfoRequest request)
+        {
+            var OutputInfo = new OutputInfo();
+            OutputInfo.IdOutput = request.IdOutput;
+            OutputInfo.IdMedicine = request.IdMedicine;
+            OutputInfo.IdInputInfo = request.IdInputInfo;
+            OutputInfo.IdReason = request.IdReason;
+            OutputInfo.Count = request.Count;
+            OutputInfo.Total = request.Total;
+            OutputInfo.Status = request.Status;
+           
+
+            _dataContext.OutputInfos.Add(OutputInfo);
+            await _dataContext.SaveChangesAsync();
+            return new CrudResult() { IsOk = true };
         }
     }
 }

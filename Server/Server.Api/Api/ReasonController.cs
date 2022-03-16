@@ -28,5 +28,12 @@ namespace Phoenix.Server.Api.Api
             return await _ReasonService.GetAllReason(request);
         }
 
+        //[HttpPost]
+        //[Route("CreateReason")]
+        //public Task<CrudResult> CreateReason([FromBody] ReasonRequest request)
+        //{
+        //    return _ReasonService.CreateReason(request);
+        //}
+
     }
 }

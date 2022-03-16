@@ -6,5 +6,7 @@ namespace Phoenix.Shared.Input
     public class InputRequest : BaseRequest
     {
         public string Id { get; set; }
+        public int IdStaff { get; set; }
+        public DateTime DateInput { get; set; }
     }
 }

@@ -4,7 +4,9 @@
              xmlns:controls="clr-namespace:Phoenix.Mobile.Controls"
              xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
              xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common" 
-             xmlns:vendor="clr-namespace:Phoenix.Mobile.Core.Models.Vendor;assembly=Phoenix.Mobile.Core" xmlns:medicine="clr-namespace:Phoenix.Mobile.Core.Models.Medicine;assembly=Phoenix.Mobile.Core" xmlns:behaviors="clr-namespace:Phoenix.Framework.Core;assembly=Phoenix.Framework" xmlns:effects="clr-namespace:Phoenix.Mobile.Effects"
+             xmlns:medicine="clr-namespace:Phoenix.Mobile.Core.Models.Medicine;assembly=Phoenix.Mobile.Core" 
+             xmlns:behaviors="clr-namespace:Phoenix.Framework.Core;assembly=Phoenix.Framework" 
+             xmlns:effects="clr-namespace:Phoenix.Mobile.Effects"
              x:Class="Phoenix.Mobile.Pages.Common.MedicinePage"
              x:DataType="common:MedicinePageModel"
              ControlTemplate="{StaticResource FullScreenHasBack}">

@@ -3,6 +3,7 @@ using Falcon.Web.Core.Helpers;
 using Phoenix.Server.Data.Entity;
 using Phoenix.Server.Services.Database;
 using Phoenix.Shared.Common;
+using Phoenix.Shared.Core;
 using Phoenix.Shared.InputInfo;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace Phoenix.Server.Services.MainServices
     public interface IInputInfoService
     {
         Task<BaseResponse<InputInfoDto>> GetAllInputInfo(InputInfoRequest request);
+        Task<CrudResult> CreateInputInfo(InputInfoRequest request);
     }
     public class InputInfoService : IInputInfoService
     {
@@ -52,5 +54,23 @@ namespace Phoenix.Server.Services.MainServices
 
             return result;
         }
+
+       // Task<CrudResult> CreateInputInfo(InputInfoRequest request);
+        public async Task<CrudResult> CreateInputInfo(InputInfoRequest request)
+        {
+            var InputInfo = new InputInfo();
+            InputInfo.IdInput = request.IdInput;
+            InputInfo.IdMedicine = request.IdMedicine;
+            InputInfo.IdSupplier = request.IdSupplier;
+            InputInfo.IdBatch = request.IdBatch;
+            InputInfo.DateOfManufacture = request.DateOfManufacture;
+            InputInfo.DueDate = request.DueDate;
+
+            _dataContext.InputInfos.Add(InputInfo);
+            await _dataContext.SaveChangesAsync();
+            return new CrudResult() { IsOk = true };
+        }
+
+
     }
 }

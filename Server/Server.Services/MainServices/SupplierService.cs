@@ -61,6 +61,8 @@ namespace Phoenix.Server.Services.MainServices
         {
             var Supplier = new Supplier();
             Supplier.Name = request.Name;
+            Supplier.PhoneNumber = request.PhoneNumber;
+            Supplier.Email = request.Email;
             Supplier.Address = request.Address;
             _dataContext.Suppliers.Add(Supplier);
             await _dataContext.SaveChangesAsync();
