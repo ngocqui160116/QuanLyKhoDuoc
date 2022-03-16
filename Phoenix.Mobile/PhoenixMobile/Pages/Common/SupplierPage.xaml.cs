@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Phoenix.Mobile.Core.Models.Customer;
+
 
 using Phoenix.Mobile.Core.Models.Vendor;
 using Phoenix.Mobile.Models.Common;
@@ -26,7 +26,7 @@ namespace Phoenix.Mobile.Pages.Common
 
         private async void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            var selectedItem = e.SelectedItem as CustomerModel;
+            
             //await Application.Current.MainPage.Navigation.PushModalAsync(new AccountPage(selectedItem.Name));
         }
 

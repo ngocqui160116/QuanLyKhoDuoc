@@ -1,6 +1,7 @@
 ﻿using Phoenix.Server.Data.Entity;
 using Phoenix.Server.Services.MainServices;
 using Phoenix.Server.Services.MainServices.Auth;
+using Phoenix.Shared.Common;
 using Phoenix.Shared.Core;
 using Phoenix.Shared.Unit;
 using System.Collections.Generic;
@@ -22,10 +23,11 @@ namespace Phoenix.Server.Api.Api
 
         [HttpPost]
         [Route("GetAllUnit")]
-        public List<UnitDto> GetAllUnit([FromBody] UnitRequest request)
+        public async Task<BaseResponse<UnitDto>> GetAllUnit([FromBody] UnitRequest request)
         {
-            return _UnitService.GetAllUnit(request);
+            return await _UnitService.GetAllUnit(request);
         }
+
 
     }
 }

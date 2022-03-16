@@ -30,7 +30,7 @@
                             <StackLayout Margin="6,4,6,4"
                                         BackgroundColor="White">
                                 <StackLayout Orientation="Horizontal">
-                                    <Label Text="{Binding NameMedicine}"
+                                    <Label Text="{Binding MedicineName}"
                                        Margin="8"
                                        FontAttributes="Bold"
                                        FontSize="Large" />
@@ -39,7 +39,7 @@
                                         <Label Text="Tồn:"
                                                Margin="8"
                                                FontSize="Small" />
-                                        <Label Text="{Binding Amount}"
+                                        <Label Text="{Binding Count}"
                                                Margin="2"
                                                FontSize="Small" />
                                     </StackLayout>

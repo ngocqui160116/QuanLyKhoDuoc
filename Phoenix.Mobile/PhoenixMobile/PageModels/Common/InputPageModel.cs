@@ -67,5 +67,16 @@ namespace Phoenix.Mobile.PageModels.Common
             await CoreMethods.PushPageModel<AddInputPageModel>();
         }
         #endregion
+
+        #region SelectedItemCommand
+
+        public Command SelectedItemCommand => new Command(async (p) => await SelectedItemCommandExecute(), (p) => !IsBusy);
+
+        private async Task SelectedItemCommandExecute()
+        {
+
+            await CoreMethods.PushPageModel<InputInfoPageModel>();
+        }
+        #endregion
     }
 }

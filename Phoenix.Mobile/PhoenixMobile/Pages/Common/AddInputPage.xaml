@@ -24,7 +24,7 @@
                        Margin="5,2,0,0"
                        FontAttributes="Bold"
                        VerticalOptions="Center"/>
-                
+
             </StackLayout>
             <Frame CornerRadius="15" >
                 <StackLayout  BackgroundColor="Black">
@@ -103,19 +103,6 @@
                                     Grid.Column="1"
                                     Format="dd/MM/yyyy"
                                     WidthRequest="200" />
-
-                        <Label  Grid.Row="3"
-                                Grid.Column="0" 
-                                Margin="10,5,0,0" 
-                                WidthRequest="95" 
-                                FontSize="Medium" 
-                                Text="Địa chỉ"/>
-                        <Entry  Grid.Row="3"
-                                Grid.Column="1"  
-                                Placeholder="{Binding DateInput}"
-                                WidthRequest="200"                         
-                                Keyboard="Text"/>
-
                     </Grid>
                 </StackLayout>
             </Frame>
@@ -129,25 +116,33 @@
                 </StackLayout>
             </Frame>
 
-            <StackLayout Margin="0,10,0,5">
+            <StackLayout Margin="0,50,0,5">
                 <AbsoluteLayout HorizontalOptions="Center">
                     <Grid xe:TouchEffect.Color="AliceBlue"
-                          xe:Commands.Tap="{Binding StoreCommand}">
+                          >
                         <forms:CachedImage Source="btn_Save" 
                                            Grid.Row="0"
-                                            Grid.Column="0"
                                            HeightRequest="50"/>
                         <Label Grid.Row="0"
-                                Grid.Column="0"
                                FontSize="Medium"
                                HorizontalOptions="Center"
                                FontAttributes="Bold"
                                TextColor="#fff"
-                               Text="Tiếp theo"/>
+                               Text="Lưu"/>
                     </Grid>
                 </AbsoluteLayout>
-                
+                <!--<AbsoluteLayout>
+                    <Button BackgroundColor="LightPink"
+                    Text="Previous"
+                    AbsoluteLayout.LayoutBounds="0,1,0.5,0.1"
+                    AbsoluteLayout.LayoutFlags="All"/>
+                    <Button BackgroundColor="MistyRose"
+                    Text="Next"
+                    AbsoluteLayout.LayoutBounds="1,1,0.5,0.1"
+                    AbsoluteLayout.LayoutFlags="All"/>
+                </AbsoluteLayout>-->
             </StackLayout>
         </StackLayout>
+
     </ContentPage.Content>
 </ContentPage>

@@ -4,7 +4,7 @@
              xmlns:controls="clr-namespace:Phoenix.Mobile.Controls"
               xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
              xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common" 
-             xmlns:supplier="clr-namespace:Phoenix.Mobile.Core.Models.Supplier;assembly=Phoenix.Mobile.Core"
+             xmlns:supplier="clr-namespace:Phoenix.Mobile.Core.Models.Supplier;assembly=Phoenix.Mobile.Core" xmlns:behaviors="clr-namespace:Phoenix.Framework.Core;assembly=Phoenix.Framework"
              x:Class="Phoenix.Mobile.Pages.Common.SupplierPage"
              x:DataType="common:SupplierPageModel"
              ControlTemplate="{StaticResource FullScreenHasBack}">
@@ -30,7 +30,13 @@
                       SeparatorVisibility="None"
                       HorizontalOptions="FillAndExpand"
                       VerticalOptions="FillAndExpand">
-
+                
+                <ListView.Behaviors>
+                    <behaviors:EventToCommandBehavior EventName="ItemTapped"
+                                      Command="{Binding SelectedItemCommand}"
+                                      CommandParameter="{Binding .}"
+                                     />
+                </ListView.Behaviors>
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="supplier:SupplierModel">
                         <ViewCell>

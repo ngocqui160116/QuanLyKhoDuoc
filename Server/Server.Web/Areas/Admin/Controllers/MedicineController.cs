@@ -12,9 +12,8 @@ using System.Web.Mvc;
 
 namespace Phoenix.Server.Web.Areas.Admin.Controllers
 {
-    public class MedicineController : BaseController
+    public class MedicineController : Controller
     {
-        //Phoenix.Server.Data.Entity.Medicine db =  
         // GET: Admin/Customer
         private readonly IMedicineService _medicineService;
 
@@ -44,42 +43,5 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
             };
             return Json(gridModel);
         }
-        /*public ActionResult Create()
-        {
-            var model = new MedicineModel();
-            return View(model);
-        }
-
-        [HttpPost]
-        public async Task<ActionResult> Create(MedicineModel model)
-        {
-            if (!ModelState.IsValid)
-                return View(model);
-            var medicine = await _medicineService.CreateMedicine(new MedicineRequest
-            {
-                Name = model.Name,
-                RegistrationNumber = model.RegistrationNumber,
-                //IdGroup = model.IdGroup,
-                ViewBag.IdGroup = new SelectList(model.IdGroup(n => n.Name))
-                Active = model.Active,
-                Content = model.Content,
-                Packing = model.Packing,
-                Amount = model.Amount,
-                Image = model.Image,
-                Status = model.Status
-            });
-            if (!medicine.success)
-            {
-                ErrorNotification("Thêm mới đại lý thành công");
-                return View(model);
-            }
-            SuccessNotification("Thêm mới đại lý thành công");
-            return RedirectToAction("Create");
-        }*/
-        [HttpGet]
-        /*public ActionResult Create(MedicineModel model)
-        {
-            ViewBag.IdGroup = new SelectList();
-        }*/
     }
 }

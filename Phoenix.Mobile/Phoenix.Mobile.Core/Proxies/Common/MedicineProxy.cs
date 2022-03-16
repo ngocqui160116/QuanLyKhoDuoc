@@ -1,5 +1,6 @@
 ﻿using Phoenix.Framework.Core;
 using Phoenix.Mobile.Core.Framework;
+using Phoenix.Shared.Common;
 using Phoenix.Shared.Medicine;
 using Refit;
 using System;
@@ -11,31 +12,32 @@ namespace Phoenix.Mobile.Core.Proxies.Common
 {
     public interface IMedicineProxy
     {
-        Task<List<MedicineDto>> GetAllMedicine(MedicineRequest request);
+        Task<BaseResponse<MedicineDto>> GetAllMedicine(MedicineRequest request);
     }
 
     public class MedicineProxy : BaseProxy, IMedicineProxy
     {
-        public async Task<List<MedicineDto>> GetAllMedicine(MedicineRequest request)
+        public async Task<BaseResponse<MedicineDto>> GetAllMedicine(MedicineRequest request)
         {
             try
             {
                 var api = RestService.For<IMedicineApi>(GetHttpClient());
-                var result = await api.GetAllMedicine(request);
-                if (result == null) return new List<MedicineDto>();
-                return result;
+
+                return await api.GetAllMedicine(request);
             }
             catch (Exception ex)
             {
                 ExceptionHandler.Handle(new NetworkException(ex), true);
-                return new List<MedicineDto>();
+                return null;
             }
         }
+
         public interface IMedicineApi
         {
             [Post("/medicine/GetAllMedicine")]
-            Task<List<MedicineDto>> GetAllMedicine([Body] MedicineRequest request);
+            Task<BaseResponse<MedicineDto>> GetAllMedicine([Body] MedicineRequest request);
 
         }
+
     }
 }

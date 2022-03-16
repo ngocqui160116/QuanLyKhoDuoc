@@ -14,7 +14,6 @@ namespace Phoenix.Server.Services.MainServices
     public interface ISupplierService
     {
         Task<BaseResponse<SupplierDto>> GetAllSupplier(SupplierRequest request);
-        Task<BaseResponse<SupplierDto>> CreateSupplier(SupplierRequest request);
     }
     public class SupplierService : ISupplierService
     {
@@ -54,30 +53,6 @@ namespace Phoenix.Server.Services.MainServices
 
             }
 
-            return result;
-        }
-        public async Task<BaseResponse<SupplierDto>> CreateSupplier(SupplierRequest request)
-        {
-            var result = new BaseResponse<SupplierDto>();
-            try
-            {
-                Supplier supplier = new Supplier
-                {
-                    Name = request.Name,
-                    PhoneNumber = request.PhoneNumber,
-                    Email = request.Email,
-                    Address = request.Address,
-                    Deleted = false
-                };
-                _dataContext.Suppliers.Add(supplier);
-                await _dataContext.SaveChangesAsync();
-
-                result.success = true;
-            }
-            catch
-            {
-
-            }
             return result;
         }
     }

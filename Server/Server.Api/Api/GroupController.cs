@@ -1,6 +1,7 @@
 ﻿using Phoenix.Server.Data.Entity;
 using Phoenix.Server.Services.MainServices;
 using Phoenix.Server.Services.MainServices.Auth;
+using Phoenix.Shared.Common;
 using Phoenix.Shared.Core;
 using Phoenix.Shared.Group;
 using System.Collections.Generic;
@@ -22,9 +23,9 @@ namespace Phoenix.Server.Api.Api
 
         [HttpPost]
         [Route("GetAllGroup")]
-        public List<GroupDto> GetAllGroup([FromBody] GroupRequest request)
+        public async Task<BaseResponse<GroupDto>> GetAllCustomer([FromBody] GroupRequest request)
         {
-            return _GroupService.GetAllGroup(request);
+            return await _GroupService.GetAllGroup(request);
         }
 
     }

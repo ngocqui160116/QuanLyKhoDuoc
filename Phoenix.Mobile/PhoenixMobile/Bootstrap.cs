@@ -62,7 +62,7 @@ namespace Phoenix.Mobile
             FreshIOC.Container.Register<IUserService, UserService>();
             FreshIOC.Container.Register<IFileService, FileService>();
             FreshIOC.Container.Register<IVendorService, VendorService>();
-            FreshIOC.Container.Register<ICustomerService, CustomerService>();
+            FreshIOC.Container.Register<IReasonService, ReasonService>();
             FreshIOC.Container.Register<IInputService, InputService>();
             FreshIOC.Container.Register<IInputInfoService, InputInfoService>();
             FreshIOC.Container.Register<IOutputService, OutputService>();
@@ -80,7 +80,7 @@ namespace Phoenix.Mobile
             FreshIOC.Container.Register<IVendorProxy, VendorProxy>();
             FreshIOC.Container.Register<IMedicineProxy, MedicineProxy>();
             FreshIOC.Container.Register<IStaffProxy, StaffProxy>();
-            FreshIOC.Container.Register<ICustomerProxy, CustomerProxy>();
+            FreshIOC.Container.Register<IReasonProxy, ReasonProxy>();
             FreshIOC.Container.Register<IInputProxy, InputProxy>();
             FreshIOC.Container.Register<IInputInfoProxy, InputInfoProxy>();
             FreshIOC.Container.Register<IOutputProxy, OutputProxy>();

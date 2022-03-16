@@ -9,8 +9,8 @@ using Phoenix.Shared.Medicine;
 using Phoenix.Mobile.Core.Models.Medicine;
 using Phoenix.Shared.Staff;
 using Phoenix.Mobile.Core.Models.Staff;
-using Phoenix.Shared.Customer;
-using Phoenix.Mobile.Core.Models.Customer;
+using Phoenix.Shared.Reason;
+using Phoenix.Mobile.Core.Models.Reason;
 using Phoenix.Shared.Input;
 using Phoenix.Mobile.Core.Models.Input;
 using Phoenix.Shared.InputInfo;
@@ -40,7 +40,7 @@ namespace Phoenix.Mobile.Core.Infrastructure
             //setting
             CreateMap<SettingDto, SettingModel>();
             CreateMap<VendorDto, VendorModel>();
-            CreateMap<CustomerDto, CustomerModel>();
+            CreateMap<ReasonDto, ReasonModel>();
             CreateMap<GroupDto, GroupModel>();
             CreateMap<MedicineDto, MedicineModel>();
               //  .ForMember(d => d.Supplier, o => o.MapFrom(s => s.Supplier.Name));

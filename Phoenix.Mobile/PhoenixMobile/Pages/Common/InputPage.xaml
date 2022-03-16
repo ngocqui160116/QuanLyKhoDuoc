@@ -5,8 +5,9 @@
              xmlns:input="clr-namespace:Phoenix.Mobile.Core.Models.Input;assembly=Phoenix.Mobile.Core"
              x:Class="Phoenix.Mobile.Pages.Common.InputPage"
              x:DataType="common:InputPageModel"
-             xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" xmlns:inputinfo="clr-namespace:Phoenix.Mobile.Core.Models.InputInfo;assembly=Phoenix.Mobile.Core"
+             xmlns:inputinfo="clr-namespace:Phoenix.Mobile.Core.Models.InputInfo;assembly=Phoenix.Mobile.Core"
              NavigationPage.HasNavigationBar="False"
+             xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" xmlns:behaviors="clr-namespace:Phoenix.Framework.Core;assembly=Phoenix.Framework"
              ControlTemplate="{StaticResource FullScreenHasBack}">
     <ContentPage.Content>
         <StackLayout >
@@ -28,7 +29,13 @@
                       SeparatorVisibility="None"
                       HorizontalOptions="FillAndExpand"
                       VerticalOptions="FillAndExpand">
-
+                
+                <ListView.Behaviors>
+                    <behaviors:EventToCommandBehavior EventName="ItemTapped"
+                                      Command="{Binding SelectedItemCommand}"
+                                      CommandParameter="{Binding .}"
+                                     />
+                </ListView.Behaviors>
                 <ListView.ItemTemplate>
 
                     <DataTemplate x:DataType="inputinfo:InputInfoModel">
@@ -40,7 +47,7 @@
                                    FontAttributes="Bold"
                                    FontSize="Medium" />
                                 <StackLayout Orientation="Horizontal">
-                                    <Label Text="{Binding NameSupplier}"
+                                    <Label Text="{Binding SupplierName}"
                                            Margin="8,2,8,4"
                                            FontSize="Small" />
                                     <Label Text="{Binding DateInput}"

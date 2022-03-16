@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:controls="clr-namespace:Phoenix.Mobile.Controls" 
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" 
+             xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common"
+             x:Class="Phoenix.Mobile.Pages.Common.AddOutputPage"
+             x:DataType="common:AddOutputPageModel"
+             xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" xmlns:input="clr-namespace:Phoenix.Mobile.Core.Models.Input;assembly=Phoenix.Mobile.Core"
+             ControlTemplate="{StaticResource FullScreenHasBack}">
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="WhiteSmoke">
+            <StackLayout Orientation="Horizontal" BackgroundColor="White">
+                <SearchBar WidthRequest="500"  
+                           x:Name="Search" 
+                           Placeholder="Tìm kiếm">
+                </SearchBar>
+            </StackLayout>
+            <StackLayout HeightRequest="25"
+                         WidthRequest="50">
+                <Label Text="Danh sách sản phẩm"
+                       FontSize="Small"
+                       Margin="5,2,0,0"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"/>
+
+            </StackLayout>
+            <Frame CornerRadius="15" >
+                <StackLayout  BackgroundColor="Black">
+                    <ListView
+                        
+                              HeightRequest="150"
+                              HasUnevenRows="True"
+                              BackgroundColor="#ecf0f1"
+                              SeparatorVisibility="None"
+                             >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout Margin="6,4,6,4"
+                                                     BackgroundColor="White">
+                                        <Label Text="Panaldo"
+                                                   Margin="8"
+                                                   FontAttributes="Bold"
+                                                   FontSize="Small" />
+
+                                        <Label Text="HSD"
+                                                       Margin="8,2,8,4"
+                                                       FontSize="Small"/>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+            </Frame>
+            <StackLayout HeightRequest="25"
+                         WidthRequest="50">
+                <Label Text="Thông tin"
+                       FontSize="Small"
+                       Margin="5,2,0,0"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"/>
+            </StackLayout>
+            <Frame CornerRadius="15" >
+                <StackLayout  BackgroundColor="White">
+                    <Grid x:DataType="input:InputModel">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.3*"/>
+                            <ColumnDefinition Width="0.7*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label  Grid.Row="1"
+                                Grid.Column="0" 
+                                Margin="10,5,0,0" 
+                                WidthRequest="115" 
+                                FontSize="Medium" 
+                                Text="Nhà cung cấp"/>
+                        <Picker x:DataType="common:AddInputPageModel"
+                               
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                ItemDisplayBinding="{Binding}"
+                                />
+
+                        <Label  Grid.Row="2"
+                                Grid.Column="0" 
+                                Margin="10,5,0,0" 
+                                WidthRequest="95" 
+                                FontSize="Medium" 
+                                Text="Ngày nhập"/>
+                        <DatePicker Grid.Row="2"
+                                    Grid.Column="1"
+                                    Format="dd/MM/yyyy"
+                                    WidthRequest="200" />
+
+                        <Label  Grid.Row="3"
+                                Grid.Column="0" 
+                                Margin="10,5,0,0" 
+                                WidthRequest="95" 
+                                FontSize="Medium" 
+                                Text="Địa chỉ"/>
+                        <Entry  Grid.Row="3"
+                                Grid.Column="1"  
+                                Placeholder="{Binding DateInput}"
+                                WidthRequest="200"                         
+                                Keyboard="Text"/>
+
+                    </Grid>
+                </StackLayout>
+            </Frame>
+            <StackLayout HeightRequest="25"
+                         WidthRequest="50">
+
+            </StackLayout>
+            <Frame CornerRadius="15">
+                <StackLayout  BackgroundColor="White">
+                    <controls:BorderlessEditor HeightRequest="100" Placeholder="Ghi chú"/>
+                </StackLayout>
+            </Frame>
+
+            <StackLayout Margin="0,10,0,5">
+                <AbsoluteLayout HorizontalOptions="Center">
+                    <Grid xe:TouchEffect.Color="AliceBlue">
+                        <forms:CachedImage Source="btn_Save" 
+                                           Grid.Row="0"
+                                            Grid.Column="0"
+                                           HeightRequest="50"/>
+                        <Label Grid.Row="0"
+                                Grid.Column="0"
+                               FontSize="Medium"
+                               HorizontalOptions="Center"
+                               FontAttributes="Bold"
+                               TextColor="#fff"
+                               Text="Lưu"/>
+                    </Grid>
+                </AbsoluteLayout>
+
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

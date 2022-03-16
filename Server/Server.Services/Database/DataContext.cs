@@ -22,7 +22,7 @@ namespace Phoenix.Server.Services.Database
         //modules
 
         public virtual DbSet<Vendor> Vendors { get; set; }
-        public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<Reason> Reasons { get; set; }
         public virtual DbSet<Group> Groups { get; set; }
         public virtual DbSet<Input> Inputs { get; set; }
         public virtual DbSet<InputInfo> InputInfos { get; set; }

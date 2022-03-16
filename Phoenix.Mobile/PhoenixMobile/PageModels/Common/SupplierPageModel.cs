@@ -68,6 +68,16 @@ namespace Phoenix.Mobile.PageModels.Common
         }
         #endregion
 
-       
+        #region SelectedItemCommand
+
+        public Command SelectedItemCommand => new Command(async (p) => await SelectedItemCommandExecute(), (p) => !IsBusy);
+
+        private async Task SelectedItemCommandExecute()
+        {
+
+            await CoreMethods.PushPageModel<EditSupplierPageModel>();
+        }
+        #endregion
+
     }
 }

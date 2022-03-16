@@ -21,8 +21,8 @@ namespace Phoenix.Mobile.Core.Services.Common
         }
         public async Task<List<InputInfoModel>> GetAllInputInfo(InputInfoRequest request)
         {
-            var data = await _InputInfoProxy.GetAllInputInfo(request);
-            return data.MapTo<InputInfoModel>();
+            var inputinfo = await _InputInfoProxy.GetAllInputInfo(request);
+            return inputinfo.Data.MapTo<InputInfoModel>();
         }
     }
 }

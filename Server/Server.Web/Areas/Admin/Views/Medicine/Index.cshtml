@@ -15,7 +15,7 @@
         Thuốc
     </h2>
     <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
-        <a href="@Url.Action("Create","Medicine")" class="btn btn-primary text-white shadow-md mr-2">Thêm mới</a>
+        <a href="@Url.Action("Create","Project")" class="btn btn-primary text-white shadow-md mr-2">Thêm mới</a>
     </div>
 </div>
 <div class="grid gap-6 mt-5">
@@ -82,13 +82,14 @@
                 { title: "Hoạt chất", field: "Active", sorter: "string", width: 180 },
                 { title: "Hàm lượng", field: "Content", sorter: "string", width: 100 },
                 { title: "Quy cách đóng gói", field: "Packing", sorter: "string", width: 250 },
+                { title: "Tên nhà cung cấp", field: "SupplierName", sorter: "string", width: 200 },
                @* { title: "Ngày sản xuất", field: "DateOfManufacture", sorter: "date", width: 180, formatter: dateFormatter },
                 { title: "Hạn sử dụng", field: "DueDate", sorter: "date", width: 180, formatter: dateFormatter},
                 { title: "Đơn vị tính", field: "Unit", sorter: "string", width: 180 },
                 { title: "Giá nhập", field: "Price", sorter: "string", width: 180 },
                 { title: "Đơn giá", field: "UnitPrice", sorter: "string", width: 180 },*@
                 { title: "Số lượng", field: "Amount", sorter: "string", width: 100 },
-                { title: "Hình ảnh", field: "Image", sorter: "string", width: 180},
+                { title: "Hình ảnh", field: "Image", sorter: "string", width: 180 },
                 { title: "Trạng thái", field: "Status", sorter: "string", width: 180 },
                 @*{
                     title: "Ngày tạo", field: "CreatedAt", sorter: "date", width: 180, formatter: dateFormatter

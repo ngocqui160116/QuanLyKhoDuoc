@@ -19,7 +19,7 @@
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <controls:RoundFrame Margin="0,5,0,0"
+                <!--<controls:RoundFrame Margin="0,5,0,0"
                                      WidthRequest="100" 
                                      HeightRequest="100" 
                                      Text="Kiểm kho" 
@@ -36,31 +36,14 @@
                                      Grid.Column="1" 
                                      Icon="icon_nhapkho.png">
                 </controls:RoundFrame>
-
-                <controls:RoundFrame WidthRequest="100" 
-                                    
-                                     HeightRequest="100" 
-                                     Text="   Kho" 
-                                     Grid.Row="1" 
-                                     Grid.Column="0" 
-                                     Icon="icon_warehouse.png">
-                </controls:RoundFrame>
                 <controls:RoundFrame WidthRequest="100" 
                                      
                                      HeightRequest="100" 
                                      Text="Xuất kho" 
                                      Grid.Row="1" 
+                                     xe:Commands.Tap="{Binding OutputCommand}" 
                                      Grid.Column="1" 
                                      Icon="icon_xuatkho.png">
-                </controls:RoundFrame>
-
-                <controls:RoundFrame WidthRequest="100" 
-                                     HeightRequest="100"
-                                     xe:Commands.Tap="{Binding MedicineCommand}" 
-                                     Text="Danh mục thuốc" 
-                                     Grid.Row="2" 
-                                     Grid.Column="0" 
-                                     Icon="icon_medicine.png">
                 </controls:RoundFrame>
                 <controls:RoundFrame WidthRequest="100" 
                                      HeightRequest="100"
@@ -69,12 +52,31 @@
                                      Grid.Row="2" 
                                      Grid.Column="1" 
                                      Icon="icon_tonkho.png">
+                </controls:RoundFrame>-->
+                <controls:RoundFrame WidthRequest="100" 
+                                     HeightRequest="100" 
+                                     Text="   Kho"
+                                     xe:Commands.Tap="{Binding WarehouseCommand}" 
+                                     Grid.Row="0" 
+                                     Grid.Column="0" 
+                                     Icon="icon_warehouse.png">
                 </controls:RoundFrame>
+              
+
+                <controls:RoundFrame WidthRequest="100" 
+                                     HeightRequest="100"
+                                     xe:Commands.Tap="{Binding MedicineCommand}" 
+                                     Text="Danh mục thuốc" 
+                                     Grid.Row="0" 
+                                     Grid.Column="1" 
+                                     Icon="icon_medicine.png">
+                </controls:RoundFrame>
+               
                 <controls:RoundFrame WidthRequest="100" 
                                      HeightRequest="100" 
                                      xe:Commands.Tap="{Binding SupplierCommand}" 
                                      Text="Nhà cung cấp" 
-                                     Grid.Row="3" 
+                                     Grid.Row="1" 
                                      Grid.Column="0" 
                                      Icon="icon_supplier.png">
                 </controls:RoundFrame>
