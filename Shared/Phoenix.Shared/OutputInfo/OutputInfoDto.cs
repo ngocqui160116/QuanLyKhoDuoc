@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 
 namespace Phoenix.Shared.OutputInfo
 {
@@ -13,7 +13,6 @@ namespace Phoenix.Shared.OutputInfo
         public string Status { get; set; }
         //add
         public string MedicineName { get; set; }
-        public string CustomerName { get; set; }
         public string Reason { get; set; }
     }
 }

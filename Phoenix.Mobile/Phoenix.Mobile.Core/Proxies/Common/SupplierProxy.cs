@@ -13,6 +13,7 @@ namespace Phoenix.Mobile.Core.Proxies.Common
     public interface ISupplierProxy
     {
         Task<BaseResponse<SupplierDto>> GetAllSupplier(SupplierRequest request);
+        Task<SupplierDto> AddSupplier(SupplierRequest request);
     }
 
     public class SupplierProxy : BaseProxy, ISupplierProxy
@@ -31,12 +32,29 @@ namespace Phoenix.Mobile.Core.Proxies.Common
                 return null;
             }
         }
+        public async Task<SupplierDto> AddSupplier(SupplierRequest request)
+        {
+            try
+            {
+                var api = RestService.For<ISupplierApi>(GetHttpClient());
+                var result = await api.AddSupplier(request);
+                if (result == null) return new SupplierDto();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler.Handle(new NetworkException(ex), true);
+                return new SupplierDto();
+            }
+        }
 
         public interface ISupplierApi
         {
             [Post("/supplier/GetAllSupplier")]
             Task<BaseResponse<SupplierDto>> GetAllSupplier([Body] SupplierRequest request);
-
+            
+            [Post("/supplier/CreateSupplier")]
+            Task<SupplierDto> AddSupplier([Body] SupplierRequest request);
         }
 
     }

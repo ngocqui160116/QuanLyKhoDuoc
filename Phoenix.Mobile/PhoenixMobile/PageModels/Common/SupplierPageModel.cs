@@ -56,6 +56,11 @@ namespace Phoenix.Mobile.PageModels.Common
         public SupplierRequest request { get; set; } = new SupplierRequest();
 
         public string SearchText { get; set; }
+        public string Name { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Email { get; set; }
+        public string Address { get; set; }
+
         #endregion
 
         #region AddSupplierCommand
@@ -79,5 +84,6 @@ namespace Phoenix.Mobile.PageModels.Common
         }
         #endregion
 
+       
     }
 }

@@ -24,7 +24,6 @@
             </StackLayout>
             
             <ListView ItemsSource="{Binding Suppliers}"
-                      ItemSelected="ListView_ItemSelected"
                       HasUnevenRows="True"
                       BackgroundColor="#ecf0f1"
                       SeparatorVisibility="None"
@@ -34,7 +33,6 @@
                 <ListView.Behaviors>
                     <behaviors:EventToCommandBehavior EventName="ItemTapped"
                                       Command="{Binding SelectedItemCommand}"
-                                      CommandParameter="{Binding .}"
                                      />
                 </ListView.Behaviors>
                 <ListView.ItemTemplate>

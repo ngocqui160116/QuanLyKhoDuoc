@@ -9,7 +9,7 @@
              mc:Ignorable="d"
              xmlns:behaviors="clr-namespace:Phoenix.Framework.Core;assembly=Phoenix.Framework"
              xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
-             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" xmlns:auth="clr-namespace:Phoenix.Mobile.PageModels.Auth" x:DataType="auth:LoginPageModel"
              x:Class="Phoenix.Mobile.Pages.Auth.LoginPage">
     <ContentPage.Content>
         <StackLayout Style="{StaticResource StackPageWrapper}" Spacing="10" Margin="20,0">

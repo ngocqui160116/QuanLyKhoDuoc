@@ -10,6 +10,7 @@ namespace Phoenix.Mobile.Core.Services.Common
     public interface ISupplierService
     {
         Task<List<SupplierModel>> GetAllSupplier(SupplierRequest request);
+        Task<SupplierModel> AddSupplier(SupplierRequest request);
     }
 
     public class SupplierService : ISupplierService
@@ -24,7 +25,12 @@ namespace Phoenix.Mobile.Core.Services.Common
             var supplier = await _SupplierProxy.GetAllSupplier(request);
             return supplier.Data.MapTo<SupplierModel>();
         }
+        public async Task<SupplierModel> AddSupplier(SupplierRequest request)
+        {
+            var data = await _SupplierProxy.AddSupplier(request);
+            return data.MapTo<SupplierModel>();
+        }
 
-        
+
     }
 }

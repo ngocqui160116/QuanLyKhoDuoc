@@ -40,8 +40,7 @@ namespace Phoenix.Server.Services.MainServices
                 {
                     query = query.Where(d => d.IdOutput.Contains(request.IdOutput));
                 }
-
-              
+                query = query.OrderByDescending(d => d.IdOutput);
 
                 var data = await query.Skip(request.Page * request.PageSize).Take(request.PageSize).ToListAsync();
                 result.DataCount = (int)((await query.CountAsync()) / request.PageSize) + 1;
@@ -61,8 +60,8 @@ namespace Phoenix.Server.Services.MainServices
             var OutputInfo = new OutputInfo();
             OutputInfo.IdOutput = request.IdOutput;
             OutputInfo.IdMedicine = request.IdMedicine;
-            OutputInfo.IdInputInfo = request.IdInputInfo;
-            OutputInfo.IdReason = request.IdReason;
+            //OutputInfo.IdInputInfo = request.IdInputInfo;
+            //OutputInfo.IdReason = request.IdReason;
             OutputInfo.Count = request.Count;
             OutputInfo.Total = request.Total;
             OutputInfo.Status = request.Status;

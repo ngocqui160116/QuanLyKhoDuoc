@@ -16,7 +16,7 @@
             </StackLayout>
             <Frame CornerRadius="15" >
                 <StackLayout  BackgroundColor="White">
-                    <Grid x:DataType="supplier:SupplierModel">
+                    <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -35,12 +35,15 @@
                                 Margin="10,5,0,0"                               
                                 WidthRequest="130" 
                                 FontSize="Medium" 
-                                Text="Tên nhà cung cấp"/>
-                        <Entry  Grid.Row="2"
+                                Text="Nhà cung cấp"/>
+                        <controls:BorderlessEntry
+                                Grid.Row="2"
                                 Grid.Column="1"
-                                Placeholder="{Binding Name}"
-                                WidthRequest="200" 
-                                 />
+                                TextColor="Black"
+                                Text="{Binding Name}"
+                                Placeholder="Nhập tên nhà cung cấp"
+                                WidthRequest="200">
+                        </controls:BorderlessEntry>
 
                         <Label  Grid.Row="3"
                                 Grid.Column="0" 
@@ -48,9 +51,12 @@
                                 WidthRequest="95" 
                                 FontSize="Medium" 
                                 Text="Điện thoại"/>
-                        <Entry  Grid.Row="3"
-                                Grid.Column="1" 
-                                Placeholder="{Binding PhoneNumber}"
+                        <controls:BorderlessEntry  
+                                Grid.Row="3"
+                                Grid.Column="1"
+                                TextColor="Black"
+                                Text="{Binding PhoneNumber}"
+                                Placeholder="Nhập điện thoại"
                                 WidthRequest="200" 
                                 Keyboard="Numeric"/>
 
@@ -60,9 +66,12 @@
                                 WidthRequest="95" 
                                 FontSize="Medium" 
                                 Text="Email"/>
-                        <Entry  Grid.Row="4"
+                        <controls:BorderlessEntry  
+                            Grid.Row="4"
                                 Grid.Column="1"
-                                 Placeholder="{Binding Email}"
+                                TextColor="Black"
+                                Text="{Binding Email}"
+                                Placeholder="Nhập email"
                                 WidthRequest="200" 
                                 Keyboard="Email"/>
 
@@ -72,9 +81,12 @@
                                 WidthRequest="95" 
                                 FontSize="Medium" 
                                 Text="Địa chỉ"/>
-                        <Entry  Grid.Row="5"
-                                Grid.Column="1"  
-                                Placeholder="{Binding Address}"
+                        <controls:BorderlessEntry  
+                                Grid.Row="5"
+                                Grid.Column="1"
+                                TextColor="Black"
+                                Text="{Binding Address}"
+                                Placeholder="Nhập địa chỉ"
                                 WidthRequest="200"                         
                                 Keyboard="Text"/>
 
@@ -85,16 +97,12 @@
                          WidthRequest="50">
 
             </StackLayout>
-            <Frame CornerRadius="15">
-                <StackLayout  BackgroundColor="White">
-                    <controls:BorderlessEditor HeightRequest="100" Placeholder="Ghi chú"/>
-                </StackLayout>
-            </Frame>
+           
 
             <StackLayout Margin="0,10,0,5">
                 <AbsoluteLayout HorizontalOptions="Center">
                     <Grid xe:TouchEffect.Color="AliceBlue"
-                          xe:Commands.Tap="{Binding SupplierCommand}">
+                          xe:Commands.Tap="{Binding AddSupplierCommand}">
                         <forms:CachedImage Source="btn_Save" 
                                            Grid.Row="0"
                                            HeightRequest="50"/>
