@@ -17,7 +17,7 @@
 
             <Frame CornerRadius="15"  >
                 <StackLayout  BackgroundColor="White">
-                    <Grid IsEnabled="False" x:Name="Grid">
+                    <Grid  x:Name="Grid">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -40,7 +40,7 @@
                         <Entry  Grid.Row="1"
                                 Grid.Column="1"
                                 TextColor="Black"
-                                Placeholder="{Binding }"
+                                Placeholder="{Binding Medicines.Name}"
                                 WidthRequest="200" 
                                  />
 

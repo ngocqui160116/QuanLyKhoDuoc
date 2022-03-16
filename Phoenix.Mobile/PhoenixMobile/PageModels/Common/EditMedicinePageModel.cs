@@ -5,6 +5,7 @@ using Phoenix.Mobile.Core.Models.Medicine;
 using Phoenix.Mobile.Core.Services.Common;
 using Phoenix.Mobile.Helpers;
 using Phoenix.Shared.Group;
+using Phoenix.Shared.Medicine;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,7 +16,7 @@ using Xamarin.Forms;
 
 namespace Phoenix.Mobile.PageModels.Common
 {
-    public class EditMedicinePageModel : FreshBasePageModel
+    public class EditMedicinePageModel : BasePageModel
     {
         private readonly IGroupService _groupService;
         private readonly IDialogService _dialogService;
@@ -26,16 +27,14 @@ namespace Phoenix.Mobile.PageModels.Common
             _dialogService = dialogService;
 
         }
+        #region properties
+       public MedicineModel Medicines { get; set; }
 
-        public EditMedicinePageModel()
-        {
-          
-        }
+        #endregion
+
 
         public override async void Init(object initData)
         {
-           
-            base.Init(initData);
             NavigationPage.SetHasNavigationBar(CurrentPage, false);
             CurrentPage.Title = "Thông tin Thuốc";
         }

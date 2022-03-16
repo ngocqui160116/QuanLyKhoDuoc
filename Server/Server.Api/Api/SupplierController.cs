@@ -23,12 +23,22 @@ namespace Phoenix.Server.Api.Api
 
         [HttpPost]
         [Route("GetAllSupplier")]
-
-
         public async Task<BaseResponse<SupplierDto>> GetAllSupplier([FromBody] SupplierRequest request)
         {
             return await _SupplierService.GetAllSupplier(request);
         }
 
+        //[HttpPost]
+        //[Route("CreateSupplier")]
+        //public async Task<BaseResponse<SupplierDto>> CreateSupplier([FromBody] SupplierRequest request)
+        //{
+        //    return await _SupplierService.GetAllSupplier(request);
+        //}
+        [HttpPost]
+        [Route("CreateSupplier")]
+        public Task<CrudResult> CreateSupplier([FromBody] SupplierRequest request)
+        {
+            return _SupplierService.CreateSupplier(request);
+        }
     }
 }

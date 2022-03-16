@@ -31,7 +31,8 @@ namespace Phoenix.Mobile.PageModels.Common
         
         public override async void Init(object initData)
         {
-            base.Init(initData);
+           // Medicines = new ObservableCollection<Medicine>(_medicineService.GetAllMedicine());
+            // base.Init(initData);
             NavigationPage.SetHasNavigationBar(CurrentPage, false);
             CurrentPage.Title = "Danh mục thuốc";
         }
@@ -79,11 +80,9 @@ namespace Phoenix.Mobile.PageModels.Common
 
         private async Task SelectedItemCommandExecute()
         {
+           // await _dialogService.AlertAsync("Bạn đã chọn:", "Thông báo", "OK");
             await CoreMethods.PushPageModel<EditMedicinePageModel>(Medicines,false,true);
-           
         }
         #endregion
-
-        
     }
 }

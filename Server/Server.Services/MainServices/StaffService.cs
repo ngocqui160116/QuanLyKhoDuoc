@@ -2,6 +2,7 @@
 using Phoenix.Server.Data.Entity;
 using Phoenix.Server.Services.Database;
 using Phoenix.Shared.Common;
+using Phoenix.Shared.Core;
 using Phoenix.Shared.Staff;
 using System;
 using System.Collections.Generic;
@@ -46,7 +47,7 @@ namespace Phoenix.Server.Services.MainServices
                     query = query.Where(d => d.Authority.Contains(request.Authority));
                 }
 
-                query = query.OrderByDescending(d => d.IdStaff);
+                query = query.OrderBy(d => d.IdStaff);
 
                 var data = await query.Skip(request.Page * request.PageSize).Take(request.PageSize).ToListAsync();
                 result.DataCount = (int)((await query.CountAsync()) / request.PageSize) + 1;
@@ -59,5 +60,11 @@ namespace Phoenix.Server.Services.MainServices
 
             return result;
         }
+       
+        //public int IdStaff { get; set; }
+        //public string Name { get; set; }
+        //public string Gender { get; set; }
+        //public string Authority { get; set; }
+        //public bool Deleted { get; set; }
     }
 }

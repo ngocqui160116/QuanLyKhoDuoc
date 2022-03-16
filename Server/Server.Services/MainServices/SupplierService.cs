@@ -2,6 +2,7 @@
 using Phoenix.Server.Data.Entity;
 using Phoenix.Server.Services.Database;
 using Phoenix.Shared.Common;
+using Phoenix.Shared.Core;
 using Phoenix.Shared.Supplier;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace Phoenix.Server.Services.MainServices
     public interface ISupplierService
     {
         Task<BaseResponse<SupplierDto>> GetAllSupplier(SupplierRequest request);
+        Task<CrudResult> CreateSupplier(SupplierRequest request);
     }
     public class SupplierService : ISupplierService
     {
@@ -55,5 +57,15 @@ namespace Phoenix.Server.Services.MainServices
 
             return result;
         }
+        public async Task<CrudResult> CreateSupplier(SupplierRequest request)
+        {
+            var Supplier = new Supplier();
+            Supplier.Name = request.Name;
+            Supplier.Address = request.Address;
+            _dataContext.Suppliers.Add(Supplier);
+            await _dataContext.SaveChangesAsync();
+            return new CrudResult() { IsOk = true };
+        }
+
     }
 }
