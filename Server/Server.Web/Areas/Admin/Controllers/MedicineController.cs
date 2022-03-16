@@ -43,5 +43,10 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
             };
             return Json(gridModel);
         }
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        } 
     }
 }
