@@ -28,13 +28,19 @@ namespace Phoenix.Mobile.PageModels.Common
 
         }
         #region properties
-       public MedicineModel Medicines { get; set; }
+       public MedicineModel Medicine { get; set; }
 
         #endregion
-
-
         public override async void Init(object initData)
         {
+            if (initData != null)
+            {
+                Medicine = (MedicineModel)initData;
+            }
+            else
+            {
+                Medicine = new MedicineModel();
+            }
             NavigationPage.SetHasNavigationBar(CurrentPage, false);
             CurrentPage.Title = "Thông tin Thuốc";
         }

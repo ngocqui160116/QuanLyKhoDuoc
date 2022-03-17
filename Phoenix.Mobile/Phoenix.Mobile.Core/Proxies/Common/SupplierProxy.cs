@@ -32,6 +32,7 @@ namespace Phoenix.Mobile.Core.Proxies.Common
                 return null;
             }
         }
+
         public async Task<SupplierDto> AddSupplier(SupplierRequest request)
         {
             try
@@ -56,6 +57,7 @@ namespace Phoenix.Mobile.Core.Proxies.Common
             [Post("/supplier/CreateSupplier")]
             Task<SupplierDto> AddSupplier([Body] SupplierRequest request);
         }
+
 
     }
 }

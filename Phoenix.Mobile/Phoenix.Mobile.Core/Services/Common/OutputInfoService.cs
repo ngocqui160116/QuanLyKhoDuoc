@@ -10,6 +10,7 @@ namespace Phoenix.Mobile.Core.Services.Common
     public interface IOutputInfoService
     {
         Task<List<OutputInfoModel>> GetAllOutputInfo(OutputInfoRequest request);
+        Task<OutputInfoModel> AddOutputInfo(OutputInfoRequest request);
     }
 
     public class OutputInfoService : IOutputInfoService
@@ -23,6 +24,12 @@ namespace Phoenix.Mobile.Core.Services.Common
         {
             var outputinfo = await _OutputInfoProxy.GetAllOutputInfo(request);
             return outputinfo.Data.MapTo<OutputInfoModel>();
+        }
+
+        public async Task<OutputInfoModel> AddOutputInfo(OutputInfoRequest request)
+        {
+            var data = await _OutputInfoProxy.AddOutputInfo(request);
+            return data.MapTo<OutputInfoModel>();
         }
     }
 }

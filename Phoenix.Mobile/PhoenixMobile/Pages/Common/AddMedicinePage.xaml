@@ -25,7 +25,7 @@
 
             <Frame CornerRadius="15" >
                 <StackLayout  BackgroundColor="White">
-                    <Grid x:DataType="medicine:MedicineModel">
+                    <Grid x:DataType="common:AddMedicinePageModel">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -49,8 +49,8 @@
                         <Entry  Grid.Row="2"
                                 Grid.Column="1"
                                 TextColor="Black"
-                                ReturnCommandParameter="{Binding Name}"
-                                Placeholder="{Binding Name}"
+                                Text="{Binding Name}"
+                                Placeholder="Nhập tên thuốc"
                                 WidthRequest="200" 
                                  />
 
@@ -62,7 +62,8 @@
                                 Text="Số đăng ký"/>
                         <Entry  Grid.Row="3"
                                 Grid.Column="1" 
-                                Placeholder="{Binding RegistrationNumber}"
+                                Text="{Binding SDK}"
+                                Placeholder="Nhập số đăng ký"
                                 WidthRequest="200" 
                                 Keyboard="Numeric"/>
 
@@ -76,14 +77,8 @@
                                 ItemsSource="{Binding Groups}"
                                 Grid.Row="4"
                                 Grid.Column="1"
-                                SelectedItem="{Binding GroupCommand}"
-                                ItemDisplayBinding="{Binding Name}">
-                            <Picker.Behaviors>
-                                <behaviors:EventToCommandBehavior EventName="ItemTapped"
-                                      Command="{Binding GroupCommand}"
-                                     
-                                     />
-                            </Picker.Behaviors>
+                                ItemDisplayBinding="{Binding IdGroup}">
+                           
                         </Picker>
                               
                         <Label  Grid.Row="5"
@@ -95,7 +90,8 @@
                         <Entry  Grid.Row="5"
                                 Grid.Column="1"
                                 TextColor="Black"
-                                Placeholder="{Binding Active}"
+                                Text="{Binding Active}"
+                                Placeholder="Nhập hoạt chất"
                                 WidthRequest="200"                         
                                 Keyboard="Text"/>
 
@@ -108,7 +104,8 @@
                         <Entry  Grid.Row="6"
                                 Grid.Column="1"
                                 TextColor="Black"
-                                Placeholder="{Binding Content}"
+                                Text="{Binding Content}"
+                                Placeholder="Nhập hàm lượng"
                                 WidthRequest="200"                         
                                 Keyboard="Text"/>
 
@@ -121,9 +118,24 @@
                         <Entry  Grid.Row="7"
                                 Grid.Column="1"  
                                 TextColor="Black"
-                                Placeholder="{Binding Packing}"
+                                Text="{Binding Packing}"
+                                Placeholder="Nhập QC đóng gói"
                                 WidthRequest="200"                         
                                 Keyboard="Text"/>
+                        
+                        <Label  Grid.Row="8"
+                                Grid.Column="0" 
+                                Margin="10,5,0,0" 
+                                WidthRequest="100" 
+                                FontSize="Medium" 
+                                Text="Đơn vị tính"/>
+                        <Picker x:DataType="common:AddMedicinePageModel" 
+                                ItemsSource="{Binding Units}"
+                                Grid.Row="8"
+                                Grid.Column="1"
+                                ItemDisplayBinding="{Binding Id}">
+
+                        </Picker>
                     </Grid>
                 </StackLayout>
             </Frame>
@@ -132,7 +144,7 @@
                 <AbsoluteLayout HorizontalOptions="Center"
 >
                     <Grid xe:TouchEffect.Color="AliceBlue"
-                          xe:Commands.Tap="{Binding UnitCommand}">
+                          xe:Commands.Tap="{Binding AddMedicineCommand}">
                         <forms:CachedImage Source="btn_Save" 
                                            Grid.Row="0"
                                            HeightRequest="50"/>
@@ -141,7 +153,7 @@
                                HorizontalOptions="Center"
                                FontAttributes="Bold"
                                TextColor="#fff"
-                               Text="Tiếp theo"/>
+                               Text="Lưu"/>
                     </Grid>
                 </AbsoluteLayout>
             </StackLayout>

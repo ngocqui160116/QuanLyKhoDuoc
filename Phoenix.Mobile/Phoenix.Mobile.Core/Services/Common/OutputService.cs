@@ -10,6 +10,7 @@ namespace Phoenix.Mobile.Core.Services.Common
     public interface IOutputService
     {
         Task<List<OutputModel>> GetAllOutput(OutputRequest request);
+        Task<OutputModel> AddOutput(OutputRequest request);
     }
 
     public class OutputService : IOutputService
@@ -23,6 +24,11 @@ namespace Phoenix.Mobile.Core.Services.Common
         {
             var output = await _OutputProxy.GetAllOutput(request);
             return output.Data.MapTo<OutputModel>();
+        }
+        public async Task<OutputModel> AddOutput(OutputRequest request)
+        {
+            var data = await _OutputProxy.AddOutput(request);
+            return data.MapTo<OutputModel>();
         }
     }
 }

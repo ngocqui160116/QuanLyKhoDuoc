@@ -20,19 +20,18 @@ namespace Phoenix.Mobile.PageModels.Common
     {
         private readonly IMedicineService _medicineService;
         private readonly IDialogService _dialogService;
-        
+        public ObservableCollection<MedicineModel> Medicine { get; set; }
+
         public MedicinePageModel(IMedicineService medicineService, IDialogService dialogService)
         {
             _medicineService = medicineService;
             _dialogService = dialogService;
-           
-
         }
-        
+
         public override async void Init(object initData)
         {
-           // Medicines = new ObservableCollection<Medicine>(_medicineService.GetAllMedicine());
-            // base.Init(initData);
+            Medicine = new ObservableCollection<MedicineModel>(Medicines);
+            //base.Init(initData);
             NavigationPage.SetHasNavigationBar(CurrentPage, false);
             CurrentPage.Title = "Danh mục thuốc";
         }
@@ -56,7 +55,33 @@ namespace Phoenix.Mobile.PageModels.Common
                 RaisePropertyChanged(nameof(Medicines));
             }
         }
-     
+
+        MedicineModel _selectedMedicine;
+
+        public MedicineModel SelectedMedicine
+        {
+            get
+            {
+                return _selectedMedicine;
+            }
+            set
+            {
+                _selectedMedicine = value;
+                if (value != null)
+                    MedicineSelected.Execute(value);
+            }
+        }
+
+        public Command<MedicineModel> MedicineSelected
+        {
+            get
+            {
+                return new Command<MedicineModel>(async (medicine) => {
+                    await CoreMethods.PushPageModel<EditMedicinePageModel>(medicine);
+                });
+            }
+        }
+
 
         #region properties
         public List<MedicineModel> Medicines { get; set; } = new List<MedicineModel>();
@@ -73,16 +98,6 @@ namespace Phoenix.Mobile.PageModels.Common
             await CoreMethods.PushPageModel<AddMedicinePageModel>();
         }
         #endregion
-
-        #region SelectedItemCommand
-
-        public Command SelectedItemCommand => new Command(async (p) => await SelectedItemCommandExecute(), (p) => !IsBusy);
-
-        private async Task SelectedItemCommandExecute()
-        {
-           // await _dialogService.AlertAsync("Bạn đã chọn:", "Thông báo", "OK");
-            await CoreMethods.PushPageModel<EditMedicinePageModel>(Medicines,false,true);
-        }
-        #endregion
+       
     }
 }

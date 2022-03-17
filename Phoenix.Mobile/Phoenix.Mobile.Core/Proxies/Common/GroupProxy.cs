@@ -13,6 +13,7 @@ namespace Phoenix.Mobile.Core.Proxies.Common
     public interface IGroupProxy
     {
         Task<BaseResponse<GroupDto>> GetAllGroup(GroupRequest request);
+        Task<GroupDto> AddGroup(GroupRequest request);
     }
 
     public class GroupProxy : BaseProxy, IGroupProxy
@@ -32,10 +33,30 @@ namespace Phoenix.Mobile.Core.Proxies.Common
             }
         }
 
+        public async Task<GroupDto> AddGroup(GroupRequest request)
+        {
+            try
+            {
+                var api = RestService.For<IGroupApi>(GetHttpClient());
+                var result = await api.AddGroup(request);
+                if (result == null) return new GroupDto();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler.Handle(new NetworkException(ex), true);
+                return new GroupDto();
+            }
+        }
+
         public interface IGroupApi
         {
             [Post("/group/GetAllGroup")]
             Task<BaseResponse<GroupDto>> GetAllGroup([Body] GroupRequest request);
+
+            [Post("/group/CreateGroup")]
+            Task<GroupDto> AddGroup([Body] GroupRequest request);
+
 
         }
 

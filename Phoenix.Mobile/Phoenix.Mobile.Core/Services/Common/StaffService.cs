@@ -10,6 +10,7 @@ namespace Phoenix.Mobile.Core.Services.Common
     public interface IStaffService
     {
         Task<List<StaffModel>> GetAllStaff(StaffRequest request);
+        Task<StaffModel> AddStaff(StaffRequest request);
     }
 
     public class StaffService : IStaffService
@@ -23,6 +24,11 @@ namespace Phoenix.Mobile.Core.Services.Common
         {
             var staff = await _StaffProxy.GetAllStaff(request);
             return staff.Data.MapTo<StaffModel>();
+        }
+        public async Task<StaffModel> AddStaff(StaffRequest request)
+        {
+            var data = await _StaffProxy.AddStaff(request);
+            return data.MapTo<StaffModel>();
         }
     }
 }

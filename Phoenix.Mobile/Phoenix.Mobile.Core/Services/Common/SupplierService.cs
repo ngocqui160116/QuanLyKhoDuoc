@@ -20,11 +20,13 @@ namespace Phoenix.Mobile.Core.Services.Common
         {
             _SupplierProxy = SupplierProxy;
         }
+
         public async Task<List<SupplierModel>> GetAllSupplier(SupplierRequest request)
         {
             var supplier = await _SupplierProxy.GetAllSupplier(request);
             return supplier.Data.MapTo<SupplierModel>();
         }
+
         public async Task<SupplierModel> AddSupplier(SupplierRequest request)
         {
             var data = await _SupplierProxy.AddSupplier(request);

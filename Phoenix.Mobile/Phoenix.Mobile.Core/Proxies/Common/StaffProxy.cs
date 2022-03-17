@@ -13,6 +13,7 @@ namespace Phoenix.Mobile.Core.Proxies.Common
     public interface IStaffProxy
     {
         Task<BaseResponse<StaffDto>> GetAllStaff(StaffRequest request);
+        Task<StaffDto> AddStaff(StaffRequest request);
     }
 
     public class StaffProxy : BaseProxy, IStaffProxy
@@ -31,12 +32,29 @@ namespace Phoenix.Mobile.Core.Proxies.Common
                 return null;
             }
         }
+        public async Task<StaffDto> AddStaff(StaffRequest request)
+        {
+            try
+            {
+                var api = RestService.For<IStaffApi>(GetHttpClient());
+                var result = await api.AddStaff(request);
+                if (result == null) return new StaffDto();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler.Handle(new NetworkException(ex), true);
+                return new StaffDto();
+            }
+        }
 
         public interface IStaffApi
         {
             [Post("/staff/GetAllStaff")]
             Task<BaseResponse<StaffDto>> GetAllStaff([Body] StaffRequest request);
 
+            [Post("/staff/CreateStaff")]
+            Task<StaffDto> AddStaff([Body] StaffRequest request);
         }
 
     }

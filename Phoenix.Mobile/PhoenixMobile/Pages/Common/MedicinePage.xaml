@@ -29,50 +29,42 @@
                       HasUnevenRows="True"
                       BackgroundColor="#ecf0f1"
                       SeparatorVisibility="None"
+                      SelectedItem="{Binding SelectedMedicine}"
                       HorizontalOptions="FillAndExpand"
-                      SelectedItem="{Binding SelectedItemCommand}"
                       VerticalOptions="FillAndExpand">
-
-                <ListView.Behaviors>
-                    <behaviors:EventToCommandBehavior EventName="ItemTapped"
-                                      Command="{Binding SelectedItemCommand}"
-                                      CommandParameter="{Binding .}"
-                                     />
-                </ListView.Behaviors>
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="medicine:MedicineModel">
                         <ViewCell>
                             <StackLayout Margin="6,4,6,4"
-                                        BackgroundColor="White">
-                                <StackLayout Orientation="Horizontal">
-                                    <Label Text="{Binding Name}"
-                                       Margin="8"
-                                       FontAttributes="Bold"
-                                       FontSize="Large" />
-                                    <Label Text="{Binding NameUnit}"
-                                       Margin="8"
-                                       FontSize="Small" />
-                                    <StackLayout Orientation="Horizontal"
-                                                 HorizontalOptions="EndAndExpand">
-                                        <Label Text="{Binding Status}"
-                                               TextColor="ForestGreen"
-                                               FontAttributes="Bold"
-                                               Margin="2"
-                                               FontSize="Small" />
-                                    </StackLayout>
-                                </StackLayout>
+                                        BackgroundColor="White" Orientation="Vertical">
+                                <StackLayout Orientation="Horizontal" 
+                                             HorizontalOptions="StartAndExpand" >
+                                    <Image Source="@drawable/icon_medicine"
+                                           WidthRequest="75"
+                                       HorizontalOptions="StartAndExpand"
+                                       VerticalOptions="CenterAndExpand">
+                                    </Image>
 
-                                <StackLayout Orientation="Horizontal">
-                                    <Label Text="Số ĐK:"
-                                       Margin="8,2,8,4"
-                                       FontSize="Small" />
-                                    <Label Text="{Binding RegistrationNumber}"
+                                    <StackLayout Orientation="Vertical"
+                                                 HorizontalOptions="StartAndExpand">
+                                        <Label Text="{Binding Name}"
+                                               Margin="8"
+                                               FontAttributes="Bold"
+                                               FontSize="Large" />
+                                        <!--<Label Text="{Binding NameUnit}"
+                                               Margin="8"
+                                               FontSize="Small" />-->
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="Số ĐK:"
+                                           Margin="8,2,8,4"
+                                           FontSize="Small" />
+                                            <Label Text="{Binding RegistrationNumber}"
                                         Margin="2,2,8,4"
                                         TextColor="DarkSlateGray"
                                         FontSize="Small" />
-                                </StackLayout>
+                                        </StackLayout>
 
-                                <StackLayout Orientation="Horizontal">
+                                        <StackLayout Orientation="Horizontal">
                                     <Label Text="Đóng gói:"
                                        Margin="8,2,8,4"
                                        FontSize="Small" />
@@ -81,6 +73,21 @@
                                         TextColor="DarkSlateGray"  
                                         FontSize="Small" />
                                 </StackLayout>
+
+                                    </StackLayout>
+
+                                   
+                                </StackLayout>
+                              
+                                <!--<StackLayout Orientation="Horizontal">
+                                    <Label Text="Đóng gói:"
+                                       Margin="8,2,8,4"
+                                       FontSize="Small" />
+                                    <Label Text="{Binding Packing}"
+                                        Margin="2,2,8,4"
+                                        TextColor="DarkSlateGray"  
+                                        FontSize="Small" />
+                                </StackLayout>-->
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

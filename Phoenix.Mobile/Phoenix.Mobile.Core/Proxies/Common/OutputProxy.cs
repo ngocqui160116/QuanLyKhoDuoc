@@ -13,6 +13,7 @@ namespace Phoenix.Mobile.Core.Proxies.Common
     public interface IOutputProxy
     {
         Task<BaseResponse<OutputDto>> GetAllOutput(OutputRequest request);
+        Task<OutputDto> AddOutput(OutputRequest request);
     }
 
     public class OutputProxy : BaseProxy, IOutputProxy
@@ -31,12 +32,29 @@ namespace Phoenix.Mobile.Core.Proxies.Common
                 return null;
             }
         }
+        public async Task<OutputDto> AddOutput(OutputRequest request)
+        {
+            try
+            {
+                var api = RestService.For<IOutputApi>(GetHttpClient());
+                var result = await api.AddOutput(request);
+                if (result == null) return new OutputDto();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler.Handle(new NetworkException(ex), true);
+                return new OutputDto();
+            }
+        }
 
         public interface IOutputApi
         {
             [Post("/output/GetAllOutput")]
             Task<BaseResponse<OutputDto>> GetAllOutput([Body] OutputRequest request);
 
+            [Post("/output/CreateOutput")]
+            Task<OutputDto> AddOutput([Body] OutputRequest request);
         }
 
     }

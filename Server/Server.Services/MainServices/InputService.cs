@@ -72,7 +72,6 @@ namespace Phoenix.Server.Services.MainServices
         public async Task<CrudResult> UpdateInput(int Id, InputRequest request)
         {
             var Input = _dataContext.Inputs.Find(Id);
-            Input.Id = request.Id;
             Input.IdStaff = request.IdStaff;
             Input.DateInput = request.DateInput;
 

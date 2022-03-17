@@ -32,9 +32,6 @@ namespace Phoenix.Mobile.PageModels.Common
             base.ViewIsAppearing(sender, e);
         }
 
-       
-
-
         #region SupplierCommand
 
         public Command SupplierCommand => new Command(async (p) => await SupplierExecute(), (p) => !IsBusy);

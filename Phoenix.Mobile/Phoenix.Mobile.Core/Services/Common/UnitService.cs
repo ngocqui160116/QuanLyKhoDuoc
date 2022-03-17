@@ -10,6 +10,7 @@ namespace Phoenix.Mobile.Core.Services.Common
     public interface IUnitService
     {
         Task<List<UnitModel>> GetAllUnit(UnitRequest request);
+        Task<UnitModel> AddUnit(UnitRequest request);
     }
 
     public class UnitService : IUnitService
@@ -23,6 +24,12 @@ namespace Phoenix.Mobile.Core.Services.Common
         {
             var unit = await _UnitProxy.GetAllUnit(request);
             return unit.Data.MapTo<UnitModel>();
+        }
+
+        public async Task<UnitModel> AddUnit(UnitRequest request)
+        {
+            var data = await _UnitProxy.AddUnit(request);
+            return data.MapTo<UnitModel>();
         }
     }
 }
