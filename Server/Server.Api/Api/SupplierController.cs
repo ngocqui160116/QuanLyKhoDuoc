@@ -34,5 +34,19 @@ namespace Phoenix.Server.Api.Api
         {
             return _SupplierService.CreateSupplier(request);
         }
+
+        [HttpPost]
+        [Route("UpdateSupplier")]
+        public Task<CrudResult> UpdateSupplier(int IdSupplier, [FromBody] SupplierRequest request)
+        {
+            return _SupplierService.UpdateSupplier(IdSupplier, request);
+        }
+
+        [HttpDelete]
+        [Route("DeleteSupplier")]
+        public Task<CrudResult> DeleteSupplier(int IdSupplier)
+        {
+            return _SupplierService.DeleteSupplier(IdSupplier);
+        }
     }
 }

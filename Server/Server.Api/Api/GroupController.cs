@@ -34,5 +34,19 @@ namespace Phoenix.Server.Api.Api
         {
             return _GroupService.CreateGroup(request);
         }
+
+        [HttpPost]
+        [Route("UpdateGroup")]
+        public Task<CrudResult> UpdateGroup(int IdGroup, [FromBody] GroupRequest request)
+        {
+            return _GroupService.UpdateGroup(IdGroup, request);
+        }
+
+        [HttpDelete]
+        [Route("DeleteGroup")]
+        public Task<CrudResult> DeleteGroup(int IdGroup)
+        {
+            return _GroupService.DeleteGroup(IdGroup);
+        }
     }
 }

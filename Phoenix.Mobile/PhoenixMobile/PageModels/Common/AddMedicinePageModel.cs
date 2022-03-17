@@ -65,7 +65,17 @@ namespace Phoenix.Mobile.PageModels.Common
         public List<GroupModel> Groups { get; set; } = new List<GroupModel>();
         public GroupRequest request { get; set; } = new GroupRequest();
 
+        public string NameGroup { get; set; }
         #endregion
 
+        #region GroupCommand
+
+        public Command GroupCommand => new Command(async (p) => await GroupExecute(), (p) => !IsBusy);
+
+        private async Task GroupExecute()
+        {
+            await CoreMethods.DisplayAlert("Bạn đã chọn:", "Thông báo", "Đóng");
+        }
+        #endregion
     }
 }

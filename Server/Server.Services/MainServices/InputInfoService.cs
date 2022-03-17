@@ -17,6 +17,8 @@ namespace Phoenix.Server.Services.MainServices
     {
         Task<BaseResponse<InputInfoDto>> GetAllInputInfo(InputInfoRequest request);
         Task<CrudResult> CreateInputInfo(InputInfoRequest request);
+        Task<CrudResult> UpdateInputInfo(int IdInput, InputInfoRequest request);
+        Task<CrudResult> DeleteInputInfo(int IdInput);
     }
     public class InputInfoService : IInputInfoService
     {
@@ -67,6 +69,35 @@ namespace Phoenix.Server.Services.MainServices
             InputInfo.DueDate = request.DueDate;
 
             _dataContext.InputInfos.Add(InputInfo);
+            await _dataContext.SaveChangesAsync();
+            return new CrudResult() { IsOk = true };
+        }
+
+        
+        public async Task<CrudResult> UpdateInputInfo(int IdInput, InputInfoRequest request)
+        {
+            var InputInfo = _dataContext.InputInfos.Find(IdInput);
+            InputInfo.IdInput = request.IdInput;
+            InputInfo.IdMedicine = request.IdMedicine;
+            InputInfo.IdSupplier = request.IdSupplier;
+            InputInfo.IdBatch = request.IdBatch;
+            InputInfo.DateOfManufacture = request.DateOfManufacture;
+            InputInfo.DueDate = request.DueDate;
+
+            await _dataContext.SaveChangesAsync();
+            return new CrudResult() { IsOk = true };
+        }
+
+        public async Task<CrudResult> DeleteInputInfo(int IdInput)
+        {
+            var InputInfo = _dataContext.InputInfos.Find(IdInput);
+            if (InputInfo == null)
+                return new CrudResult()
+                {
+                    ErrorCode = CommonErrorStatus.KeyNotFound,
+                    ErrorDescription = "Xoá không thành công."
+                };
+            _dataContext.InputInfos.Remove(InputInfo);
             await _dataContext.SaveChangesAsync();
             return new CrudResult() { IsOk = true };
         }

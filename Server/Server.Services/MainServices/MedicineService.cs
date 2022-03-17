@@ -17,6 +17,8 @@ namespace Phoenix.Server.Services.MainServices
     {
         Task<BaseResponse<MedicineDto>> GetAllMedicine(MedicineRequest request);
         Task<CrudResult> CreateMedicine(MedicineRequest request);
+        Task<CrudResult> UpdateMedicine(int IdMedicine, MedicineRequest request);
+        Task<CrudResult> DeleteMedicine(int IdMedicine);
     }
     public class MedicineService : IMedicineService
     {
@@ -78,6 +80,39 @@ namespace Phoenix.Server.Services.MainServices
             Medicine.Status = request.Status;
 
             _dataContext.Medicines.Add(Medicine);
+            await _dataContext.SaveChangesAsync();
+            return new CrudResult() { IsOk = true };
+        }
+
+        //Task<CrudResult> UpdateMedicine(int IdMedicine, MedicineRequest request);
+        //Task<CrudResult> DeleteMedicine(int IdMedicine);
+        public async Task<CrudResult> UpdateMedicine(int IdMedicine, MedicineRequest request)
+        {
+            var Medicine = _dataContext.Medicines.Find(IdMedicine);
+            Medicine.RegistrationNumber = request.RegistrationNumber;
+            Medicine.Name = request.Name;
+            Medicine.IdGroup = request.IdGroup;
+            Medicine.IdUnit = request.IdUnit;
+            Medicine.Active = request.Active;
+            Medicine.Content = request.Content;
+            Medicine.Packing = request.Packing;
+            Medicine.Image = request.Image;
+            Medicine.Status = request.Status;
+
+            await _dataContext.SaveChangesAsync();
+            return new CrudResult() { IsOk = true };
+        }
+
+        public async Task<CrudResult> DeleteMedicine(int IdMedicine)
+        {
+            var Medicine = _dataContext.Medicines.Find(IdMedicine);
+            if (Medicine == null)
+                return new CrudResult()
+                {
+                    ErrorCode = CommonErrorStatus.KeyNotFound,
+                    ErrorDescription = "Xoá không thành công."
+                };
+            _dataContext.Medicines.Remove(Medicine);
             await _dataContext.SaveChangesAsync();
             return new CrudResult() { IsOk = true };
         }

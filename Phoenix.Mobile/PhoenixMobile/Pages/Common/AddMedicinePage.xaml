@@ -7,6 +7,7 @@
              xmlns:medicine="clr-namespace:Phoenix.Mobile.Core.Models.Medicine;assembly=Phoenix.Mobile.Core" 
              xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:DataType="common:AddMedicinePageModel"
+             xmlns:behaviors="clr-namespace:Phoenix.Framework.Core;assembly=Phoenix.Framework" 
              x:Class="Phoenix.Mobile.Pages.Common.AddMedicinePage"
              ControlTemplate="{StaticResource FullScreenHasBack}">
     <ContentPage.Content>
@@ -75,9 +76,16 @@
                                 ItemsSource="{Binding Groups}"
                                 Grid.Row="4"
                                 Grid.Column="1"
-                                ItemDisplayBinding="{Binding Name}"
-                                />
-
+                                SelectedItem="{Binding GroupCommand}"
+                                ItemDisplayBinding="{Binding Name}">
+                            <Picker.Behaviors>
+                                <behaviors:EventToCommandBehavior EventName="ItemTapped"
+                                      Command="{Binding GroupCommand}"
+                                     
+                                     />
+                            </Picker.Behaviors>
+                        </Picker>
+                              
                         <Label  Grid.Row="5"
                                 Grid.Column="0" 
                                 Margin="10,5,0,0" 

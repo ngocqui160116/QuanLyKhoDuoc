@@ -16,6 +16,8 @@ namespace Phoenix.Server.Services.MainServices
     {
         Task<BaseResponse<OutputInfoDto>> GetAllOutputInfo(OutputInfoRequest request);
         Task<CrudResult> CreateOutputInfo(OutputInfoRequest request);
+        Task<CrudResult> UpdateOutputInfo(int IdOutput, OutputInfoRequest request);
+        Task<CrudResult> DeleteOutputInfo(int IdOutput);
     }
     public class OutputInfoService : IOutputInfoService
     {
@@ -68,6 +70,37 @@ namespace Phoenix.Server.Services.MainServices
            
 
             _dataContext.OutputInfos.Add(OutputInfo);
+            await _dataContext.SaveChangesAsync();
+            return new CrudResult() { IsOk = true };
+        }
+
+        //Task<CrudResult> UpdateOutputInfo(int IdOutputInfo, OutputInfoRequest request);
+        //Task<CrudResult> DeleteOutputInfo(int IdOutputInfo);
+        public async Task<CrudResult> UpdateOutputInfo(int IdOutput, OutputInfoRequest request)
+        {
+            var OutputInfo = _dataContext.OutputInfos.Find(IdOutput);
+            OutputInfo.IdOutput = request.IdOutput;
+            OutputInfo.IdMedicine = request.IdMedicine;
+            //OutputInfo.IdInputInfo = request.IdInputInfo;
+            //OutputInfo.IdReason = request.IdReason;
+            OutputInfo.Count = request.Count;
+            OutputInfo.Total = request.Total;
+            OutputInfo.Status = request.Status;
+
+            await _dataContext.SaveChangesAsync();
+            return new CrudResult() { IsOk = true };
+        }
+
+        public async Task<CrudResult> DeleteOutputInfo(int IdOutput)
+        {
+            var OutputInfo = _dataContext.OutputInfos.Find(IdOutput);
+            if (OutputInfo == null)
+                return new CrudResult()
+                {
+                    ErrorCode = CommonErrorStatus.KeyNotFound,
+                    ErrorDescription = "Xoá không thành công."
+                };
+            _dataContext.OutputInfos.Remove(OutputInfo);
             await _dataContext.SaveChangesAsync();
             return new CrudResult() { IsOk = true };
         }

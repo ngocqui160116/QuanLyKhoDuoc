@@ -17,6 +17,8 @@ namespace Phoenix.Server.Services.MainServices
     {
         Task<BaseResponse<InputDto>> GetAllInput(InputRequest request);
         Task<CrudResult> CreateInput(InputRequest request);
+        Task<CrudResult> UpdateInput(int Id, InputRequest request);
+        Task<CrudResult> DeleteInput(int Id);
     }
     public class InputService : IInputService
     {
@@ -61,6 +63,33 @@ namespace Phoenix.Server.Services.MainServices
             Input.DateInput = request.DateInput;
            
             _dataContext.Inputs.Add(Input);
+            await _dataContext.SaveChangesAsync();
+            return new CrudResult() { IsOk = true };
+        }
+
+        //Task<CrudResult> UpdateInput(int IdInput, InputRequest request);
+        //Task<CrudResult> DeleteInput(int IdInput);
+        public async Task<CrudResult> UpdateInput(int Id, InputRequest request)
+        {
+            var Input = _dataContext.Inputs.Find(Id);
+            Input.Id = request.Id;
+            Input.IdStaff = request.IdStaff;
+            Input.DateInput = request.DateInput;
+
+            await _dataContext.SaveChangesAsync();
+            return new CrudResult() { IsOk = true };
+        }
+
+        public async Task<CrudResult> DeleteInput(int Id)
+        {
+            var Input = _dataContext.Inputs.Find(Id);
+            if (Input == null)
+                return new CrudResult()
+                {
+                    ErrorCode = CommonErrorStatus.KeyNotFound,
+                    ErrorDescription = "Xoá không thành công."
+                };
+            _dataContext.Inputs.Remove(Input);
             await _dataContext.SaveChangesAsync();
             return new CrudResult() { IsOk = true };
         }

@@ -33,5 +33,19 @@ namespace Phoenix.Server.Api.Api
         {
             return _StaffService.CreateStaff(request);
         }
+
+        [HttpPost]
+        [Route("UpdateStaff")]
+        public Task<CrudResult> UpdateStaff(int IdStaff, [FromBody] StaffRequest request)
+        {
+            return _StaffService.UpdateStaff(IdStaff, request);
+        }
+
+        [HttpDelete]
+        [Route("DeleteStaff")]
+        public Task<CrudResult> DeleteStaff(int IdStaff)
+        {
+            return _StaffService.DeleteStaff(IdStaff);
+        }
     }
 }

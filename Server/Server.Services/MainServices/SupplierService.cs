@@ -16,6 +16,8 @@ namespace Phoenix.Server.Services.MainServices
     {
         Task<BaseResponse<SupplierDto>> GetAllSupplier(SupplierRequest request);
         Task<CrudResult> CreateSupplier(SupplierRequest request);
+        Task<CrudResult> UpdateSupplier(int IdSupplier, SupplierRequest request);
+        Task<CrudResult> DeleteSupplier(int IdSupplier);
     }
     public class SupplierService : ISupplierService
     {
@@ -69,5 +71,29 @@ namespace Phoenix.Server.Services.MainServices
             return new CrudResult() { IsOk = true };
         }
 
+        public async Task<CrudResult> UpdateSupplier(int IdSupplier, SupplierRequest request)
+        {
+            var Supplier = _dataContext.Suppliers.Find(IdSupplier);
+            Supplier.Name = request.Name;
+            Supplier.PhoneNumber = request.PhoneNumber;
+            Supplier.Email = request.Email;
+            Supplier.Address = request.Address;
+            await _dataContext.SaveChangesAsync();
+            return new CrudResult() { IsOk = true };
+        }
+
+        public async Task<CrudResult> DeleteSupplier(int IdSupplier)
+        {
+            var Supplier = _dataContext.Suppliers.Find(IdSupplier);
+            if (Supplier == null)
+                return new CrudResult()
+                {
+                    ErrorCode = CommonErrorStatus.KeyNotFound,
+                    ErrorDescription = "Xoá không thành công."
+                };
+            _dataContext.Suppliers.Remove(Supplier);
+            await _dataContext.SaveChangesAsync();
+            return new CrudResult() { IsOk = true };
+        }
     }
 }

@@ -16,6 +16,8 @@ namespace Phoenix.Server.Services.MainServices
     {
         Task<BaseResponse<UnitDto>> GetAllUnit(UnitRequest request);
         Task<CrudResult> CreateUnit(UnitRequest request);
+        Task<CrudResult> UpdateUnit(int Id, UnitRequest request);
+        Task<CrudResult> DeleteUnit(int IdUnit);
     }
     public class UnitService : IUnitService
     {
@@ -64,5 +66,29 @@ namespace Phoenix.Server.Services.MainServices
             await _dataContext.SaveChangesAsync();
             return new CrudResult() { IsOk = true };
         }
+        
+        public async Task<CrudResult> UpdateUnit(int Id, UnitRequest request)
+        {
+            var Unit = _dataContext.Units.Find(Id);
+            Unit.Name = request.Name;
+          
+            await _dataContext.SaveChangesAsync();
+            return new CrudResult() { IsOk = true };
+        }
+
+        public async Task<CrudResult> DeleteUnit(int Id)
+        {
+            var Unit = _dataContext.Staffs.Find(Id);
+            if (Unit == null)
+                return new CrudResult()
+                {
+                    ErrorCode = CommonErrorStatus.KeyNotFound,
+                    ErrorDescription = "Xoá không thành công."
+                };
+            _dataContext.Staffs.Remove(Unit);
+            await _dataContext.SaveChangesAsync();
+            return new CrudResult() { IsOk = true };
+        }
+
     }
 }

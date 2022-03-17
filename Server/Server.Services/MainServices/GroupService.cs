@@ -4,7 +4,7 @@ using Phoenix.Server.Services.Database;
 using Phoenix.Shared.Common;
 using Phoenix.Shared.Core;
 using Phoenix.Shared.Group;
-using Phoenix.Shared.Supplier;
+using Phoenix.Shared.Group;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -17,6 +17,8 @@ namespace Phoenix.Server.Services.MainServices
     {
         Task<BaseResponse<GroupDto>> GetAllGroup(GroupRequest request);
         Task<CrudResult> CreateGroup (GroupRequest request);
+        Task<CrudResult> UpdateGroup(int IdGroup, GroupRequest request);
+        Task<CrudResult> DeleteGroup(int IdGroup);
     }
     public class GroupService : IGroupService
     {
@@ -59,6 +61,30 @@ namespace Phoenix.Server.Services.MainServices
             var Group = new Group();
             Group.Name = request.Name;      
             _dataContext.Groups.Add(Group);
+            await _dataContext.SaveChangesAsync();
+            return new CrudResult() { IsOk = true };
+        }
+
+        //Task<CrudResult> UpdateGroup(int IdGroup, GroupRequest request);
+        //Task<CrudResult> DeleteGroup(int IdGroup);
+        public async Task<CrudResult> UpdateGroup(int IdGroup, GroupRequest request)
+        {
+            var Group = _dataContext.Groups.Find(IdGroup);
+            Group.Name = request.Name;
+            await _dataContext.SaveChangesAsync();
+            return new CrudResult() { IsOk = true };
+        }
+
+        public async Task<CrudResult> DeleteGroup(int IdGroup)
+        {
+            var Group = _dataContext.Groups.Find(IdGroup);
+            if (Group == null)
+                return new CrudResult()
+                {
+                    ErrorCode = CommonErrorStatus.KeyNotFound,
+                    ErrorDescription = "Xoá không thành công."
+                };
+            _dataContext.Groups.Remove(Group);
             await _dataContext.SaveChangesAsync();
             return new CrudResult() { IsOk = true };
         }

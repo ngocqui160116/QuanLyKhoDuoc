@@ -35,6 +35,18 @@ namespace Phoenix.Server.Api.Api
             return _UnitService.CreateUnit(request);
         }
 
+        [HttpPost]
+        [Route("UpdateUnit")]
+        public Task<CrudResult> UpdateUnit(int Id, [FromBody] UnitRequest request)
+        {
+            return _UnitService.UpdateUnit(Id, request);
+        }
 
+        [HttpDelete]
+        [Route("DeleteUnit")]
+        public Task<CrudResult> DeleteUnit(int Id)
+        {
+            return _UnitService.DeleteUnit(Id);
+        }
     }
 }

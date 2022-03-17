@@ -16,6 +16,8 @@ namespace Phoenix.Server.Services.MainServices
     {
         Task<BaseResponse<StaffDto>> GetAllStaff(StaffRequest request);
         Task<CrudResult> CreateStaff(StaffRequest request);
+        Task<CrudResult> UpdateStaff(int IdStaff, StaffRequest request);
+        Task<CrudResult> DeleteStaff(int IdStaff);
     }
     public class StaffService : IStaffService
     {
@@ -76,7 +78,37 @@ namespace Phoenix.Server.Services.MainServices
             _dataContext.Staffs.Add(Staff);
             await _dataContext.SaveChangesAsync();
             return new CrudResult() { IsOk = true };
-    }
-       
+        }
+
+        //Task<CrudResult> UpdateStaff(int IdStaff, StaffRequest request);
+        //Task<CrudResult> DeleteStaff(int IdStaff);
+        public async Task<CrudResult> UpdateStaff(int IdStaff, StaffRequest request)
+        {
+            var Staff = _dataContext.Staffs.Find(IdStaff);
+            Staff.Name = request.Name;
+            Staff.Gender = request.Gender;
+            Staff.Birth = request.Birth;
+            Staff.PhoneNumber = request.PhoneNumber;
+            Staff.Address = request.Address;
+            Staff.Authority = request.Authority;
+
+            await _dataContext.SaveChangesAsync();
+            return new CrudResult() { IsOk = true };
+        }
+
+        public async Task<CrudResult> DeleteStaff(int IdStaff)
+        {
+            var Staff = _dataContext.Staffs.Find(IdStaff);
+            if (Staff == null)
+                return new CrudResult()
+                {
+                    ErrorCode = CommonErrorStatus.KeyNotFound,
+                    ErrorDescription = "Xoá không thành công."
+                };
+            _dataContext.Staffs.Remove(Staff);
+            await _dataContext.SaveChangesAsync();
+            return new CrudResult() { IsOk = true };
+        }
+
     }
 }

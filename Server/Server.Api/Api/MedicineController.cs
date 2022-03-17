@@ -33,5 +33,19 @@ namespace Phoenix.Server.Api.Api
         {
             return _medicineService.CreateMedicine(request);
         }
+
+        [HttpPost]
+        [Route("UpdateMedicine")]
+        public Task<CrudResult> UpdateMedicine(int IdMedicine, [FromBody] MedicineRequest request)
+        {
+            return _medicineService.UpdateMedicine(IdMedicine, request);
+        }
+
+        [HttpDelete]
+        [Route("DeleteMedicine")]
+        public Task<CrudResult> DeleteMedicine(int IdMedicine)
+        {
+            return _medicineService.DeleteMedicine(IdMedicine);
+        }
     }
 }
