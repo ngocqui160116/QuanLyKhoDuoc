@@ -17,8 +17,8 @@ namespace Phoenix.Server.Services.MainServices
     {
         Task<BaseResponse<InputDto>> GetAllInput(InputRequest request);
         Task<CrudResult> CreateInput(InputRequest request);
-        Task<CrudResult> UpdateInput(int Id, InputRequest request);
-        Task<CrudResult> DeleteInput(int Id);
+        Task<CrudResult> UpdateInput(string Id, InputRequest request);
+        Task<CrudResult> DeleteInput(string Id);
     }
     public class InputService : IInputService
     {
@@ -69,7 +69,7 @@ namespace Phoenix.Server.Services.MainServices
 
         //Task<CrudResult> UpdateInput(int IdInput, InputRequest request);
         //Task<CrudResult> DeleteInput(int IdInput);
-        public async Task<CrudResult> UpdateInput(int Id, InputRequest request)
+        public async Task<CrudResult> UpdateInput(string Id, InputRequest request)
         {
             var Input = _dataContext.Inputs.Find(Id);
             Input.IdStaff = request.IdStaff;
@@ -79,7 +79,7 @@ namespace Phoenix.Server.Services.MainServices
             return new CrudResult() { IsOk = true };
         }
 
-        public async Task<CrudResult> DeleteInput(int Id)
+        public async Task<CrudResult> DeleteInput(string Id)
         {
             var Input = _dataContext.Inputs.Find(Id);
             if (Input == null)

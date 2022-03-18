@@ -11,6 +11,7 @@ namespace Phoenix.Mobile.Core.Services.Common
     {
         Task<List<MedicineModel>> GetAllMedicine(MedicineRequest request);
         Task<MedicineModel> AddMedicine(MedicineRequest request);
+        Task<MedicineModel> UpdateMedicine(int IdMedicine, MedicineRequest request);
     }
 
     public class MedicineService : IMedicineService
@@ -28,6 +29,11 @@ namespace Phoenix.Mobile.Core.Services.Common
         public async Task<MedicineModel> AddMedicine(MedicineRequest request)
         {
             var data = await _MedicineProxy.AddMedicine(request);
+            return data.MapTo<MedicineModel>();
+        }
+        public async Task<MedicineModel> UpdateMedicine(int IdMedicine, MedicineRequest request)
+        {
+            var data = await _MedicineProxy.UpdateMedicine(IdMedicine, request);
             return data.MapTo<MedicineModel>();
         }
     }

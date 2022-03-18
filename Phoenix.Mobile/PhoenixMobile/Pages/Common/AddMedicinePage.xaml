@@ -77,7 +77,7 @@
                                 ItemsSource="{Binding Groups}"
                                 Grid.Row="4"
                                 Grid.Column="1"
-                                 SelectedItem="{Binding SelectedMedicine}"
+                                SelectedItem="{Binding SelectedGroup}"
                                 ItemDisplayBinding="{Binding Name}">
                            
                         </Picker>
@@ -157,6 +157,7 @@
                                TextColor="#fff"
                                Text="Lưu"/>
                     </Grid>
+                    
                 </AbsoluteLayout>
             </StackLayout>
         </StackLayout>

@@ -35,14 +35,14 @@ namespace Phoenix.Server.Api.Api
 
         [HttpPost]
         [Route("UpdateOutput")]
-        public Task<CrudResult> UpdateOutput(int Id, [FromBody] OutputRequest request)
+        public Task<CrudResult> UpdateOutput(string Id, [FromBody] OutputRequest request)
         {
             return _OutputService.UpdateOutput(Id, request);
         }
 
         [HttpDelete]
         [Route("DeleteOutput")]
-        public Task<CrudResult> DeleteOutput(int Id)
+        public Task<CrudResult> DeleteOutput(string Id)
         {
             return _OutputService.DeleteOutput(Id);
         }

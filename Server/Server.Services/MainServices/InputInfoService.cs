@@ -17,8 +17,8 @@ namespace Phoenix.Server.Services.MainServices
     {
         Task<BaseResponse<InputInfoDto>> GetAllInputInfo(InputInfoRequest request);
         Task<CrudResult> CreateInputInfo(InputInfoRequest request);
-        Task<CrudResult> UpdateInputInfo(int IdInput, InputInfoRequest request);
-        Task<CrudResult> DeleteInputInfo(int IdInput);
+        Task<CrudResult> UpdateInputInfo(string IdInput, InputInfoRequest request);
+        Task<CrudResult> DeleteInputInfo(string IdInput);
     }
     public class InputInfoService : IInputInfoService
     {
@@ -74,10 +74,9 @@ namespace Phoenix.Server.Services.MainServices
         }
 
         
-        public async Task<CrudResult> UpdateInputInfo(int IdInput, InputInfoRequest request)
+        public async Task<CrudResult> UpdateInputInfo(string IdInput, InputInfoRequest request)
         {
             var InputInfo = _dataContext.InputInfos.Find(IdInput);
-            InputInfo.IdInput = request.IdInput;
             InputInfo.IdMedicine = request.IdMedicine;
             InputInfo.IdSupplier = request.IdSupplier;
             InputInfo.IdBatch = request.IdBatch;
@@ -88,7 +87,7 @@ namespace Phoenix.Server.Services.MainServices
             return new CrudResult() { IsOk = true };
         }
 
-        public async Task<CrudResult> DeleteInputInfo(int IdInput)
+        public async Task<CrudResult> DeleteInputInfo(string IdInput)
         {
             var InputInfo = _dataContext.InputInfos.Find(IdInput);
             if (InputInfo == null)

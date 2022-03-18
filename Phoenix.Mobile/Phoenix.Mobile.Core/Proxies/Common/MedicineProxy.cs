@@ -14,6 +14,7 @@ namespace Phoenix.Mobile.Core.Proxies.Common
     {
         Task<BaseResponse<MedicineDto>> GetAllMedicine(MedicineRequest request);
         Task<MedicineDto> AddMedicine(MedicineRequest request);
+        Task<MedicineDto> UpdateMedicine(int IdMedicine, MedicineRequest request);
     }
 
     public class MedicineProxy : BaseProxy, IMedicineProxy
@@ -48,6 +49,22 @@ namespace Phoenix.Mobile.Core.Proxies.Common
             }
         }
 
+        public async Task<MedicineDto> UpdateMedicine(int IdMedicine,MedicineRequest request)
+        {
+            try
+            {
+                var api = RestService.For<IMedicineApi>(GetHttpClient());
+                var result = await api.UpdateMedicine(IdMedicine, request);
+                if (result == null) return new MedicineDto();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler.Handle(new NetworkException(ex), true);
+                return new MedicineDto();
+            }
+        }
+
         public interface IMedicineApi
         {
             [Post("/medicine/GetAllMedicine")]
@@ -55,6 +72,9 @@ namespace Phoenix.Mobile.Core.Proxies.Common
 
             [Post("/medicine/CreateMedicine")]
             Task<MedicineDto> AddMedicine([Body] MedicineRequest request);
+
+            [Post("/medicine/UpdateMedicine")]
+            Task<MedicineDto> UpdateMedicine([Body] int IdMedicine, MedicineRequest request);
         }
 
     }

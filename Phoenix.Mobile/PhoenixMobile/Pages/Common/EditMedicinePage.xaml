@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:DataType="common:EditMedicinePageModel"
-              xmlns:controls="clr-namespace:Phoenix.Mobile.Controls"
+             xmlns:controls="clr-namespace:Phoenix.Mobile.Controls"
              xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
              ControlTemplate="{StaticResource FullScreenHasBack}"
              xmlns:medicine="clr-namespace:Phoenix.Mobile.Core.Models.Medicine;assembly=Phoenix.Mobile.Core" 
@@ -19,7 +19,7 @@
 
             <Frame CornerRadius="15"  >
                 <StackLayout  BackgroundColor="White">
-                    <Grid  x:Name="Grid" IsEnabled="False">
+                    <Grid  x:Name="Grid" IsEnabled="{Binding IsEnabled}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -42,7 +42,7 @@
                         <Entry  Grid.Row="1"
                                 Grid.Column="1"
                                 TextColor="Black"
-                                Placeholder=""
+                                IsReadOnly="True"
                                 Text="{Binding Medicine.IdMedicine}"
                                 WidthRequest="200" 
                                  />
@@ -55,9 +55,10 @@
                                 Text="Tên thuốc*"/>
                         <Entry  Grid.Row="2"
                                 Grid.Column="1"
-                                Placeholder=""
+                                Placeholder="{Binding Medicine.Name}"
+                                PlaceholderColor="Black"
                                 TextColor="Black"
-                                Text="{Binding Medicine.Name}"
+                                Text="{Binding Name}"
                                 WidthRequest="200" 
                                  />
 
@@ -72,6 +73,7 @@
                                 WidthRequest="200"
                                 Placeholder=""
                                 TextColor="Black"
+                                
                                 Text="{Binding Medicine.RegistrationNumber}"
                                 Keyboard="Numeric"/>
 
@@ -81,18 +83,16 @@
                                 WidthRequest="100" 
                                 FontSize="Medium" 
                                 Text="Nhóm thuốc"/>
-                        <Entry  Grid.Row="4"
-                                Grid.Column="1"
-                                TextColor="Black"
-                                Text="{Binding Medicine.GroupName}"
-                                WidthRequest="200"                         
-                                Keyboard="Text"/>
-                        <!--<Picker x:DataType="common:AddMedicinePageModel" 
+
+                        <Picker x:DataType="common:EditMedicinePageModel" 
                                 ItemsSource="{Binding Groups}"
                                 Grid.Row="4"
                                 Grid.Column="1"
-                              
-                                />-->
+                                 SelectedItem="{Binding SelectedGroup}"
+                                Title="{Binding Medicine.GroupName}"
+                                TitleColor="Black"
+                                ItemDisplayBinding="{Binding Name}">
+                        </Picker>
 
                         <Label  Grid.Row="5"
                                 Grid.Column="0" 
@@ -140,46 +140,25 @@
                                 WidthRequest="100" 
                                 FontSize="Medium" 
                                 Text="Đơn vị tính"/>
-                        <Entry  Grid.Row="8"
-                                Grid.Column="1"  
-                                TextColor="Black"
-                                Text="{Binding Medicine.NameUnit}"
-                                WidthRequest="200"                         
-                                Keyboard="Text"/>
+                        <Picker Title="{Binding Medicine.NameUnit}"
+                                TitleColor="Black"
+                                ItemsSource="{Binding Units}"
+                                SelectedItem="{Binding SelectedUnit}"
+                                Grid.Row="8"
+                                Grid.Column="1"
+                                ItemDisplayBinding="{Binding Name}">
+                        </Picker>
                     </Grid>
                 </StackLayout>
             </Frame>
 
-            <!--<StackLayout Margin="0,50,0,5">
-                --><!--<Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <ImageButton Grid.Row="0"
-                                 Margin="5,0,5,0"
-                                 Grid.Column="0"
-                                 WidthRequest="100"
-                                 
-                                 BackgroundColor="White"
-                                 Source="@drawable/btn_Save">
-                    </ImageButton>
-                    <ImageButton Grid.Row="0"
-                                 Source="@drawable/btn_Save"
-                                 Grid.Column="1"
-                                 BackgroundColor="White"
-                                 Margin="5,0,5,0">
-                    </ImageButton>
-                </Grid>--><!--
-            </StackLayout>-->
             <StackLayout  Margin="0,20,0,0"
                          >
 
                 <AbsoluteLayout HorizontalOptions="Center">
-                    <Grid xe:TouchEffect.Color="AliceBlue">
+                    <Grid xe:TouchEffect.Color="AliceBlue"
+                          xe:Commands.Tap="{Binding EditCommand}"
+                           IsVisible="true">
                         <forms:CachedImage Source="btn_Save" 
                                            Grid.Row="0"
                                            HeightRequest="50"/>
@@ -190,17 +169,23 @@
                                TextColor="#fff"
                                Text="Sửa"/>
                     </Grid>
+                    <Grid xe:TouchEffect.Color="AliceBlue"
+                          IsVisible="{Binding IsEnabled}"
+                        xe:Commands.Tap="{Binding UpdateMedicineCommand}"
+                          >
+                        <forms:CachedImage Source="btn_Save" 
+                                           Grid.Row="0"
+                                           HeightRequest="50"/>
+                        <Label Grid.Row="0"
+                               FontSize="Medium"
+                               HorizontalOptions="Center"
+                               FontAttributes="Bold"
+                               TextColor="#fff"
+                               Text="Cập nhật"/>
+                    </Grid>
                 </AbsoluteLayout>
-
-                <!--<controls:CommonButton  
-                                       Text="Đăng nhập"   
-                                       TextColor="GhostWhite" BackgroundColor="Blue"
-                                       WidthRequest="240"
-                                       Radius="50"
-                                       FontSize="20"
-                                       Command="{Binding LoginCommand}"
-                                       />-->
-
+                
+                
 
             </StackLayout>
         </StackLayout>

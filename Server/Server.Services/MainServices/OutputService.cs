@@ -16,8 +16,8 @@ namespace Phoenix.Server.Services.MainServices
     {
         Task<BaseResponse<OutputDto>> GetAllOutput(OutputRequest request);
         Task<CrudResult> CreateOutput(OutputRequest request);
-        Task<CrudResult> UpdateOutput(int Id, OutputRequest request);
-        Task<CrudResult> DeleteOutput(int Id);
+        Task<CrudResult> UpdateOutput(string Id, OutputRequest request);
+        Task<CrudResult> DeleteOutput(string Id);
     }
     public class OutputService : IOutputService
     {
@@ -68,10 +68,9 @@ namespace Phoenix.Server.Services.MainServices
 
         //Task<CrudResult> UpdateOutput(int IdOutput, OutputRequest request);
         //Task<CrudResult> DeleteOutput(int IdOutput);
-        public async Task<CrudResult> UpdateOutput(int Id, OutputRequest request)
+        public async Task<CrudResult> UpdateOutput(string Id, OutputRequest request)
         {
             var Output = _dataContext.Outputs.Find(Id);
-            Output.Id = request.Id;
             Output.IdStaff = request.IdStaff;
             Output.DateOutput = request.DateOutput;
 
@@ -79,7 +78,7 @@ namespace Phoenix.Server.Services.MainServices
             return new CrudResult() { IsOk = true };
         }
 
-        public async Task<CrudResult> DeleteOutput(int Id)
+        public async Task<CrudResult> DeleteOutput(string Id)
         {
             var Output = _dataContext.Outputs.Find(Id);
             if (Output == null)

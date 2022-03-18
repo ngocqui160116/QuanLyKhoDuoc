@@ -107,7 +107,7 @@ namespace Phoenix.Mobile.PageModels.Common
                 {
                     RegistrationNumber = SDK,
                     Name = Name,
-                    IdGroup = SelectedMedicine.IdGroup,
+                    IdGroup = SelectedGroup.IdGroup,
                     Active = Active,
                     Content = Content,
                     Packing = Packing,
@@ -128,6 +128,7 @@ namespace Phoenix.Mobile.PageModels.Common
 
         #region properties
         public string SearchText { get; set; }
+        public int IdMedicine { get; set; }
         public string SDK { get; set; }
         public string Name { get; set; }
         public int IdGroup { get; set; }
@@ -146,37 +147,31 @@ namespace Phoenix.Mobile.PageModels.Common
         public GroupRequest request { get; set; } = new GroupRequest();
         public UnitRequest unitrequest { get; set; } = new UnitRequest();
 
+        GroupModel _selectedGroup;
+
+        UnitModel _selectedUnit;
+
+
+        #endregion
+
        
-        #endregion
 
-        #region GroupCommand
-
-        public Command GroupCommand => new Command(async (p) => await GroupExecute(), (p) => !IsBusy);
-
-        private async Task GroupExecute()
-        {
-            await CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn:" +SelectedMedicine.IdGroup, "Đóng");
-        }
-        #endregion
-
-        GroupModel _selectedMedicine;
-
-        public GroupModel SelectedMedicine
+        
+        public GroupModel SelectedGroup
         {
             get
             {
-                return _selectedMedicine;
+                return _selectedGroup;
             }
             set
             {
-                _selectedMedicine = value;
+                _selectedGroup = value;
                 if (value != null)
                     IdGroup = value.IdGroup;
             }
         }
 
-        UnitModel _selectedUnit;
-
+       
         public UnitModel SelectedUnit
         {
             get

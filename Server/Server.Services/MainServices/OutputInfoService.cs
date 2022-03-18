@@ -16,8 +16,8 @@ namespace Phoenix.Server.Services.MainServices
     {
         Task<BaseResponse<OutputInfoDto>> GetAllOutputInfo(OutputInfoRequest request);
         Task<CrudResult> CreateOutputInfo(OutputInfoRequest request);
-        Task<CrudResult> UpdateOutputInfo(int IdOutput, OutputInfoRequest request);
-        Task<CrudResult> DeleteOutputInfo(int IdOutput);
+        Task<CrudResult> UpdateOutputInfo(string IdOutput, OutputInfoRequest request);
+        Task<CrudResult> DeleteOutputInfo(string IdOutput);
     }
     public class OutputInfoService : IOutputInfoService
     {
@@ -76,13 +76,12 @@ namespace Phoenix.Server.Services.MainServices
 
         //Task<CrudResult> UpdateOutputInfo(int IdOutputInfo, OutputInfoRequest request);
         //Task<CrudResult> DeleteOutputInfo(int IdOutputInfo);
-        public async Task<CrudResult> UpdateOutputInfo(int IdOutput, OutputInfoRequest request)
+        public async Task<CrudResult> UpdateOutputInfo(string IdOutput, OutputInfoRequest request)
         {
             var OutputInfo = _dataContext.OutputInfos.Find(IdOutput);
-            OutputInfo.IdOutput = request.IdOutput;
             OutputInfo.IdMedicine = request.IdMedicine;
-            //OutputInfo.IdInputInfo = request.IdInputInfo;
-            //OutputInfo.IdReason = request.IdReason;
+            OutputInfo.IdInputInfo = request.IdInputInfo;
+            
             OutputInfo.Count = request.Count;
             OutputInfo.Total = request.Total;
             OutputInfo.Status = request.Status;
@@ -91,7 +90,7 @@ namespace Phoenix.Server.Services.MainServices
             return new CrudResult() { IsOk = true };
         }
 
-        public async Task<CrudResult> DeleteOutputInfo(int IdOutput)
+        public async Task<CrudResult> DeleteOutputInfo(string IdOutput)
         {
             var OutputInfo = _dataContext.OutputInfos.Find(IdOutput);
             if (OutputInfo == null)
