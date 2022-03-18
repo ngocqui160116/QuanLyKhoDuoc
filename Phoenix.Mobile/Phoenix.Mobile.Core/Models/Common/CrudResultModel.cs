@@ -7,5 +7,6 @@ namespace Phoenix.Mobile.Core.Models.Common
 {
     public class CrudResultModel: CrudResult
     {
+
     }
 }

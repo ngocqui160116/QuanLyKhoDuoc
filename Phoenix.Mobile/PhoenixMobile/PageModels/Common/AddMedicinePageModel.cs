@@ -107,11 +107,11 @@ namespace Phoenix.Mobile.PageModels.Common
                 {
                     RegistrationNumber = SDK,
                     Name = Name,
-                    IdGroup = IdGroup,
+                    IdGroup = SelectedMedicine.IdGroup,
                     Active = Active,
                     Content = Content,
                     Packing = Packing,
-                    IdUnit = IdUnit
+                    IdUnit = SelectedUnit.Id
                 });
                 await CoreMethods.PushPageModel<MedicinePageModel>();
                 await _dialogService.AlertAsync("Thêm thành công");
@@ -135,6 +135,8 @@ namespace Phoenix.Mobile.PageModels.Common
         public string Content { get; set; }
         public string Packing { get; set; }
         public int IdUnit { get; set; }
+        public string NameGroup { get; set; }
+        public string NameUnit { get; set; }
 
         #endregion
 
@@ -144,7 +146,7 @@ namespace Phoenix.Mobile.PageModels.Common
         public GroupRequest request { get; set; } = new GroupRequest();
         public UnitRequest unitrequest { get; set; } = new UnitRequest();
 
-        public string NameGroup { get; set; }
+       
         #endregion
 
         #region GroupCommand
@@ -153,8 +155,40 @@ namespace Phoenix.Mobile.PageModels.Common
 
         private async Task GroupExecute()
         {
-            await CoreMethods.DisplayAlert("Bạn đã chọn:", "Thông báo", "Đóng");
+            await CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn:" +SelectedMedicine.IdGroup, "Đóng");
         }
         #endregion
+
+        GroupModel _selectedMedicine;
+
+        public GroupModel SelectedMedicine
+        {
+            get
+            {
+                return _selectedMedicine;
+            }
+            set
+            {
+                _selectedMedicine = value;
+                if (value != null)
+                    IdGroup = value.IdGroup;
+            }
+        }
+
+        UnitModel _selectedUnit;
+
+        public UnitModel SelectedUnit
+        {
+            get
+            {
+                return _selectedUnit;
+            }
+            set
+            {
+                _selectedUnit = value;
+                if (value != null)
+                    IdUnit = value.Id;
+            }
+        }
     }
 }

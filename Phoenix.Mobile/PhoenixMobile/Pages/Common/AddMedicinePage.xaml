@@ -77,7 +77,8 @@
                                 ItemsSource="{Binding Groups}"
                                 Grid.Row="4"
                                 Grid.Column="1"
-                                ItemDisplayBinding="{Binding IdGroup}">
+                                 SelectedItem="{Binding SelectedMedicine}"
+                                ItemDisplayBinding="{Binding Name}">
                            
                         </Picker>
                               
@@ -129,11 +130,12 @@
                                 WidthRequest="100" 
                                 FontSize="Medium" 
                                 Text="Đơn vị tính"/>
-                        <Picker x:DataType="common:AddMedicinePageModel" 
+                        <Picker 
                                 ItemsSource="{Binding Units}"
                                 Grid.Row="8"
                                 Grid.Column="1"
-                                ItemDisplayBinding="{Binding Id}">
+                                SelectedItem="{Binding SelectedUnit}"
+                                ItemDisplayBinding="{Binding Name}">
 
                         </Picker>
                     </Grid>

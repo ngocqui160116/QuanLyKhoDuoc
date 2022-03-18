@@ -10,7 +10,6 @@ namespace Phoenix.Server.Services.MainServices.Media.Models
     {
         public bool IsOk { get; set; }
         public string Message { get; set; }
-
         public ImageModel Image { get; set; }
     }
 }

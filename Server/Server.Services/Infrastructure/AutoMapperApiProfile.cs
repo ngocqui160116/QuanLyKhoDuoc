@@ -33,6 +33,7 @@ namespace Phoenix.Server.Services.Infrastructure
                 .ForMember(d => d.DateInput, o => o.MapFrom(s => s.Input.DateInput))
                 .ForMember(d => d.SDK, o => o.MapFrom(s => s.Medicine.RegistrationNumber));
             CreateMap<Medicine, MedicineDto>()
+                .ForMember(d => d.ImageUrl, o => o.MapFrom(s => s.Medicine_Image.AbsolutePath))
                 .ForMember(d => d.GroupName, o => o.MapFrom(s => s.Group.Name))
                 .ForMember(d => d.NameUnit, o => o.MapFrom(s => s.Unit.Name));
 

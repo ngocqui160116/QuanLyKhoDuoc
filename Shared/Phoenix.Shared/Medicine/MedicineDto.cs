@@ -19,5 +19,6 @@ namespace Phoenix.Shared.Medicine
         public string SupplierName { get; set; }
         public string GroupName { get; set; }
         public string NameUnit { get; set; }
+        public string ImageUrl { get; set; }
     }
 }
