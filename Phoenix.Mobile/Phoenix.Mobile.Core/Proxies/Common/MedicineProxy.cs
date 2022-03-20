@@ -1,6 +1,7 @@
 ﻿using Phoenix.Framework.Core;
 using Phoenix.Mobile.Core.Framework;
 using Phoenix.Shared.Common;
+using Phoenix.Shared.Core;
 using Phoenix.Shared.Medicine;
 using Refit;
 using System;
@@ -14,7 +15,8 @@ namespace Phoenix.Mobile.Core.Proxies.Common
     {
         Task<BaseResponse<MedicineDto>> GetAllMedicine(MedicineRequest request);
         Task<MedicineDto> AddMedicine(MedicineRequest request);
-        Task<MedicineDto> UpdateMedicine(int IdMedicine, MedicineRequest request);
+        Task<CrudResult> UpdateMedicine(int IdMedicine, MedicineRequest request);
+        Task<CrudResult> DeleteMedicine(int IdMedicine);
     }
 
     public class MedicineProxy : BaseProxy, IMedicineProxy
@@ -48,20 +50,35 @@ namespace Phoenix.Mobile.Core.Proxies.Common
                 return new MedicineDto();
             }
         }
-
-        public async Task<MedicineDto> UpdateMedicine(int IdMedicine,MedicineRequest request)
+        public async Task<CrudResult> UpdateMedicine(int IdMedicine,MedicineRequest request)
         {
             try
             {
                 var api = RestService.For<IMedicineApi>(GetHttpClient());
                 var result = await api.UpdateMedicine(IdMedicine, request);
-                if (result == null) return new MedicineDto();
+                if (result == null) return new CrudResult();
                 return result;
             }
             catch (Exception ex)
             {
                 ExceptionHandler.Handle(new NetworkException(ex), true);
-                return new MedicineDto();
+                return new CrudResult();
+            }
+        }
+
+        public async Task<CrudResult> DeleteMedicine(int IdMedicine)
+        {
+            try
+            {
+                var api = RestService.For<IMedicineApi>(GetHttpClient());
+                var result = await api.DeleteMedicine(IdMedicine);
+                if (result == null) return new CrudResult();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler.Handle(new NetworkException(ex), true);
+                return new CrudResult();
             }
         }
 
@@ -74,7 +91,10 @@ namespace Phoenix.Mobile.Core.Proxies.Common
             Task<MedicineDto> AddMedicine([Body] MedicineRequest request);
 
             [Post("/medicine/UpdateMedicine")]
-            Task<MedicineDto> UpdateMedicine([Body] int IdMedicine, MedicineRequest request);
+            Task<CrudResult> UpdateMedicine(int IdMedicine, [Body]  MedicineRequest request);
+            
+            [Delete("/medicine/DeleteMedicine")]
+            Task<CrudResult> DeleteMedicine(int IdMedicine);
         }
 
     }

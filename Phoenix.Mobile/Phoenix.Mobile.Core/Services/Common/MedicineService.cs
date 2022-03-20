@@ -1,6 +1,7 @@
 ﻿using Phoenix.Mobile.Core.Models.Medicine;
 using Phoenix.Mobile.Core.Proxies.Common;
 using Phoenix.Mobile.Core.Utils;
+using Phoenix.Shared.Core;
 using Phoenix.Shared.Medicine;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -11,7 +12,8 @@ namespace Phoenix.Mobile.Core.Services.Common
     {
         Task<List<MedicineModel>> GetAllMedicine(MedicineRequest request);
         Task<MedicineModel> AddMedicine(MedicineRequest request);
-        Task<MedicineModel> UpdateMedicine(int IdMedicine, MedicineRequest request);
+        Task<CrudResult> UpdateMedicine(int IdMedicine, MedicineRequest request);
+        Task<CrudResult> DeleteMedicine(int IdMedicine);
     }
 
     public class MedicineService : IMedicineService
@@ -31,10 +33,15 @@ namespace Phoenix.Mobile.Core.Services.Common
             var data = await _MedicineProxy.AddMedicine(request);
             return data.MapTo<MedicineModel>();
         }
-        public async Task<MedicineModel> UpdateMedicine(int IdMedicine, MedicineRequest request)
+     
+        public Task<CrudResult> DeleteMedicine(int IdMedicine)
         {
-            var data = await _MedicineProxy.UpdateMedicine(IdMedicine, request);
-            return data.MapTo<MedicineModel>();
+            return _MedicineProxy.DeleteMedicine(IdMedicine);
+        }
+
+        public Task<CrudResult> UpdateMedicine(int IdMedicine, MedicineRequest request)
+        {
+            return _MedicineProxy.UpdateMedicine(IdMedicine, request);
         }
     }
 }

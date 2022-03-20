@@ -17,6 +17,7 @@ namespace Phoenix.Mobile.PageModels.Common
     {
         private readonly ISupplierService _supplierService;
         private readonly IDialogService _dialogService;
+        public ObservableCollection<SupplierModel> Supplier { get; set; }
         public SupplierPageModel(ISupplierService supplierService, IDialogService dialogService)
         {
             _supplierService = supplierService;
@@ -25,7 +26,8 @@ namespace Phoenix.Mobile.PageModels.Common
 
         public override async void Init(object initData)
         {
-            base.Init(initData);
+            Supplier = new ObservableCollection<SupplierModel>(Suppliers);
+            //base.Init(initData);
             NavigationPage.SetHasNavigationBar(CurrentPage, false);
             CurrentPage.Title = "Nhà cung cấp";
         }
@@ -47,6 +49,32 @@ namespace Phoenix.Mobile.PageModels.Common
                 Suppliers = data;
                 //RaisePropertyChanged("Suppliers");
                 RaisePropertyChanged(nameof(Suppliers));
+            }
+        }
+
+        SupplierModel _selectedSupplier;
+
+        public SupplierModel SelectedSupplier
+        {
+            get
+            {
+                return _selectedSupplier;
+            }
+            set
+            {
+                _selectedSupplier = value;
+                if (value != null)
+                    SupplierSelected.Execute(value);
+            }
+        }
+
+        public Command<SupplierModel> SupplierSelected
+        {
+            get
+            {
+                return new Command<SupplierModel>(async (supplier) => {
+                    await CoreMethods.PushPageModel<EditSupplierPageModel>(supplier);
+                });
             }
         }
 
@@ -73,16 +101,6 @@ namespace Phoenix.Mobile.PageModels.Common
         }
         #endregion
 
-        #region SelectedItemCommand
-
-        public Command SelectedItemCommand => new Command(async (p) => await SelectedItemCommandExecute(), (p) => !IsBusy);
-
-        private async Task SelectedItemCommandExecute()
-        {
-
-            await CoreMethods.PushPageModel<EditSupplierPageModel>();
-        }
-        #endregion
 
        
     }

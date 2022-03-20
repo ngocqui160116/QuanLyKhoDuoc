@@ -86,7 +86,7 @@ namespace Phoenix.Mobile.PageModels.Common
         #region properties
         public List<MedicineModel> Medicines { get; set; } = new List<MedicineModel>();
         public MedicineRequest request { get; set; } = new MedicineRequest();
-
+        public int IdMedicine { get; set; }
         #endregion
 
         #region AddMedicineCommand
@@ -98,6 +98,7 @@ namespace Phoenix.Mobile.PageModels.Common
             await CoreMethods.PushPageModel<AddMedicinePageModel>();
         }
         #endregion
-       
+
+
     }
 }

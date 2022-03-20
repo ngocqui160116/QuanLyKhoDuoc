@@ -7,6 +7,7 @@ using Phoenix.Shared.Input;
 using Phoenix.Shared.InputInfo;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -18,6 +19,8 @@ namespace Phoenix.Mobile.PageModels.Common
         private readonly IInputInfoService _inputInfoService;
         private readonly IDialogService _dialogService;
 
+        public ObservableCollection<InputInfoDto> Input { get; set; }
+
         public InputPageModel(IInputInfoService InputInfoService, IDialogService dialogService)
         {
             _inputInfoService = InputInfoService;
@@ -27,7 +30,8 @@ namespace Phoenix.Mobile.PageModels.Common
 
         public override async void Init(object initData)
         {
-            base.Init(initData);
+            Input = new ObservableCollection<InputInfoDto>(Inputs);
+            //base.Init(initData);
             NavigationPage.SetHasNavigationBar(CurrentPage, false);
             CurrentPage.Title = "Danh sách phiếu nhập";
         }
@@ -68,15 +72,30 @@ namespace Phoenix.Mobile.PageModels.Common
         }
         #endregion
 
-        #region SelectedItemCommand
+        InputModel _selectedInput;
 
-        public Command SelectedItemCommand => new Command(async (p) => await SelectedItemCommandExecute(), (p) => !IsBusy);
-
-        private async Task SelectedItemCommandExecute()
+        public InputModel SelectedInput
         {
-
-            await CoreMethods.PushPageModel<InputInfoPageModel>();
+            get
+            {
+                return _selectedInput;
+            }
+            set
+            {
+                _selectedInput = value;
+                if (value != null)
+                    InputSelected.Execute(value);
+            }
         }
-        #endregion
+
+        public Command<InputModel> InputSelected
+        {
+            get
+            {
+                return new Command<InputModel>(async (Input) => {
+                    await CoreMethods.PushPageModel<InputInfoPageModel>(Input);
+                });
+            }
+        }
     }
 }

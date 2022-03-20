@@ -1,4 +1,5 @@
-﻿using Phoenix.Mobile.Core.Infrastructure;
+﻿using Phoenix.Framework.Extensions;
+using Phoenix.Mobile.Core.Infrastructure;
 using Phoenix.Mobile.Core.Models.Group;
 using Phoenix.Mobile.Core.Models.Unit;
 using Phoenix.Mobile.Core.Services.Common;
@@ -78,31 +79,20 @@ namespace Phoenix.Mobile.PageModels.Common
             {
                 if (IsBusy) return;
                 IsBusy = true;
-                //if (Name.IsNullOrEmpty())
-                //{
-                //    await _dialogService.AlertAsync("Vui lòng nhập tên nhà cung cấp");
-                //    IsBusy = false;
-                //    return;
-                //}
+                if (Name.IsNullOrEmpty())
+                {
+                    await _dialogService.AlertAsync("Vui lòng nhập tên thuốc");
+                    IsBusy = false;
+                    return;
+                }
 
-                //if (PhoneNumber.IsNullOrEmpty())
-                //{
-                //    await _dialogService.AlertAsync("Vui lòng nhập số điện thoại");
-                //    IsBusy = false;
-                //    return;
-                //}
-                //if (Email.IsNullOrEmpty())
-                //{
-                //    await _dialogService.AlertAsync("Vui lòng nhập email");
-                //    IsBusy = false;
-                //    return;
-                //}
-                //if (Address.IsNullOrEmpty())
-                //{
-                //    await _dialogService.AlertAsync("Vui lòng nhập địa chỉ");
-                //    IsBusy = false;
-                //    return;
-                //}
+                if (SDK.IsNullOrEmpty())
+                {
+                    await _dialogService.AlertAsync("Vui lòng nhập số đăng ký");
+                    IsBusy = false;
+                    return;
+                }
+                
                 var data = await _medicineService.AddMedicine(new MedicineRequest
                 {
                     RegistrationNumber = SDK,
@@ -161,7 +151,8 @@ namespace Phoenix.Mobile.PageModels.Common
         {
             get
             {
-                return _selectedGroup;
+
+                return _selectedGroup = Groups[0];
             }
             set
             {
@@ -176,7 +167,7 @@ namespace Phoenix.Mobile.PageModels.Common
         {
             get
             {
-                return _selectedUnit;
+                return _selectedUnit = Units[0];
             }
             set
             {

@@ -28,14 +28,9 @@
                       BackgroundColor="#ecf0f1"
                       SeparatorVisibility="None"
                       HorizontalOptions="FillAndExpand"
-                      VerticalOptions="FillAndExpand">
-                
-                <ListView.Behaviors>
-                    <behaviors:EventToCommandBehavior EventName="ItemTapped"
-                                      Command="{Binding SelectedItemCommand}"
-                                      CommandParameter="{Binding .}"
-                                     />
-                </ListView.Behaviors>
+                      VerticalOptions="FillAndExpand"
+                      SelectedItem="{Binding SelectedInput}">
+
                 <ListView.ItemTemplate>
 
                     <DataTemplate x:DataType="inputinfo:InputInfoModel">

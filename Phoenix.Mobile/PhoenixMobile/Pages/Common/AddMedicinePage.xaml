@@ -13,12 +13,7 @@
     <ContentPage.Content>
        
         <StackLayout BackgroundColor="WhiteSmoke">
-            <StackLayout Orientation="Horizontal" BackgroundColor="White">
-                <SearchBar WidthRequest="500"  
-                           x:Name="Search" 
-                           Placeholder="Tìm thuốc">
-                </SearchBar>
-            </StackLayout>
+            
             <StackLayout HeightRequest="25"
                          WidthRequest="50">
             </StackLayout>
@@ -57,28 +52,30 @@
                         <Label  Grid.Row="3"
                                 Grid.Column="0" 
                                 Margin="10,5,0,0" 
-                                WidthRequest="100" 
+                                WidthRequest="115" 
                                 FontSize="Medium" 
-                                Text="Số đăng ký"/>
+                                Text="Số đăng ký*"/>
                         <Entry  Grid.Row="3"
                                 Grid.Column="1" 
                                 Text="{Binding SDK}"
                                 Placeholder="Nhập số đăng ký"
                                 WidthRequest="200" 
-                                Keyboard="Numeric"/>
+                                Keyboard="Text"/>
 
                         <Label  Grid.Row="4"
                                 Grid.Column="0" 
                                 Margin="10,5,0,0" 
-                                WidthRequest="100" 
+                                WidthRequest="115" 
                                 FontSize="Medium" 
-                                Text="Nhóm thuốc"/>
+                                Text="Nhóm thuốc*"/>
                         <Picker x:DataType="common:AddMedicinePageModel" 
                                 ItemsSource="{Binding Groups}"
                                 Grid.Row="4"
                                 Grid.Column="1"
-                                SelectedItem="{Binding SelectedGroup}"
-                                ItemDisplayBinding="{Binding Name}">
+                                Title="{Binding Name}"
+                                TitleColor="Black"
+                                ItemDisplayBinding="{Binding Name}"
+                                SelectedItem="{Binding SelectedGroup}">
                            
                         </Picker>
                               
@@ -115,7 +112,7 @@
                                 Margin="10,5,0,0" 
                                 WidthRequest="100" 
                                 FontSize="Medium" 
-                                Text="Đóng gói"/>
+                                Text="QC Đóng gói"/>
                         <Entry  Grid.Row="7"
                                 Grid.Column="1"  
                                 TextColor="Black"
@@ -127,15 +124,17 @@
                         <Label  Grid.Row="8"
                                 Grid.Column="0" 
                                 Margin="10,5,0,0" 
-                                WidthRequest="100" 
+                                WidthRequest="115" 
                                 FontSize="Medium" 
-                                Text="Đơn vị tính"/>
+                                Text="Đơn vị tính*"/>
                         <Picker 
                                 ItemsSource="{Binding Units}"
                                 Grid.Row="8"
                                 Grid.Column="1"
-                                SelectedItem="{Binding SelectedUnit}"
-                                ItemDisplayBinding="{Binding Name}">
+                                Title="{Binding  NameUnit}"
+                                TitleColor="Black"
+                                ItemDisplayBinding="{Binding Name}"
+                                SelectedItem="{Binding SelectedUnit}">
 
                         </Picker>
                     </Grid>

@@ -56,6 +56,24 @@ namespace Phoenix.Mobile.PageModels.Common
 
         private async Task LoadData()
         {
+            if (IsBusy) return;
+            IsBusy = true;
+#if DEBUG
+            IdMedicine = Medicine.IdMedicine;
+            SDK = Medicine.RegistrationNumber;
+            Name = Medicine.Name;
+            NameGroup = Medicine.GroupName;
+            Active = Medicine.Active;
+            Content = Medicine.Content;
+            Packing = Medicine.Packing;
+            NameUnit = Medicine.NameUnit;
+            IdUnit = Medicine.IdUnit;
+            IdGroup = Medicine.IdGroup;
+           
+#endif
+            IsBusy = false;
+
+
             var data = await _groupService.GetAllGroup(request);
             if (data == null)
             {
@@ -106,47 +124,24 @@ namespace Phoenix.Mobile.PageModels.Common
         #endregion
 
         #region UpdateMedicineCommand
-        public Command UpdateMedicineCommand => new Command(async (p) => await EpdateMedicineExecute(), (p) => !IsBusy);
-        private async Task EpdateMedicineExecute()
+        public Command UpdateMedicineCommand => new Command(async (p) => await UpdateMedicineExecute(), (p) => !IsBusy);
+        private async Task UpdateMedicineExecute()
         {
             try
             {
                 if (IsBusy) return;
                 IsBusy = true;
-                //if (Name.IsNullOrEmpty())
-                //{
-                //    await _dialogService.AlertAsync("Vui lòng nhập tên nhà cung cấp");
-                //    IsBusy = false;
-                //    return;
-                //}
 
-                //if (PhoneNumber.IsNullOrEmpty())
-                //{
-                //    await _dialogService.AlertAsync("Vui lòng nhập số điện thoại");
-                //    IsBusy = false;
-                //    return;
-                //}
-                //if (Email.IsNullOrEmpty())
-                //{
-                //    await _dialogService.AlertAsync("Vui lòng nhập email");
-                //    IsBusy = false;
-                //    return;
-                //}
-                //if (Address.IsNullOrEmpty())
-                //{
-                //    await _dialogService.AlertAsync("Vui lòng nhập địa chỉ");
-                //    IsBusy = false;
-                //    return;
-                //}
                 var data = await _medicineService.UpdateMedicine(IdMedicine, new MedicineRequest
                 {
+                    IdMedicine = IdMedicine,
                     RegistrationNumber = SDK,
                     Name = Name,
-                    IdGroup = SelectedGroup.IdGroup,
+                    IdGroup = IdGroup,
                     Active = Active,
                     Content = Content,
                     Packing = Packing,
-                    IdUnit = SelectedUnit.Id
+                    IdUnit = IdUnit
                 });
                 await CoreMethods.PushPageModel<MedicinePageModel>();
                 await _dialogService.AlertAsync("Cập nhật thành công");
@@ -159,6 +154,8 @@ namespace Phoenix.Mobile.PageModels.Common
             }
         }
         #endregion
+
+       
 
 
         #region properties
@@ -204,6 +201,29 @@ namespace Phoenix.Mobile.PageModels.Common
                     IdUnit = value.Id;
             }
         }
+
+        #region DeleteMedicineCommand
+        public Command DeleteMedicineCommand => new Command(async (p) => await DeleteMedicineExecute(), (p) => !IsBusy);
+        private async Task DeleteMedicineExecute()
+        {
+            //await CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn:" + IdMedicine, "Đóng");
+            try
+            {
+                if (IsBusy) return;
+                IsBusy = true;
+
+                var data = await _medicineService.DeleteMedicine(IdMedicine);
+                await CoreMethods.PushPageModel<MedicinePageModel>();
+                await _dialogService.AlertAsync("Xóa thành công");
+                IsBusy = false;
+
+            }
+            catch (Exception e)
+            {
+                await _dialogService.AlertAsync("Xóa thất bại");
+            }
+        }
+        #endregion
 
     }
 }
