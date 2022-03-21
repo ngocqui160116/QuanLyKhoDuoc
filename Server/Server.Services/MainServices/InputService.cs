@@ -17,6 +17,8 @@ namespace Phoenix.Server.Services.MainServices
     public interface IInputService
     {
         Task<BaseResponse<InputDto>> GetAllInput(InputRequest request);
+        //Task<InputInfo> GetInput(string Id);
+        //List<InputDto> GetInput(InputRequest request);
         Task<CrudResult> CreateInput(InputRequest request);
         Task<CrudResult> UpdateInput(string Id, InputRequest request);
         Task<CrudResult> DeleteInput(string Id);
@@ -39,6 +41,11 @@ namespace Phoenix.Server.Services.MainServices
                 // setup query
                 var query = _dataContext.Inputs.AsQueryable();
 
+                if (!string.IsNullOrEmpty(request.Id))
+                {
+                    query = query.Where(d => d.Id.Contains(request.Id));
+                }
+
                 query = query.OrderByDescending(d => d.Id);
 
                 var data = await query.Skip(request.Page * request.PageSize).Take(request.PageSize).ToListAsync();
@@ -52,6 +59,21 @@ namespace Phoenix.Server.Services.MainServices
 
             return result;
         }
+
+
+        //public List<InputDto> GetInput(InputInfoRequest request)
+        //{
+        //    //setup query
+        //    var query = _dataContext.Inputs.AsQueryable();
+        //    //filter
+
+        //    query = query.Include(d => d.)
+        //            .Where(d => d.Id.Contains(request.Id));
+
+
+        //    var data = query.ToList();
+        //    return data.MapTo<InputInfoDto>();
+        //}
 
         // Task<CrudResult> CreateInput(InputRequest request);
         public async Task<CrudResult> CreateInput(InputRequest request)

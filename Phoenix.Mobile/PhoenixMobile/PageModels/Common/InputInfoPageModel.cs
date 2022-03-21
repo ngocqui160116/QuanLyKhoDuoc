@@ -1,7 +1,9 @@
 ﻿using Phoenix.Mobile.Core.Infrastructure;
+using Phoenix.Mobile.Core.Models.Input;
 using Phoenix.Mobile.Core.Models.InputInfo;
 using Phoenix.Mobile.Core.Services.Common;
 using Phoenix.Mobile.Helpers;
+using Phoenix.Shared.InputInfo;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -26,11 +28,11 @@ namespace Phoenix.Mobile.PageModels.Common
             //base.Init(initData);
             if (initData != null)
             {
-                InputInfo = (InputInfoModel)initData;
+                Input = (InputModel)initData;
             }
             else
             {
-                InputInfo = new InputInfoModel();
+                Input = new InputModel();
             }
             NavigationPage.SetHasNavigationBar(CurrentPage, false);
             CurrentPage.Title = "Chi tiết phiếu nhập";
@@ -46,40 +48,37 @@ namespace Phoenix.Mobile.PageModels.Common
             if (IsBusy) return;
             IsBusy = true;
 #if DEBUG
-            //Id = InputInfo.IdInput;
-            //SDK = InputInfo.RegistrationNumber;
-            //Name = InputInfo.Name;
-            //NameGroup = InputInfo.GroupName;
-            //Active = InputInfo.Active;
-            //Content = InputInfo.Content;
-            //Packing = InputInfo.Packing;
-            //NameUnit = InputInfo.NameUnit;
-            //IdUnit = InputInfo.IdUnit;
-            //IdGroup = InputInfo.IdGroup;
-
+            request.Id = Input.Id;
+            IdInput = Input.Id;
 #endif
             IsBusy = false;
 
-
-
+            var data = await _inputInfoService.GetAllInputInfo(request);
+            if (data == null)
+            {
+                await _dialogService.AlertAsync("Lỗi kết nối mạng!", "Lỗi", "OK");
+            }
+            else
+            {
+                InputInfos = data;
+                //RaisePropertyChanged("Vendors");
+                RaisePropertyChanged(nameof(InputInfos));
+            }
         }
 
         #region properties
+        public InputModel Input { get; set; }
+        public List<InputInfoModel> InputInfos { get; set; } = new List<InputInfoModel>();
+        public InputInfoRequest request { get; set; } = new InputInfoRequest();
         public bool IsEnabled { get; set; } = false;
-        public InputInfoModel InputInfo { get; set; }
-
+        //public InputInfoModel InputInfo { get; set; }
         public string SearchText { get; set; }
-        public int IdInput { get; set; }
-        public string SDK { get; set; }
-        public string Name { get; set; }
-        public int IdGroup { get; set; }
-        public string Active { get; set; }
-        public string Content { get; set; }
-        public string Packing { get; set; }
-        public int IdUnit { get; set; }
-        public string NameGroup { get; set; }
-        public string NameUnit { get; set; }
-
+        public string IdInput { get; set; }
+        public string SupplierName { get; set; }
+        public string Status { get; set; }
+        public string DateInput { get; set; }
+        public string NameStaff { get; set; }
+        public double Total { get; set; }
         #endregion
     }
 }

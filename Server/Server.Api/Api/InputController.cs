@@ -21,10 +21,18 @@ namespace Phoenix.Server.Api.Api
 
         [HttpPost]
         [Route("GetAllInput")]
-        public async Task<BaseResponse<InputDto>> GetAllInput([FromBody] InputRequest request)
+        public async Task<BaseResponse<InputDto>> GetAllInput( [FromBody] InputRequest request)
         {
             return await _InputService.GetAllInput(request);
         }
+
+        //[HttpPost]
+        //[Route("GetInput")]
+        //public List<InputDto> GetInput(InputRequest request)
+        //{
+        //    return _InputService.GetInput(request);
+        //}
+        
 
         [HttpPost]
         [Route("CreateInput")]

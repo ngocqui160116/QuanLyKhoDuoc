@@ -5,9 +5,9 @@
              xmlns:input="clr-namespace:Phoenix.Mobile.Core.Models.Input;assembly=Phoenix.Mobile.Core"
              x:Class="Phoenix.Mobile.Pages.Common.InputPage"
              x:DataType="common:InputPageModel"
-             xmlns:inputinfo="clr-namespace:Phoenix.Mobile.Core.Models.InputInfo;assembly=Phoenix.Mobile.Core"
              NavigationPage.HasNavigationBar="False"
-             xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" xmlns:behaviors="clr-namespace:Phoenix.Framework.Core;assembly=Phoenix.Framework"
+             xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
+             xmlns:behaviors="clr-namespace:Phoenix.Framework.Core;assembly=Phoenix.Framework"
              ControlTemplate="{StaticResource FullScreenHasBack}">
     <ContentPage.Content>
         <StackLayout >
@@ -33,11 +33,11 @@
 
                 <ListView.ItemTemplate>
 
-                    <DataTemplate x:DataType="inputinfo:InputInfoModel">
+                    <DataTemplate x:DataType="input:InputModel">
                         <ViewCell>
                             <StackLayout Margin="6,4,6,4"
                                  BackgroundColor="White">
-                                <Label Text="{Binding InputId}"
+                                <Label Text="{Binding Id}"
                                    Margin="8"
                                    FontAttributes="Bold"
                                    FontSize="Medium" />

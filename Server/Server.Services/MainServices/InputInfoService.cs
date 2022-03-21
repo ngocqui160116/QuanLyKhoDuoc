@@ -102,7 +102,7 @@ namespace Phoenix.Server.Services.MainServices
             var InputInfo = new InputInfo();
             InputInfo.IdInput = request.Id;
             InputInfo.IdMedicine = request.IdMedicine;
-            InputInfo.IdSupplier = request.IdSupplier;
+            //InputInfo.IdSupplier = request.IdSupplier;
             InputInfo.IdBatch = request.IdBatch;
             InputInfo.Count = request.Count;
             InputInfo.InputPrice = request.InputPrice;
@@ -120,7 +120,7 @@ namespace Phoenix.Server.Services.MainServices
         {
             var InputInfo = _dataContext.InputInfos.Find(Id);
             InputInfo.IdMedicine = request.IdMedicine;
-            InputInfo.IdSupplier = request.IdSupplier;
+           // InputInfo.IdSupplier = request.IdSupplier;
             InputInfo.IdBatch = request.IdBatch;
             InputInfo.DateOfManufacture = request.DateOfManufacture;
             InputInfo.DueDate = request.DueDate;

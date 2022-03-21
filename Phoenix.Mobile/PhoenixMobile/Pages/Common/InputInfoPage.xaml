@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
              ControlTemplate="{StaticResource FullScreenHasBack}"
-             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:inputinfo="clr-namespace:Phoenix.Mobile.Core.Models.InputInfo;assembly=Phoenix.Mobile.Core" 
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" 
+             xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common" x:DataType="common:InputInfoPageModel"
              x:Class="Phoenix.Mobile.Pages.Common.InputInfoPage">
     <ContentPage.Content>
         <StackLayout BackgroundColor="WhiteSmoke">
@@ -12,7 +14,7 @@
                          WidthRequest="50">
             </StackLayout>
 
-            <Frame CornerRadius="15"  >
+            <Frame CornerRadius="15">
                 <StackLayout  BackgroundColor="White">
                     <Grid IsEnabled="False" x:Name="Grid">
                         <Grid.RowDefinitions>
@@ -37,6 +39,7 @@
                         <Entry  Grid.Row="1"
                                 Grid.Column="1"
                                 TextColor="Black"
+                                Text="{Binding IdInput}"
                                 Placeholder="VN-001"
                                 WidthRequest="200" 
                                  />
