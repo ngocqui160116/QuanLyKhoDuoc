@@ -37,6 +37,7 @@ namespace Phoenix.Server.Services.MainServices
                 {
                     query = query.Where(d => d.NameReason.Contains(request.NameReason));
                 }
+                query = query.OrderByDescending(d => d.IdReason);
 
                 var data = await query.Skip(request.Page * request.PageSize).Take(request.PageSize).ToListAsync();
                 result.DataCount = (int)((await query.CountAsync()) / request.PageSize) + 1;

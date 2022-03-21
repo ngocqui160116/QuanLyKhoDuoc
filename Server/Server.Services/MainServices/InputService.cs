@@ -4,6 +4,7 @@ using Phoenix.Server.Services.Database;
 using Phoenix.Shared.Common;
 using Phoenix.Shared.Core;
 using Phoenix.Shared.Input;
+using Phoenix.Shared.InputInfo;
 using Phoenix.Shared.Vendor;
 using System;
 using System.Collections.Generic;
@@ -37,8 +38,6 @@ namespace Phoenix.Server.Services.MainServices
             {
                 // setup query
                 var query = _dataContext.Inputs.AsQueryable();
-
-                
 
                 query = query.OrderByDescending(d => d.Id);
 

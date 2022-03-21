@@ -32,11 +32,6 @@ namespace Phoenix.Server.Services.Database
         public virtual DbSet<Staff> Staffs { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
         public virtual DbSet<Unit> Units { get; set; }
-       
-       
-     
-
-
 
         #endregion
 

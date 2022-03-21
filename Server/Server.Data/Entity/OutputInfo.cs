@@ -8,6 +8,7 @@ namespace Phoenix.Server.Data.Entity
     public class OutputInfo
     {
         [Key]
+        public int Id { get; set; }
         public string IdOutput { get; set; }
         [ForeignKey("IdOutput")]
         public virtual Output Output { get; set; }
@@ -15,7 +16,7 @@ namespace Phoenix.Server.Data.Entity
         [ForeignKey("IdMedicine")]
         public virtual Medicine Medicine { get; set; }
 
-        public string IdInputInfo { get; set; }
+        public int IdInputInfo { get; set; }
         [ForeignKey("IdInputInfo")]
         public virtual InputInfo InputInfo { get; set; }
         public int IdReason { get; set; }

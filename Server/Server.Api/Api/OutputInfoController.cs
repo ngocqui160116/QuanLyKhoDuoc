@@ -4,6 +4,7 @@ using Phoenix.Server.Services.MainServices.Auth;
 using Phoenix.Shared.Common;
 using Phoenix.Shared.Core;
 using Phoenix.Shared.OutputInfo;
+
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -35,16 +36,16 @@ namespace Phoenix.Server.Api.Api
 
         [HttpPost]
         [Route("UpdateOutputInfo")]
-        public Task<CrudResult> UpdateOutputInfo(string IdOutput, [FromBody] OutputInfoRequest request)
+        public Task<CrudResult> UpdateOutputInfo(int Id, [FromBody] OutputInfoRequest request)
         {
-            return _OutputInfoService.UpdateOutputInfo(IdOutput, request);
+            return _OutputInfoService.UpdateOutputInfo(Id, request);
         }
 
         [HttpDelete]
         [Route("DeleteOutputInfo")]
-        public Task<CrudResult> DeleteOutputInfo(string IdOutput)
+        public Task<CrudResult> DeleteOutputInfo(int Id)
         {
-            return _OutputInfoService.DeleteOutputInfo(IdOutput);
+            return _OutputInfoService.DeleteOutputInfo(Id);
         }
 
     }

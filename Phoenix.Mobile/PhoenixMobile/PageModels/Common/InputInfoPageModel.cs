@@ -46,16 +46,16 @@ namespace Phoenix.Mobile.PageModels.Common
             if (IsBusy) return;
             IsBusy = true;
 #if DEBUG
-            Id = InputInfo.IdInput;
-            SDK = InputInfo.RegistrationNumber;
-            Name = InputInfo.Name;
-            NameGroup = InputInfo.GroupName;
-            Active = InputInfo.Active;
-            Content = InputInfo.Content;
-            Packing = InputInfo.Packing;
-            NameUnit = InputInfo.NameUnit;
-            IdUnit = InputInfo.IdUnit;
-            IdGroup = InputInfo.IdGroup;
+            //Id = InputInfo.IdInput;
+            //SDK = InputInfo.RegistrationNumber;
+            //Name = InputInfo.Name;
+            //NameGroup = InputInfo.GroupName;
+            //Active = InputInfo.Active;
+            //Content = InputInfo.Content;
+            //Packing = InputInfo.Packing;
+            //NameUnit = InputInfo.NameUnit;
+            //IdUnit = InputInfo.IdUnit;
+            //IdGroup = InputInfo.IdGroup;
 
 #endif
             IsBusy = false;

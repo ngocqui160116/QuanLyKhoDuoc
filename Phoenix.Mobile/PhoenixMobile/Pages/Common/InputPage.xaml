@@ -37,7 +37,7 @@
                         <ViewCell>
                             <StackLayout Margin="6,4,6,4"
                                  BackgroundColor="White">
-                                <Label Text="{Binding IdInput}"
+                                <Label Text="{Binding InputId}"
                                    Margin="8"
                                    FontAttributes="Bold"
                                    FontSize="Medium" />

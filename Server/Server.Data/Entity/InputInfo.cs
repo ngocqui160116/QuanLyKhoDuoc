@@ -8,6 +8,7 @@ namespace Phoenix.Server.Data.Entity
     public class InputInfo
     {
         [Key]
+        public int Id { get; set; }
         public string IdInput { get; set; }
         [ForeignKey("IdInput")]
         public virtual Input Input { get; set; }

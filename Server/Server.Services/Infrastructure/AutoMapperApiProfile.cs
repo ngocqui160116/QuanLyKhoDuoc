@@ -29,7 +29,7 @@ namespace Phoenix.Server.Services.Infrastructure
                 .ForMember(d => d.NameStaff, o => o.MapFrom(s => s.Staff.Name));
             CreateMap<InputInfo, InputInfoDto>()
                 //.ForMember(d => d.NameSupplier, o => o.MapFrom(s => s.Supplier.Name))
-                //.ForMember(d => d.NameMedicine, o => o.MapFrom(s => s.Medicine.Name))
+                .ForMember(d => d.InputId, o => o.MapFrom(s => s.Input.Id))
                 .ForMember(d => d.DateInput, o => o.MapFrom(s => s.Input.DateInput))
                 .ForMember(d => d.SDK, o => o.MapFrom(s => s.Medicine.RegistrationNumber));
             CreateMap<Medicine, MedicineDto>()
@@ -40,7 +40,7 @@ namespace Phoenix.Server.Services.Infrastructure
             CreateMap<Output, OutputDto>()
                 .ForMember(d => d.NameStaff, o => o.MapFrom(s => s.Staff.Name));
             CreateMap<OutputInfo, OutputInfoDto>()
-                .ForMember(d => d.Reason, o => o.MapFrom(s => s.Reason.NameReason))
+                //.ForMember(d => d.Reason, o => o.MapFrom(s => s.Reason.NameReason))
                 .ForMember(d => d.MedicineName, o => o.MapFrom(s => s.Medicine.Name));
             CreateMap<Staff, StaffDto>();
 
