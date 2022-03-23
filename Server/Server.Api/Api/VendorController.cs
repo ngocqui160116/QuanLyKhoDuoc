@@ -21,12 +21,14 @@ namespace Phoenix.Server.Api.Api
             _vendorService = vendorService;
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("GetImage")]
         public Medicine_Image GetImageById(int id)
         {
             return _vendorService.GetImageById(id);
         }
+
+      
 
     }
 }

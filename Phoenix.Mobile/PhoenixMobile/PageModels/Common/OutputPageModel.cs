@@ -1,7 +1,9 @@
 ﻿using Phoenix.Mobile.Core.Infrastructure;
+using Phoenix.Mobile.Core.Models.Output;
 using Phoenix.Mobile.Core.Models.OutputInfo;
 using Phoenix.Mobile.Core.Services.Common;
 using Phoenix.Mobile.Helpers;
+using Phoenix.Shared.Output;
 using Phoenix.Shared.OutputInfo;
 using System;
 using System.Collections.Generic;
@@ -13,12 +15,12 @@ namespace Phoenix.Mobile.PageModels.Common
 {
     public class OutputPageModel : BasePageModel 
     {
-        private readonly IOutputInfoService _OutputInfoService;
+        private readonly IOutputService _OutputService;
         private readonly IDialogService _dialogService;
 
-        public OutputPageModel(IOutputInfoService OutputInfoService, IDialogService dialogService)
+        public OutputPageModel(IOutputService OutputService, IDialogService dialogService)
         {
-            _OutputInfoService = OutputInfoService;
+            _OutputService = OutputService;
             _dialogService = dialogService;
 
         }
@@ -37,7 +39,7 @@ namespace Phoenix.Mobile.PageModels.Common
 
         private async Task LoadData()
         {
-            var data = await _OutputInfoService.GetAllOutputInfo(request);
+            var data = await _OutputService.GetAllOutput(request);
             if (data == null)
             {
                 await _dialogService.AlertAsync("Lỗi kết nối mạng!", "Lỗi", "OK");
@@ -51,8 +53,8 @@ namespace Phoenix.Mobile.PageModels.Common
         }
 
         #region properties
-        public List<OutputInfoModel> Outputs { get; set; } = new List<OutputInfoModel>();
-        public OutputInfoRequest request { get; set; } = new OutputInfoRequest();
+        public List<OutputModel> Outputs { get; set; } = new List<OutputModel>();
+        public OutputRequest request { get; set; } = new OutputRequest();
 
         #endregion
 

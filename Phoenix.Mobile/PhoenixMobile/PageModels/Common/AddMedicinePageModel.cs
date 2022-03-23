@@ -1,5 +1,6 @@
 ﻿using Phoenix.Framework.Extensions;
 using Phoenix.Mobile.Core.Infrastructure;
+using Phoenix.Mobile.Core.Models.Common;
 using Phoenix.Mobile.Core.Models.Group;
 using Phoenix.Mobile.Core.Models.Unit;
 using Phoenix.Mobile.Core.Services;
@@ -13,6 +14,7 @@ using Plugin.Media.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -144,20 +146,89 @@ namespace Phoenix.Mobile.PageModels.Common
         GroupModel _selectedGroup;
 
         UnitModel _selectedUnit;
+        public ImageSource image { get; set; }
 
 
         #endregion
 
-        #region TakePictureCommand
+        #region TakeCameraCommand
 
-        public Command TakePictureCommand => new Command(async (p) => await TakePictureExecute(), (p) => !IsBusy);
+        public Command TakeCameraCommand => new Command(async (p) => await TakeCameraExecute(), (p) => !IsBusy);
 
-        private async Task TakePictureExecute()
+        private async Task TakeCameraExecute()
         {
-            await _cameraService.TakeByCamera();
+            if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+            {
+                await CoreMethods.DisplayAlert("No Camera", ":( No camera available.", "OK");
+                return;
+            }
+
+            var file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
+            {
+                Directory = "Test",
+                SaveToAlbum = true,
+                CompressionQuality = 75,
+                CustomPhotoSize = 50,
+                PhotoSize = PhotoSize.MaxWidthHeight,
+                MaxWidthHeight = 2000,
+                DefaultCamera = CameraDevice.Front
+            });
+
+            if (file == null)
+                return;
+
+            var result = new BinaryAsset();
+
+            //CoreMethods.DisplayAlert("File Location", file.Path, "OK");
+
+            image = ImageSource.FromStream(() =>
+            {
+                var stream = file.GetStream();
+                file.Dispose();
+                return stream;
+            });
+
+            //using (var ms = new MemoryStream())
+            //{
+            //    file.GetStream().CopyTo(ms);
+            //    result.Path = file.Path;
+            //    result.Content = ms.ToArray();
+            //    //result.Ext = file.Path.GetFileType();
+            //}
+
         }
         #endregion
 
+
+        #region TakeImageCommand
+
+        public Command TakeImageCommand => new Command(async (p) => await TakeImageExecute(), (p) => !IsBusy);
+
+        private async Task TakeImageExecute()
+        {
+            if (!CrossMedia.Current.IsPickPhotoSupported)
+            {
+                await CoreMethods.DisplayAlert("Photos Not Supported", ":( Permission not granted to photos.", "OK");
+                return;
+            }
+            var file = await CrossMedia.Current.PickPhotoAsync(new PickMediaOptions
+            {
+                PhotoSize = PhotoSize.Medium,
+
+            });
+
+
+            if (file == null)
+                return;
+
+            image = ImageSource.FromStream(() =>
+            {
+                var stream = file.GetStream();
+                file.Dispose();
+                return stream;
+            });
+        }
+        #endregion
 
         public GroupModel SelectedGroup
         {

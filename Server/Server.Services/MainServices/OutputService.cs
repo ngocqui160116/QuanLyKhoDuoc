@@ -37,7 +37,10 @@ namespace Phoenix.Server.Services.MainServices
                 // setup query
                 var query = _dataContext.Outputs.AsQueryable();
 
-
+                if (!string.IsNullOrEmpty(request.Id))
+                {
+                    query = query.Where(d => d.Id.Contains(request.Id));
+                }
 
                 query = query.OrderByDescending(d => d.Id);
 

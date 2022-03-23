@@ -16,48 +16,28 @@
 
             <StackLayout HeightRequest="50"
                          WidthRequest="50" Orientation="Horizontal">
-                <Label Text="Danh sách thuốc"
+                <Label Text="Hình ảnh thuốc"
                        FontSize="Medium"
                        Margin="5,10,5,10"
                        FontAttributes="Bold"/>
                 <ImageButton Source="@drawable/camera" 
                              WidthRequest="30" 
                              BackgroundColor="WhiteSmoke"
-                             xe:Commands.Tap="{Binding TakePictureCommand}"/>
+                             xe:Commands.Tap="{Binding TakeCameraCommand}"/>
                 <ImageButton Source="@drawable/image" 
                              WidthRequest="30" 
-                             BackgroundColor="WhiteSmoke"/>
+                             BackgroundColor="WhiteSmoke"
+                             xe:Commands.Tap="{Binding TakeImageCommand}"/>
             </StackLayout>
  
                 <Frame CornerRadius="15" >
-                    <StackLayout  BackgroundColor="Black">
-                        <ListView
-                        
-                              HeightRequest="150"
-                              HasUnevenRows="True"
-                              BackgroundColor="#ecf0f1"
-                              SeparatorVisibility="None"
-                             >
-
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <ViewCell>
-                                        <StackLayout Margin="6,4,6,4"
-                                                     BackgroundColor="White">
-                                            <Label Text="Panaldo"
-                                                   Margin="8"
-                                                   FontAttributes="Bold"
-                                                   FontSize="Small" />
-
-                                            <Label Text="HSD"
-                                                       Margin="8,2,8,4"
-                                                       FontSize="Small"/>
-                                        </StackLayout>
-                                    </ViewCell>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
-                    </StackLayout>
+                    <StackLayout  BackgroundColor="White"
+                                   HeightRequest="100">
+                    <Image Source="{Binding image}"
+                           WidthRequest="75"
+                           HorizontalOptions="Start"
+                           Margin="5,10,5,10"/>
+                </StackLayout>
                 </Frame>
           
             

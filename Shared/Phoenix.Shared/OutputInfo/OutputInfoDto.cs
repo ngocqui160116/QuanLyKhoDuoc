@@ -14,6 +14,6 @@ namespace Phoenix.Shared.OutputInfo
         public string Status { get; set; }
         //add
         public string MedicineName { get; set; }
-        public string Reason { get; set; }
+        public string NameReason { get; set; }
     }
 }

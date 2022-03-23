@@ -15,12 +15,8 @@ namespace Phoenix.Shared.Input
         public string NameStaff { get; set; }
         public string SupplierName { get; set; }
 
-        //public InputDto()
-        //{
-        //    InputInfo = new HashSet<InputInfoDto>();
-        //}
+
         public List<InputInfoDto> InputInfo { get; set; }
-        //public virtual ICollection<InputInfoDto> InputInfo { get; set; }
-        //public virtual InputInfoDto InputInfo { get; set; }
+
     }
 }

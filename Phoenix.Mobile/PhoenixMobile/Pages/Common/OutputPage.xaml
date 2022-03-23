@@ -1,10 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             xmlns:outputinfo="clr-namespace:Phoenix.Mobile.Core.Models.OutputInfo;assembly=Phoenix.Mobile.Core"
              x:Class="Phoenix.Mobile.Pages.Common.OutputPage"
              NavigationPage.HasNavigationBar="False"
-             xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common" x:DataType="common:OutputPageModel"
+             xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
+             xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common" 
+             xmlns:output="clr-namespace:Phoenix.Mobile.Core.Models.Output;assembly=Phoenix.Mobile.Core"
+             x:DataType="common:OutputPageModel"
              ControlTemplate="{StaticResource FullScreenHasBack}">
     <ContentPage.Content>
         <StackLayout >
@@ -20,28 +22,32 @@
                              Source="icon_add"/>
             </StackLayout>
 
-            <ListView 
+            <ListView ItemsSource="{Binding Outputs}"
                       HasUnevenRows="True"
                       BackgroundColor="#ecf0f1"
                       SeparatorVisibility="None"
                       HorizontalOptions="FillAndExpand"
-                      VerticalOptions="FillAndExpand">
+                      VerticalOptions="FillAndExpand"
+                      >
 
                 <ListView.ItemTemplate>
 
-                    <DataTemplate x:DataType="outputinfo:OutputInfoModel">
+                    <DataTemplate x:DataType="output:OutputModel">
                         <ViewCell>
                             <StackLayout Margin="6,4,6,4"
                                  BackgroundColor="White">
-                                <Label
+                                <Label Text="{Binding Id}"
                                    Margin="8"
                                    FontAttributes="Bold"
                                    FontSize="Medium" />
                                 <StackLayout Orientation="Horizontal">
-                                    <Label
+                                    <Label Text="Người tạo:"
                                            Margin="8,2,8,4"
                                            FontSize="Small" />
-                                    <Label 
+                                    <Label Text="{Binding NameStaff}"
+                                           Margin="0,2,8,4"
+                                           FontSize="Small" />
+                                    <Label Text="{Binding DateOutput}"
                                            HorizontalOptions="EndAndExpand"
                                            TextColor="ForestGreen"
                                            FontAttributes="Bold"

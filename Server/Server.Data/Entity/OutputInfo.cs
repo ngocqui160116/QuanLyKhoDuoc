@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -24,8 +25,8 @@ namespace Phoenix.Server.Data.Entity
         public virtual Reason Reason { get; set; }
         public int Count { get; set; }
         public double Total { get; set; }
-        public string Status { get; set; }
+        public bool Status { get; set; }
 
-       
+        
     }
 }
