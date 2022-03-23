@@ -3,15 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
              ControlTemplate="{StaticResource FullScreenHasBack}"
-             xmlns:inputinfo="clr-namespace:Phoenix.Mobile.Core.Models.InputInfo;assembly=Phoenix.Mobile.Core" 
              xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" 
-             xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common" x:DataType="common:InputInfoPageModel"
+             xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common" 
+             xmlns:inputinfo="clr-namespace:Phoenix.Shared.InputInfo;assembly=Phoenix.Shared" x:DataType="common:InputInfoPageModel"
              x:Class="Phoenix.Mobile.Pages.Common.InputInfoPage">
     <ContentPage.Content>
         <StackLayout BackgroundColor="WhiteSmoke">
 
-            <StackLayout HeightRequest="25"
+            <StackLayout HeightRequest="50"
                          WidthRequest="50">
+                <Label Text="Thông tin phiếu nhập"
+                       FontSize="Medium"
+                       Margin="5,10,5,10"
+                       FontAttributes="Bold"/>
             </StackLayout>
 
             <Frame CornerRadius="15">
@@ -47,29 +51,18 @@
                         <Label  Grid.Row="2"
                                 Grid.Column="0" 
                                 Margin="10,5,0,0"                               
-                                WidthRequest="100" 
+                                WidthRequest="115" 
                                 FontSize="Medium" 
                                 Text="Nhà cung cấp"/>
                         <Entry  Grid.Row="2"
                                 Grid.Column="1"
                                 TextColor="Black"
-                                Placeholder="Panaldo"
+                               Text="{Binding SupplierName}"
                                 WidthRequest="200" 
                                  />
 
-                        <Label  Grid.Row="3"
-                                Grid.Column="0" 
-                                Margin="10,5,0,0" 
-                                WidthRequest="100" 
-                                FontSize="Medium" 
-                                Text="Trạng thái"/>
-                        <Entry  Grid.Row="3"
-                                Grid.Column="1"  
-                                Placeholder="VN-001"
-                                WidthRequest="200" 
-                                Keyboard="Text"/>
 
-                        <Label  Grid.Row="4"
+                        <Label  Grid.Row="3"
                                 Grid.Column="0" 
                                 Margin="10,5,0,0" 
                                 WidthRequest="100" 
@@ -77,38 +70,23 @@
                                 Text="Ngày nhập"/>
                         <DatePicker 
                                 Format="dd/MM/yyyy"
-                                Grid.Row="4"
-                                Grid.Column="1"
+                                Grid.Row="3"
+                                Grid.Column="1"/>
 
-                                />
-
-                        <Label  Grid.Row="5"
-                                Grid.Column="0" 
-                                Margin="10,5,0,0" 
-                                WidthRequest="95" 
-                                FontSize="Medium" 
-                                Text="Ghi chú"/>
-                        <Entry  Grid.Row="5"
-                                Grid.Column="1"
-                                TextColor="Black"
-                                Placeholder="VN-001"
-                                WidthRequest="200"                         
-                                Keyboard="Text"/>
-
-                        <Label  Grid.Row="6"
+                        <Label  Grid.Row="4"
                                 Grid.Column="0" 
                                 Margin="10,5,0,0" 
                                 WidthRequest="100" 
                                 FontSize="Medium" 
                                 Text="Người tạo"/>
-                        <Entry  Grid.Row="6"
+                        <Entry  Grid.Row="4"
                                 Grid.Column="1"
                                 TextColor="Black"
-                                Placeholder="VN-001"
+                                Text="{Binding NameStaff}"
                                 WidthRequest="200"                         
                                 Keyboard="Text"/>
 
-                        <Label  Grid.Row="7"
+                        <!--<Label  Grid.Row="7"
                                 Grid.Column="0" 
                                 Margin="10,5,0,0" 
                                 WidthRequest="100" 
@@ -119,10 +97,72 @@
                                 TextColor="Black"
                                 Placeholder="VN-001"
                                 WidthRequest="200"                         
-                                Keyboard="Text"/>
+                                Keyboard="Text"/>-->
                     </Grid>
                 </StackLayout>
+
             </Frame>
+
+            <StackLayout HeightRequest="50"
+                         WidthRequest="50">
+                <Label Text="Danh sách thuốc"
+                       FontSize="Medium"
+                       Margin="5,10,5,10"
+                       FontAttributes="Bold"/>
+            </StackLayout>
+            <StackLayout>
+                <ListView ItemsSource="{Binding InputInfos}"
+                      HasUnevenRows="True"
+                      BackgroundColor="#ecf0f1"
+                      SeparatorVisibility="None"
+                      HorizontalOptions="FillAndExpand"
+                      VerticalOptions="FillAndExpand">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="inputinfo:InputInfoDto">
+                            <ViewCell>
+                                <StackLayout Margin="6,4,6,4"
+                                        BackgroundColor="White" Orientation="Vertical">
+                                    <StackLayout Orientation="Horizontal" 
+                                             HorizontalOptions="StartAndExpand" >
+                                        <Image Source="@drawable/icon_medicine"
+                                           WidthRequest="75"
+                                       HorizontalOptions="StartAndExpand"
+                                       VerticalOptions="CenterAndExpand">
+                                        </Image>
+
+                                        <StackLayout Orientation="Vertical"
+                                                 HorizontalOptions="StartAndExpand">
+                                            <Label Text="{Binding MedicineName}"
+                                               Margin="8"
+                                               FontAttributes="Bold"
+                                               FontSize="Large" />
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label Text="Số Lô:"
+                                           Margin="8,2,8,4"
+                                           FontSize="Small" />
+                                                <Label Text="{Binding IdBatch}"
+                                        Margin="2,2,8,4"
+                                        TextColor="DarkSlateGray"
+                                        FontSize="Small" />
+                                            </StackLayout>
+
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label Text="HSD:"
+                                       Margin="8,2,8,4"
+                                       FontSize="Small" />
+                                                <Label Text="{Binding DueDate}"
+                                        Margin="2,2,8,4"
+                                        TextColor="DarkSlateGray"  
+                                        FontSize="Small" />
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

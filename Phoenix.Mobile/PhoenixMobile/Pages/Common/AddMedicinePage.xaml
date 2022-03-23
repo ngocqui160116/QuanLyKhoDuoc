@@ -13,9 +13,60 @@
     <ContentPage.Content>
        
         <StackLayout BackgroundColor="WhiteSmoke">
+
+            <StackLayout HeightRequest="50"
+                         WidthRequest="50" Orientation="Horizontal">
+                <Label Text="Danh sách thuốc"
+                       FontSize="Medium"
+                       Margin="5,10,5,10"
+                       FontAttributes="Bold"/>
+                <ImageButton Source="@drawable/camera" 
+                             WidthRequest="30" 
+                             BackgroundColor="WhiteSmoke"
+                             xe:Commands.Tap="{Binding TakePictureCommand}"/>
+                <ImageButton Source="@drawable/image" 
+                             WidthRequest="30" 
+                             BackgroundColor="WhiteSmoke"/>
+            </StackLayout>
+ 
+                <Frame CornerRadius="15" >
+                    <StackLayout  BackgroundColor="Black">
+                        <ListView
+                        
+                              HeightRequest="150"
+                              HasUnevenRows="True"
+                              BackgroundColor="#ecf0f1"
+                              SeparatorVisibility="None"
+                             >
+
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <StackLayout Margin="6,4,6,4"
+                                                     BackgroundColor="White">
+                                            <Label Text="Panaldo"
+                                                   Margin="8"
+                                                   FontAttributes="Bold"
+                                                   FontSize="Small" />
+
+                                            <Label Text="HSD"
+                                                       Margin="8,2,8,4"
+                                                       FontSize="Small"/>
+                                        </StackLayout>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
+                </Frame>
+          
             
-            <StackLayout HeightRequest="25"
+            <StackLayout HeightRequest="50"
                          WidthRequest="50">
+                <Label Text="Thông tin phiếu nhập"
+                       FontSize="Medium"
+                       Margin="5,10,5,10"
+                       FontAttributes="Bold"/>
             </StackLayout>
 
             <Frame CornerRadius="15" >

@@ -34,21 +34,7 @@ namespace Phoenix.Mobile.Core.Proxies.Common
             }
         }
 
-        //public async Task<List<InputDto>> GetInput(string Id)
-        //{
-        //    try
-        //    {
-        //        var api = RestService.For<IInputApi>(GetHttpClient());
-        //        var result = await api.GetInput(Id);
-        //        if (result == null) return new List<InputDto>();
-        //        return result;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        ExceptionHandler.Handle(new NetworkException(ex), true);
-        //        return null;
-        //    }
-        //}
+       
         public async Task<InputDto> AddInput(InputRequest request)
         {
             try

@@ -71,7 +71,6 @@ namespace Phoenix.Mobile.PageModels.Common
                     MedicineSelected.Execute(value);
             }
         }
-
         public Command<MedicineModel> MedicineSelected
         {
             get

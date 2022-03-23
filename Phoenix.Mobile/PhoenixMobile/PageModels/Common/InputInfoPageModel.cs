@@ -48,35 +48,28 @@ namespace Phoenix.Mobile.PageModels.Common
             if (IsBusy) return;
             IsBusy = true;
 #if DEBUG
-            request.Id = Input.Id;
+            InputInfos = Input.InputInfo;
+
             IdInput = Input.Id;
+            SupplierName = Input.SupplierName;
+            NameStaff = Input.NameStaff;
+            DateInput = Input.DateInput;
+
 #endif
             IsBusy = false;
 
-            var data = await _inputInfoService.GetAllInputInfo(request);
-            if (data == null)
-            {
-                await _dialogService.AlertAsync("Lỗi kết nối mạng!", "Lỗi", "OK");
-            }
-            else
-            {
-                InputInfos = data;
-                //RaisePropertyChanged("Vendors");
-                RaisePropertyChanged(nameof(InputInfos));
-            }
         }
+
 
         #region properties
         public InputModel Input { get; set; }
-        public List<InputInfoModel> InputInfos { get; set; } = new List<InputInfoModel>();
-        public InputInfoRequest request { get; set; } = new InputInfoRequest();
-        public bool IsEnabled { get; set; } = false;
-        //public InputInfoModel InputInfo { get; set; }
+        public List<InputInfoDto> InputInfos { get; set; }
+
         public string SearchText { get; set; }
         public string IdInput { get; set; }
         public string SupplierName { get; set; }
         public string Status { get; set; }
-        public string DateInput { get; set; }
+        public DateTime DateInput { get; set; }
         public string NameStaff { get; set; }
         public double Total { get; set; }
         #endregion

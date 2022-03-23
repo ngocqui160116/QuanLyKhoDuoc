@@ -2,11 +2,14 @@
 using Phoenix.Mobile.Core.Infrastructure;
 using Phoenix.Mobile.Core.Models.Group;
 using Phoenix.Mobile.Core.Models.Unit;
+using Phoenix.Mobile.Core.Services;
 using Phoenix.Mobile.Core.Services.Common;
 using Phoenix.Mobile.Helpers;
 using Phoenix.Shared.Group;
 using Phoenix.Shared.Medicine;
 using Phoenix.Shared.Unit;
+using Plugin.Media;
+using Plugin.Media.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,6 +23,7 @@ namespace Phoenix.Mobile.PageModels.Common
     public class AddMedicinePageModel : BasePageModel
     {
         private readonly IGroupService _groupService;
+        private readonly ICameraService _cameraService;
         private readonly IUnitService _unitService;
         private readonly IMedicineService _medicineService;
         private readonly IDialogService _dialogService;
@@ -144,9 +148,17 @@ namespace Phoenix.Mobile.PageModels.Common
 
         #endregion
 
-       
+        #region TakePictureCommand
 
-        
+        public Command TakePictureCommand => new Command(async (p) => await TakePictureExecute(), (p) => !IsBusy);
+
+        private async Task TakePictureExecute()
+        {
+            await _cameraService.TakeByCamera();
+        }
+        #endregion
+
+
         public GroupModel SelectedGroup
         {
             get
@@ -176,5 +188,7 @@ namespace Phoenix.Mobile.PageModels.Common
                     IdUnit = value.Id;
             }
         }
+
+        
     }
 }

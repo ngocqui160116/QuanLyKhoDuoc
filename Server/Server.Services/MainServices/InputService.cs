@@ -60,22 +60,6 @@ namespace Phoenix.Server.Services.MainServices
             return result;
         }
 
-
-        //public List<InputDto> GetInput(InputInfoRequest request)
-        //{
-        //    //setup query
-        //    var query = _dataContext.Inputs.AsQueryable();
-        //    //filter
-
-        //    query = query.Include(d => d.)
-        //            .Where(d => d.Id.Contains(request.Id));
-
-
-        //    var data = query.ToList();
-        //    return data.MapTo<InputInfoDto>();
-        //}
-
-        // Task<CrudResult> CreateInput(InputRequest request);
         public async Task<CrudResult> CreateInput(InputRequest request)
         {
             var Input = new Input();

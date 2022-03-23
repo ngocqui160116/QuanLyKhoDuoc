@@ -51,6 +51,7 @@ namespace Phoenix.Mobile.PageModels.Common
             else
             {
                 Inputs = data;
+                
                 //RaisePropertyChanged("Vendors");
                 RaisePropertyChanged(nameof(Inputs));
             }
@@ -94,8 +95,8 @@ namespace Phoenix.Mobile.PageModels.Common
             get
             {
                 return new Command<InputModel>(async (Input) => {
-                    await CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn"+SelectedInput.Id, "Đóng");
-                    //await CoreMethods.PushPageModel<InputInfoPageModel>(Input);
+                    //await CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn"+SelectedInput.Id, "Đóng");
+                    await CoreMethods.PushPageModel<InputInfoPageModel>(Input);
                 });
             }
         }
