@@ -8,8 +8,10 @@ using Phoenix.Shared.Input;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace Phoenix.Mobile.PageModels.Common
@@ -58,7 +60,7 @@ namespace Phoenix.Mobile.PageModels.Common
         }
 
         #region properties
-        public List<InputModel> Inputs { get; set; } = new List<InputModel>();
+        public static List<InputModel> Inputs { get; set; } = new List<InputModel>();
         public InputRequest request { get; set; } = new InputRequest();
 
 
@@ -73,6 +75,8 @@ namespace Phoenix.Mobile.PageModels.Common
             await CoreMethods.PushPageModel<AddInputPageModel>();
         }
         #endregion
+
+        #region SelectInput
 
         InputModel _selectedInput;
 
@@ -100,5 +104,35 @@ namespace Phoenix.Mobile.PageModels.Common
                 });
             }
         }
+        #endregion
+
+        #region Search
+
+        public ICommand PerformSearch => new Command<string>((string query) =>
+        {
+            SearchResults = GetSearchResults(query);
+        });
+
+        // public static List<InputModel> Fruits { get; set; } 
+        public static List<InputModel> GetSearchResults(string queryString)
+        {
+            var normalizedQuery = queryString?.ToLower() ?? "";
+            return Inputs.Where(f => f.Id.ToUpperInvariant().Contains(normalizedQuery)).ToList();
+        }
+
+        List<InputModel> searchResults = Inputs;
+        public List<InputModel> SearchResults
+        {
+            get
+            {
+                return searchResults;
+            }
+            set
+            {
+                searchResults = value;
+            }
+        }
+
+        #endregion
     }
 }

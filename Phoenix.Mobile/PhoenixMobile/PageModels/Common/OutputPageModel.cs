@@ -15,7 +15,7 @@ using Xamarin.Forms;
 
 namespace Phoenix.Mobile.PageModels.Common
 {
-    public class OutputPageModel : BasePageModel 
+    public class OutputPageModel : BasePageModel
     {
         private readonly IOutputService _OutputService;
         private readonly IDialogService _dialogService;
@@ -92,7 +92,8 @@ namespace Phoenix.Mobile.PageModels.Common
         {
             get
             {
-                return new Command<OutputModel>(async (Output) => {
+                return new Command<OutputModel>(async (Output) =>
+                {
                     //await CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn"+SelectedOutput.Id, "Đóng");
                     await CoreMethods.PushPageModel<OutputInfoPageModel>(Output);
                 });
@@ -101,14 +102,14 @@ namespace Phoenix.Mobile.PageModels.Common
         #endregion
 
 
-
+        #region Search
 
         public ICommand PerformSearch => new Command<string>((string query) =>
         {
             SearchResults = GetSearchResults(query);
         });
 
-       // public static List<OutputModel> Fruits { get; set; } 
+        // public static List<OutputModel> Fruits { get; set; } 
         public static List<OutputModel> GetSearchResults(string queryString)
         {
             var normalizedQuery = queryString?.ToLower() ?? "";
@@ -118,7 +119,7 @@ namespace Phoenix.Mobile.PageModels.Common
         List<OutputModel> searchResults = Outputs;
         public List<OutputModel> SearchResults
         {
-           
+
             get
             {
                 return searchResults;
@@ -126,9 +127,11 @@ namespace Phoenix.Mobile.PageModels.Common
             set
             {
                 searchResults = value;
-               
+
             }
         }
+
+        #endregion
 
     }
 }

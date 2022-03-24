@@ -12,10 +12,12 @@
     <ContentPage.Content>
         <StackLayout >
             <StackLayout Orientation="Horizontal">
-                <SearchBar WidthRequest="420"  
-                           x:Name="Search" 
-                           Placeholder="Nhập thông tin">
-                </SearchBar>
+                <SearchBar x:Name="searchBar" WidthRequest="420" 
+                   HorizontalOptions="Fill"
+                   VerticalOptions="CenterAndExpand"
+                   Placeholder="Nhập thông tin"
+                   SearchCommand="{Binding PerformSearch}" 
+                   SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"/>
                 <ImageButton Margin="5,0,0,0"  
                              xe:Commands.Tap="{Binding AddInputCommand}"
                              BackgroundColor="White" 
@@ -23,7 +25,8 @@
                              Source="icon_add"/>
             </StackLayout>
 
-            <ListView ItemsSource="{Binding Inputs}"
+            <ListView ItemsSource="{Binding SearchResults}"
+                      x:Name="searchResults"
                       HasUnevenRows="True"
                       BackgroundColor="#ecf0f1"
                       SeparatorVisibility="None"
