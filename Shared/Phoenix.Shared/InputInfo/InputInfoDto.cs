@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+using System;
+using System.Collections.ObjectModel;
 
 namespace Phoenix.Shared.InputInfo
 {
@@ -22,5 +24,6 @@ namespace Phoenix.Shared.InputInfo
         public string SDK { get; set; }
         public string MedicineName { get; set; }
         public string DateInput { get; set; }
+        
     }
 }

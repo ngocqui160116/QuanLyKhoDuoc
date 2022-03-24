@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -13,8 +14,12 @@ namespace Phoenix.Server.Data.Entity
         [ForeignKey("IdStaff")]
         public virtual Staff Staff { get; set; }
         public DateTime DateOutput { get; set; }
-        
 
+        public int IdReason { get; set; }
+        [ForeignKey("IdReason")]
+        public virtual Reason Reason { get; set; }
+
+        public virtual ICollection<OutputInfo> OutputInfo { get; set; }
     }
     
 }

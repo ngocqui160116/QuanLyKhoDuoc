@@ -38,19 +38,19 @@ namespace Phoenix.Server.Services.MainServices
             {
                 // setup query
                 var query = _dataContext.InputInfos.AsQueryable();
+                var query1 = _dataContext.OutputInfos.AsQueryable();
 
                 // filter
                 if (!string.IsNullOrEmpty(request.IdInput))
                 {
                     query = query.Where(d => d.IdInput.Contains(request.IdInput));
                 }
+                
+                
 
-                if (!string.IsNullOrEmpty(request.Id))
-                {
-                    query = query.Where(d => d.Input.Id.Contains(request.Id));
-                }
 
                 query = query.OrderByDescending(d => d.Id);
+                query = query.OrderByDescending(d => d.IdBatch);
 
                 var data = await query.Skip(request.Page * request.PageSize).Take(request.PageSize).ToListAsync();
                 result.DataCount = (int)((await query.CountAsync()) / request.PageSize) + 1;

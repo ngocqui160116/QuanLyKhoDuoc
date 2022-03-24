@@ -12,6 +12,7 @@ using Phoenix.Shared.OutputInfo;
 using Phoenix.Shared.Supplier;
 using Phoenix.Shared.InputInfo;
 
+
 namespace Phoenix.Server.Services.Infrastructure
 {
     public class AutoMapperApiProfile : Profile
@@ -39,10 +40,13 @@ namespace Phoenix.Server.Services.Infrastructure
                 .ForMember(d => d.NameUnit, o => o.MapFrom(s => s.Unit.Name));
 
             CreateMap<Output, OutputDto>()
+                .ForMember(d => d.NameReason, o => o.MapFrom(s => s.Reason.NameReason))
                 .ForMember(d => d.NameStaff, o => o.MapFrom(s => s.Staff.Name));
             CreateMap<OutputInfo, OutputInfoDto>()
-                .ForMember(d => d.NameReason, o => o.MapFrom(s => s.Reason.NameReason))
+                .ForMember(d => d.DueDate, o => o.MapFrom(s => s.InputInfo.DueDate))
+                .ForMember(d => d.CountInput, o => o.MapFrom(s => s.InputInfo.Count))
                 .ForMember(d => d.MedicineName, o => o.MapFrom(s => s.Medicine.Name));
+
             CreateMap<Staff, StaffDto>();
 
             CreateMap<Supplier, SupplierDto>();

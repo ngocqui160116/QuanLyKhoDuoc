@@ -4,6 +4,7 @@ using Phoenix.Server.Data.Entity;
 using Phoenix.Server.Services.Database;
 using Phoenix.Shared.Common;
 using Phoenix.Shared.Core;
+
 using Phoenix.Shared.OutputInfo;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace Phoenix.Server.Services.MainServices
     public interface IOutputInfoService
     {
         Task<BaseResponse<OutputInfoDto>> GetAllOutputInfo(OutputInfoRequest request);
+
         Task<CrudResult> CreateOutputInfo(OutputInfoRequest request);
         Task<CrudResult> UpdateOutputInfo(int Id, OutputInfoRequest request);
         Task<CrudResult> DeleteOutputInfo(int Id);
@@ -42,7 +44,7 @@ namespace Phoenix.Server.Services.MainServices
                 {
                     query = query.Where(d => d.IdOutput.Contains(request.IdOutput));
                 }
-
+               
 
                 query = query.OrderByDescending(d => d.Id);
 
@@ -57,6 +59,7 @@ namespace Phoenix.Server.Services.MainServices
 
             return result;
         }
+
 
         // Task<CrudResult> CreateOutputInfo(OutputInfoRequest request);
         public async Task<CrudResult> CreateOutputInfo(OutputInfoRequest request)
@@ -73,7 +76,7 @@ namespace Phoenix.Server.Services.MainServices
             OutputInfo.IdOutput = request.Id;
             OutputInfo.IdMedicine = request.IdMedicine;
             OutputInfo.IdInputInfo = request.IdInputInfo;
-            OutputInfo.IdReason = request.IdReason; 
+           
             OutputInfo.Count = request.Count;
             OutputInfo.Total = request.Total;
 

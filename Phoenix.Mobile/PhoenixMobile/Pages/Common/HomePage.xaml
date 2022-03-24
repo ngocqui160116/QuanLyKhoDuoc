@@ -8,6 +8,7 @@
              x:Class="Phoenix.Mobile.Pages.Common.HomePage">
     <ContentPage.Content>
         <StackLayout>
+            
             <Grid RowSpacing="5" ColumnSpacing="5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>

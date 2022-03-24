@@ -28,11 +28,6 @@ namespace Phoenix.Server.Api.Api
             return await _InputInfoService.GetAllInputInfo(request);
         }
 
-        [Route("GetInputInfoById")]
-        public async Task<BaseResponse<InputInfoDto>> GetInputInfoById([FromBody] InputInfoRequest request)
-        {
-            return await _InputInfoService.GetInputInfoById(request);
-        }
 
         [HttpPost]
         [Route("CreateInputInfo")]

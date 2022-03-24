@@ -1,18 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
-             ControlTemplate="{StaticResource FullScreenHasBack}"
-             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" 
              xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common" 
-             xmlns:inputinfo="clr-namespace:Phoenix.Shared.InputInfo;assembly=Phoenix.Shared" x:DataType="common:InputInfoPageModel"
-             x:Class="Phoenix.Mobile.Pages.Common.InputInfoPage">
+             xmlns:Outputinfo="clr-namespace:Phoenix.Shared.OutputInfo;assembly=Phoenix.Shared" 
+             x:DataType="common:OutputInfoPageModel"
+             ControlTemplate="{StaticResource FullScreenHasBack}"
+             x:Class="Phoenix.Mobile.Pages.Common.OutputInfoPage">
     <ContentPage.Content>
         <StackLayout BackgroundColor="WhiteSmoke">
 
             <StackLayout HeightRequest="50"
                          WidthRequest="50">
-                <Label Text="Thông tin phiếu nhập"
+                <Label Text="Thông tin phiếu xuất"
                        FontSize="Medium"
                        Margin="5,10,5,10"
                        FontAttributes="Bold"/>
@@ -43,7 +42,7 @@
                         <Entry  Grid.Row="1"
                                 Grid.Column="1"
                                 TextColor="Black"
-                                Text="{Binding IdInput}"
+                                Text="{Binding IdOutput}"
                                 Placeholder="VN-001"
                                 WidthRequest="200" 
                                  />
@@ -53,11 +52,11 @@
                                 Margin="10,5,0,0"                               
                                 WidthRequest="115" 
                                 FontSize="Medium" 
-                                Text="Nhà cung cấp"/>
+                                Text="Lý do"/>
                         <Entry  Grid.Row="2"
                                 Grid.Column="1"
                                 TextColor="Black"
-                               Text="{Binding SupplierName}"
+                               Text="{Binding NameReason}"
                                 WidthRequest="200" 
                                  />
 
@@ -67,7 +66,7 @@
                                 Margin="10,5,0,0" 
                                 WidthRequest="100" 
                                 FontSize="Medium" 
-                                Text="Ngày nhập"/>
+                                Text="Ngày xuất"/>
                         <DatePicker 
                                 Format="dd/MM/yyyy"
                                 Grid.Row="3"
@@ -111,59 +110,50 @@
                        FontAttributes="Bold"/>
             </StackLayout>
             <StackLayout>
-                <ListView ItemsSource="{Binding InputInfos}"
-                          HasUnevenRows="True"
-                          BackgroundColor="#ecf0f1"
-                          SeparatorVisibility="None"
-                          HorizontalOptions="FillAndExpand"
-                          VerticalOptions="FillAndExpand">
+                <ListView ItemsSource="{Binding OutputInfos}"
+                      HasUnevenRows="True"
+                      BackgroundColor="#ecf0f1"
+                      SeparatorVisibility="None"
+                      HorizontalOptions="FillAndExpand"
+                      VerticalOptions="FillAndExpand">
                     <ListView.ItemTemplate>
-                        <DataTemplate x:DataType="inputinfo:InputInfoDto">
+                        <DataTemplate x:DataType="Outputinfo:OutputInfoDto">
                             <ViewCell>
                                 <StackLayout Margin="6,4,6,4"
-                                             BackgroundColor="White">
+                                        BackgroundColor="White" Orientation="Vertical">
                                     <StackLayout Orientation="Horizontal" 
-                                                 HorizontalOptions="StartAndExpand" >
+                                             HorizontalOptions="StartAndExpand" >
                                         <Image Source="@drawable/icon_medicine"
-                                               WidthRequest="75"
-                                               HorizontalOptions="StartAndExpand"
-                                               VerticalOptions="CenterAndExpand">
+                                           WidthRequest="75"
+                                       HorizontalOptions="StartAndExpand"
+                                       VerticalOptions="CenterAndExpand">
                                         </Image>
 
                                         <StackLayout Orientation="Vertical"
-                                                     HorizontalOptions="StartAndExpand">
+                                                 HorizontalOptions="StartAndExpand">
                                             <Label Text="{Binding MedicineName}"
-                                                       Margin="8"
-                                                       FontAttributes="Bold"
-                                                       FontSize="Large" />
-
-                                            <StackLayout Orientation="Horizontal">
-                                                <Label Text="Giá nhập:"
-                                                       Margin="8,2,8,4"
-                                                       FontSize="Small" />
-                                                <Label Text="{Binding InputPrice}"
-                                                       Margin="8"
-                                                       FontSize="Small" />
-                                            </StackLayout>
-                                            
-
+                                               Margin="8"
+                                               FontAttributes="Bold"
+                                               FontSize="Large" />
                                             <StackLayout Orientation="Horizontal">
                                                 <Label Text="Số Lô:"
-                                                       Margin="8,2,8,4"
-                                                       FontSize="Small" />
-                                                <Label Text="{Binding IdBatch}"
-                                                       Margin="2,2,8,4"
-                                                       TextColor="DarkSlateGray"
-                                                       FontSize="Small" />
-                                                <Label Text="HSD:"
-                                                       Margin="8,2,8,4"
-                                                       FontSize="Small" />
-                                                <Label Text="{Binding DueDate}"
-                                                        Margin="2,2,8,4"
-                                                        TextColor="DarkSlateGray"  
-                                                        FontSize="Small" />
+                                           Margin="8,2,8,4"
+                                           FontSize="Small" />
+                                                <Label Text="{Binding IdInputInfo}"
+                                        Margin="2,2,8,4"
+                                        TextColor="DarkSlateGray"
+                                        FontSize="Small" />
                                             </StackLayout>
 
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label Text="HSD:"
+                                       Margin="8,2,8,4"
+                                       FontSize="Small" />
+                                                <Label Text="{Binding DueDate}"
+                                        Margin="2,2,8,4"
+                                        TextColor="DarkSlateGray"  
+                                        FontSize="Small" />
+                                            </StackLayout>
                                         </StackLayout>
                                     </StackLayout>
                                 </StackLayout>

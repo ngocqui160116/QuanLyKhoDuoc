@@ -48,5 +48,7 @@ namespace Phoenix.Server.Api.Api
             return _OutputInfoService.DeleteOutputInfo(Id);
         }
 
+        
+
     }
 }

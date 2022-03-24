@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -20,13 +21,10 @@ namespace Phoenix.Server.Data.Entity
         public int IdInputInfo { get; set; }
         [ForeignKey("IdInputInfo")]
         public virtual InputInfo InputInfo { get; set; }
-        public int IdReason { get; set; }
-        [ForeignKey("IdReason")]
-        public virtual Reason Reason { get; set; }
+
         public int Count { get; set; }
         public double Total { get; set; }
         public bool Status { get; set; }
 
-        
     }
 }

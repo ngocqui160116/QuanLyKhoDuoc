@@ -7,8 +7,10 @@ using Phoenix.Shared.Output;
 using Phoenix.Shared.OutputInfo;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace Phoenix.Mobile.PageModels.Common
@@ -53,7 +55,7 @@ namespace Phoenix.Mobile.PageModels.Common
         }
 
         #region properties
-        public List<OutputModel> Outputs { get; set; } = new List<OutputModel>();
+        public static List<OutputModel> Outputs { get; set; } = new List<OutputModel>();
         public OutputRequest request { get; set; } = new OutputRequest();
 
         #endregion
@@ -67,5 +69,66 @@ namespace Phoenix.Mobile.PageModels.Common
             await CoreMethods.PushPageModel<AddOutputPageModel>();
         }
         #endregion
+
+        #region SelectedOutput
+
+        OutputModel _selectedOutput;
+
+        public OutputModel SelectedOutput
+        {
+            get
+            {
+                return _selectedOutput;
+            }
+            set
+            {
+                _selectedOutput = value;
+                if (value != null)
+                    OutputSelected.Execute(value);
+            }
+        }
+
+        public Command<OutputModel> OutputSelected
+        {
+            get
+            {
+                return new Command<OutputModel>(async (Output) => {
+                    //await CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn"+SelectedOutput.Id, "Đóng");
+                    await CoreMethods.PushPageModel<OutputInfoPageModel>(Output);
+                });
+            }
+        }
+        #endregion
+
+
+
+
+        public ICommand PerformSearch => new Command<string>((string query) =>
+        {
+            SearchResults = GetSearchResults(query);
+        });
+
+       // public static List<OutputModel> Fruits { get; set; } 
+        public static List<OutputModel> GetSearchResults(string queryString)
+        {
+            var normalizedQuery = queryString?.ToLower() ?? "";
+            return Outputs.Where(f => f.Id.ToUpperInvariant().Contains(normalizedQuery)).ToList();
+        }
+
+        List<OutputModel> searchResults = Outputs;
+        public List<OutputModel> SearchResults
+        {
+           
+            get
+            {
+                return searchResults;
+            }
+            set
+            {
+                searchResults = value;
+               
+            }
+        }
+
     }
 }

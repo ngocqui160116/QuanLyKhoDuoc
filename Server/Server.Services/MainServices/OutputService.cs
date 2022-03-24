@@ -63,7 +63,7 @@ namespace Phoenix.Server.Services.MainServices
             Output.Id = request.Id;
             Output.IdStaff = request.IdStaff;
             Output.DateOutput = request.DateOutput;
-
+            Output.IdReason = request.IdReason;
             _dataContext.Outputs.Add(Output);
             await _dataContext.SaveChangesAsync();
             return new CrudResult() { IsOk = true };
