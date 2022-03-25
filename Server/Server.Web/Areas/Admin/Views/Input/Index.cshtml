@@ -15,7 +15,7 @@
         Nhập kho
     </h2>
     <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
-        <a href="@Url.Action("Create","Project")" class="btn btn-primary text-white shadow-md mr-2">Thêm mới</a>
+        <a href="@Url.Action("Create","Input")" class="btn btn-primary text-white shadow-md mr-2">Thêm mới</a>
     </div>
 </div>
 <div class="grid gap-6 mt-5">
@@ -74,17 +74,15 @@
             },
             placeholder: "Chưa có dữ liệu",
             columns: [
-                { title: "Mã hóa đơn", field: "IdInvoice", sorter: "string", width: 180 },
+                { title: "Mã hóa đơn", field: "Id", sorter: "string", width: 180 },
                 {
-                    title: "Tên", field: "Name", sorter: "string", width: 180, formatter(cell, formatterParams)
+                    title: "Tên người tạo", field: "NameStaff", sorter: "string", width: 250, formatter(cell, formatterParams)
                     {
-                        return `<a href="../Project/Update/${cell.getData().Id}" class="text-theme-1 dark:text-theme-10"> ${cell.getData().NameStaff}</a>`
+                        return `<a href="../Admin/InputInfo/Detail/${cell.getData().IdInput}" class="text-theme-1 dark:text-theme-10"> ${cell.getData().NameStaff}</a>`
                     }
                 },
-                { title: "Ngày tạo", field: "Date", sorter: "date", width: 180, formatter: dateFormatter},
-                { title: "Mã nhân viên", field: "IdStaff", sorter: "string", width: 180 },
-                { title: "Mã khách hàng", field: "IdCustomer", sorter: "string", width: 180 },
-                { title: "Giá", field: "Total", sorter: "string", width: 180 },
+                { title: "Nhà cung cấp", field: "SupplierName", sorter: "string", width: 300 },
+                { title: "Ngày tạo", field: "DateInput", sorter: "date", width: 180, formatter: dateFormatter},
                 @*{
                     title: "Ngày tạo", field: "CreatedAt", sorter: "date", width: 180, formatter: dateFormatter
                 },

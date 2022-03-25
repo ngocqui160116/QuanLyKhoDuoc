@@ -752,6 +752,15 @@
     <Content Include="Areas\Admin\Views\InputInfo\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Unit\Index.cshtml" />
     <Content Include="Areas\Admin\Views\OutputInfo\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Supplier\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Supplier\_CreateOrUpdate.cshtml" />
+    <Content Include="Areas\Admin\Views\Medicine\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Medicine\_CreateOrUpdate.cshtml" />
+    <Content Include="Areas\Admin\Views\Supplier\Update.cshtml" />
+    <Content Include="Areas\Admin\Views\Medicine\Update.cshtml" />
+    <Content Include="Areas\Admin\Views\Input\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Input\_CreateOrUpdate.cshtml" />
+    <Content Include="Areas\Admin\Views\InputInfo\Detail.cshtml" />
     <None Include="assets\js\kendo\2019.3.1023\kendo.all-vsdoc.js" />
     <None Include="assets\js\kendo\2019.3.1023\kendo.all.min.intellisense.js" />
     <Content Include="assets\js\kendo\2019.3.1023\kendo.all.min.js" />
@@ -1205,7 +1214,6 @@
     <Compile Include="Areas\Admin\Controllers\AdminAuthorizeAttribute.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
-    <Compile Include="Areas\Admin\Controllers\CustomerController.cs" />
     <Compile Include="Areas\Admin\Controllers\UnitController.cs" />
     <Compile Include="Areas\Admin\Controllers\GroupController.cs" />
     <Compile Include="Areas\Admin\Controllers\OutputInfoController.cs" />
