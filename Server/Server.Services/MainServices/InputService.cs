@@ -22,6 +22,11 @@ namespace Phoenix.Server.Services.MainServices
         Task<CrudResult> CreateInput(InputRequest request);
         Task<CrudResult> UpdateInput(string Id, InputRequest request);
         Task<CrudResult> DeleteInput(string Id);
+
+        //
+        Task<BaseResponse<InputDto>> Create(InputRequest request);
+        Input GetInputById(string id);
+        //Task<BaseResponse<Input>> Delete(string Id);
     }
     public class InputService : IInputService
     {
@@ -97,5 +102,53 @@ namespace Phoenix.Server.Services.MainServices
             await _dataContext.SaveChangesAsync();
             return new CrudResult() { IsOk = true };
         }
+
+        // 
+        public async Task<BaseResponse<InputDto>> Create(InputRequest request)
+        {
+            var result = new BaseResponse<InputDto>();
+            try
+            {
+                Input inputs = new Input
+                {
+                   //Id = "HD00" + ,
+                   IdStaff = request.IdStaff,
+                   IdSupplier  = request.IdSupplier,
+                   DateInput = request.DateInput
+                };
+                _dataContext.Inputs.Add(inputs);
+                await _dataContext.SaveChangesAsync();
+
+                result.Success = true;
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return result;
+        }
+        public Input GetInputById(string id) => _dataContext.Inputs.Find(id);
+        
+        /*public async Task<BaseResponse<Input>> Delete(string Id)
+        {
+            var result = new BaseResponse<InputDto>();
+            try
+            {
+                var input = GetInputById(Id);
+
+                //input.Status = True;
+                
+                await _dataContext.SaveChangesAsync();
+
+                result.Success = true;
+            }
+            catch (Exception ex)
+            {
+                result.Success = false;
+                result.Message = ex.Message;
+            }
+            return result;
+        }*/
     }
 }

@@ -17,10 +17,14 @@ namespace Phoenix.Server.Services.MainServices
     public interface IInputInfoService
     {
         Task<BaseResponse<InputInfoDto>> GetAllInputInfo(InputInfoRequest request);
-        Task<BaseResponse<InputInfoDto>> GetInputInfoById(InputInfoRequest request);
+        //Task<BaseResponse<InputInfoDto>> GetInputInfoById(InputInfoRequest request);
         Task<CrudResult> CreateInputInfo(InputInfoRequest request);
         Task<CrudResult> UpdateInputInfo(int Id, InputInfoRequest request);
         Task<CrudResult> DeleteInputInfo(int Id);
+
+        //
+        InputInfo GetInputInfoById(string id);
+        Task<BaseResponse<InputInfoDto>> Detail(string IdInput);
     }
     public class InputInfoService : IInputInfoService
     {
@@ -63,8 +67,7 @@ namespace Phoenix.Server.Services.MainServices
 
             return result;
         }
-
-        public async Task<BaseResponse<InputInfoDto>> GetInputInfoById(InputInfoRequest request)
+        /*public async Task<BaseResponse<InputInfoDto>> GetInputInfoById(InputInfoRequest request)
         {
             var result = new BaseResponse<InputInfoDto>();
             try
@@ -84,7 +87,7 @@ namespace Phoenix.Server.Services.MainServices
             }
 
             return result;
-        }
+        }*/
 
 
         // Task<CrudResult> CreateInputInfo(InputInfoRequest request);
@@ -143,6 +146,28 @@ namespace Phoenix.Server.Services.MainServices
             return new CrudResult() { IsOk = true };
         }
 
+        /////////////
+        ///
+        public InputInfo GetInputInfoById(string id) => _dataContext.InputInfos.Find(id);
+        public async Task<BaseResponse<InputInfoDto>> Detail(string IdInput)
+        {
+            var result = new BaseResponse<InputInfoDto>();
+            try
+            {
+                var supplier = GetInputInfoById(IdInput);
+                //supplier.IdSupplier = request.IdSupplier;
+                //supplier.Deleted = true;
+                //_dataContext.Suppliers.Remove(Supplier);
+                await _dataContext.SaveChangesAsync();
 
+                result.Success = true;
+            }
+            catch (Exception ex)
+            {
+                result.Success = false;
+                result.Message = ex.Message;
+            }
+            return result;
+        }
     }
 }

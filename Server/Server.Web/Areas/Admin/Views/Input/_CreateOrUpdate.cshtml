@@ -1,71 +1,21 @@
 ﻿@using Falcon.Web.Mvc.HtmlExtensions
-@model Phoenix.Server.Web.Areas.Admin.Models.Medicine.MedicineModel
+@model Phoenix.Server.Web.Areas.Admin.Models.Input.InputModel
 @Html.ValidationSummary(true)
-@Html.HiddenFor(model => model.IdMedicine)
+@Html.HiddenFor(model => model.Id)
 <div class="grid grid-cols-12 gap-6 mt-5">
     <div class="intro-y col-span-12 lg:col-span-6">
         <div class="intro-y box p-5">
             <div class="mt-3">
-                <label>Tên </label>
+                <label>Tên người tạo </label>
                 <div class="mt-2">
-                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control w-full" } })
-                    @Html.ValidationMessageFor(model => model.Name)
+                    @Html.DropDownList("IdStaff", null, new { @class = "form-control input input--switch border" })
                 </div>
             </div>
             <div class="mt-3">
-                <label>Số đăng ký</label>
+                <label>Nhà cung cấp</label>
                 <div class="mt-2">
-                    @Html.EditorFor(model => model.RegistrationNumber, new { htmlAttributes = new { @class = "form-control w-full" } })
-                    @Html.ValidationMessageFor(model => model.RegistrationNumber)
+                    @Html.DropDownList("IdSupplier", null, new { @class = "form-control input input--switch border" })
                 </div>
-            </div>
-            @*<div>
-                <label>Nhóm</label>
-                @Html.EditorFor(model => model.IdGroup, new { htmlAttributes = new { @class = "input w-full border mt-2" } })
-                @Html.ValidationMessageFor(model => model.IdGroup)
-                </div>*@
-            <div class="mt-3">
-                <label>Nhóm thuốc</label>
-                <div class="mt-2">
-                    @Html.DropDownList("IdGroup", null, new { @class = "form-control input input--switch border" })
-                </div>
-            </div>
-            <div class="mt-3">
-                <label>Hoạt chất</label>
-                <div class="mt-2">
-                    @Html.EditorFor(model => model.Active, new { htmlAttributes = new { @class = "form-control w-full" } })
-                    @Html.ValidationMessageFor(model => model.Active)
-                </div>
-            </div>
-            <div class="mt-3">
-                <label>Hàm lượng</label>
-                <div class="mt-2">
-                    @Html.EditorFor(model => model.Content, new { htmlAttributes = new { @class = "form-control w-full" } })
-                    @Html.ValidationMessageFor(model => model.Content)
-                </div>
-            </div>
-            <div class="mt-3">
-                <label>Quy cách đóng gói</label>
-                <div class="mt-2">
-                    @Html.EditorFor(model => model.Packing, new { htmlAttributes = new { @class = "form-control w-full" } })
-                    @Html.ValidationMessageFor(model => model.Packing)
-                </div>
-            </div>
-            <div class="mt-3">
-                <label>Đơn vị tính</label>
-                <div class="mt-2">
-                    @Html.DropDownList("IdUnit", null, new { @class = "form-control input input--switch border" })
-                </div>
-            </div>
-            @*<div>
-                    <label>Hình ảnh</label>
-                    @Html.EditorFor(model => model.Image, new { htmlAttributes = new { @class = "input w-full border mt-2" } })
-                    @Html.ValidationMessageFor(model => model.Image)
-                </div>*@
-            <div class="mt-3">
-                <label>Trạng thái</label>
-                @Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "form-control w-full" } })
-                @Html.ValidationMessageFor(model => model.Status)
             </div>
         </div>
     </div>
@@ -402,14 +352,14 @@
         </div>
     </div>*@
 <script>
-    $("#IdGroup").kendoComboBox({
+    $("#IdStaff").kendoComboBox({
         dataTextField: "Name",
-        dataValueField: "IdGroup",
+        dataValueField: "IdStaff",
         dataSource: {
             type: "json",
             transport: {
                 read: {
-                    url: "@Html.Raw(Url.Action("List", "Group"))",
+                    url: "@Html.Raw(Url.Action("List", "Staff"))",
                     type: "POST",
                     datatype: "json"
                 }
@@ -421,16 +371,16 @@
             }
         }
     });
-    $("#IdGroup").closest('.k-combobox').addClass("form-control");
+    $("#IdStaff").closest('.k-combobox').addClass("form-control");
     /////////
-    $("#IdUnit").kendoComboBox({
+    $("#IdSupplier").kendoComboBox({
         dataTextField: "Name",
-        dataValueField: "IdUnit",
+        dataValueField: "IdSupplier",
         dataSource: {
             type: "json",
             transport: {
                 read: {
-                    url: "@Html.Raw(Url.Action("List", "Unit"))",
+                    url: "@Html.Raw(Url.Action("List", "Supplier"))",
                     type: "POST",
                     datatype: "json"
                 }
@@ -442,7 +392,7 @@
             }
         }
     });
-    $("#Id").closest('.k-combobox').addClass("form-control");
+    $("#IdSupplier").closest('.k-combobox').addClass("form-control");
     //$("#ProductTypeId").kendoComboBox({
     //    dataTextField: "Name",
     //    dataValueField: "Id",

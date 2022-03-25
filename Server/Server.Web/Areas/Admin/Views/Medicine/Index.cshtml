@@ -15,7 +15,7 @@
         Thuốc
     </h2>
     <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
-        <a href="@Url.Action("Create","Project")" class="btn btn-primary text-white shadow-md mr-2">Thêm mới</a>
+        <a href="@Url.Action("Create","Medicine")" class="btn btn-primary text-white shadow-md mr-2">Thêm mới</a>
     </div>
 </div>
 <div class="grid gap-6 mt-5">
@@ -70,27 +70,32 @@
             },
             placeholder: "Chưa có dữ liệu",
             columns: [
-                { title: "Mã thuốc", field: "IdMedicine", sorter: "string", width: 100 },
+                { title: "Mã thuốc", field: "IdMedicine", sorter: "string", width: 120 },
                 {
                     title: "Tên thuốc", field: "Name", sorter: "string", width: 200, formatter(cell, formatterParams)
                     {
-                        return `<a href="../Project/Update/${cell.getData().Id}" class="text-theme-1 dark:text-theme-10"> ${cell.getData().Name}</a>`
+                        return `<a href="../Admin/Medicine/Update/${cell.getData().IdMedicine}" class="text-theme-1 dark:text-theme-10"> ${cell.getData().Name}</a>`
                     }
                 },
                 { title: "Số đăng ký", field: "RegistrationNumber", sorter: "string", width: 150 },
                 { title: "Tên nhóm thuốc", field: "GroupName", sorter: "string", width: 300 },
                 { title: "Hoạt chất", field: "Active", sorter: "string", width: 180 },
-                { title: "Hàm lượng", field: "Content", sorter: "string", width: 100 },
+                { title: "Hàm lượng", field: "Content", sorter: "string", width: 180 },
                 { title: "Quy cách đóng gói", field: "Packing", sorter: "string", width: 250 },
-                { title: "Tên nhà cung cấp", field: "SupplierName", sorter: "string", width: 200 },
+                //{ title: "Tên nhà cung cấp", field: "SupplierName", sorter: "string", width: 200 },
                @* { title: "Ngày sản xuất", field: "DateOfManufacture", sorter: "date", width: 180, formatter: dateFormatter },
                 { title: "Hạn sử dụng", field: "DueDate", sorter: "date", width: 180, formatter: dateFormatter},
                 { title: "Đơn vị tính", field: "Unit", sorter: "string", width: 180 },
                 { title: "Giá nhập", field: "Price", sorter: "string", width: 180 },
                 { title: "Đơn giá", field: "UnitPrice", sorter: "string", width: 180 },*@
-                { title: "Số lượng", field: "Amount", sorter: "string", width: 100 },
+                //{ title: "Số lượng", field: "Amount", sorter: "string", width: 100 },
                 { title: "Hình ảnh", field: "Image", sorter: "string", width: 180 },
                 { title: "Trạng thái", field: "Status", sorter: "string", width: 180 },
+                {
+                    title: "", field: "IdMedicine", sorter: "string", width: 80, formatter(cell, formatterParams) {
+                        return `<a href="../Admin/Medicine/Update/${cell.getData().IdMedicine}" class="btn btn-primary text-white shadow-md mr-2">Sửa</a>`
+                    }
+                }
                 @*{
                     title: "Ngày tạo", field: "CreatedAt", sorter: "date", width: 180, formatter: dateFormatter
                 },

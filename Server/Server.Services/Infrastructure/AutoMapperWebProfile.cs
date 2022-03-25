@@ -22,16 +22,21 @@ namespace Phoenix.Server.Services.Infrastructure
             CreateMap<Supplier, SupplierDto>();
             CreateMap<Medicine, MedicineDto>()
                 //.ForMember(d => d.SupplierName, o => o.MapFrom(s => s..Name))
-                .ForMember(d => d.GroupName, o => o.MapFrom(s => s.Group.Name)); 
+                .ForMember(d => d.GroupName, o => o.MapFrom(s => s.Group.Name));
             CreateMap<Group, GroupDto>();
             CreateMap<Staff, StaffDto>();
             CreateMap<Input, InputDto>();
             CreateMap<Output, OutputDto>();
             CreateMap<InputInfo, InputInfoDto>()
                .ForMember(d => d.MedicineName, o => o.MapFrom(s => s.Medicine.Name));
-            CreateMap<OutputInfo, OutputInfoDto>();/*
-               .ForMember(d => d.MedicineName, o => o.MapFrom(s => s.Medicine.Name))
-               .ForMember(d => d.CustomerName, o => o.MapFrom(s => s.Customer.Name));*/
+            CreateMap<Input, InputDto>()
+                .ForMember(d => d.NameStaff, o => o.MapFrom(s => s.Staff.Name))
+                .ForMember(d => d.SupplierName, o => o.MapFrom(s => s.Supplier.Name));
+            //.ForMember(d => d.SupplierName, o => o.MapFrom(s => s.Supplier.Name));
+            CreateMap<OutputInfo, OutputInfoDto>()
+               .ForMember(d => d.MedicineName, o => o.MapFrom(s => s.Medicine.Name));
+              // .ForMember(d => d.IdBatch, o => o.MapFrom(s => s.InputInfo.IdBatch))
+               //.ForMember(d => d.Reason, o => o.MapFrom(s => s.Reason.NameReason));
             CreateMap<Unit, UnitDto>();
 
             /*CreateMap<Vendor, VendorDto>()

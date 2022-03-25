@@ -1,4 +1,8 @@
 ﻿using AutoMapper;
+using Phoenix.Server.Data.Entity;
+using Phoenix.Server.Web.Areas.Admin.Models.Input;
+using Phoenix.Server.Web.Areas.Admin.Models.Medicine;
+using Phoenix.Server.Web.Areas.Admin.Models.Supplier;
 
 namespace Phoenix.Server.Web.Infrastructure
 {
@@ -6,6 +10,10 @@ namespace Phoenix.Server.Web.Infrastructure
     {
         public AutoMapperExtendWebProfile()
         {
+            CreateMap<Supplier, SupplierModel>();
+            CreateMap<Medicine, MedicineModel>();
+            CreateMap<Input, InputModel>();
+           
         }
     }
 }
