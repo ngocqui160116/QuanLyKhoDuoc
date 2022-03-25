@@ -13,11 +13,11 @@
         <StackLayout >
             <StackLayout Orientation="Horizontal">
                 <SearchBar x:Name="searchBar" WidthRequest="420" 
-                   HorizontalOptions="Fill"
-                   VerticalOptions="CenterAndExpand"
-                   Placeholder="Nhập thông tin"
-                   SearchCommand="{Binding PerformSearch}" 
-                   SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"/>
+                           HorizontalOptions="Fill"
+                           VerticalOptions="CenterAndExpand"
+                           Placeholder="Nhập thông tin"
+                           SearchCommand="{Binding PerformSearch}" 
+                           SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"/>
                 <ImageButton Margin="5,0,0,0"  
                              xe:Commands.Tap="{Binding AddInputCommand}"
                              BackgroundColor="White" 

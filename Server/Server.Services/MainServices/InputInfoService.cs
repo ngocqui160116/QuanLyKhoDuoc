@@ -17,7 +17,6 @@ namespace Phoenix.Server.Services.MainServices
     public interface IInputInfoService
     {
         Task<BaseResponse<InputInfoDto>> GetAllInputInfo(InputInfoRequest request);
-        Task<BaseResponse<InputInfoDto>> GetInputInfoById(InputInfoRequest request);
         Task<CrudResult> CreateInputInfo(InputInfoRequest request);
         Task<CrudResult> UpdateInputInfo(int Id, InputInfoRequest request);
         Task<CrudResult> DeleteInputInfo(int Id);
@@ -64,27 +63,7 @@ namespace Phoenix.Server.Services.MainServices
             return result;
         }
 
-        public async Task<BaseResponse<InputInfoDto>> GetInputInfoById(InputInfoRequest request)
-        {
-            var result = new BaseResponse<InputInfoDto>();
-            try
-            {
-
-                //setup query
-                var query = _dataContext.InputInfos.AsQueryable();
-                //filter
-                //var data = await query.FirstOrDefaultAsync(d => d.Id == request.Id);
-                var data = await query.FirstOrDefaultAsync(d => d.IdInput == request.IdInput);
-                //var data = await query.FindAsync(request.Id);
-                result.Record = data.MapTo<InputInfoDto>();
-            }
-            catch (Exception ex)
-            {
-
-            }
-
-            return result;
-        }
+       
 
 
         // Task<CrudResult> CreateInputInfo(InputInfoRequest request);
@@ -94,6 +73,7 @@ namespace Phoenix.Server.Services.MainServices
             var Input = new Input();
             Input.Id = request.Id;
             Input.IdStaff = request.IdStaff;
+            Input.IdSupplier = request.IdSupplier;
             Input.DateInput = request.DateInput;
 
             _dataContext.Inputs.Add(Input);

@@ -137,14 +137,7 @@
                                                        FontAttributes="Bold"
                                                        FontSize="Large" />
 
-                                            <StackLayout Orientation="Horizontal">
-                                                <Label Text="Giá nhập:"
-                                                       Margin="8,2,8,4"
-                                                       FontSize="Small" />
-                                                <Label Text="{Binding InputPrice}"
-                                                       Margin="8"
-                                                       FontSize="Small" />
-                                            </StackLayout>
+                                            
                                             
 
                                             <StackLayout Orientation="Horizontal">

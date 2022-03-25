@@ -7,7 +7,8 @@
              xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="Phoenix.Mobile.Pages.Common.AddInputPage"
              x:DataType="common:AddInputPageModel"
-             xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" xmlns:intputinfo="clr-namespace:Phoenix.Mobile.Core.Models.InputInfo;assembly=Phoenix.Mobile.Core"
+             xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
+             xmlns:intputinfo="clr-namespace:Phoenix.Mobile.Core.Models.InputInfo;assembly=Phoenix.Mobile.Core"
              ControlTemplate="{StaticResource FullScreenHasBack}">
     <ContentPage.Content>
         <StackLayout BackgroundColor="WhiteSmoke">
@@ -16,6 +17,7 @@
                    HorizontalOptions="Fill"
                    VerticalOptions="CenterAndExpand"
                    Placeholder="Nhập thông tin"
+                   xe:Commands.Tap="{Binding AddMedicineCommand}"
                    SearchCommand="{Binding PerformSearch}" 
                    SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"/>
             </StackLayout>
@@ -30,14 +32,14 @@
             </StackLayout>
             <Frame CornerRadius="15" >
 
-                <ListView ItemsSource="{Binding SearchResults}" 
-                          HeightRequest="150" BackgroundColor="White"
+                <ListView ItemsSource="{Binding Medicine}" 
+                          HeightRequest="100" BackgroundColor="White"
                           x:Name="searchResults"
                           HasUnevenRows="True"
                           SeparatorVisibility="None"
                           HorizontalOptions="FillAndExpand"
                           VerticalOptions="FillAndExpand"
-                         >
+                          >
 
                     <ListView.ItemTemplate>
 
@@ -53,8 +55,7 @@
                                                VerticalOptions="CenterAndExpand">
                                         </Image>
 
-                                        <StackLayout Orientation="Vertical"
-                                                     HorizontalOptions="StartAndExpand">
+                                        <StackLayout Orientation="Vertical">
                                             <Label Text="{Binding MedicineName}"
                                                        Margin="8"
                                                        FontAttributes="Bold"
@@ -76,8 +77,9 @@
                                                         TextColor="DarkSlateGray"  
                                                         FontSize="Small" />
                                             </StackLayout>
-
                                         </StackLayout>
+                                        
+
                                     </StackLayout>
                                 </StackLayout>
                             </ViewCell>
@@ -149,7 +151,7 @@
             <StackLayout Margin="0,50,0,5">
                 <AbsoluteLayout HorizontalOptions="Center">
                     <Grid xe:TouchEffect.Color="AliceBlue"
-                          >
+                          xe:Commands.Tap="{Binding AddInputCommand}">
                         <forms:CachedImage Source="btn_Save" 
                                            Grid.Row="0"
                                            HeightRequest="50"/>

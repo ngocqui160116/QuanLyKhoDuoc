@@ -235,7 +235,7 @@ namespace Phoenix.Mobile.PageModels.Common
             get
             {
 
-                return _selectedGroup = Groups[0];
+                return _selectedGroup;
             }
             set
             {
@@ -250,7 +250,7 @@ namespace Phoenix.Mobile.PageModels.Common
         {
             get
             {
-                return _selectedUnit = Units[0];
+                return _selectedUnit;
             }
             set
             {

@@ -56,6 +56,8 @@ namespace Phoenix.Mobile.PageModels.Common
             }
         }
 
+        #region SelectMedicine
+
         MedicineModel _selectedMedicine;
 
         public MedicineModel SelectedMedicine
@@ -75,11 +77,14 @@ namespace Phoenix.Mobile.PageModels.Common
         {
             get
             {
-                return new Command<MedicineModel>(async (medicine) => {
-                    await CoreMethods.PushPageModel<EditMedicinePageModel>(medicine);
+                return new Command<MedicineModel>(async (Medicine) => {
+                    await CoreMethods.PushPageModel<EditMedicinePageModel>(Medicine);
+                    await CoreMethods.PushPageModel<AddInputInfoPageModel>();
                 });
             }
         }
+
+        #endregion
 
 
         #region properties
