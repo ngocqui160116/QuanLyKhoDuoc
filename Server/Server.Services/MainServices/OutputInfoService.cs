@@ -36,6 +36,23 @@ namespace Phoenix.Server.Services.MainServices
             var result = new BaseResponse<OutputInfoDto>();
             try
             {
+                //var inputList = _dataContext.InputInfos.Where(p => p.IdInput == request.Id);
+                //var outputList = _dataContext.OutputInfos.Where(p => p.IdOutput == request.Id);
+
+                //int sumInput = 0;
+                //int sumOutput = 0;
+
+                //if (inputList != null)
+                //{
+                //    sumInput = (int)inputList.Sum(p => p.Count);
+                //}
+                //if (outputList != null)
+                //{
+                //    sumOutput = (int)outputList.Sum(p => p.Count);
+                //}
+
+                //int Soluong = sumInput - sumOutput;
+
                 // setup query
                 var query = _dataContext.OutputInfos.AsQueryable();
 
@@ -44,7 +61,10 @@ namespace Phoenix.Server.Services.MainServices
                 {
                     query = query.Where(d => d.IdOutput.Contains(request.IdOutput));
                 }
-               
+                //query = query.Where(d => d.Count.Equals(Soluong));
+
+                
+
 
                 query = query.OrderByDescending(d => d.Id);
 
@@ -56,6 +76,8 @@ namespace Phoenix.Server.Services.MainServices
             {
 
             }
+
+
 
             return result;
         }

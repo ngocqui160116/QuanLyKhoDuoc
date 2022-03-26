@@ -3,6 +3,7 @@ using Phoenix.Mobile.Core.Infrastructure;
 using Phoenix.Mobile.Core.Models.Common;
 using Phoenix.Mobile.Core.Models.Group;
 using Phoenix.Mobile.Core.Models.InputInfo;
+using Phoenix.Mobile.Core.Models.Medicine;
 using Phoenix.Mobile.Core.Models.Unit;
 using Phoenix.Mobile.Core.Services;
 using Phoenix.Mobile.Core.Services.Common;
@@ -14,6 +15,7 @@ using Plugin.Media;
 using Plugin.Media.Abstractions;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
@@ -42,11 +44,11 @@ namespace Phoenix.Mobile.PageModels.Common
             //base.Init(initData);
             if (initData != null)
             {
-                InputInfo = (InputInfoModel)initData;
+                Medicine = (MedicineModel)initData;
             }
             else
             {
-                InputInfo = new InputInfoModel();
+                Medicine = new MedicineModel();
             }
             NavigationPage.SetHasNavigationBar(CurrentPage, false);
             CurrentPage.Title = "Thêm Thuốc";
@@ -58,6 +60,7 @@ namespace Phoenix.Mobile.PageModels.Common
         }
         private async Task LoadData()
         {
+            NameMedicine = Medicine.Name;
 
             var data = await _unitService.GetAllUnit(request);
             if (data == null)
@@ -73,7 +76,9 @@ namespace Phoenix.Mobile.PageModels.Common
         }
 
         #region properties
-        public InputInfoModel InputInfo { get; set; }
+        public MedicineModel Medicine { get; set; }
+
+        public string NameMedicine { get; set; }
         public string IdBatch { get; set; }
         public DateTime HSD { get; set; } = DateTime.Now;
         public int Count { get; set; }
@@ -86,8 +91,7 @@ namespace Phoenix.Mobile.PageModels.Common
 
         public List<UnitModel> Units { get; set; } = new List<UnitModel>();
         public UnitRequest request { get; set; } = new UnitRequest();
-
-        public List<string> Data { get; set; }
+        public ObservableCollection<InputInfoModel> ListInputInfo { get; set; }
 
         UnitModel _selectedUnit;
 
@@ -99,79 +103,49 @@ namespace Phoenix.Mobile.PageModels.Common
 
         private async Task AddInputExecute()
         {
-            var response = await _dialogService.DisplayPromptAsync("Question", "What is your name?", "Yes", "No", "type your name");
-           
-            //try
-            //{
-            //    if (IsBusy) return;
-            //    IsBusy = true;
-            //    if (IdBatch.IsNullOrEmpty())
-            //    {
-            //        await _dialogService.AlertAsync("Vui lòng nhập số lô");
-            //        IsBusy = false;
-            //        return;
-            //    }
 
-               
-            //    if (Count.Equals(0))
-            //    {
-            //        await _dialogService.AlertAsync("Số lượng phải lớn hơn 0");
-            //        IsBusy = false;
-            //        return;
-            //    }
-            //    if (IdUnit.Equals(0))
-            //    {
-            //        await _dialogService.AlertAsync("Vui lòng Chọn Đơn vị tính");
-            //        IsBusy = false;
-            //        return;
-            //    }
+            try
+            {
+                if (IsBusy) return;
+                IsBusy = true;
+                if (IdBatch.IsNullOrEmpty())
+                {
+                    await _dialogService.AlertAsync("Vui lòng nhập số lô");
+                    IsBusy = false;
+                    return;
+                }
 
-            //   // await CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn " + data, "Đóng");
+                if (Count.Equals(0))
+                {
+                    await _dialogService.AlertAsync("Số lượng phải lớn hơn 0");
+                    IsBusy = false;
+                    return;
+                }
+                if (IdUnit.Equals(0))
+                {
+                    await _dialogService.AlertAsync("Vui lòng Chọn Đơn vị tính");
+                    IsBusy = false;
+                    return;
+                }
 
-            //    await CoreMethods.PushPageModel<AddInputPageModel>(IdBatch+Count+IdUnit+HSD);
-               
-            //    IsBusy = false;
 
-            //}
-            //catch (Exception e)
-            //{
-            //    await _dialogService.AlertAsync("Thêm thất bại");
+                // await CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn " + data, "Đóng");
 
-            //}
-            ////await CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn " + Count, "Đóng");
-            ////await CoreMethods.PushPageModel<AddInputPageModel>();
+                await CoreMethods.PushPageModel<AddInputPageModel>();
+
+                IsBusy = false;
+
+            }
+            catch (Exception e)
+            {
+                await _dialogService.AlertAsync("Thêm thất bại");
+
+            }
+            await CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn " + Count, "Đóng");
+            //await CoreMethods.PushPageModel<AddInputPageModel>();
         }
         #endregion
 
-        //#region SelectInput
-
-        //InputInfoModel _selectedInput;
-
-        //public InputInfoModel SelectedInput
-        //{
-        //    get
-        //    {
-        //        return _selectedInput;
-        //    }
-        //    set
-        //    {
-        //        _selectedInput = value;
-        //        if (value != null)
-        //            InputSelected.Execute(value);
-        //    }
-        //}
-
-        //public Command<InputInfoModel> InputSelected
-        //{
-        //    get
-        //    {
-        //        return new Command<InputInfoModel>(async (Input) => {
-        //            await CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn"+SelectedInput.Id + IdBatch + Count + HSD, "Đóng");
-        //            //await CoreMethods.PushPageModel<InputInfoPageModel>(Input);
-        //        });
-        //    }
-        //}
-        //#endregion
 
         #region SelectedUnit
         public UnitModel SelectedUnit

@@ -48,7 +48,7 @@ namespace Phoenix.Mobile.PageModels.Common
             if (IsBusy) return;
             IsBusy = true;
 #if DEBUG
-            OutputInfos = Output.OutputInfo;
+           // OutputInfos = Output.OutputInfo;
 
             IdOutput = Output.Id;
             NameReason = Output.NameReason;

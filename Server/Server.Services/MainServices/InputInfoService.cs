@@ -42,15 +42,12 @@ namespace Phoenix.Server.Services.MainServices
             {
                 // setup query
                 var query = _dataContext.InputInfos.AsQueryable();
-                var query1 = _dataContext.OutputInfos.AsQueryable();
 
                 // filter
                 if (!string.IsNullOrEmpty(request.IdInput))
                 {
                     query = query.Where(d => d.IdInput.Contains(request.IdInput));
                 }
-                
-                
 
 
                 query = query.OrderByDescending(d => d.Id);
@@ -67,27 +64,7 @@ namespace Phoenix.Server.Services.MainServices
 
             return result;
         }
-        /*public async Task<BaseResponse<InputInfoDto>> GetInputInfoById(InputInfoRequest request)
-        {
-            var result = new BaseResponse<InputInfoDto>();
-            try
-            {
 
-                //setup query
-                var query = _dataContext.InputInfos.AsQueryable();
-                //filter
-                //var data = await query.FirstOrDefaultAsync(d => d.Id == request.Id);
-                var data = await query.FirstOrDefaultAsync(d => d.IdInput == request.IdInput);
-                //var data = await query.FindAsync(request.Id);
-                result.Record = data.MapTo<InputInfoDto>();
-            }
-            catch (Exception ex)
-            {
-
-            }
-
-            return result;
-        }*/
 
 
         // Task<CrudResult> CreateInputInfo(InputInfoRequest request);

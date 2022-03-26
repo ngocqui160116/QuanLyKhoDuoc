@@ -9,7 +9,7 @@
         <StackLayout>
             <StackLayout HeightRequest="50"
                          WidthRequest="50">
-                <Label Text="Thông tin"
+                <Label Text="{Binding NameMedicine}"
                        FontSize="Medium"
                        Margin="5,10,5,10"
                        HorizontalOptions="Center"

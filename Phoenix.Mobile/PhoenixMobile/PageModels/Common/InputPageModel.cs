@@ -63,7 +63,7 @@ namespace Phoenix.Mobile.PageModels.Common
         public static List<InputModel> Inputs { get; set; } = new List<InputModel>();
         public InputRequest request { get; set; } = new InputRequest();
 
-
+        public DateTime DateInput { get; set; }
         #endregion
 
         #region AddInputCommand

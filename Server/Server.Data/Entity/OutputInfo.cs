@@ -26,5 +26,6 @@ namespace Phoenix.Server.Data.Entity
         public double Total { get; set; }
         public bool Status { get; set; }
 
+      
     }
 }

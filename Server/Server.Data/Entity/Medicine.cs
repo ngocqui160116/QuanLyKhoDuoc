@@ -17,7 +17,6 @@ namespace Phoenix.Server.Data.Entity
         public string Active { get; set; }
         public string Content { get; set; }
         public string Packing { get; set; }
-        
         public int IdUnit { get; set; }
         [ForeignKey("IdUnit")]
        public virtual Unit Unit { get; set; }

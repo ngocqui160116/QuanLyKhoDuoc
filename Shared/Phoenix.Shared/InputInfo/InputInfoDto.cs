@@ -24,6 +24,5 @@ namespace Phoenix.Shared.InputInfo
         public string SDK { get; set; }
         public string MedicineName { get; set; }
         public string DateInput { get; set; }
-        
     }
 }

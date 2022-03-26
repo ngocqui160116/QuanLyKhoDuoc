@@ -14,6 +14,7 @@ namespace Phoenix.Shared.Output
         //Add
         public string NameStaff { get; set; }
         public string NameReason { get; set; }
-        public List<OutputInfoDto> OutputInfo { get; set; }
+
+        
     }
 }
