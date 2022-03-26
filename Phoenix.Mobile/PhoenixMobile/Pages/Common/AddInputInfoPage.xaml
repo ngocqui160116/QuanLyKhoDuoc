@@ -56,6 +56,7 @@
                         <DatePicker Grid.Row="3"
                                     Grid.Column="1"
                                     TextColor="Black"
+                                    Date="{Binding HSD}"
                                     Format="dd/MM/yyyy"
                                     WidthRequest="200" />
 
@@ -83,8 +84,7 @@
                                 ItemsSource="{Binding Units}"
                                 Grid.Row="5"
                                 Grid.Column="1"
-                                Title="{Binding  NameUnit}"
-                                TitleColor="Black"
+                                Title="----- Chọn Đơn vị tính -----"
                                 ItemDisplayBinding="{Binding Name}"
                                 SelectedItem="{Binding SelectedUnit}">
 

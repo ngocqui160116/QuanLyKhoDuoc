@@ -122,6 +122,7 @@
                                 ItemsSource="{Binding Suppliers}"
                                 Grid.Row="1"
                                 Grid.Column="1"
+                                Title="----- Chọn Nhà cung cấp -----"
                                 ItemDisplayBinding="{Binding Name}"
                                 />
 
@@ -163,16 +164,7 @@
                                Text="Lưu"/>
                     </Grid>
                 </AbsoluteLayout>
-                <!--<AbsoluteLayout>
-                    <Button BackgroundColor="LightPink"
-                    Text="Previous"
-                    AbsoluteLayout.LayoutBounds="0,1,0.5,0.1"
-                    AbsoluteLayout.LayoutFlags="All"/>
-                    <Button BackgroundColor="MistyRose"
-                    Text="Next"
-                    AbsoluteLayout.LayoutBounds="1,1,0.5,0.1"
-                    AbsoluteLayout.LayoutFlags="All"/>
-                </AbsoluteLayout>-->
+                
             </StackLayout>
         </StackLayout>
 

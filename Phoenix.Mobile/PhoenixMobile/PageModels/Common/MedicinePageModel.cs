@@ -79,6 +79,7 @@ namespace Phoenix.Mobile.PageModels.Common
             {
                 return new Command<MedicineModel>(async (Medicine) => {
                     await CoreMethods.PushPageModel<EditMedicinePageModel>(Medicine);
+                    
                     await CoreMethods.PushPageModel<AddInputInfoPageModel>();
                 });
             }

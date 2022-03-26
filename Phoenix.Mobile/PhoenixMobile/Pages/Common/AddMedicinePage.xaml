@@ -103,7 +103,7 @@
                                 ItemsSource="{Binding Groups}"
                                 Grid.Row="4"
                                 Grid.Column="1"
-                                Title="{Binding Name}"
+                                Title="----- Chọn Nhóm thuốc -----"
                                 TitleColor="Black"
                                 ItemDisplayBinding="{Binding Name}"
                                 SelectedItem="{Binding SelectedGroup}">
@@ -162,8 +162,7 @@
                                 ItemsSource="{Binding Units}"
                                 Grid.Row="8"
                                 Grid.Column="1"
-                                Title="{Binding  NameUnit}"
-                                TitleColor="Black"
+                                Title="----- Chọn Đơn vị tính -----"
                                 ItemDisplayBinding="{Binding Name}"
                                 SelectedItem="{Binding SelectedUnit}">
 

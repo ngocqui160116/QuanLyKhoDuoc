@@ -44,7 +44,7 @@ namespace Phoenix.Mobile.PageModels.Common
             }
             else
             {
-                Medicine = new MedicineModel();
+                Medicine = new MedicineModel();  
             }
             NavigationPage.SetHasNavigationBar(CurrentPage, false);
             CurrentPage.Title = "Thêm phiếu nhập";
@@ -69,7 +69,6 @@ namespace Phoenix.Mobile.PageModels.Common
             Packing = Medicine.Packing;
             NameUnit = Medicine.NameUnit;
             IdUnit = Medicine.IdUnit;
-           
 
 #endif
             IsBusy = false;
@@ -78,6 +77,7 @@ namespace Phoenix.Mobile.PageModels.Common
             if (data == null)
             {
                 await _dialogService.AlertAsync("Lỗi kết nối mạng!", "Lỗi", "OK");
+                
             }
             else
             {
@@ -165,7 +165,7 @@ namespace Phoenix.Mobile.PageModels.Common
         public int IdUnit { get; set; }
         public string NameGroup { get; set; }
         public string NameUnit { get; set; }
-
+        public string IdBatch { get; set; }
         #endregion
 
         #region AddMedicineCommand

@@ -52,6 +52,7 @@ namespace Phoenix.Mobile.PageModels.Common
         }
         private async Task LoadData()
         {
+
             var data = await _groupService.GetAllGroup(request);
             if (data == null)
             {
@@ -98,16 +99,28 @@ namespace Phoenix.Mobile.PageModels.Common
                     IsBusy = false;
                     return;
                 }
-                
+                if (IdGroup.Equals(0))
+                {
+                    await _dialogService.AlertAsync("Vui lòng Chọn Nhóm thuốc");
+                    IsBusy = false;
+                    return;
+                }
+                if (IdUnit.Equals(0))
+                {
+                    await _dialogService.AlertAsync("Vui lòng Chọn Đơn vị tính");
+                    IsBusy = false;
+                    return;
+                }
+
                 var data = await _medicineService.AddMedicine(new MedicineRequest
                 {
                     RegistrationNumber = SDK,
                     Name = Name,
-                    IdGroup = SelectedGroup.IdGroup,
+                    IdGroup = IdGroup,
                     Active = Active,
                     Content = Content,
                     Packing = Packing,
-                    IdUnit = SelectedUnit.Id
+                    IdUnit = IdUnit
                 });
                 await CoreMethods.PushPageModel<MedicinePageModel>();
                 await _dialogService.AlertAsync("Thêm thành công");
@@ -117,6 +130,7 @@ namespace Phoenix.Mobile.PageModels.Common
             catch (Exception e)
             {
                 await _dialogService.AlertAsync("Thêm thất bại");
+             
             }
         }
         #endregion
@@ -249,14 +263,14 @@ namespace Phoenix.Mobile.PageModels.Common
         public UnitModel SelectedUnit
         {
             get
-            {
+            { 
                 return _selectedUnit;
             }
             set
             {
-                _selectedUnit = value;
+                 _selectedUnit = value;
                 if (value != null)
-                    IdUnit = value.Id;
+                    IdUnit = value.Id;   
             }
         }
 

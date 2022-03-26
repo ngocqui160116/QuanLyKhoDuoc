@@ -75,7 +75,7 @@ namespace Phoenix.Mobile.PageModels.Common
         #region properties
         public InputInfoModel InputInfo { get; set; }
         public string IdBatch { get; set; }
-        public DateTime HSD { get; set; }
+        public DateTime HSD { get; set; } = DateTime.Now;
         public int Count { get; set; }
         public int IdUnit { get; set; }
         public string NameUnit { get; set; }
@@ -87,6 +87,7 @@ namespace Phoenix.Mobile.PageModels.Common
         public List<UnitModel> Units { get; set; } = new List<UnitModel>();
         public UnitRequest request { get; set; } = new UnitRequest();
 
+        public List<string> Data { get; set; }
 
         UnitModel _selectedUnit;
 
@@ -98,8 +99,47 @@ namespace Phoenix.Mobile.PageModels.Common
 
         private async Task AddInputExecute()
         {
-            await CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn" + SelectedUnit.Name, "Đóng");
-            //await CoreMethods.PushPageModel<AddInputPageModel>();
+            var response = await _dialogService.DisplayPromptAsync("Question", "What is your name?", "Yes", "No", "type your name");
+           
+            //try
+            //{
+            //    if (IsBusy) return;
+            //    IsBusy = true;
+            //    if (IdBatch.IsNullOrEmpty())
+            //    {
+            //        await _dialogService.AlertAsync("Vui lòng nhập số lô");
+            //        IsBusy = false;
+            //        return;
+            //    }
+
+               
+            //    if (Count.Equals(0))
+            //    {
+            //        await _dialogService.AlertAsync("Số lượng phải lớn hơn 0");
+            //        IsBusy = false;
+            //        return;
+            //    }
+            //    if (IdUnit.Equals(0))
+            //    {
+            //        await _dialogService.AlertAsync("Vui lòng Chọn Đơn vị tính");
+            //        IsBusy = false;
+            //        return;
+            //    }
+
+            //   // await CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn " + data, "Đóng");
+
+            //    await CoreMethods.PushPageModel<AddInputPageModel>(IdBatch+Count+IdUnit+HSD);
+               
+            //    IsBusy = false;
+
+            //}
+            //catch (Exception e)
+            //{
+            //    await _dialogService.AlertAsync("Thêm thất bại");
+
+            //}
+            ////await CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn " + Count, "Đóng");
+            ////await CoreMethods.PushPageModel<AddInputPageModel>();
         }
         #endregion
 
@@ -138,7 +178,7 @@ namespace Phoenix.Mobile.PageModels.Common
         {
             get
             {
-                return _selectedUnit = Units[0];
+                return _selectedUnit;
             }
             set
             {

@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Acr.UserDialogs;
 using Phoenix.Mobile.Core.Infrastructure;
+using Xamarin.Forms;
 
 namespace Phoenix.Mobile.Helpers
 {
@@ -35,6 +36,42 @@ namespace Phoenix.Mobile.Helpers
             return _userDialogs.ActionSheetAsync(title, cancel, destructive, cancelToken, buttons);
         }
 
+        //
+        // Summary:
+        //     To be added.
+        //
+        // Parameters:
+        //   title:
+        //     To be added.
+        //
+        //   message:
+        //     To be added.
+        //
+        //   accept:
+        //     To be added.
+        //
+        //   cancel:
+        //     To be added.
+        //
+        //   placeholder:
+        //     To be added.
+        //
+        //   maxLength:
+        //     To be added.
+        //
+        //   keyboard:
+        //     To be added.
+        //
+        //   initialValue:
+        //     To be added.
+        //
+        // Returns:
+        //     To be added.
+        //
+        // Remarks:
+        //     To be added.
+
+
         public async Task<bool> ConfirmAsync(string message, string title = null, string okText = null, string cancelText = null,
             CancellationToken? cancelToken = null)
         {
@@ -54,6 +91,11 @@ namespace Phoenix.Mobile.Helpers
         public IDisposable Toast(string title, TimeSpan? dismissTimer = null)
         {
             return _userDialogs.Toast(title, dismissTimer);
+        }
+
+        public Task<string> DisplayPromptAsync(string title, string message, string accept = "OK", string cancel = "Cancel", string placeholder = null, int maxLength = -1, Keyboard keyboard = null, string initialValue = "")
+        {
+            throw new NotImplementedException();
         }
     }
 }
