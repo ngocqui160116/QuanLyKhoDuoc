@@ -72,24 +72,26 @@ namespace Phoenix.Server.Services.MainServices
         {
 
             var Input = new Input();
-            Input.Id = request.Id;
+            Input.Id = request.IdInput;
             Input.IdStaff = request.IdStaff;
             Input.IdSupplier = request.IdSupplier;
             Input.DateInput = request.DateInput;
+            Input.Status = request.Status;
 
             _dataContext.Inputs.Add(Input);
             await _dataContext.SaveChangesAsync();
 
             var InputInfo = new InputInfo();
-            InputInfo.IdInput = request.Id;
+            InputInfo.Id = request.Id;
+            InputInfo.IdInput = request.IdInput;
             InputInfo.IdMedicine = request.IdMedicine;
-            //InputInfo.IdSupplier = request.IdSupplier;
             InputInfo.IdBatch = request.IdBatch;
+            InputInfo.IdUnit = request.IdUnit;
             InputInfo.Count = request.Count;
             InputInfo.InputPrice = request.InputPrice;
             InputInfo.Total = request.Count * request.InputPrice;
-            InputInfo.DateOfManufacture = request.DateOfManufacture;
             InputInfo.DueDate = request.DueDate;
+            
 
             _dataContext.InputInfos.Add(InputInfo);
             await _dataContext.SaveChangesAsync();
@@ -103,7 +105,6 @@ namespace Phoenix.Server.Services.MainServices
             InputInfo.IdMedicine = request.IdMedicine;
            // InputInfo.IdSupplier = request.IdSupplier;
             InputInfo.IdBatch = request.IdBatch;
-            InputInfo.DateOfManufacture = request.DateOfManufacture;
             InputInfo.DueDate = request.DueDate;
 
             await _dataContext.SaveChangesAsync();

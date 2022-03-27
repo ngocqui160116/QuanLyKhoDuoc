@@ -35,20 +35,5 @@ namespace Phoenix.Server.Api.Api
         {
             return _InputInfoService.CreateInputInfo( request);
         }
-
-        [HttpPost]
-        [Route("UpdateInputInfo")]
-        public Task<CrudResult> UpdateInputInfo(int Id, [FromBody] InputInfoRequest request)
-        {
-            return _InputInfoService.UpdateInputInfo(Id, request);
-        }
-
-        [HttpDelete]
-        [Route("DeleteInputInfo")]
-        public Task<CrudResult> DeleteInputInfo(int Id)
-        {
-            return _InputInfoService.DeleteInputInfo(Id);
-        }
-
     }
 }

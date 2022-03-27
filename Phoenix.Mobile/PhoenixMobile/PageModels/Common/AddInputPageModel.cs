@@ -1,10 +1,12 @@
 ﻿using Phoenix.Mobile.Core.Infrastructure;
 using Phoenix.Mobile.Core.Models.InputInfo;
 using Phoenix.Mobile.Core.Models.Medicine;
+using Phoenix.Mobile.Core.Models.Staff;
 using Phoenix.Mobile.Core.Models.Supplier;
 using Phoenix.Mobile.Core.Services.Common;
 using Phoenix.Mobile.Helpers;
 using Phoenix.Shared.InputInfo;
+using Phoenix.Shared.Staff;
 using Phoenix.Shared.Supplier;
 using System;
 using System.Collections.Generic;
@@ -20,14 +22,14 @@ namespace Phoenix.Mobile.PageModels.Common
     public class AddInputPageModel : BasePageModel
     {
         private readonly ISupplierService _supplierService;
+        private readonly IStaffService _staffService;
         private readonly IInputInfoService _inputInfoService;
         private readonly IDialogService _dialogService;
 
-        public ObservableCollection<InputInfoModel> InputInfo { get; set; }
-
-        public AddInputPageModel(ISupplierService supplierService, IInputInfoService inputInfoService, IDialogService dialogService)
+        public AddInputPageModel(ISupplierService supplierService, IStaffService staffService,  IInputInfoService inputInfoService, IDialogService dialogService)
         {
             _supplierService = supplierService;
+            _staffService = staffService;
             _inputInfoService = inputInfoService;
             _dialogService = dialogService;
 
@@ -39,7 +41,6 @@ namespace Phoenix.Mobile.PageModels.Common
             if (initData != null)
             {
                 Medicine = (MedicineModel)initData;
-              
             }
             else
             {
@@ -98,16 +99,28 @@ namespace Phoenix.Mobile.PageModels.Common
                 //RaisePropertyChanged("Vendors");
                 RaisePropertyChanged(nameof(InputInfos));
             }
-        }
 
-     
+            var data2 = await _staffService.GetAllStaff(StaffRequest);
+            if (data2 == null)
+            {
+                await _dialogService.AlertAsync("Lỗi kết nối mạng!", "Lỗi", "OK");
+
+            }
+            else
+            {
+                Staffs = data2;
+                //RaisePropertyChanged("Vendors");
+                RaisePropertyChanged(nameof(Staffs));
+            }
+        }
 
         #region properties
         public List<SupplierModel> Suppliers { get; set; } = new List<SupplierModel>();
         public SupplierRequest request { get; set; } = new SupplierRequest();
+        public List<StaffModel> Staffs { get; set; } = new List<StaffModel>();
+        public StaffRequest StaffRequest { get; set; } = new StaffRequest();
         public MedicineModel Medicine { get; set; }
         public ObservableCollection<MedicineModel> ListMedicine { get; set; }
-        public ObservableCollection<InputInfoModel> ListInputInfo { get; set; }
         public static List<InputInfoModel> InputInfos { get; set; } = new List<InputInfoModel>();
         public InputInfoRequest InputInfoRequest { get; set; } = new InputInfoRequest();
 
@@ -128,9 +141,9 @@ namespace Phoenix.Mobile.PageModels.Common
                     IdStaff = 3,
                     DateInput = HSD,
                     DueDate = HSD,
-                    DateOfManufacture = HSD,
-                    Id = "HD0017",
+                    IdInput = "HD0010",
                     Count = 10,
+                    IdUnit = 1,
                     InputPrice = 1000
                 }); ;
                 await CoreMethods.PushPageModel<InputPageModel>();
@@ -152,6 +165,7 @@ namespace Phoenix.Mobile.PageModels.Common
         public string Name { get; set; }
         public string NameUnit { get; set; }
         public int IdSupplier { get; set; }
+        public int IdStaff { get; set; }
         public DateTime HSD { get; set; } = DateTime.Now;
         #endregion
 
@@ -172,13 +186,31 @@ namespace Phoenix.Mobile.PageModels.Common
         {
             get
             {
-                return _selectedSupplier = Suppliers[0];
+                return _selectedSupplier;
             }
             set
             {
                 _selectedSupplier = value;
                 if (value != null)
                     IdSupplier = value.IdSupplier;
+            }
+        }
+        #endregion
+
+        #region SelectStaff
+
+        StaffModel _selectedStaff;
+        public StaffModel SelectedStaff
+        {
+            get
+            {
+                return _selectedStaff;
+            }
+            set
+            {
+                _selectedStaff = value;
+                if (value != null)
+                    IdStaff = value.IdStaff;
             }
         }
         #endregion

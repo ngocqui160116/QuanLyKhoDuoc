@@ -11,13 +11,16 @@ namespace Phoenix.Server.Data.Entity
     {
         [Key]
         public string Id { get; set; }
-        public DateTime DateInput { get; set; }
         public int IdStaff { get; set; }
         [ForeignKey("IdStaff")]
         public virtual Staff Staff { get; set; }
         public int IdSupplier { get; set; }
         [ForeignKey("IdSupplier")]
         public virtual Supplier Supplier { get; set; }
+        public DateTime DateInput { get; set; }
+        public bool Status { get; set; }
+
+        //List
         public virtual ICollection<InputInfo> InputInfo { get; set; }
     }
 }

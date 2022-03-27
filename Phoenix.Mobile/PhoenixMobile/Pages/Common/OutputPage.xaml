@@ -12,11 +12,11 @@
         <StackLayout >
             <StackLayout Orientation="Horizontal">
                 <SearchBar x:Name="searchBar" WidthRequest="420" 
-                   HorizontalOptions="Fill"
-                   VerticalOptions="CenterAndExpand"
-                   Placeholder="Nhập thông tin"
-                   SearchCommand="{Binding PerformSearch}" 
-                   SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"/>
+                           HorizontalOptions="Fill"
+                           VerticalOptions="CenterAndExpand"
+                           Placeholder="Nhập thông tin"
+                           SearchCommand="{Binding PerformSearch}" 
+                           SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"/>
                 <ImageButton Margin="5,0,0,0"  
                              BackgroundColor="White" 
                              HorizontalOptions="End" 
@@ -38,11 +38,11 @@
                     <DataTemplate x:DataType="output:OutputModel">
                         <ViewCell>
                             <StackLayout Margin="6,4,6,4"
-                                 BackgroundColor="White">
+                                         BackgroundColor="White">
                                 <Label Text="{Binding Id}"
-                                   Margin="8"
-                                   FontAttributes="Bold"
-                                   FontSize="Medium" />
+                                       Margin="8"
+                                       FontAttributes="Bold"
+                                       FontSize="Medium" />
                                 <StackLayout Orientation="Horizontal">
                                     <Label Text="Người tạo:"
                                            Margin="8,2,8,4"

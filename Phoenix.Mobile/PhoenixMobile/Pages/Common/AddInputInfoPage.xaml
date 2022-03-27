@@ -3,9 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
              xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common" 
-             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" x:DataType="common:AddInputInfoPageModel"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup" x:DataType="common:AddInputInfoPageModel"
              x:Class="Phoenix.Mobile.Pages.Common.AddInputInfoPage">
     <ContentPage.Content>
+        
         <StackLayout>
             <StackLayout HeightRequest="50"
                          WidthRequest="50">
@@ -44,8 +45,7 @@
                                 TextColor="Black"
                                 Text="{Binding IdBatch}"
                                 Placeholder="Số lô"
-                                WidthRequest="200" 
-                                 />
+                                WidthRequest="200"/>
 
                         <Label  Grid.Row="3"
                                 Grid.Column="0" 
@@ -114,3 +114,4 @@
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
+

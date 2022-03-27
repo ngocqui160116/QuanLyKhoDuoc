@@ -141,8 +141,8 @@ namespace Phoenix.Mobile.PageModels.Common
                 await _dialogService.AlertAsync("Thêm thất bại");
 
             }
-            await CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn " + Count, "Đóng");
-            //await CoreMethods.PushPageModel<AddInputPageModel>();
+            //await CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn " + Count, "Đóng");
+            await CoreMethods.PushPageModel<AddInputPageModel>();
         }
         #endregion
 

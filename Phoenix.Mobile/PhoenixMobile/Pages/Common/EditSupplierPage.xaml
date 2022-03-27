@@ -2,19 +2,22 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:converters="clr-namespace:Phoenix.Framework.Converters;assembly=Phoenix.Framework"
-             xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common" x:DataType="common:EditSupplierPageModel"
+             xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" 
+             xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common" 
+             x:DataType="common:EditSupplierPageModel"
              ControlTemplate="{StaticResource FullScreenHasBack}"
              x:Class="Phoenix.Mobile.Pages.Common.EditSupplierPage">
     <ContentPage.Content>
         <StackLayout BackgroundColor="WhiteSmoke">
-
             <StackLayout HeightRequest="25"
                          WidthRequest="50">
             </StackLayout>
 
-            <Frame CornerRadius="15"  >
+            <Frame CornerRadius="15">
                 <StackLayout  BackgroundColor="White">
-                    <Grid IsEnabled="{Binding IsEnabled}" x:Name="Grid">
+                    <Grid IsEnabled="{Binding IsEnabled}" 
+                          x:Name="Grid">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -39,8 +42,7 @@
                                 TextColor="Black"
                                 IsReadOnly="True"
                                 Text="{Binding IdSupplier}"
-                                WidthRequest="200" 
-                                 />
+                                WidthRequest="200"/>
 
                         <Label  Grid.Row="2"
                                 Grid.Column="0" 
@@ -53,8 +55,7 @@
                                 TextColor="Black"
                                 Placeholder="Nhập tên nhà cung cấp"
                                 Text="{Binding Name}"
-                                WidthRequest="200" 
-                                 />
+                                WidthRequest="200"/>
 
                         <Label  Grid.Row="3"
                                 Grid.Column="0" 
@@ -157,7 +158,6 @@
                         </Grid>
                     </AbsoluteLayout>
                 </Grid>
-
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

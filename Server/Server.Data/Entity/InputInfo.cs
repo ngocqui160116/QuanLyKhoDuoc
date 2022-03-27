@@ -15,15 +15,14 @@ namespace Phoenix.Server.Data.Entity
         public int IdMedicine { get; set; }
         [ForeignKey("IdMedicine")]
         public virtual Medicine Medicine { get; set; }
-       
         public string IdBatch { get; set; }
+        public int IdUnit { get; set; }
+        [ForeignKey("IdUnit")]
+        public virtual Unit Unit { get; set; }
         public int Count { get; set; }
         public double InputPrice { get; set; }
         public double Total { get; set; }
-        public DateTime DateOfManufacture { get; set; }
         public DateTime DueDate { get; set; }
-        public string Status { get; set; }
-
        
     }
 }

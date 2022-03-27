@@ -57,9 +57,7 @@
                                 Grid.Column="1"
                                 TextColor="Black"
                                Text="{Binding NameReason}"
-                                WidthRequest="200" 
-                                 />
-
+                                WidthRequest="200"/>
 
                         <Label  Grid.Row="3"
                                 Grid.Column="0" 
@@ -84,19 +82,6 @@
                                 Text="{Binding NameStaff}"
                                 WidthRequest="200"                         
                                 Keyboard="Text"/>
-
-                        <!--<Label  Grid.Row="7"
-                                Grid.Column="0" 
-                                Margin="10,5,0,0" 
-                                WidthRequest="100" 
-                                FontSize="Medium" 
-                                Text="Tổng tiền"/>
-                        <Entry  Grid.Row="7"
-                                Grid.Column="1"  
-                                TextColor="Black"
-                                Placeholder="VN-001"
-                                WidthRequest="200"                         
-                                Keyboard="Text"/>-->
                     </Grid>
                 </StackLayout>
 
@@ -111,48 +96,48 @@
             </StackLayout>
             <StackLayout>
                 <ListView ItemsSource="{Binding OutputInfos}"
-                      HasUnevenRows="True"
-                      BackgroundColor="#ecf0f1"
-                      SeparatorVisibility="None"
-                      HorizontalOptions="FillAndExpand"
-                      VerticalOptions="FillAndExpand">
+                          HasUnevenRows="True"
+                          BackgroundColor="#ecf0f1"
+                          SeparatorVisibility="None"
+                          HorizontalOptions="FillAndExpand"
+                          VerticalOptions="FillAndExpand">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="Outputinfo:OutputInfoDto">
                             <ViewCell>
                                 <StackLayout Margin="6,4,6,4"
-                                        BackgroundColor="White" Orientation="Vertical">
+                                             BackgroundColor="White" Orientation="Vertical">
                                     <StackLayout Orientation="Horizontal" 
-                                             HorizontalOptions="StartAndExpand" >
+                                                 HorizontalOptions="StartAndExpand" >
                                         <Image Source="@drawable/icon_medicine"
-                                           WidthRequest="75"
-                                       HorizontalOptions="StartAndExpand"
-                                       VerticalOptions="CenterAndExpand">
+                                               WidthRequest="75"
+                                               HorizontalOptions="StartAndExpand"
+                                               VerticalOptions="CenterAndExpand">
                                         </Image>
 
                                         <StackLayout Orientation="Vertical"
-                                                 HorizontalOptions="StartAndExpand">
+                                                     HorizontalOptions="StartAndExpand">
                                             <Label Text="{Binding MedicineName}"
-                                               Margin="8"
-                                               FontAttributes="Bold"
-                                               FontSize="Large" />
+                                                   Margin="8"
+                                                   FontAttributes="Bold"
+                                                   FontSize="Large" />
                                             <StackLayout Orientation="Horizontal">
                                                 <Label Text="Số Lô:"
-                                           Margin="8,2,8,4"
-                                           FontSize="Small" />
+                                                       Margin="8,2,8,4"
+                                                       FontSize="Small" />
                                                 <Label Text="{Binding IdInputInfo}"
-                                        Margin="2,2,8,4"
-                                        TextColor="DarkSlateGray"
-                                        FontSize="Small" />
+                                                       Margin="2,2,8,4"
+                                                       TextColor="DarkSlateGray"
+                                                       FontSize="Small" />
                                             </StackLayout>
 
                                             <StackLayout Orientation="Horizontal">
                                                 <Label Text="HSD:"
-                                       Margin="8,2,8,4"
-                                       FontSize="Small" />
+                                                       Margin="8,2,8,4"
+                                                       FontSize="Small" />
                                                 <Label Text="{Binding DueDate}"
-                                        Margin="2,2,8,4"
-                                        TextColor="DarkSlateGray"  
-                                        FontSize="Small" />
+                                                       Margin="2,2,8,4"
+                                                       TextColor="DarkSlateGray"  
+                                                       FontSize="Small" />
                                             </StackLayout>
                                         </StackLayout>
                                     </StackLayout>

@@ -5,11 +5,11 @@
              ControlTemplate="{StaticResource FullScreenHasBack}"
              xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" 
              xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common" 
-             xmlns:inputinfo="clr-namespace:Phoenix.Shared.InputInfo;assembly=Phoenix.Shared" x:DataType="common:InputInfoPageModel"
+             xmlns:inputinfo="clr-namespace:Phoenix.Shared.InputInfo;assembly=Phoenix.Shared" 
+             x:DataType="common:InputInfoPageModel"
              x:Class="Phoenix.Mobile.Pages.Common.InputInfoPage">
     <ContentPage.Content>
         <StackLayout BackgroundColor="WhiteSmoke">
-
             <StackLayout HeightRequest="50"
                          WidthRequest="50">
                 <Label Text="Thông tin phiếu nhập"
@@ -20,7 +20,8 @@
 
             <Frame CornerRadius="15">
                 <StackLayout  BackgroundColor="White">
-                    <Grid IsEnabled="False" x:Name="Grid">
+                    <Grid IsEnabled="False" 
+                          x:Name="Grid">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -45,8 +46,7 @@
                                 TextColor="Black"
                                 Text="{Binding IdInput}"
                                 Placeholder="VN-001"
-                                WidthRequest="200" 
-                                 />
+                                WidthRequest="200"/>
 
                         <Label  Grid.Row="2"
                                 Grid.Column="0" 
@@ -58,9 +58,7 @@
                                 Grid.Column="1"
                                 TextColor="Black"
                                Text="{Binding SupplierName}"
-                                WidthRequest="200" 
-                                 />
-
+                                WidthRequest="200"/>
 
                         <Label  Grid.Row="3"
                                 Grid.Column="0" 
@@ -85,19 +83,6 @@
                                 Text="{Binding NameStaff}"
                                 WidthRequest="200"                         
                                 Keyboard="Text"/>
-
-                        <!--<Label  Grid.Row="7"
-                                Grid.Column="0" 
-                                Margin="10,5,0,0" 
-                                WidthRequest="100" 
-                                FontSize="Medium" 
-                                Text="Tổng tiền"/>
-                        <Entry  Grid.Row="7"
-                                Grid.Column="1"  
-                                TextColor="Black"
-                                Placeholder="VN-001"
-                                WidthRequest="200"                         
-                                Keyboard="Text"/>-->
                     </Grid>
                 </StackLayout>
 
@@ -136,10 +121,6 @@
                                                        Margin="8"
                                                        FontAttributes="Bold"
                                                        FontSize="Large" />
-
-                                            
-                                            
-
                                             <StackLayout Orientation="Horizontal">
                                                 <Label Text="Số Lô:"
                                                        Margin="8,2,8,4"
@@ -152,11 +133,10 @@
                                                        Margin="8,2,8,4"
                                                        FontSize="Small" />
                                                 <Label Text="{Binding DueDate}"
-                                                        Margin="2,2,8,4"
-                                                        TextColor="DarkSlateGray"  
-                                                        FontSize="Small" />
+                                                       Margin="2,2,8,4"
+                                                       TextColor="DarkSlateGray"  
+                                                       FontSize="Small" />
                                             </StackLayout>
-
                                         </StackLayout>
                                     </StackLayout>
                                 </StackLayout>

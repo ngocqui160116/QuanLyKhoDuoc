@@ -37,13 +37,13 @@
                     <DataTemplate x:DataType="medicine:MedicineModel">
                         <ViewCell>
                             <StackLayout Margin="6,4,6,4"
-                                        BackgroundColor="White" Orientation="Vertical">
+                                         BackgroundColor="White" Orientation="Vertical">
                                 <StackLayout Orientation="Horizontal" 
                                              HorizontalOptions="StartAndExpand" >
                                     <Image Source="@drawable/icon_medicine"
                                            WidthRequest="75"
-                                       HorizontalOptions="StartAndExpand"
-                                       VerticalOptions="CenterAndExpand">
+                                           HorizontalOptions="StartAndExpand"
+                                           VerticalOptions="CenterAndExpand">
                                     </Image>
 
                                     <StackLayout Orientation="Vertical"
@@ -54,22 +54,22 @@
                                                FontSize="Large" />
                                         <StackLayout Orientation="Horizontal">
                                             <Label Text="Số ĐK:"
-                                           Margin="8,2,8,4"
-                                           FontSize="Small" />
+                                                   Margin="8,2,8,4"
+                                                   FontSize="Small" />
                                             <Label Text="{Binding RegistrationNumber}"
-                                        Margin="2,2,8,4"
-                                        TextColor="DarkSlateGray"
-                                        FontSize="Small" />
+                                                   Margin="2,2,8,4"
+                                                   TextColor="DarkSlateGray"
+                                                   FontSize="Small" />
                                         </StackLayout>
 
                                         <StackLayout Orientation="Horizontal">
                                             <Label Text="Nhóm:"
-                                       Margin="8,2,8,4"
-                                       FontSize="Small" />
+                                                   Margin="8,2,8,4"
+                                                   FontSize="Small" />
                                             <Label Text="{Binding GroupName}"
-                                        Margin="2,2,8,4"
-                                        TextColor="DarkSlateGray"  
-                                        FontSize="Small" />
+                                                   Margin="2,2,8,4"
+                                                   TextColor="DarkSlateGray"  
+                                                   FontSize="Small" />
                                         </StackLayout>
                                     </StackLayout>
                                 </StackLayout>

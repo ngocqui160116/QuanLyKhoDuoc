@@ -39,7 +39,6 @@
                           SeparatorVisibility="None"
                           HorizontalOptions="FillAndExpand"
                           VerticalOptions="FillAndExpand">
-
                     <ListView.ItemTemplate>
 
                         <DataTemplate x:DataType="medicine:MedicineModel">
@@ -72,9 +71,9 @@
                                                        Margin="8,2,8,4"
                                                        FontSize="Small" />
                                                 <Label Text="{Binding NameUnit}"
-                                                        Margin="2,2,8,4"
-                                                        TextColor="DarkSlateGray"  
-                                                        FontSize="Small" />
+                                                       Margin="2,2,8,4"
+                                                       TextColor="DarkSlateGray"  
+                                                       FontSize="Small" />
                                             </StackLayout>
                                         </StackLayout>
                                         
@@ -122,8 +121,7 @@
                                 Grid.Row="1"
                                 Grid.Column="1"
                                 Title="----- Chọn Nhà cung cấp -----"
-                                ItemDisplayBinding="{Binding Name}"
-                                />
+                                ItemDisplayBinding="{Binding Name}"/>
 
                         <Label  Grid.Row="2"
                                 Grid.Column="0" 
@@ -131,24 +129,28 @@
                                 WidthRequest="95" 
                                 FontSize="Medium" 
                                 Text="Ngày nhập"/>
-                        <DatePicker x:DataType="common:AddInputPageModel" Grid.Row="2"
+                        <DatePicker x:DataType="common:AddInputPageModel" 
+                                    Grid.Row="2"
                                     Grid.Column="1"
                                     Date="{Binding HSD}"
                                     Format="dd/MM/yyyy"
                                     WidthRequest="200" />
+
+                        <Label  Grid.Row="3"
+                                Grid.Column="0" 
+                                Margin="10,5,0,0" 
+                                WidthRequest="115" 
+                                FontSize="Medium" 
+                                Text="Người tạo"/>
+                        <Picker x:DataType="common:AddInputPageModel"
+                                ItemsSource="{Binding Staffs}"
+                                Grid.Row="3"
+                                Grid.Column="1"
+                                Title="----- Chọn Người tạo -----"
+                                ItemDisplayBinding="{Binding Name}"/>
                     </Grid>
                 </StackLayout>
             </Frame>
-            <StackLayout HeightRequest="25"
-                         WidthRequest="50">
-
-            </StackLayout>
-            <Frame CornerRadius="15">
-                <StackLayout  BackgroundColor="White">
-                    <controls:BorderlessEditor HeightRequest="100" Placeholder="Ghi chú"/>
-                </StackLayout>
-            </Frame>
-
             <StackLayout Margin="0,50,0,5">
                 <AbsoluteLayout HorizontalOptions="Center">
                     <Grid xe:TouchEffect.Color="AliceBlue"

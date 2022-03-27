@@ -67,7 +67,7 @@
                                 FontSize="Medium" 
                                 Text="Email"/>
                         <controls:BorderlessEntry  
-                            Grid.Row="4"
+                                Grid.Row="4"
                                 Grid.Column="1"
                                 TextColor="Black"
                                 Text="{Binding Email}"
@@ -89,16 +89,12 @@
                                 Placeholder="Nhập địa chỉ"
                                 WidthRequest="200"                         
                                 Keyboard="Text"/>
-
                     </Grid>
                 </StackLayout>
             </Frame>
             <StackLayout HeightRequest="25"
                          WidthRequest="50">
-
             </StackLayout>
-           
-
             <StackLayout Margin="0,10,0,5">
                 <AbsoluteLayout HorizontalOptions="Center">
                     <Grid xe:TouchEffect.Color="AliceBlue"

@@ -39,11 +39,11 @@
                     <DataTemplate x:DataType="input:InputModel">
                         <ViewCell>
                             <StackLayout Margin="6,4,6,4"
-                                 BackgroundColor="White">
+                                         BackgroundColor="White">
                                 <Label Text="{Binding Id}"
-                                   Margin="8"
-                                   FontAttributes="Bold"
-                                   FontSize="Medium" />
+                                       Margin="8"
+                                       FontAttributes="Bold"
+                                       FontSize="Medium" />
                                 <StackLayout Orientation="Horizontal">
                                     <Label Text="{Binding SupplierName}"
                                            Margin="8,2,8,4"

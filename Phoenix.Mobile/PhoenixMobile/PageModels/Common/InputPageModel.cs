@@ -21,7 +21,7 @@ namespace Phoenix.Mobile.PageModels.Common
         private readonly IInputService _InputService;
         private readonly IDialogService _dialogService;
 
-        public ObservableCollection<InputDto> Input { get; set; }
+       // public ObservableCollection<InputDto> Input { get; set; }
 
         public InputPageModel(IInputService InputService, IDialogService dialogService)
         {
@@ -32,8 +32,8 @@ namespace Phoenix.Mobile.PageModels.Common
 
         public override async void Init(object initData)
         {
-            Input = new ObservableCollection<InputDto>(Inputs);
-            //base.Init(initData);
+           // Input = new ObservableCollection<InputDto>(Inputs);
+            base.Init(initData);
             NavigationPage.SetHasNavigationBar(CurrentPage, false);
             CurrentPage.Title = "Danh sách phiếu nhập";
         }
@@ -60,9 +60,8 @@ namespace Phoenix.Mobile.PageModels.Common
         }
 
         #region properties
-        public static List<InputModel> Inputs { get; set; } = new List<InputModel>();
+        public static List<InputModel> Inputs { get; set; } 
         public InputRequest request { get; set; } = new InputRequest();
-
         public DateTime DateInput { get; set; }
         #endregion
 

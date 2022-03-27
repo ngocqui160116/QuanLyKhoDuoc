@@ -11,11 +11,11 @@
              x:Class="Phoenix.Mobile.Pages.Common.AddMedicinePage"
              ControlTemplate="{StaticResource FullScreenHasBack}">
     <ContentPage.Content>
-       
-        <StackLayout BackgroundColor="WhiteSmoke">
 
+        <StackLayout BackgroundColor="WhiteSmoke">
             <StackLayout HeightRequest="50"
-                         WidthRequest="50" Orientation="Horizontal">
+                         WidthRequest="50" 
+                         Orientation="Horizontal">
                 <Label Text="Hình ảnh thuốc"
                        FontSize="Medium"
                        Margin="5,10,5,10"
@@ -32,7 +32,7 @@
  
                 <Frame CornerRadius="15" >
                     <StackLayout  BackgroundColor="White"
-                                   HeightRequest="100">
+                                  HeightRequest="100">
                     <Image Source="{Binding image}"
                            WidthRequest="75"
                            HorizontalOptions="Start"
@@ -64,8 +64,6 @@
                             <ColumnDefinition Width="0.3*"/>
                             <ColumnDefinition Width="0.7*"/>
                         </Grid.ColumnDefinitions>
-
-
                         <Label  Grid.Row="2"
                                 Grid.Column="0" 
                                 Margin="10,5,0,0"                               
@@ -77,8 +75,7 @@
                                 TextColor="Black"
                                 Text="{Binding Name}"
                                 Placeholder="Nhập tên thuốc"
-                                WidthRequest="200" 
-                                 />
+                                WidthRequest="200"/>
 
                         <Label  Grid.Row="3"
                                 Grid.Column="0" 
@@ -107,7 +104,6 @@
                                 TitleColor="Black"
                                 ItemDisplayBinding="{Binding Name}"
                                 SelectedItem="{Binding SelectedGroup}">
-                           
                         </Picker>
                               
                         <Label  Grid.Row="5"
@@ -165,7 +161,6 @@
                                 Title="----- Chọn Đơn vị tính -----"
                                 ItemDisplayBinding="{Binding Name}"
                                 SelectedItem="{Binding SelectedUnit}">
-
                         </Picker>
                     </Grid>
                 </StackLayout>

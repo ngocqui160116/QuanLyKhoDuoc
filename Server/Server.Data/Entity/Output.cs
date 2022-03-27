@@ -14,11 +14,12 @@ namespace Phoenix.Server.Data.Entity
         [ForeignKey("IdStaff")]
         public virtual Staff Staff { get; set; }
         public DateTime DateOutput { get; set; }
-
         public int IdReason { get; set; }
         [ForeignKey("IdReason")]
         public virtual Reason Reason { get; set; }
+        public bool Status { get; set; }
 
+        //List
         public virtual ICollection<OutputInfo> OutputInfo { get; set; }
     }
     

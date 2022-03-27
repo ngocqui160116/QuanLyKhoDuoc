@@ -17,10 +17,7 @@ namespace Phoenix.Server.Services.MainServices
     public interface IOutputInfoService
     {
         Task<BaseResponse<OutputInfoDto>> GetAllOutputInfo(OutputInfoRequest request);
-
         Task<CrudResult> CreateOutputInfo(OutputInfoRequest request);
-        Task<CrudResult> UpdateOutputInfo(int Id, OutputInfoRequest request);
-        Task<CrudResult> DeleteOutputInfo(int Id);
     }
     public class OutputInfoService : IOutputInfoService
     {
@@ -87,60 +84,26 @@ namespace Phoenix.Server.Services.MainServices
         public async Task<CrudResult> CreateOutputInfo(OutputInfoRequest request)
         {
             var Output = new Output();
-            Output.Id = request.Id;
+            Output.Id = request.IdOutput;
             Output.IdStaff = request.IdStaff;
             Output.DateOutput = request.DateOutput;
+            Output.IdReason = request.IdReason;
+            Output.Status = request.Status;
 
             _dataContext.Outputs.Add(Output);
             await _dataContext.SaveChangesAsync();
 
             var OutputInfo = new OutputInfo();
-            OutputInfo.IdOutput = request.Id;
+            OutputInfo.IdOutput = request.IdOutput;
             OutputInfo.IdMedicine = request.IdMedicine;
             OutputInfo.IdInputInfo = request.IdInputInfo;
-           
             OutputInfo.Count = request.Count;
             OutputInfo.Total = request.Total;
+
 
             _dataContext.OutputInfos.Add(OutputInfo);
             await _dataContext.SaveChangesAsync();
             return new CrudResult() { IsOk = true };
         }
-
-
-        public async Task<CrudResult> UpdateOutputInfo(int Id, OutputInfoRequest request)
-        {
-            var OutputInfo = _dataContext.OutputInfos.Find(Id);
-            OutputInfo.IdMedicine = request.IdMedicine;
-
-            await _dataContext.SaveChangesAsync();
-            return new CrudResult() { IsOk = true };
-        }
-
-        public async Task<CrudResult> DeleteOutputInfo(int Id)
-        {
-            var Output = _dataContext.Outputs.Find(Id);
-            if (Output == null)
-                return new CrudResult()
-                {
-                    ErrorCode = CommonErrorStatus.KeyNotFound,
-                    ErrorDescription = "Xoá không thành công."
-                };
-            _dataContext.Outputs.Remove(Output);
-            await _dataContext.SaveChangesAsync();
-
-            var OutputInfo = _dataContext.OutputInfos.Find(Id);
-            if (OutputInfo == null)
-                return new CrudResult()
-                {
-                    ErrorCode = CommonErrorStatus.KeyNotFound,
-                    ErrorDescription = "Xoá không thành công."
-                };
-            _dataContext.OutputInfos.Remove(OutputInfo);
-            await _dataContext.SaveChangesAsync();
-            return new CrudResult() { IsOk = true };
-        }
-
-
     }
 }

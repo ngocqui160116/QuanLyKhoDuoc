@@ -8,8 +8,8 @@
              x:Class="Phoenix.Mobile.Pages.Common.HomePage">
     <ContentPage.Content>
         <StackLayout>
-            
-            <Grid RowSpacing="5" ColumnSpacing="5">
+            <Grid RowSpacing="5" 
+                  ColumnSpacing="5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
@@ -20,40 +20,6 @@
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <!--<controls:RoundFrame Margin="0,5,0,0"
-                                     WidthRequest="100" 
-                                     HeightRequest="100" 
-                                     Text="Kiểm kho" 
-                                     Grid.Row="0" 
-                                     Grid.Column="0" 
-                                     Icon="icon_inventory.png">
-                </controls:RoundFrame>
-                <controls:RoundFrame WidthRequest="100" 
-                                     Margin="0,5,0,0"
-                                     HeightRequest="100" 
-                                     Text="Nhập kho" 
-                                     xe:Commands.Tap="{Binding InputCommand}" 
-                                     Grid.Row="0" 
-                                     Grid.Column="1" 
-                                     Icon="icon_nhapkho.png">
-                </controls:RoundFrame>
-                <controls:RoundFrame WidthRequest="100" 
-                                     
-                                     HeightRequest="100" 
-                                     Text="Xuất kho" 
-                                     Grid.Row="1" 
-                                     xe:Commands.Tap="{Binding OutputCommand}" 
-                                     Grid.Column="1" 
-                                     Icon="icon_xuatkho.png">
-                </controls:RoundFrame>
-                <controls:RoundFrame WidthRequest="100" 
-                                     HeightRequest="100"
-                                     xe:Commands.Tap="{Binding InventoryCommand}"
-                                     Text="Tồn kho" 
-                                     Grid.Row="2" 
-                                     Grid.Column="1" 
-                                     Icon="icon_tonkho.png">
-                </controls:RoundFrame>-->
                 <controls:RoundFrame WidthRequest="100" 
                                      HeightRequest="100" 
                                      Text="   Kho"

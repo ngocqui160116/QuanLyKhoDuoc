@@ -10,14 +10,14 @@
              x:Class="Phoenix.Mobile.Pages.Common.EditMedicinePage">
     <ContentPage.Content>
         <StackLayout BackgroundColor="WhiteSmoke">
-
             <StackLayout HeightRequest="25"
                          WidthRequest="50">
             </StackLayout>
 
-            <Frame CornerRadius="15"  >
+            <Frame CornerRadius="15">
                 <StackLayout  BackgroundColor="White">
-                    <Grid  x:Name="Grid" IsEnabled="{Binding IsEnabled}">
+                    <Grid  x:Name="Grid" 
+                           IsEnabled="{Binding IsEnabled}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>

@@ -36,19 +36,19 @@
                     <DataTemplate x:DataType="supplier:SupplierModel">
                         <ViewCell>
                             <StackLayout Margin="6,4,6,4"
-                                        BackgroundColor="White">
+                                         BackgroundColor="White">
                                 <Label Text="{Binding Name}"
                                        Margin="8"
                                        FontAttributes="Bold"
                                        FontSize="Medium" />
                                 <StackLayout Orientation="Horizontal">
                                     <Label Text="Điện thoại:"
-                                       Margin="8,2,8,4"
-                                       FontSize="Small"/>
+                                           Margin="8,2,8,4"
+                                           FontSize="Small"/>
                                     <Label Text="{Binding PhoneNumber}"
                                            TextColor="CadetBlue"
-                                       Margin="0,2,8,4"
-                                       FontSize="Small"/>
+                                           Margin="0,2,8,4"
+                                           FontSize="Small"/>
                                 </StackLayout>
                                 
                             </StackLayout>

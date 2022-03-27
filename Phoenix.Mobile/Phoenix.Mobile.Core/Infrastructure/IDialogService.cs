@@ -16,9 +16,6 @@ namespace Phoenix.Mobile.Core.Infrastructure
         Task<string> ActionSheetAsync(string title, string cancel, string destructive,
             CancellationToken? cancelToken = null, params string[] buttons);
 
-         Task<string> DisplayPromptAsync(string title, string message, string accept = "OK", string cancel = "Cancel", string placeholder = null, int maxLength = -1, Keyboard keyboard = null, string initialValue = "");
-
-
         Task<bool> ConfirmAsync(string message, string title = null, string okText = null, string cancelText = null,
             CancellationToken? cancelToken = null);
 
