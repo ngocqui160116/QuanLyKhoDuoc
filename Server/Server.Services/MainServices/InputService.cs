@@ -112,6 +112,7 @@ namespace Phoenix.Server.Services.MainServices
                 Input inputs = new Input
                 {
                    //Id = "HD00" + ,
+                   Id = request.Id,
                    IdStaff = request.IdStaff,
                    IdSupplier  = request.IdSupplier,
                    DateInput = request.DateInput

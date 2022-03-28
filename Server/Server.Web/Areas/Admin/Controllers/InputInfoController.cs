@@ -65,17 +65,20 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
         }*/
 
         [HttpPost]
-        public async Task<ActionResult> Detail(string id)
+        public async Task<ActionResult> Detail(DataSourceRequest command, InputInfoModel model)
         {
-            SetViewBag();
-            var inputinfo = _inputinfoService.GetInputInfoById(id);
-            if (inputinfo == null)
-                //No email account found with the specified id
-                return RedirectToAction("Index");
+            var inputinfos = await _inputinfoService.GetAllInputInfo(new InputInfoRequest()
+            {
+                Page = command.Page - 1,
+                PageSize = command.PageSize
+            });
 
-            await _inputinfoService.Detail(inputinfo.IdInput);
-            SuccessNotification("Xóa đại lý thành công");
-            return RedirectToAction("Detail");
+            var gridModel = new DataSourceResult
+            {
+                Data = inputinfos.Data,
+                Total = inputinfos.DataCount
+            };
+            return Json(gridModel);
         }
     }
 }
