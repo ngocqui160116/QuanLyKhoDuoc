@@ -3,52 +3,153 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects"
              xmlns:controls="clr-namespace:Phoenix.Mobile.Controls" 
-             xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common"
+             xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common" xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:DataType="common:HomePageModel"
              x:Class="Phoenix.Mobile.Pages.Common.HomePage">
     <ContentPage.Content>
         <StackLayout>
-            <Grid RowSpacing="5" 
+            <StackLayout>
+                <Grid RowSpacing="5" 
                   ColumnSpacing="5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                </Grid.RowDefinitions>
-                <controls:RoundFrame WidthRequest="100" 
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+
+                    </Grid.RowDefinitions>
+                    <controls:RoundFrame WidthRequest="100" 
                                      HeightRequest="100" 
                                      Text="   Kho"
                                      xe:Commands.Tap="{Binding WarehouseCommand}" 
                                      Grid.Row="0" 
                                      Grid.Column="0" 
                                      Icon="icon_warehouse.png">
-                </controls:RoundFrame>
-              
+                    </controls:RoundFrame>
 
-                <controls:RoundFrame WidthRequest="100" 
+
+                    <controls:RoundFrame WidthRequest="100" 
                                      HeightRequest="100"
                                      xe:Commands.Tap="{Binding MedicineCommand}" 
                                      Text="Danh mục thuốc" 
                                      Grid.Row="0" 
                                      Grid.Column="1" 
                                      Icon="icon_medicine.png">
-                </controls:RoundFrame>
-               
-                <controls:RoundFrame WidthRequest="100" 
+                    </controls:RoundFrame>
+
+                    <controls:RoundFrame WidthRequest="100" 
                                      HeightRequest="100" 
                                      xe:Commands.Tap="{Binding SupplierCommand}" 
                                      Text="Nhà cung cấp" 
                                      Grid.Row="1" 
                                      Grid.Column="0" 
                                      Icon="icon_supplier.png">
-                </controls:RoundFrame>
-            </Grid>
+                    </controls:RoundFrame>
+
+                </Grid>
+
+
+            </StackLayout>
+            <StackLayout Margin="5,10,5,10" 
+                         HeightRequest="150" 
+                         BackgroundColor="White">
+                <Label Text="Thống kê" 
+                       TextColor="Black"
+                       FontSize="25"
+                       Margin="5,10,5,10"
+                       HorizontalOptions="CenterAndExpand"></Label>
+                <Grid RowSpacing="5" 
+                  ColumnSpacing="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                     
+                    </Grid.RowDefinitions>
+                   
+                    <StackLayout BackgroundColor="DeepSkyBlue" 
+                                 Grid.Column="0"
+                     
+                                 Orientation="Horizontal" 
+                                 HeightRequest="75"
+                                 Margin="60,10,10,5"
+                                 HorizontalOptions="StartAndExpand" >
+                        <StackLayout Orientation="Vertical"
+                                    HorizontalOptions="StartAndExpand"
+                                     VerticalOptions="CenterAndExpand">
+
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Nhập kho"
+                                       TextColor="White"
+                                       FontAttributes="Bold"
+                                       Margin="8,2,8,4"
+                                       FontSize="Small" />
+
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="6"
+                                       Margin="8,2,8,4"
+                                       FontSize="Small" />
+                                <Label Text="phiếu"
+                                       Margin="2,2,8,4"
+                                       FontSize="Small" />
+                            </StackLayout>
+                        </StackLayout>
+                        <Image Source="@drawable/icon_medicine"
+                                           WidthRequest="75"
+                                           HorizontalOptions="StartAndExpand"
+                                           VerticalOptions="CenterAndExpand">
+                        </Image>
+
+                        
+                    </StackLayout>
+                    <StackLayout BackgroundColor="PaleVioletRed" 
+                                 Orientation="Horizontal" 
+                                  Grid.Column="1"
+                   
+                                 HeightRequest="75"
+                                 Margin="20,10,10,5"
+                                 HorizontalOptions="StartAndExpand" >
+                        <StackLayout Orientation="Vertical"
+                                    HorizontalOptions="StartAndExpand"
+                                     VerticalOptions="CenterAndExpand">
+
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Xuất kho"
+                                       TextColor="White"
+                                       FontAttributes="Bold"
+                                       Margin="8,2,8,4"
+                                       FontSize="Small" />
+
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="6"
+                                       Margin="8,2,8,4"
+                                       FontSize="Small" />
+                                <Label Text="phiếu"
+                                       Margin="2,2,8,4"
+                                       FontSize="Small" />
+                            </StackLayout>
+                        </StackLayout>
+                        <Image Source="@drawable/icon_medicine"
+                                           WidthRequest="75"
+                                           HorizontalOptions="StartAndExpand"
+                                           VerticalOptions="CenterAndExpand">
+                        </Image>
+
+
+                    </StackLayout>
+                </Grid>
+            </StackLayout>
         </StackLayout>
        
+       
+
     </ContentPage.Content>
 </ContentPage>

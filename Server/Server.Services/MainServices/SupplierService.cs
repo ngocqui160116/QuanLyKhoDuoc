@@ -57,8 +57,7 @@ namespace Phoenix.Server.Services.MainServices
                 }
                 query = query.OrderByDescending(d => d.IdSupplier);
 
-                var data = await query.Skip(request.Page * request.PageSize).Take(request.PageSize).ToListAsync();
-                result.DataCount = (int)((await query.CountAsync()) / request.PageSize) + 1;
+                var data = await query.ToListAsync();
                 result.Data = data.MapTo<SupplierDto>();
             }
             catch (Exception ex)

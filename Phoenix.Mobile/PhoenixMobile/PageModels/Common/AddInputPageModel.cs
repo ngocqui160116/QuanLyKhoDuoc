@@ -36,8 +36,7 @@ namespace Phoenix.Mobile.PageModels.Common
         }
         public override async void Init(object initData)
         {
-            //base.Init(initData);
-            //InputInfo = new ObservableCollection<InputInfoModel>(InputInfos);
+
             if (initData != null)
             {
                 Medicine = (MedicineModel)initData;
@@ -135,13 +134,13 @@ namespace Phoenix.Mobile.PageModels.Common
 
                 var data = await _inputInfoService.AddInputInfo(new InputInfoRequest
                 {
-                    IdMedicine = 21,
-                    IdSupplier = 32,
+                    IdMedicine = Medicine.IdMedicine,
+                    IdSupplier = IdSupplier,
                     IdBatch = "2",
-                    IdStaff = 3,
+                    IdStaff = IdStaff,
                     DateInput = HSD,
                     DueDate = HSD,
-                    IdInput = "HD0010",
+                    IdInput = "HD009",
                     Count = 10,
                     IdUnit = 1,
                     InputPrice = 1000
