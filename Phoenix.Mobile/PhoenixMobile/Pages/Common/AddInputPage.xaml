@@ -55,9 +55,9 @@
 
                                         <StackLayout Orientation="Vertical">
                                             <Label Text="{Binding Name}"
-                                                       Margin="8"
-                                                       FontAttributes="Bold"
-                                                       FontSize="Large" />
+                                                   Margin="8"
+                                                   FontAttributes="Bold"
+                                                   FontSize="Large" />
 
                                             <StackLayout Orientation="Horizontal">
                                                 <Label Text="Số Lô:"
@@ -121,7 +121,8 @@
                                 Grid.Row="1"
                                 Grid.Column="1"
                                 Title="----- Chọn Nhà cung cấp -----"
-                                ItemDisplayBinding="{Binding Name}"/>
+                                ItemDisplayBinding="{Binding Name}"
+                                SelectedItem="{Binding SelectedSupplier}"/>
 
                         <Label  Grid.Row="2"
                                 Grid.Column="0" 
@@ -147,7 +148,8 @@
                                 Grid.Row="3"
                                 Grid.Column="1"
                                 Title="----- Chọn Người tạo -----"
-                                ItemDisplayBinding="{Binding Name}"/>
+                                ItemDisplayBinding="{Binding Name}"
+                                SelectedItem="{Binding SelectedStaff}"/>
                     </Grid>
                 </StackLayout>
             </Frame>
@@ -163,7 +165,7 @@
                                HorizontalOptions="Center"
                                FontAttributes="Bold"
                                TextColor="#fff"
-                               Text="Lưu"/>
+                               Text="Thêm"/>
                     </Grid>
                 </AbsoluteLayout>
                 

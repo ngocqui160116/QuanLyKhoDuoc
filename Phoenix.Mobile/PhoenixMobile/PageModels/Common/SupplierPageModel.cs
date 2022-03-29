@@ -73,7 +73,7 @@ namespace Phoenix.Mobile.PageModels.Common
             get
             {
                 return new Command<SupplierModel>(async (supplier) => {
-                    await CoreMethods.PushPageModel<InputInfoPageModel>(supplier);
+                    await CoreMethods.PushPageModel<EditSupplierPageModel>(supplier);
                 });
             }
         }
