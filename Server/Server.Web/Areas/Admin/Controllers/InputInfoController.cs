@@ -27,10 +27,17 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
         {
             return View();
         }
+        public ActionResult Detail(string Id)
+        {
+            DataContext db = new DataContext();
+            var inputinfo = db.InputInfos.Where(n => n.IdInput.Equals(Id)).FirstOrDefault();
+            return View(inputinfo);
+        }
 
         [HttpPost]
         public async Task<ActionResult> List(DataSourceRequest command, InputInfoModel model)
         {
+            //List<InputInfoModel> = 
             var inputinfos = await _inputinfoService.GetAllInputInfo(new InputInfoRequest()
             {
                 Page = command.Page - 1,
@@ -63,11 +70,22 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
             var inputinfoModel = inputinfoDto.MapTo<InputInfoModel>();
             return View(inputinfoModel);
         }*/
+        /*public ActionResult Detail(int id)
+        {
+            SetViewBag();
+            var inputinfoDto = _inputinfoService.GetMedicineById(id);
+            if (inputinfoDto == null)
+            {
+                return RedirectToAction("Index");
+            }
 
+            var inputinfoModel = inputinfoDto.MapTo<InputInfoModel>();
+            return View(inputinfoModel);
+        }
         [HttpPost]
         public async Task<ActionResult> Detail(DataSourceRequest command, InputInfoModel model)
         {
-            var inputinfos = await _inputinfoService.GetAllInputInfo(new InputInfoRequest()
+            var inputinfos = await _inputinfoService.Detail(stringnew InputInfoRequest()
             {
                 Page = command.Page - 1,
                 PageSize = command.PageSize
@@ -79,6 +97,6 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
                 Total = inputinfos.DataCount
             };
             return Json(gridModel);
-        }
+        }*/
     }
 }

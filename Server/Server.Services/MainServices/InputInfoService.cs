@@ -23,8 +23,9 @@ namespace Phoenix.Server.Services.MainServices
         Task<CrudResult> DeleteInputInfo(int Id);
 
         //
-        InputInfo GetInputInfoById(string id);
-        Task<BaseResponse<InputInfoDto>> Detail(string IdInput, InputInfoRequest request);
+        InputInfo GetInputInfoById(string Id);
+        //Task<BaseResponse<InputInfoDto>> Detail(string IdInput, InputInfoRequest request);
+        Task<BaseResponse<InputInfoDto>> GetAllInputInfoById(string Id,InputInfoRequest request);
     }
     public class InputInfoService : IInputInfoService
     {
@@ -49,7 +50,6 @@ namespace Phoenix.Server.Services.MainServices
                     query = query.Where(d => d.IdInput.Contains(request.IdInput));
                 }
                 
-
                 query = query.OrderByDescending(d => d.Id);
                 query = query.OrderByDescending(d => d.IdBatch);
 
@@ -63,7 +63,39 @@ namespace Phoenix.Server.Services.MainServices
             }
             return result;
         }
+        public async Task<BaseResponse<InputInfoDto>> GetAllInputInfoById(string Id, InputInfoRequest request)
+        {
+            var result = new BaseResponse<InputInfoDto>();
+            try
+            {
+                // setup query
+                var query = _dataContext.InputInfos.AsQueryable();
+                var i = "HD001";
+                // filter
+                if (!string.IsNullOrEmpty(request.IdInput))
+                {
+                    query = query.Where(d => d.IdInput.Contains(request.IdInput));
+                }
+                if (request.IdInput.Contains(i))
+                {
+                    query = query.Where(d => d.IdInput.Contains(request.IdInput));
+                }
 
+                query = query.OrderByDescending(d => d.Id);
+                //query = query.OrderByDescending(d => d.IdBatch);
+
+                //var data = await query.FirstOrDefaultAsync(d => d.IdInput == request.IdInput);
+
+                var data = await query.Skip(request.Page * request.PageSize).Take(request.PageSize).ToListAsync();
+                result.DataCount = (int)((await query.CountAsync()) / request.PageSize) + 1;
+                result.Data = data.MapTo<InputInfoDto>();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return result;
+        }
 
 
         // Task<CrudResult> CreateInputInfo(InputInfoRequest request);
@@ -126,15 +158,15 @@ namespace Phoenix.Server.Services.MainServices
 
         /////////////
         ///
-        public InputInfo GetInputInfoById(string id) => _dataContext.InputInfos.Find(id);
-        public async Task<BaseResponse<InputInfoDto>> Detail(string IdInput, InputInfoRequest request)
+        public InputInfo GetInputInfoById(string Id) => _dataContext.InputInfos.Find(Id);
+       /* public async Task<BaseResponse<InputInfoDto>> Detail(string IdInput, InputInfoRequest request)
         {
 
             var result = new BaseResponse<InputInfoDto>();
             try
             {
                 // setup query
-                var query = _dataContext.InputInfos.AsQueryable();
+                var query = _dataContext.InputInfos.Find(IdInput);
                 //var query = GetInputInfoById(IdInput);
                 if (request.IdInput.Equals(IdInput))
                 {
@@ -161,23 +193,7 @@ namespace Phoenix.Server.Services.MainServices
             }
 
             return result;
-            /*var result = new BaseResponse<InputInfoDto>();
-            try
-            {
-                var supplier = GetInputInfoById(IdInput);
-                //supplier.IdSupplier = request.IdSupplier;
-                //supplier.Deleted = true;
-                //_dataContext.Suppliers.Remove(Supplier);
-                await _dataContext.SaveChangesAsync();
-
-                result.Success = true;
-            }
-            catch (Exception ex)
-            {
-                result.Success = false;
-                result.Message = ex.Message;
-            }
-            return result;*/
-        }
+           
+        }*/
     }
 }

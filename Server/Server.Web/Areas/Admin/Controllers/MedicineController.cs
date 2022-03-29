@@ -35,7 +35,9 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
             var medicines = await _medicineService.GetAllMedicine(new MedicineRequest()
             {
                 Page = command.Page - 1,
-                PageSize = command.PageSize
+                PageSize = command.PageSize,
+                IdGroup = model.IdGroup,
+                IdUnit = model.IdUnit
             });
 
             var gridModel = new DataSourceResult
@@ -87,7 +89,7 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
                 return View(model);
             }
             SuccessNotification("Thêm mới thành công");
-            return RedirectToAction("Create");
+            return RedirectToAction("Index");
         }
         public ActionResult Update(int id)
         {
