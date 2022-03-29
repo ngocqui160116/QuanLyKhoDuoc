@@ -24,7 +24,7 @@ namespace Phoenix.Server.Services.MainServices
 
         //
         InputInfo GetInputInfoById(string id);
-        Task<BaseResponse<InputInfoDto>> Detail(string IdInput);
+        Task<BaseResponse<InputInfoDto>> Detail(string IdInput, InputInfoRequest request);
     }
     public class InputInfoService : IInputInfoService
     {
@@ -37,7 +37,7 @@ namespace Phoenix.Server.Services.MainServices
         //lấy danh sách nhà cung cấp
         public async Task<BaseResponse<InputInfoDto>> GetAllInputInfo(InputInfoRequest request)
         {
-            var result = new BaseResponse<InputInfoDto>();
+            var result = new BaseResponse<InputInfoDto>(); 
             try
             {
                 // setup query
@@ -48,7 +48,7 @@ namespace Phoenix.Server.Services.MainServices
                 {
                     query = query.Where(d => d.IdInput.Contains(request.IdInput));
                 }
-
+                
 
                 query = query.OrderByDescending(d => d.Id);
                 query = query.OrderByDescending(d => d.IdBatch);
@@ -60,7 +60,6 @@ namespace Phoenix.Server.Services.MainServices
             {
 
             }
-
             return result;
         }
 
@@ -127,9 +126,41 @@ namespace Phoenix.Server.Services.MainServices
         /////////////
         ///
         public InputInfo GetInputInfoById(string id) => _dataContext.InputInfos.Find(id);
-        public async Task<BaseResponse<InputInfoDto>> Detail(string IdInput)
+        public async Task<BaseResponse<InputInfoDto>> Detail(string IdInput, InputInfoRequest request)
         {
+
             var result = new BaseResponse<InputInfoDto>();
+            try
+            {
+                // setup query
+                var query = _dataContext.InputInfos.AsQueryable();
+                //var query = GetInputInfoById(IdInput);
+                if (request.IdInput.Equals(IdInput))
+                {
+                    // filter
+                    if (!string.IsNullOrEmpty(request.IdInput))
+                    {
+                        query = query.Where(d => d.IdInput.Contains(request.IdInput));
+                    }
+
+
+                    query = query.OrderByDescending(d => d.Id);
+                    query = query.OrderByDescending(d => d.IdBatch);
+
+                    var data = await query.Skip(request.Page * request.PageSize).Take(request.PageSize).ToListAsync();
+                    result.DataCount = (int)((await query.CountAsync()) / request.PageSize) + 1;
+                    result.Data = data.MapTo<InputInfoDto>();
+                }
+
+               
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return result;
+            /*var result = new BaseResponse<InputInfoDto>();
             try
             {
                 var supplier = GetInputInfoById(IdInput);
@@ -145,7 +176,7 @@ namespace Phoenix.Server.Services.MainServices
                 result.Success = false;
                 result.Message = ex.Message;
             }
-            return result;
+            return result;*/
         }
     }
 }
