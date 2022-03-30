@@ -45,10 +45,12 @@ namespace Phoenix.Mobile.PageModels.Common
             if (initData != null)
             {
                 Medicine = (MedicineModel)initData;
+                
             }
             else
             {
                 Medicine = new MedicineModel();
+                
             }
             NavigationPage.SetHasNavigationBar(CurrentPage, false);
             CurrentPage.Title = "Thêm Thuốc";
@@ -61,6 +63,7 @@ namespace Phoenix.Mobile.PageModels.Common
         private async Task LoadData()
         {
             NameMedicine = Medicine.Name;
+            
 
             var data = await _unitService.GetAllUnit(request);
             if (data == null)
@@ -77,11 +80,14 @@ namespace Phoenix.Mobile.PageModels.Common
 
         #region properties
         public MedicineModel Medicine { get; set; }
-
+       
+        public InputInfoModel inputInfoModel { get; set; }
         public string NameMedicine { get; set; }
         public string IdBatch { get; set; }
         public DateTime HSD { get; set; } = DateTime.Now;
         public int Count { get; set; }
+
+        
         public int IdUnit { get; set; }
         public string NameUnit { get; set; }
 
@@ -95,56 +101,79 @@ namespace Phoenix.Mobile.PageModels.Common
 
         UnitModel _selectedUnit;
 
+
+
         #endregion
-
-        #region AddInputCommand
-
-        public Command AddInputCommand => new Command(async (p) => await AddInputExecute(), (p) => !IsBusy);
-
-        private async Task AddInputExecute()
+       
+        public Command<InputInfoModel> InputSelected
         {
-
-            try
+            get
             {
-                if (IsBusy) return;
-                IsBusy = true;
-                if (IdBatch.IsNullOrEmpty())
+                return new Command<InputInfoModel>(async (InputInfo) =>
                 {
-                    await _dialogService.AlertAsync("Vui lòng nhập số lô");
-                    IsBusy = false;
-                    return;
-                }
-
-                if (Count.Equals(0))
-                {
-                    await _dialogService.AlertAsync("Số lượng phải lớn hơn 0");
-                    IsBusy = false;
-                    return;
-                }
-                if (IdUnit.Equals(0))
-                {
-                    await _dialogService.AlertAsync("Vui lòng Chọn Đơn vị tính");
-                    IsBusy = false;
-                    return;
-                }
-
-
-                // await CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn " + data, "Đóng");
-
-                await CoreMethods.PushPageModel<AddInputPageModel>();
-
-                IsBusy = false;
-
+                    //await CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn"+Count, "Đóng");
+                    await CoreMethods.PushPageModel<AddInputInfoPageModel>(InputInfo);
+                });
             }
-            catch (Exception e)
-            {
-                await _dialogService.AlertAsync("Thêm thất bại");
-
-            }
-            //await CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn " + Count, "Đóng");
-            await CoreMethods.PushPageModel<AddInputPageModel>();
         }
-        #endregion
+
+        //#region AddInputCommand
+
+        //public Command AddInputCommand => new Command(async (p) => await AddInputExecute(), (p) => !IsBusy);
+       
+        //private async Task AddInputExecute()
+        //{
+
+        //    try
+        //    {
+        //        if (IsBusy) return;
+        //        IsBusy = true;
+        //        if (IdBatch.IsNullOrEmpty())
+        //        {
+        //            await _dialogService.AlertAsync("Vui lòng nhập số lô");
+        //            IsBusy = false;
+        //            return;
+        //        }
+
+        //        if (Count.Equals(0))
+        //        {
+        //            await _dialogService.AlertAsync("Số lượng phải lớn hơn 0");
+        //            IsBusy = false;
+        //            return;
+        //        }
+        //        if (IdUnit.Equals(0))
+        //        {
+        //            await _dialogService.AlertAsync("Vui lòng Chọn Đơn vị tính");
+        //            IsBusy = false;
+        //            return;
+        //        }
+
+        //        inputInfoModel = new InputInfoModel()
+        //        {
+        //            IdBatch = IdBatch,
+        //            Count = Count,
+        //            IdUnit = IdUnit,
+        //            DueDate = HSD
+        //        };
+                      
+
+
+        //        // await CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn " + data, "Đóng");
+
+        //        await CoreMethods.PushPageModel<AddInputPageModel>(inputInfoModel);
+
+        //        IsBusy = false;
+
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        await _dialogService.AlertAsync("Thêm thất bại");
+
+        //    }
+        //    //await CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn " + Count, "Đóng");
+        //    await CoreMethods.PushPageModel<AddInputPageModel>();
+        //}
+        //#endregion
 
 
         #region SelectedUnit

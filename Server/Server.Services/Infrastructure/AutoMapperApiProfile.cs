@@ -6,6 +6,7 @@ using Phoenix.Shared.Medicine;
 using Phoenix.Shared.Staff;
 using Phoenix.Shared.Group;
 using Phoenix.Shared.Unit;
+using Phoenix.Shared.Inventory;
 using Phoenix.Shared.Input;
 using Phoenix.Shared.Output;
 using Phoenix.Shared.OutputInfo;
@@ -25,7 +26,7 @@ namespace Phoenix.Server.Services.Infrastructure
             CreateMap<Reason, ReasonDto>();
 
             CreateMap<Group, GroupDto>();
-
+            CreateMap<Inventory, InventoryDto>();
             CreateMap<Input, InputDto>()
                 .ForMember(d => d.SupplierName, o => o.MapFrom(s => s.Supplier.Name))
                 .ForMember(d => d.NameStaff, o => o.MapFrom(s => s.Staff.Name));

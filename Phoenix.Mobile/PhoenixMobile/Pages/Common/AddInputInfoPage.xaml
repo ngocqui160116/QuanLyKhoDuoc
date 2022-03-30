@@ -97,7 +97,7 @@
                 <AbsoluteLayout HorizontalOptions="Center"
 >
                     <Grid xe:TouchEffect.Color="AliceBlue"
-                          xe:Commands.Tap="{Binding AddInputCommand}">
+                          xe:Commands.Tap="{Binding }">
                         <forms:CachedImage Source="btn_Save" 
                                            Grid.Row="0"
                                            HeightRequest="50"/>

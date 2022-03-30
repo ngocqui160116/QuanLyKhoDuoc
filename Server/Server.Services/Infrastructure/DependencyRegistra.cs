@@ -34,6 +34,7 @@ namespace Phoenix.Server.Services.Infrastructure
             //to use in web admin
             container.Register<SettingService>(Lifestyle.Scoped);
             container.Register<IVendorService, VendorService>(Lifestyle.Scoped);
+            container.Register<IInventoryService, InventoryService>(Lifestyle.Scoped);
             container.Register<IReasonService, ReasonService>(Lifestyle.Scoped);
             container.Register<IGroupService, GroupService>(Lifestyle.Scoped);
             container.Register<IInputService, InputService>(Lifestyle.Scoped);

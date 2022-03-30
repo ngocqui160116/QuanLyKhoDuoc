@@ -56,6 +56,7 @@ namespace Phoenix.Mobile.PageModels.Common
 
         private async Task LoadData()
         {
+            //SoLuong = infoModel.Count;
             if (IsBusy) return;
             IsBusy = true;
 #if DEBUG
@@ -63,7 +64,7 @@ namespace Phoenix.Mobile.PageModels.Common
             ListMedicine = new ObservableCollection<MedicineModel>()
             {
                 new MedicineModel()
-                { 
+                {
                     IdMedicine = Medicine.IdMedicine,
                     Name = Medicine.Name,
                     NameUnit = Medicine.NameUnit
@@ -159,7 +160,8 @@ namespace Phoenix.Mobile.PageModels.Common
         #endregion
 
         #region properties
-
+        public InputInfoModel infoModel { get; set; }
+        public int SoLuong { get; set; }
         public int IdMedicine { get; set; }
         public string Name { get; set; }
         public string NameUnit { get; set; }
@@ -221,7 +223,7 @@ namespace Phoenix.Mobile.PageModels.Common
             SearchResults = GetSearchResults(query);
         });
 
-        // public static List<InputModel> Fruits { get; set; } 
+        
         public static List<InputInfoModel> GetSearchResults(string queryString)
         {
             var normalizedQuery = queryString?.ToLower() ?? "";

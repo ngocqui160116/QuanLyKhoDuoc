@@ -25,6 +25,7 @@ namespace Phoenix.Server.Services.Database
         public virtual DbSet<Vendor> Vendors { get; set; }
         public virtual DbSet<Reason> Reasons { get; set; }
         public virtual DbSet<Group> Groups { get; set; }
+        public virtual DbSet<Inventory> Inventories { get; set; }
         public virtual DbSet<Input> Inputs { get; set; }
         public virtual DbSet<InputInfo> InputInfos { get; set; }
         public virtual DbSet<Medicine> Medicines { get; set; }

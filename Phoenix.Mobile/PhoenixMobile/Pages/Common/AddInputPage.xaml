@@ -74,6 +74,8 @@
                                                        Margin="2,2,8,4"
                                                        TextColor="DarkSlateGray"  
                                                        FontSize="Small" />
+
+                                               
                                             </StackLayout>
                                         </StackLayout>
                                         
@@ -150,6 +152,13 @@
                                 Title="----- Chọn Người tạo -----"
                                 ItemDisplayBinding="{Binding Name}"
                                 SelectedItem="{Binding SelectedStaff}"/>
+                        <Label x:DataType="common:AddInputPageModel" 
+                                Grid.Row="3"
+                                Grid.Column="0" 
+                                Margin="10,5,0,0" 
+                                WidthRequest="95" 
+                                FontSize="Medium" 
+                                Text="{Binding SoLuong}"/>
                     </Grid>
                 </StackLayout>
             </Frame>

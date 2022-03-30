@@ -1,25 +1,24 @@
-﻿using System;
+﻿
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Phoenix.Server.Data.Entity
 {
-    [Table("InputInfo")]
-    public class InputInfo
+    [Table("Inventory")]
+    public class Inventory
     {
         [Key]
         public int Id { get; set; }
-        public string IdInput { get; set; }
-        [ForeignKey("IdInput")]
-        public virtual Input Input { get; set; }
         public int IdMedicine { get; set; }
         [ForeignKey("IdMedicine")]
         public virtual Medicine Medicine { get; set; }
+        public int IdInputInfo { get; set; }
+        [ForeignKey("IdInputInfo")]
+        public virtual InputInfo InputInfo { get; set; }
+        public int IdOutputInfo { get; set; }
+        [ForeignKey("IdOutputInfo")]
+        public virtual OutputInfo OutputInfo { get; set; }
         public string IdBatch { get; set; }
         public int Count { get; set; }
-        public double InputPrice { get; set; }
-        public double Total { get; set; }
-        public DateTime DueDate { get; set; }
-       
     }
 }
