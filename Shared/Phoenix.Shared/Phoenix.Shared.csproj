@@ -63,6 +63,8 @@
     <Compile Include="Core\CrudResult.cs" />
     <Compile Include="Core\ListDto.cs" />
     <Compile Include="Core\ResultDto.cs" />
+    <Compile Include="Inventory\InventoryDto.cs" />
+    <Compile Include="Inventory\InventoryRequest.cs" />
     <Compile Include="Reason\ReasonDto.cs" />
     <Compile Include="Reason\ReasonRequest.cs" />
     <Compile Include="Supplier\SupplierDto.cs" />
@@ -89,5 +91,6 @@
     <Compile Include="Vendor\VendorDto.cs" />
     <Compile Include="Vendor\VendorRequest.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

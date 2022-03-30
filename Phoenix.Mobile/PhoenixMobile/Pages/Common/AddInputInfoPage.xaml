@@ -3,19 +3,79 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
              xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common" 
-             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup" x:DataType="common:AddInputInfoPageModel"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup" xmlns:medicine="clr-namespace:Phoenix.Mobile.Core.Models.Medicine;assembly=Phoenix.Mobile.Core" x:DataType="common:AddInputInfoPageModel"
              x:Class="Phoenix.Mobile.Pages.Common.AddInputInfoPage">
     <ContentPage.Content>
         
         <StackLayout>
-            <StackLayout HeightRequest="50"
+            <StackLayout HeightRequest="25"
                          WidthRequest="50">
-                <Label Text="{Binding NameMedicine}"
-                       FontSize="Medium"
-                       Margin="5,10,5,10"
-                       HorizontalOptions="Center"
-                       FontAttributes="Bold"/>
+                <Label Text="Danh sách sản phẩm"
+                       FontSize="Small"
+                       Margin="5,2,0,0"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"/>
+
             </StackLayout>
+            <Frame CornerRadius="15" >
+
+                <ListView ItemsSource="{Binding ListMedicine}" 
+                          HeightRequest="100" BackgroundColor="White"
+                          x:Name="searchResults"
+                          HasUnevenRows="True"
+                          SeparatorVisibility="None"
+                          HorizontalOptions="FillAndExpand"
+                          VerticalOptions="FillAndExpand"
+                          SelectedItem="{Binding SelectedMedicine}">
+                    <ListView.ItemTemplate>
+
+                        <DataTemplate x:DataType="medicine:MedicineModel">
+                            <ViewCell>
+                                <StackLayout Margin="6,4,6,4"
+                                             BackgroundColor="White">
+                                    <StackLayout Orientation="Horizontal" 
+                                                 HorizontalOptions="StartAndExpand" >
+                                        <Image Source="@drawable/icon_medicine"
+                                               WidthRequest="75"
+                                               HorizontalOptions="StartAndExpand"
+                                               VerticalOptions="CenterAndExpand">
+                                        </Image>
+
+                                        <StackLayout Orientation="Vertical">
+                                            <Label Text="{Binding Name}"
+                                                   Margin="8"
+                                                   FontAttributes="Bold"
+                                                   FontSize="Large" />
+
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label Text="Số ĐK:"
+                                                       Margin="8,2,8,4"
+                                                       FontSize="Small" />
+                                                <Label Text="{Binding RegistrationNumber}"
+                                                       Margin="2,2,8,4"
+                                                       TextColor="DarkSlateGray"
+                                                       FontSize="Small" />
+                                                <Label Text="ĐVT:"
+                                                       Margin="8,2,8,4"
+                                                       FontSize="Small" />
+                                                <Label Text="{Binding NameUnit}"
+                                                       Margin="2,2,8,4"
+                                                       TextColor="DarkSlateGray"  
+                                                       FontSize="Small" />
+
+
+                                            </StackLayout>
+                                        </StackLayout>
+
+
+                                    </StackLayout>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Frame>
 
             <Frame CornerRadius="15" >
                 <StackLayout  BackgroundColor="White">
@@ -74,21 +134,34 @@
                                 WidthRequest="200"                         
                                 Keyboard="Numeric"/>
 
+                        <Label  Grid.Row="4"
+                                Grid.Column="0" 
+                                Margin="10,5,0,0" 
+                                WidthRequest="95" 
+                                FontSize="Medium" 
+                                Text="Số lượng"/>
+                        <Entry  Grid.Row="4"
+                                Grid.Column="1"
+                                TextColor="Black"
+                                Text="{Binding Count}"
+                                Placeholder="0"
+                                WidthRequest="200"                         
+                                Keyboard="Numeric"/>
+
                         <Label  Grid.Row="5"
                                 Grid.Column="0" 
                                 Margin="10,5,0,0" 
-                                WidthRequest="115" 
+                                WidthRequest="95" 
                                 FontSize="Medium" 
-                                Text="Đơn vị tính*"/>
-                        <Picker 
-                                ItemsSource="{Binding Units}"
-                                Grid.Row="5"
+                                Text="Giá nhập"/>
+                        <Entry  Grid.Row="5"
                                 Grid.Column="1"
-                                Title="----- Chọn Đơn vị tính -----"
-                                ItemDisplayBinding="{Binding Name}"
-                                SelectedItem="{Binding SelectedUnit}">
+                                TextColor="Black"
+                                Text="{Binding InputPrice}"
+                                Placeholder="0"
+                                WidthRequest="200"                         
+                                Keyboard="Numeric"/>
 
-                        </Picker>
                     </Grid>
                 </StackLayout>
             </Frame>
@@ -97,7 +170,7 @@
                 <AbsoluteLayout HorizontalOptions="Center"
 >
                     <Grid xe:TouchEffect.Color="AliceBlue"
-                          xe:Commands.Tap="{Binding AddInputCommand}">
+                          xe:Commands.Tap="{Binding AddMedicineCommand}">
                         <forms:CachedImage Source="btn_Save" 
                                            Grid.Row="0"
                                            HeightRequest="50"/>

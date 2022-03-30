@@ -17,8 +17,7 @@ namespace Phoenix.Server.Services.MainServices
     public interface IInputService
     {
         Task<BaseResponse<InputDto>> GetAllInput(InputRequest request);
-        //Task<InputInfo> GetInput(string Id);
-        //List<InputDto> GetInput(InputRequest request);
+        
         Task<CrudResult> CreateInput(InputRequest request);
         Task<CrudResult> UpdateInput(string Id, InputRequest request);
         Task<CrudResult> DeleteInput(string Id);
@@ -39,6 +38,9 @@ namespace Phoenix.Server.Services.MainServices
         //lấy danh sách nhà cung cấp
         public async Task<BaseResponse<InputDto>> GetAllInput(InputRequest request)
         {
+
+            
+
             //setup query
             var result = new BaseResponse<InputDto>();
             try
@@ -63,6 +65,8 @@ namespace Phoenix.Server.Services.MainServices
 
             return result;
         }
+
+       
 
         public async Task<CrudResult> CreateInput(InputRequest request)
         {

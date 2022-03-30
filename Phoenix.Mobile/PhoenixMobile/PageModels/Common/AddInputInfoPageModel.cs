@@ -1,25 +1,10 @@
-﻿using Phoenix.Framework.Extensions;
-using Phoenix.Mobile.Core.Infrastructure;
-using Phoenix.Mobile.Core.Models.Common;
-using Phoenix.Mobile.Core.Models.Group;
+﻿using Phoenix.Mobile.Core.Infrastructure;
 using Phoenix.Mobile.Core.Models.InputInfo;
 using Phoenix.Mobile.Core.Models.Medicine;
-using Phoenix.Mobile.Core.Models.Unit;
-using Phoenix.Mobile.Core.Services;
 using Phoenix.Mobile.Core.Services.Common;
 using Phoenix.Mobile.Helpers;
-using Phoenix.Shared.Group;
-using Phoenix.Shared.Medicine;
-using Phoenix.Shared.Unit;
-using Plugin.Media;
-using Plugin.Media.Abstractions;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.IO;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -27,14 +12,12 @@ namespace Phoenix.Mobile.PageModels.Common
 {
     public class AddInputInfoPageModel : BasePageModel
     {
-        private readonly IUnitService _unitService;
         private readonly IMedicineService _medicineService;
         private readonly IDialogService _dialogService;
 
-        public AddInputInfoPageModel(IMedicineService medicineService, IUnitService unitService, IDialogService dialogService)
+        public AddInputInfoPageModel(IMedicineService medicineService, IDialogService dialogService)
         {
             _medicineService = medicineService;
-            _unitService = unitService;
             _dialogService = dialogService;
 
         }
@@ -45,10 +28,12 @@ namespace Phoenix.Mobile.PageModels.Common
             if (initData != null)
             {
                 Medicine = (MedicineModel)initData;
+                
             }
             else
             {
                 Medicine = new MedicineModel();
+                
             }
             NavigationPage.SetHasNavigationBar(CurrentPage, false);
             CurrentPage.Title = "Thêm Thuốc";
@@ -61,78 +46,77 @@ namespace Phoenix.Mobile.PageModels.Common
         private async Task LoadData()
         {
             NameMedicine = Medicine.Name;
+            ListMedicine = new ObservableCollection<MedicineModel>()
+            {
+                new MedicineModel()
+                {
+                    IdMedicine = Medicine.IdMedicine,
+                    Name = Medicine.Name,
+                    RegistrationNumber = Medicine.RegistrationNumber
+                }
 
-            var data = await _unitService.GetAllUnit(request);
-            if (data == null)
-            {
-                await _dialogService.AlertAsync("Lỗi kết nối mạng!", "Lỗi", "OK");
-            }
-            else
-            {
-                Units = data;
-                //RaisePropertyChanged("Vendors");
-                RaisePropertyChanged(nameof(Units));
-            }
+            };
+
         }
 
         #region properties
         public MedicineModel Medicine { get; set; }
-
+        public ObservableCollection<MedicineModel> ListMedicine { get; set; }
+        public InputInfoModel inputInfoModel { get; set; }
         public string NameMedicine { get; set; }
         public string IdBatch { get; set; }
         public DateTime HSD { get; set; } = DateTime.Now;
         public int Count { get; set; }
-        public int IdUnit { get; set; }
+        public double InputPrice { get; set; }
         public string NameUnit { get; set; }
-
+        public string SDK { get; set; }
         #endregion
 
         #region properties
-
-        public List<UnitModel> Units { get; set; } = new List<UnitModel>();
-        public UnitRequest request { get; set; } = new UnitRequest();
+     
         public ObservableCollection<InputInfoModel> ListInputInfo { get; set; }
-
-        UnitModel _selectedUnit;
 
         #endregion
 
-        #region AddInputCommand
+        #region SelectMedicine
 
-        public Command AddInputCommand => new Command(async (p) => await AddInputExecute(), (p) => !IsBusy);
+        MedicineModel _selectedMedicine;
 
-        private async Task AddInputExecute()
+        public MedicineModel SelectedMedicine
         {
+            get
+            {
+                return _selectedMedicine;
+            }
+            set
+            {
+                _selectedMedicine = value;
+                if (value != null)
+                    MedicineSelected.Execute(value);
+            }
+        }
+        public Command<MedicineModel> MedicineSelected
+        {
+            get
+            {
+                return new Command<MedicineModel>(async (Medicine) => {
+                    //await CoreMethods.PushPageModel<AddInputPageModel>(Medicine);
+                    await CoreMethods.PushPageModel<MedicinePageModel>();
+                });
+            }
+        }
 
+        #endregion
+
+        #region AddMedicineCommand
+        public Command AddMedicineCommand => new Command(async (p) => await AddMedicineExecute(), (p) => !IsBusy);
+        private async Task AddMedicineExecute()
+        {
             try
             {
-                if (IsBusy) return;
-                IsBusy = true;
-                if (IdBatch.IsNullOrEmpty())
-                {
-                    await _dialogService.AlertAsync("Vui lòng nhập số lô");
-                    IsBusy = false;
-                    return;
-                }
-
-                if (Count.Equals(0))
-                {
-                    await _dialogService.AlertAsync("Số lượng phải lớn hơn 0");
-                    IsBusy = false;
-                    return;
-                }
-                if (IdUnit.Equals(0))
-                {
-                    await _dialogService.AlertAsync("Vui lòng Chọn Đơn vị tính");
-                    IsBusy = false;
-                    return;
-                }
-
-
-                // await CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn " + data, "Đóng");
 
                 await CoreMethods.PushPageModel<AddInputPageModel>();
-
+                //await _dialogService.AlertAsync("Thêm thành công");
                 IsBusy = false;
 
             }
@@ -141,27 +125,22 @@ namespace Phoenix.Mobile.PageModels.Common
                 await _dialogService.AlertAsync("Thêm thất bại");
 
             }
-            //await CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn " + Count, "Đóng");
-            await CoreMethods.PushPageModel<AddInputPageModel>();
         }
         #endregion
 
-
-        #region SelectedUnit
-        public UnitModel SelectedUnit
+        public Command<InputInfoModel> InputSelected
         {
             get
             {
-                return _selectedUnit;
-            }
-            set
-            {
-                _selectedUnit = value;
-                if (value != null)
-                    IdUnit = value.Id;
+                return new Command<InputInfoModel>(async (InputInfo) =>
+                {
+                    //await CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn"+Count, "Đóng");
+                    await CoreMethods.PushPageModel<AddInputInfoPageModel>(InputInfo);
+                });
             }
         }
-        #endregion
+
+       
 
     }
 }

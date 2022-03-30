@@ -56,6 +56,7 @@ namespace Phoenix.Mobile.PageModels.Common
 
         private async Task LoadData()
         {
+            
             if (IsBusy) return;
             IsBusy = true;
 #if DEBUG
@@ -63,7 +64,7 @@ namespace Phoenix.Mobile.PageModels.Common
             ListMedicine = new ObservableCollection<MedicineModel>()
             {
                 new MedicineModel()
-                { 
+                {
                     IdMedicine = Medicine.IdMedicine,
                     Name = Medicine.Name,
                     NameUnit = Medicine.NameUnit
@@ -142,7 +143,7 @@ namespace Phoenix.Mobile.PageModels.Common
                     DueDate = HSD,
                     IdInput = "HD009",
                     Count = 10,
-                    IdUnit = 1,
+                    
                     InputPrice = 1000
                 }); ;
                 await CoreMethods.PushPageModel<InputPageModel>();
@@ -159,7 +160,8 @@ namespace Phoenix.Mobile.PageModels.Common
         #endregion
 
         #region properties
-
+        public InputInfoModel infoModel { get; set; }
+        public int SoLuong { get; set; }
         public int IdMedicine { get; set; }
         public string Name { get; set; }
         public string NameUnit { get; set; }
@@ -174,7 +176,7 @@ namespace Phoenix.Mobile.PageModels.Common
 
         private async Task AddMedicineExecute()
         {
-            await CoreMethods.PushPageModel<MedicinePageModel>();
+            await CoreMethods.PushPageModel<AddInputInfoPageModel>();
         }
         #endregion
 
@@ -221,7 +223,7 @@ namespace Phoenix.Mobile.PageModels.Common
             SearchResults = GetSearchResults(query);
         });
 
-        // public static List<InputModel> Fruits { get; set; } 
+        
         public static List<InputInfoModel> GetSearchResults(string queryString)
         {
             var normalizedQuery = queryString?.ToLower() ?? "";

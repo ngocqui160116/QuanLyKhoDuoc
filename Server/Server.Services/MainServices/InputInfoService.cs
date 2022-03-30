@@ -108,7 +108,6 @@ namespace Phoenix.Server.Services.MainServices
             InputInfo.IdInput = request.IdInput;
             InputInfo.IdMedicine = request.IdMedicine;
             InputInfo.IdBatch = request.IdBatch;
-            InputInfo.IdUnit = request.IdUnit;
             InputInfo.Count = request.Count;
             InputInfo.InputPrice = request.InputPrice;
             InputInfo.Total = request.Count * request.InputPrice;

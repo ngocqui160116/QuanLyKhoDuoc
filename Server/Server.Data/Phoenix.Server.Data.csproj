@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\Inventory.cs" />
     <Compile Include="Entity\Reason.cs" />
     <Compile Include="Entity\Supplier.cs" />
     <Compile Include="Entity\Output.cs" />
