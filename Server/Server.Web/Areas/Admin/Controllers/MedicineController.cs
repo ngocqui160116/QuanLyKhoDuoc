@@ -127,7 +127,7 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
                 Status = model.Status
             });
             SuccessNotification("Chỉnh sửa thông tin chương trình thành công");
-            return RedirectToAction("Update", new { id = model.IdMedicine });
+            return RedirectToAction("Index", new { id = model.IdMedicine });
         }
         [HttpPost]
         public async Task<ActionResult> Delete(int id)

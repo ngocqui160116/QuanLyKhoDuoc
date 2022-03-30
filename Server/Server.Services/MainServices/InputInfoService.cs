@@ -24,7 +24,7 @@ namespace Phoenix.Server.Services.MainServices
 
         //
         InputInfo GetInputInfoById(string Id);
-        //Task<BaseResponse<InputInfoDto>> Detail(string IdInput, InputInfoRequest request);
+        Task<BaseResponse<InputInfoDto>> Create(InputInfoRequest request);
         Task<BaseResponse<InputInfoDto>> GetAllInputInfoById(string Id,InputInfoRequest request);
     }
     public class InputInfoService : IInputInfoService
@@ -43,7 +43,6 @@ namespace Phoenix.Server.Services.MainServices
             {
                 // setup query
                 var query = _dataContext.InputInfos.AsQueryable();
-
                 // filter
                 if (!string.IsNullOrEmpty(request.IdInput))
                 {
@@ -69,24 +68,17 @@ namespace Phoenix.Server.Services.MainServices
             {
                 // setup query
                 var query = _dataContext.InputInfos.AsQueryable();
-                var i = "HD001";
                 // filter
                 if (!string.IsNullOrEmpty(request.IdInput))
                 {
                     query = query.Where(d => d.IdInput.Contains(request.IdInput));
                 }
-                if (request.IdInput.Contains(i))
-                {
-                    query = query.Where(d => d.IdInput.Contains(request.IdInput));
-                }
-
+                //var i = "HD001";
                 query = query.OrderByDescending(d => d.Id);
-                //query = query.OrderByDescending(d => d.IdBatch);
+                query = query.OrderByDescending(d => d.IdBatch);
 
-                //var data = await query.FirstOrDefaultAsync(d => d.IdInput == request.IdInput);
-
-                var data = await query.Skip(request.Page * request.PageSize).Take(request.PageSize).ToListAsync();
-                result.DataCount = (int)((await query.CountAsync()) / request.PageSize) + 1;
+                var list = _dataContext.InputInfos.Where(p => p.IdInput.Equals(Id));
+                var data = await list.ToListAsync();
                 result.Data = data.MapTo<InputInfoDto>();
             }
             catch (Exception ex)
@@ -157,34 +149,28 @@ namespace Phoenix.Server.Services.MainServices
 
         /////////////
         ///
-        public InputInfo GetInputInfoById(string Id) => _dataContext.InputInfos.Find(Id);
-       /* public async Task<BaseResponse<InputInfoDto>> Detail(string IdInput, InputInfoRequest request)
+        public InputInfo GetInputInfoById(string Id) => _dataContext.InputInfos.Find(Id);        
+        
+        public async Task<BaseResponse<InputInfoDto>> Create(InputInfoRequest request)
         {
-
             var result = new BaseResponse<InputInfoDto>();
             try
             {
-                // setup query
-                var query = _dataContext.InputInfos.Find(IdInput);
-                //var query = GetInputInfoById(IdInput);
-                if (request.IdInput.Equals(IdInput))
+                InputInfo inputinfos = new InputInfo
                 {
-                    // filter
-                    if (!string.IsNullOrEmpty(request.IdInput))
-                    {
-                        query = query.Where(d => d.IdInput.Contains(request.IdInput));
-                    }
+                    IdInput = request.IdInput,
+                    IdMedicine = request.IdMedicine,
+                    IdBatch =request.IdBatch,
+                    Count = request.Count,
+                    InputPrice = request.InputPrice,
+                    Total = request.Total,
+                    DueDate = request.DueDate,
+                    IdUnit = request.IdUnit
+                };
+                _dataContext.InputInfos.Add(inputinfos);
+                await _dataContext.SaveChangesAsync();
 
-
-                    query = query.OrderByDescending(d => d.Id);
-                    query = query.OrderByDescending(d => d.IdBatch);
-
-                    var data = await query.Skip(request.Page * request.PageSize).Take(request.PageSize).ToListAsync();
-                    result.DataCount = (int)((await query.CountAsync()) / request.PageSize) + 1;
-                    result.Data = data.MapTo<InputInfoDto>();
-                }
-
-               
+                result.Success = true;
             }
             catch (Exception ex)
             {
@@ -192,7 +178,7 @@ namespace Phoenix.Server.Services.MainServices
             }
 
             return result;
-           
-        }*/
+        }
+       
     }
 }

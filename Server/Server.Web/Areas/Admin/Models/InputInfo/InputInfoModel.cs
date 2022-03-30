@@ -19,5 +19,6 @@ namespace Phoenix.Server.Web.Areas.Admin.Models.InputInfo
         public string Id { get; set; }
         public int IdStaff { get; set; }
         public DateTime DateInput { get; set; }
+        public int IdUnit { get; set; }
     }
 }

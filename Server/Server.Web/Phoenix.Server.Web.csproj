@@ -761,6 +761,8 @@
     <Content Include="Areas\Admin\Views\Input\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Input\_CreateOrUpdate.cshtml" />
     <Content Include="Areas\Admin\Views\InputInfo\Detail.cshtml" />
+    <Content Include="Areas\Admin\Views\InputInfo\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\InputInfo\_CreateOrUpdate.cshtml" />
     <None Include="assets\js\kendo\2019.3.1023\kendo.all-vsdoc.js" />
     <None Include="assets\js\kendo\2019.3.1023\kendo.all.min.intellisense.js" />
     <Content Include="assets\js\kendo\2019.3.1023\kendo.all.min.js" />

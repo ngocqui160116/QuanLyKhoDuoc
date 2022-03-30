@@ -29,16 +29,17 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
         }
         public ActionResult Detail(string Id)
         {
-            DataContext db = new DataContext();
-            var inputinfo = db.InputInfos.Where(n => n.IdInput.Equals(Id)).FirstOrDefault();
-            return View(inputinfo);
+            //DataContext db = new DataContext();
+            //var inputinfo = db.InputInfos.Where(n => n.IdInput.Equals(Id)).ToList();
+            var model = new InputInfoModel();
+            model.Id = Id;
+            return View(model);
         }
 
         [HttpPost]
-        public async Task<ActionResult> List(DataSourceRequest command, InputInfoModel model)
+        public async Task<ActionResult> Detail(DataSourceRequest command, InputInfoModel model)
         {
-            //List<InputInfoModel> = 
-            var inputinfos = await _inputinfoService.GetAllInputInfo(new InputInfoRequest()
+            var inputinfos = await _inputinfoService.GetAllInputInfoById(model.Id,new InputInfoRequest()
             {
                 Page = command.Page - 1,
                 PageSize = command.PageSize
@@ -54,49 +55,40 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
         public void SetViewBag(long? selectedId = null)
         {
             DataContext db = new DataContext();
-            ViewBag.IdStaff = new SelectList(db.Staffs.OrderBy(n => n.Name), "IdStaff", "Name", selectedId);
-            ViewBag.IdSupplier = new SelectList(db.Suppliers.OrderBy(n => n.Name), "IdSupplier", "Name", selectedId);
+            ViewBag.IdMedicine = new SelectList(db.Medicines.OrderBy(n => n.Name), "IdMedicine", "Name", selectedId);
         }
-
-        /*public ActionResult Detail(string id)
+        public ActionResult Create()
         {
             SetViewBag();
-            var inputinfoDto = _inputinfoService.GetInputInfoById(id);
-            if (inputinfoDto == null)
-            {
-                return RedirectToAction("Index");
-            }
 
-            var inputinfoModel = inputinfoDto.MapTo<InputInfoModel>();
-            return View(inputinfoModel);
-        }*/
-        /*public ActionResult Detail(int id)
-        {
-            SetViewBag();
-            var inputinfoDto = _inputinfoService.GetMedicineById(id);
-            if (inputinfoDto == null)
-            {
-                return RedirectToAction("Index");
-            }
-
-            var inputinfoModel = inputinfoDto.MapTo<InputInfoModel>();
-            return View(inputinfoModel);
+            var model = new InputInfoModel();
+            return View(model);
         }
+
         [HttpPost]
-        public async Task<ActionResult> Detail(DataSourceRequest command, InputInfoModel model)
+        public async Task<ActionResult> Create(InputInfoModel model)
         {
-            var inputinfos = await _inputinfoService.Detail(stringnew InputInfoRequest()
+            SetViewBag();
+            if (!ModelState.IsValid)
+                return View(model);
+            var inputs = await _inputinfoService.Create(new InputInfoRequest
             {
-                Page = command.Page - 1,
-                PageSize = command.PageSize
+                IdInput = model.IdInput,
+                IdMedicine = model.IdMedicine,
+                IdBatch = model.IdBatch,
+                Count = model.Count,
+                InputPrice = model.InputPrice,
+                Total = model.Total,
+                DueDate = model.DueDate,
+                IdUnit = model.IdUnit
             });
-
-            var gridModel = new DataSourceResult
+            if (!inputs.Success)
             {
-                Data = inputinfos.Data,
-                Total = inputinfos.DataCount
-            };
-            return Json(gridModel);
-        }*/
+                ErrorNotification("Thêm mới không thành công");
+                return View(model);
+            }
+            SuccessNotification("Thêm mới thành công");
+            return RedirectToAction("Create");
+        }
     }
 }
