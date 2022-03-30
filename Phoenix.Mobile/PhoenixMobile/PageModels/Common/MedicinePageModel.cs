@@ -9,8 +9,10 @@ using Phoenix.Shared.Unit;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace Phoenix.Mobile.PageModels.Common
@@ -30,8 +32,8 @@ namespace Phoenix.Mobile.PageModels.Common
 
         public override async void Init(object initData)
         {
-            Medicine = new ObservableCollection<MedicineModel>(Medicines);
-            //base.Init(initData);
+           // Medicine = new ObservableCollection<MedicineModel>(Medicines);
+            base.Init(initData);
             NavigationPage.SetHasNavigationBar(CurrentPage, false);
             CurrentPage.Title = "Danh mục thuốc";
         }
@@ -78,8 +80,8 @@ namespace Phoenix.Mobile.PageModels.Common
             get
             {
                 return new Command<MedicineModel>(async (Medicine) => {
-                    await CoreMethods.PushPageModel<AddInputPageModel>();
-                   // await CoreMethods.PushPageModel<AddInputInfoPageModel>(Medicine);
+                    //await CoreMethods.PushPageModel<AddInputPageModel>(Medicine);
+                    await CoreMethods.PushPageModel<AddInputInfoPageModel>(Medicine);
                 });
             }
         }
@@ -88,7 +90,7 @@ namespace Phoenix.Mobile.PageModels.Common
 
 
         #region properties
-        public List<MedicineModel> Medicines { get; set; } = new List<MedicineModel>();
+        public static List<MedicineModel> Medicines { get; set; } = new List<MedicineModel>();
         public MedicineRequest request { get; set; } = new MedicineRequest();
         public int IdMedicine { get; set; }
         #endregion
@@ -103,6 +105,33 @@ namespace Phoenix.Mobile.PageModels.Common
         }
         #endregion
 
+        #region Search
 
+        public ICommand PerformSearch => new Command<string>((string query) =>
+        {
+            SearchResults = GetSearchResults(query);
+        });
+
+        // public static List<InputModel> Fruits { get; set; } 
+        public static List<MedicineModel> GetSearchResults(string queryString)
+        {
+            var normalizedQuery = queryString?.ToLower() ?? "";
+            return Medicines.Where(f => f.Name.ToUpperInvariant().Contains(normalizedQuery)).ToList();
+        }
+
+        List<MedicineModel> searchResults = Medicines;
+        public List<MedicineModel> SearchResults
+        {
+            get
+            {
+                return searchResults;
+            }
+            set
+            {
+                searchResults = value;
+            }
+        }
+
+        #endregion
     }
 }

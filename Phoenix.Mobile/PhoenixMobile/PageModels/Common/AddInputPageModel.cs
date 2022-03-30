@@ -56,7 +56,7 @@ namespace Phoenix.Mobile.PageModels.Common
 
         private async Task LoadData()
         {
-            //SoLuong = infoModel.Count;
+            
             if (IsBusy) return;
             IsBusy = true;
 #if DEBUG
@@ -143,7 +143,7 @@ namespace Phoenix.Mobile.PageModels.Common
                     DueDate = HSD,
                     IdInput = "HD009",
                     Count = 10,
-                    IdUnit = 1,
+                    
                     InputPrice = 1000
                 }); ;
                 await CoreMethods.PushPageModel<InputPageModel>();
@@ -176,7 +176,7 @@ namespace Phoenix.Mobile.PageModels.Common
 
         private async Task AddMedicineExecute()
         {
-            await CoreMethods.PushPageModel<MedicinePageModel>();
+            await CoreMethods.PushPageModel<AddInputInfoPageModel>();
         }
         #endregion
 

@@ -38,6 +38,9 @@ namespace Phoenix.Server.Services.MainServices
         //lấy danh sách nhà cung cấp
         public async Task<BaseResponse<InputDto>> GetAllInput(InputRequest request)
         {
+
+            
+
             //setup query
             var result = new BaseResponse<InputDto>();
             try

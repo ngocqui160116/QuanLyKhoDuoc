@@ -60,7 +60,7 @@ namespace Phoenix.Mobile.PageModels.Common
         }
 
         #region properties
-        public static List<InputModel> Inputs { get; set; } 
+        public static List<InputModel> Inputs { get; set; } = new List<InputModel>();
         public InputRequest request { get; set; } = new InputRequest();
         public DateTime DateInput { get; set; }
         #endregion
