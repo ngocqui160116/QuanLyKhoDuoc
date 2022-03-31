@@ -6,6 +6,7 @@ using Phoenix.Mobile.Helpers;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace Phoenix.Mobile.PageModels.Common
@@ -28,7 +29,8 @@ namespace Phoenix.Mobile.PageModels.Common
             if (initData != null)
             {
                 Medicine = (MedicineModel)initData;
-                
+                IsClose = true;
+                IsOpen = false;
             }
             else
             {
@@ -36,7 +38,7 @@ namespace Phoenix.Mobile.PageModels.Common
                 
             }
             NavigationPage.SetHasNavigationBar(CurrentPage, false);
-            CurrentPage.Title = "Thêm Thuốc";
+            CurrentPage.Title = "Nhập thông tin phiếu nhập";
         }
         protected override async void ViewIsAppearing(object sender, EventArgs e)
         {
@@ -45,18 +47,17 @@ namespace Phoenix.Mobile.PageModels.Common
         }
         private async Task LoadData()
         {
-            NameMedicine = Medicine.Name;
             ListMedicine = new ObservableCollection<MedicineModel>()
             {
                 new MedicineModel()
                 {
                     IdMedicine = Medicine.IdMedicine,
                     Name = Medicine.Name,
+                    NameUnit = Medicine.NameUnit,
                     RegistrationNumber = Medicine.RegistrationNumber
                 }
 
             };
-
         }
 
         #region properties
@@ -70,61 +71,48 @@ namespace Phoenix.Mobile.PageModels.Common
         public double InputPrice { get; set; }
         public string NameUnit { get; set; }
         public string SDK { get; set; }
+        public bool IsClose { get; set; } = false;
+        public bool IsOpen { get; set; } = true;
         #endregion
 
         #region properties
-     
+
         public ObservableCollection<InputInfoModel> ListInputInfo { get; set; }
 
         #endregion
 
-        #region SelectMedicine
+        
 
-        MedicineModel _selectedMedicine;
-
-        public MedicineModel SelectedMedicine
+       public ICommand PerformSearch => new Command<MedicineModel>((MedicineModel Medicine) =>
         {
-            get
-            {
-                return _selectedMedicine;
-            }
-            set
-            {
-                _selectedMedicine = value;
-                if (value != null)
-                    MedicineSelected.Execute(value);
-            }
-        }
-        public Command<MedicineModel> MedicineSelected
-        {
-            get
-            {
-                return new Command<MedicineModel>(async (Medicine) => {
-                    //await CoreMethods.PushPageModel<AddInputPageModel>(Medicine);
-                    await CoreMethods.PushPageModel<MedicinePageModel>();
-                });
-            }
-        }
-
-        #endregion
+             CoreMethods.DisplayAlert("Thêm thành công","Bạn đã chọn" + Medicine.Name,"Đóng");
+             CoreMethods.PushPageModel<AddInputPageModel>(Medicine);
+        });
 
         #region AddMedicineCommand
-        public Command AddMedicineCommand => new Command(async (p) => await AddMedicineExecute(), (p) => !IsBusy);
+        public ICommand AddMedicineCommand => new Command(async (p) => await AddMedicineExecute(), (p) => !IsBusy);
         private async Task AddMedicineExecute()
         {
-            try
+            inputInfoModel = new InputInfoModel()
             {
+                IdMedicine = Medicine.IdMedicine,
+                MedicineName = Medicine.Name,
+                IdBatch = IdBatch,
+                DueDate = HSD,
+                Count = Count,
+                InputPrice = InputPrice
+            };
+            //await CoreMethods.DisplayAlert("Thêm thành công", "Bạn đã chọn" + Medicine.Name, "Đóng");
+            CoreMethods.PushPageModel<AddInputPageModel>(inputInfoModel);
+        }
+        #endregion
 
-                await CoreMethods.PushPageModel<AddInputPageModel>();
-                //await _dialogService.AlertAsync("Thêm thành công");
-                IsBusy = false;
-
-            }
-            catch (Exception e)
-            {
-                await _dialogService.AlertAsync("Thêm thất bại");
-
-            }
+        #region SelectMedicine
+        public Command SelectMedicine => new Command(async (p) => await SelectMedicineExecute(), (p) => !IsBusy);
+        private async Task SelectMedicineExecute()
+        {
+            
+            await CoreMethods.PushPageModel<MedicinePageModel>();
         }
         #endregion
 

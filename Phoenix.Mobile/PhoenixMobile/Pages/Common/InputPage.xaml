@@ -25,13 +25,16 @@
                              Source="icon_add"/>
             </StackLayout>
 
-            <ListView ItemsSource="{Binding SearchResults}"
+            <ListView ItemsSource="{Binding Inputs}"
                       x:Name="searchResults"
                       HasUnevenRows="True"
                       BackgroundColor="#ecf0f1"
                       SeparatorVisibility="None"
                       HorizontalOptions="FillAndExpand"
                       VerticalOptions="FillAndExpand"
+                      IsPullToRefreshEnabled="True"
+                      RefreshCommand="{Binding }"
+                      IsRefreshing="{Binding IsRefreshing}"
                       SelectedItem="{Binding SelectedInput}">
 
                 <ListView.ItemTemplate>

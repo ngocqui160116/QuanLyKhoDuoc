@@ -13,7 +13,7 @@ namespace Phoenix.Mobile.Core.Proxies.Common
     public interface IInputProxy
     {
         Task<BaseResponse<InputDto>> GetAllInput(InputRequest request);
-        //Task<List<InputDto>> GetInput(string Id);
+        List<InputDto> Search(string Id);
         Task<InputDto> AddInput(InputRequest request);
     }
 
@@ -34,7 +34,22 @@ namespace Phoenix.Mobile.Core.Proxies.Common
             }
         }
 
-       
+        public  List<InputDto> Search(string Id)
+        {
+            try
+            {
+                var api = RestService.For<IInputApi>(GetHttpClient());
+
+                return  api.Search(Id);
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler.Handle(new NetworkException(ex), true);
+                return null;
+            }
+        }
+
+
         public async Task<InputDto> AddInput(InputRequest request)
         {
             try
@@ -56,6 +71,9 @@ namespace Phoenix.Mobile.Core.Proxies.Common
             [Post("/input/GetAllInput")]
             Task<BaseResponse<InputDto>> GetAllInput([Body] InputRequest request);
             
+            [Post("/input/Search")]
+            List<InputDto> Search( string Id);
+
             [Post("/input/GetInput")]
             Task<List<InputDto>> GetInput(string Id);
 
