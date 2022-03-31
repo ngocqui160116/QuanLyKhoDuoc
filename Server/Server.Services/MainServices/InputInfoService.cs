@@ -109,6 +109,7 @@ namespace Phoenix.Server.Services.MainServices
             await _dataContext.SaveChangesAsync();
 
             var InputInfo = new InputInfo();
+
             InputInfo.Id = request.Id;
             InputInfo.IdInput = request.IdInput;
             InputInfo.IdMedicine = request.IdMedicine;

@@ -4,8 +4,8 @@
     {
 #if DEBUG        
         //public const string ServerBaseUrl = "http://192.168.1.9:63199/api";
-        //public const string ServerBaseUrl = "http://192.168.1.14:63199/api";
-        public const string ServerBaseUrl = "http://172.31.98.215:63199/api";
+        public const string ServerBaseUrl = "http://192.168.1.14:63199/api";
+        //public const string ServerBaseUrl = "http://172.31.98.215:63199/api";
        
 
 #else

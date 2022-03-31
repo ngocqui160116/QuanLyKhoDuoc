@@ -5,6 +5,7 @@ using Phoenix.Mobile.Core.Models.Medicine;
 using Phoenix.Mobile.Core.Services.Common;
 using Phoenix.Mobile.Helpers;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -32,6 +33,7 @@ namespace Phoenix.Mobile.PageModels.Common
                 Medicine = (MedicineModel)initData;
                 IsClose = true;
                 IsOpen = false;
+                
             }
             else
             {
@@ -48,22 +50,35 @@ namespace Phoenix.Mobile.PageModels.Common
         }
         private async Task LoadData()
         {
-            ListMedicine = new ObservableCollection<MedicineModel>()
+           //so = ListMedicine.Count;
+            if(so.Equals(0))
             {
-                new MedicineModel()
+                
+                ListMedicine = new List<MedicineModel>()
                 {
-                    IdMedicine = Medicine.IdMedicine,
-                    Name = Medicine.Name,
-                    NameUnit = Medicine.NameUnit,
-                    RegistrationNumber = Medicine.RegistrationNumber
-                }
+                    new MedicineModel()
+                    {
+                        IdMedicine = Medicine.IdMedicine,
+                        Name = Medicine.Name,
+                        NameUnit = Medicine.NameUnit,
+                        RegistrationNumber = Medicine.RegistrationNumber
+                    }
 
-            };
+                };
+               so = so + 1;
+            }
+            else
+            {
+                ListMedicine.Count.Equals(so);
+                ListMedicine.Add(Medicine);
+            }
+            
         }
 
         #region properties
+        public int so { get; set; }
         public MedicineModel Medicine { get; set; }
-        public ObservableCollection<MedicineModel> ListMedicine { get; set; }
+        public List<MedicineModel> ListMedicine { get; set; } = new List<MedicineModel>();
         public InputInfoModel inputInfoModel { get; set; }
         public string NameMedicine { get; set; }
         public string IdBatch { get; set; }
