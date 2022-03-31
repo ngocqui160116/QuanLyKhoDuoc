@@ -163,8 +163,7 @@ namespace Phoenix.Server.Services.MainServices
                     Count = request.Count,
                     InputPrice = request.InputPrice,
                     Total = request.Total,
-                    DueDate = request.DueDate,
-                    IdUnit = request.IdUnit
+                    DueDate = request.DueDate
                 };
                 _dataContext.InputInfos.Add(inputinfos);
                 await _dataContext.SaveChangesAsync();

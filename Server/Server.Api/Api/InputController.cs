@@ -26,13 +26,13 @@ namespace Phoenix.Server.Api.Api
             return await _InputService.GetAllInput(request);
         }
 
-        //[HttpPost]
-        //[Route("GetInput")]
-        //public List<InputDto> GetInput(InputRequest request)
-        //{
-        //    return _InputService.GetInput(request);
-        //}
-        
+        [HttpPost]
+        [Route("Search")]
+        public  List<InputDto> Search(string Id)
+        {
+            return  _InputService.Search(Id);
+        }
+
 
         [HttpPost]
         [Route("CreateInput")]

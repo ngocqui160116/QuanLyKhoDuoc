@@ -114,6 +114,21 @@ namespace Phoenix.Mobile.PageModels.Common
 
         #endregion
 
+        #region properties
+        public string SearchText { get; set; }
+        public int IdMedicine { get; set; }
+        public string SDK { get; set; }
+        public string Name { get; set; }
+        public int IdGroup { get; set; }
+        public string Active { get; set; }
+        public string Content { get; set; }
+        public string Packing { get; set; }
+        public int IdUnit { get; set; }
+        public string NameGroup { get; set; }
+        public string NameUnit { get; set; }
+
+        #endregion
+
         #region EditCommand
         public Command EditCommand => new Command(async (p) => await EditExecute(), (p) => !IsBusy);
         private async Task EditExecute()
@@ -157,22 +172,7 @@ namespace Phoenix.Mobile.PageModels.Common
 
        
 
-
-        #region properties
-        public string SearchText { get; set; }
-        public int IdMedicine { get; set; }
-        public string SDK { get; set; }
-        public string Name { get; set; }
-        public int IdGroup { get; set; }
-        public string Active { get; set; }
-        public string Content { get; set; }
-        public string Packing { get; set; }
-        public int IdUnit { get; set; }
-        public string NameGroup { get; set; }
-        public string NameUnit { get; set; }
-
-        #endregion
-
+        #region SelectedGroup
         public GroupModel SelectedGroup
         {
             get
@@ -186,8 +186,9 @@ namespace Phoenix.Mobile.PageModels.Common
                     IdGroup = value.IdGroup;
             }
         }
+        #endregion
 
-
+        #region SelectedGroup
         public UnitModel SelectedUnit
         {
             get
@@ -201,6 +202,7 @@ namespace Phoenix.Mobile.PageModels.Common
                     IdUnit = value.Id;
             }
         }
+        #endregion
 
         #region DeleteMedicineCommand
         public Command DeleteMedicineCommand => new Command(async (p) => await DeleteMedicineExecute(), (p) => !IsBusy);

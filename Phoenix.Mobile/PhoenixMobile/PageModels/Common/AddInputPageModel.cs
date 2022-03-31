@@ -39,12 +39,13 @@ namespace Phoenix.Mobile.PageModels.Common
 
             if (initData != null)
             {
-                Medicine = (MedicineModel)initData;
+                infoModel = (InputInfoModel)initData;
             }
             else
             {
-                Medicine = new MedicineModel();
+                infoModel = new InputInfoModel();
             }
+            //base.Init(infoModel);
             NavigationPage.SetHasNavigationBar(CurrentPage, false);
             CurrentPage.Title = "Thêm phiếu nhập";
         }
@@ -60,14 +61,16 @@ namespace Phoenix.Mobile.PageModels.Common
             if (IsBusy) return;
             IsBusy = true;
 #if DEBUG
-            IdMedicine = Medicine.IdMedicine;
-            ListMedicine = new ObservableCollection<MedicineModel>()
+            //IdMedicine = Medicine.IdMedicine;
+            ListMedicine = new ObservableCollection<InputInfoModel>()
             {
-                new MedicineModel()
+                new InputInfoModel()
                 {
-                    IdMedicine = Medicine.IdMedicine,
-                    Name = Medicine.Name,
-                    NameUnit = Medicine.NameUnit
+                    IdMedicine = infoModel.IdMedicine,
+                    MedicineName = infoModel.MedicineName,
+                    DueDate = infoModel.DueDate,
+                    Count = infoModel.Count,
+                    IdBatch = infoModel.IdBatch
                 }
 
             };
@@ -119,8 +122,8 @@ namespace Phoenix.Mobile.PageModels.Common
         public SupplierRequest request { get; set; } = new SupplierRequest();
         public List<StaffModel> Staffs { get; set; } = new List<StaffModel>();
         public StaffRequest StaffRequest { get; set; } = new StaffRequest();
-        public MedicineModel Medicine { get; set; }
-        public ObservableCollection<MedicineModel> ListMedicine { get; set; }
+
+        public ObservableCollection<InputInfoModel> ListMedicine { get; set; }
         public static List<InputInfoModel> InputInfos { get; set; } = new List<InputInfoModel>();
         public InputInfoRequest InputInfoRequest { get; set; } = new InputInfoRequest();
 
@@ -135,19 +138,18 @@ namespace Phoenix.Mobile.PageModels.Common
 
                 var data = await _inputInfoService.AddInputInfo(new InputInfoRequest
                 {
-                    IdMedicine = Medicine.IdMedicine,
+                    IdMedicine = infoModel.IdMedicine,
                     IdSupplier = IdSupplier,
-                    IdBatch = "2",
+                    IdBatch = infoModel.IdBatch,
                     IdStaff = IdStaff,
-                    DateInput = HSD,
-                    DueDate = HSD,
-                    IdInput = "HD009",
-                    Count = 10,
-                    
-                    InputPrice = 1000
+                    DateInput = DateInput,
+                    DueDate = infoModel.DueDate,
+                    IdInput = "HD003",
+                    Count = infoModel.Count,
+                    InputPrice = infoModel.InputPrice
                 }); ;
                 await CoreMethods.PushPageModel<InputPageModel>();
-               
+
                 await _dialogService.AlertAsync("Thêm thành công");
                 IsBusy = false;
 
@@ -167,7 +169,7 @@ namespace Phoenix.Mobile.PageModels.Common
         public string NameUnit { get; set; }
         public int IdSupplier { get; set; }
         public int IdStaff { get; set; }
-        public DateTime HSD { get; set; } = DateTime.Now;
+        public DateTime DateInput { get; set; } = DateTime.Now;
         #endregion
 
         #region AddMedicineCommand

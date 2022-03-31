@@ -41,7 +41,7 @@
                           VerticalOptions="FillAndExpand">
                     <ListView.ItemTemplate>
 
-                        <DataTemplate x:DataType="medicine:MedicineModel">
+                        <DataTemplate x:DataType="intputinfo:InputInfoModel">
                             <ViewCell>
                                 <StackLayout Margin="6,4,6,4"
                                              BackgroundColor="White">
@@ -54,23 +54,23 @@
                                         </Image>
 
                                         <StackLayout Orientation="Vertical">
-                                            <Label Text="{Binding Name}"
+                                            <Label Text="{Binding MedicineName}"
                                                    Margin="8"
                                                    FontAttributes="Bold"
                                                    FontSize="Large" />
 
                                             <StackLayout Orientation="Horizontal">
-                                                <Label Text="Số Lô:"
+                                                <Label Text="Số lượng:"
                                                        Margin="8,2,8,4"
                                                        FontSize="Small" />
-                                                <Label Text="{Binding IdMedicine}"
+                                                <Label Text="{Binding Count}"
                                                        Margin="2,2,8,4"
                                                        TextColor="DarkSlateGray"
                                                        FontSize="Small" />
                                                 <Label Text="HSD:"
                                                        Margin="8,2,8,4"
                                                        FontSize="Small" />
-                                                <Label Text="{Binding NameUnit}"
+                                                <Label Text="{Binding DueDate}"
                                                        Margin="2,2,8,4"
                                                        TextColor="DarkSlateGray"  
                                                        FontSize="Small" />
@@ -135,7 +135,7 @@
                         <DatePicker x:DataType="common:AddInputPageModel" 
                                     Grid.Row="2"
                                     Grid.Column="1"
-                                    Date="{Binding HSD}"
+                                    Date="{Binding DateInput}"
                                     Format="dd/MM/yyyy"
                                     WidthRequest="200" />
 
@@ -152,13 +152,7 @@
                                 Title="----- Chọn Người tạo -----"
                                 ItemDisplayBinding="{Binding Name}"
                                 SelectedItem="{Binding SelectedStaff}"/>
-                        <Label x:DataType="common:AddInputPageModel" 
-                                Grid.Row="3"
-                                Grid.Column="0" 
-                                Margin="10,5,0,0" 
-                                WidthRequest="95" 
-                                FontSize="Medium" 
-                                Text="{Binding SoLuong}"/>
+                        
                     </Grid>
                 </StackLayout>
             </Frame>

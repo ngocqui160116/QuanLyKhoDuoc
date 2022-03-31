@@ -57,11 +57,13 @@ namespace Phoenix.Mobile.PageModels.Common
                 //RaisePropertyChanged("Vendors");
                 RaisePropertyChanged(nameof(Inputs));
             }
+
         }
 
         #region properties
-        public static List<InputModel> Inputs { get; set; } = new List<InputModel>();
+        public List<InputModel> Inputs { get; set; } = new List<InputModel>();
         public InputRequest request { get; set; } = new InputRequest();
+        public string Id { get; set; }
         public DateTime DateInput { get; set; }
         #endregion
 
@@ -109,29 +111,46 @@ namespace Phoenix.Mobile.PageModels.Common
 
         public ICommand PerformSearch => new Command<string>((string query) =>
         {
-            SearchResults = GetSearchResults(query);
+            Inputs = GetSearchResults(query);
         });
 
-        // public static List<InputModel> Fruits { get; set; } 
-        public static List<InputModel> GetSearchResults(string queryString)
+
+        public  List<InputModel> GetSearchResults(string queryString)
         {
+
             var normalizedQuery = queryString?.ToLower() ?? "";
-            return Inputs.Where(f => f.Id.ToUpperInvariant().Contains(normalizedQuery)).ToList();
+            var data =  _InputService.Search(normalizedQuery);
+            return data;
         }
 
-        List<InputModel> searchResults = Inputs;
-        public List<InputModel> SearchResults
-        {
-            get
-            {
-                return searchResults;
-            }
-            set
-            {
-                searchResults = value;
-            }
-        }
+        //List<InputInfoModel> searchResults = InputInfos;
+        //public List<InputInfoModel> SearchResults
+        //{
+        //    get
+        //    {
+        //        return searchResults;
+        //    }
+        //    set
+        //    {
+        //        searchResults = value;
+
+        //    }
+        //}
 
         #endregion
+
+        //public ICommand RefreshCommand
+        //{
+        //    get {
+        //        return new Command(async () =>
+        //        {
+        //            IsRefreshing = true;
+
+        //            await LoadData();
+
+        //            IsRefreshing = false;
+        //        });
+        //    }
+        //}
     }
 }

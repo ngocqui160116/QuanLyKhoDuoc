@@ -4,7 +4,8 @@
              xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
              xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common" 
              xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup" xmlns:medicine="clr-namespace:Phoenix.Mobile.Core.Models.Medicine;assembly=Phoenix.Mobile.Core" x:DataType="common:AddInputInfoPageModel"
-             x:Class="Phoenix.Mobile.Pages.Common.AddInputInfoPage">
+             x:Class="Phoenix.Mobile.Pages.Common.AddInputInfoPage"
+             ControlTemplate="{StaticResource FullScreenHasBack}">
     <ContentPage.Content>
         
         <StackLayout>
@@ -13,26 +14,40 @@
                 <Label Text="Danh sách sản phẩm"
                        FontSize="Small"
                        Margin="5,2,0,0"
+                       BackgroundColor="WhiteSmoke"
                        FontAttributes="Bold"
                        VerticalOptions="Center"/>
 
             </StackLayout>
-            <Frame CornerRadius="15" >
-
+            <Frame xe:Commands.Tap="{Binding SelectMedicine}" 
+                   CornerRadius="15" 
+                   HeightRequest="100"
+                   IsVisible="{Binding IsOpen}">
+                <Label
+                    Text="Thêm sản phẩm"
+                    FontSize="25"
+                    TextColor="Black"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"/>
+            </Frame>
+            
+            <Frame CornerRadius="15" 
+                   IsVisible="{Binding IsClose}">
+                
                 <ListView ItemsSource="{Binding ListMedicine}" 
                           HeightRequest="100" BackgroundColor="White"
                           x:Name="searchResults"
                           HasUnevenRows="True"
                           SeparatorVisibility="None"
                           HorizontalOptions="FillAndExpand"
-                          VerticalOptions="FillAndExpand"
-                          SelectedItem="{Binding SelectedMedicine}">
+                          VerticalOptions="FillAndExpand">
                     <ListView.ItemTemplate>
 
                         <DataTemplate x:DataType="medicine:MedicineModel">
                             <ViewCell>
                                 <StackLayout Margin="6,4,6,4"
                                              BackgroundColor="White">
+                                    
                                     <StackLayout Orientation="Horizontal" 
                                                  HorizontalOptions="StartAndExpand" >
                                         <Image Source="@drawable/icon_medicine"
@@ -50,24 +65,23 @@
                                             <StackLayout Orientation="Horizontal">
                                                 <Label Text="Số ĐK:"
                                                        Margin="8,2,8,4"
-                                                       FontSize="Small" />
+                                                       FontSize="Small"/>
                                                 <Label Text="{Binding RegistrationNumber}"
                                                        Margin="2,2,8,4"
                                                        TextColor="DarkSlateGray"
-                                                       FontSize="Small" />
+                                                       IsEnabled="False"
+                                                       FontSize="Small"/>
                                                 <Label Text="ĐVT:"
                                                        Margin="8,2,8,4"
-                                                       FontSize="Small" />
+                                                       IsEnabled="False"
+                                                       FontSize="Small"/>
                                                 <Label Text="{Binding NameUnit}"
                                                        Margin="2,2,8,4"
+                                                       IsEnabled="False"
                                                        TextColor="DarkSlateGray"  
-                                                       FontSize="Small" />
-
-
+                                                       FontSize="Small"/>
                                             </StackLayout>
                                         </StackLayout>
-
-
                                     </StackLayout>
                                 </StackLayout>
                             </ViewCell>
