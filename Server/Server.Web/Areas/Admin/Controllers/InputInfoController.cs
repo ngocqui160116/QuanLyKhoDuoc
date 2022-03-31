@@ -79,8 +79,7 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
                 Count = model.Count,
                 InputPrice = model.InputPrice,
                 Total = model.Total,
-                DueDate = model.DueDate,
-                IdUnit = model.IdUnit
+                DueDate = model.DueDate
             });
             if (!inputs.Success)
             {
