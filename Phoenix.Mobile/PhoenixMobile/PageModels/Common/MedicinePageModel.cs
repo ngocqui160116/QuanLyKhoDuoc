@@ -90,7 +90,7 @@ namespace Phoenix.Mobile.PageModels.Common
 
 
         #region properties
-        public static List<MedicineModel> Medicines { get; set; } = new List<MedicineModel>();
+        public List<MedicineModel> Medicines { get; set; } = new List<MedicineModel>();
         public MedicineRequest request { get; set; } = new MedicineRequest();
         public int IdMedicine { get; set; }
         #endregion
@@ -105,33 +105,33 @@ namespace Phoenix.Mobile.PageModels.Common
         }
         #endregion
 
-        #region Search
+        //#region Search
 
-        public ICommand PerformSearch => new Command<string>((string query) =>
-        {
-            SearchResults = GetSearchResults(query);
-        });
+        //public ICommand PerformSearch => new Command<string>((string query) =>
+        //{
+        //    SearchResults = GetSearchResults(query);
+        //});
 
-        // public static List<InputModel> Fruits { get; set; } 
-        public static List<MedicineModel> GetSearchResults(string queryString)
-        {
-            var normalizedQuery = queryString?.ToLower() ?? "";
-            return Medicines.Where(f => f.Name.ToUpperInvariant().Contains(normalizedQuery)).ToList();
-        }
+        //// public static List<InputModel> Fruits { get; set; } 
+        //public static List<MedicineModel> GetSearchResults(string queryString)
+        //{
+        //    var normalizedQuery = queryString?.ToLower() ?? "";
+        //    return Medicines.Where(f => f.Name.ToUpperInvariant().Contains(normalizedQuery)).ToList();
+        //}
 
-        List<MedicineModel> searchResults = Medicines;
-        public List<MedicineModel> SearchResults
-        {
-            get
-            {
-                return searchResults;
-            }
-            set
-            {
-                searchResults = value;
-            }
-        }
+        //List<MedicineModel> searchResults = Medicines;
+        //public List<MedicineModel> SearchResults
+        //{
+        //    get
+        //    {
+        //        return searchResults;
+        //    }
+        //    set
+        //    {
+        //        searchResults = value;
+        //    }
+        //}
 
-        #endregion
+        //#endregion
     }
 }

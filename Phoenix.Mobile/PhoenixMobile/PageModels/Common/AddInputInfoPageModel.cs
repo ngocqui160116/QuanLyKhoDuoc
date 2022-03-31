@@ -1,4 +1,5 @@
-﻿using Phoenix.Mobile.Core.Infrastructure;
+﻿using Phoenix.Framework.Extensions;
+using Phoenix.Mobile.Core.Infrastructure;
 using Phoenix.Mobile.Core.Models.InputInfo;
 using Phoenix.Mobile.Core.Models.Medicine;
 using Phoenix.Mobile.Core.Services.Common;
@@ -102,8 +103,39 @@ namespace Phoenix.Mobile.PageModels.Common
                 Count = Count,
                 InputPrice = InputPrice
             };
+
+            try
+            {
+                if (IsBusy) return;
+                IsBusy = true;
+                if (IdBatch.IsNullOrEmpty())
+                {
+                    await _dialogService.AlertAsync("Vui lòng nhập số lô");
+                    IsBusy = false;
+                    return;
+                }
+
+                if (Count.Equals(0))
+                {
+                    await _dialogService.AlertAsync("Vui lòng nhập Số lượng lớn hơn 0");
+                    IsBusy = false;
+                    return;
+                }
+
+
+                CoreMethods.PushPageModel<AddInputPageModel>(inputInfoModel);
+                
+                IsBusy = false;
+
+            }
+            catch (Exception e)
+            {
+                await _dialogService.AlertAsync("Thêm thất bại");
+
+            }
+
             //await CoreMethods.DisplayAlert("Thêm thành công", "Bạn đã chọn" + Medicine.Name, "Đóng");
-            CoreMethods.PushPageModel<AddInputPageModel>(inputInfoModel);
+            
         }
         #endregion
 
@@ -115,20 +147,5 @@ namespace Phoenix.Mobile.PageModels.Common
             await CoreMethods.PushPageModel<MedicinePageModel>();
         }
         #endregion
-
-        public Command<InputInfoModel> InputSelected
-        {
-            get
-            {
-                return new Command<InputInfoModel>(async (InputInfo) =>
-                {
-                    //await CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn"+Count, "Đóng");
-                    await CoreMethods.PushPageModel<AddInputInfoPageModel>(InputInfo);
-                });
-            }
-        }
-
-       
-
     }
 }

@@ -23,7 +23,7 @@ namespace Phoenix.Server.Api.Api
 
         [HttpPost]
         [Route("GetAllInventory")]
-        public async Task<BaseResponse<InventoryDto>> GetAllCustomer([FromBody] InventoryRequest request)
+        public async Task<BaseResponse<InventoryDto>> GetAllInventory([FromBody] InventoryRequest request)
         {
             return await _InventoryService.GetAllInventory(request);
         }

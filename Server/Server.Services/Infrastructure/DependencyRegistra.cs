@@ -35,6 +35,8 @@ namespace Phoenix.Server.Services.Infrastructure
             container.Register<SettingService>(Lifestyle.Scoped);
             container.Register<IVendorService, VendorService>(Lifestyle.Scoped);
             container.Register<IInventoryService, InventoryService>(Lifestyle.Scoped);
+            container.Register<IInventoryTagsService, InventoryTagsService>(Lifestyle.Scoped);
+            //container.Register<IDocumentTypeService, DocumentTypeService>(Lifestyle.Scoped);
             container.Register<IReasonService, ReasonService>(Lifestyle.Scoped);
             container.Register<IGroupService, GroupService>(Lifestyle.Scoped);
             container.Register<IInputService, InputService>(Lifestyle.Scoped);

@@ -31,37 +31,18 @@ namespace Phoenix.Server.Services.MainServices
         public async Task<BaseResponse<InventoryDto>> GetAllInventory(InventoryRequest request)
         {
             var result = new BaseResponse<InventoryDto>();
+
             try
             {
-                var person = (from d in _dataContext.InputInfos
-                              join e in _dataContext.OutputInfos
-                              on d.IdMedicine equals e.IdMedicine into j1
+                // setup query
+                var query = _dataContext.Inventories.AsQueryable();
 
-                              from r in j1.DefaultIfEmpty()
+                // filter
+                
+                query = query.OrderByDescending(d => d.Id);
 
-                              select new
-                              {
-                                  Id = d.Id,
-                                  IdMedicine = d.IdMedicine,
-                                  Count = d.Count - r.Count
-                                  
-                              })
-                    .ToList();
-                //if (request.IdMedicine != 0)
-                //{
-                //    person = person.Where(d => d.IdMedicine.Equals(request.IdMedicine));
-                //}
-
-
-
-               // var congfig = new MapperConfiguration(cfg => cfg.CreateMissingTypeMaps = true);
-                //var mapper = congfig.CreateMapper();
-                //var listcart = query.Select(mapper.Map<InventoryDto>).ToList();
-
-                //var data = await query.ToListAsync();
-
-                //result.Data = data.MapTo<CartListDto>();
-                result.Data = person.MapTo<InventoryDto>();
+                var data = await query.ToListAsync();
+                result.Data = data.MapTo<InventoryDto>();
 
             }
             catch (Exception ex)

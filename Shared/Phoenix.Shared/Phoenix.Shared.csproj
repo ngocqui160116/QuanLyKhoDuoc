@@ -63,6 +63,10 @@
     <Compile Include="Core\CrudResult.cs" />
     <Compile Include="Core\ListDto.cs" />
     <Compile Include="Core\ResultDto.cs" />
+    <Compile Include="DocumentType\DocumentTypeDto.cs" />
+    <Compile Include="DocumentType\DocumentTypeRequest.cs" />
+    <Compile Include="InventoryTags\InventoryTagsDto.cs" />
+    <Compile Include="InventoryTags\InventoryTagsRequest.cs" />
     <Compile Include="Inventory\InventoryDto.cs" />
     <Compile Include="Inventory\InventoryRequest.cs" />
     <Compile Include="Reason\ReasonDto.cs" />

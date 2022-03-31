@@ -15,7 +15,7 @@
                            HorizontalOptions="Fill"
                            VerticalOptions="CenterAndExpand"
                            Placeholder="Nhập thông tin"
-                           SearchCommand="{Binding PerformSearch}" 
+                           SearchCommand="{Binding }" 
                            SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"/>
                 <ImageButton Margin="5,0,0,0"  
                              BackgroundColor="White" 
@@ -24,7 +24,7 @@
                              Source="icon_add"/>
             </StackLayout>
 
-            <ListView ItemsSource="{Binding SearchResults}"
+            <ListView ItemsSource="{Binding Outputs}"
                       HasUnevenRows="True"
                       x:Name="searchResults"
                       BackgroundColor="#ecf0f1"

@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Phoenix.Shared.Inventory
+namespace Phoenix.Shared.DocumentType
 {
-    public class InventoryDto
+    public class DocumentTypeDto
     {
         public int Id { get; set; }
-        public int IdMedicine { get; set; }
-        public int Count { get; set; }
+        public string Name { get; set; }
     }
 }

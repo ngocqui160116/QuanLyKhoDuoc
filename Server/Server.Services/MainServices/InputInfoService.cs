@@ -8,7 +8,9 @@ using Phoenix.Shared.Input;
 using Phoenix.Shared.InputInfo;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -68,6 +70,8 @@ namespace Phoenix.Server.Services.MainServices
             {
                 // setup query
                 var query = _dataContext.InputInfos.AsQueryable();
+
+
                 // filter
                 if (!string.IsNullOrEmpty(request.IdInput))
                 {
@@ -94,6 +98,7 @@ namespace Phoenix.Server.Services.MainServices
         {
 
             var Input = new Input();
+
             Input.Id = request.IdInput;
             Input.IdStaff = request.IdStaff;
             Input.IdSupplier = request.IdSupplier;
