@@ -55,7 +55,7 @@ namespace Phoenix.Mobile.PageModels.Common
         }
 
         #region properties
-        public static List<OutputModel> Outputs { get; set; } = new List<OutputModel>();
+        public List<OutputModel> Outputs { get; set; } = new List<OutputModel>();
         public OutputRequest request { get; set; } = new OutputRequest();
 
         #endregion
@@ -102,36 +102,36 @@ namespace Phoenix.Mobile.PageModels.Common
         #endregion
 
 
-        #region Search
+        //#region Search
 
-        public ICommand PerformSearch => new Command<string>((string query) =>
-        {
-            SearchResults = GetSearchResults(query);
-        });
+        //public ICommand PerformSearch => new Command<string>((string query) =>
+        //{
+        //    SearchResults = GetSearchResults(query);
+        //});
 
-        // public static List<OutputModel> Fruits { get; set; } 
-        public static List<OutputModel> GetSearchResults(string queryString)
-        {
-            var normalizedQuery = queryString?.ToLower() ?? "";
-            return Outputs.Where(f => f.Id.ToUpperInvariant().Contains(normalizedQuery)).ToList();
-        }
+        //// public static List<OutputModel> Fruits { get; set; } 
+        //public static List<OutputModel> GetSearchResults(string queryString)
+        //{
+        //    var normalizedQuery = queryString?.ToLower() ?? "";
+        //    return Outputs.Where(f => f.Id.ToUpperInvariant().Contains(normalizedQuery)).ToList();
+        //}
 
-        List<OutputModel> searchResults = Outputs;
-        public List<OutputModel> SearchResults
-        {
+        //List<OutputModel> searchResults = Outputs;
+        //public List<OutputModel> SearchResults
+        //{
 
-            get
-            {
-                return searchResults;
-            }
-            set
-            {
-                searchResults = value;
+        //    get
+        //    {
+        //        return searchResults;
+        //    }
+        //    set
+        //    {
+        //        searchResults = value;
 
-            }
-        }
+        //    }
+        //}
 
-        #endregion
+        //#endregion
 
     }
 }

@@ -12,13 +12,6 @@ namespace Phoenix.Server.Data.Entity
         public int IdMedicine { get; set; }
         [ForeignKey("IdMedicine")]
         public virtual Medicine Medicine { get; set; }
-        public int IdInputInfo { get; set; }
-        [ForeignKey("IdInputInfo")]
-        public virtual InputInfo InputInfo { get; set; }
-        public int IdOutputInfo { get; set; }
-        [ForeignKey("IdOutputInfo")]
-        public virtual OutputInfo OutputInfo { get; set; }
-        public string IdBatch { get; set; }
         public int Count { get; set; }
     }
 }

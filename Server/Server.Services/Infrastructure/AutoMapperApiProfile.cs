@@ -12,7 +12,8 @@ using Phoenix.Shared.Output;
 using Phoenix.Shared.OutputInfo;
 using Phoenix.Shared.Supplier;
 using Phoenix.Shared.InputInfo;
-
+using Phoenix.Shared.InventoryTags;
+using Phoenix.Shared.DocumentType;
 
 namespace Phoenix.Server.Services.Infrastructure
 {
@@ -26,6 +27,8 @@ namespace Phoenix.Server.Services.Infrastructure
             CreateMap<Reason, ReasonDto>();
 
             CreateMap<Group, GroupDto>();
+            CreateMap<InventoryTags, InventoryTagsDto>();
+            CreateMap<DocumentType, DocumentTypeDto>();
             CreateMap<Inventory, InventoryDto>();
             CreateMap<Input, InputDto>()
                 .ForMember(d => d.SupplierName, o => o.MapFrom(s => s.Supplier.Name))

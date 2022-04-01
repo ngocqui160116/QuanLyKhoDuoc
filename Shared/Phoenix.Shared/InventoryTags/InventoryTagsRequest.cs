@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Phoenix.Shared.Inventory
+namespace Phoenix.Shared.InventoryTags
 {
-    public class InventoryRequest : BaseRequest
+    public class InventoryTagsRequest : BaseRequest
     {
         public int Id { get; set; }
-        public int IdMedicine { get; set; }
-        public int Count { get; set; }
+        public string DocumentId { get; set; }
+        public DateTime DocumentDate { get; set; }
     }
 }

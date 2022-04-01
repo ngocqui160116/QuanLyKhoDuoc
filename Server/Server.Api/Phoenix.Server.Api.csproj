@@ -225,6 +225,7 @@
     <Compile Include="Api\AuthController.cs" />
     <Compile Include="Api\BaseApiController.cs" />
     <Compile Include="Api\InventoryController.cs" />
+    <Compile Include="Api\InventoryTagsController.cs" />
     <Compile Include="Api\ReasonController.cs" />
     <Compile Include="Api\SupplierController.cs" />
     <Compile Include="Api\OutputController.cs" />

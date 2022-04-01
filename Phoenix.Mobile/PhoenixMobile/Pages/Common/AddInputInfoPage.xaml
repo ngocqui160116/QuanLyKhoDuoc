@@ -9,9 +9,10 @@
     <ContentPage.Content>
         
         <StackLayout>
-            <StackLayout HeightRequest="25"
+            <StackLayout HeightRequest="50"
                          WidthRequest="50">
                 <Label Text="Danh sách sản phẩm"
+                       xe:Commands.Tap="{Binding SelectMedicine}" 
                        FontSize="Small"
                        Margin="5,2,0,0"
                        BackgroundColor="WhiteSmoke"
@@ -35,7 +36,7 @@
                    IsVisible="{Binding IsClose}">
                 
                 <ListView ItemsSource="{Binding ListMedicine}" 
-                          HeightRequest="100" BackgroundColor="White"
+                          HeightRequest="200" BackgroundColor="White"
                           x:Name="searchResults"
                           HasUnevenRows="True"
                           SeparatorVisibility="None"
@@ -134,19 +135,6 @@
                                     Format="dd/MM/yyyy"
                                     WidthRequest="200" />
 
-                        <Label  Grid.Row="4"
-                                Grid.Column="0" 
-                                Margin="10,5,0,0" 
-                                WidthRequest="95" 
-                                FontSize="Medium" 
-                                Text="Số lượng"/>
-                        <Entry  Grid.Row="4"
-                                Grid.Column="1"
-                                TextColor="Black"
-                                Text="{Binding Count}"
-                                Placeholder="0"
-                                WidthRequest="200"                         
-                                Keyboard="Numeric"/>
 
                         <Label  Grid.Row="4"
                                 Grid.Column="0" 

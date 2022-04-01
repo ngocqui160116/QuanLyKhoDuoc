@@ -16,7 +16,7 @@
                 <SearchBar WidthRequest="420"  
                            x:Name="searchBar" 
                            Placeholder="Mã / Tên thuốc"
-                           SearchCommand="{Binding PerformSearch}" 
+                           SearchCommand="{Binding }" 
                            SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}">
                 </SearchBar>
                 
@@ -28,7 +28,7 @@
                 </ImageButton>
             </StackLayout>
 
-            <ListView ItemsSource="{Binding SearchResults}"
+            <ListView ItemsSource="{Binding Medicines}"
                       HasUnevenRows="True"
                       BackgroundColor="#ecf0f1"
                       SeparatorVisibility="None"

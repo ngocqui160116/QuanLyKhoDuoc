@@ -79,6 +79,7 @@ namespace Phoenix.Server.Services.MainServices
         public async Task<CrudResult> CreateMedicine(MedicineRequest request)
         {
             var Medicine = new Medicine();
+            
             Medicine.RegistrationNumber = request.RegistrationNumber;
             Medicine.Name = request.Name;
             Medicine.IdGroup = request.IdGroup;
