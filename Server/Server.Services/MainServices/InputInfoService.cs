@@ -23,6 +23,7 @@ namespace Phoenix.Server.Services.MainServices
         Task<CrudResult> CreateInputInfo(InputInfoRequest request);
         Task<CrudResult> UpdateInputInfo(int Id, InputInfoRequest request);
         Task<CrudResult> DeleteInputInfo(int Id);
+        Task<CrudResult> CreateInventory(InputInfoRequest request);
 
         //
         InputInfo GetInputInfoById(string Id);
@@ -125,7 +126,63 @@ namespace Phoenix.Server.Services.MainServices
             return new CrudResult() { IsOk = true };
         }
 
-        
+        public async Task<CrudResult> CreateInventory(InputInfoRequest request)
+        {
+
+            var Input = new Input();
+
+            Input.Id = request.IdInput;
+            Input.IdStaff = request.IdStaff;
+            Input.IdSupplier = request.IdSupplier;
+            Input.DateInput = request.DateInput;
+            Input.Status = request.Status;
+
+            _dataContext.Inputs.Add(Input);
+            await _dataContext.SaveChangesAsync();
+
+            var InputInfo = new InputInfo();
+
+            InputInfo.Id = request.Id;
+            InputInfo.IdInput = request.IdInput;
+            InputInfo.IdMedicine = request.IdMedicine;
+            InputInfo.IdBatch = request.IdBatch;
+            InputInfo.Count = request.Count;
+            InputInfo.InputPrice = request.InputPrice;
+            InputInfo.Total = request.Count * request.InputPrice;
+            InputInfo.DueDate = request.DueDate;
+
+            _dataContext.InputInfos.Add(InputInfo);
+            await _dataContext.SaveChangesAsync();
+
+            var inventory = _dataContext.Inventories.Find(request.IdMedicine);
+
+            inventory.IdMedicine = request.IdMedicine;
+            inventory.Count = inventory.Count + request.Count;
+
+            await _dataContext.SaveChangesAsync();
+
+            var InventoryTags = new InventoryTags();
+            InventoryTags.DocumentId = "PN002";
+            InventoryTags.ExpiredDate = DateTime.Now;
+            InventoryTags.DocumentDate = DateTime.Now;
+            InventoryTags.LotNumber = request.IdBatch;
+            InventoryTags.UnitPrice = 2;
+            InventoryTags.TotalPrice = 2;
+            InventoryTags.SupplierId = Input.IdSupplier;
+            InventoryTags.DocumentType = 1;
+            InventoryTags.MedicineId = request.IdMedicine;
+            InventoryTags.Qty_After = InputInfo.Count;
+            InventoryTags.Qty = 0;
+            InventoryTags.Qty_Before = inventory.Count;
+
+
+            _dataContext.InventoryTags.Add(InventoryTags);
+            await _dataContext.SaveChangesAsync();
+
+            return new CrudResult() { IsOk = true };
+        }
+
+
         public async Task<CrudResult> UpdateInputInfo(int Id, InputInfoRequest request)
         {
             var InputInfo = _dataContext.InputInfos.Find(Id);

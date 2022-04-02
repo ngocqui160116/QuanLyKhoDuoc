@@ -1,9 +1,11 @@
 ﻿using Phoenix.Mobile.Core.Infrastructure;
 using Phoenix.Mobile.Core.Models.InputInfo;
+using Phoenix.Mobile.Core.Models.InventoryTags;
 using Phoenix.Mobile.Core.Models.OutputInfo;
 using Phoenix.Mobile.Core.Services.Common;
 using Phoenix.Mobile.Helpers;
 using Phoenix.Shared.InputInfo;
+using Phoenix.Shared.InventoryTags;
 using Phoenix.Shared.OutputInfo;
 using System;
 using System.Collections.Generic;
@@ -18,12 +20,14 @@ namespace Phoenix.Mobile.PageModels.Common
 
         private readonly IInputInfoService _inputinfoService;
         private readonly IOutputInfoService _outputinfoService;
+        private readonly IInventoryTagsService _inventoryTagsService;
         private readonly IDialogService _dialogService;
 
-        public InventoryPageModel(IInputInfoService inputinfoService, IOutputInfoService outputinfoService, IDialogService dialogService)
+        public InventoryPageModel(IInputInfoService inputinfoService, IInventoryTagsService inventoryTagsService, IOutputInfoService outputinfoService, IDialogService dialogService)
         {
             _inputinfoService = inputinfoService;
             _outputinfoService = outputinfoService;
+            _inventoryTagsService = inventoryTagsService;
             _dialogService = dialogService;
 
         }
@@ -44,16 +48,16 @@ namespace Phoenix.Mobile.PageModels.Common
         {
            
 
-            var data = await _inputinfoService.GetAllInputInfo(request);
+            var data = await _inventoryTagsService.GetAllInventoryTags(InventoryTagsRequest);
             if (data == null)
             {
                 await _dialogService.AlertAsync("Lỗi kết nối mạng!", "Lỗi", "OK");
             }
             else
             {
-                Inventorys = data;
+                InventoryTags = data;
                 //RaisePropertyChanged("Vendors");
-                RaisePropertyChanged(nameof(Inventorys));
+                RaisePropertyChanged(nameof(InventoryTags));
             }
 
             var data1 = await _outputinfoService.GetAllOutputInfo(OutputInfoRequest);
@@ -72,6 +76,8 @@ namespace Phoenix.Mobile.PageModels.Common
         #region properties
         public List<InputInfoModel> Inventorys { get; set; } = new List<InputInfoModel>();
         public InputInfoRequest request { get; set; } = new InputInfoRequest();
+        public List<InventoryTagsModel> InventoryTags { get; set; } = new List<InventoryTagsModel>();
+        public InventoryTagsRequest InventoryTagsRequest { get; set; } = new InventoryTagsRequest();
 
         public List<OutputInfoModel> OutputInfos { get; set; } = new List<OutputInfoModel>();
         public OutputInfoRequest OutputInfoRequest { get; set; } = new OutputInfoRequest();

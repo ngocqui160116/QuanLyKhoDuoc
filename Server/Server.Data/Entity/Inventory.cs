@@ -8,7 +8,7 @@ namespace Phoenix.Server.Data.Entity
     public class Inventory
     {
         [Key]
-        public int Id { get; set; }
+        //public int Id { get; set; }
         public int IdMedicine { get; set; }
         [ForeignKey("IdMedicine")]
         public virtual Medicine Medicine { get; set; }

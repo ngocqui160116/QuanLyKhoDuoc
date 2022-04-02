@@ -72,6 +72,7 @@ namespace Phoenix.Mobile
             FreshIOC.Container.Register<ISupplierService, SupplierService>();
             FreshIOC.Container.Register<IGroupService, GroupService>();
             FreshIOC.Container.Register<IUnitService, UnitService>();
+            FreshIOC.Container.Register<IInventoryTagsService, InventoryTagsService>();
 
             //proxy
             FreshIOC.Container.Register<IAuthProxy, AuthProxy>();
@@ -88,6 +89,7 @@ namespace Phoenix.Mobile
             FreshIOC.Container.Register<ISupplierProxy, SupplierProxy>();
             FreshIOC.Container.Register<IGroupProxy, GroupProxy>();
             FreshIOC.Container.Register<IUnitProxy, UnitProxy>();
+            FreshIOC.Container.Register<IInventoryTagsProxy, InventoryTagsProxy>();
         }
     }
 }

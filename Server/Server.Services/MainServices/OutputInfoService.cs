@@ -17,6 +17,7 @@ namespace Phoenix.Server.Services.MainServices
     public interface IOutputInfoService
     {
         Task<BaseResponse<OutputInfoDto>> GetAllOutputInfo(OutputInfoRequest request);
+        Task<CrudResult> CreateOutputInventory(OutputInfoRequest request);
         Task<CrudResult> CreateOutputInfo(OutputInfoRequest request);
     }
     public class OutputInfoService : IOutputInfoService
@@ -102,6 +103,57 @@ namespace Phoenix.Server.Services.MainServices
 
             _dataContext.OutputInfos.Add(OutputInfo);
             await _dataContext.SaveChangesAsync();
+            return new CrudResult() { IsOk = true };
+        }
+
+        public async Task<CrudResult> CreateOutputInventory(OutputInfoRequest request)
+        {
+            var Output = new Output();
+            Output.Id = request.IdOutput;
+            Output.IdStaff = request.IdStaff;
+            Output.DateOutput = request.DateOutput;
+            Output.IdReason = request.IdReason;
+            Output.Status = request.Status;
+
+            _dataContext.Outputs.Add(Output);
+            await _dataContext.SaveChangesAsync();
+
+            var OutputInfo = new OutputInfo();
+            OutputInfo.IdOutput = request.IdOutput;
+            OutputInfo.IdMedicine = request.IdMedicine;
+            OutputInfo.IdInputInfo = request.IdInputInfo;
+            OutputInfo.Count = request.Count;
+            OutputInfo.Total = request.Total;
+
+            _dataContext.OutputInfos.Add(OutputInfo);
+            await _dataContext.SaveChangesAsync();
+
+            var inventory = _dataContext.Inventories.Find(request.IdMedicine);
+
+            inventory.IdMedicine = request.IdMedicine;
+            inventory.Count = inventory.Count - request.Count;
+
+            await _dataContext.SaveChangesAsync();
+
+            var InventoryTags = new InventoryTags();
+            InventoryTags.DocumentId = "PX002";
+            InventoryTags.ExpiredDate = DateTime.Now;
+            InventoryTags.DocumentDate = DateTime.Now;
+            InventoryTags.LotNumber = 2;
+            InventoryTags.UnitPrice = 2;
+            InventoryTags.TotalPrice = 2;
+            InventoryTags.SupplierId = 32;
+
+            InventoryTags.DocumentType = 1;
+            InventoryTags.MedicineId = request.IdMedicine;
+            InventoryTags.Qty_After = InputInfo.Count;
+            InventoryTags.Qty = 0;
+            InventoryTags.Qty_Before = inventory.Count;
+
+
+            _dataContext.InventoryTags.Add(InventoryTags);
+            await _dataContext.SaveChangesAsync();
+
             return new CrudResult() { IsOk = true };
         }
     }

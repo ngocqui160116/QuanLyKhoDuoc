@@ -120,7 +120,8 @@
                                 TextColor="Black"
                                 Text="{Binding IdBatch}"
                                 Placeholder="Số lô"
-                                WidthRequest="200"/>
+                                WidthRequest="200"
+                                Keyboard="Numeric"/>
 
                         <Label  Grid.Row="3"
                                 Grid.Column="0" 

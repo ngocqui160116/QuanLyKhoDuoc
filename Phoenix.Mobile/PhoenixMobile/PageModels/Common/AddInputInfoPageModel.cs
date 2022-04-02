@@ -66,14 +66,6 @@ namespace Phoenix.Mobile.PageModels.Common
                    }
 
                 };
-         
-            //so = so + 1;
-            //}
-            //else
-            //{
-            //    ListMedicine.Count.Equals(so);
-            //    ListMedicine.Add(MedicineModel);
-            //}
 
         }
 
@@ -81,10 +73,9 @@ namespace Phoenix.Mobile.PageModels.Common
        
         public MedicineModel Medicine { get; set; }
         public List<MedicineModel> ListMedicine { get; set; }
-       
         public InputInfoModel inputInfoModel { get; set; }
         public string NameMedicine { get; set; }
-        public string IdBatch { get; set; }
+        public int IdBatch { get; set; }
         public DateTime HSD { get; set; } = DateTime.Now;
         public int Count { get; set; }
         public double InputPrice { get; set; }
@@ -93,16 +84,6 @@ namespace Phoenix.Mobile.PageModels.Common
         public bool IsClose { get; set; } = false;
         public bool IsOpen { get; set; } = true;
         #endregion
-
-        #region properties
-
-        public ObservableCollection<InputInfoModel> ListInputInfo { get; set; }
-
-        #endregion
-
-        
-
-     
 
         #region AddMedicineCommand
         public ICommand AddMedicineCommand => new Command(async (p) => await AddMedicineExecute(), (p) => !IsBusy);
@@ -122,7 +103,7 @@ namespace Phoenix.Mobile.PageModels.Common
             {
                 if (IsBusy) return;
                 IsBusy = true;
-                if (IdBatch.IsNullOrEmpty())
+                if (IdBatch.Equals(0))
                 {
                     await _dialogService.AlertAsync("Vui lòng nhập số lô");
                     IsBusy = false;
@@ -146,10 +127,7 @@ namespace Phoenix.Mobile.PageModels.Common
             {
                 await _dialogService.AlertAsync("Thêm thất bại");
 
-            }
-
-            //await CoreMethods.DisplayAlert("Thêm thành công", "Bạn đã chọn" + Medicine.Name, "Đóng");
-            
+            }   
         }
         #endregion
 

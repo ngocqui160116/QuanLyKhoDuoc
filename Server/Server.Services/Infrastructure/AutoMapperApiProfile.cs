@@ -27,9 +27,11 @@ namespace Phoenix.Server.Services.Infrastructure
             CreateMap<Reason, ReasonDto>();
 
             CreateMap<Group, GroupDto>();
-            CreateMap<InventoryTags, InventoryTagsDto>();
+            CreateMap<InventoryTags, InventoryTagsDto>()
+                .ForMember(d => d.MedicineName, o => o.MapFrom(s => s.Medicine.Name));
             CreateMap<DocumentType, DocumentTypeDto>();
-            CreateMap<Inventory, InventoryDto>();
+            CreateMap<Inventory, InventoryDto>()
+                .ForMember(d => d.MedicineName, o => o.MapFrom(s => s.Medicine.Name));
             CreateMap<Input, InputDto>()
                 .ForMember(d => d.SupplierName, o => o.MapFrom(s => s.Supplier.Name))
                 .ForMember(d => d.NameStaff, o => o.MapFrom(s => s.Staff.Name));

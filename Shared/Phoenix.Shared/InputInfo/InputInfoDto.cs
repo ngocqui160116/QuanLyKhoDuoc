@@ -9,7 +9,7 @@ namespace Phoenix.Shared.InputInfo
         public int Id { get; set; }
         public string IdInput{ get; set; }
         public int IdMedicine { get; set; }
-        public string IdBatch { get; set; }
+        public int IdBatch { get; set; }
         public int Count { get; set; }
         public double InputPrice { get; set; }
         public double Total { get; set; }

@@ -14,8 +14,10 @@ namespace Phoenix.Shared.Medicine
         public int IdUnit { get; set; }
         public int? Image { get; set; }
         public string Status { get; set; }
-        
-        //
+
+        //Add
+        public int Count { get; set; }
+
         //public string SupplierName { get; set; }
         public string GroupName { get; set; }
         public string NameUnit { get; set; }
