@@ -37,7 +37,7 @@ namespace Phoenix.Mobile.PageModels.Common
 
         private async Task StockExecute()
         {
-            await CoreMethods.PushPageModel<AddInputInfoPageModel>();
+            await CoreMethods.PushPageModel<AccountPageModel>();
         }
         #endregion
 

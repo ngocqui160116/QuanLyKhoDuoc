@@ -30,6 +30,7 @@ namespace Phoenix.Mobile.PageModels.Common
             //base.Init(initData);
             if (initData != null)
             {
+                //ListMedicine = (List<MedicineModel>)initData;
                 Medicine = (MedicineModel)initData;
                 IsClose = true;
                 IsOpen = false;
@@ -38,7 +39,7 @@ namespace Phoenix.Mobile.PageModels.Common
             else
             {
                 Medicine = new MedicineModel();
-                
+                //ListMedicine = new List<MedicineModel>();
             }
             NavigationPage.SetHasNavigationBar(CurrentPage, false);
             CurrentPage.Title = "Nhập thông tin phiếu nhập";
@@ -50,35 +51,37 @@ namespace Phoenix.Mobile.PageModels.Common
         }
         private async Task LoadData()
         {
-           //so = ListMedicine.Count;
-            if(so.Equals(0))
-            {
-                
-                ListMedicine = new List<MedicineModel>()
+            //so = ListMedicine.Count;
+            //if (so.Equals(0))
+            //{
+
+            ListMedicine = new List<MedicineModel>()
                 {
-                    new MedicineModel()
-                    {
-                        IdMedicine = Medicine.IdMedicine,
-                        Name = Medicine.Name,
-                        NameUnit = Medicine.NameUnit,
-                        RegistrationNumber = Medicine.RegistrationNumber
-                    }
+                   new MedicineModel()
+                   {
+                       IdMedicine = Medicine.IdMedicine,
+                       Name = Medicine.Name,
+                       NameUnit = Medicine.NameUnit,
+                       RegistrationNumber = Medicine.RegistrationNumber
+                   }
 
                 };
-               so = so + 1;
-            }
-            else
-            {
-                ListMedicine.Count.Equals(so);
-                ListMedicine.Add(Medicine);
-            }
-            
+         
+            //so = so + 1;
+            //}
+            //else
+            //{
+            //    ListMedicine.Count.Equals(so);
+            //    ListMedicine.Add(MedicineModel);
+            //}
+
         }
 
         #region properties
-        public int so { get; set; }
+       
         public MedicineModel Medicine { get; set; }
-        public List<MedicineModel> ListMedicine { get; set; } = new List<MedicineModel>();
+        public List<MedicineModel> ListMedicine { get; set; }
+       
         public InputInfoModel inputInfoModel { get; set; }
         public string NameMedicine { get; set; }
         public string IdBatch { get; set; }
@@ -99,11 +102,7 @@ namespace Phoenix.Mobile.PageModels.Common
 
         
 
-       public ICommand PerformSearch => new Command<MedicineModel>((MedicineModel Medicine) =>
-        {
-             CoreMethods.DisplayAlert("Thêm thành công","Bạn đã chọn" + Medicine.Name,"Đóng");
-             CoreMethods.PushPageModel<AddInputPageModel>(Medicine);
-        });
+     
 
         #region AddMedicineCommand
         public ICommand AddMedicineCommand => new Command(async (p) => await AddMedicineExecute(), (p) => !IsBusy);
@@ -159,7 +158,7 @@ namespace Phoenix.Mobile.PageModels.Common
         private async Task SelectMedicineExecute()
         {
             
-            await CoreMethods.PushPageModel<MedicinePageModel>();
+            await CoreMethods.PushPageModel<MedicinePageModel>(Medicine);
         }
         #endregion
     }

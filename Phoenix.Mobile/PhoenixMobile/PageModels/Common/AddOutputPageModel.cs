@@ -1,4 +1,5 @@
 ﻿using Phoenix.Mobile.Core.Infrastructure;
+using Phoenix.Mobile.Core.Models.InputInfo;
 using Phoenix.Mobile.Core.Models.Medicine;
 using Phoenix.Mobile.Core.Models.Reason;
 using Phoenix.Mobile.Core.Models.Staff;
@@ -38,11 +39,11 @@ namespace Phoenix.Mobile.PageModels.Common
             //base.Init(initData);
             if (initData != null)
             {
-                Medicine = (MedicineModel)initData;
+                InputInfo = (InputInfoModel)initData;
             }
             else
             {
-                Medicine = new MedicineModel();
+                InputInfo = new InputInfoModel();
             }
             NavigationPage.SetHasNavigationBar(CurrentPage, false);
             CurrentPage.Title = "Thêm phiếu xuất";
@@ -55,6 +56,21 @@ namespace Phoenix.Mobile.PageModels.Common
 
         private async Task LoadData()
         {
+
+            ListMedicine = new List<InputInfoModel>()
+                {
+                   new InputInfoModel()
+                   {
+                       IdMedicine = InputInfo.IdMedicine,
+                       MedicineName = InputInfo.MedicineName,
+                       Count = InputInfo.Count,
+                       DueDate = InputInfo.DueDate
+                   }
+
+                };
+
+
+
             var data = await _reasonService.GetAllReason(request);
             if (data == null)
             {
@@ -82,12 +98,15 @@ namespace Phoenix.Mobile.PageModels.Common
         }
 
         #region properties
+        public InputInfoModel InputInfo { get; set; }
         public List<ReasonModel> Reasons { get; set; } = new List<ReasonModel>();
         public ReasonRequest request { get; set; } = new ReasonRequest();
         public List<StaffModel> Staffs { get; set; } = new List<StaffModel>();
         public StaffRequest StaffRequest { get; set; } = new StaffRequest();
         public MedicineModel Medicine { get; set; }
-        public ObservableCollection<MedicineModel> ListMedicine { get; set; }
+       
+        //public ObservableCollection<MedicineModel> ListMedicine { get; set; }
+        public List<InputInfoModel> ListMedicine { get; set; }
 
         #endregion
 
@@ -108,16 +127,18 @@ namespace Phoenix.Mobile.PageModels.Common
 
                 var data = await _outputInfoService.AddOutputInfo(new OutputInfoRequest
                 {
-                    IdOutput = "HDX004",
-                    IdMedicine = 21,
+                    IdOutput = "HDX007",
+                    IdMedicine = InputInfo.IdMedicine,
                     IdInputInfo = 1,
-                    IdReason = 2,
+                    IdReason = SelectedReason.IdReason,
                     Total = 2000,
-                    IdStaff = 3,
+                    IdStaff = SelectedStaff.IdStaff,
                     Count = 100,
                     DateOutput = HSD
                 });
-                await CoreMethods.PushPageModel<OutputPageModel>();
+                //await CoreMethods.PushPageModel<OutputPageModel>();
+
+                CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn" +SelectedReason.IdReason +SelectedStaff.IdStaff, "Đóng");
 
                 await _dialogService.AlertAsync("Thêm thành công");
                 IsBusy = false;
@@ -136,7 +157,7 @@ namespace Phoenix.Mobile.PageModels.Common
 
         private async Task AddMedicineExecute()
         {
-            await CoreMethods.PushPageModel<MedicinePageModel>();
+            await CoreMethods.PushPageModel<InventoryPageModel>();
         }
         #endregion
 

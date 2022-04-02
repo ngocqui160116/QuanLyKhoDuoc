@@ -78,11 +78,51 @@ namespace Phoenix.Mobile.PageModels.Common
 
         public OutputInfoDto outputInfoDto { get; set; }
 
-       
+
 
         #endregion
 
         #region SelectedItemCommand
+
+        #region SelectMedicine
+
+        InputInfoModel _selectedInputInfo;
+
+        public InputInfoModel SelectedInputInfo
+        {
+            get
+            {
+                return _selectedInputInfo;
+            }
+            set
+            {
+                _selectedInputInfo = value;
+                if (value != null)
+                    //ListMedicines.Add(SelectedMedicine);
+                    InputInfoSelected.Execute(value);
+
+            }
+
+        }
+        #region InputInfoSelected
+        public Command<InputInfoModel> InputInfoSelected
+        {
+            get
+            {
+                return new Command<InputInfoModel>(async (InputInfo) =>
+                {
+                    //await CoreMethods.PushPageModel<AddInputPageModel>(Medicine);
+                    await CoreMethods.PushPageModel<AddOutputPageModel>(InputInfo);
+                });
+            }
+        }
+
+        #endregion
+        #endregion
+
+
+
+
 
         public Command SelectedItemCommand => new Command(async (p) => await SelectedItemCommandExecute(), (p) => !IsBusy);
 

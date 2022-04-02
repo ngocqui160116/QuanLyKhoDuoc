@@ -21,7 +21,7 @@
                       BackgroundColor="#ecf0f1"
                       SeparatorVisibility="None"
                       HorizontalOptions="FillAndExpand"
-                      SelectedItem="{Binding SelectedItemCommand}"
+                      SelectedItem="{Binding SelectedInputInfo}"
                       VerticalOptions="FillAndExpand">
 
                 <ListView.ItemTemplate>
