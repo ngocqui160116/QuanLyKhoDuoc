@@ -14,6 +14,7 @@ namespace Phoenix.Mobile.Core.Proxies.Common
     {
         Task<BaseResponse<InputInfoDto>> GetAllInputInfo(InputInfoRequest request);
         Task<InputInfoDto> AddInputInfo(InputInfoRequest request);
+        Task<InputInfoDto> AddInventory(InputInfoRequest request);
     }
 
     public class InputInfoProxy : BaseProxy, IInputInfoProxy
@@ -49,6 +50,22 @@ namespace Phoenix.Mobile.Core.Proxies.Common
             }
         }
 
+        public async Task<InputInfoDto> AddInventory(InputInfoRequest request)
+        {
+            try
+            {
+                var api = RestService.For<IInputInfoApi>(GetHttpClient());
+                var result = await api.AddInventory(request);
+                if (result == null) return new InputInfoDto();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler.Handle(new NetworkException(ex), true);
+                return new InputInfoDto();
+            }
+        }
+
         public interface IInputInfoApi
         {
             [Post("/inputInfo/GetAllInputInfo")]
@@ -56,6 +73,9 @@ namespace Phoenix.Mobile.Core.Proxies.Common
 
             [Post("/inputInfo/CreateInputInfo")]
             Task<InputInfoDto> AddInputInfo([Body] InputInfoRequest request);
+
+            [Post("/inputInfo/CreateInventory")]
+            Task<InputInfoDto> AddInventory([Body] InputInfoRequest request);
         }
 
     }

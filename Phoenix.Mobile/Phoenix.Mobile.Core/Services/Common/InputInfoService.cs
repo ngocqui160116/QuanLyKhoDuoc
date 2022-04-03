@@ -11,6 +11,7 @@ namespace Phoenix.Mobile.Core.Services.Common
     {
         Task<List<InputInfoModel>> GetAllInputInfo(InputInfoRequest request);
         Task<InputInfoModel> AddInputInfo(InputInfoRequest request);
+        Task<InputInfoModel> AddInventory(InputInfoRequest request);
     }
 
     public class InputInfoService : IInputInfoService
@@ -28,6 +29,11 @@ namespace Phoenix.Mobile.Core.Services.Common
         public async Task<InputInfoModel> AddInputInfo(InputInfoRequest request)
         {
             var data = await _InputInfoProxy.AddInputInfo(request);
+            return data.MapTo<InputInfoModel>();
+        }
+        public async Task<InputInfoModel> AddInventory(InputInfoRequest request)
+        {
+            var data = await _InputInfoProxy.AddInventory(request);
             return data.MapTo<InputInfoModel>();
         }
     }

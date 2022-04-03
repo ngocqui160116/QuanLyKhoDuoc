@@ -9,7 +9,7 @@ namespace Phoenix.Shared.Inventory
 {
     public class InventoryRequest : BaseRequest
     {
-        public int Id { get; set; }
+       // public int Id { get; set; }
         public int IdMedicine { get; set; }
         public int Count { get; set; }
     }

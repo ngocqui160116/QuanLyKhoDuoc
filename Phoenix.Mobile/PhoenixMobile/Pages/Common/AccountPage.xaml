@@ -7,12 +7,76 @@
              xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:controls="clr-namespace:Phoenix.Mobile.Controls" 
              xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common" 
-             xmlns:customer="clr-namespace:Phoenix.Mobile.Core.Models.Customer;assembly=Phoenix.Mobile.Core"
+             xmlns:customer="clr-namespace:Phoenix.Mobile.Core.Models.Customer;assembly=Phoenix.Mobile.Core" xmlns:input="clr-namespace:Phoenix.Mobile.Core.Models.Input;assembly=Phoenix.Mobile.Core"
              x:DataType="common:AccountPageModel"
              ControlTemplate="{StaticResource FullScreenHasBack}">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome!"/>
+            <StackLayout HeightRequest="25"
+                         WidthRequest="50">
+                <Label Text="Thông tin"
+                       FontSize="Small"
+                       Margin="5,2,0,0"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"/>
+            </StackLayout>
+            <Frame CornerRadius="15" >
+                <StackLayout  BackgroundColor="White">
+                    <Grid x:DataType="input:InputModel">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.3*"/>
+                            <ColumnDefinition Width="0.7*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label  Grid.Row="1"
+                                Grid.Column="0" 
+                                Margin="10,5,0,0" 
+                                WidthRequest="115" 
+                                FontSize="Medium" 
+                                Text="Lý do"/>
+                        <Picker x:DataType="common:AddOutputPageModel"
+                                ItemsSource="{Binding Reasons}"
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Title="----- Chọn lý do xuất kho -----"
+                                ItemDisplayBinding="{Binding Name}"/>
+
+                        <Label  Grid.Row="2"
+                                Grid.Column="0" 
+                                Margin="10,5,0,0" 
+                                WidthRequest="95" 
+                                FontSize="Medium" 
+                                Text="Ngày xuất"/>
+                        <DatePicker x:DataType="common:AddOutputPageModel" 
+                                    Grid.Row="2"
+                                    Grid.Column="1"
+                                    Date="{Binding HSD}"
+                                    Format="dd/MM/yyyy"
+                                    WidthRequest="200" />
+
+                        <Label  Grid.Row="3"
+                                Grid.Column="0" 
+                                Margin="10,5,0,0" 
+                                WidthRequest="115" 
+                                FontSize="Medium" 
+                                Text="Người tạo"/>
+                        <Picker x:DataType="common:AddOutputPageModel"
+                                ItemsSource="{Binding Staffs}"
+                                Grid.Row="3"
+                                Grid.Column="1"
+                                Title="----- Chọn Người tạo -----"
+                                ItemDisplayBinding="{Binding Name}"/>
+                    </Grid>
+                </StackLayout>
+            </Frame>
         </StackLayout>
 
     </ContentPage.Content>

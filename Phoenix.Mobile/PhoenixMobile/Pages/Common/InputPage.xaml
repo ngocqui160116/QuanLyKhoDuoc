@@ -7,7 +7,7 @@
              x:DataType="common:InputPageModel"
              NavigationPage.HasNavigationBar="False"
              xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
-             xmlns:behaviors="clr-namespace:Phoenix.Framework.Core;assembly=Phoenix.Framework"
+             xmlns:behaviors="clr-namespace:Phoenix.Framework.Core;assembly=Phoenix.Framework" xmlns:effects="clr-namespace:Phoenix.Mobile.Effects"
              ControlTemplate="{StaticResource FullScreenHasBack}">
     <ContentPage.Content>
         <StackLayout >

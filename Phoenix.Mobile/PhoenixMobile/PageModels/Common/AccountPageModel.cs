@@ -8,10 +8,7 @@ namespace Phoenix.Mobile.PageModels.Common
 {
     public class AccountPageModel : BasePageModel
     {
-        public AccountPageModel(string Name)
-        {
-           
-        }
+        
         public override async void Init(object initData)
         {
             base.Init(initData);

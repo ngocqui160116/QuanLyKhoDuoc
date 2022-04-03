@@ -12,7 +12,7 @@ namespace Phoenix.Mobile.Pages.Common
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AccountPage : ContentPage
     {
-        public AccountPage(string Name)
+        public AccountPage()
         {
             
             InitializeComponent();

@@ -39,7 +39,7 @@ namespace Phoenix.Server.Services.MainServices
 
                 // filter
                 
-                query = query.OrderByDescending(d => d.Id);
+                query = query.OrderByDescending(d => d.IdMedicine);
 
                 var data = await query.ToListAsync();
                 result.Data = data.MapTo<InventoryDto>();

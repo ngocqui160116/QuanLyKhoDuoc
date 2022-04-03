@@ -22,7 +22,7 @@ namespace Phoenix.Mobile.PageModels.Common
     {
         private readonly IMedicineService _medicineService;
         private readonly IDialogService _dialogService;
-        public ObservableCollection<MedicineModel> Medicine { get; set; }
+        //public ObservableCollection<MedicineModel> Medicine { get; set; }
 
         public MedicinePageModel(IMedicineService medicineService, IDialogService dialogService)
         {
@@ -32,8 +32,19 @@ namespace Phoenix.Mobile.PageModels.Common
 
         public override async void Init(object initData)
         {
-           // Medicine = new ObservableCollection<MedicineModel>(Medicines);
-            base.Init(initData);
+            // Medicine = new ObservableCollection<MedicineModel>(Medicines);
+            if (initData != null)
+            {
+                Medicine = (MedicineModel)initData;
+               
+
+            }
+            else
+            {
+                Medicine = new MedicineModel();
+
+            }
+            //base.Init(initData);
             NavigationPage.SetHasNavigationBar(CurrentPage, false);
             CurrentPage.Title = "Danh mục thuốc";
         }
@@ -72,25 +83,48 @@ namespace Phoenix.Mobile.PageModels.Common
             {
                 _selectedMedicine = value;
                 if (value != null)
-                    MedicineSelected.Execute(value);
+                //ListMedicines.Add(SelectedMedicine);
+                MedicineSelected.Execute(value);
+                
             }
+            
         }
+        #endregion
+
+        //#region MedicineSelectedCommand
+        //public ICommand MedicineSelectedCommand => new Command(async (p) => await MedicineSelected(), (p) => !IsBusy);
+        //private async Task MedicineSelected()
+        //{
+
+        //    await CoreMethods.PushPageModel<AddInputInfoPageModel>(ListMedicines);
+
+
+
+        //    //await CoreMethods.DisplayAlert("Thêm thành công", "Bạn đã chọn" + Medicine.Name, "Đóng");
+
+        //}
+        //#endregion
+
+        #region MedicineSelected
         public Command<MedicineModel> MedicineSelected
         {
             get
             {
-                return new Command<MedicineModel>(async (Medicine) => {
+                return new Command<MedicineModel>(async (Medicine) =>
+                {
                     //await CoreMethods.PushPageModel<AddInputPageModel>(Medicine);
                     await CoreMethods.PushPageModel<AddInputInfoPageModel>(Medicine);
                 });
             }
         }
 
-        #endregion
+#endregion
 
 
         #region properties
+        public MedicineModel Medicine { get; set; }
         public List<MedicineModel> Medicines { get; set; } = new List<MedicineModel>();
+        public List<MedicineModel> ListMedicines { get; set; } = new List<MedicineModel>();
         public MedicineRequest request { get; set; } = new MedicineRequest();
         public int IdMedicine { get; set; }
         #endregion

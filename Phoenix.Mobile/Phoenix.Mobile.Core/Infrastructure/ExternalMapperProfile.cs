@@ -25,6 +25,8 @@ using Phoenix.Shared.Group;
 using Phoenix.Mobile.Core.Models.Group;
 using Phoenix.Shared.Unit;
 using Phoenix.Mobile.Core.Models.Unit;
+using Phoenix.Shared.InventoryTags;
+using Phoenix.Mobile.Core.Models.InventoryTags;
 
 namespace Phoenix.Mobile.Core.Infrastructure
 {
@@ -51,6 +53,7 @@ namespace Phoenix.Mobile.Core.Infrastructure
             CreateMap<OutputInfoDto, OutputInfoModel>();
             CreateMap<SupplierDto, SupplierModel>();
             CreateMap<UnitDto, UnitModel>();
+            CreateMap<InventoryTagsDto, InventoryTagsModel>();
         }
     }
 }

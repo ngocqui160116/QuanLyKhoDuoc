@@ -33,5 +33,14 @@ namespace Phoenix.Server.Api.Api
         {
             return _OutputInfoService.CreateOutputInfo(request);
         }
+
+        [HttpPost]
+        [Route("CreateOutputInventory")]
+        public Task<CrudResult> CreateOutputInventory(OutputInfoRequest request)
+        {
+            return _OutputInfoService.CreateOutputInventory(request);
+        }
+
+        
     }
 }

@@ -62,7 +62,7 @@ namespace Phoenix.Mobile.PageModels.Common
             IsBusy = true;
 #if DEBUG
             //IdMedicine = Medicine.IdMedicine;
-            ListMedicine = new ObservableCollection<InputInfoModel>()
+            ListMedicine = new List<InputInfoModel>()
             {
                 new InputInfoModel()
                 {
@@ -71,9 +71,10 @@ namespace Phoenix.Mobile.PageModels.Common
                     DueDate = infoModel.DueDate,
                     Count = infoModel.Count,
                     IdBatch = infoModel.IdBatch
-                }
 
+                }
             };
+                
 #endif
             IsBusy = false;
 
@@ -88,19 +89,6 @@ namespace Phoenix.Mobile.PageModels.Common
                 Suppliers = data;
                 //RaisePropertyChanged("Vendors");
                 RaisePropertyChanged(nameof(Suppliers));
-            }
-
-            var data1 = await _inputInfoService.GetAllInputInfo(InputInfoRequest);
-            if (data1 == null)
-            {
-                await _dialogService.AlertAsync("Lỗi kết nối mạng!", "Lỗi", "OK");
-            }
-            else
-            {
-                InputInfos = data1;
-
-                //RaisePropertyChanged("Vendors");
-                RaisePropertyChanged(nameof(InputInfos));
             }
 
             var data2 = await _staffService.GetAllStaff(StaffRequest);
@@ -123,9 +111,10 @@ namespace Phoenix.Mobile.PageModels.Common
         public List<StaffModel> Staffs { get; set; } = new List<StaffModel>();
         public StaffRequest StaffRequest { get; set; } = new StaffRequest();
 
-        public ObservableCollection<InputInfoModel> ListMedicine { get; set; }
+        public List<InputInfoModel> ListMedicine { get; set; }
         public static List<InputInfoModel> InputInfos { get; set; } = new List<InputInfoModel>();
         public InputInfoRequest InputInfoRequest { get; set; } = new InputInfoRequest();
+        public InputInfoModel infoModel { get; set; }
 
         #endregion
 
@@ -136,7 +125,7 @@ namespace Phoenix.Mobile.PageModels.Common
             try
             {
 
-                var data = await _inputInfoService.AddInputInfo(new InputInfoRequest
+                var data = await _inputInfoService.AddInventory(new InputInfoRequest
                 {
                     IdMedicine = infoModel.IdMedicine,
                     IdSupplier = IdSupplier,
@@ -144,7 +133,7 @@ namespace Phoenix.Mobile.PageModels.Common
                     IdStaff = IdStaff,
                     DateInput = DateInput,
                     DueDate = infoModel.DueDate,
-                    IdInput = "HD003",
+                    IdInput = "HD027",
                     Count = infoModel.Count,
                     InputPrice = infoModel.InputPrice
                 }); ;
@@ -162,7 +151,7 @@ namespace Phoenix.Mobile.PageModels.Common
         #endregion
 
         #region properties
-        public InputInfoModel infoModel { get; set; }
+
         public int SoLuong { get; set; }
         public int IdMedicine { get; set; }
         public string Name { get; set; }

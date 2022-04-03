@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
              xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common" 
-             xmlns:inputinfo="clr-namespace:Phoenix.Mobile.Core.Models.InputInfo;assembly=Phoenix.Mobile.Core"
+             xmlns:inputinfo="clr-namespace:Phoenix.Mobile.Core.Models.InputInfo;assembly=Phoenix.Mobile.Core" xmlns:inventoryTags="clr-namespace:Phoenix.Mobile.Core.Models.InventoryTags;assembly=Phoenix.Mobile.Core"
              x:DataType="common:InventoryPageModel"
              x:Class="Phoenix.Mobile.Pages.Common.InventoryPage"
              ControlTemplate="{StaticResource FullScreenHasBack}">
@@ -16,16 +16,16 @@
                 </SearchBar>
             </StackLayout>
 
-            <ListView ItemsSource="{Binding Inventorys}"
+            <ListView ItemsSource="{Binding InventoryTags}"
                       HasUnevenRows="True"
                       BackgroundColor="#ecf0f1"
                       SeparatorVisibility="None"
                       HorizontalOptions="FillAndExpand"
-                      SelectedItem="{Binding SelectedItemCommand}"
+                      SelectedItem="{Binding SelectedInputInfo}"
                       VerticalOptions="FillAndExpand">
 
                 <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="inputinfo:InputInfoModel">
+                    <DataTemplate x:DataType="inventoryTags:InventoryTagsModel">
                         <ViewCell>
                             <StackLayout Margin="6,4,6,4"
                                          BackgroundColor="White">
@@ -39,7 +39,7 @@
                                         <Label Text="Tồn:"
                                                Margin="8"
                                                FontSize="Small" />
-                                        <Label Text="{Binding Count}"
+                                        <Label Text="{Binding Qty_Before}"
                                                Margin="2"
                                                FontSize="Small" />
                                     </StackLayout>
@@ -48,7 +48,7 @@
                                     <Label Text="Lô:"
                                            Margin="8,2,2,4"
                                            FontSize="Small" />
-                                    <Label Text="{Binding IdBatch}"
+                                    <Label Text="{Binding LotNumber}"
                                            Margin="2"
                                            FontAttributes="Bold"
                                            FontSize="Small" />
@@ -56,7 +56,7 @@
                                         <Label Text="HSD:"
                                                Margin="8,2,2,4"
                                                FontSize="Small" />
-                                        <Label Text="{Binding DueDate}"
+                                        <Label Text="{Binding ExpiredDate}"
                                                TextColor="DarkGray"
                                                Margin="2"
                                                FontSize="Small" />
