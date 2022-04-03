@@ -125,6 +125,28 @@ namespace Phoenix.Mobile.PageModels.Common
             try
             {
 
+                if (IsBusy) return;
+                IsBusy = true;
+                if (infoModel.IdMedicine == 0)
+                {
+                    await _dialogService.AlertAsync("Vui lòng nhập thông tin thuốc");
+                    IsBusy = false;
+                    return;
+                }
+
+                if (IdSupplier.Equals(0))
+                {
+                    await _dialogService.AlertAsync("Vui lòng chọn nhà cung cấp");
+                    IsBusy = false;
+                    return;
+                }
+                if (IdStaff.Equals(0))
+                {
+                    await _dialogService.AlertAsync("Vui lòng chọn người tạo");
+                    IsBusy = false;
+                    return;
+                }
+
                 var data = await _inputInfoService.AddInventory(new InputInfoRequest
                 {
                     IdMedicine = infoModel.IdMedicine,
@@ -133,10 +155,65 @@ namespace Phoenix.Mobile.PageModels.Common
                     IdStaff = IdStaff,
                     DateInput = DateInput,
                     DueDate = infoModel.DueDate,
-                    IdInput = "HD027",
+                    IdInput = "HD029",
                     Count = infoModel.Count,
                     InputPrice = infoModel.InputPrice
-                }); ;
+                });
+                await CoreMethods.PushPageModel<InputPageModel>();
+
+                await _dialogService.AlertAsync("Lưu thành công");
+                IsBusy = false;
+
+            }
+            catch (Exception e)
+            {
+                await _dialogService.AlertAsync("Lưu thất bại");
+            }
+        }
+        #endregion
+
+
+        #region AddInventoryCommand
+        public Command AddInventoryCCommand => new Command(async (p) => await AddInventoryCExecute(), (p) => !IsBusy);
+        private async Task AddInventoryCExecute()
+        {
+            try
+            {
+
+                if (IsBusy) return;
+                IsBusy = true;
+                if (infoModel.IdMedicine == 0)
+                {
+                    await _dialogService.AlertAsync("Vui lòng nhập thông tin thuốc");
+                    IsBusy = false;
+                    return;
+                }
+
+                if (IdSupplier.Equals(0))
+                {
+                    await _dialogService.AlertAsync("Vui lòng chọn nhà cung cấp");
+                    IsBusy = false;
+                    return;
+                }
+                if (IdStaff.Equals(0))
+                {
+                    await _dialogService.AlertAsync("Vui lòng chọn người tạo");
+                    IsBusy = false;
+                    return;
+                }
+
+                var data = await _inputInfoService.AddInputInfo(new InputInfoRequest
+                {
+                    IdMedicine = infoModel.IdMedicine,
+                    IdSupplier = IdSupplier,
+                    IdBatch = infoModel.IdBatch,
+                    IdStaff = IdStaff,
+                    DateInput = DateInput,
+                    DueDate = infoModel.DueDate,
+                    IdInput = "HD031",
+                    Count = infoModel.Count,
+                    InputPrice = infoModel.InputPrice
+                });
                 await CoreMethods.PushPageModel<InputPageModel>();
 
                 await _dialogService.AlertAsync("Thêm thành công");

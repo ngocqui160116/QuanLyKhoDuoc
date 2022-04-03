@@ -48,10 +48,11 @@ namespace Phoenix.Server.Services.MainServices
                 // setup query
                 var query = _dataContext.Inputs.AsQueryable();
 
-                if (!string.IsNullOrEmpty(request.Id))
-                {
-                    query = query.Where(d => d.Id.Contains(request.Id));
-                }
+                //if (!string.IsNullOrEmpty(request.Id))
+                //{
+                //    query = query.Where(d => d.Id.Contains(request.Id));
+                //}
+
 
                 query = query.OrderByDescending(d => d.Id);
 
@@ -74,7 +75,7 @@ namespace Phoenix.Server.Services.MainServices
             //setup query
            
                 // setup query
-                var query = _dataContext.Inputs.Where(x => x.Id.Contains(Id));
+                var query = _dataContext.Inputs.Where(x => x.Id.Equals(Id));
 
                 var data =  query.ToList();
                 return data.MapTo<InputDto>();
@@ -82,9 +83,12 @@ namespace Phoenix.Server.Services.MainServices
 
         public async Task<CrudResult> CreateInput(InputRequest request)
         {
+
+            //var query = _dataContext.Database.ExecuteSqlCommand("Select IdInput from Input");
+
             var Input = new Input();
-            Input.Id = request.Id;
             Input.IdStaff = request.IdStaff;
+            Input.IdSupplier = request.IdSupplier;
             Input.DateInput = request.DateInput;
            
             _dataContext.Inputs.Add(Input);

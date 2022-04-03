@@ -11,6 +11,7 @@ namespace Phoenix.Server.Data.Entity
     {
         [Key]
         public string Id { get; set; }
+       
         public int IdStaff { get; set; }
         [ForeignKey("IdStaff")]
         public virtual Staff Staff { get; set; }

@@ -31,11 +31,13 @@ namespace Phoenix.Server.Services.Infrastructure
                 .ForMember(d => d.MedicineName, o => o.MapFrom(s => s.Medicine.Name));
             CreateMap<DocumentType, DocumentTypeDto>();
             CreateMap<Inventory, InventoryDto>()
+                //.ForMember(d => d.LotNumber, o => o.MapFrom(s => s.Medicine.Name))
                 .ForMember(d => d.MedicineName, o => o.MapFrom(s => s.Medicine.Name));
             CreateMap<Input, InputDto>()
                 .ForMember(d => d.SupplierName, o => o.MapFrom(s => s.Supplier.Name))
                 .ForMember(d => d.NameStaff, o => o.MapFrom(s => s.Staff.Name));
             CreateMap<InputInfo, InputInfoDto>();
+               // .ForMember(d => d.InputName, o => o.MapFrom(s => s.Input.));
             CreateMap<Medicine, MedicineDto>()
                 .ForMember(d => d.ImageUrl, o => o.MapFrom(s => s.Medicine_Image.RelativePath))
                 .ForMember(d => d.GroupName, o => o.MapFrom(s => s.Group.Name))

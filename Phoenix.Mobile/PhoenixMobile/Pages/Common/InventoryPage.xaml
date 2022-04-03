@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
              xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common" 
-             xmlns:inputinfo="clr-namespace:Phoenix.Mobile.Core.Models.InputInfo;assembly=Phoenix.Mobile.Core" xmlns:inventoryTags="clr-namespace:Phoenix.Mobile.Core.Models.InventoryTags;assembly=Phoenix.Mobile.Core"
+             xmlns:inputinfo="clr-namespace:Phoenix.Mobile.Core.Models.InputInfo;assembly=Phoenix.Mobile.Core" xmlns:inventoryTags="clr-namespace:Phoenix.Mobile.Core.Models.InventoryTags;assembly=Phoenix.Mobile.Core" xmlns:inventory="clr-namespace:Phoenix.Mobile.Core.Models.Inventory;assembly=Phoenix.Mobile.Core"
              x:DataType="common:InventoryPageModel"
              x:Class="Phoenix.Mobile.Pages.Common.InventoryPage"
              ControlTemplate="{StaticResource FullScreenHasBack}">
@@ -16,7 +16,7 @@
                 </SearchBar>
             </StackLayout>
 
-            <ListView ItemsSource="{Binding InventoryTags}"
+            <ListView ItemsSource="{Binding Inventory}"
                       HasUnevenRows="True"
                       BackgroundColor="#ecf0f1"
                       SeparatorVisibility="None"
@@ -25,7 +25,7 @@
                       VerticalOptions="FillAndExpand">
 
                 <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="inventoryTags:InventoryTagsModel">
+                    <DataTemplate x:DataType="inventory:InventoryModel">
                         <ViewCell>
                             <StackLayout Margin="6,4,6,4"
                                          BackgroundColor="White">
@@ -39,12 +39,12 @@
                                         <Label Text="Tồn:"
                                                Margin="8"
                                                FontSize="Small" />
-                                        <Label Text="{Binding Qty_Before}"
+                                        <Label Text="{Binding Count}"
                                                Margin="2"
                                                FontSize="Small" />
                                     </StackLayout>
                                 </StackLayout>
-                                <StackLayout Orientation="Horizontal">
+                                <!--<StackLayout Orientation="Horizontal">
                                     <Label Text="Lô:"
                                            Margin="8,2,2,4"
                                            FontSize="Small" />
@@ -61,7 +61,7 @@
                                                Margin="2"
                                                FontSize="Small" />
                                     </StackLayout>
-                                </StackLayout>
+                                </StackLayout>-->
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

@@ -47,10 +47,10 @@ namespace Phoenix.Server.Services.MainServices
                 // setup query
                 var query = _dataContext.InputInfos.AsQueryable();
                 // filter
-                if (!string.IsNullOrEmpty(request.IdInput))
-                {
-                    query = query.Where(d => d.IdInput.Contains(request.IdInput));
-                }
+                //if (!string.IsNullOrEmpty(request.IdInput))
+                //{
+                //    query = query.Where(d => d.IdInput.Contains(request.IdInput));
+                //}
                 
                 query = query.OrderByDescending(d => d.Id);
                 query = query.OrderByDescending(d => d.IdBatch);
@@ -74,10 +74,10 @@ namespace Phoenix.Server.Services.MainServices
 
 
                 // filter
-                if (!string.IsNullOrEmpty(request.IdInput))
-                {
-                    query = query.Where(d => d.IdInput.Contains(request.IdInput));
-                }
+                //if (!string.IsNullOrEmpty(request.IdInput))
+                //{
+                //    query = query.Where(d => d.IdInput.Contains(request.IdInput));
+                //}
                 //var i = "HD001";
                 query = query.OrderByDescending(d => d.Id);
                 query = query.OrderByDescending(d => d.IdBatch);
@@ -100,7 +100,7 @@ namespace Phoenix.Server.Services.MainServices
 
             var Input = new Input();
 
-            Input.Id = request.IdInput;
+            //Input.Id = request.IdInput;
             Input.IdStaff = request.IdStaff;
             Input.IdSupplier = request.IdSupplier;
             Input.DateInput = request.DateInput;
@@ -111,8 +111,8 @@ namespace Phoenix.Server.Services.MainServices
 
             var InputInfo = new InputInfo();
 
-            InputInfo.Id = request.Id;
-            InputInfo.IdInput = request.IdInput;
+            //InputInfo.Id = request.Id;
+           // InputInfo.IdInput = request.Id;
             InputInfo.IdMedicine = request.IdMedicine;
             InputInfo.IdBatch = request.IdBatch;
             InputInfo.Count = request.Count;
@@ -131,7 +131,7 @@ namespace Phoenix.Server.Services.MainServices
 
             var Input = new Input();
 
-            Input.Id = request.IdInput;
+           // Input.Id = request.IdInput;
             Input.IdStaff = request.IdStaff;
             Input.IdSupplier = request.IdSupplier;
             Input.DateInput = request.DateInput;
@@ -143,7 +143,7 @@ namespace Phoenix.Server.Services.MainServices
             var InputInfo = new InputInfo();
 
             InputInfo.Id = request.Id;
-            InputInfo.IdInput = request.IdInput;
+            InputInfo.IdInput = Input.Id;
             InputInfo.IdMedicine = request.IdMedicine;
             InputInfo.IdBatch = request.IdBatch;
             InputInfo.Count = request.Count;
@@ -166,8 +166,8 @@ namespace Phoenix.Server.Services.MainServices
             InventoryTags.ExpiredDate = DateTime.Now;
             InventoryTags.DocumentDate = DateTime.Now;
             InventoryTags.LotNumber = request.IdBatch;
-            InventoryTags.UnitPrice = 2;
-            InventoryTags.TotalPrice = 2;
+            InventoryTags.UnitPrice = InputInfo.InputPrice;
+            InventoryTags.TotalPrice = InputInfo.Total;
             InventoryTags.SupplierId = Input.IdSupplier;
             InventoryTags.DocumentType = 1;
             InventoryTags.MedicineId = request.IdMedicine;

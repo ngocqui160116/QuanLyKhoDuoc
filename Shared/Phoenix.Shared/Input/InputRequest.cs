@@ -5,6 +5,7 @@ namespace Phoenix.Shared.Input
 {
     public class InputRequest : BaseRequest
     {
+        //public int Id { get; set; }
         public string Id { get; set; }
         public int IdStaff { get; set; }
         public int IdSupplier { get; set; }
