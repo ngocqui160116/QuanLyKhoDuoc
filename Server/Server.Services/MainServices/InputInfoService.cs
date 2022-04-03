@@ -161,6 +161,17 @@ namespace Phoenix.Server.Services.MainServices
             var result = new BaseResponse<InputInfoDto>();
             try
             {
+                Input inputs = new Input
+                {
+                    Id = request.IdInput,
+                    IdStaff = request.IdMedicine,
+                    IdSupplier = request.IdSupplier,
+                    DateInput = DateTime.Now,
+                    Status = false
+                };
+                _dataContext.Inputs.Add(inputs);
+                await _dataContext.SaveChangesAsync();
+
                 InputInfo inputinfos = new InputInfo
                 {
                     IdInput = request.IdInput,
@@ -174,6 +185,7 @@ namespace Phoenix.Server.Services.MainServices
                 _dataContext.InputInfos.Add(inputinfos);
                 await _dataContext.SaveChangesAsync();
 
+               
                 result.Success = true;
             }
             catch (Exception ex)

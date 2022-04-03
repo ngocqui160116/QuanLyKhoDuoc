@@ -1,4 +1,5 @@
 ﻿@using Phoenix.Server.Services.Database;
+
 @section Scripts{
     <script type="text/javascript" src="~/assets/js/tabulator.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
@@ -9,6 +10,40 @@
         <a href="#" class="breadcrumb--active">Nhập kho</a>
     </div>
 }
+<script>
+    var tableContent = [];
+    function render_tbody() {
+        let template = (stt, id, name, qty, price, lotNumber, expiredDate) => `<tr class="bg-gray-200 dark:bg-dark-1">
+                            <td class="border-b dark:border-dark-5">${stt}</td>
+                            <td class="border-b dark:border-dark-5">${name}</td>
+                            <td class="border-b dark:border-dark-5">
+                                <input type="text" class="form-control" placeholder="Lô" aria-label="Price" aria-describedby="input-group-price" value="${price}" /> 
+                            </td>
+                            <td class="border-b dark:border-dark-5">
+                                <input class="datepicker form-control w-56 block mx-auto" data-single-mode="true">
+                            </td>
+                            <td class="border-b dark:border-dark-5">
+                                <input type="text" class="form-control" placeholder="Giá" aria-label="Price" aria-describedby="input-group-price">
+                            </td>
+                            <td class="border-b dark:border-dark-5">
+                                <input type="text" class="form-control" placeholder="Số lượng" aria-label="Price" aria-describedby="input-group-price">
+                            </td>
+                            <td class="border-b dark:border-dark-5">
+                                <button href="javascript:;" data-toggle="modal-cancel" data-target="#custom-content-tooltip" type="submit" class="btn btn-danger text-white shadow-md mr-2">
+                                    <i data-feather="trash-2" class="w-4 h-4 mr-2"></i>
+                                </button>
+                            </td>
+                        </tr>`;
+        let htmlTemplate = "";
+        tableContent.map(function (row, index) {
+            htmlTemplate += template(index + 1, row.medicineId, row.medicineName, row.qty, row.price, row.lotNumber, row.expiredDate)
+        })
+        $("#tbody").html(htmlTemplate)
+    }
+    $(document).ready(function () {
+        render_tbody()
+    })
+</script>
 @Html.AntiForgeryToken()
 <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
     <h2 class="text-lg font-medium mr-auto">
@@ -156,18 +191,6 @@
                         @Html.DropDownList("IdMedicine", null, new { @class = "form-control input input--switch border" })
                     </div>
                 </div>
-                <div class="col-span-12 sm:col-span-6">
-                    <label for="modal-form-1" class="form-label">Thuốc</label>
-                    <select data-placeholder="Select your favorite actors" class="tom-select w-full" multiple>
-                        <option value="1" selected>Leonardo DiCaprio</option>
-                        <option value="2" selected>Johnny Deep</option>
-                        <option value="3" selected>Robert Downey, Jr</option>
-                        <option value="4">Samuel L. Jackson</option>
-                        <option value="5">Morgan Freeman</option>
-                    </select>
-                </div>
-            </div>
-            <div class="modal-body">
                 <table class="table">
                     <thead>
                         <tr>
@@ -175,52 +198,51 @@
                             <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Tên thuốc</th>
                             <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Số Lô</th>
                             <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">HSD</th>
+                            <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Giá nhập</th>
                             <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Số lượng</th>
-                            <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Giá</th>
+                            <th class="border-b-2 dark:border-dark-5 whitespace-nowrap"></th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr class="bg-gray-200 dark:bg-dark-1">
-                            <td class="border-b dark:border-dark-5">1</td>
-                            <td class="border-b dark:border-dark-5">Angelina</td>
-                            <td class="border-b dark:border-dark-5">Jolie</td>
-                            <td class="border-b dark:border-dark-5">angelinajolie</td>
-                            <td class="border-b dark:border-dark-5">0</td>
-                            <td class="border-b dark:border-dark-5">0</td>
-                        </tr>
+                    <tbody id="tbody">
+                        
                     </tbody>
                 </table>
             </div>
+            <div class="modal-body">
+                <div class="col-span-12 sm:col-span-6">
+                    <label for="modal-form-1" class="form-label">Thuốc</label>
+                    <select data-placeholder="Select your favorite actors" class="tom-select w-full" multiple>
+                        <option value="1" selected>Leonardo DiCaprio</option>
+                        <option value="2">Johnny Deep</option>
+                        <option value="3" selected>Robert Downey, Jr</option>
+                        <option value="4">Samuel L. Jackson</option>
+                        <option value="5">Morgan Freeman</option>
+                    </select>
+                </div>
+            </div>
+
             <!-- END: Modal Body -->
             <!-- BEGIN: Modal Footer -->
             <div class="modal-footer text-right">
                 <button type="button" data-dismiss="modal" class="btn btn-outline-secondary w-20 mr-1">Hủy</button>
-                <button type="button" class="btn btn-primary w-20">Lưu</button>
+                <button href="@Url.Action("Create","InputInfo")" type="button" class="btn btn-primary w-20">Lưu</button>
             </div> <!-- END: Modal Footer -->
-            </div>
         </div>
+    </div>
 </div>
 <!-- END: Modal Content -->
 <script>
-    $("#IdMedicine").kendoComboBox({
-        dataTextField: "Name",
-        dataValueField: "IdMedicine",
-        dataSource: {
-            type: "json",
-            transport: {
-                read: {
-                    url: "@Html.Raw(Url.Action("List", "Input"))",
-                    type: "POST",
-                    datatype: "json"
-                }
-            },
-            schema: {
-                data: "Data",
-                total: "Total",
-                error: "Error"
-            }
-        }
-    });
-    $("#IdMedicine").closest('.k-combobox').addClass("form-control");
+    $("#IdMedicine").on("change", function (e) {
+        //console.log("name >> " + $('#IdMedicine option:selected').text() + "   val >>" + $("#IdMedicine").val())
+        tableContent.push({
+            medicineId: $("#IdMedicine").val(),
+            medicineName: $('#IdMedicine option:selected').text(),
+            qty: 0,
+            price: 0,
+            lotNumber: "",
+            expiredDate: ""
+        });
+        render_tbody();
+        JSON.stringify(tableContent)
+    })
 </script>
- 
