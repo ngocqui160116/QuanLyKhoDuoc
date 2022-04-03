@@ -2,6 +2,7 @@
 using Falcon.Web.Framework.Kendoui;
 using Phoenix.Server.Services.Database;
 using Phoenix.Server.Services.MainServices;
+using Phoenix.Server.Web.Areas.Admin.Models.Input;
 using Phoenix.Server.Web.Areas.Admin.Models.InputInfo;
 using Phoenix.Shared.InputInfo;
 using System;
@@ -61,30 +62,36 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
         {
             SetViewBag();
 
-            var model = new InputInfoModel();
-            return View(model);
+            var inpputinfomodel = new InputInfoModel();
+            var inputmodel = new InputModel();
+            return View(inpputinfomodel);
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(InputInfoModel model)
+        public async Task<ActionResult> Create(InputInfoModel inputinfomodel, InputModel inputmodel)
         {
             SetViewBag();
             if (!ModelState.IsValid)
-                return View(model);
+                return View(inputinfomodel);
             var inputs = await _inputinfoService.Create(new InputInfoRequest
             {
-                IdInput = model.IdInput,
-                IdMedicine = model.IdMedicine,
-                IdBatch = model.IdBatch,
-                Count = model.Count,
-                InputPrice = model.InputPrice,
-                Total = model.Total,
-                DueDate = model.DueDate
+                IdStaff = inputmodel.IdStaff,
+                IdSupplier = inputmodel.IdSupplier,
+                DateInput = inputmodel.DateInput,
+                Status = inputmodel.Status,
+                   
+                IdInput = inputinfomodel.IdInput,
+                IdMedicine = inputinfomodel.IdMedicine,
+                IdBatch = inputinfomodel.IdBatch,
+                Count = inputinfomodel.Count,
+                InputPrice = inputinfomodel.InputPrice,
+                Total = inputinfomodel.Total,
+                DueDate = inputinfomodel.DueDate
             });
             if (!inputs.Success)
             {
                 ErrorNotification("Thêm mới không thành công");
-                return View(model);
+                return View(inputinfomodel);
             }
             SuccessNotification("Thêm mới thành công");
             return RedirectToAction("Create");

@@ -34,7 +34,8 @@ namespace Phoenix.Server.Services.Infrastructure
                 .ForMember(d => d.SupplierName, o => o.MapFrom(s => s.Supplier.Name));
             //.ForMember(d => d.SupplierName, o => o.MapFrom(s => s.Supplier.Name));
             CreateMap<OutputInfo, OutputInfoDto>()
-               .ForMember(d => d.MedicineName, o => o.MapFrom(s => s.Medicine.Name));
+               .ForMember(d => d.MedicineName, o => o.MapFrom(s => s.Medicine.Name))
+               .ForMember(d => d.Batch, o => o.MapFrom(s =>s.InputInfo.IdBatch));
               // .ForMember(d => d.IdBatch, o => o.MapFrom(s => s.InputInfo.IdBatch))
                //.ForMember(d => d.Reason, o => o.MapFrom(s => s.Reason.NameReason));
             CreateMap<Unit, UnitDto>();

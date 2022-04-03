@@ -69,11 +69,6 @@ namespace Phoenix.Server.Services.MainServices
 
         public List<InputDto> Search(string Id)
         {
-
-
-
-            //setup query
-           
                 // setup query
                 var query = _dataContext.Inputs.Where(x => x.Id.Equals(Id));
 
