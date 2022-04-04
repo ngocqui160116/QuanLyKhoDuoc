@@ -43,10 +43,16 @@
                         <ViewCell>
                             <StackLayout Margin="6,4,6,4"
                                          BackgroundColor="White">
-                                <Label Text="{Binding Id}"
-                                       Margin="8"
+                                <StackLayout Orientation="Horizontal" HeightRequest="50">
+                                    <Label Text="PN0"
+                                       Margin="10,0,0,0"
                                        FontAttributes="Bold"
                                        FontSize="Medium" />
+                                    <Label Text="{Binding Id}"
+                                       FontAttributes="Bold"
+                                       FontSize="Medium" />
+                                </StackLayout>
+                                
                                 <StackLayout Orientation="Horizontal">
                                     <Label Text="{Binding SupplierName}"
                                            Margin="8,2,8,4"

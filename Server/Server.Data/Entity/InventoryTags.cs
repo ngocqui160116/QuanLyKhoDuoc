@@ -29,8 +29,7 @@ namespace Phoenix.Server.Data.Entity
         public double UnitPrice { get; set; }
         public double TotalPrice { get; set; }
         public int SupplierId { get; set; }
-        [ForeignKey("SupplierId")]
-        public virtual Supplier Supplier { get; set; }
+       
    
     }
  

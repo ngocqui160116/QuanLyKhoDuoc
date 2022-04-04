@@ -22,21 +22,29 @@
             </StackLayout>
             <Frame xe:Commands.Tap="{Binding SelectMedicine}" 
                    CornerRadius="15" 
-                   HeightRequest="100"
+                   HeightRequest="80"
                    IsVisible="{Binding IsOpen}">
-                <Label
-                    Text="Thêm sản phẩm"
-                    FontSize="25"
-                    TextColor="Black"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"/>
+                <StackLayout>
+                    <Image Source="@drawable/icon_medicine"
+                           WidthRequest="50"
+                           HeightRequest="50"
+                           HorizontalOptions="CenterAndExpand"
+                           VerticalOptions="CenterAndExpand">
+                    </Image>
+                    <Label Text="Thêm sản phẩm"
+                           FontSize="20"
+                           TextColor="Black"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"/>
+                </StackLayout>
+                
             </Frame>
             
             <Frame CornerRadius="15" 
                    IsVisible="{Binding IsClose}">
                 
                 <ListView ItemsSource="{Binding ListMedicine}" 
-                          HeightRequest="200" BackgroundColor="White"
+                          HeightRequest="80" BackgroundColor="White"
                           x:Name="searchResults"
                           HasUnevenRows="True"
                           SeparatorVisibility="None"

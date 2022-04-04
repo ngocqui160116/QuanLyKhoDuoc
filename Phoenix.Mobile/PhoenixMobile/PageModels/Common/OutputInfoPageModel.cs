@@ -66,7 +66,7 @@ namespace Phoenix.Mobile.PageModels.Common
         public List<OutputInfoDto> OutputInfos { get; set; }
 
         public string SearchText { get; set; }
-        public string IdOutput { get; set; }
+        public int IdOutput { get; set; }
         public string NameReason { get; set; }
         public string Status { get; set; }
         public DateTime DateOutput { get; set; }

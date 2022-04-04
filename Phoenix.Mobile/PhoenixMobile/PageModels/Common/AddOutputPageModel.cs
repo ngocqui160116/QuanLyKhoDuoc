@@ -127,7 +127,6 @@ namespace Phoenix.Mobile.PageModels.Common
 
                 var data = await _outputInfoService.AddOutputInfo(new OutputInfoRequest
                 {
-                    IdOutput = "HDX007",
                     IdMedicine = InputInfo.IdMedicine,
                     IdInputInfo = 1,
                     IdReason = SelectedReason.IdReason,

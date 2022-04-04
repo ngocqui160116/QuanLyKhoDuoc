@@ -40,6 +40,8 @@ namespace Phoenix.Mobile.PageModels.Common
             if (initData != null)
             {
                 infoModel = (InputInfoModel)initData;
+                IsClose = true;
+                IsOpen = false;
             }
             else
             {
@@ -70,8 +72,8 @@ namespace Phoenix.Mobile.PageModels.Common
                     MedicineName = infoModel.MedicineName,
                     DueDate = infoModel.DueDate,
                     Count = infoModel.Count,
-                    IdBatch = infoModel.IdBatch
-
+                    IdBatch = infoModel.IdBatch,
+                    Total = infoModel.Count * infoModel.InputPrice 
                 }
             };
                 
@@ -118,9 +120,9 @@ namespace Phoenix.Mobile.PageModels.Common
 
         #endregion
 
-        #region AddInputCommand
-        public Command AddInputCommand => new Command(async (p) => await AddInputExecute(), (p) => !IsBusy);
-        private async Task AddInputExecute()
+        #region AddInventoryCommand
+        public Command AddInventoryCommand => new Command(async (p) => await AddInventoryExecute(), (p) => !IsBusy);
+        private async Task AddInventoryExecute()
         {
             try
             {
@@ -155,7 +157,6 @@ namespace Phoenix.Mobile.PageModels.Common
                     IdStaff = IdStaff,
                     DateInput = DateInput,
                     DueDate = infoModel.DueDate,
-                    IdInput = "HD029",
                     Count = infoModel.Count,
                     InputPrice = infoModel.InputPrice
                 });
@@ -173,9 +174,9 @@ namespace Phoenix.Mobile.PageModels.Common
         #endregion
 
 
-        #region AddInventoryCommand
-        public Command AddInventoryCCommand => new Command(async (p) => await AddInventoryCExecute(), (p) => !IsBusy);
-        private async Task AddInventoryCExecute()
+        #region AddInputCommand
+        public Command AddInputCommand => new Command(async (p) => await AddInputExecute(), (p) => !IsBusy);
+        private async Task AddInputExecute()
         {
             try
             {
@@ -210,7 +211,6 @@ namespace Phoenix.Mobile.PageModels.Common
                     IdStaff = IdStaff,
                     DateInput = DateInput,
                     DueDate = infoModel.DueDate,
-                    IdInput = "HD031",
                     Count = infoModel.Count,
                     InputPrice = infoModel.InputPrice
                 });
@@ -228,8 +228,9 @@ namespace Phoenix.Mobile.PageModels.Common
         #endregion
 
         #region properties
-
-        public int SoLuong { get; set; }
+        public bool IsClose { get; set; } = false;
+        public bool IsOpen { get; set; } = true;
+        public float Total { get; set; }
         public int IdMedicine { get; set; }
         public string Name { get; set; }
         public string NameUnit { get; set; }

@@ -66,7 +66,7 @@ namespace Phoenix.Mobile.PageModels.Common
         public List<InputInfoDto> InputInfos { get; set; }
 
         public string SearchText { get; set; }
-        public string IdInput { get; set; }
+        public int IdInput { get; set; }
         public string SupplierName { get; set; }
         public string Status { get; set; }
         public DateTime DateInput { get; set; }

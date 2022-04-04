@@ -13,75 +13,118 @@
              ControlTemplate="{StaticResource FullScreenHasBack}">
     <ContentPage.Content>
         <StackLayout BackgroundColor="WhiteSmoke">
-            <StackLayout Orientation="Horizontal" BackgroundColor="White">
-                <SearchBar x:Name="searchBar" WidthRequest="420" 
-                   HorizontalOptions="Fill"
-                   VerticalOptions="CenterAndExpand"
-                   Placeholder="Nhập thông tin"
-                   xe:Commands.Tap="{Binding AddMedicineCommand}"
-                   SearchCommand="{Binding PerformSearch}" 
-                   SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"/>
+            <StackLayout Orientation="Horizontal" BackgroundColor="WhiteSmoke">
+                <controls:CommonButton Text="Thêm thông tin thuốc"
+                                       
+                                       Style="{StaticResource CommonButtonPrimary}">
+                    
+                </controls:CommonButton>
             </StackLayout>
-            <StackLayout HeightRequest="25"
-                         WidthRequest="50">
-                <Label Text="Danh sách sản phẩm"
+            <StackLayout HeightRequest="25">
+                <Label Text="Danh sách thuốc "
                        FontSize="Small"
                        Margin="5,2,0,0"
                        FontAttributes="Bold"
                        VerticalOptions="Center"/>
 
             </StackLayout>
-            <Frame CornerRadius="15" >
+            <Frame xe:Commands.Tap="{Binding}" 
+                   CornerRadius="15" 
+                   HeightRequest="100"
+                   IsVisible="{Binding IsOpen}">
+                <StackLayout>
+                    <Image Source="@drawable/icon_medicine"
+                           WidthRequest="50"
+                           HeightRequest="50"
+                           Margin="0,10,0,0"
+                           HorizontalOptions="CenterAndExpand"
+                           VerticalOptions="StartAndExpand">
+                    </Image>
+                    <Label Text="Chưa có thuốc"
+                           FontSize="15"
+                           TextColor="Black"
+                           HorizontalOptions="Center"
+                           VerticalOptions="StartAndExpand"/>
+                </StackLayout>
+
+            </Frame>
+            <Frame CornerRadius="15"
+                   IsVisible="{Binding IsClose}">
 
                 <ListView ItemsSource="{Binding ListMedicine}" 
-                          HeightRequest="100" BackgroundColor="White"
+                          Margin="5,5,0,10"
+                          HeightRequest="85" BackgroundColor="White"
                           x:Name="searchResults"
                           HasUnevenRows="True"
                           SeparatorVisibility="None"
+                          IsEnabled="False"
                           HorizontalOptions="FillAndExpand"
                           VerticalOptions="FillAndExpand">
                     <ListView.ItemTemplate>
 
                         <DataTemplate x:DataType="intputinfo:InputInfoModel">
                             <ViewCell>
-                                <StackLayout Margin="6,4,6,4"
-                                             BackgroundColor="White">
+                                <StackLayout Margin="6,4,0,0"
+                                             BackgroundColor="White"
+                                             HeightRequest="75"
+                                             Orientation="Horizontal" >
                                     <StackLayout Orientation="Horizontal" 
                                                  HorizontalOptions="StartAndExpand" >
+
                                         <Image Source="@drawable/icon_medicine"
                                                WidthRequest="75"
                                                HorizontalOptions="StartAndExpand"
                                                VerticalOptions="CenterAndExpand">
                                         </Image>
 
-                                        <StackLayout Orientation="Vertical">
-                                            <Label Text="{Binding MedicineName}"
-                                                   Margin="8"
-                                                   FontAttributes="Bold"
-                                                   FontSize="Large" />
-
+                                        <StackLayout Orientation="Vertical" >
                                             <StackLayout Orientation="Horizontal">
+
+                                                <Label Text="{Binding MedicineName}"
+                                                       Margin="2,2,8,4"
+                                                       HorizontalOptions="StartAndExpand"
+                                                       TextColor="DarkSlateGray"
+                                                       FontSize="Large" />
+                                                <StackLayout Orientation="Horizontal"
+                                                             HorizontalOptions="EndAndExpand">
+                                                    <Label Text="{Binding Total}"
+                                                           HorizontalOptions="EndAndExpand"
+                                                           Margin="5,2,0,4"
+                                                           TextColor="Red"  
+                                                           FontSize="Medium" />
+                                                    <Label Text="đ"
+                                                           HorizontalOptions="EndAndExpand"
+                                                           Margin="1,2,0,4"
+                                                           TextColor="Red"  
+                                                           FontSize="Medium" />
+                                                </StackLayout>
+                                            </StackLayout>
+
+                                            <StackLayout Orientation="Horizontal"
+                                                         HorizontalOptions="End">
                                                 <Label Text="Số lượng:"
                                                        Margin="8,2,8,4"
+                                                       HorizontalOptions="StartAndExpand"
                                                        FontSize="Small" />
                                                 <Label Text="{Binding Count}"
                                                        Margin="2,2,8,4"
                                                        TextColor="DarkSlateGray"
                                                        FontSize="Small" />
-                                                <Label Text="HSD:"
-                                                       Margin="8,2,8,4"
-                                                       FontSize="Small" />
-                                                <Label Text="{Binding DueDate}"
-                                                       Margin="2,2,8,4"
-                                                       TextColor="DarkSlateGray"  
-                                                       FontSize="Small" />
-
-                                               
+                                                <StackLayout Margin="50,0,0,0" Orientation="Horizontal" 
+                                                             HorizontalOptions="End">
+                                                    <Label Text="HSD:"
+                                                           Margin="2,2,8,4"
+                                                           FontSize="Small" />
+                                                    <Label Text="{Binding DueDate}"
+                                                           Margin="2,2,0,4"
+                                                           TextColor="DarkSlateGray"  
+                                                           FontSize="Small" />
+                                                </StackLayout>
                                             </StackLayout>
                                         </StackLayout>
                                         
 
-                                    </StackLayout>
+                                </StackLayout>
                                 </StackLayout>
                             </ViewCell>
                         </DataTemplate>
@@ -163,12 +206,11 @@
                     <AbsoluteLayout Grid.Row="0"
                                     Grid.Column="0" 
                                     HorizontalOptions="Center">
-                        <Grid xe:TouchEffect.Color="AliceBlue"
-                              xe:Commands.Tap="{Binding AddInputCommand}">
+                        <Grid xe:TouchEffect.Color="AliceBlue">
                             <forms:CachedImage Source="btn_delete" 
                                                Grid.Row="0"
                                                Grid.Column="0"
-                                               
+                                               xe:Commands.Tap="{Binding AddInputCommand}"
                                                HeightRequest="50"/>
                             <Label Grid.Row="0"
                                    Grid.Column="0"
@@ -182,11 +224,11 @@
                     <AbsoluteLayout Grid.Row="0"
                                     Grid.Column="1" 
                                     HorizontalOptions="Center">
-                        <Grid xe:TouchEffect.Color="AliceBlue"
-                              xe:Commands.Tap="{Binding AddInventoryCCommand}">
+                        <Grid xe:TouchEffect.Color="AliceBlue">
                             <forms:CachedImage Source="btn_Save" 
                                                Grid.Row="0"
-                                               HeightRequest="50"/>
+                                               HeightRequest="50"
+                                               xe:Commands.Tap="{Binding AddInventoryCommand}"/>
                             <Label Grid.Row="0"
                                    FontSize="Medium"
                                    HorizontalOptions="Center"
