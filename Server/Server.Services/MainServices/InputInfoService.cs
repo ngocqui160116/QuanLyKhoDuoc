@@ -26,6 +26,7 @@ namespace Phoenix.Server.Services.MainServices
         Task<CrudResult> CreateInventory(InputInfoRequest request);
 
         //
+        Task<BaseResponse<InputInfoDto>> GetAll(InputInfoRequest request);
         InputInfo GetInputInfoById(string Id);
         Task<BaseResponse<InputInfoDto>> Create(InputInfoRequest request);
         Task<BaseResponse<InputInfoDto>> GetAllInputInfoById(string Id,InputInfoRequest request);
@@ -204,7 +205,32 @@ namespace Phoenix.Server.Services.MainServices
         }
 
         /////////////
-        ///
+        public async Task<BaseResponse<InputInfoDto>> GetAll(InputInfoRequest request)
+        {
+            var result = new BaseResponse<InputInfoDto>();
+            try
+            {
+                // setup query
+                var query = _dataContext.InputInfos.AsQueryable();
+                // filter
+                //if (!string.IsNullOrEmpty(request.IdInput))
+                //{
+                //    query = query.Where(d => d.IdInput.Contains(request.IdInput));
+                //}
+
+                query = query.OrderByDescending(d => d.Id);
+                query = query.OrderByDescending(d => d.IdBatch);
+
+                var data = await query.Skip(request.Page * request.PageSize).Take(request.PageSize).ToListAsync();
+                result.DataCount = (int)((await query.CountAsync()) / request.PageSize) + 1;
+                result.Data = data.MapTo<InputInfoDto>();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return result;
+        }
         public InputInfo GetInputInfoById(string Id) => _dataContext.InputInfos.Find(Id);        
         
         public async Task<BaseResponse<InputInfoDto>> Create(InputInfoRequest request)
@@ -212,12 +238,18 @@ namespace Phoenix.Server.Services.MainServices
             var result = new BaseResponse<InputInfoDto>();
             try
             {
+<<<<<<< HEAD
+                Input inputs = new Input
+                {
+                    Id = request.IdInput,
+=======
 
               
 
                 Input inputs = new Input
                 {
                     //Id = request.IdInput,
+>>>>>>> bbec9a5253e188f56a419dae1d819e265acb5648
                     IdStaff = request.IdMedicine,
                     IdSupplier = request.IdSupplier,
                     DateInput = DateTime.Now,

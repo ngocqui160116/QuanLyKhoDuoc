@@ -30,7 +30,7 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
         [HttpPost]
         public async Task<ActionResult> List(DataSourceRequest command, SupplierModel model)
         {
-            var suppliers = await _supplierService.GetAllSupplier(new SupplierRequest()
+            var suppliers = await _supplierService.GetAll(new SupplierRequest()
             {
                 Page = command.Page - 1,
                 PageSize = command.PageSize

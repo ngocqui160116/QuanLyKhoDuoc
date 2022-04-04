@@ -20,6 +20,7 @@ namespace Phoenix.Server.Services.MainServices
         Task<CrudResult> DeleteSupplier(int IdSupplier);
 
         //
+        Task<BaseResponse<SupplierDto>> GetAll(SupplierRequest request);
         Task<BaseResponse<SupplierDto>> Create(SupplierRequest request);
         Supplier GetSupplierById(int id);
         Task<BaseResponse<SupplierDto>> Update(SupplierRequest request);
@@ -105,6 +106,40 @@ namespace Phoenix.Server.Services.MainServices
         }
 
         ////web
+        public async Task<BaseResponse<SupplierDto>> GetAll(SupplierRequest request)
+        {
+            var result = new BaseResponse<SupplierDto>();
+            try
+            {
+                // setup query
+                var query = _dataContext.Suppliers.AsQueryable();
+
+                // filter
+                if (!string.IsNullOrEmpty(request.Name))
+                {
+                    query = query.Where(d => d.Address.Contains(request.Name));
+                }
+                if (!string.IsNullOrEmpty(request.Address))
+                {
+                    query = query.Where(d => d.Address.Contains(request.Address));
+                }
+                if (request.Deleted == false)
+                {
+                    query = query.Where(d => d.Deleted.Equals(request.Deleted));
+                }
+                query = query.OrderByDescending(d => d.IdSupplier);
+
+                var data = await query.Skip(request.Page * request.PageSize).Take(request.PageSize).ToListAsync();
+                result.DataCount = (int)((await query.CountAsync()) / request.PageSize) + 1;
+                result.Data = data.MapTo<SupplierDto>();
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return result;
+        }
         public async Task<BaseResponse<SupplierDto>> Create(SupplierRequest request)
         {
             var result = new BaseResponse<SupplierDto>();

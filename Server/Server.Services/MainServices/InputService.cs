@@ -23,6 +23,7 @@ namespace Phoenix.Server.Services.MainServices
         Task<CrudResult> DeleteInput(string Id);
 
         //
+        Task<BaseResponse<InputDto>> GetAll(InputRequest request);
         Task<BaseResponse<InputDto>> Create(InputRequest request);
         Input GetInputById(string id);
         //Task<BaseResponse<Input>> Delete(string Id);
@@ -142,6 +143,34 @@ namespace Phoenix.Server.Services.MainServices
         }
 
         // 
+        public async Task<BaseResponse<InputDto>> GetAll(InputRequest request)
+        {
+            //setup query
+            var result = new BaseResponse<InputDto>();
+            try
+            {
+                // setup query
+                var query = _dataContext.Inputs.AsQueryable();
+
+                //if (!string.IsNullOrEmpty(request.Id))
+                //{
+                //    query = query.Where(d => d.Id.Contains(request.Id));
+                //}
+
+
+                query = query.OrderByDescending(d => d.Id);
+
+                var data = await query.Skip(request.Page * request.PageSize).Take(request.PageSize).ToListAsync();
+                result.DataCount = (int)((await query.CountAsync()) / request.PageSize) + 1;
+                result.Data = data.MapTo<InputDto>();
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return result;
+        }
         public async Task<BaseResponse<InputDto>> Create(InputRequest request)
         {
             var result = new BaseResponse<InputDto>();
@@ -149,14 +178,21 @@ namespace Phoenix.Server.Services.MainServices
             {
                 Input inputs = new Input
                 {
-                   //Id = "HD00" + ,
-                   Id = request.Id,
-                   IdStaff = request.IdStaff,
-                   IdSupplier  = request.IdSupplier,
-                   DateInput = request.DateInput
+                    //Id = "HD00" + ,
+                    Id = request.Id,
+                    IdStaff = request.IdStaff,
+                    IdSupplier = request.IdSupplier,
+                    DateInput = request.DateInput,
+                    Status = request.Status
+
                 };
                 _dataContext.Inputs.Add(inputs);
                 await _dataContext.SaveChangesAsync();
+
+                /*InputInfo list = new InputInfo();
+                //list = 
+                _dataContext.InputInfos.AddRange(List);
+                await _dataContext.SaveChangesAsync();*/
 
                 result.Success = true;
             }

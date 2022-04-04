@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -20,6 +21,7 @@ namespace Phoenix.Server.Data.Entity
         public double InputPrice { get; set; }
         public double Total { get; set; }
         public DateTime DueDate { get; set; }
+        //public List<InputInfo> list { get; set; }
        
     }
 }

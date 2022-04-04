@@ -2,10 +2,10 @@
 using Newtonsoft.Json;
 using Phoenix.Server.Services.Database;
 using Phoenix.Server.Services.MainServices;
-using Phoenix.Server.Web.Areas.Admin.Models.Input;
-using Phoenix.Server.Web.Areas.Admin.Models.InputInfo;
+using Phoenix.Server.Web.Areas.Admin.Models.InventoryTags;
 using Phoenix.Shared.Common;
 using Phoenix.Shared.Input;
+using Phoenix.Shared.InventoryTags;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,14 +15,14 @@ using System.Web.Mvc;
 
 namespace Phoenix.Server.Web.Areas.Admin.Controllers
 {
-    public class InputController : BaseController
+    public class InventoryTagsController : BaseController
     {
         // GET: Admin/Customer
-        private readonly IInputService _inputService;
+        private readonly IInventoryTagsService _inventorytagsService;
 
-        public InputController(IInputService inputService)
+        public InventoryTagsController(IInventoryTagsService inventorytagsService)
         {
-            _inputService = inputService;
+            _inventorytagsService = inventorytagsService;
         }
 
         public ActionResult Index()
@@ -32,9 +32,9 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> List(DataSourceRequest command, InputModel model)
+        public async Task<ActionResult> List(DataSourceRequest command, InventoryTagsModel model)
         {
-            var inputs = await _inputService.GetAll(new InputRequest()
+            var inputs = await _inventorytagsService.GetAll(new InventoryTagsRequest()
             {
                 Page = command.Page - 1,
                 PageSize = command.PageSize
@@ -58,7 +58,7 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
         }
 
         // Create Vendor
-        public ActionResult Create()
+        /*public ActionResult Create()
         {
             SetViewBag();
             var model = new InputModel();
@@ -72,19 +72,19 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
             SetViewBag();
             if (!ModelState.IsValid)
                 return View(model);
-            var inputs = await _inputService.Create(new InputRequest
+            var inputs = await _inventorytagsService.Create(new InputRequest
             {
                 IdStaff = model.IdStaff,
                 IdSupplier = model.IdSupplier,
                 DateInput = DateTime.Now,
 
-                /*IdMedicine = inputinfomodel.IdMedicine,
+                *//*IdMedicine = inputinfomodel.IdMedicine,
                 IdInput = inputinfomodel.Id,
                 IdBatch = inputinfomodel.IdBatch,
                 Count = inputinfomodel.Count,
                 InputPrice = inputinfomodel.InputPrice,
                 Total = inputinfomodel.Total,
-                DueDate = inputinfomodel.DueDate,*/
+                DueDate = inputinfomodel.DueDate,*//*
                 
                 List = JsonConvert.DeserializeObject<List<InputContentDto>>(model.TableContent)
 
@@ -96,7 +96,7 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
             }
             SuccessNotification("Thêm mới thành công");
             return RedirectToAction("Create");
-        }
+        }*/
        
         /*[HttpPost]
         public async Task<ActionResult> Delete(string id)

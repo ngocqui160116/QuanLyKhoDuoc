@@ -13,7 +13,7 @@ using System.Web.Mvc;
 
 namespace Phoenix.Server.Web.Areas.Admin.Controllers
 {
-    public class OutputController : Controller
+    public class OutputController : BaseController
     {
         // GET: Admin/Customer
         private readonly IOutputService _outputService;
@@ -31,7 +31,7 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
         [HttpPost]
         public async Task<ActionResult> List(DataSourceRequest command, OutputModel model)
         {
-            var outputs = await _outputService.GetAllOutput(new OutputRequest()
+            var outputs = await _outputService.GetAll(new OutputRequest()
             {
                 Page = command.Page - 1,
                 PageSize = command.PageSize

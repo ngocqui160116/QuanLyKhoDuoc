@@ -18,6 +18,9 @@ namespace Phoenix.Server.Services.MainServices
         Task<CrudResult> CreateOutput(OutputRequest request);
         Task<CrudResult> UpdateOutput(string Id, OutputRequest request);
         Task<CrudResult> DeleteOutput(string Id);
+
+        ///
+        Task<BaseResponse<OutputDto>> GetAll(OutputRequest request);
     }
     public class OutputService : IOutputService
     {
@@ -90,6 +93,35 @@ namespace Phoenix.Server.Services.MainServices
             _dataContext.Outputs.Remove(Output);
             await _dataContext.SaveChangesAsync();
             return new CrudResult() { IsOk = true };
+        }
+
+        //////
+        public async Task<BaseResponse<OutputDto>> GetAll(OutputRequest request)
+        {
+            //setup query
+            var result = new BaseResponse<OutputDto>();
+            try
+            {
+                // setup query
+                var query = _dataContext.Outputs.AsQueryable();
+
+                if (!string.IsNullOrEmpty(request.Id))
+                {
+                    query = query.Where(d => d.Id.Contains(request.Id));
+                }
+
+                query = query.OrderByDescending(d => d.Id);
+
+                var data = await query.Skip(request.Page * request.PageSize).Take(request.PageSize).ToListAsync();
+                result.DataCount = (int)((await query.CountAsync()) / request.PageSize) + 1;
+                result.Data = data.MapTo<OutputDto>();
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return result;
         }
     }
 }

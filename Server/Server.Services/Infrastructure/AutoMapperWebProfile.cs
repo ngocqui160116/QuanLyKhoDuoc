@@ -10,6 +10,7 @@ using Phoenix.Shared.OutputInfo;
 using Phoenix.Shared.Staff;
 using Phoenix.Shared.Supplier;
 using Phoenix.Shared.Unit;
+using Phoenix.Shared.InventoryTags;
 
 namespace Phoenix.Server.Services.Infrastructure
 {
@@ -26,7 +27,9 @@ namespace Phoenix.Server.Services.Infrastructure
             CreateMap<Group, GroupDto>();
             CreateMap<Staff, StaffDto>();
             CreateMap<Input, InputDto>();
-            CreateMap<Output, OutputDto>();
+            CreateMap<Output, OutputDto>()
+                .ForMember(d => d.NameReason, o => o.MapFrom(s => s.Reason.NameReason))
+                .ForMember(d => d.NameStaff, o => o.MapFrom(s => s.Staff.Name));
             CreateMap<InputInfo, InputInfoDto>()
                 .ForMember(d => d.MedicineName, o => o.MapFrom(s => s.Medicine.Name));
             CreateMap<Input, InputDto>()
@@ -36,10 +39,16 @@ namespace Phoenix.Server.Services.Infrastructure
             CreateMap<OutputInfo, OutputInfoDto>()
                .ForMember(d => d.MedicineName, o => o.MapFrom(s => s.Medicine.Name))
                .ForMember(d => d.Batch, o => o.MapFrom(s =>s.InputInfo.IdBatch));
+<<<<<<< HEAD
+=======
               // .ForMember(d => d.IdBatch, o => o.MapFrom(s => s.InputInfo.IdBatch))
                //.ForMember(d => d.Reason, o => o.MapFrom(s => s.Reason.NameReason));
+>>>>>>> bbec9a5253e188f56a419dae1d819e265acb5648
             CreateMap<Unit, UnitDto>();
-
+            CreateMap<InventoryTags, InventoryTagsDto>()
+                .ForMember(d => d.MedicineName, o => o.MapFrom(s => s.Medicine.Name))
+                .ForMember(d => d.DocumentTypeName, o => o.MapFrom(s => s.documentType.Name))
+                .ForMember(d => d.SupplierName, o => o.MapFrom(s => s.Supplier.Name));
             /*CreateMap<Vendor, VendorDto>()
                 .ForMember(d => d.ImageUrl, o => o.MapFrom(s => s.Medicine_Image.AbsolutePath));*/
         }

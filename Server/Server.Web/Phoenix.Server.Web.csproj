@@ -100,6 +100,7 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework" />
     <Reference Include="Rhino.Mocks, Version=3.6.0.0, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
       <HintPath>..\..\packages\RhinoMocks.3.6.1\lib\net\Rhino.Mocks.dll</HintPath>
     </Reference>
@@ -191,6 +192,7 @@
     <Reference Include="System.Web.Http.WebHost, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.7\lib\net45\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Mobile" />
     <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
     </Reference>
@@ -763,6 +765,8 @@
     <Content Include="Areas\Admin\Views\InputInfo\Detail.cshtml" />
     <Content Include="Areas\Admin\Views\InputInfo\Create.cshtml" />
     <Content Include="Areas\Admin\Views\InputInfo\_CreateOrUpdate.cshtml" />
+    <Content Include="Areas\Admin\Views\InventoryTags\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Output\Index.cshtml" />
     <None Include="assets\js\kendo\2019.3.1023\kendo.all-vsdoc.js" />
     <None Include="assets\js\kendo\2019.3.1023\kendo.all.min.intellisense.js" />
     <Content Include="assets\js\kendo\2019.3.1023\kendo.all.min.js" />
@@ -1216,6 +1220,7 @@
     <Compile Include="Areas\Admin\Controllers\AdminAuthorizeAttribute.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
+    <Compile Include="Areas\Admin\Controllers\InventoryTagsController.cs" />
     <Compile Include="Areas\Admin\Controllers\UnitController.cs" />
     <Compile Include="Areas\Admin\Controllers\GroupController.cs" />
     <Compile Include="Areas\Admin\Controllers\OutputInfoController.cs" />
@@ -1234,6 +1239,7 @@
     <Compile Include="Areas\Admin\Models\Common\LoginModel.cs" />
     <Compile Include="Areas\Admin\Models\Common\MimeTypes.cs" />
     <Compile Include="Areas\Admin\Models\Customer\CustomerModel.cs" />
+    <Compile Include="Areas\Admin\Models\InventoryTags\InventoryTagsModel.cs" />
     <Compile Include="Areas\Admin\Models\OutputInfo\OutputInfoModel.cs" />
     <Compile Include="Areas\Admin\Models\Unit\UnitModel.cs" />
     <Compile Include="Areas\Admin\Models\Group\GroupModel.cs" />

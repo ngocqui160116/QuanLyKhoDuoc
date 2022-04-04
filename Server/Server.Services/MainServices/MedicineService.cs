@@ -22,6 +22,7 @@ namespace Phoenix.Server.Services.MainServices
         Task<CrudResult> DeleteMedicine(int IdMedicine);
 
         //
+        Task<BaseResponse<MedicineDto>> GetAll(MedicineRequest request);
         Task<BaseResponse<MedicineDto>> Create(MedicineRequest request);
         Medicine GetMedicineById(int id);
         Task<BaseResponse<MedicineDto>> Update(MedicineRequest request);
@@ -138,6 +139,45 @@ namespace Phoenix.Server.Services.MainServices
         }
 
         //web
+        public async Task<BaseResponse<MedicineDto>> GetAll(MedicineRequest request)
+        {
+            var result = new BaseResponse<MedicineDto>();
+            try
+            {
+                //setup query
+                var query = _dataContext.Medicines.AsQueryable();
+                //filter
+                if (!string.IsNullOrEmpty(request.Name))
+                {
+                    query = query.Where(d => d.Name.Contains(request.Name));
+                }
+                if (!string.IsNullOrEmpty(request.RegistrationNumber))
+                {
+                    query = query.Where(d => d.RegistrationNumber.Contains(request.RegistrationNumber));
+                }
+
+                if (!string.IsNullOrEmpty(request.Status))
+                {
+                    query = query.Where(d => d.Status.Contains(request.Status));
+                }
+                //if (request.Status.ToString() == "đang bán")
+                /*if(request.Status.Contains(request.Status)
+                {
+                    query = query.Where(d => d.Status.Contains(request.Status));
+                }*/
+                query = query.OrderByDescending(d => d.IdMedicine);
+
+                var data = await query.Skip(request.Page * request.PageSize).Take(request.PageSize).ToListAsync();
+                result.DataCount = (int)((await query.CountAsync()) / request.PageSize) + 1;
+                result.Data = data.MapTo<MedicineDto>();
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return result;
+        }
         public async Task<BaseResponse<MedicineDto>> Create(MedicineRequest request)
         {
             var result = new BaseResponse<MedicineDto>();

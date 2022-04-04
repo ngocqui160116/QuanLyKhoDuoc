@@ -29,7 +29,7 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
         [HttpPost]
         public async Task<ActionResult> List(DataSourceRequest command, GroupModel model)
         {
-            var groups = await _groupService.GetAllGroup(new GroupRequest()
+            var groups = await _groupService.GetAll(new GroupRequest()
             {
                 Page = command.Page - 1,
                 PageSize = command.PageSize

@@ -15,7 +15,7 @@
                 <i data-feather="save" class="w-4 h-4 mr-2"></i>Lưu
             </button>
             <a href="javascript:;" data-toggle="modal" data-target="#delete-modal" class="button w-32 mr-2 mb-2 flex items-center justify-center bg-theme-6 text-white">
-                <i data-feather="trash" class="w-4 h-4 mr-2"></i> Tiếp tục
+                <i data-feather="trash" class="w-4 h-4 mr-2"></i>Xóa
             </a>
         </div>
     </div>
@@ -28,7 +28,7 @@
             <div class="text-3xl mt-5">Bạn có chắc chắn muốn xóa?</div>
             <div class="text-gray-600 mt-2">Do you really want to delete these records? This process cannot be undone.</div>
         </div>
-        @using (Html.BeginForm("Create", "InputInfo"))
+        @using (Html.BeginForm("Delete", "Input"))
         {
             <div class="px-5 pb-8 text-center">
                 <button type="button" data-dismiss="modal" class="button w-24 border text-gray-700 dark:border-dark-5 dark:text-gray-300 mr-1">Không! cảm ơn.</button>

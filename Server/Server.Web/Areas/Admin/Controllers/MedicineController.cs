@@ -32,7 +32,7 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
         [HttpPost]
         public async Task<ActionResult> List(DataSourceRequest command, MedicineModel model)
         {
-            var medicines = await _medicineService.GetAllMedicine(new MedicineRequest()
+            var medicines = await _medicineService.GetAll(new MedicineRequest()
             {
                 Page = command.Page - 1,
                 PageSize = command.PageSize,

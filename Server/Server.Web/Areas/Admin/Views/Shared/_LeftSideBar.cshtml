@@ -2,7 +2,7 @@
 <nav class="side-nav">
     <a href="/" class="intro-x flex items-center pl-5 pt-4">
         <img alt="PCheck" class="w-6" src="~/assets/images/logo-phoenix-s.png">
-        <span class="hidden xl:block text-white text-lg ml-3"> P<span class="font-medium">Check</span> </span>
+        <span class="hidden xl:block text-white text-lg ml-3"> NQ<span class="font-medium">Med</span> </span>
     </a>
     <div class="side-nav__devider my-6"></div>
     <ul>
@@ -83,13 +83,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="@Html.Raw(Url.Action("Index", "OutputInfo"))" class="side-menu">
+                    <a href="@Html.Raw(Url.Action("Index", "Output"))" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
                         <div class="side-menu__title"> Xuất kho </div>
                     </a>
                 </li>
                 <li>
-                    <a href="@Html.Raw(Url.Action("Index", "InputInfo"))" class="side-menu">
+                    <a href="@Html.Raw(Url.Action("Index", "InventoryTags"))" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
                         <div class="side-menu__title"> Kiểm kho </div>
                     </a>
@@ -98,7 +98,7 @@
         </li>
         <li>
             <a href="javascript:;" class="side-menu">
-                <div class="side-menu__icon"> <i data-feather="list"></i> </div>
+                <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
                 <div class="side-menu__title"> Đối tác <i data-feather="chevron-down" class="side-menu__sub-icon"></i> </div>
             </a>
             <ul class="">
@@ -108,24 +108,6 @@
                         <div class="side-menu__title"> Nhà cung cấp </div>
                     </a>
                 </li>
-                @*<li>
-                    <a href="@Html.Raw(Url.Action("Index", "Staff"))" class="side-menu">
-                        <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                        <div class="side-menu__title"> Nhân viên </div>
-                    </a>
-                </li>*@
-                @*<li>
-            <a href="@Html.Raw(Url.Action("List", "Product"))" class="side-menu">
-                <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                <div class="side-menu__title"> Sản phẩm </div>
-            </a>
-        </li>
-        <li>
-            <a href="#" class="side-menu">
-                <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                <div class="side-menu__title"> Thông báo </div>
-            </a>
-        </li>*@
             </ul>
         </li>
         <li>

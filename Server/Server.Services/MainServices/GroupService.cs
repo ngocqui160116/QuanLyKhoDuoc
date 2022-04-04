@@ -19,6 +19,9 @@ namespace Phoenix.Server.Services.MainServices
         Task<CrudResult> CreateGroup (GroupRequest request);
         Task<CrudResult> UpdateGroup(int IdGroup, GroupRequest request);
         Task<CrudResult> DeleteGroup(int IdGroup);
+
+        //////
+        Task<BaseResponse<GroupDto>> GetAll(GroupRequest request);
     }
     public class GroupService : IGroupService
     {
@@ -86,6 +89,35 @@ namespace Phoenix.Server.Services.MainServices
             _dataContext.Groups.Remove(Group);
             await _dataContext.SaveChangesAsync();
             return new CrudResult() { IsOk = true };
+        }
+
+        ////////
+        public async Task<BaseResponse<GroupDto>> GetAll(GroupRequest request)
+        {
+            var result = new BaseResponse<GroupDto>();
+            try
+            {
+                // setup query
+                var query = _dataContext.Groups.AsQueryable();
+
+                // filter
+                if (!string.IsNullOrEmpty(request.Name))
+                {
+                    query = query.Where(d => d.Name.Contains(request.Name));
+                }
+
+                query = query.OrderByDescending(d => d.IdGroup);
+
+                var data = await query.Skip(request.Page * request.PageSize).Take(request.PageSize).ToListAsync();
+                result.DataCount = (int)((await query.CountAsync()) / request.PageSize) + 1;
+                result.Data = data.MapTo<GroupDto>();
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return result;
         }
     }
 }

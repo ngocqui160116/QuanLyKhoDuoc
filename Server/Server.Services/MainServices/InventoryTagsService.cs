@@ -15,6 +15,10 @@ namespace Phoenix.Server.Services.MainServices
     {
 
         Task<BaseResponse<InventoryTagsDto>> GetAllInventoryTags(InventoryTagsRequest request);
+
+
+        ///
+        Task<BaseResponse<InventoryTagsDto>> GetAll(InventoryTagsRequest request);
     }
     public class InventoryTagsService : IInventoryTagsService
     {
@@ -35,6 +39,34 @@ namespace Phoenix.Server.Services.MainServices
 
                 // filter
                 
+
+                query = query.OrderByDescending(d => d.Id);
+
+                var data = await query.ToListAsync();
+                result.Data = data.MapTo<InventoryTagsDto>();
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return result;
+        }
+
+
+        /////
+        public async Task<BaseResponse<InventoryTagsDto>> GetAll(InventoryTagsRequest request)
+        {
+            var result = new BaseResponse<InventoryTagsDto>();
+
+            try
+            {
+                // setup query
+                var query = _dataContext.InventoryTags.AsQueryable();
+
+                // filter
+
 
                 query = query.OrderByDescending(d => d.Id);
 

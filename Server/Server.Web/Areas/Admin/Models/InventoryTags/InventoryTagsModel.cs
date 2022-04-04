@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace Phoenix.Shared.InventoryTags
+namespace Phoenix.Server.Web.Areas.Admin.Models.InventoryTags
 {
-    public class InventoryTagsDto
+    public class InventoryTagsModel
     {
         public int Id { get; set; }
         public string DocumentId { get; set; }
@@ -25,6 +24,5 @@ namespace Phoenix.Shared.InventoryTags
         //
         public string MedicineName { get; set; }
         public string DocumentTypeName { get; set; }
-        public string SupplierName { get; set; }
     }
 }

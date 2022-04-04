@@ -125,7 +125,8 @@ namespace Phoenix.Server.Services.MainServices
 
             InventoryTags.DocumentType = 1;
             InventoryTags.MedicineId = request.IdMedicine;
-            InventoryTags.Qty_After = request.Count;
+
+            //InventoryTags.Qty_After = request.Count;
             InventoryTags.Qty = 0;
             InventoryTags.Qty_Before = inventory.Count;
 

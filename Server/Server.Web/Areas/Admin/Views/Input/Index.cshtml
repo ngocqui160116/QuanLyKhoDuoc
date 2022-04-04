@@ -10,6 +10,10 @@
         <a href="#" class="breadcrumb--active">Nhập kho</a>
     </div>
 }
+<<<<<<< HEAD
+
+=======
+>>>>>>> bbec9a5253e188f56a419dae1d819e265acb5648
 <script>
     var tableContent = [];
     function render_tbody() {
@@ -17,7 +21,11 @@
                             <td class="border-b dark:border-dark-5">${stt}</td>
                             <td class="border-b dark:border-dark-5">${name}</td>
                             <td class="border-b dark:border-dark-5">
+<<<<<<< HEAD
+                                <input type="text" class="form-control" placeholder="Lô" aria-label="Price" aria-describedby="input-group-price" value="${price}" />
+=======
                                 <input type="text" class="form-control" placeholder="Lô" aria-label="Price" aria-describedby="input-group-price" value="${price}" /> 
+>>>>>>> bbec9a5253e188f56a419dae1d819e265acb5648
                             </td>
                             <td class="border-b dark:border-dark-5">
                                 <input class="datepicker form-control w-56 block mx-auto" data-single-mode="true">
@@ -52,7 +60,10 @@
 
     <!-- BEGIN: Modal Toggle -->
     <div class="text-center">
-        <a href="javascript:;" data-toggle="modal" data-target="#superlarge-modal-size-preview" class="btn btn-primary">Thêm mới</a>
+        <a href="@Url.Action("Create","Input")" class="btn btn-primary text-white shadow-md mr-2">Thêm mới</a>
+    </div>
+    <div class="text-center">
+        <a href="javascript:;" data-toggle="modal" data-target="#superlarge-modal-size-preview" class="btn btn-primary text-white shadow-md mr-2">Thêm mới</a>
     </div>
     <!-- END: Modal Toggle -->
 
@@ -122,6 +133,7 @@
                 },
                 { title: "Nhà cung cấp", field: "SupplierName", sorter: "string", width: 300 },
                 { title: "Ngày tạo", field: "DateInput", sorter: "date", width: 180, formatter: dateFormatter },
+                { title: "Trạng thái", field: "Status", sorter: "date", width: 180, formatter: dateFormatter },
                 {
                     title: "", field: "Id", sorter: "string", width: 80, formatter(cell, formatterParams) {
                         return `<a href="../Admin/InputInfo/List/${cell.getData().Id}" class="btn btn-primary text-white shadow-md mr-2">Sửa</a>`
@@ -204,7 +216,10 @@
                         </tr>
                     </thead>
                     <tbody id="tbody">
+<<<<<<< HEAD
+=======
                         
+>>>>>>> bbec9a5253e188f56a419dae1d819e265acb5648
                     </tbody>
                 </table>
             </div>
