@@ -34,35 +34,13 @@ namespace Phoenix.Server.Services.MainServices
             var result = new BaseResponse<OutputInfoDto>();
             try
             {
-                //var inputList = _dataContext.InputInfos.Where(p => p.IdInput == request.Id);
-                //var outputList = _dataContext.OutputInfos.Where(p => p.IdOutput == request.Id);
-
-                //int sumInput = 0;
-                //int sumOutput = 0;
-
-                //if (inputList != null)
-                //{
-                //    sumInput = (int)inputList.Sum(p => p.Count);
-                //}
-                //if (outputList != null)
-                //{
-                //    sumOutput = (int)outputList.Sum(p => p.Count);
-                //}
-
-                //int Soluong = sumInput - sumOutput;
 
                 // setup query
                 var query = _dataContext.OutputInfos.AsQueryable();
 
                 // filter
-                if (!string.IsNullOrEmpty(request.IdOutput))
-                {
-                    query = query.Where(d => d.IdOutput.Contains(request.IdOutput));
-                }
+               
                 //query = query.Where(d => d.Count.Equals(Soluong));
-
-                
-
 
                 query = query.OrderByDescending(d => d.Id);
 
@@ -84,7 +62,7 @@ namespace Phoenix.Server.Services.MainServices
         public async Task<CrudResult> CreateOutputInfo(OutputInfoRequest request)
         {
             var Output = new Output();
-            Output.Id = request.IdOutput;
+
             Output.IdStaff = request.IdStaff;
             Output.DateOutput = request.DateOutput;
             Output.IdReason = request.IdReason;
@@ -94,12 +72,12 @@ namespace Phoenix.Server.Services.MainServices
             await _dataContext.SaveChangesAsync();
 
             var OutputInfo = new OutputInfo();
-            OutputInfo.IdOutput = request.IdOutput;
+
+            OutputInfo.IdOutput = Output.Id;
             OutputInfo.IdMedicine = request.IdMedicine;
             OutputInfo.IdInputInfo = request.IdInputInfo;
             OutputInfo.Count = request.Count;
             OutputInfo.Total = request.Total;
-
 
             _dataContext.OutputInfos.Add(OutputInfo);
             await _dataContext.SaveChangesAsync();
@@ -109,7 +87,7 @@ namespace Phoenix.Server.Services.MainServices
         public async Task<CrudResult> CreateOutputInventory(OutputInfoRequest request)
         {
             var Output = new Output();
-            Output.Id = request.IdOutput;
+
             Output.IdStaff = request.IdStaff;
             Output.DateOutput = request.DateOutput;
             Output.IdReason = request.IdReason;
@@ -119,7 +97,8 @@ namespace Phoenix.Server.Services.MainServices
             await _dataContext.SaveChangesAsync();
 
             var OutputInfo = new OutputInfo();
-            OutputInfo.IdOutput = request.IdOutput;
+
+            OutputInfo.IdOutput = Output.Id;
             OutputInfo.IdMedicine = request.IdMedicine;
             OutputInfo.IdInputInfo = request.IdInputInfo;
             OutputInfo.Count = request.Count;
@@ -136,7 +115,7 @@ namespace Phoenix.Server.Services.MainServices
             await _dataContext.SaveChangesAsync();
 
             var InventoryTags = new InventoryTags();
-            InventoryTags.DocumentId = "PX002";
+            InventoryTags.DocumentId = "PX00" + OutputInfo.Id;
             InventoryTags.ExpiredDate = DateTime.Now;
             InventoryTags.DocumentDate = DateTime.Now;
             InventoryTags.LotNumber = 2;

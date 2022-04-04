@@ -9,7 +9,7 @@ namespace Phoenix.Shared.OutputInfo
     public class OutputInfoDto
     {
         public int Id { get; set; }
-        public string IdOutput { get; set; }
+        public int IdOutput { get; set; }
         public int IdMedicine { get; set; }
         public int IdInputInfo { get; set; }
         public int Count { get; set; }

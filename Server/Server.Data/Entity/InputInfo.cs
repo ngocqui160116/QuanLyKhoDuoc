@@ -9,7 +9,7 @@ namespace Phoenix.Server.Data.Entity
     {
         [Key]
         public int Id { get; set; }
-        public string IdInput { get; set; }
+        public int IdInput { get; set; }
         [ForeignKey("IdInput")]
         public virtual Input Input { get; set; }
         public int IdMedicine { get; set; }

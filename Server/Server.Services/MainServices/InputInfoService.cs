@@ -100,7 +100,6 @@ namespace Phoenix.Server.Services.MainServices
 
             var Input = new Input();
 
-            //Input.Id = request.IdInput;
             Input.IdStaff = request.IdStaff;
             Input.IdSupplier = request.IdSupplier;
             Input.DateInput = request.DateInput;
@@ -110,9 +109,7 @@ namespace Phoenix.Server.Services.MainServices
             await _dataContext.SaveChangesAsync();
 
             var InputInfo = new InputInfo();
-
-            //InputInfo.Id = request.Id;
-           // InputInfo.IdInput = request.Id;
+            InputInfo.IdInput = Input.Id;
             InputInfo.IdMedicine = request.IdMedicine;
             InputInfo.IdBatch = request.IdBatch;
             InputInfo.Count = request.Count;
@@ -131,7 +128,6 @@ namespace Phoenix.Server.Services.MainServices
 
             var Input = new Input();
 
-           // Input.Id = request.IdInput;
             Input.IdStaff = request.IdStaff;
             Input.IdSupplier = request.IdSupplier;
             Input.DateInput = request.DateInput;
@@ -141,8 +137,6 @@ namespace Phoenix.Server.Services.MainServices
             await _dataContext.SaveChangesAsync();
 
             var InputInfo = new InputInfo();
-
-            InputInfo.Id = request.Id;
             InputInfo.IdInput = Input.Id;
             InputInfo.IdMedicine = request.IdMedicine;
             InputInfo.IdBatch = request.IdBatch;
@@ -162,7 +156,7 @@ namespace Phoenix.Server.Services.MainServices
             await _dataContext.SaveChangesAsync();
 
             var InventoryTags = new InventoryTags();
-            InventoryTags.DocumentId = "PN002";
+            InventoryTags.DocumentId = "PN00" +InputInfo.Id;
             InventoryTags.ExpiredDate = DateTime.Now;
             InventoryTags.DocumentDate = DateTime.Now;
             InventoryTags.LotNumber = request.IdBatch;
@@ -218,9 +212,12 @@ namespace Phoenix.Server.Services.MainServices
             var result = new BaseResponse<InputInfoDto>();
             try
             {
+
+              
+
                 Input inputs = new Input
                 {
-                    Id = request.IdInput,
+                    //Id = request.IdInput,
                     IdStaff = request.IdMedicine,
                     IdSupplier = request.IdSupplier,
                     DateInput = DateTime.Now,
@@ -231,7 +228,7 @@ namespace Phoenix.Server.Services.MainServices
 
                 InputInfo inputinfos = new InputInfo
                 {
-                    IdInput = request.IdInput,
+                    //IdInput = request.IdInput,
                     IdMedicine = request.IdMedicine,
                     IdBatch =request.IdBatch,
                     Count = request.Count,

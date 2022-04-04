@@ -6,8 +6,8 @@ namespace Phoenix.Shared.Input
 {
     public class InputDto
     {
-        //public int Id { get; set; }
-        public string Id { get; set; }
+        public int Id { get; set; }
+        //public string IdInput { get; set; } 
         public int IdStaff { get; set; }
         public int IdSupplier { get; set; }
         public DateTime DateInput { get; set; }
@@ -16,7 +16,7 @@ namespace Phoenix.Shared.Input
         public string NameStaff { get; set; }
         public string SupplierName { get; set; } 
         //List
-       public List<InputInfoDto> InputInfo { get; set; }
+        public List<InputInfoDto> InputInfo { get; set; }
 
     }
 }

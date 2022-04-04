@@ -7,7 +7,7 @@ namespace Phoenix.Shared.InputInfo
     public class InputInfoDto
     {
         public int Id { get; set; }
-        public string IdInput{ get; set; }
+        public int IdInput{ get; set; }
         public int IdMedicine { get; set; }
         public int IdBatch { get; set; }
         public int Count { get; set; }

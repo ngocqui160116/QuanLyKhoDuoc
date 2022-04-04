@@ -37,10 +37,7 @@ namespace Phoenix.Server.Services.MainServices
                 // setup query
                 var query = _dataContext.Outputs.AsQueryable();
 
-                if (!string.IsNullOrEmpty(request.Id))
-                {
-                    query = query.Where(d => d.Id.Contains(request.Id));
-                }
+                
 
                 query = query.OrderByDescending(d => d.Id);
 
@@ -59,10 +56,11 @@ namespace Phoenix.Server.Services.MainServices
         public async Task<CrudResult> CreateOutput(OutputRequest request)
         {
             var Output = new Output();
-            Output.Id = request.Id;
+
             Output.IdStaff = request.IdStaff;
             Output.DateOutput = request.DateOutput;
             Output.IdReason = request.IdReason;
+
             _dataContext.Outputs.Add(Output);
             await _dataContext.SaveChangesAsync();
             return new CrudResult() { IsOk = true };

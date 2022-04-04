@@ -29,6 +29,7 @@ namespace Phoenix.Server.Services.MainServices
     }
     public class InputService : IInputService
     {
+        
         private readonly DataContext _dataContext;
         public InputService(DataContext dataContext)
         {
@@ -75,19 +76,42 @@ namespace Phoenix.Server.Services.MainServices
                 var data =  query.ToList();
                 return data.MapTo<InputDto>();
         }
+        //int ID;
+        //public int PhieuNhap()
+        //{
+           
+        //    var input = _dataContext.Inputs.ToList().LastOrDefault();
+
+
+        //    if (input.Id == null)
+        //    {
+        //        ID = 1;
+        //    }
+        //    else
+        //    {
+        //        //ID = input.IdInput;
+        //        ID = Convert.ToInt32(input.Id += 1);
+        //    }
+        //    return ID;
+        //}
+
+      
 
         public async Task<CrudResult> CreateInput(InputRequest request)
         {
+            //PhieuNhap();
 
-            //var query = _dataContext.Database.ExecuteSqlCommand("Select IdInput from Input");
 
-            var Input = new Input();
-            Input.IdStaff = request.IdStaff;
-            Input.IdSupplier = request.IdSupplier;
-            Input.DateInput = request.DateInput;
-           
-            _dataContext.Inputs.Add(Input);
+            Input inputs = new Input
+            {
+                IdStaff = request.IdStaff,
+                IdSupplier = request.IdSupplier,
+                DateInput = request.DateInput
+            };
+
+            _dataContext.Inputs.Add(inputs);
             await _dataContext.SaveChangesAsync();
+
             return new CrudResult() { IsOk = true };
         }
 
