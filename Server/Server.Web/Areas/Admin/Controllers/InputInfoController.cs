@@ -28,7 +28,7 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
         {
             return View();
         }
-        public ActionResult Detail(string Id)
+        public ActionResult Detail(int Id)
         {
             //DataContext db = new DataContext();
             //var inputinfo = db.InputInfos.Where(n => n.IdInput.Equals(Id)).ToList();

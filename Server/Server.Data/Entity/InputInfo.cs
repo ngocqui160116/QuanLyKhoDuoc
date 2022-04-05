@@ -17,11 +17,9 @@ namespace Phoenix.Server.Data.Entity
         [ForeignKey("IdMedicine")]
         public virtual Medicine Medicine { get; set; }
         public int IdBatch { get; set; }
-        public int Count { get; set; }
-        public double InputPrice { get; set; }
-        public double Total { get; set; }
-        public DateTime DueDate { get; set; }
-        //public List<InputInfo> list { get; set; }
-       
+        public int? Count { get; set; }
+        public double? InputPrice { get; set; }
+        public double? Total { get; set; }
+        public DateTime? DueDate { get; set; }
     }
 }

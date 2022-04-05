@@ -25,9 +25,9 @@ namespace Phoenix.Server.Data.Entity
         public DateTime ExpiredDate { get; set; }
         public int Qty_Before { get; set; }
         public int Qty { get; set; }
-        public int Qty_After { get; set; }
-        public double UnitPrice { get; set; }
-        public double TotalPrice { get; set; }
+        public int? Qty_After { get; set; }
+        public double? UnitPrice { get; set; }
+        public double? TotalPrice { get; set; }
         public int SupplierId { get; set; }
        
    

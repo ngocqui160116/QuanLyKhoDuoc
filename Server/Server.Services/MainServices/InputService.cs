@@ -26,6 +26,7 @@ namespace Phoenix.Server.Services.MainServices
         Task<BaseResponse<InputDto>> GetAll(InputRequest request);
         Task<BaseResponse<InputDto>> Create(InputRequest request);
         Input GetInputById(string id);
+        Input GetLatestInput();
         //Task<BaseResponse<Input>> Delete(string Id);
     }
     public class InputService : IInputService
@@ -184,14 +185,26 @@ namespace Phoenix.Server.Services.MainServices
                     Status = request.Status
 
                 };
+                
                 _dataContext.Inputs.Add(inputs);
                 await _dataContext.SaveChangesAsync();
 
-                /*InputInfo list = new InputInfo();
-                //list = 
-                _dataContext.InputInfos.AddRange(List);
-                await _dataContext.SaveChangesAsync();*/
+                var Latest = GetLatestInput();
+                
+                InputInfo inputinfos = new InputInfo();
+                foreach (var item in request.List)
+                {
+                    inputinfos.IdInput = Latest.Id;
+                    inputinfos.IdMedicine = item.medicineId;
+                    inputinfos.IdBatch = item.Batch;
+                    inputinfos.Count = item.Count;
+                    inputinfos.InputPrice = item.InputPrice;
+                    inputinfos.Total = item.Total;
+                    inputinfos.DueDate = item.DueDate;
 
+                    _dataContext.InputInfos.Add(inputinfos);
+                    await _dataContext.SaveChangesAsync();
+                }
                 result.Success = true;
             }
             catch (Exception ex)
@@ -200,6 +213,20 @@ namespace Phoenix.Server.Services.MainServices
             }
 
             return result;
+        }
+        public Input GetLatestInput()
+        {
+            var query = _dataContext.Inputs.AsQueryable();
+
+            //if (!string.IsNullOrEmpty(request.Id))
+            //{
+            //    query = query.Where(d => d.Id.Contains(request.Id));
+            //}
+
+
+            query = query.OrderByDescending(d => d.Id);
+            var da = query.FirstOrDefault();
+            return da;
         }
         public Input GetInputById(string id) => _dataContext.Inputs.Find(id);
         

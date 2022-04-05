@@ -17,10 +17,10 @@ namespace Phoenix.Shared.Input
         public string IdInput { get; set; }
         public int IdMedicine { get; set; }
         public int IdBatch { get; set; }
-        public int Count { get; set; }
-        public double InputPrice { get; set; }
-        public double Total { get; set; }
-        public DateTime DueDate { get; set; }
+        public int? Count { get; set; }
+        public double? InputPrice { get; set; }
+        public double? Total { get; set; }
+        public DateTime? DueDate { get; set; }
         
         public List<InputContentDto> List { get; set; }
     }

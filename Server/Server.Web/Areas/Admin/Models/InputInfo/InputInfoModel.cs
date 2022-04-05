@@ -7,7 +7,7 @@ namespace Phoenix.Server.Web.Areas.Admin.Models.InputInfo
 {
     public class InputInfoModel
     {
-        public string IdInput { get; set; }
+        public int IdInput { get; set; }
         public int IdMedicine { get; set; }
         public int IdSupplier { get; set; }
         public int IdBatch { get; set; }
@@ -16,7 +16,7 @@ namespace Phoenix.Server.Web.Areas.Admin.Models.InputInfo
         public double Total { get; set; }
         public DateTime DateOfManufacture { get; set; }
         public DateTime DueDate { get; set; }
-        public string Id { get; set; }
+        public int Id { get; set; }
         public int IdStaff { get; set; }
         public DateTime DateInput { get; set; }
         public int IdUnit { get; set; }
