@@ -26,6 +26,8 @@ namespace Phoenix.Server.Services.MainServices
         Task<BaseResponse<MedicineDto>> Create(MedicineRequest request);
         Medicine GetMedicineById(int id);
         Task<BaseResponse<MedicineDto>> Update(MedicineRequest request);
+        Task<BaseResponse<MedicineDto>> Pause(int IdMedicine);
+        Task<BaseResponse<MedicineDto>> Again(int IdMedicine);
         Task<BaseResponse<MedicineDto>> Delete(int IdMedicine);
     }
     public class MedicineService : IMedicineService
@@ -193,7 +195,7 @@ namespace Phoenix.Server.Services.MainServices
                     Packing = request.Packing,
                     IdUnit = request.IdUnit,
                     Image = request.Image,
-                    Status = request.Status
+                    Status = "đang bán"
                 };
                 _dataContext.Medicines.Add(medicines);
                 await _dataContext.SaveChangesAsync();
@@ -242,6 +244,52 @@ namespace Phoenix.Server.Services.MainServices
             }
             return result;
         }
+
+        //Cập nhật trạng thái của thuốc thành "Nghỉ bán"
+        public async Task<BaseResponse<MedicineDto>> Pause(int IdMedicine)
+        {
+            var result = new BaseResponse<MedicineDto>();
+            try
+            {
+                var medicine = GetMedicineById(IdMedicine);
+                //supplier.IdSupplier = request.IdSupplier;
+                medicine.Status = "nghỉ bán";
+                //_dataContext.Suppliers.Remove(Supplier);
+                await _dataContext.SaveChangesAsync();
+
+                result.Success = true;
+            }
+            catch (Exception ex)
+            {
+                result.Success = false;
+                result.Message = ex.Message;
+            }
+            return result;
+        }
+
+        //kinh doanh lại thuốc
+        //thay đổi trạng thái Status thành đang bán
+        public async Task<BaseResponse<MedicineDto>> Again(int IdMedicine)
+        {
+            var result = new BaseResponse<MedicineDto>();
+            try
+            {
+                var medicine = GetMedicineById(IdMedicine);
+                //supplier.IdSupplier = request.IdSupplier;
+                medicine.Status = "đang bán";
+                //_dataContext.Suppliers.Remove(Supplier);
+                await _dataContext.SaveChangesAsync();
+
+                result.Success = true;
+            }
+            catch (Exception ex)
+            {
+                result.Success = false;
+                result.Message = ex.Message;
+            }
+            return result;
+        }
+        //Xóa thuốc 
         public async Task<BaseResponse<MedicineDto>> Delete(int IdMedicine)
         {
             var result = new BaseResponse<MedicineDto>();
@@ -249,8 +297,7 @@ namespace Phoenix.Server.Services.MainServices
             {
                 var medicine = GetMedicineById(IdMedicine);
                 //supplier.IdSupplier = request.IdSupplier;
-                medicine.Status = "Nghỉ bán";
-                //_dataContext.Suppliers.Remove(Supplier);
+                _dataContext.Medicines.Remove(medicine);
                 await _dataContext.SaveChangesAsync();
 
                 result.Success = true;

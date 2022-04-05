@@ -130,6 +130,32 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
             return RedirectToAction("Index", new { id = model.IdMedicine });
         }
         [HttpPost]
+        public async Task<ActionResult> Pause(int id)
+        {
+            SetViewBag();
+            var medicine = _medicineService.GetMedicineById(id);
+            if (medicine == null)
+                //No email account found with the specified id
+                return RedirectToAction("Index");
+
+            await _medicineService.Pause(medicine.IdMedicine);
+            SuccessNotification("Đã tạm ngưng kinh doanh");
+            return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public async Task<ActionResult> Again(int id)
+        {
+            SetViewBag();
+            var medicine = _medicineService.GetMedicineById(id);
+            if (medicine == null)
+                //No email account found with the specified id
+                return RedirectToAction("Index");
+
+            await _medicineService.Again(medicine.IdMedicine);
+            SuccessNotification("Đã kinh doanh lại sản phẩm");
+            return RedirectToAction("Index");
+        }
+        [HttpPost]
         public async Task<ActionResult> Delete(int id)
         {
             SetViewBag();
@@ -139,7 +165,7 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
                 return RedirectToAction("Index");
 
             await _medicineService.Delete(medicine.IdMedicine);
-            SuccessNotification("Xóa đại lý thành công");
+            SuccessNotification("Đã xóa sản phẩm");
             return RedirectToAction("Index");
         }
 
