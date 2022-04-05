@@ -238,22 +238,14 @@ namespace Phoenix.Server.Services.MainServices
             var result = new BaseResponse<InputInfoDto>();
             try
             {
-<<<<<<< HEAD
+
                 Input inputs = new Input
                 {
                     Id = request.IdInput,
-=======
 
-              
 
-                Input inputs = new Input
-                {
-                    //Id = request.IdInput,
->>>>>>> bbec9a5253e188f56a419dae1d819e265acb5648
-                    IdStaff = request.IdMedicine,
-                    IdSupplier = request.IdSupplier,
-                    DateInput = DateTime.Now,
-                    Status = false
+
+
                 };
                 _dataContext.Inputs.Add(inputs);
                 await _dataContext.SaveChangesAsync();

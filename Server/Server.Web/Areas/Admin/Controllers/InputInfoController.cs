@@ -80,13 +80,6 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
                 DateInput = inputmodel.DateInput,
                 Status = inputmodel.Status,
                    
-                IdInput = inputinfomodel.IdInput,
-                IdMedicine = inputinfomodel.IdMedicine,
-                IdBatch = inputinfomodel.IdBatch,
-                Count = inputinfomodel.Count,
-                InputPrice = inputinfomodel.InputPrice,
-                Total = inputinfomodel.Total,
-                DueDate = inputinfomodel.DueDate
             });
             if (!inputs.Success)
             {

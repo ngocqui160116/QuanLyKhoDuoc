@@ -77,14 +77,6 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
                 IdStaff = model.IdStaff,
                 IdSupplier = model.IdSupplier,
                 DateInput = DateTime.Now,
-
-                /*IdMedicine = inputinfomodel.IdMedicine,
-                IdInput = inputinfomodel.Id,
-                IdBatch = inputinfomodel.IdBatch,
-                Count = inputinfomodel.Count,
-                InputPrice = inputinfomodel.InputPrice,
-                Total = inputinfomodel.Total,
-                DueDate = inputinfomodel.DueDate,*/
                 
                 List = JsonConvert.DeserializeObject<List<InputContentDto>>(model.TableContent)
 

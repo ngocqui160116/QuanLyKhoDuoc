@@ -39,16 +39,12 @@ namespace Phoenix.Server.Services.Infrastructure
             CreateMap<OutputInfo, OutputInfoDto>()
                .ForMember(d => d.MedicineName, o => o.MapFrom(s => s.Medicine.Name))
                .ForMember(d => d.Batch, o => o.MapFrom(s =>s.InputInfo.IdBatch));
-<<<<<<< HEAD
-=======
-              // .ForMember(d => d.IdBatch, o => o.MapFrom(s => s.InputInfo.IdBatch))
-               //.ForMember(d => d.Reason, o => o.MapFrom(s => s.Reason.NameReason));
->>>>>>> bbec9a5253e188f56a419dae1d819e265acb5648
+
             CreateMap<Unit, UnitDto>();
             CreateMap<InventoryTags, InventoryTagsDto>()
                 .ForMember(d => d.MedicineName, o => o.MapFrom(s => s.Medicine.Name))
-                .ForMember(d => d.DocumentTypeName, o => o.MapFrom(s => s.documentType.Name))
-                .ForMember(d => d.SupplierName, o => o.MapFrom(s => s.Supplier.Name));
+                .ForMember(d => d.DocumentTypeName, o => o.MapFrom(s => s.documentType.Name));
+                //.ForMember(d => d.SupplierName, o => o.MapFrom(s => s.Supplier.Name));
             /*CreateMap<Vendor, VendorDto>()
                 .ForMember(d => d.ImageUrl, o => o.MapFrom(s => s.Medicine_Image.AbsolutePath));*/
         }
