@@ -75,7 +75,7 @@ namespace Phoenix.Server.Services.MainServices
 
             OutputInfo.IdOutput = Output.Id;
             OutputInfo.IdMedicine = request.IdMedicine;
-            OutputInfo.IdInputInfo = request.IdInputInfo;
+            
             OutputInfo.Count = request.Count;
             OutputInfo.Total = request.Total;
 
@@ -100,17 +100,21 @@ namespace Phoenix.Server.Services.MainServices
 
             OutputInfo.IdOutput = Output.Id;
             OutputInfo.IdMedicine = request.IdMedicine;
-            OutputInfo.IdInputInfo = request.IdInputInfo;
             OutputInfo.Count = request.Count;
             OutputInfo.Total = request.Total;
 
             _dataContext.OutputInfos.Add(OutputInfo);
             await _dataContext.SaveChangesAsync();
 
-            var inventory = _dataContext.Inventories.Find(request.IdMedicine);
+            var inventories = _dataContext.Inventories.ToList()
+                                        .FindAll(d => d.IdMedicine == request.IdMedicine && d.LotNumber == request.IdBatch);
+
+           var inventory = inventories.FirstOrDefault();
 
             inventory.IdMedicine = request.IdMedicine;
             inventory.Count = inventory.Count - request.Count;
+            inventory.LotNumber = inventory.LotNumber;
+            inventory.IdInputInfo = null;
 
             await _dataContext.SaveChangesAsync();
 
@@ -118,17 +122,17 @@ namespace Phoenix.Server.Services.MainServices
             InventoryTags.DocumentId = "PX00" + OutputInfo.Id;
             InventoryTags.ExpiredDate = DateTime.Now;
             InventoryTags.DocumentDate = DateTime.Now;
-            InventoryTags.LotNumber = 2;
+            InventoryTags.LotNumber = (int)inventory.LotNumber;
             InventoryTags.UnitPrice = 2;
             InventoryTags.TotalPrice = 2;
-            InventoryTags.SupplierId = 32;
+            //InventoryTags.SupplierId = 32;
 
-            InventoryTags.DocumentType = 1;
+            InventoryTags.DocumentType = request.IdReason;
             InventoryTags.MedicineId = request.IdMedicine;
 
-            //InventoryTags.Qty_After = request.Count;
-            InventoryTags.Qty = 0;
-            InventoryTags.Qty_Before = inventory.Count;
+            InventoryTags.Qty_After = inventory.Count;
+            InventoryTags.Qty = request.Count;
+            InventoryTags.Qty_Before = 0;
 
 
             _dataContext.InventoryTags.Add(InventoryTags);

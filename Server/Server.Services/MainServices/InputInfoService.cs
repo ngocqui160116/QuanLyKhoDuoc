@@ -122,10 +122,28 @@ namespace Phoenix.Server.Services.MainServices
             _dataContext.InputInfos.Add(InputInfo);
             await _dataContext.SaveChangesAsync();
 
-            var inventory = _dataContext.Inventories.Find(request.IdMedicine);
+
+
+            var inventories = _dataContext.Inventories.ToList()
+                                        .FindAll(d => d.IdMedicine == request.IdMedicine && d.LotNumber == request.IdBatch);
+
+            var inventory = inventories.FirstOrDefault();
 
             inventory.IdMedicine = request.IdMedicine;
-            inventory.Count = inventory.Count + request.Count;
+            if(inventory.Count == null)
+            {
+                inventory.Count = 0 + request.Count;
+            }
+            else
+            {
+                inventory.Count = inventory.Count + request.Count;
+            }
+           
+            inventory.LotNumber = request.IdBatch;
+            inventory.IdInputInfo = InputInfo.Id;
+            
+
+
 
             await _dataContext.SaveChangesAsync();
 
@@ -136,12 +154,12 @@ namespace Phoenix.Server.Services.MainServices
             InventoryTags.LotNumber = request.IdBatch;
             InventoryTags.UnitPrice = InputInfo.InputPrice;
             InventoryTags.TotalPrice = InputInfo.Total;
-            InventoryTags.SupplierId = Input.IdSupplier;
+           // InventoryTags.SupplierId = Input.IdSupplier;
             InventoryTags.DocumentType = 1;
             InventoryTags.MedicineId = request.IdMedicine;
-            InventoryTags.Qty_After = InputInfo.Count;
+            InventoryTags.Qty_After = inventory.Count;
             InventoryTags.Qty = 0;
-            InventoryTags.Qty_Before = inventory.Count;
+            InventoryTags.Qty_Before = request.Count;
 
 
             _dataContext.InventoryTags.Add(InventoryTags);
