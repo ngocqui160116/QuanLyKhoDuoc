@@ -4,25 +4,25 @@
 <script>
     var tableContent = [];
     function render_tbody() {
-        let template = (stt, id, name, batch, duedate, price, Count) => `<tr class="bg-gray-200 dark:bg-dark-1">
+        let template = (stt, id, name, batch, duedate, price, count) => `<tr class="bg-gray-200 dark:bg-dark-1">
                             <td class="border-b dark:border-dark-5">${stt}</td>
                             <td class="border-b dark:border-dark-5">${name}</td>
                             <td class="border-b dark:border-dark-5">
-                                <input type="text" class="form-control" aria-label="Batch" aria-describedby="input-group-price" value="${batch}" />
+                                <input type="text" class="form-control" aria-label="Batch" aria-describedby="input-group-price" value="${batch}" onchange="onBatchChange(${id}, this.value)" />
                             </td>
                             <td class="border-b dark:border-dark-5">
-                                <input class="datepicker form-control w-56 block mx-auto" data-single-mode="true" value="${duedate}" />
+                                <input class="datepicker form-control w-56 block mx-auto" data-single-mode="true" value="${duedate}" onchane="onDuedateChange(${id}, this.value)"/>
                             </td>
                             <td class="border-b dark:border-dark-5">
-                                <input type="text" class="form-control" aria-label="Price" aria-describedby="input-group-price" value="${price}" />
+                                <input type="text" class="form-control" aria-label="Price" aria-describedby="input-group-price" value="${price}"  onchange="onPriceChange(${id}, this.value)"/>
                             </td>
                             <td class="border-b dark:border-dark-5">
-                                <input type="text" class="form-control" aria-label="Price" aria-describedby="input-group-price" value="${Count}" />
+                                <input type="text" class="form-control" aria-label="Price" aria-describedby="input-group-price" value="${count}" onchange="onCountChange(${id}, this.value)"/>
                             </td>
                             <td class="border-b dark:border-dark-5">
-                                <button href="javascript:;" data-toggle="modal-cancel" data-target="#custom-content-tooltip" type="submit" class="btn btn-danger mr-1 mb-2">
+                                <a id="delete" data-toggle="modal-cancel" data-target="#custom-content-tooltip" class="btn btn-danger mr-1 mb-2" onchange="onDeleteChange(${id})">
                                     <i data-feather="trash" class="w-5 h-5"> </i>
-                                </button>
+                                </a>
                             </td>
                         </tr>`;
         let htmlTemplate = "";
@@ -33,9 +33,61 @@
         $("#tableContent").val(JSON.stringify(tableContent))
 
     }
-    $(document).ready(function () {
+
+    //cập nhật số lô của thuốc
+    function onBatchChange(medicineId, val) {
+        tableContent = tableContent.map(function (row) {
+            if (row.medicineId == medicineId) {
+                row.Batch = val;
+            }
+            return row;
+        })
+        $("#tableContent").val(JSON.stringify(tableContent))
+    }
+    //cập nhật ngày
+    function onDuedateChange(medicineId, val) {
+        tableContent = tableContent.map(function (row) {
+            if (row.medicineId == medicineId) {
+                row.DueDate = val;
+            }
+            return row;
+        })
+        $("#tableContent").val(JON.stringify(tableContent))
+    }
+    //cập nhật giá thuốc
+    function onPriceChange(medicineId, val) {
+        tableContent = tableContent.map(function (row) {
+            if (row.medicineId == medicineId) {
+                row.InputPrice = val;
+            }
+            return row;
+        })
+        $("#tableContent").val(JON.stringify(tableContent))
+    }
+    //cập nhật số lượng
+    function onCountChange(medicineId, val) {
+        tableContent = tableContent.map(function (row) {
+            if (row.medicineId == medicineId) {
+                row.Count = val;
+            }
+            return row;
+        })
+        $("#tableContent").val(JON.stringify(tableContent))
+    }
+    //function delete dùng onTableRender(), filter array javascript
+    function onDeleteChange(medicineId) {
+        tableContent = tableContent.map(function (row) {
+            tableContent.filter(row.medicineId != medicineId)
+        })
         render_tbody()
     })
+    
+    }
+    $(document).ready(function () {
+        render_tbody()
+
+    })
+
 </script>
 
 @Html.ValidationSummary(true)
@@ -104,6 +156,7 @@
         render_tbody();
         //JSON.stringify(tableContent)
     })
+    
 </script>
 @*<div class="content">
         <div class="form-horizontal">

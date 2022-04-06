@@ -172,6 +172,7 @@ namespace Phoenix.Server.Services.MainServices
 
             return result;
         }
+        //thêm hóa đơn nhập và chi tiết hóa đơn nhập
         public async Task<BaseResponse<InputDto>> Create(InputRequest request)
         {
             var result = new BaseResponse<InputDto>();
@@ -199,7 +200,7 @@ namespace Phoenix.Server.Services.MainServices
                     inputinfos.IdBatch = item.Batch;
                     inputinfos.Count = item.Count;
                     inputinfos.InputPrice = item.InputPrice;
-                    inputinfos.Total = item.Total;
+                    inputinfos.Total = item.Count * item.InputPrice;
                     inputinfos.DueDate = item.DueDate;
 
                     _dataContext.InputInfos.Add(inputinfos);
