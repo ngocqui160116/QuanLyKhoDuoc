@@ -1,6 +1,7 @@
 ﻿using Falcon.Web.Framework.Kendoui;
+using Phoenix.Server.Services.Database;
 using Phoenix.Server.Services.MainServices;
-using Phoenix.Server.Web.Areas.Admin.Models.Input;
+using Phoenix.Server.Web.Areas.Admin.Models.Output;
 using Phoenix.Shared.Common;
 using Phoenix.Shared.Input;
 using Phoenix.Shared.Output;
@@ -43,6 +44,47 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
                 Total = outputs.DataCount
             };
             return Json(gridModel);
+        }
+
+        public void SetViewBag(long? selectedId = null)
+        {
+            DataContext db = new DataContext();
+            ViewBag.IdStaff = new SelectList(db.Staffs.OrderBy(n => n.Name), "IdStaff", "Name", selectedId);
+            ViewBag.IdReason = new SelectList(db.Reasons.OrderBy(n => n.NameReason), "IdReason", "NameReason", selectedId);
+            ViewBag.IdInputInfo = new SelectList(db.InputInfos.OrderBy(n => n.IdMedicine), "IdInputInfo", "IdMedicine", selectedId);
+        }
+
+        // Create Vendor
+        public ActionResult Create()
+        {
+            SetViewBag();
+            var model = new OutputModel();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Create(OutputModel model)
+        {
+            SetViewBag();
+            if (!ModelState.IsValid)
+                return View(model);
+            var inputs = await _outputService.Create(new OutputRequest
+            {
+                /*IdStaff = model.IdStaff,
+                IdSupplier = model.IdSupplier,
+                DateInput = DateTime.Now,*/
+
+                //List = JsonConvert.DeserializeObject<List<InputContentDto>>(model.TableContent)
+
+            });
+            if (!inputs.Success)
+            {
+                ErrorNotification("Thêm mới không thành công");
+                return View(model);
+            }
+            SuccessNotification("Thêm mới thành công");
+            return RedirectToAction("Index");
         }
     }
 }

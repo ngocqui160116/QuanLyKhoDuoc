@@ -21,6 +21,7 @@ namespace Phoenix.Server.Services.MainServices
 
         ///
         Task<BaseResponse<OutputDto>> GetAll(OutputRequest request);
+        Task<BaseResponse<OutputDto>> Create(OutputRequest request);
     }
     public class OutputService : IOutputService
     {
@@ -115,6 +116,31 @@ namespace Phoenix.Server.Services.MainServices
                 var data = await query.Skip(request.Page * request.PageSize).Take(request.PageSize).ToListAsync();
                 result.DataCount = (int)((await query.CountAsync()) / request.PageSize) + 1;
                 result.Data = data.MapTo<OutputDto>();
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return result;
+        }
+        public async Task<BaseResponse<OutputDto>> Create(OutputRequest request)
+        {
+            var result = new BaseResponse<OutputDto>();
+            try
+            {
+                Input inputs = new Input
+                {
+                    /*IdStaff = request.IdStaff,
+                    IdSupplier = request.IdSupplier,
+                    DateInput = request.DateInput,
+                    Status = request.Status
+*/
+                };
+
+                _dataContext.Inputs.Add(inputs);
+                await _dataContext.SaveChangesAsync();
+                result.Success = true;
             }
             catch (Exception ex)
             {

@@ -30,6 +30,7 @@ namespace Phoenix.Server.Services.MainServices
         InputInfo GetInputInfoById(int Id);
         Task<BaseResponse<InputInfoDto>> Create(InputInfoRequest request);
         Task<BaseResponse<InputInfoDto>> GetAllInputInfoById(int Id,InputInfoRequest request);
+        Task<BaseResponse<InputInfoDto>> GetExpiredMedicine(InputInfoRequest request);
     }
     public class InputInfoService : IInputInfoService
     {
@@ -210,13 +211,13 @@ namespace Phoenix.Server.Services.MainServices
             try
             {
                 var query = _dataContext.InputInfos.AsQueryable();
+                
                 query = query.OrderByDescending(d => d.Id);
                 query = query.OrderByDescending(d => d.IdBatch);
-                var get = GetInputInfoById(Id);
+                //var get = GetInputInfoById(Id);
                 var list = _dataContext.InputInfos.Where(p => p.IdInput.Equals(Id));
-
-                var data = await list.Skip(request.Page * request.PageSize).Take(request.PageSize).ToListAsync();
-                result.DataCount = (int)((await list.CountAsync()) / request.PageSize) + 1;
+            
+                var data = await list.ToListAsync();
                 result.Data = data.MapTo<InputInfoDto>();
             }
             catch (Exception ex)
@@ -264,6 +265,26 @@ namespace Phoenix.Server.Services.MainServices
 
             return result;
         }
-       
+        public async Task<BaseResponse<InputInfoDto>> GetExpiredMedicine(InputInfoRequest request)
+        {
+            var result = new BaseResponse<InputInfoDto>();
+            try
+            {
+                var query = _dataContext.InputInfos.AsQueryable();
+                /*if(){
+
+                }*/
+                query = query.OrderByDescending(d => d.Id);
+                query = query.OrderByDescending(d => d.IdBatch);
+
+                var data = await query.ToListAsync();
+                result.Data = data.MapTo<InputInfoDto>();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return result;
+        }
     }
 }

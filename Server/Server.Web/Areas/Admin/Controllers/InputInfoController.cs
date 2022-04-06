@@ -89,5 +89,26 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
             SuccessNotification("Thêm mới thành công");
             return RedirectToAction("Create");
         }
+        public ActionResult Expired()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Expired(DataSourceRequest command, InputInfoModel model)
+        {
+            var inputinfos = await _inputinfoService.GetExpiredMedicine(new InputInfoRequest()
+            {
+                Page = command.Page - 1,
+                PageSize = command.PageSize
+            });
+
+            var gridModel = new DataSourceResult
+            {
+                Data = inputinfos.Data,
+                Total = inputinfos.DataCount
+            };
+            return Json(gridModel);
+        }
     }
 }
