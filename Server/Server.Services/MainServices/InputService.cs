@@ -25,9 +25,10 @@ namespace Phoenix.Server.Services.MainServices
         //
         Task<BaseResponse<InputDto>> GetAll(InputRequest request);
         Task<BaseResponse<InputDto>> Create(InputRequest request);
-        Input GetInputById(string id);
+        Input GetInputById(int id);
+        Task<BaseResponse<InputInfoDto>> GetAllInputInfoById(int id, InputInfoRequest request);
         Input GetLatestInput();
-        //Task<BaseResponse<Input>> Delete(string Id);
+        Task<BaseResponse<InputDto>> Complete(InputRequest request);
     }
     public class InputService : IInputService
     {
@@ -215,31 +216,52 @@ namespace Phoenix.Server.Services.MainServices
 
             return result;
         }
+        ///Lấy hóa đơn mới nhất
         public Input GetLatestInput()
         {
             var query = _dataContext.Inputs.AsQueryable();
-
-            //if (!string.IsNullOrEmpty(request.Id))
-            //{
-            //    query = query.Where(d => d.Id.Contains(request.Id));
-            //}
-
-
             query = query.OrderByDescending(d => d.Id);
             var da = query.FirstOrDefault();
             return da;
         }
-        public Input GetInputById(string id) => _dataContext.Inputs.Find(id);
-        
-        /*public async Task<BaseResponse<Input>> Delete(string Id)
+        public Input GetInputById(int id) => _dataContext.Inputs.Find(id);
+        public async Task<BaseResponse<InputInfoDto>> GetAllInputInfoById(int id, InputInfoRequest request)
+        {
+            var result = new BaseResponse<InputInfoDto>();
+            try
+            {
+                var query = _dataContext.InputInfos.AsQueryable();
+
+                query = query.OrderByDescending(d => d.Id);
+                query = query.OrderByDescending(d => d.IdBatch);
+                //var get = GetInputInfoById(Id);
+                var list = _dataContext.InputInfos.Where(p => p.IdInput.Equals(id));
+
+                var data = await list.ToListAsync();
+                result.Data = data.MapTo<InputInfoDto>();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return result;
+        }
+
+        public async Task<BaseResponse<InputDto>> Complete(InputRequest request)
         {
             var result = new BaseResponse<InputDto>();
             try
             {
-                var input = GetInputById(Id);
+                //Lay du lieu cu
+                var medicine = GetInputById(request.IdMedicine);
+                //cap nhat
 
-                //input.Status = True;
+                /*Supplier supplier = new Supplier
+                {*/
                 
+                medicine.Status = request.Status;
+                //};
+                //_dataContext.Suppliers.Add(supplier);
                 await _dataContext.SaveChangesAsync();
 
                 result.Success = true;
@@ -250,6 +272,6 @@ namespace Phoenix.Server.Services.MainServices
                 result.Message = ex.Message;
             }
             return result;
-        }*/
+        }
     }
 }

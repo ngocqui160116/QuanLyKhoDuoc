@@ -770,6 +770,7 @@
     <Content Include="Areas\Admin\Views\Output\_CreateOrUpdate.cshtml" />
     <Content Include="Areas\Admin\Views\Output\Create.cshtml" />
     <Content Include="Areas\Admin\Views\InputInfo\Expired.cshtml" />
+    <Content Include="Areas\Admin\Views\Input\Complete.cshtml" />
     <None Include="assets\js\kendo\2019.3.1023\kendo.all-vsdoc.js" />
     <None Include="assets\js\kendo\2019.3.1023\kendo.all.min.intellisense.js" />
     <Content Include="assets\js\kendo\2019.3.1023\kendo.all.min.js" />

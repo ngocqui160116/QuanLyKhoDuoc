@@ -19,6 +19,9 @@
                             <td class="border-b dark:border-dark-5">
                                 <input type="text" class="form-control" aria-label="Price" aria-describedby="input-group-price" value="${count}" onchange="onCountChange(${id}, this.value)" />
                             </td>
+                            @*<td class="border-b dark:border-dark-5">
+                                <input type="text" class="form-control" aria-label="Total" aria-describedby="input-group-price" value="${total}"/>
+                            </td>*@
                             <td class="border-b dark:border-dark-5">
                                 <button id="delete" data-toggle="modal-cancel" data-target="#custom-content-tooltip" class="btn btn-danger mr-1 mb-2" onclick="onDeleteChange(${id})">
                                     <i data-feather="trash" class="w-5 h-5"> </i>
@@ -59,6 +62,7 @@
         tableContent = tableContent.map(function (row) {
             if (row.medicineId == medicineId) {
                 row.InputPrice = val;
+                row.Total = val * row.Count;
             }
             return row;
         })
@@ -69,6 +73,7 @@
         tableContent = tableContent.map(function (row) {
             if (row.medicineId == medicineId) {
                 row.Count = val;
+                row.Total = val * row.InputPrice;
             }
             return row;
         })
@@ -132,6 +137,7 @@
                 <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">HSD</th>
                 <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Giá nhập</th>
                 <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Số lượng</th>
+                <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Thành tiền</th>
                 <th class="border-b-2 dark:border-dark-5 whitespace-nowrap"></th>
             </tr>
         </thead>
@@ -147,7 +153,7 @@
             medicineId: $("#IdMedicine").val(),
             medicineName: $('#IdMedicine option:selected').text(),
             Batch: 0,
-            DueDate: Date(datepicker),
+            DueDate: new Date(),
             InputPrice: 0,
             Count: 0,
         });

@@ -31,6 +31,7 @@ namespace Phoenix.Server.Services.MainServices
         Task<BaseResponse<InputInfoDto>> Create(InputInfoRequest request);
         Task<BaseResponse<InputInfoDto>> GetAllInputInfoById(int Id,InputInfoRequest request);
         Task<BaseResponse<InputInfoDto>> GetExpiredMedicine(InputInfoRequest request);
+        Task<BaseResponse<InputInfoDto>> Complete(int Id, InputInfoRequest request);
     }
     public class InputInfoService : IInputInfoService
     {
@@ -302,6 +303,43 @@ namespace Phoenix.Server.Services.MainServices
             {
 
             }
+            return result;
+        }
+        public async Task<BaseResponse<InputInfoDto>> Complete(int Id, InputInfoRequest request)
+        {
+            var result = new BaseResponse<InputInfoDto>();
+            try
+            {
+                var inputinfos = GetAllInputInfoById(Id,request);
+                Input inputs = new Input
+                {
+                    Id = request.IdInput,
+
+                };
+                _dataContext.Inputs.Add(inputs);
+                await _dataContext.SaveChangesAsync();
+
+                InputInfo inputinfos = new InputInfo
+                {
+                    //IdInput = request.IdInput,
+                    IdMedicine = request.IdMedicine,
+                    IdBatch = request.IdBatch,
+                    Count = request.Count,
+                    InputPrice = request.InputPrice,
+                    Total = request.Total,
+                    DueDate = request.DueDate
+                };
+                _dataContext.InputInfos.Add(inputinfos);
+                await _dataContext.SaveChangesAsync();
+
+
+                result.Success = true;
+            }
+            catch (Exception ex)
+            {
+
+            }
+
             return result;
         }
     }

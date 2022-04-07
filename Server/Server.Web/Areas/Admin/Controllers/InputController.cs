@@ -1,4 +1,5 @@
-﻿using Falcon.Web.Framework.Kendoui;
+﻿using Falcon.Web.Core.Helpers;
+using Falcon.Web.Framework.Kendoui;
 using Newtonsoft.Json;
 using Phoenix.Server.Services.Database;
 using Phoenix.Server.Services.MainServices;
@@ -89,7 +90,39 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
             SuccessNotification("Thêm mới thành công");
             return RedirectToAction("Index");
         }
-       
+        //Nhập thuốc vào kho
+        public ActionResult Complete(int id)
+        {
+            SetViewBag();
+            var inputDto = _inputService.GetInputById(id);
+            //var inputinfoDto = _inputService
+            if (inputDto == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            var inputModel = inputDto.MapTo<InputModel>();
+            return View(inputModel);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Complete(InputModel model)
+        {
+            SetViewBag();
+            var input = _inputService.GetInputById(model.Id);
+            if (input == null)
+                return RedirectToAction("Index");
+            if (!ModelState.IsValid)
+                return View(model);
+            var inputs = await _inputService.Complete(new InputRequest
+            {
+                List = JsonConvert.DeserializeObject<List<InputContentDto>>(model.TableContent),
+                Status = model.Status
+            }) ;
+            SuccessNotification("Chỉnh sửa thông tin chương trình thành công");
+            return RedirectToAction("Index", new { id = model.Id });
+        }
+
         /*[HttpPost]
         public async Task<ActionResult> Delete(string id)
         {

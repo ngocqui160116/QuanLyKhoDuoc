@@ -110,5 +110,37 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
             };
             return Json(gridModel);
         }
+        ///Cập nhật thuốc vào kho
+        public ActionResult Complete(int Id)
+        {
+            var model = new InputInfoModel();
+            // gán Id hóa đơn vào Id chi tiết hóa đơn
+            model.Id = Id;
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Complete(InputInfoModel inputinfomodel, InputModel model)
+        {
+            SetViewBag();
+            if (!ModelState.IsValid)
+                return View(inputinfomodel);
+            //var inputinfos = await _inputinfoService.GetAllInputInfoById(model.Id, new );
+            var inputs = await _inputinfoService.Complete(inputinfomodel.Id, new InputInfoRequest
+            {
+                IdStaff = model.IdStaff,
+                IdSupplier = model.IdSupplier,
+                DateInput = model.DateInput,
+                Status = model.Status,
+
+            });
+            if (!inputs.Success)
+            {
+                ErrorNotification("Thêm mới không thành công");
+                return View(inputinfomodel);
+            }
+            SuccessNotification("Thêm mới thành công");
+            return RedirectToAction("Detail");
+        }
     }
 }
