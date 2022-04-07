@@ -1,6 +1,7 @@
 ﻿using Phoenix.Mobile.Core.Infrastructure;
 using Phoenix.Mobile.Core.Models.InputInfo;
 using Phoenix.Mobile.Core.Models.Medicine;
+using Phoenix.Mobile.Core.Models.MedicineItem;
 using Phoenix.Mobile.Core.Models.Staff;
 using Phoenix.Mobile.Core.Models.Supplier;
 using Phoenix.Mobile.Core.Services.Common;
@@ -8,6 +9,7 @@ using Phoenix.Mobile.Helpers;
 using Phoenix.Shared.Input;
 using Phoenix.Shared.InputInfo;
 using Phoenix.Shared.Medicine;
+using Phoenix.Shared.MedicineItem;
 using Phoenix.Shared.Staff;
 using Phoenix.Shared.Supplier;
 using System;
@@ -24,13 +26,15 @@ namespace Phoenix.Mobile.PageModels.Common
     public class AddInputPageModel : BasePageModel
     {
         private readonly ISupplierService _supplierService;
+        private readonly IMedicineItemService _medicineItemService;
         private readonly IStaffService _staffService;
         private readonly IInputInfoService _inputInfoService;
         private readonly IDialogService _dialogService;
 
-        public AddInputPageModel(ISupplierService supplierService, IStaffService staffService,  IInputInfoService inputInfoService, IDialogService dialogService)
+        public AddInputPageModel(ISupplierService supplierService, IMedicineItemService medicineItemService, IStaffService staffService,  IInputInfoService inputInfoService, IDialogService dialogService)
         {
             _supplierService = supplierService;
+            _medicineItemService = medicineItemService;
             _staffService = staffService;
             _inputInfoService = inputInfoService;
             _dialogService = dialogService;
@@ -87,6 +91,19 @@ namespace Phoenix.Mobile.PageModels.Common
 #endif
             IsBusy = false;
 
+            var data1 = await _medicineItemService.GetAllMedicineItem(MedicineItemRequest);
+            if (data1 == null)
+            {
+                await _dialogService.AlertAsync("Lỗi kết nối mạng!", "Lỗi", "OK");
+
+            }
+            else
+            {
+                MedicineItems = data1;
+                //RaisePropertyChanged("Vendors");
+                RaisePropertyChanged(nameof(MedicineItems));
+            }
+
             var data = await _supplierService.GetAllSupplier(request);
             if (data == null)
             {
@@ -117,6 +134,8 @@ namespace Phoenix.Mobile.PageModels.Common
         #region properties
         public List<SupplierModel> Suppliers { get; set; } = new List<SupplierModel>();
         public SupplierRequest request { get; set; } = new SupplierRequest();
+        public List<MedicineItemModel> MedicineItems { get; set; } = new List<MedicineItemModel>();
+        public MedicineItemRequest MedicineItemRequest { get; set; } = new MedicineItemRequest();
         public List<StaffModel> Staffs { get; set; } = new List<StaffModel>();
         public StaffRequest StaffRequest { get; set; } = new StaffRequest();
 
@@ -259,15 +278,23 @@ namespace Phoenix.Mobile.PageModels.Common
         }
         #endregion
 
-        #region AddCommand
+        #region EditCommand
 
+        public ICommand EditCommand => new Command(async (p) => await EditExecute(), (p) => !IsBusy);
+
+        private async Task EditExecute()
+        {
+            await CoreMethods.PushPageModel<AddInputInfoPageModel>();
+        }
+        #endregion
+        #region AddCommand
         public Command AddCommand => new Command(async (p) => await AddExecute(), (p) => !IsBusy);
 
         private async Task AddExecute()
         {
             await CoreMethods.PushPageModel<AddInputInfoPageModel>();
         }
-        #endregion
+#endregion
 
         #region SelectSupplier
 

@@ -5,6 +5,7 @@ using Phoenix.Mobile.Core.Models.Vendor;
 using Phoenix.Mobile.Core.Services.Common;
 using Phoenix.Mobile.Helpers;
 using Phoenix.Shared.Medicine;
+using Phoenix.Shared.MedicineItem;
 using Phoenix.Shared.Unit;
 using System;
 using System.Collections.Generic;
@@ -21,12 +22,14 @@ namespace Phoenix.Mobile.PageModels.Common
     public class MedicinePageModel : BasePageModel
     {
         private readonly IMedicineService _medicineService;
+        private readonly IMedicineItemService _medicineItemService;
         private readonly IDialogService _dialogService;
         //public ObservableCollection<MedicineModel> Medicine { get; set; }
 
-        public MedicinePageModel(IMedicineService medicineService, IDialogService dialogService)
+        public MedicinePageModel(IMedicineService medicineService, IMedicineItemService medicineItemService, IDialogService dialogService)
         {
             _medicineService = medicineService;
+            _medicineItemService = medicineItemService;
             _dialogService = dialogService;
         }
 
@@ -68,6 +71,24 @@ namespace Phoenix.Mobile.PageModels.Common
                 RaisePropertyChanged(nameof(Medicines));
             }
         }
+
+        #region AddMedicineItemCommand
+        public Command AddMedicineItemCommand => new Command(async (p) => await AddMedicineItemExecute(), (p) => !IsBusy);
+        private async Task AddMedicineItemExecute()
+        {
+           
+                if (IsBusy) return;
+                IsBusy = true;
+
+                var data = await _medicineItemService.AddMedicineItem(new MedicineItemRequest
+                {
+                    Medicine_Id = Medicine.IdMedicine
+                });
+                await CoreMethods.PushPageModel<AddInputPageModel>();
+                //await _dialogService.AlertAsync("Thêm thành công");
+                IsBusy = false;
+        }
+        #endregion
 
         #region SelectMedicine
 

@@ -42,15 +42,14 @@ namespace Phoenix.Server.Services.MainServices
             try
             {
                 var query = (from c in _dataContext.MedicineItems
-                             join s in _dataContext.InputInfos on c.Inputinfo_Id equals s.Id
-                             join p in _dataContext.Inputs on s.IdInput equals p.Id
+                             join s in _dataContext.Medicines on c.Medicine_Id equals s.IdMedicine
                              select new
                              {
                                  Id = c.Id,
                                  MedicineId = s.IdMedicine,
-                                 Name = s.Medicine.Name,
-                                 IdSupplier = p.IdSupplier,
-                                 SupplierName = p.Supplier.Name
+                                 Name = s.Name,
+                                 RegistrationNumber = s.RegistrationNumber,
+                                 GroupName = s.Group
                              }).AsQueryable();
 
                 var config = new MapperConfiguration(cfg => cfg.CreateMissingTypeMaps = true);
@@ -74,7 +73,7 @@ namespace Phoenix.Server.Services.MainServices
         public async Task<CrudResult> AddMedicineItem(MedicineItemRequest request)
         {
             var MedicineItem = new MedicineItem();
-            MedicineItem.Inputinfo_Id = request.Id;
+            MedicineItem.Medicine_Id = request.Medicine_Id;
       
             _dataContext.MedicineItems.Add(MedicineItem);
             await _dataContext.SaveChangesAsync();
