@@ -11,18 +11,18 @@
                                 <input type="text" class="form-control" aria-label="Batch" aria-describedby="input-group-price" value="${batch}" onchange="onBatchChange(${id}, this.value)" />
                             </td>
                             <td class="border-b dark:border-dark-5">
-                                <input class="datepicker form-control w-56 block mx-auto" data-single-mode="true" value="${duedate}" onchane="onDuedateChange(${id}, this.value)"/>
+                                <input class="datepicker form-control w-56 block mx-auto" data-single-mode="true" value="${duedate}" onchange="onDueDateChange(${id}, this.value)" />
                             </td>
                             <td class="border-b dark:border-dark-5">
-                                <input type="text" class="form-control" aria-label="Price" aria-describedby="input-group-price" value="${price}"  onchange="onPriceChange(${id}, this.value)"/>
+                                <input type="text" class="form-control" aria-label="Price" aria-describedby="input-group-price" value="${price}" onchange="onPriceChange(${id}, this.value)" />
                             </td>
                             <td class="border-b dark:border-dark-5">
-                                <input type="text" class="form-control" aria-label="Price" aria-describedby="input-group-price" value="${count}" onchange="onCountChange(${id}, this.value)"/>
+                                <input type="text" class="form-control" aria-label="Price" aria-describedby="input-group-price" value="${count}" onchange="onCountChange(${id}, this.value)" />
                             </td>
                             <td class="border-b dark:border-dark-5">
-                                <a id="delete" data-toggle="modal-cancel" data-target="#custom-content-tooltip" class="btn btn-danger mr-1 mb-2" onchange="onDeleteChange(${id})">
+                                <button id="delete" data-toggle="modal-cancel" data-target="#custom-content-tooltip" class="btn btn-danger mr-1 mb-2" onclick="onDeleteChange(${id})">
                                     <i data-feather="trash" class="w-5 h-5"> </i>
-                                </a>
+                                </button>
                             </td>
                         </tr>`;
         let htmlTemplate = "";
@@ -45,14 +45,14 @@
         $("#tableContent").val(JSON.stringify(tableContent))
     }
     //cập nhật ngày
-    function onDuedateChange(medicineId, val) {
+    function onDueDateChange(medicineId, val) {
         tableContent = tableContent.map(function (row) {
             if (row.medicineId == medicineId) {
                 row.DueDate = val;
             }
             return row;
         })
-        $("#tableContent").val(JON.stringify(tableContent))
+        $("#tableContent").val(JSON.stringify(tableContent))
     }
     //cập nhật giá thuốc
     function onPriceChange(medicineId, val) {
@@ -62,7 +62,7 @@
             }
             return row;
         })
-        $("#tableContent").val(JON.stringify(tableContent))
+        $("#tableContent").val(JSON.stringify(tableContent))
     }
     //cập nhật số lượng
     function onCountChange(medicineId, val) {
@@ -72,17 +72,14 @@
             }
             return row;
         })
-        $("#tableContent").val(JON.stringify(tableContent))
+        $("#tableContent").val(JSON.stringify(tableContent))
     }
     //function delete dùng onTableRender(), filter array javascript
     function onDeleteChange(medicineId) {
-        tableContent = tableContent.map(function (row) {
-            tableContent.filter(row.medicineId != medicineId)
-        })
+        tableContent = tableContent.filter(e => e.medicineId != medicineId)
         render_tbody()
-    })
-    
     }
+    
     $(document).ready(function () {
         render_tbody()
 
@@ -117,12 +114,13 @@
 </div>
 <div class="grid grid-cols-12 gap-6 mt-5">
     <div class="col-span-12 sm:col-span-6">
-        <label for="modal-form-1" class="form-label">Thuốc</label>
-        <div class="mt-2">
-            @Html.DropDownList("IdMedicine", null, new { @class = "form-control input input--switch border" })
+        <div class="mt-3">
+            <label for="modal-form-1" class="form-label">Thuốc</label>
+            <div class="mt-2">
+                @Html.DropDownList("IdMedicine", null,"Vui lòng chọn thuốc cần nhập", new { @class = "form-control input input--switch border" })
+            </div>
         </div>
     </div>
-    
 </div>
 <div class="intro-y box p-5 mt-5">
     <table class="table">
@@ -149,7 +147,7 @@
             medicineId: $("#IdMedicine").val(),
             medicineName: $('#IdMedicine option:selected').text(),
             Batch: 0,
-            DueDate: "",
+            DueDate: Date(datepicker),
             InputPrice: 0,
             Count: 0,
         });
