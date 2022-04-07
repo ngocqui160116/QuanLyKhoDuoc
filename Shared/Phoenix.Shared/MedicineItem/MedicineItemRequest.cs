@@ -10,14 +10,10 @@ namespace Phoenix.Shared.MedicineItem
     public class MedicineItemRequest : BaseRequest
     {
         //public int Id { get; set; }
-        public int Inputinfo_Id { get; set; }
-        //public int LotNumber { get; set; }
-
         public int Id { get; set; }
-       
-        public int MedicineId { get; set; }
+        public int Medicine_Id { get; set; }
         public string Name { get; set; }
-        public int IdSupplier { get; set; }
-        public string SupplierName { get; set; }
+        public string RegistrationNumber { get; set; }
+        public string GroupName { get; set; }
     }
 }

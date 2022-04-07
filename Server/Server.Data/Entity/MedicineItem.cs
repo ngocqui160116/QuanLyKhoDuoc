@@ -13,8 +13,8 @@ namespace Phoenix.Server.Data.Entity
     {
         [Key]
         public int Id { get; set; }
-        public int Inputinfo_Id { get; set; }
-        [ForeignKey("Inputinfo_Id")]
-        public virtual InputInfo Inputinfo { get; set; }
+        public int Medicine_Id { get; set; }
+        [ForeignKey("Medicine_Id")]
+        public virtual Medicine Medicine { get; set; }
     }
 }

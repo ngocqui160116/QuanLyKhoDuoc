@@ -9,7 +9,7 @@
              x:DataType="common:AddInputPageModel"
              xmlns:converters="clr-namespace:Phoenix.Framework.Converters;assembly=Phoenix.Framework"
              xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
-             xmlns:intputinfo="clr-namespace:Phoenix.Mobile.Core.Models.InputInfo;assembly=Phoenix.Mobile.Core" xmlns:medicine="clr-namespace:Phoenix.Mobile.Core.Models.Medicine;assembly=Phoenix.Mobile.Core"
+             xmlns:intputinfo="clr-namespace:Phoenix.Mobile.Core.Models.InputInfo;assembly=Phoenix.Mobile.Core" xmlns:medicine="clr-namespace:Phoenix.Mobile.Core.Models.Medicine;assembly=Phoenix.Mobile.Core" xmlns:medicineItem="clr-namespace:Phoenix.Mobile.Core.Models.MedicineItem;assembly=Phoenix.Mobile.Core"
              ControlTemplate="{StaticResource FullScreenHasBack}">
     <ContentPage.Content>
         <StackLayout BackgroundColor="WhiteSmoke">
@@ -51,77 +51,163 @@
                 </StackLayout>
 
             </Frame>
-            <Frame CornerRadius="15"
-                   IsVisible="{Binding IsClose}">
 
-                <ListView ItemsSource="{Binding ListMedicine}" 
-                          Margin="5,5,0,10"
-                          HeightRequest="85" BackgroundColor="White"
-                          x:Name="searchResults"
-                          HasUnevenRows="True"
-                          SeparatorVisibility="None"
-                          
-                          HorizontalOptions="FillAndExpand"
-                          VerticalOptions="FillAndExpand">
+            <AbsoluteLayout HorizontalOptions="FillAndExpand" 
+                                VerticalOptions="FillAndExpand"
+                                IsEnabled="True">
+                <ScrollView AbsoluteLayout.LayoutFlags="All" 
+                                AbsoluteLayout.LayoutBounds="0,0,1,1">
+                    <StackLayout 
+                                         BackgroundColor="WhiteSmoke">
+                        <ListView ItemsSource="{Binding MedicineItems}"
+                                  HasUnevenRows="True"
+                                  BackgroundColor="#ecf0f1"
+                                  SeparatorVisibility="None"
+                                  HorizontalOptions="FillAndExpand"
+                                  VerticalOptions="FillAndExpand">
+                            <ListView.ItemTemplate>
+                                <DataTemplate x:DataType="medicineItem:MedicineItemModel">
+                                    <ViewCell>
+
+
+                                        <StackLayout Margin="6,4,6,4"
+                                                 BackgroundColor="White" 
+                                                 HorizontalOptions="FillAndExpand"
+                                                 Orientation="Vertical">
+                                            <StackLayout Orientation="Horizontal" 
+                                                     HorizontalOptions="FillAndExpand" >
+                                                <Grid 
+                                                  x:Name="Grid">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto"/>
+                                                        <RowDefinition Height="Auto"/>
+
+                                                    </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="50"/>
+                                                        <ColumnDefinition Width="200"/>
+                                                        <ColumnDefinition Width="50"/>
+                                                        <ColumnDefinition Width="50"/>
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <Image  Source="@drawable/icon_medicine"
+                                                   HorizontalOptions="StartAndExpand"
+                                                   Grid.Column="0"
+                                                   Grid.Row="0"
+                                                   VerticalOptions="CenterAndExpand">
+                                                    </Image>
+
+
+                                                    <StackLayout Orientation="Vertical"
+                                                             Grid.Column="1"
+                                                             Margin="10,0,5,0">
+                                                        <StackLayout Orientation="Horizontal">
+                                                            <Label Text="{Binding Name}"
+                                                               Grid.Column="1"
+                                                               FontAttributes="Bold"
+                                                               FontSize="Large" />
+                                                        </StackLayout>
+
+                                                        <StackLayout 
+                                                                 Orientation="Horizontal">
+                                                            <Label Text="Số ĐK:"
+                                                               Margin="0,2,8,4"
+                                                               FontSize="Small" />
+                                                            <Label Text="{Binding RegistrationNumber}"
+                                                               Margin="2,2,8,4"
+                                                               TextColor="DarkSlateGray"
+                                                               FontSize="Small" />
+                                                        </StackLayout>
+
+                                                        <StackLayout Orientation="Horizontal">
+                                                            <Label Text="Nhóm:"
+                                                               Margin="0,2,8,4"
+                                                               FontSize="Small" />
+                                                            <Label Text="{Binding Id}"
+                                                               Margin="2,2,8,4"
+                                                               TextColor="DarkSlateGray"  
+                                                               FontSize="Small" />
+                                                        </StackLayout>
+                                                    </StackLayout>
+                                                    <StackLayout Grid.Column="3" 
+                                                             HorizontalOptions="EndAndExpand">
+                                                        <ImageButton Source="@drawable/icon_edit"
+                                                                 x:DataType="common:AddInputPageModel"
+                                                                 Grid.Column="3" 
+                                                                 Command="{Binding EditCommand}"
+                                                                 HorizontalOptions="EndAndExpand"
+                                                                 VerticalOptions="CenterAndExpand">
+                                                            <ImageButton.GestureRecognizers>
+                                                                <TapGestureRecognizer Command="{Binding AddCommand}"/>
+                                                            </ImageButton.GestureRecognizers>
+                                                        </ImageButton>
+
+                                                    </StackLayout>
+                                                </Grid>
+                                            </StackLayout>
+
+                                        </StackLayout>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
+                </ScrollView>
+            </AbsoluteLayout>
+            <!--<ListView ItemsSource="{Binding MedicineItems}"
+                      HasUnevenRows="True"
+                      BackgroundColor="#ecf0f1"
+                      SeparatorVisibility="None"
+                      HeightRequest="300"
+                      SelectedItem="{Binding SelectedMedicine}"
+                      HorizontalOptions="FillAndExpand"
+                      VerticalOptions="FillAndExpand">
                     <ListView.ItemTemplate>
-
                         <DataTemplate x:DataType="medicine:MedicineModel">
                             <ViewCell>
-                                <StackLayout Margin="6,4,0,0"
-                                             BackgroundColor="White"
-                                             HeightRequest="75"
-                                             Orientation="Horizontal" >
+                                <StackLayout Margin="6,4,6,4"
+                                         BackgroundColor="White" Orientation="Vertical">
                                     <StackLayout Orientation="Horizontal" 
-                                                 HorizontalOptions="StartAndExpand" >
+                                             HorizontalOptions="StartAndExpand" >
                                         <Image Source="@drawable/icon_medicine"
-                                               WidthRequest="75"
-                                               HorizontalOptions="StartAndExpand"
-                                               VerticalOptions="CenterAndExpand">
+                                           WidthRequest="75"
+                                           HorizontalOptions="StartAndExpand"
+                                           VerticalOptions="CenterAndExpand">
                                         </Image>
 
-                                        <StackLayout Orientation="Vertical">
+                                        <StackLayout Orientation="Vertical"
+                                                 HorizontalOptions="StartAndExpand">
                                             <Label Text="{Binding Name}"
-                                                   Margin="8"
-                                                   FontAttributes="Bold"
-                                                   FontSize="Large" />
-
+                                               Margin="8"
+                                               FontAttributes="Bold"
+                                               FontSize="Large" />
                                             <StackLayout Orientation="Horizontal">
                                                 <Label Text="Số ĐK:"
-                                                       Margin="8,2,8,4"
-                                                       FontSize="Small"/>
+                                                   Margin="8,2,8,4"
+                                                   FontSize="Small" />
                                                 <Label Text="{Binding RegistrationNumber}"
-                                                       Margin="2,2,8,4"
-                                                       TextColor="DarkSlateGray"
-                                                       IsEnabled="False"
-                                                       FontSize="Small"/>
-                                                <Label Text="ĐVT:"
-                                                       Margin="8,2,8,4"
-                                                       IsEnabled="False"
-                                                       FontSize="Small"/>
-                                                <Label Text="{Binding NameUnit}"
-                                                       Margin="2,2,8,4"
-                                                       IsEnabled="False"
-                                                       TextColor="DarkSlateGray"  
-                                                       FontSize="Small"/>
+                                                   Margin="2,2,8,4"
+                                                   TextColor="DarkSlateGray"
+                                                   FontSize="Small" />
+                                            </StackLayout>
 
-                                               
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label Text="Nhóm:"
+                                                   Margin="8,2,8,4"
+                                                   FontSize="Small" />
+                                                <Label Text="{Binding GroupName}"
+                                                   Margin="2,2,8,4"
+                                                   TextColor="DarkSlateGray"  
+                                                   FontSize="Small" />
                                             </StackLayout>
                                         </StackLayout>
-                                        <Image Source="@drawable/icon_medicine"
-                                               x:DataType="common:AddInputPageModel"
-                                               WidthRequest="75"
-                                                       xe:Commands.Tap="{Binding AddCommand}"
-                                               HorizontalOptions="EndAndExpand"
-                                               VerticalOptions="CenterAndExpand">
-                                        </Image>
                                     </StackLayout>
                                 </StackLayout>
                             </ViewCell>
                         </DataTemplate>
-
                     </ListView.ItemTemplate>
-                </ListView>
-            </Frame>
+                </ListView>-->
+  
             <StackLayout HeightRequest="25"
                          WidthRequest="50">
                 <Label Text="Thông tin"
