@@ -344,5 +344,59 @@ namespace Phoenix.Server.Services.MainServices
             }
             return result;
         }
+<<<<<<< HEAD
+        public async Task<BaseResponse<InputInfoDto>> Complete(int Id, InputInfoRequest request)
+        {
+            var result = new BaseResponse<InputInfoDto>();
+            try
+            {
+                var query = _dataContext.InputInfos.AsQueryable();
+
+                query = query.OrderByDescending(d => d.Id);
+                query = query.OrderByDescending(d => d.IdBatch);
+                //lấy danh sách các chi tiết hóa đơn nhập
+                var list = _dataContext.InputInfos.Where(p => p.IdInput.Equals(Id));
+                var data = await list.ToListAsync();
+
+                Inventory inventorys = new Inventory();
+                foreach (var item in data)
+                {
+                    if (item.IdMedicine == inventorys.IdMedicine && item.IdBatch == inventorys.LotNumber)
+                    {
+                        inventorys.IdMedicine = item.IdMedicine;
+                        inventorys.Count = item.Count;
+                        inventorys.LotNumber = item.IdBatch;
+                        inventorys.IdInputInfo = item.Id;
+                        _dataContext.Inventories.Add(inventorys);
+                        await _dataContext.SaveChangesAsync();
+                    }
+                    
+                }
+
+                InventoryTags inventoryTags = new InventoryTags();
+                foreach (var item in data)
+                {
+                    inventoryTags.DocumentId = "PN00" + item.Id;
+                    inventoryTags.DocumentDate = DateTime.Now;
+                    inventoryTags.DocumentType = 1;
+                    inventoryTags.MedicineId = item.IdMedicine;
+                    inventoryTags.LotNumber = item.IdBatch;
+                    inventoryTags.ExpiredDate = (DateTime)item.DueDate;
+                    inventoryTags.Qty_Before = (int)item.Count;
+                    inventoryTags.Qty = 0;
+                    inventoryTags.Qty_After = (int)item.Count + inventoryTags.Qty_Before;
+
+                }
+
+                result.Data = data.MapTo<InputInfoDto>();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return result;
+        }
+=======
+>>>>>>> 1ad824c670c903b06ea1298419b8e0a0f0d239dc
     }
 }
