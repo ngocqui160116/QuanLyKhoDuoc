@@ -31,6 +31,7 @@ namespace Phoenix.Server.Services.MainServices
         Task<BaseResponse<InputInfoDto>> Create(InputInfoRequest request);
         Task<BaseResponse<InputInfoDto>> GetAllInputInfoById(int Id,InputInfoRequest request);
         Task<BaseResponse<InputInfoDto>> GetExpiredMedicine(InputInfoRequest request);
+        Task<BaseResponse<InputInfoDto>> Complete(int Id, InputInfoRequest request);
     }
     public class InputInfoService : IInputInfoService
     {
@@ -344,7 +345,7 @@ namespace Phoenix.Server.Services.MainServices
             }
             return result;
         }
-<<<<<<< HEAD
+
         public async Task<BaseResponse<InputInfoDto>> Complete(int Id, InputInfoRequest request)
         {
             var result = new BaseResponse<InputInfoDto>();
@@ -357,35 +358,70 @@ namespace Phoenix.Server.Services.MainServices
                 //lấy danh sách các chi tiết hóa đơn nhập
                 var list = _dataContext.InputInfos.Where(p => p.IdInput.Equals(Id));
                 var data = await list.ToListAsync();
-
-                Inventory inventorys = new Inventory();
+                //thêm chi tiết hóa đơn nhập vào kho
                 foreach (var item in data)
                 {
-                    if (item.IdMedicine == inventorys.IdMedicine && item.IdBatch == inventorys.LotNumber)
+                    //Thuốc và lô trong kho trùng với hóa đơn nhập
+                    var inventories = _dataContext.Inventories.ToList()
+                                        .FindAll(d => d.IdMedicine == item.IdMedicine && d.LotNumber == item.IdBatch);
+                    //đã có thuốc trong kho
+                    if(inventories.Count != 0)
                     {
-                        inventorys.IdMedicine = item.IdMedicine;
-                        inventorys.Count = item.Count;
-                        inventorys.LotNumber = item.IdBatch;
-                        inventorys.IdInputInfo = item.Id;
-                        _dataContext.Inventories.Add(inventorys);
+                        var inventory = inventories.FirstOrDefault();
+                        //cập nhật lại số lượng tồn trong kho
+                        if(inventory.Count == null)
+                        {
+                            inventory.Count = 0 + item.Count;
+                        }
+                        else
+                        {
+                            inventory.Count = inventory.Count + item.Count;
+                        }
+                        inventory.IdInputInfo = item.Id;
+                        await _dataContext.SaveChangesAsync();
+
+                        //thêm chi tiết hóa đơn nhập vào thẻ kho
+                        InventoryTags inventoryTags = new InventoryTags();
+                        inventoryTags.DocumentId = "PN00" + item.Id;
+                        inventoryTags.DocumentDate = DateTime.Now;
+                        inventoryTags.DocumentType = 1;
+                        inventoryTags.MedicineId = item.IdMedicine;
+                        inventoryTags.LotNumber = item.IdBatch;
+                        inventoryTags.ExpiredDate = (DateTime)item.DueDate;
+                        inventoryTags.Qty_Before = item.Count;
+                        inventoryTags.Qty = 0;
+                        inventoryTags.Qty_After = item.Count + inventory.Count;
+
+                        _dataContext.InventoryTags.Add(inventoryTags);
                         await _dataContext.SaveChangesAsync();
                     }
-                    
-                }
+                    //chưa có thuốc trong kho
+                    else
+                    {
+                        var inventory2 = new Inventory();
+                        inventory2.IdMedicine = item.IdMedicine;
+                        inventory2.Count = item.Count;
+                        inventory2.LotNumber = item.IdBatch;
+                        inventory2.IdInputInfo = item.Id;
 
-                InventoryTags inventoryTags = new InventoryTags();
-                foreach (var item in data)
-                {
-                    inventoryTags.DocumentId = "PN00" + item.Id;
-                    inventoryTags.DocumentDate = DateTime.Now;
-                    inventoryTags.DocumentType = 1;
-                    inventoryTags.MedicineId = item.IdMedicine;
-                    inventoryTags.LotNumber = item.IdBatch;
-                    inventoryTags.ExpiredDate = (DateTime)item.DueDate;
-                    inventoryTags.Qty_Before = (int)item.Count;
-                    inventoryTags.Qty = 0;
-                    inventoryTags.Qty_After = (int)item.Count + inventoryTags.Qty_Before;
+                        _dataContext.Inventories.Add(inventory2);
+                        await _dataContext.SaveChangesAsync();
 
+                        //thêm chi tiết hóa đơn nhập vào thẻ kho
+                        InventoryTags inventoryTags = new InventoryTags();
+                        inventoryTags.DocumentId = "PN00" + item.Id;
+                        inventoryTags.DocumentDate = DateTime.Now;
+                        inventoryTags.DocumentType = 1;
+                        inventoryTags.MedicineId = item.IdMedicine;
+                        inventoryTags.LotNumber = item.IdBatch;
+                        inventoryTags.ExpiredDate = (DateTime)item.DueDate;
+                        inventoryTags.Qty_Before = item.Count;
+                        inventoryTags.Qty = 0;
+                        inventoryTags.Qty_After = item.Count;
+
+                        _dataContext.InventoryTags.Add(inventoryTags);
+                        await _dataContext.SaveChangesAsync();
+                    }
                 }
 
                 result.Data = data.MapTo<InputInfoDto>();
@@ -396,7 +432,5 @@ namespace Phoenix.Server.Services.MainServices
             }
             return result;
         }
-=======
->>>>>>> 1ad824c670c903b06ea1298419b8e0a0f0d239dc
     }
 }
