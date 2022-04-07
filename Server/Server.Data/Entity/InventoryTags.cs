@@ -14,7 +14,7 @@ namespace Phoenix.Server.Data.Entity
         [Key]
         public int Id { get; set; }
         public string DocumentId { get; set; }
-        public DateTime DocumentDate { get; set; }
+        public DateTime? DocumentDate { get; set; }
         public int DocumentType { get; set; }
         [ForeignKey("DocumentType")]
         public virtual DocumentType documentType { get; set; }
@@ -22,7 +22,7 @@ namespace Phoenix.Server.Data.Entity
         [ForeignKey("MedicineId")]
         public virtual Medicine Medicine { get; set; }
         public int LotNumber { get; set; }
-        public DateTime ExpiredDate { get; set; }
+        public DateTime? ExpiredDate { get; set; }
         public int? Qty_Before { get; set; }
         public int? Qty { get; set; }
         public int? Qty_After { get; set; }

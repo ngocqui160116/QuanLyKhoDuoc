@@ -387,10 +387,12 @@ namespace Phoenix.Server.Services.MainServices
                         inventoryTags.DocumentType = 1;
                         inventoryTags.MedicineId = item.IdMedicine;
                         inventoryTags.LotNumber = item.IdBatch;
-                        inventoryTags.ExpiredDate = (DateTime)item.DueDate;
+                        inventoryTags.ExpiredDate = item.DueDate;
                         inventoryTags.Qty_Before = item.Count;
                         inventoryTags.Qty = 0;
                         inventoryTags.Qty_After = item.Count + inventory.Count;
+                        inventoryTags.UnitPrice = item.InputPrice;
+                        inventoryTags.TotalPrice = item.Total;
 
                         _dataContext.InventoryTags.Add(inventoryTags);
                         await _dataContext.SaveChangesAsync();
@@ -414,10 +416,12 @@ namespace Phoenix.Server.Services.MainServices
                         inventoryTags.DocumentType = 1;
                         inventoryTags.MedicineId = item.IdMedicine;
                         inventoryTags.LotNumber = item.IdBatch;
-                        inventoryTags.ExpiredDate = (DateTime)item.DueDate;
+                        inventoryTags.ExpiredDate = item.DueDate;
                         inventoryTags.Qty_Before = item.Count;
                         inventoryTags.Qty = 0;
                         inventoryTags.Qty_After = item.Count;
+                        inventoryTags.UnitPrice = item.InputPrice;
+                        inventoryTags.TotalPrice = item.Total;
 
                         _dataContext.InventoryTags.Add(inventoryTags);
                         await _dataContext.SaveChangesAsync();
@@ -425,6 +429,7 @@ namespace Phoenix.Server.Services.MainServices
                 }
 
                 result.Data = data.MapTo<InputInfoDto>();
+                result.Success = true;
             }
             catch (Exception ex)
             {
