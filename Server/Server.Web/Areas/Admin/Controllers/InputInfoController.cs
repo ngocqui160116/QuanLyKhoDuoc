@@ -120,27 +120,20 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Complete(InputInfoModel inputinfomodel, InputModel model)
+        public async Task<ActionResult> Complete(DataSourceRequest command, InputInfoModel model)
         {
-            SetViewBag();
-            if (!ModelState.IsValid)
-                return View(inputinfomodel);
-            //var inputinfos = await _inputinfoService.GetAllInputInfoById(model.Id, new );
-            var inputs = await _inputinfoService.Complete(inputinfomodel.Id, new InputInfoRequest
+            var inputinfos = await _inputinfoService.Complete(model.Id, new InputInfoRequest()
             {
-                IdStaff = model.IdStaff,
-                IdSupplier = model.IdSupplier,
-                DateInput = model.DateInput,
-                Status = model.Status,
-
+                Page = command.Page - 1,
+                PageSize = command.PageSize
             });
-            if (!inputs.Success)
+
+            var gridModel = new DataSourceResult
             {
-                ErrorNotification("Thêm mới không thành công");
-                return View(inputinfomodel);
-            }
-            SuccessNotification("Thêm mới thành công");
-            return RedirectToAction("Detail");
+                Data = inputinfos.Data,
+                Total = inputinfos.DataCount
+            };
+            return Json(gridModel);
         }
     }
 }

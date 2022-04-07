@@ -310,36 +310,46 @@ namespace Phoenix.Server.Services.MainServices
             var result = new BaseResponse<InputInfoDto>();
             try
             {
-                var inputinfos = GetAllInputInfoById(Id,request);
-                Input inputs = new Input
+                var query = _dataContext.InputInfos.AsQueryable();
+
+                query = query.OrderByDescending(d => d.Id);
+                query = query.OrderByDescending(d => d.IdBatch);
+                //lấy danh sách các chi tiết hóa đơn nhập
+                var list = _dataContext.InputInfos.Where(p => p.IdInput.Equals(Id));
+                var data = await list.ToListAsync();
+
+                Inventory inventorys = new Inventory();
+                foreach (var item in data)
                 {
-                    Id = request.IdInput,
+                    inventorys.IdMedicine = item.IdMedicine;
+                    inventorys.Count = item.Count;
+                    inventorys.LotNumber = item.IdBatch;
+                    inventorys.IdInputInfo = item.Id;
+                    _dataContext.Inventories.Add(inventorys);
+                    await _dataContext.SaveChangesAsync();
+                }
 
-                };
-                _dataContext.Inputs.Add(inputs);
-                await _dataContext.SaveChangesAsync();
-
-                InputInfo inputinfos = new InputInfo
+                InventoryTags inventoryTags = new InventoryTags();
+                foreach (var item in data)
                 {
-                    //IdInput = request.IdInput,
-                    IdMedicine = request.IdMedicine,
-                    IdBatch = request.IdBatch,
-                    Count = request.Count,
-                    InputPrice = request.InputPrice,
-                    Total = request.Total,
-                    DueDate = request.DueDate
-                };
-                _dataContext.InputInfos.Add(inputinfos);
-                await _dataContext.SaveChangesAsync();
+                    inventoryTags.DocumentId = "PN00" + item.Id;
+                    inventoryTags.DocumentDate = DateTime.Now;
+                    inventoryTags.DocumentType = 1;
+                    inventoryTags.MedicineId = item.IdMedicine;
+                    inventoryTags.LotNumber = item.IdBatch;
+                    inventoryTags.ExpiredDate = (DateTime)item.DueDate;
+                    inventoryTags.Qty_Before = (int)item.Count;
+                    inventoryTags.Qty = 0;
+                    inventoryTags.Qty_After = (int)item.Count + inventoryTags.Qty_Before;
 
+                }
 
-                result.Success = true;
+                result.Data = data.MapTo<InputInfoDto>();
             }
             catch (Exception ex)
             {
 
             }
-
             return result;
         }
     }
