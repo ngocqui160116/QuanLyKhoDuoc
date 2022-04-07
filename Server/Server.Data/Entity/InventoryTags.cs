@@ -28,7 +28,6 @@ namespace Phoenix.Server.Data.Entity
         public int? Qty_After { get; set; }
         public double? UnitPrice { get; set; }
         public double? TotalPrice { get; set; }
-        public int SupplierId { get; set; }
        
    
     }

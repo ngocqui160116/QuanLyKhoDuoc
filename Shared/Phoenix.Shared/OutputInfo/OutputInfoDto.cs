@@ -11,7 +11,7 @@ namespace Phoenix.Shared.OutputInfo
         public int Id { get; set; }
         public int IdOutput { get; set; }
         public int IdMedicine { get; set; }
-        public int IdInputInfo { get; set; }
+       
         public int Count { get; set; }
         public double Total { get; set; }
         

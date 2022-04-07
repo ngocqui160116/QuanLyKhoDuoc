@@ -47,10 +47,10 @@ namespace Phoenix.Server.Services.Infrastructure
             CreateMap<Output, OutputDto>()
                 .ForMember(d => d.NameReason, o => o.MapFrom(s => s.Reason.NameReason))
                 .ForMember(d => d.NameStaff, o => o.MapFrom(s => s.Staff.Name));
-            CreateMap<OutputInfo, OutputInfoDto>()
-                .ForMember(d => d.DueDate, o => o.MapFrom(s => s.InputInfo.DueDate))
-                .ForMember(d => d.InputPrice, o => o.MapFrom(s => s.InputInfo.InputPrice))
-                .ForMember(d => d.MedicineName, o => o.MapFrom(s => s.Medicine.Name));
+            CreateMap<OutputInfo, OutputInfoDto>();
+                //.ForMember(d => d.DueDate, o => o.MapFrom(s => s.InputInfo.DueDate))
+                //.ForMember(d => d.InputPrice, o => o.MapFrom(s => s.InputInfo.InputPrice))
+                //.ForMember(d => d.MedicineName, o => o.MapFrom(s => s.Medicine.Name));
 
             CreateMap<Staff, StaffDto>();
 
