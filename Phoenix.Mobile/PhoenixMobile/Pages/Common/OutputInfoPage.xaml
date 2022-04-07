@@ -124,7 +124,7 @@
                                                 <Label Text="Số Lô:"
                                                        Margin="8,2,8,4"
                                                        FontSize="Small" />
-                                                <Label Text="{Binding IdInputInfo}"
+                                                <Label Text="{Binding Batch}"
                                                        Margin="2,2,8,4"
                                                        TextColor="DarkSlateGray"
                                                        FontSize="Small" />

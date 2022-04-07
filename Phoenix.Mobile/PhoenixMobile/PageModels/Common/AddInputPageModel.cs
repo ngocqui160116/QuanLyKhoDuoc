@@ -5,7 +5,9 @@ using Phoenix.Mobile.Core.Models.Staff;
 using Phoenix.Mobile.Core.Models.Supplier;
 using Phoenix.Mobile.Core.Services.Common;
 using Phoenix.Mobile.Helpers;
+using Phoenix.Shared.Input;
 using Phoenix.Shared.InputInfo;
+using Phoenix.Shared.Medicine;
 using Phoenix.Shared.Staff;
 using Phoenix.Shared.Supplier;
 using System;
@@ -39,13 +41,15 @@ namespace Phoenix.Mobile.PageModels.Common
 
             if (initData != null)
             {
-                infoModel = (InputInfoModel)initData;
+                medicineModels = (MedicineModel)initData;
+                //infoModel = (InputInfoModel)initData;
                 IsClose = true;
                 IsOpen = false;
             }
             else
             {
-                infoModel = new InputInfoModel();
+                medicineModels = new MedicineModel();
+                //infoModel = new InputInfoModel();
             }
             //base.Init(infoModel);
             NavigationPage.SetHasNavigationBar(CurrentPage, false);
@@ -63,20 +67,23 @@ namespace Phoenix.Mobile.PageModels.Common
             if (IsBusy) return;
             IsBusy = true;
 #if DEBUG
-            //IdMedicine = Medicine.IdMedicine;
-            ListMedicine = new List<InputInfoModel>()
+           
+
+             //IdMedicine = Medicine.IdMedicine;
+             ListMedicine = new List<MedicineModel>()
             {
-                new InputInfoModel()
+                new MedicineModel()
                 {
-                    IdMedicine = infoModel.IdMedicine,
-                    MedicineName = infoModel.MedicineName,
-                    DueDate = infoModel.DueDate,
-                    Count = infoModel.Count,
-                    IdBatch = infoModel.IdBatch,
-                    Total = infoModel.Count * infoModel.InputPrice 
+                    IdMedicine = medicineModels.IdMedicine,
+                    Name = medicineModels.Name,
+                    RegistrationNumber = medicineModels.RegistrationNumber,
+                    //Count = infoModel.Count,
+                    //IdBatch = infoModel.IdBatch,
+                    IdUnit = medicineModels.IdUnit,
+                    NameUnit = medicineModels.NameUnit
                 }
             };
-                
+
 #endif
             IsBusy = false;
 
@@ -113,10 +120,13 @@ namespace Phoenix.Mobile.PageModels.Common
         public List<StaffModel> Staffs { get; set; } = new List<StaffModel>();
         public StaffRequest StaffRequest { get; set; } = new StaffRequest();
 
-        public List<InputInfoModel> ListMedicine { get; set; }
+       // public List<InputInfoModel> ListMedicine { get; set; }
+        public List<MedicineModel> ListMedicine { get; set; }
+        public List<InputRequest> ListMe { get; set; }
         public static List<InputInfoModel> InputInfos { get; set; } = new List<InputInfoModel>();
         public InputInfoRequest InputInfoRequest { get; set; } = new InputInfoRequest();
         public InputInfoModel infoModel { get; set; }
+        public MedicineModel medicineModels { get; set; }
 
         #endregion
 
@@ -244,6 +254,16 @@ namespace Phoenix.Mobile.PageModels.Common
         public Command AddMedicineCommand => new Command(async (p) => await AddMedicineExecute(), (p) => !IsBusy);
 
         private async Task AddMedicineExecute()
+        {
+            await CoreMethods.PushPageModel<MedicinePageModel>();
+        }
+        #endregion
+
+        #region AddCommand
+
+        public Command AddCommand => new Command(async (p) => await AddExecute(), (p) => !IsBusy);
+
+        private async Task AddExecute()
         {
             await CoreMethods.PushPageModel<AddInputInfoPageModel>();
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Phoenix.Shared.Common;
+using Phoenix.Shared.Medicine;
 
 namespace Phoenix.Shared.Input
 {
@@ -23,5 +24,6 @@ namespace Phoenix.Shared.Input
         public DateTime? DueDate { get; set; }
         
         public List<InputContentDto> List { get; set; }
+        public List<MedicineDto> ListMedicine { get; set; }
     }
 }

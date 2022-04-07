@@ -91,19 +91,6 @@ namespace Phoenix.Mobile.PageModels.Common
         }
         #endregion
 
-        //#region MedicineSelectedCommand
-        //public ICommand MedicineSelectedCommand => new Command(async (p) => await MedicineSelected(), (p) => !IsBusy);
-        //private async Task MedicineSelected()
-        //{
-
-        //    await CoreMethods.PushPageModel<AddInputInfoPageModel>(ListMedicines);
-
-
-
-        //    //await CoreMethods.DisplayAlert("Thêm thành công", "Bạn đã chọn" + Medicine.Name, "Đóng");
-
-        //}
-        //#endregion
 
         #region MedicineSelected
         public Command<MedicineModel> MedicineSelected
@@ -113,7 +100,7 @@ namespace Phoenix.Mobile.PageModels.Common
                 return new Command<MedicineModel>(async (Medicine) =>
                 {
                     //await CoreMethods.PushPageModel<AddInputPageModel>(Medicine);
-                    await CoreMethods.PushPageModel<AddInputInfoPageModel>(Medicine);
+                    await CoreMethods.PushPageModel<AddInputPageModel>(Medicine);
                 });
             }
         }
@@ -139,33 +126,6 @@ namespace Phoenix.Mobile.PageModels.Common
         }
         #endregion
 
-        //#region Search
-
-        //public ICommand PerformSearch => new Command<string>((string query) =>
-        //{
-        //    SearchResults = GetSearchResults(query);
-        //});
-
-        //// public static List<InputModel> Fruits { get; set; } 
-        //public static List<MedicineModel> GetSearchResults(string queryString)
-        //{
-        //    var normalizedQuery = queryString?.ToLower() ?? "";
-        //    return Medicines.Where(f => f.Name.ToUpperInvariant().Contains(normalizedQuery)).ToList();
-        //}
-
-        //List<MedicineModel> searchResults = Medicines;
-        //public List<MedicineModel> SearchResults
-        //{
-        //    get
-        //    {
-        //        return searchResults;
-        //    }
-        //    set
-        //    {
-        //        searchResults = value;
-        //    }
-        //}
-
-        //#endregion
+       
     }
 }

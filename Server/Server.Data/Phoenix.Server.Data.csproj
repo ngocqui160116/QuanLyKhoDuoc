@@ -57,6 +57,7 @@
     <Compile Include="Entity\DocumentType.cs" />
     <Compile Include="Entity\Inventory.cs" />
     <Compile Include="Entity\InventoryTags.cs" />
+    <Compile Include="Entity\MedicineItem.cs" />
     <Compile Include="Entity\Reason.cs" />
     <Compile Include="Entity\Supplier.cs" />
     <Compile Include="Entity\Output.cs" />

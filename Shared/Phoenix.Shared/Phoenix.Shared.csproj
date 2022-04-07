@@ -70,6 +70,8 @@
     <Compile Include="InventoryTags\InventoryTagsRequest.cs" />
     <Compile Include="Inventory\InventoryDto.cs" />
     <Compile Include="Inventory\InventoryRequest.cs" />
+    <Compile Include="MedicineItem\MedicineItemDto.cs" />
+    <Compile Include="MedicineItem\MedicineItemRequest.cs" />
     <Compile Include="Reason\ReasonDto.cs" />
     <Compile Include="Reason\ReasonRequest.cs" />
     <Compile Include="Supplier\SupplierDto.cs" />

@@ -31,7 +31,6 @@ namespace Phoenix.Server.Services.MainServices
         Task<BaseResponse<InputInfoDto>> Create(InputInfoRequest request);
         Task<BaseResponse<InputInfoDto>> GetAllInputInfoById(int Id,InputInfoRequest request);
         Task<BaseResponse<InputInfoDto>> GetExpiredMedicine(InputInfoRequest request);
-        Task<BaseResponse<InputInfoDto>> Complete(int Id, InputInfoRequest request);
     }
     public class InputInfoService : IInputInfoService
     {
@@ -127,44 +126,84 @@ namespace Phoenix.Server.Services.MainServices
 
             var inventories = _dataContext.Inventories.ToList()
                                         .FindAll(d => d.IdMedicine == request.IdMedicine && d.LotNumber == request.IdBatch);
-
-            var inventory = inventories.FirstOrDefault();
-
-            inventory.IdMedicine = request.IdMedicine;
-            if(inventory.Count == null)
+            if(inventories.Count != 0)
             {
-                inventory.Count = 0 + request.Count;
-            }
+                var inventory = inventories.FirstOrDefault();
+
+                inventory.IdMedicine = request.IdMedicine;
+                if (inventory.Count == null)
+                {
+                    inventory.Count = 0 + request.Count;
+                }
+                else
+                {
+                    inventory.Count = inventory.Count + request.Count;
+                }
+
+                inventory.LotNumber = request.IdBatch;
+                inventory.IdInputInfo = InputInfo.Id;
+
+                await _dataContext.SaveChangesAsync();
+
+
+                var InventoryTags = new InventoryTags();
+                InventoryTags.DocumentId = "PN00" + InputInfo.Id;
+                InventoryTags.ExpiredDate = DateTime.Now;
+                InventoryTags.DocumentDate = DateTime.Now;
+                InventoryTags.LotNumber = request.IdBatch;
+                InventoryTags.UnitPrice = InputInfo.InputPrice;
+                InventoryTags.TotalPrice = InputInfo.Total;
+                // InventoryTags.SupplierId = Input.IdSupplier;
+                InventoryTags.DocumentType = 1;
+                InventoryTags.MedicineId = request.IdMedicine;
+                InventoryTags.Qty_After = inventory.Count;
+                InventoryTags.Qty = 0;
+                InventoryTags.Qty_Before = request.Count;
+
+
+                _dataContext.InventoryTags.Add(InventoryTags);
+                await _dataContext.SaveChangesAsync();
+            }    
             else
             {
-                inventory.Count = inventory.Count + request.Count;
+                var inventori = new Inventory();
+                inventori.IdMedicine = request.IdMedicine;
+                if (inventori.Count == null)
+                {
+                    inventori.Count = 0 + request.Count;
+                }
+                else
+                {
+                    inventori.Count = inventori.Count + request.Count;
+                }
+
+                inventori.LotNumber = request.IdBatch;
+                inventori.IdInputInfo = InputInfo.Id;
+
+                _dataContext.Inventories.Add(inventori);
+                await _dataContext.SaveChangesAsync();
+
+
+                var InventoryTags = new InventoryTags();
+                InventoryTags.DocumentId = "PN00" + InputInfo.Id;
+                InventoryTags.ExpiredDate = DateTime.Now;
+                InventoryTags.DocumentDate = DateTime.Now;
+                InventoryTags.LotNumber = request.IdBatch;
+                InventoryTags.UnitPrice = InputInfo.InputPrice;
+                InventoryTags.TotalPrice = InputInfo.Total;
+                // InventoryTags.SupplierId = Input.IdSupplier;
+                InventoryTags.DocumentType = 1;
+                InventoryTags.MedicineId = request.IdMedicine;
+                InventoryTags.Qty_After = inventori.Count;
+                InventoryTags.Qty = 0;
+                InventoryTags.Qty_Before = request.Count;
+
+
+                _dataContext.InventoryTags.Add(InventoryTags);
+                await _dataContext.SaveChangesAsync();
             }
+
            
-            inventory.LotNumber = request.IdBatch;
-            inventory.IdInputInfo = InputInfo.Id;
-            
-
-
-
-            await _dataContext.SaveChangesAsync();
-
-            var InventoryTags = new InventoryTags();
-            InventoryTags.DocumentId = "PN00" +InputInfo.Id;
-            InventoryTags.ExpiredDate = DateTime.Now;
-            InventoryTags.DocumentDate = DateTime.Now;
-            InventoryTags.LotNumber = request.IdBatch;
-            InventoryTags.UnitPrice = InputInfo.InputPrice;
-            InventoryTags.TotalPrice = InputInfo.Total;
-           // InventoryTags.SupplierId = Input.IdSupplier;
-            InventoryTags.DocumentType = 1;
-            InventoryTags.MedicineId = request.IdMedicine;
-            InventoryTags.Qty_After = inventory.Count;
-            InventoryTags.Qty = 0;
-            InventoryTags.Qty_Before = request.Count;
-
-
-            _dataContext.InventoryTags.Add(InventoryTags);
-            await _dataContext.SaveChangesAsync();
 
             return new CrudResult() { IsOk = true };
         }
@@ -297,53 +336,6 @@ namespace Phoenix.Server.Services.MainServices
                 query = query.OrderByDescending(d => d.IdBatch);
 
                 var data = await query.ToListAsync();
-                result.Data = data.MapTo<InputInfoDto>();
-            }
-            catch (Exception ex)
-            {
-
-            }
-            return result;
-        }
-        public async Task<BaseResponse<InputInfoDto>> Complete(int Id, InputInfoRequest request)
-        {
-            var result = new BaseResponse<InputInfoDto>();
-            try
-            {
-                var query = _dataContext.InputInfos.AsQueryable();
-
-                query = query.OrderByDescending(d => d.Id);
-                query = query.OrderByDescending(d => d.IdBatch);
-                //lấy danh sách các chi tiết hóa đơn nhập
-                var list = _dataContext.InputInfos.Where(p => p.IdInput.Equals(Id));
-                var data = await list.ToListAsync();
-
-                Inventory inventorys = new Inventory();
-                foreach (var item in data)
-                {
-                    inventorys.IdMedicine = item.IdMedicine;
-                    inventorys.Count = item.Count;
-                    inventorys.LotNumber = item.IdBatch;
-                    inventorys.IdInputInfo = item.Id;
-                    _dataContext.Inventories.Add(inventorys);
-                    await _dataContext.SaveChangesAsync();
-                }
-
-                InventoryTags inventoryTags = new InventoryTags();
-                foreach (var item in data)
-                {
-                    inventoryTags.DocumentId = "PN00" + item.Id;
-                    inventoryTags.DocumentDate = DateTime.Now;
-                    inventoryTags.DocumentType = 1;
-                    inventoryTags.MedicineId = item.IdMedicine;
-                    inventoryTags.LotNumber = item.IdBatch;
-                    inventoryTags.ExpiredDate = (DateTime)item.DueDate;
-                    inventoryTags.Qty_Before = (int)item.Count;
-                    inventoryTags.Qty = 0;
-                    inventoryTags.Qty_After = (int)item.Count + inventoryTags.Qty_Before;
-
-                }
-
                 result.Data = data.MapTo<InputInfoDto>();
             }
             catch (Exception ex)

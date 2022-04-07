@@ -50,11 +50,16 @@
     <h2 class="text-lg font-medium mr-auto">
         Nhập kho
     </h2>
-    <!--Thêm hóa đơn nhập-->
+
+    <!-- BEGIN: Modal Toggle -->
     <div class="text-center">
         <a href="@Url.Action("Create","Input")" class="btn btn-primary text-white shadow-md mr-2">Thêm mới</a>
     </div>
+    <div class="text-center">
+        <a href="javascript:;" data-toggle="modal" data-target="#superlarge-modal-size-preview" class="btn btn-primary text-white shadow-md mr-2">Thêm mới</a>
+    </div>
     <!-- END: Modal Toggle -->
+
 </div>
 <div class="grid gap-6 mt-5">
     <div class="intro-y box p-5">
@@ -112,19 +117,19 @@
             },
             placeholder: "Chưa có dữ liệu",
             columns: [
-                { title: "Mã hóa đơn", field: "Id", sorter: "string", width: 150 },
+                { title: "Mã hóa đơn", field: "Id", sorter: "string", width: 180 },
                 {
-                    title: "Tên người tạo", field: "NameStaff", sorter: "string", width: 200, formatter(cell, formatterParams)
+                    title: "Tên người tạo", field: "NameStaff", sorter: "string", width: 250, formatter(cell, formatterParams)
                     {
                         return `<a href="../Admin/InputInfo/Detail/${cell.getData().Id}" class="text-theme-1 dark:text-theme-10"> ${cell.getData().NameStaff}</a>`
                     }
                 },
                 { title: "Nhà cung cấp", field: "SupplierName", sorter: "string", width: 300 },
                 { title: "Ngày tạo", field: "DateInput", sorter: "date", width: 180, formatter: dateFormatter },
-                { title: "Trạng thái", field: "Status", sorter: "date", width: 150, formatter: dateFormatter },
+                { title: "Trạng thái", field: "Status", sorter: "date", width: 180, formatter: dateFormatter },
                 {
-                    title: "", field: "", sorter: "string", width: 80, formatter(cell, formatterParams) {
-                        return `<a href="../Admin/Input/Complete/${cell.getData().Id}" class="btn btn-primary text-white shadow-md mr-2">Hoàn thành</a>`
+                    title: "", field: "Id", sorter: "string", width: 80, formatter(cell, formatterParams) {
+                        return `<a href="../Admin/InputInfo/List/${cell.getData().Id}" class="btn btn-primary text-white shadow-md mr-2">Sửa</a>`
                     }
                 }
                 @*{
@@ -145,3 +150,104 @@
         }
     </script>
 </div>
+
+<!-- BEGIN: Modal Content -->
+<div id="superlarge-modal-size-preview" class="modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <!-- BEGIN: Modal Header -->
+            <div class="modal-header">
+                <h2 class="font-medium text-base mr-auto">Phiếu nhập</h2>
+                <button class="btn btn-outline-secondary hidden sm:flex">
+                    <i data-feather="file" class="w-4 h-4 mr-2"></i> Download Docs
+                </button>
+                <div class="dropdown sm:hidden">
+                    <a class="dropdown-toggle w-5 h-5 block" href="javascript:;" aria-expanded="false">
+                        <i data-feather="more-horizontal" class="w-5 h-5 text-gray-600 dark:text-gray-600"></i>
+                    </a>
+                    <div class="dropdown-menu w-40">
+                        <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
+                            <a href="javascript:;" class="flex items-center p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
+                                <i data-feather="file" class="w-4 h-4 mr-2"></i> Download Docs
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END: Modal Header -->
+            <!-- BEGIN: Modal Body -->
+            <div class="modal-body grid grid-cols-12 gap-4 gap-y-3">
+                <div class="col-span-12 sm:col-span-6">
+                    <label for="modal-form-1" class="form-label">Người tạo</label>
+                    <div class="mt-2">
+                        @Html.DropDownList("IdStaff", null, new { @class = "form-control input input--switch border" })
+                    </div>
+                </div>
+                <div class="col-span-12 sm:col-span-6">
+                    <label for="modal-form-1" class="form-label">Nhà cung cấp</label>
+                    <div class="mt-2">
+                        @Html.DropDownList("IdSupplier", null, new { @class = "form-control input input--switch border" })
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="col-span-12 sm:col-span-6">
+                    <label for="modal-form-1" class="form-label">Thuốc</label>
+                    <div class="mt-2">
+                        @Html.DropDownList("IdMedicine", null, new { @class = "form-control input input--switch border" })
+                    </div>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">#</th>
+                            <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Tên thuốc</th>
+                            <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Số Lô</th>
+                            <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">HSD</th>
+                            <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Giá nhập</th>
+                            <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Số lượng</th>
+                            <th class="border-b-2 dark:border-dark-5 whitespace-nowrap"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody">
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-body">
+                <div class="col-span-12 sm:col-span-6">
+                    <label for="modal-form-1" class="form-label">Thuốc</label>
+                    <select data-placeholder="Select your favorite actors" class="tom-select w-full" multiple>
+                        <option value="1" selected>Leonardo DiCaprio</option>
+                        <option value="2">Johnny Deep</option>
+                        <option value="3" selected>Robert Downey, Jr</option>
+                        <option value="4">Samuel L. Jackson</option>
+                        <option value="5">Morgan Freeman</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- END: Modal Body -->
+            <!-- BEGIN: Modal Footer -->
+            <div class="modal-footer text-right">
+                <button type="button" data-dismiss="modal" class="btn btn-outline-secondary w-20 mr-1">Hủy</button>
+                <button href="@Url.Action("Create","InputInfo")" type="button" class="btn btn-primary w-20">Lưu</button>
+            </div> <!-- END: Modal Footer -->
+        </div>
+    </div>
+</div>
+<!-- END: Modal Content -->
+<script>
+    $("#IdMedicine").on("change", function (e) {
+        //console.log("name >> " + $('#IdMedicine option:selected').text() + "   val >>" + $("#IdMedicine").val())
+        tableContent.push({
+            medicineId: $("#IdMedicine").val(),
+            medicineName: $('#IdMedicine option:selected').text(),
+            qty: 0,
+            price: 0,
+            lotNumber: "",
+            expiredDate: ""
+        });
+        render_tbody();
+        JSON.stringify(tableContent)
+    })
+</script>

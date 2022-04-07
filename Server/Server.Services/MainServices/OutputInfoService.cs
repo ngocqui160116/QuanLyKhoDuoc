@@ -114,7 +114,7 @@ namespace Phoenix.Server.Services.MainServices
             inventory.IdMedicine = request.IdMedicine;
             inventory.Count = inventory.Count - request.Count;
             inventory.LotNumber = inventory.LotNumber;
-            inventory.IdInputInfo = null;
+            //inventory.IdInputInfo = null;
 
             await _dataContext.SaveChangesAsync();
 

@@ -110,30 +110,5 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
             };
             return Json(gridModel);
         }
-        ///Cập nhật thuốc vào kho
-        public ActionResult Complete(int Id)
-        {
-            var model = new InputInfoModel();
-            // gán Id hóa đơn vào Id chi tiết hóa đơn
-            model.Id = Id;
-            return View(model);
-        }
-
-        [HttpPost]
-        public async Task<ActionResult> Complete(DataSourceRequest command, InputInfoModel model)
-        {
-            var inputinfos = await _inputinfoService.Complete(model.Id, new InputInfoRequest()
-            {
-                Page = command.Page - 1,
-                PageSize = command.PageSize
-            });
-
-            var gridModel = new DataSourceResult
-            {
-                Data = inputinfos.Data,
-                Total = inputinfos.DataCount
-            };
-            return Json(gridModel);
-        }
     }
 }

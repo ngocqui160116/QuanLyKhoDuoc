@@ -14,6 +14,7 @@ using Phoenix.Shared.Supplier;
 using Phoenix.Shared.InputInfo;
 using Phoenix.Shared.InventoryTags;
 using Phoenix.Shared.DocumentType;
+using Phoenix.Shared.MedicineItem;
 
 namespace Phoenix.Server.Services.Infrastructure
 {
@@ -57,6 +58,7 @@ namespace Phoenix.Server.Services.Infrastructure
             CreateMap<Supplier, SupplierDto>();
 
             CreateMap<Unit, UnitDto>();
+            CreateMap<MedicineItem, MedicineItemDto>();
 
         }
     }
