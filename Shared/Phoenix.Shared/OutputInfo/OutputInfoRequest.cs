@@ -10,7 +10,7 @@ namespace Phoenix.Shared.OutputInfo
         public int IdInputInfo { get; set; }
         public int Count { get; set; }
         public double Total { get; set; }
-        public bool Status { get; set; }
+        public string Status { get; set; }
         public int IdBatch { get; set; }
         //Output
         public int IdStaff { get; set; }

@@ -17,7 +17,7 @@ namespace Phoenix.Server.Data.Entity
         public int IdReason { get; set; }
         [ForeignKey("IdReason")]
         public virtual Reason Reason { get; set; }
-        public bool Status { get; set; }
+        public string Status { get; set; }
 
         //List
         public virtual ICollection<OutputInfo> OutputInfo { get; set; }
