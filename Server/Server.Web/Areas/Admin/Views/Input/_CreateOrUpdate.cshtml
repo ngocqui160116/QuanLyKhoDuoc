@@ -4,7 +4,7 @@
 <script>
     var tableContent = [];
     function render_tbody() {
-        let template = (stt, id, name, batch, duedate, price, count) => `<tr class="bg-gray-200 dark:bg-dark-1">
+        let template = (stt, id, name, batch, duedate, price, count, total) => `<tr class="bg-gray-200 dark:bg-dark-1">
                             <td class="border-b dark:border-dark-5">${stt}</td>
                             <td class="border-b dark:border-dark-5">${name}</td>
                             <td class="border-b dark:border-dark-5">
@@ -19,6 +19,9 @@
                             <td class="border-b dark:border-dark-5">
                                 <input type="text" class="form-control" aria-label="Price" aria-describedby="input-group-price" value="${count}" onchange="onCountChange(${id}, this.value)" />
                             </td>
+                                <td class="border-b dark:border-dark-5">
+                                <input type="text" class="form-control" aria-label="Total" aria-describedby="input-group-price" value="${total}"/>
+                            </td>
                             <td class="border-b dark:border-dark-5">
                                 <button id="delete" data-toggle="modal-cancel" data-target="#custom-content-tooltip" class="btn btn-danger mr-1 mb-2" onclick="onDeleteChange(${id})">
                                     <i data-feather="trash" class="w-5 h-5"> </i>
@@ -27,7 +30,7 @@
                         </tr>`;
         let htmlTemplate = "";
         tableContent.map(function (row, index) {
-            htmlTemplate += template(index + 1, row.medicineId, row.medicineName, row.Batch, row.DueDate, row.InputPrice, row.Count)
+            htmlTemplate += template(index + 1, row.medicineId, row.medicineName, row.Batch, row.DueDate, row.InputPrice, row.Count, row.Total)
         })
         $("#tbody").html(htmlTemplate)
         $("#tableContent").val(JSON.stringify(tableContent))
@@ -59,20 +62,22 @@
         tableContent = tableContent.map(function (row) {
             if (row.medicineId == medicineId) {
                 row.InputPrice = val;
+                row.Total = val * row.Count;
             }
             return row;
         })
-        $("#tableContent").val(JSON.stringify(tableContent))
+        render_tbody()
     }
     //cập nhật số lượng
     function onCountChange(medicineId, val) {
         tableContent = tableContent.map(function (row) {
             if (row.medicineId == medicineId) {
                 row.Count = val;
+                row.Total = val * row.InputPrice;
             }
             return row;
         })
-        $("#tableContent").val(JSON.stringify(tableContent))
+        render_tbody()
     }
     //function delete dùng onTableRender(), filter array javascript
     function onDeleteChange(medicineId) {
@@ -132,6 +137,7 @@
                 <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">HSD</th>
                 <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Giá nhập</th>
                 <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Số lượng</th>
+                <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Thành tiền</th>
                 <th class="border-b-2 dark:border-dark-5 whitespace-nowrap"></th>
             </tr>
         </thead>
@@ -150,6 +156,7 @@
             DueDate: Date(datepicker),
             InputPrice: 0,
             Count: 0,
+            Total: 0,
         });
         render_tbody();
         //JSON.stringify(tableContent)

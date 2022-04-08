@@ -18,6 +18,7 @@ namespace Phoenix.Server.Web.Infrastructure
             CreateMap<Input, InputModel>();
             CreateMap<InputInfo, InputInfoModel>();
             CreateMap<Output, OutputModel>();
+            CreateMap<OutputInfo, OutputInfoModel>();
             CreateMap<InventoryTags, InventoryTagsModel>();
            
         }
