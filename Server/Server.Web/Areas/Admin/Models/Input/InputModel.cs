@@ -11,7 +11,7 @@ namespace Phoenix.Server.Web.Areas.Admin.Models.Input
         public int IdStaff { get; set; }
         public int IdSupplier { get; set; }
         public DateTime DateInput { get; set; }
-        public bool Status { get; set; }
+        public string Status { get; set; }
         public string TableContent { get; set; }
     }
 }

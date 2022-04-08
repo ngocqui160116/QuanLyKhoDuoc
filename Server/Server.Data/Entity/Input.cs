@@ -19,7 +19,7 @@ namespace Phoenix.Server.Data.Entity
         [ForeignKey("IdSupplier")]
         public virtual Supplier Supplier { get; set; }
         public DateTime DateInput { get; set; }
-        public bool Status { get; set; }
+        public string Status { get; set; }
 
         //List
         public virtual ICollection<InputInfo> InputInfo { get; set; }

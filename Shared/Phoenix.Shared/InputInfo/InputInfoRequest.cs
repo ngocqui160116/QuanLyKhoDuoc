@@ -13,7 +13,7 @@ namespace Phoenix.Shared.InputInfo
         public double InputPrice { get; set; }
         public double Total { get; set; }
         public DateTime DueDate { get; set; }
-        public bool Status { get; set; }
+        public string Status { get; set; }
         //Input
         public int IdStaff { get; set; }
         public int IdSupplier { get; set; }
