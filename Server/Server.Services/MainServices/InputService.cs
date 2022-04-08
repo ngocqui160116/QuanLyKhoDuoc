@@ -183,7 +183,7 @@ namespace Phoenix.Server.Services.MainServices
                     IdStaff = request.IdStaff,
                     IdSupplier = request.IdSupplier,
                     DateInput = request.DateInput,
-                    Status = request.Status
+                    Status = "Đã lưu"
 
                 };
                 

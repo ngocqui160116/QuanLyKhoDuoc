@@ -427,9 +427,16 @@ namespace Phoenix.Server.Services.MainServices
                         await _dataContext.SaveChangesAsync();
                     }
                 }
-
+                
                 result.Data = data.MapTo<InputInfoDto>();
                 result.Success = true;
+                if (result.Success == true)
+                {
+                    var input = _dataContext.Inputs.Find(Id);
+                    input.Status = "Đã hoàn thành";
+                    await _dataContext.SaveChangesAsync();
+                }
+                    
             }
             catch (Exception ex)
             {
