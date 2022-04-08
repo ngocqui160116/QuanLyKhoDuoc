@@ -18,14 +18,14 @@ namespace Phoenix.Server.Services.MainServices
 {
     public interface IInputInfoService
     {
+        //Mobile
         Task<BaseResponse<InputInfoDto>> GetAllInputInfo(InputInfoRequest request);
-        //Task<BaseResponse<InputInfoDto>> GetInputInfoById(InputInfoRequest request);
         Task<CrudResult> CreateInputInfo(InputInfoRequest request);
         Task<CrudResult> UpdateInputInfo(int Id, InputInfoRequest request);
         Task<CrudResult> DeleteInputInfo(int Id);
         Task<CrudResult> CreateInventory(InputInfoRequest request);
 
-        //
+        //Web
         Task<BaseResponse<InputInfoDto>> GetAll(InputInfoRequest request);
         InputInfo GetInputInfoById(int Id);
         Task<BaseResponse<InputInfoDto>> Create(InputInfoRequest request);
@@ -41,7 +41,9 @@ namespace Phoenix.Server.Services.MainServices
             _dataContext = dataContext;
         }
 
-        //lấy danh sách nhà cung cấp
+        ////////Mobile
+
+        #region GetAllInputInfo
         public async Task<BaseResponse<InputInfoDto>> GetAllInputInfo(InputInfoRequest request)
         {
             var result = new BaseResponse<InputInfoDto>(); 
@@ -49,11 +51,6 @@ namespace Phoenix.Server.Services.MainServices
             {
                 // setup query
                 var query = _dataContext.InputInfos.AsQueryable();
-                // filter
-                //if (!string.IsNullOrEmpty(request.IdInput))
-                //{
-                //    query = query.Where(d => d.IdInput.Contains(request.IdInput));
-                //}
                 
                 query = query.OrderByDescending(d => d.Id);
                 query = query.OrderByDescending(d => d.IdBatch);
@@ -67,24 +64,13 @@ namespace Phoenix.Server.Services.MainServices
             }
             return result;
         }
+        #endregion
 
-
-        // Task<CrudResult> CreateInputInfo(InputInfoRequest request);
+        #region CreateInputInfo
         public async Task<CrudResult> CreateInputInfo(InputInfoRequest request)
         {
-
-            var Input = new Input();
-
-            Input.IdStaff = request.IdStaff;
-            Input.IdSupplier = request.IdSupplier;
-            Input.DateInput = request.DateInput;
-            Input.Status = request.Status;
-
-            _dataContext.Inputs.Add(Input);
-            await _dataContext.SaveChangesAsync();
-
             var InputInfo = new InputInfo();
-            InputInfo.IdInput = Input.Id;
+            InputInfo.IdInput = request.Id;
             InputInfo.IdMedicine = request.IdMedicine;
             InputInfo.IdBatch = request.IdBatch;
             InputInfo.Count = request.Count;
@@ -92,12 +78,13 @@ namespace Phoenix.Server.Services.MainServices
             InputInfo.Total = request.Count * request.InputPrice;
             InputInfo.DueDate = request.DueDate;
             
-
             _dataContext.InputInfos.Add(InputInfo);
             await _dataContext.SaveChangesAsync();
             return new CrudResult() { IsOk = true };
         }
+        #endregion
 
+        #region CreateInventory
         public async Task<CrudResult> CreateInventory(InputInfoRequest request)
         {
 
@@ -123,10 +110,8 @@ namespace Phoenix.Server.Services.MainServices
             _dataContext.InputInfos.Add(InputInfo);
             await _dataContext.SaveChangesAsync();
 
-
-
             var inventories = _dataContext.Inventories.ToList()
-                                        .FindAll(d => d.IdMedicine == request.IdMedicine && d.LotNumber == request.IdBatch);
+                               .FindAll(d => d.IdMedicine == request.IdMedicine && d.LotNumber == request.IdBatch);
             if(inventories.Count != 0)
             {
                 var inventory = inventories.FirstOrDefault();
@@ -146,7 +131,6 @@ namespace Phoenix.Server.Services.MainServices
 
                 await _dataContext.SaveChangesAsync();
 
-
                 var InventoryTags = new InventoryTags();
                 InventoryTags.DocumentId = "PN00" + InputInfo.Id;
                 InventoryTags.ExpiredDate = DateTime.Now;
@@ -154,13 +138,11 @@ namespace Phoenix.Server.Services.MainServices
                 InventoryTags.LotNumber = request.IdBatch;
                 InventoryTags.UnitPrice = InputInfo.InputPrice;
                 InventoryTags.TotalPrice = InputInfo.Total;
-                // InventoryTags.SupplierId = Input.IdSupplier;
                 InventoryTags.DocumentType = 1;
                 InventoryTags.MedicineId = request.IdMedicine;
                 InventoryTags.Qty_After = inventory.Count;
                 InventoryTags.Qty = 0;
                 InventoryTags.Qty_Before = request.Count;
-
 
                 _dataContext.InventoryTags.Add(InventoryTags);
                 await _dataContext.SaveChangesAsync();
@@ -184,7 +166,6 @@ namespace Phoenix.Server.Services.MainServices
                 _dataContext.Inventories.Add(inventori);
                 await _dataContext.SaveChangesAsync();
 
-
                 var InventoryTags = new InventoryTags();
                 InventoryTags.DocumentId = "PN00" + InputInfo.Id;
                 InventoryTags.ExpiredDate = DateTime.Now;
@@ -192,36 +173,33 @@ namespace Phoenix.Server.Services.MainServices
                 InventoryTags.LotNumber = request.IdBatch;
                 InventoryTags.UnitPrice = InputInfo.InputPrice;
                 InventoryTags.TotalPrice = InputInfo.Total;
-                // InventoryTags.SupplierId = Input.IdSupplier;
                 InventoryTags.DocumentType = 1;
                 InventoryTags.MedicineId = request.IdMedicine;
                 InventoryTags.Qty_After = inventori.Count;
                 InventoryTags.Qty = 0;
                 InventoryTags.Qty_Before = request.Count;
 
-
                 _dataContext.InventoryTags.Add(InventoryTags);
                 await _dataContext.SaveChangesAsync();
             }
-
-           
-
             return new CrudResult() { IsOk = true };
         }
+        #endregion
 
-
+        #region UpdateInputInfo
         public async Task<CrudResult> UpdateInputInfo(int Id, InputInfoRequest request)
         {
             var InputInfo = _dataContext.InputInfos.Find(Id);
             InputInfo.IdMedicine = request.IdMedicine;
-           // InputInfo.IdSupplier = request.IdSupplier;
             InputInfo.IdBatch = request.IdBatch;
             InputInfo.DueDate = request.DueDate;
 
             await _dataContext.SaveChangesAsync();
             return new CrudResult() { IsOk = true };
         }
+        #endregion
 
+        #region DeleteInputInfo
         public async Task<CrudResult> DeleteInputInfo(int Id)
         {
             var InputInfo = _dataContext.InputInfos.Find(Id);
@@ -235,8 +213,11 @@ namespace Phoenix.Server.Services.MainServices
             await _dataContext.SaveChangesAsync();
             return new CrudResult() { IsOk = true };
         }
+        #endregion
 
-        /////////////
+        /////////////WEB
+
+        #region GetAll
         public async Task<BaseResponse<InputInfoDto>> GetAll(InputInfoRequest request)
         {
             var result = new BaseResponse<InputInfoDto>();
@@ -263,7 +244,7 @@ namespace Phoenix.Server.Services.MainServices
             }
             return result;
         }
-
+        #endregion
         public async Task<BaseResponse<InputInfoDto>> GetAllInputInfoById(int Id, InputInfoRequest request)
         {
             var result = new BaseResponse<InputInfoDto>();

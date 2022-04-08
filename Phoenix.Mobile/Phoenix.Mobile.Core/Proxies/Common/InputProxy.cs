@@ -14,6 +14,8 @@ namespace Phoenix.Mobile.Core.Proxies.Common
     {
         Task<BaseResponse<InputDto>> GetAllInput(InputRequest request);
         List<InputDto> Search(string Id);
+        Task<BaseResponse<InputDto>> GetLatestOrder();
+        Task<BaseResponse<InputDto>> Create(InputRequest request);
         Task<InputDto> AddInput(InputRequest request);
     }
 
@@ -48,6 +50,33 @@ namespace Phoenix.Mobile.Core.Proxies.Common
                 return null;
             }
         }
+        public async Task<BaseResponse<InputDto>> Create(InputRequest request)
+        {
+            try
+            {
+                var api = RestService.For<IInputApi>(GetHttpClient());
+
+                return await api.Create(request);
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler.Handle(new NetworkException(ex), true);
+                return null;
+            }
+        }
+        public async Task<BaseResponse<InputDto>> GetLatestOrder()
+        {
+            try
+            {
+                var api = RestService.For<IInputApi>(GetHttpClient());
+                return await api.GetLatestOrder();
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler.Handle(new NetworkException(ex), true);
+                return null;
+            }
+        }
 
 
         public async Task<InputDto> AddInput(InputRequest request)
@@ -70,7 +99,13 @@ namespace Phoenix.Mobile.Core.Proxies.Common
         {
             [Post("/input/GetAllInput")]
             Task<BaseResponse<InputDto>> GetAllInput([Body] InputRequest request);
-            
+
+            [Post("/input/GetLatestOrder")]
+            Task<BaseResponse<InputDto>> GetLatestOrder();
+
+            [Post("/input/Create")]
+            Task<BaseResponse<InputDto>> Create([Body] InputRequest request);
+
             [Post("/input/Search")]
             List<InputDto> Search( string Id);
 

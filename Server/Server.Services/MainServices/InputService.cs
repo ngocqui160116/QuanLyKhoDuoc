@@ -16,17 +16,17 @@ namespace Phoenix.Server.Services.MainServices
 {
     public interface IInputService
     {
+        //Mobile
         Task<BaseResponse<InputDto>> GetAllInput(InputRequest request);
-        List<InputDto> Search(string Id);
-        Task<CrudResult> CreateInput(InputRequest request);
+        Task<BaseResponse<InputDto>> CreateInput(InputRequest request);
         Task<CrudResult> UpdateInput(string Id, InputRequest request);
         Task<CrudResult> DeleteInput(string Id);
-
-        //
+        List<InputDto> Search(string Id);
+        
+        //Web
         Task<BaseResponse<InputDto>> GetAll(InputRequest request);
         Task<BaseResponse<InputDto>> Create(InputRequest request);
         Input GetInputById(string id);
-        Input GetLatestInput();
         //Task<BaseResponse<Input>> Delete(string Id);
     }
     public class InputService : IInputService
@@ -38,7 +38,10 @@ namespace Phoenix.Server.Services.MainServices
             _dataContext = dataContext;
         }
 
-        //lấy danh sách nhà cung cấp
+        //Mobile
+        #region Mobile
+
+        #region GetAllInput
         public async Task<BaseResponse<InputDto>> GetAllInput(InputRequest request)
         {
 
@@ -69,56 +72,54 @@ namespace Phoenix.Server.Services.MainServices
 
             return result;
         }
+        #endregion
 
-        public List<InputDto> Search(string Id)
+        #region CreateInput
+        public async Task<BaseResponse<InputDto>> CreateInput(InputRequest request)
         {
-                // setup query
-                var query = _dataContext.Inputs.Where(x => x.Id.Equals(Id));
-
-                var data =  query.ToList();
-                return data.MapTo<InputDto>();
-        }
-        //int ID;
-        //public int PhieuNhap()
-        //{
-           
-        //    var input = _dataContext.Inputs.ToList().LastOrDefault();
-
-
-        //    if (input.Id == null)
-        //    {
-        //        ID = 1;
-        //    }
-        //    else
-        //    {
-        //        //ID = input.IdInput;
-        //        ID = Convert.ToInt32(input.Id += 1);
-        //    }
-        //    return ID;
-        //}
-
-      
-
-        public async Task<CrudResult> CreateInput(InputRequest request)
-        {
-            //PhieuNhap();
-
-
-            Input inputs = new Input
+            var result = new BaseResponse<InputDto>();
+            var medicineItems = _dataContext.MedicineItems.ToList();
+            try
             {
-                IdStaff = request.IdStaff,
-                IdSupplier = request.IdSupplier,
-                DateInput = request.DateInput
-            };
+                Input inputs = new Input
+                {
+                    IdStaff = request.IdStaff,
+                    IdSupplier = request.IdSupplier,
+                    DateInput = request.DateInput,
+                    Status = "Đã lưu"
+                };
 
-            _dataContext.Inputs.Add(inputs);
-            await _dataContext.SaveChangesAsync();
+                _dataContext.Inputs.Add(inputs);
+                await _dataContext.SaveChangesAsync();
 
-            return new CrudResult() { IsOk = true };
+                var Latest = GetLatestInput();
+
+                InputInfo inputinfos = new InputInfo();
+                foreach (var item in medicineItems)
+                {
+                    inputinfos.IdInput = Latest.Id;
+                    inputinfos.IdMedicine = item.Medicine_Id;
+                    inputinfos.IdBatch = (int)item.Batch;
+                    inputinfos.Count = item.Count;
+                    inputinfos.InputPrice = item.InputPrice;
+                    inputinfos.Total = item.Count * item.InputPrice;
+                    inputinfos.DueDate = item.DueDate;
+
+                    _dataContext.InputInfos.Add(inputinfos);
+                    await _dataContext.SaveChangesAsync();
+                }
+                result.Success = true;
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return result;
         }
+        #endregion
 
-        //Task<CrudResult> UpdateInput(int IdInput, InputRequest request);
-        //Task<CrudResult> DeleteInput(int IdInput);
+        #region UpdateInput
         public async Task<CrudResult> UpdateInput(string Id, InputRequest request)
         {
             var Input = _dataContext.Inputs.Find(Id);
@@ -128,7 +129,9 @@ namespace Phoenix.Server.Services.MainServices
             await _dataContext.SaveChangesAsync();
             return new CrudResult() { IsOk = true };
         }
+        #endregion
 
+        #region DeleteInput
         public async Task<CrudResult> DeleteInput(string Id)
         {
             var Input = _dataContext.Inputs.Find(Id);
@@ -142,8 +145,24 @@ namespace Phoenix.Server.Services.MainServices
             await _dataContext.SaveChangesAsync();
             return new CrudResult() { IsOk = true };
         }
+        #endregion
 
-        // 
+        #region Search
+        public List<InputDto> Search(string Id)
+        {
+            // setup query
+            var query = _dataContext.Inputs.Where(x => x.Id.Equals(Id));
+            var data = query.ToList();
+            return data.MapTo<InputDto>();
+        }
+        #endregion
+
+        #endregion
+
+        //Web 
+        #region Web
+
+        #region GetAll
         public async Task<BaseResponse<InputDto>> GetAll(InputRequest request)
         {
             //setup query
@@ -172,12 +191,17 @@ namespace Phoenix.Server.Services.MainServices
 
             return result;
         }
+        #endregion
+
+        #region Create
         //thêm hóa đơn nhập và chi tiết hóa đơn nhập
         public async Task<BaseResponse<InputDto>> Create(InputRequest request)
         {
             var result = new BaseResponse<InputDto>();
+            var medicineItems = _dataContext.MedicineItems.ToList();
             try
             {
+               
                 Input inputs = new Input
                 {
                     IdStaff = request.IdStaff,
@@ -191,7 +215,9 @@ namespace Phoenix.Server.Services.MainServices
                 await _dataContext.SaveChangesAsync();
 
                 var Latest = GetLatestInput();
-                
+
+               
+
                 InputInfo inputinfos = new InputInfo();
                 foreach (var item in request.List)
                 {
@@ -215,22 +241,11 @@ namespace Phoenix.Server.Services.MainServices
 
             return result;
         }
-        public Input GetLatestInput()
-        {
-            var query = _dataContext.Inputs.AsQueryable();
+        #endregion
 
-            //if (!string.IsNullOrEmpty(request.Id))
-            //{
-            //    query = query.Where(d => d.Id.Contains(request.Id));
-            //}
-
-
-            query = query.OrderByDescending(d => d.Id);
-            var da = query.FirstOrDefault();
-            return da;
-        }
+        #region GetInputById
         public Input GetInputById(string id) => _dataContext.Inputs.Find(id);
-        
+
         /*public async Task<BaseResponse<Input>> Delete(string Id)
         {
             var result = new BaseResponse<InputDto>();
@@ -251,5 +266,20 @@ namespace Phoenix.Server.Services.MainServices
             }
             return result;
         }*/
+        #endregion
+
+        #endregion
+        //Chung
+        #region GetLatestInput
+        public Input GetLatestInput()
+        {
+            var query = _dataContext.Inputs.AsQueryable();
+
+            query = query.OrderByDescending(d => d.Id);
+            var da = query.FirstOrDefault();
+            return da;
+        }
+
+        #endregion
     }
 }

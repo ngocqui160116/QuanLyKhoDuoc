@@ -27,16 +27,8 @@ namespace Phoenix.Server.Api.Api
         }
 
         [HttpPost]
-        [Route("Search")]
-        public  List<InputDto> Search(string Id)
-        {
-            return  _InputService.Search(Id);
-        }
-
-
-        [HttpPost]
         [Route("CreateInput")]
-        public Task<CrudResult> CreateInput([FromBody] InputRequest request)
+        public Task<BaseResponse<InputDto>> CreateInput([FromBody] InputRequest request)
         {
             return _InputService.CreateInput(request);
         }
@@ -54,6 +46,14 @@ namespace Phoenix.Server.Api.Api
         {
             return _InputService.DeleteInput(Id);
         }
+
+        [HttpPost]
+        [Route("Search")]
+        public List<InputDto> Search(string Id)
+        {
+            return _InputService.Search(Id);
+        }
+
 
     }
 }

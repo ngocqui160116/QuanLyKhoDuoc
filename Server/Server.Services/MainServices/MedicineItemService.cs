@@ -47,9 +47,8 @@ namespace Phoenix.Server.Services.MainServices
                              {
                                  Id = c.Id,
                                  MedicineId = s.IdMedicine,
-                                 Name = s.Name,
-                                 RegistrationNumber = s.RegistrationNumber,
-                                 GroupName = s.Group
+                                 MedicineName = s.Name,
+                                 RegistrationNumber = s.RegistrationNumber
                              }).AsQueryable();
 
                 var config = new MapperConfiguration(cfg => cfg.CreateMissingTypeMaps = true);

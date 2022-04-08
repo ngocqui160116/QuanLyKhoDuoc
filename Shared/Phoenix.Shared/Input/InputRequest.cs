@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Phoenix.Shared.Common;
 using Phoenix.Shared.Medicine;
+using Phoenix.Shared.MedicineItem;
 
 namespace Phoenix.Shared.Input
 {
@@ -15,7 +16,7 @@ namespace Phoenix.Shared.Input
         public string Status { get; set; }
 
         //inputinfo
-        public string IdInput { get; set; }
+        public int IdInput { get; set; }
         public int IdMedicine { get; set; }
         public int IdBatch { get; set; }
         public int? Count { get; set; }
@@ -24,6 +25,6 @@ namespace Phoenix.Shared.Input
         public DateTime? DueDate { get; set; }
         
         public List<InputContentDto> List { get; set; }
-        public List<MedicineDto> ListMedicine { get; set; }
+        public List<MedicineItemDto> ListMedicine { get; set; }
     }
 }

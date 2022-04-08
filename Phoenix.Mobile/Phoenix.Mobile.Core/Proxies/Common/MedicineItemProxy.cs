@@ -56,7 +56,7 @@ namespace Phoenix.Mobile.Core.Proxies.Common
             [Post("/MedicineItem/GetAllMedicineItems")]
             Task<BaseResponse<MedicineItemDto>> GetAllMedicineItems( MedicineItemRequest request);
 
-            [Post("/MedicineItem/CreateMedicineItem")]
+            [Post("/MedicineItem/AddMedicineItem")]
             Task<CrudResult> AddMedicineItem(MedicineItemRequest request);
 
 

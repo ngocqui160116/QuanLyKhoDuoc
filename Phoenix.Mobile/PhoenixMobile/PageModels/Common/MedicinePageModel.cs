@@ -76,17 +76,25 @@ namespace Phoenix.Mobile.PageModels.Common
         public Command AddMedicineItemCommand => new Command(async (p) => await AddMedicineItemExecute(), (p) => !IsBusy);
         private async Task AddMedicineItemExecute()
         {
-           
-                if (IsBusy) return;
-                IsBusy = true;
+
+            try
+            {
+              
 
                 var data = await _medicineItemService.AddMedicineItem(new MedicineItemRequest
                 {
-                    Medicine_Id = Medicine.IdMedicine
+                   Medicine_Id = Medicine.IdMedicine
                 });
                 await CoreMethods.PushPageModel<AddInputPageModel>();
-                //await _dialogService.AlertAsync("Thêm thành công");
+
+               // await _dialogService.AlertAsync("Lưu thành công");
                 IsBusy = false;
+
+            }
+            catch (Exception e)
+            {
+                //await _dialogService.AlertAsync("Lưu thất bại");
+            }
         }
         #endregion
 
@@ -104,30 +112,29 @@ namespace Phoenix.Mobile.PageModels.Common
             {
                 _selectedMedicine = value;
                 if (value != null)
-                //ListMedicines.Add(SelectedMedicine);
                 MedicineSelected.Execute(value);
                 
             }
             
         }
-        #endregion
 
-
-        #region MedicineSelected
         public Command<MedicineModel> MedicineSelected
         {
             get
             {
                 return new Command<MedicineModel>(async (Medicine) =>
                 {
-                    //await CoreMethods.PushPageModel<AddInputPageModel>(Medicine);
-                    await CoreMethods.PushPageModel<AddInputPageModel>(Medicine);
+                    var data = _medicineItemService.AddMedicineItem(new MedicineItemRequest
+                    {
+                        Medicine_Id = Medicine.IdMedicine
+                    });
+                    CoreMethods.PushPageModel<AddInputPageModel>(Medicine);
+                   
                 });
             }
         }
 
 #endregion
-
 
         #region properties
         public MedicineModel Medicine { get; set; }
