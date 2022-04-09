@@ -15,6 +15,7 @@ namespace Phoenix.Mobile.Core.Proxies.Common
     public interface IMedicineItemProxy
     {
         Task<BaseResponse<MedicineItemDto>> GetAllMedicineItems(MedicineItemRequest request);
+        Task<BaseResponse<MedicineItemDto>> GetMedicineItemById(int Id);
         Task<CrudResult> AddMedicineItem(MedicineItemRequest request);
     }
 
@@ -27,6 +28,21 @@ namespace Phoenix.Mobile.Core.Proxies.Common
                 var api = RestService.For<IMedicineItemApi>(GetHttpClient());
 
                 return await api.GetAllMedicineItems(request);
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler.Handle(new NetworkException(ex), true);
+                return null;
+            }
+        }
+
+        public async Task<BaseResponse<MedicineItemDto>> GetMedicineItemById(int Id)
+        {
+            try
+            {
+                var api = RestService.For<IMedicineItemApi>(GetHttpClient());
+
+                return await api.GetMedicineItemById(Id);
             }
             catch (Exception ex)
             {
@@ -55,6 +71,9 @@ namespace Phoenix.Mobile.Core.Proxies.Common
         {
             [Post("/MedicineItem/GetAllMedicineItems")]
             Task<BaseResponse<MedicineItemDto>> GetAllMedicineItems( MedicineItemRequest request);
+           
+            [Post("/MedicineItem/GetMedicineItemById")]
+            Task<BaseResponse<MedicineItemDto>> GetMedicineItemById(int Id);
 
             [Post("/MedicineItem/AddMedicineItem")]
             Task<CrudResult> AddMedicineItem(MedicineItemRequest request);

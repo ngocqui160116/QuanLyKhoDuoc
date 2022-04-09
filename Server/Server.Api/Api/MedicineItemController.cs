@@ -28,12 +28,27 @@ namespace Phoenix.Server.Api.Api
         }
 
         [HttpPost]
+        [Route("GetMedicineItemById")]
+        //public async Task<BaseResponse<MedicineItemDto>> GetAllMedicineItems(MedicineItemRequest request)
+        public async Task<BaseResponse<MedicineItemDto>> GetMedicineItemById(int Id)
+        {
+            return await _MedicineItemService.GetMedicineItemById(Id);
+        }
+
+        [HttpPost]
         [Route("AddMedicineItem")]
         public Task<CrudResult> AddMedicineItem([FromBody] MedicineItemRequest request)
 
         {
             return _MedicineItemService.AddMedicineItem(request);
         }
+
+        //[HttpPost]
+        //[Route("UpdateMedicineItem")]
+        //public Task<CrudResult> UpdateMedicineItem(int IdMedicine, [FromBody] MedicineItemRequest request)
+        //{
+        //    return _MedicineItemService.UpdateMedicineItem(IdMedicine, request);
+        //}
 
         [HttpDelete]
         [Route("RemoveMedicineItem")]

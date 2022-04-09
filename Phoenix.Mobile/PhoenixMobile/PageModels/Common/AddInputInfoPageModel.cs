@@ -2,6 +2,7 @@
 using Phoenix.Mobile.Core.Infrastructure;
 using Phoenix.Mobile.Core.Models.InputInfo;
 using Phoenix.Mobile.Core.Models.Medicine;
+using Phoenix.Mobile.Core.Models.MedicineItem;
 using Phoenix.Mobile.Core.Services.Common;
 using Phoenix.Mobile.Helpers;
 using System;
@@ -15,31 +16,27 @@ namespace Phoenix.Mobile.PageModels.Common
 {
     public class AddInputInfoPageModel : BasePageModel
     {
-        private readonly IMedicineService _medicineService;
+        private readonly IMedicineItemService _medicineItemService;
+       
         private readonly IDialogService _dialogService;
 
-        public AddInputInfoPageModel(IMedicineService medicineService, IDialogService dialogService)
+        public AddInputInfoPageModel(IMedicineItemService medicineItemService, IDialogService dialogService)
         {
-            _medicineService = medicineService;
+            _medicineItemService = medicineItemService;
             _dialogService = dialogService;
 
         }
 
         public override async void Init(object initData)
         {
-            //base.Init(initData);
+
             if (initData != null)
             {
-                //ListMedicine = (List<MedicineModel>)initData;
-                Medicine = (MedicineModel)initData;
-                IsClose = true;
-                IsOpen = false;
-                
+                MedicineItem = (MedicineItemModel)initData;
             }
             else
             {
-                Medicine = new MedicineModel();
-                //ListMedicine = new List<MedicineModel>();
+                MedicineItem = new MedicineItemModel();
             }
             NavigationPage.SetHasNavigationBar(CurrentPage, false);
             CurrentPage.Title = "Nhập thông tin phiếu nhập";
@@ -51,29 +48,23 @@ namespace Phoenix.Mobile.PageModels.Common
         }
         private async Task LoadData()
         {
-            //so = ListMedicine.Count;
-            //if (so.Equals(0))
-            //{
+            Id = MedicineItem.Id;
+            NameMedicine = MedicineItem.MedicineName;
+            IdBatch = (int)MedicineItem.Batch;
+            Count = (int)MedicineItem.Count;
+            InputPrice = (double)MedicineItem.InputPrice;
+            HSD = (DateTime)MedicineItem.DueDate;
 
-            ListMedicine = new List<MedicineModel>()
-                {
-                   new MedicineModel()
-                   {
-                       IdMedicine = Medicine.IdMedicine,
-                       Name = Medicine.Name,
-                       NameUnit = Medicine.NameUnit,
-                       RegistrationNumber = Medicine.RegistrationNumber
-                   }
-
-                };
-
+            
         }
 
         #region properties
-       
+
         public MedicineModel Medicine { get; set; }
-        public List<MedicineModel> ListMedicine { get; set; }
+        public MedicineItemModel MedicineItem { get; set; }
+        public List<MedicineItemModel> MedicineItems { get; set; } = new List<MedicineItemModel>();
         public InputInfoModel inputInfoModel { get; set; }
+        public int Id { get; set; }
         public string NameMedicine { get; set; }
         public int IdBatch { get; set; }
         public DateTime HSD { get; set; } = DateTime.Now;

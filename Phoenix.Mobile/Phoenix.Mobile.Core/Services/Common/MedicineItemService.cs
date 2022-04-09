@@ -15,6 +15,7 @@ namespace Phoenix.Mobile.Core.Services.Common
     public interface IMedicineItemService
     {
         Task<List<MedicineItemModel>> GetAllMedicineItem(MedicineItemRequest request);
+        Task<List<MedicineItemModel>> GetMedicineItemById(int Id);
         Task<CrudResult> AddMedicineItem(MedicineItemRequest request);
     }
 
@@ -33,6 +34,12 @@ namespace Phoenix.Mobile.Core.Services.Common
         public Task<CrudResult> AddMedicineItem(MedicineItemRequest request)
         {
             return _MedicineItemProxy.AddMedicineItem(request);
+        }
+
+        public async Task<List<MedicineItemModel>> GetMedicineItemById(int Id)
+        {
+            var MedicineItem = await _MedicineItemProxy.GetMedicineItemById(Id);
+            return MedicineItem.Data.MapTo<MedicineItemModel>();
         }
     }
 }

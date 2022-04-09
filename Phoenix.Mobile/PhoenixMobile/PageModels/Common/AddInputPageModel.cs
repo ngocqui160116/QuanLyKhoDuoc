@@ -33,7 +33,7 @@ namespace Phoenix.Mobile.PageModels.Common
         private readonly IInputInfoService _inputInfoService;
         private readonly IDialogService _dialogService;
 
-        private ObservableCollection<MedicineItemModel> medicineItem;
+        private List<MedicineItemModel> medicineItem;
         private Command<MedicineItemModel> _selectItemCommand;
 
         public AddInputPageModel(ISupplierService supplierService, IMedicineItemService medicineItemService, IStaffService staffService,  IInputInfoService inputInfoService, IInputService inputService, IDialogService dialogService)
@@ -52,7 +52,7 @@ namespace Phoenix.Mobile.PageModels.Common
             if (initData != null)
             {
                 medicineModels = (MedicineModel)initData;
-                medicineItem = new ObservableCollection<MedicineItemModel>();
+                medicineItem = new List<MedicineItemModel>();
                 IsClose = true;
                 IsOpen = false;
             }
@@ -135,25 +135,18 @@ namespace Phoenix.Mobile.PageModels.Common
 
         #endregion
 
-        #region Properties
+        #region SelectItem
 
-        //public ObservableCollection<MedicineItemModel> Persons
-        //{
-        //    get { return _persons; }
-        //    set {  }
-        //}
-
-
-        public Command<MedicineItemModel> SelectPersonCommand
+        public Command<MedicineItemModel> SelectItemCommand
         {
             get
             {
-                return _selectItemCommand ?? (_selectItemCommand = new Command<MedicineItemModel>((id) =>
+                return new Command<MedicineItemModel>(async (MedicineItemModel) =>
                 {
-                    //CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn:" + id, "Đóng");
-                    CoreMethods.PushPageModel<AddInputInfoPageModel>();
-                    //Application.Current.MainPage.DisplayAlert("Selected Peron", "Person id : " + id.ToString(), "Ok");
-                }));
+                    //CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn: " +MedicineItemModel.MedicineName, "Đóng");
+                    CoreMethods.PushPageModel<AddInputInfoPageModel>(MedicineItemModel);
+
+                });
             }
         }
 

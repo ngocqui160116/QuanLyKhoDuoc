@@ -3,16 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
              xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common" 
-             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup" xmlns:medicine="clr-namespace:Phoenix.Mobile.Core.Models.Medicine;assembly=Phoenix.Mobile.Core" x:DataType="common:AddInputInfoPageModel"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup" xmlns:medicine="clr-namespace:Phoenix.Mobile.Core.Models.Medicine;assembly=Phoenix.Mobile.Core" xmlns:medicineItem="clr-namespace:Phoenix.Mobile.Core.Models.MedicineItem;assembly=Phoenix.Mobile.Core" x:DataType="common:AddInputInfoPageModel"
              x:Class="Phoenix.Mobile.Pages.Common.AddInputInfoPage"
              ControlTemplate="{StaticResource FullScreenHasBack}">
     <ContentPage.Content>
         
         <StackLayout>
-            <StackLayout HeightRequest="50"
-                         WidthRequest="50">
-                <Label Text="Danh sách sản phẩm"
-                       xe:Commands.Tap="{Binding SelectMedicine}" 
+            <StackLayout HeightRequest="25"
+                         WidthRequest="25">
+                <Label Text="Thông tin"
                        FontSize="Small"
                        Margin="5,2,0,0"
                        BackgroundColor="WhiteSmoke"
@@ -20,87 +19,21 @@
                        VerticalOptions="Center"/>
 
             </StackLayout>
-            <Frame xe:Commands.Tap="{Binding SelectMedicine}" 
-                   CornerRadius="15" 
-                   HeightRequest="80"
+            <Frame CornerRadius="15" 
+                   HeightRequest="50"
                    IsVisible="{Binding IsOpen}">
                 <StackLayout>
-                    <Image Source="@drawable/icon_medicine"
-                           WidthRequest="50"
-                           HeightRequest="50"
-                           HorizontalOptions="CenterAndExpand"
-                           VerticalOptions="CenterAndExpand">
-                    </Image>
-                    <Label Text="Thêm sản phẩm"
-                           FontSize="20"
+                    <Label Text="{Binding NameMedicine}"
+                           FontSize="30"
                            TextColor="Black"
+                           FontAttributes="Bold"
                            HorizontalOptions="Center"
-                           VerticalOptions="Center"/>
+                           VerticalOptions="CenterAndExpand"/>
                 </StackLayout>
                 
             </Frame>
             
-            <Frame CornerRadius="15" 
-                   IsVisible="{Binding IsClose}">
-                
-                <ListView ItemsSource="{Binding ListMedicine}" 
-                          HeightRequest="80" BackgroundColor="White"
-                          x:Name="searchResults"
-                          HasUnevenRows="True"
-                          SeparatorVisibility="None"
-                          HorizontalOptions="FillAndExpand"
-                          VerticalOptions="FillAndExpand">
-                    <ListView.ItemTemplate>
-
-                        <DataTemplate x:DataType="medicine:MedicineModel">
-                            <ViewCell>
-                                <StackLayout Margin="6,4,6,4"
-                                             BackgroundColor="White">
-                                    
-                                    <StackLayout Orientation="Horizontal" 
-                                                 HorizontalOptions="StartAndExpand" >
-                                        <Image Source="@drawable/icon_medicine"
-                                               WidthRequest="75"
-                                               HorizontalOptions="StartAndExpand"
-                                               VerticalOptions="CenterAndExpand">
-                                        </Image>
-
-                                        <StackLayout Orientation="Vertical">
-                                            <Label Text="{Binding Name}"
-                                                   Margin="8"
-                                                   FontAttributes="Bold"
-                                                   FontSize="Large" />
-
-                                            <StackLayout Orientation="Horizontal">
-                                                <Label Text="Số ĐK:"
-                                                       Margin="8,2,8,4"
-                                                       FontSize="Small"/>
-                                                <Label Text="{Binding RegistrationNumber}"
-                                                       Margin="2,2,8,4"
-                                                       TextColor="DarkSlateGray"
-                                                       IsEnabled="False"
-                                                       FontSize="Small"/>
-                                                <Label Text="ĐVT:"
-                                                       Margin="8,2,8,4"
-                                                       IsEnabled="False"
-                                                       FontSize="Small"/>
-                                                <Label Text="{Binding NameUnit}"
-                                                       Margin="2,2,8,4"
-                                                       IsEnabled="False"
-                                                       TextColor="DarkSlateGray"  
-                                                       FontSize="Small"/>
-                                            </StackLayout>
-                                        </StackLayout>
-                                    </StackLayout>
-                                </StackLayout>
-                            </ViewCell>
-                        </DataTemplate>
-
-                    </ListView.ItemTemplate>
-                </ListView>
-            </Frame>
-
-            <Frame CornerRadius="15" >
+            <Frame CornerRadius="15">
                 <StackLayout  BackgroundColor="White">
                     <Grid x:DataType="common:AddInputInfoPageModel">
                         <Grid.RowDefinitions>

@@ -57,7 +57,7 @@
                              AbsoluteLayout.LayoutBounds="0,0,1,1">
                     <StackLayout  >
                         <StackLayout BindableLayout.ItemsSource="{Binding MedicineItems}"
-                                     x:Name="PersonList"
+                                     x:Name="ItemList"
                                      IsEnabled="{Binding IsClose}"  
                                      BackgroundColor="WhiteSmoke">
                             <BindableLayout.ItemTemplate  IsEnabled="{Binding IsClose}">
@@ -67,8 +67,8 @@
                                                  HorizontalOptions="FillAndExpand"
                                                  Orientation="Vertical">
                                             <StackLayout.GestureRecognizers>
-                                                <TapGestureRecognizer Command="{Binding BindingContext.SelectPersonCommand,Source={x:Reference PersonList}}" 
-                                                                      CommandParameter="{Binding Medicine_Id}"/>
+                                                <TapGestureRecognizer Command="{Binding BindingContext.SelectItemCommand ,Source={x:Reference ItemList}}" 
+                                                                      CommandParameter="{Binding .}"/>
                                             </StackLayout.GestureRecognizers>
 
                                             <StackLayout Orientation="Horizontal" 
@@ -91,6 +91,17 @@
                                                            Grid.Row="0"
                                                            VerticalOptions="CenterAndExpand">
                                                     </Image>
+
+                                                    <StackLayout Grid.Column="5" 
+                                                                 HorizontalOptions="EndAndExpand"
+                                                                 VerticalOptions="StartAndExpand">
+                                                        <Label   Grid.Column="5"
+                                                                 Text="200"
+                                                                 HorizontalOptions="EndAndExpand"
+                                                                 VerticalOptions="StartAndExpand">
+
+                                                        </Label>
+                                                    </StackLayout>
 
                                                     <StackLayout Orientation="Vertical"
                                                                  Grid.Column="1"
@@ -126,15 +137,12 @@
                                                                  HorizontalOptions="EndAndExpand"
                                                                  VerticalOptions="EndAndExpand">
                                                         <ImageButton Source="@drawable/icon_edit"
-                                                                     Command="{Binding BindingContext.SelectPersonCommand,Source={x:Reference PersonList}}" 
-                                                                     CommandParameter="{Binding Medicine_Id}"
+                                                                     Command="{Binding BindingContext.SelectItemCommand,Source={x:Reference ItemList}}" 
+                                                                     CommandParameter="{Binding .}"
                                                                      Grid.Column="5"
                                                                      HorizontalOptions="EndAndExpand"
                                                                      VerticalOptions="CenterAndExpand">
-                                                            <ImageButton.GestureRecognizers>
-                                                                <TapGestureRecognizer Command="{Binding BindingContext.SelectPersonCommand,Source={x:Reference PersonList}}" 
-                                                                                      CommandParameter="{Binding Medicine_Id}"/>
-                                                            </ImageButton.GestureRecognizers>
+                                                            
                                                         </ImageButton>
                                                     </StackLayout>
                                                     <StackLayout Grid.Column="6"
@@ -142,15 +150,12 @@
                                                                  HorizontalOptions="EndAndExpand"
                                                                  VerticalOptions="EndAndExpand">
                                                         <ImageButton Source="@drawable/icon_edit"
-                                                                     Command="{Binding BindingContext.SelectPersonCommand,Source={x:Reference PersonList}}" 
-                                                                     CommandParameter="{Binding Medicine_Id}"
+                                                                     Command="{Binding BindingContext.SelectItemCommand,Source={x:Reference ItemList}}" 
+                                                                     CommandParameter="{Binding .}"
                                                                      Grid.Column="6"
                                                                      HorizontalOptions="EndAndExpand"
                                                                      VerticalOptions="CenterAndExpand">
-                                                            <ImageButton.GestureRecognizers>
-                                                                <TapGestureRecognizer Command="{Binding BindingContext.SelectPersonCommand,Source={x:Reference PersonList}}" 
-                                                                                      CommandParameter="{Binding Medicine_Id}"/>
-                                                            </ImageButton.GestureRecognizers>
+                                                            
                                                         </ImageButton>
                                                     </StackLayout>
                                                 </Grid>

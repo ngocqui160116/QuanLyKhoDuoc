@@ -17,6 +17,8 @@ namespace Phoenix.Server.Services.MainServices
     {
         //Task<BaseResponse<MedicineItemDto>> GetAllMedicineItems(MedicineItemRequest request);
         Task<BaseResponse<MedicineItemDto>> GetAllMedicineItems(MedicineItemRequest request);
+        Task<BaseResponse<MedicineItemDto>> GetMedicineItemById(int Id);
+        Task<CrudResult> UpdateMedicineItem(int IdMedicine, MedicineItemRequest request);
         Task<CrudResult> AddMedicineItem(MedicineItemRequest request);
         Task<CrudResult> RemoveMedicineItem(int Id);
 
@@ -35,7 +37,7 @@ namespace Phoenix.Server.Services.MainServices
 
 
         // Lấy danh sách nhà cung cấp
-        //public async Task<BaseResponse<MedicineItemDto>> GetAllMedicineItems(MedicineItemRequest request)
+        
         public async Task<BaseResponse<MedicineItemDto>> GetAllMedicineItems(MedicineItemRequest request)
         {
             var result = new BaseResponse<MedicineItemDto>();
@@ -69,12 +71,60 @@ namespace Phoenix.Server.Services.MainServices
             return result;
         }
 
+        public async Task<BaseResponse<MedicineItemDto>> GetMedicineItemById(int Id)
+        {
+            var result = new BaseResponse<MedicineItemDto>();
+            try
+            {
+                var query = (from c in _dataContext.MedicineItems
+                             join s in _dataContext.Medicines on c.Medicine_Id equals s.IdMedicine
+                             select new
+                             {
+                                 Id = c.Id,
+                                 MedicineId = s.IdMedicine,
+                                 MedicineName = s.Name,
+                                 RegistrationNumber = s.RegistrationNumber
+                             }).AsQueryable();
+
+                if (Id > 0)
+                {
+                    query = query.Where(d => d.Id == Id);
+                }
+
+                var config = new MapperConfiguration(cfg => cfg.CreateMissingTypeMaps = true);
+                var mapper = config.CreateMapper();
+                var listcart = query.Select(mapper.Map<MedicineItemDto>).ToList();
+                result.Data = listcart.MapTo<MedicineItemDto>();
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return result;
+        }
+
         public async Task<CrudResult> AddMedicineItem(MedicineItemRequest request)
         {
             var MedicineItem = new MedicineItem();
             MedicineItem.Medicine_Id = request.Medicine_Id;
       
             _dataContext.MedicineItems.Add(MedicineItem);
+            await _dataContext.SaveChangesAsync();
+            return new CrudResult() { IsOk = true };
+        }
+
+        public async Task<CrudResult> UpdateMedicineItem(int IdMedicine, MedicineItemRequest request)
+        {
+            var MedicineItem = _dataContext.MedicineItems.Find(IdMedicine);
+            MedicineItem.Medicine_Id = request.Medicine_Id;
+            MedicineItem.Batch = request.Batch;
+            MedicineItem.Count = request.Count;
+            MedicineItem.InputPrice = request.InputPrice;
+            MedicineItem.Total = request.InputPrice * request.Count;
+            MedicineItem.DueDate = request.DueDate;
+
             await _dataContext.SaveChangesAsync();
             return new CrudResult() { IsOk = true };
         }
