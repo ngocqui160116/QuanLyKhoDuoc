@@ -126,10 +126,6 @@ namespace Phoenix.Mobile.PageModels.Common
         #endregion
         #endregion
 
-
-
-
-
         public Command SelectedItemCommand => new Command(async (p) => await SelectedItemCommandExecute(), (p) => !IsBusy);
 
         private async Task SelectedItemCommandExecute()

@@ -16,10 +16,10 @@ namespace Phoenix.Server.Data.Entity
         public int Medicine_Id { get; set; }
         [ForeignKey("Medicine_Id")]
         public virtual Medicine Medicine { get; set; }
-        public int? Batch { get; set; }
-        public int? Count { get; set; }
-        public double? InputPrice { get; set; }
-        public double? Total { get; set; }
-        public DateTime? DueDate { get; set; }
+        public int Batch { get; set; }
+        public int Count { get; set; }
+        public double InputPrice { get; set; }
+        public double Total { get; set; }
+        public DateTime DueDate { get; set; }
     }
 }

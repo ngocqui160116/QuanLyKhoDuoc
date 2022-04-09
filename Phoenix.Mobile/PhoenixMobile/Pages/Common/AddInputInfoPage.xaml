@@ -9,16 +9,7 @@
     <ContentPage.Content>
         
         <StackLayout>
-            <StackLayout HeightRequest="25"
-                         WidthRequest="25">
-                <Label Text="Thông tin"
-                       FontSize="Small"
-                       Margin="5,2,0,0"
-                       BackgroundColor="WhiteSmoke"
-                       FontAttributes="Bold"
-                       VerticalOptions="Center"/>
-
-            </StackLayout>
+            
             <Frame CornerRadius="15" 
                    HeightRequest="50"
                    IsVisible="{Binding IsOpen}">
@@ -32,7 +23,16 @@
                 </StackLayout>
                 
             </Frame>
-            
+            <StackLayout HeightRequest="25"
+                         WidthRequest="25">
+                <Label Text="Thông tin"
+                       FontSize="Small"
+                       Margin="5,2,0,0"
+                       BackgroundColor="WhiteSmoke"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"/>
+
+            </StackLayout>
             <Frame CornerRadius="15">
                 <StackLayout  BackgroundColor="White">
                     <Grid x:DataType="common:AddInputInfoPageModel">
@@ -114,7 +114,7 @@
                 <AbsoluteLayout HorizontalOptions="Center"
 >
                     <Grid xe:TouchEffect.Color="AliceBlue"
-                          xe:Commands.Tap="{Binding AddMedicineCommand}">
+                          xe:Commands.Tap="{Binding UpdateMedicineItemCommand}">
                         <forms:CachedImage Source="btn_Save" 
                                            Grid.Row="0"
                                            HeightRequest="50"/>

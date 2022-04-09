@@ -18,7 +18,7 @@ namespace Phoenix.Server.Services.MainServices
         //Task<BaseResponse<MedicineItemDto>> GetAllMedicineItems(MedicineItemRequest request);
         Task<BaseResponse<MedicineItemDto>> GetAllMedicineItems(MedicineItemRequest request);
         Task<BaseResponse<MedicineItemDto>> GetMedicineItemById(int Id);
-        Task<CrudResult> UpdateMedicineItem(int IdMedicine, MedicineItemRequest request);
+        Task<CrudResult> UpdateMedicineItem(int Medicine_Id, MedicineItemRequest request);
         Task<CrudResult> AddMedicineItem(MedicineItemRequest request);
         Task<CrudResult> RemoveMedicineItem(int Id);
 
@@ -109,15 +109,21 @@ namespace Phoenix.Server.Services.MainServices
         {
             var MedicineItem = new MedicineItem();
             MedicineItem.Medicine_Id = request.Medicine_Id;
-      
+            MedicineItem.Batch = 0;
+            MedicineItem.Count = 0;
+            MedicineItem.InputPrice = 0;
+            MedicineItem.Total = request.InputPrice * request.Count;
+            MedicineItem.DueDate = DateTime.Now;
+
+
             _dataContext.MedicineItems.Add(MedicineItem);
             await _dataContext.SaveChangesAsync();
             return new CrudResult() { IsOk = true };
         }
 
-        public async Task<CrudResult> UpdateMedicineItem(int IdMedicine, MedicineItemRequest request)
+        public async Task<CrudResult> UpdateMedicineItem(int Id, MedicineItemRequest request)
         {
-            var MedicineItem = _dataContext.MedicineItems.Find(IdMedicine);
+            var MedicineItem = _dataContext.MedicineItems.Find(Id);
             MedicineItem.Medicine_Id = request.Medicine_Id;
             MedicineItem.Batch = request.Batch;
             MedicineItem.Count = request.Count;

@@ -5,6 +5,7 @@ using Phoenix.Mobile.Core.Models.Medicine;
 using Phoenix.Mobile.Core.Models.MedicineItem;
 using Phoenix.Mobile.Core.Services.Common;
 using Phoenix.Mobile.Helpers;
+using Phoenix.Shared.MedicineItem;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -48,14 +49,18 @@ namespace Phoenix.Mobile.PageModels.Common
         }
         private async Task LoadData()
         {
-            Id = MedicineItem.Id;
-            NameMedicine = MedicineItem.MedicineName;
-            IdBatch = (int)MedicineItem.Batch;
-            Count = (int)MedicineItem.Count;
-            InputPrice = (double)MedicineItem.InputPrice;
-            HSD = (DateTime)MedicineItem.DueDate;
+            HSD = DateTime.Now;
 
-            
+            Id = MedicineItem.Id;
+            IdMedicine = MedicineItem.Medicine_Id;
+            NameMedicine = MedicineItem.MedicineName;
+            IdBatch = MedicineItem.Batch;
+            Count = MedicineItem.Count;
+            InputPrice = MedicineItem.InputPrice;
+            HSD = MedicineItem.DueDate;
+            Total = MedicineItem.Total;
+
+
         }
 
         #region properties
@@ -65,11 +70,13 @@ namespace Phoenix.Mobile.PageModels.Common
         public List<MedicineItemModel> MedicineItems { get; set; } = new List<MedicineItemModel>();
         public InputInfoModel inputInfoModel { get; set; }
         public int Id { get; set; }
+        public int IdMedicine { get; set; }
         public string NameMedicine { get; set; }
         public int IdBatch { get; set; }
         public DateTime HSD { get; set; } = DateTime.Now;
         public int Count { get; set; }
         public double InputPrice { get; set; }
+        public double Total { get; set; }
         public string NameUnit { get; set; }
         public string SDK { get; set; }
         public bool IsClose { get; set; } = false;
@@ -119,6 +126,36 @@ namespace Phoenix.Mobile.PageModels.Common
                 await _dialogService.AlertAsync("Thêm thất bại");
 
             }   
+        }
+        #endregion
+
+        #region UpdateMedicineItemCommand
+        public Command UpdateMedicineItemCommand => new Command(async (p) => await UpdateMedicineItemExecute(), (p) => !IsBusy);
+        private async Task UpdateMedicineItemExecute()
+        {
+            try
+            {
+                if (IsBusy) return;
+                IsBusy = true;
+
+                var data = await _medicineItemService.UpdateMedicineItem(Id, new MedicineItemRequest
+                {
+                    Id = Id,
+                    Medicine_Id = IdMedicine,
+                    Batch = IdBatch,
+                    Count = Count,
+                    InputPrice = InputPrice,
+                    DueDate = HSD
+                });
+                await CoreMethods.PushPageModel<AddInputPageModel>();
+                //await _dialogService.AlertAsync("Cập nhật thành công");
+                IsBusy = false;
+
+            }
+            catch (Exception e)
+            {
+                //await _dialogService.AlertAsync("Cập nhật thất bại");
+            }
         }
         #endregion
 

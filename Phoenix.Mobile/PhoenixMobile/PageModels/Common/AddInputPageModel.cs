@@ -72,11 +72,9 @@ namespace Phoenix.Mobile.PageModels.Common
 
         private async Task LoadData()
         {
-
+            
             if (IsBusy) return;
             IsBusy = true;
-
-            IsBusy = false;
 
             #region MedicineItem
             var data1 = await _medicineItemService.GetAllMedicineItem(MedicineItemRequest);

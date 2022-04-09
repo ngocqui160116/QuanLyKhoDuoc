@@ -43,12 +43,12 @@ namespace Phoenix.Server.Api.Api
             return _MedicineItemService.AddMedicineItem(request);
         }
 
-        //[HttpPost]
-        //[Route("UpdateMedicineItem")]
-        //public Task<CrudResult> UpdateMedicineItem(int IdMedicine, [FromBody] MedicineItemRequest request)
-        //{
-        //    return _MedicineItemService.UpdateMedicineItem(IdMedicine, request);
-        //}
+        [HttpPost]
+        [Route("UpdateMedicineItem")]
+        public Task<CrudResult> UpdateMedicineItem(int Id, [FromBody] MedicineItemRequest request)
+        {
+            return _MedicineItemService.UpdateMedicineItem(Id, request);
+        }
 
         [HttpDelete]
         [Route("RemoveMedicineItem")]

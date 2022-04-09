@@ -92,11 +92,24 @@
                                                            VerticalOptions="CenterAndExpand">
                                                     </Image>
 
-                                                    <StackLayout Grid.Column="5" 
+                                                    <StackLayout Grid.Column="5"
+                                                                 Margin="5,10,0,0"
+                                                                 Orientation="Horizontal"
                                                                  HorizontalOptions="EndAndExpand"
                                                                  VerticalOptions="StartAndExpand">
                                                         <Label   Grid.Column="5"
-                                                                 Text="200"
+                                                                 Text="{Binding Batch}"
+                                                                 FontSize="Small"
+                                                                 TextColor="Red"
+                                                                 FontAttributes="Bold"
+                                                                 HorizontalOptions="EndAndExpand"
+                                                                 VerticalOptions="StartAndExpand">
+                                                        </Label>
+                                                        <Label   Grid.Column="5"
+                                                                 Text=" đ"
+                                                                 FontSize="Small"
+                                                                 TextColor="Red"
+                                                                 FontAttributes="Bold"
                                                                  HorizontalOptions="EndAndExpand"
                                                                  VerticalOptions="StartAndExpand">
 
@@ -114,16 +127,6 @@
                                                         </StackLayout>
 
                                                         <StackLayout Orientation="Horizontal">
-                                                            <Label Text="Số ĐK:"
-                                                                   Margin="0,2,8,4"
-                                                                   FontSize="Small" />
-                                                            <Label Text="{Binding RegistrationNumber}"
-                                                                   Margin="2,2,8,4"
-                                                                   TextColor="DarkSlateGray"
-                                                                   FontSize="Small" />
-                                                        </StackLayout>
-
-                                                        <StackLayout Orientation="Horizontal">
                                                             <Label Text="Số lô:"
                                                                    Margin="0,2,8,4"
                                                                    FontSize="Small" />
@@ -131,9 +134,27 @@
                                                                    Margin="2,2,8,4"
                                                                    TextColor="DarkSlateGray"  
                                                                    FontSize="Small" />
+
+                                                            <Label Text="HSD:"
+                                                                   Margin="0,2,8,4"
+                                                                   FontSize="Small" />
+                                                            <Label Text="{Binding Batch}"
+                                                                   Margin="2,2,8,4"
+                                                                   TextColor="DarkSlateGray"  
+                                                                   FontSize="Small" />
+                                                        </StackLayout>
+                                                        <StackLayout Orientation="Horizontal">
+                                                            <Label Text="Số lượng:"
+                                                                   Margin="0,2,8,4"
+                                                                   FontSize="Small" />
+                                                            <Label Text="{Binding Count}"
+                                                                   Margin="2,2,8,4"
+                                                                   FontSize="Small"
+                                                                   TextColor="Red"/>
                                                         </StackLayout>
                                                     </StackLayout>
                                                     <StackLayout Grid.Column="5" 
+                                                                 Margin="10,0,5,10"
                                                                  HorizontalOptions="EndAndExpand"
                                                                  VerticalOptions="EndAndExpand">
                                                         <ImageButton Source="@drawable/icon_edit"
@@ -146,10 +167,10 @@
                                                         </ImageButton>
                                                     </StackLayout>
                                                     <StackLayout Grid.Column="6"
-                                                                 Margin="10,0,5,0"
+                                                                 Margin="10,0,5,10"
                                                                  HorizontalOptions="EndAndExpand"
                                                                  VerticalOptions="EndAndExpand">
-                                                        <ImageButton Source="@drawable/icon_edit"
+                                                        <ImageButton Source="@drawable/icon_remove"
                                                                      Command="{Binding BindingContext.SelectItemCommand,Source={x:Reference ItemList}}" 
                                                                      CommandParameter="{Binding .}"
                                                                      Grid.Column="6"
