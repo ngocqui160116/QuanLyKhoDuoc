@@ -52,7 +52,7 @@ namespace Phoenix.Mobile.PageModels.Common
             if (initData != null)
             {
                 medicineModels = (MedicineModel)initData;
-                medicineItem = new List<MedicineItemModel>();
+                //medicineItem = new List<MedicineItemModel>();
                 IsClose = true;
                 IsOpen = false;
             }

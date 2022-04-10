@@ -32,7 +32,8 @@ namespace Phoenix.Server.Services.Infrastructure
                 .ForMember(d => d.MedicineName, o => o.MapFrom(s => s.Medicine.Name));
             CreateMap<DocumentType, DocumentTypeDto>();
             CreateMap<Inventory, InventoryDto>()
-                //.ForMember(d => d.LotNumber, o => o.MapFrom(s => s.Medicine.Name))
+                .ForMember(d => d.UnitPrice, o => o.MapFrom(s => s.InputInfo.InputPrice))
+                .ForMember(d => d.HSD, o => o.MapFrom(s => s.InputInfo.DueDate))
                 .ForMember(d => d.MedicineName, o => o.MapFrom(s => s.Medicine.Name));
             CreateMap<Input, InputDto>()
                 

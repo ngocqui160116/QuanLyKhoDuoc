@@ -6,6 +6,7 @@ using Phoenix.Mobile.Core.Services.Common;
 using Phoenix.Mobile.Helpers;
 using Phoenix.Shared.InputInfo;
 using Phoenix.Shared.Inventory;
+using Phoenix.Shared.MedicineItem;
 using Phoenix.Shared.OutputInfo;
 using System;
 using System.Collections.Generic;
@@ -17,14 +18,15 @@ namespace Phoenix.Mobile.PageModels.Common
 {
     public class InventoryPageModel :BasePageModel
     {
-
+        private readonly IMedicineItemService _medicineItemService;
         private readonly IInputInfoService _inputinfoService;
         private readonly IOutputInfoService _outputinfoService;
         private readonly IInventoryService _InventoryService;
         private readonly IDialogService _dialogService;
 
-        public InventoryPageModel(IInputInfoService inputinfoService, IInventoryService InventoryService, IOutputInfoService outputinfoService, IDialogService dialogService)
+        public InventoryPageModel(IInputInfoService inputinfoService, IMedicineItemService medicineItemService, IInventoryService InventoryService, IOutputInfoService outputinfoService, IDialogService dialogService)
         {
+            _medicineItemService = medicineItemService;
             _inputinfoService = inputinfoService;
             _outputinfoService = outputinfoService;
             _InventoryService = InventoryService;
@@ -83,56 +85,51 @@ namespace Phoenix.Mobile.PageModels.Common
         public OutputInfoRequest OutputInfoRequest { get; set; } = new OutputInfoRequest();
 
         public OutputInfoDto outputInfoDto { get; set; }
-
+        public InventoryModel InventoryModel { get; set; }
 
 
         #endregion
 
-        #region SelectedItemCommand
+        #region SelectMedicineItem
 
-        #region SelectMedicine
+        InventoryModel _selectedInventory;
 
-        InputInfoModel _selectedInputInfo;
-
-        public InputInfoModel SelectedInputInfo
+        public InventoryModel SelectedInventory
         {
             get
             {
-                return _selectedInputInfo;
+                return _selectedInventory;
             }
             set
             {
-                _selectedInputInfo = value;
+                _selectedInventory = value;
                 if (value != null)
-                    //ListMedicines.Add(SelectedMedicine);
-                    InputInfoSelected.Execute(value);
+                    InventorySelected.Execute(value);
 
             }
 
         }
-        #region InputInfoSelected
-        public Command<InputInfoModel> InputInfoSelected
+
+        public Command<InventoryModel> InventorySelected
         {
             get
             {
-                return new Command<InputInfoModel>(async (InputInfo) =>
+                return new Command<InventoryModel>(async (Inventory) =>
                 {
-                    //await CoreMethods.PushPageModel<AddInputPageModel>(Medicine);
-                    await CoreMethods.PushPageModel<AddOutputPageModel>(InputInfo);
+                    var data = _medicineItemService.AddItemInventory(new MedicineItemRequest
+                    {
+                        Medicine_Id = Inventory.IdMedicine,
+                        Batch = Inventory.LotNumber,
+                        Count = Inventory.Count,
+                        DueDate = Inventory.HSD,
+                        InputPrice = Inventory.UnitPrice
+                    });
+                    CoreMethods.PushPageModel<AddOutputPageModel>(Inventory);
+
                 });
             }
         }
 
-        #endregion
-        #endregion
-
-        public Command SelectedItemCommand => new Command(async (p) => await SelectedItemCommandExecute(), (p) => !IsBusy);
-
-        private async Task SelectedItemCommandExecute()
-        {
-            await _dialogService.AlertAsync("Bạn đã chọn:", "Thông báo", "OK");
-            // await CoreMethods.PushPageModel<AddMedicinePageModel>();
-        }
         #endregion
     }
 }

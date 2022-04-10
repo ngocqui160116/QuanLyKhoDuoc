@@ -21,7 +21,7 @@
                       BackgroundColor="#ecf0f1"
                       SeparatorVisibility="None"
                       HorizontalOptions="FillAndExpand"
-                      SelectedItem="{Binding SelectedInputInfo}"
+                      SelectedItem="{Binding SelectedInventory}"
                       VerticalOptions="FillAndExpand">
 
                 <ListView.ItemTemplate>
@@ -44,7 +44,7 @@
                                                FontSize="Small" />
                                     </StackLayout>
                                 </StackLayout>
-                                <!--<StackLayout Orientation="Horizontal">
+                                <StackLayout Orientation="Horizontal">
                                     <Label Text="Lô:"
                                            Margin="8,2,2,4"
                                            FontSize="Small" />
@@ -56,12 +56,12 @@
                                         <Label Text="HSD:"
                                                Margin="8,2,2,4"
                                                FontSize="Small" />
-                                        <Label Text="{Binding ExpiredDate}"
+                                        <Label Text="{Binding HSD}"
                                                TextColor="DarkGray"
                                                Margin="2"
                                                FontSize="Small" />
                                     </StackLayout>
-                                </StackLayout>-->
+                                </StackLayout>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

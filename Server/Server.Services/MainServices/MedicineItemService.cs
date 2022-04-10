@@ -20,6 +20,7 @@ namespace Phoenix.Server.Services.MainServices
         Task<BaseResponse<MedicineItemDto>> GetMedicineItemById(int Id);
         Task<CrudResult> UpdateMedicineItem(int Medicine_Id, MedicineItemRequest request);
         Task<CrudResult> AddMedicineItem(MedicineItemRequest request);
+        Task<CrudResult> AddItemInventory(MedicineItemRequest request);
         Task<CrudResult> RemoveMedicineItem(int Id);
 
         //Task<CrudResult> UpdateCart(int Id, MedicineItemRequest request);
@@ -112,6 +113,22 @@ namespace Phoenix.Server.Services.MainServices
             MedicineItem.Batch = 0;
             MedicineItem.Count = 0;
             MedicineItem.InputPrice = 0;
+            MedicineItem.Total = request.InputPrice * request.Count;
+            MedicineItem.DueDate = DateTime.Now;
+
+
+            _dataContext.MedicineItems.Add(MedicineItem);
+            await _dataContext.SaveChangesAsync();
+            return new CrudResult() { IsOk = true };
+        }
+
+        public async Task<CrudResult> AddItemInventory(MedicineItemRequest request)
+        {
+            var MedicineItem = new MedicineItem();
+            MedicineItem.Medicine_Id = request.Medicine_Id;
+            MedicineItem.Batch = request.Batch;
+            MedicineItem.Count = request.Count;
+            MedicineItem.InputPrice = request.InputPrice;
             MedicineItem.Total = request.InputPrice * request.Count;
             MedicineItem.DueDate = DateTime.Now;
 

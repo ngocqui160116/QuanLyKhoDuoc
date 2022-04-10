@@ -15,5 +15,7 @@ namespace Phoenix.Shared.Inventory
     //
         public string MedicineName { get; set; }
         public int LotNumber { get; set; }
+        public double UnitPrice { get; set; }
+        public DateTime HSD { get; set; }
     }
 }

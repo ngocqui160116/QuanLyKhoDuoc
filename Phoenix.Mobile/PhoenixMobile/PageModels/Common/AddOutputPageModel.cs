@@ -1,11 +1,13 @@
 ﻿using Phoenix.Mobile.Core.Infrastructure;
 using Phoenix.Mobile.Core.Models.InputInfo;
 using Phoenix.Mobile.Core.Models.Medicine;
+using Phoenix.Mobile.Core.Models.MedicineItem;
 using Phoenix.Mobile.Core.Models.Reason;
 using Phoenix.Mobile.Core.Models.Staff;
 using Phoenix.Mobile.Core.Models.Supplier;
 using Phoenix.Mobile.Core.Services.Common;
 using Phoenix.Mobile.Helpers;
+using Phoenix.Shared.MedicineItem;
 using Phoenix.Shared.OutputInfo;
 using Phoenix.Shared.Reason;
 using Phoenix.Shared.Staff;
@@ -21,14 +23,16 @@ namespace Phoenix.Mobile.PageModels.Common
 {
     public class AddOutputPageModel : BasePageModel
     {
+        private readonly IMedicineItemService _medicineItemService;
         private readonly IReasonService _reasonService;
         private readonly IStaffService _staffService;
         private readonly IOutputInfoService _outputInfoService;
         private readonly IDialogService _dialogService;
 
-        public AddOutputPageModel(IReasonService reasonService, IStaffService staffService, IOutputInfoService outputInfoService , IDialogService dialogService)
+        public AddOutputPageModel(IReasonService reasonService, IMedicineItemService medicineItemService, IStaffService staffService, IOutputInfoService outputInfoService , IDialogService dialogService)
         {
             _reasonService = reasonService;
+            _medicineItemService = medicineItemService;
             _staffService = staffService;
             _outputInfoService = outputInfoService;
             _dialogService = dialogService;
@@ -36,15 +40,18 @@ namespace Phoenix.Mobile.PageModels.Common
         }
         public override async void Init(object initData)
         {
-            //base.Init(initData);
-            if (initData != null)
-            {
-                InputInfo = (InputInfoModel)initData;
-            }
-            else
-            {
-                InputInfo = new InputInfoModel();
-            }
+            base.Init(initData);
+            IsClose = true;
+            IsOpen = false;
+            //if (initData != null)
+            //{
+            //    Medicine = (MedicineModel)initData;
+            //}
+            //else
+            //{
+            //    Medicine = new MedicineModel();
+
+            //}
             NavigationPage.SetHasNavigationBar(CurrentPage, false);
             CurrentPage.Title = "Thêm phiếu xuất";
         }
@@ -56,20 +63,32 @@ namespace Phoenix.Mobile.PageModels.Common
 
         private async Task LoadData()
         {
+           
 
-            ListMedicine = new List<InputInfoModel>()
-                {
-                   new InputInfoModel()
-                   {
-                       IdMedicine = InputInfo.IdMedicine,
-                       MedicineName = InputInfo.MedicineName,
-                       Count = InputInfo.Count,
-                       DueDate = InputInfo.DueDate
-                   }
+            //ListMedicine = new List<InputInfoModel>()
+            //    {
+            //       new InputInfoModel()
+            //       {
+            //           IdMedicine = InputInfo.IdMedicine,
+            //           MedicineName = InputInfo.MedicineName,
+            //           Count = InputInfo.Count,
+            //           DueDate = InputInfo.DueDate
+            //       }
 
-                };
+            //    };
 
-
+            #region MedicineItem
+            var data2 = await _medicineItemService.GetAllMedicineItem(MedicineItemRequest);
+            if (data2 == null)
+            {
+                await _dialogService.AlertAsync("Lỗi kết nối mạng!", "Lỗi", "OK");
+            }
+            else
+            {
+                MedicineItems = data2;
+                RaisePropertyChanged(nameof(MedicineItems));
+            }
+            #endregion
 
             var data = await _reasonService.GetAllReason(request);
             if (data == null)
@@ -98,19 +117,24 @@ namespace Phoenix.Mobile.PageModels.Common
         }
 
         #region properties
+        public List<MedicineItemModel> MedicineItems { get; set; } = new List<MedicineItemModel>();
+        public MedicineItemRequest MedicineItemRequest { get; set; } = new MedicineItemRequest();
+        public List<MedicineModel> ListMedicine { get; set; }
         public InputInfoModel InputInfo { get; set; }
         public List<ReasonModel> Reasons { get; set; } = new List<ReasonModel>();
         public ReasonRequest request { get; set; } = new ReasonRequest();
         public List<StaffModel> Staffs { get; set; } = new List<StaffModel>();
         public StaffRequest StaffRequest { get; set; } = new StaffRequest();
-        public MedicineModel Medicine { get; set; }
-       
+        public MedicineItemModel MedicineItem { get; set; }
+
         //public ObservableCollection<MedicineModel> ListMedicine { get; set; }
-        public List<InputInfoModel> ListMedicine { get; set; }
+        //public List<InputInfoModel> ListMedicine { get; set; }
 
         #endregion
 
         #region properties
+        public bool IsClose { get; set; } = false;
+        public bool IsOpen { get; set; } = true;
         public int IdMedicine { get; set; }
         public string Name { get; set; }
         public int IdReason { get; set; }
@@ -158,6 +182,23 @@ namespace Phoenix.Mobile.PageModels.Common
         {
             await CoreMethods.PushPageModel<InventoryPageModel>();
         }
+        #endregion
+
+        #region SelectItem
+
+        public Command<MedicineItemModel> SelectItemCommand
+        {
+            get
+            {
+                return new Command<MedicineItemModel>(async (MedicineItemModel) =>
+                {
+                    //CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn: " +MedicineItemModel.MedicineName, "Đóng");
+                    CoreMethods.PushPageModel<AddInputInfoPageModel>(MedicineItemModel);
+
+                });
+            }
+        }
+
         #endregion
 
         #region SelectReason

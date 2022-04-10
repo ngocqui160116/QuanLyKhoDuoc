@@ -44,6 +44,14 @@ namespace Phoenix.Server.Api.Api
         }
 
         [HttpPost]
+        [Route("AddItemInventory")]
+        public Task<CrudResult> AddItemInventory([FromBody] MedicineItemRequest request)
+
+        {
+            return _MedicineItemService.AddItemInventory(request);
+        }
+
+        [HttpPost]
         [Route("UpdateMedicineItem")]
         public Task<CrudResult> UpdateMedicineItem(int Id, [FromBody] MedicineItemRequest request)
         {

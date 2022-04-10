@@ -39,8 +39,6 @@ namespace Phoenix.Mobile.PageModels.Common
             if (initData != null)
             {
                 Medicine = (MedicineModel)initData;
-               
-
             }
             else
             {

@@ -14,6 +14,7 @@ namespace Phoenix.Server.Data.Entity
         public virtual Medicine Medicine { get; set; }
         public int? Count { get; set; }
         public int? LotNumber { get; set; }
+        public double? UnitPrice { get; set; }
         public int? IdInputInfo { get; set; }
         [ForeignKey("IdInputInfo")]
         public virtual InputInfo InputInfo { get; set; }
