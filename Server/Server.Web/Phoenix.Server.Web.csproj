@@ -770,6 +770,8 @@
     <Content Include="Areas\Admin\Views\Output\_CreateOrUpdate.cshtml" />
     <Content Include="Areas\Admin\Views\Output\Create.cshtml" />
     <Content Include="Areas\Admin\Views\InputInfo\Expired.cshtml" />
+    <Content Include="Areas\Admin\Views\Inventory\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Inventory\OutOfInventory.cshtml" />
     <None Include="assets\js\kendo\2019.3.1023\kendo.all-vsdoc.js" />
     <None Include="assets\js\kendo\2019.3.1023\kendo.all.min.intellisense.js" />
     <Content Include="assets\js\kendo\2019.3.1023\kendo.all.min.js" />
@@ -1223,6 +1225,8 @@
     <Compile Include="Areas\Admin\Controllers\AdminAuthorizeAttribute.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
+    <Compile Include="Areas\Admin\Controllers\InventoryController.cs" />
+    <Compile Include="Areas\Admin\Controllers\InventoryModel.cs" />
     <Compile Include="Areas\Admin\Controllers\InventoryTagsController.cs" />
     <Compile Include="Areas\Admin\Controllers\UnitController.cs" />
     <Compile Include="Areas\Admin\Controllers\GroupController.cs" />
@@ -1242,6 +1246,7 @@
     <Compile Include="Areas\Admin\Models\Common\LoginModel.cs" />
     <Compile Include="Areas\Admin\Models\Common\MimeTypes.cs" />
     <Compile Include="Areas\Admin\Models\Customer\CustomerModel.cs" />
+    <Compile Include="Areas\Admin\Models\Inventory\InventoryModel.cs" />
     <Compile Include="Areas\Admin\Models\InventoryTags\InventoryTagsModel.cs" />
     <Compile Include="Areas\Admin\Models\OutputInfo\OutputInfoModel.cs" />
     <Compile Include="Areas\Admin\Models\Unit\UnitModel.cs" />

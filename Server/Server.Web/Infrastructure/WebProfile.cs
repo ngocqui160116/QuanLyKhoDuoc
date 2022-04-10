@@ -2,6 +2,7 @@
 using Phoenix.Server.Data.Entity;
 using Phoenix.Server.Web.Areas.Admin.Models.Input;
 using Phoenix.Server.Web.Areas.Admin.Models.InputInfo;
+using Phoenix.Server.Web.Areas.Admin.Models.Inventory;
 using Phoenix.Server.Web.Areas.Admin.Models.InventoryTags;
 using Phoenix.Server.Web.Areas.Admin.Models.Medicine;
 using Phoenix.Server.Web.Areas.Admin.Models.Output;
@@ -20,7 +21,7 @@ namespace Phoenix.Server.Web.Infrastructure
             CreateMap<Output, OutputModel>();
             CreateMap<OutputInfo, OutputInfoModel>();
             CreateMap<InventoryTags, InventoryTagsModel>();
-           
+            CreateMap<Inventory, InventoryModel>();
         }
     }
 }
