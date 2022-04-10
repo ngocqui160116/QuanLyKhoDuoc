@@ -136,6 +136,7 @@ namespace Phoenix.Mobile.PageModels.Common
         #endregion
 
 
+
         #region properties
         public string SearchText { get; set; }
         public int IdMedicine { get; set; }

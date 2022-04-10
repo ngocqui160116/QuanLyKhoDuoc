@@ -2,13 +2,38 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common"
+              xmlns:controls="clr-namespace:Phoenix.Mobile.Controls" 
              x:Class="Phoenix.Mobile.Pages.Common.AlertPage"
              x:DataType="common:AlertPageModel">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <common:NameConverter x:Key="NameConverter" />
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.BindingContext>
+        <common:AlertPageModel />
+    </ContentPage.BindingContext>
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="{Binding TestString}"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout
+            Padding="12">
+            <controls:BorderlessEntry
+                Placeholder="Name"
+                Keyboard="Numeric"
+                Text="{Binding Name, Mode=TwoWay}"/>
+            <controls:BorderlessEntry
+                Placeholder="Surname"
+                Keyboard="Numeric"
+                Text="{Binding Surname, Mode=TwoWay}"/>
+            <Label>
+                <Label.Text>
+                    <MultiBinding Converter="{StaticResource NameConverter}">
+                        <Binding Path="Name"/>
+                        <Binding Path="Surname"/>
+                    </MultiBinding>
+                </Label.Text>
+            </Label>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

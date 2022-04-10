@@ -68,6 +68,8 @@ namespace Phoenix.Mobile.PageModels.Common
         {
             base.ViewIsAppearing(sender, e);
             await LoadData();
+           
+            IsOpen = false;
         }
 
         private async Task LoadData()

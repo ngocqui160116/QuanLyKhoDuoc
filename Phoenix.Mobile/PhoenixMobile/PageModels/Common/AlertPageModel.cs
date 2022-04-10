@@ -22,15 +22,30 @@ namespace Phoenix.Mobile.PageModels.Common
         protected override async void ViewIsAppearing(object sender, EventArgs e)
         {
             base.ViewIsAppearing(sender, e);
-            TestString = "hello world";
+            //TestString = "hello world";
         }
 
-        #region commands
+        string _name;
+        string _surname;
 
-        #endregion
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                _name = value;
+               
+            }
+        }
 
-        #region properties
-        public string TestString { get; set; }
-        #endregion
+        public string Surname
+        {
+            get { return _surname; }
+            set
+            {
+                _surname = value;
+                
+            }
+        }
     }
 }

@@ -41,8 +41,6 @@ namespace Phoenix.Server.Services.MainServices
                 // setup query
                 var query = _dataContext.Outputs.AsQueryable();
 
-                
-
                 query = query.OrderByDescending(d => d.Id);
 
                 var data = await query.ToListAsync();
@@ -52,7 +50,6 @@ namespace Phoenix.Server.Services.MainServices
             {
 
             }
-
             return result;
         }
 
@@ -70,8 +67,6 @@ namespace Phoenix.Server.Services.MainServices
             return new CrudResult() { IsOk = true };
         }
 
-        //Task<CrudResult> UpdateOutput(int IdOutput, OutputRequest request);
-        //Task<CrudResult> DeleteOutput(int IdOutput);
         public async Task<CrudResult> UpdateOutput(string Id, OutputRequest request)
         {
             var Output = _dataContext.Outputs.Find(Id);

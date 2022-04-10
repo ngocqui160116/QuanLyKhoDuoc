@@ -1,18 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             xmlns:input="clr-namespace:Phoenix.Mobile.Core.Models.Input;assembly=Phoenix.Mobile.Core"
-             xmlns:controls="clr-namespace:Phoenix.Mobile.Controls" 
-             xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common"  
-             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             x:Class="Phoenix.Mobile.Pages.Common.AddInputPage"
-             x:DataType="common:AddInputPageModel"
-             xmlns:converters="clr-namespace:Phoenix.Framework.Converters;assembly=Phoenix.Framework"
              xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
-             xmlns:intputinfo="clr-namespace:Phoenix.Mobile.Core.Models.InputInfo;assembly=Phoenix.Mobile.Core" xmlns:medicine="clr-namespace:Phoenix.Mobile.Core.Models.Medicine;assembly=Phoenix.Mobile.Core" xmlns:medicineItem="clr-namespace:Phoenix.Mobile.Core.Models.MedicineItem;assembly=Phoenix.Mobile.Core"
-             ControlTemplate="{StaticResource FullScreenHasBack}">
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             
+             xmlns:converters="clr-namespace:Phoenix.Framework.Converters;assembly=Phoenix.Framework"
+             xmlns:medicineItem="clr-namespace:Phoenix.Mobile.Core.Models.MedicineItem;assembly=Phoenix.Mobile.Core" 
+             xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common" 
+             xmlns:input="clr-namespace:Phoenix.Mobile.Core.Models.Input;assembly=Phoenix.Mobile.Core" 
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:DataType="common:AddInputPageModel"
+             x:Class="Phoenix.Mobile.Pages.Common.AddInputPage"
+             ControlTemplate="{StaticResource ModalFullScreenHasBack}">
     <ContentPage.Content>
-        <StackLayout BackgroundColor="WhiteSmoke">
+        <StackLayout>
             <Frame CornerRadius="10">
                 <StackLayout Orientation="Horizontal" 
                              BackgroundColor="WhiteSmoke">
@@ -20,7 +20,7 @@
                             Command="{Binding AddMedicineCommand}"
                             WidthRequest="500">
                     </Button>
-            </StackLayout>
+                </StackLayout>
             </Frame>
             <StackLayout HeightRequest="25">
                 <Label Text="Danh sách thuốc "
@@ -47,22 +47,21 @@
                            VerticalOptions="StartAndExpand"/>
                 </StackLayout>
             </Frame>
-            
             <Frame IsVisible="{Binding IsClose}" >
                 <AbsoluteLayout 
                 HorizontalOptions="FillAndExpand" 
                     VerticalOptions="FillAndExpand" >
-                <ScrollView  IsEnabled="{Binding IsClose}"  
+                    <ScrollView  IsEnabled="{Binding IsClose}"  
                              AbsoluteLayout.LayoutFlags="All" 
                              AbsoluteLayout.LayoutBounds="0,0,1,1">
-                    <StackLayout  >
-                        <StackLayout BindableLayout.ItemsSource="{Binding MedicineItems}"
+                        <StackLayout>
+                            <StackLayout BindableLayout.ItemsSource="{Binding MedicineItems}"
                                      x:Name="ItemList"
                                      IsEnabled="{Binding IsClose}"  
                                      BackgroundColor="WhiteSmoke">
-                            <BindableLayout.ItemTemplate  IsEnabled="{Binding IsClose}">
-                                <DataTemplate x:DataType="medicineItem:MedicineItemModel"> 
-                                    <StackLayout Margin="6,4,6,4" 
+                                <BindableLayout.ItemTemplate  IsEnabled="{Binding IsClose}">
+                                    <DataTemplate x:DataType="medicineItem:MedicineItemModel">
+                                        <StackLayout Margin="6,4,6,4" 
                                                  BackgroundColor="White" 
                                                  HorizontalOptions="FillAndExpand"
                                                  Orientation="Vertical">
@@ -163,7 +162,7 @@
                                                                      Grid.Column="5"
                                                                      HorizontalOptions="EndAndExpand"
                                                                      VerticalOptions="CenterAndExpand">
-                                                            
+
                                                         </ImageButton>
                                                     </StackLayout>
                                                     <StackLayout Grid.Column="6"
@@ -176,20 +175,19 @@
                                                                      Grid.Column="6"
                                                                      HorizontalOptions="EndAndExpand"
                                                                      VerticalOptions="CenterAndExpand">
-                                                            
+
                                                         </ImageButton>
                                                     </StackLayout>
                                                 </Grid>
                                             </StackLayout>
                                         </StackLayout>
-                                </DataTemplate>
-                            </BindableLayout.ItemTemplate>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </StackLayout>
                         </StackLayout>
-                    </StackLayout>
-                </ScrollView>
-            </AbsoluteLayout>
+                    </ScrollView>
+                </AbsoluteLayout>
             </Frame>
-           
             <StackLayout HeightRequest="25"
                          WidthRequest="50">
                 <Label Text="Thông tin"
@@ -258,8 +256,7 @@
                     </Grid>
                 </StackLayout>
             </Frame>
-            <StackLayout  Margin="0,50,0,0" 
-                          IsVisible="{Binding IsBusy, Converter={x:Static converters:InverseBoolConverter.Instance}}">
+            <StackLayout  Margin="0,50,0,0">
                 <Grid>
                     <AbsoluteLayout Grid.Row="0"
                                     Grid.Column="0" 
@@ -298,6 +295,5 @@
                 </Grid>
             </StackLayout>
         </StackLayout>
-
     </ContentPage.Content>
 </ContentPage>

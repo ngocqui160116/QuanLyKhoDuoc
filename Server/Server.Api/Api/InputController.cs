@@ -47,13 +47,12 @@ namespace Phoenix.Server.Api.Api
             return _InputService.DeleteInput(Id);
         }
 
+
         [HttpPost]
         [Route("Search")]
-        public List<InputDto> Search(string Id)
+        public async Task<BaseResponse<InputDto>> Search(string Id)
         {
-            return _InputService.Search(Id);
+            return await _InputService.Search(Id);
         }
-
-
     }
 }

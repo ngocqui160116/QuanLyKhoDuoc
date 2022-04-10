@@ -46,12 +46,18 @@ namespace Phoenix.Server.Services.MainServices
             {
                 var query = (from c in _dataContext.MedicineItems
                              join s in _dataContext.Medicines on c.Medicine_Id equals s.IdMedicine
+                             
                              select new
                              {
                                  Id = c.Id,
                                  MedicineId = s.IdMedicine,
                                  MedicineName = s.Name,
-                                 RegistrationNumber = s.RegistrationNumber
+                                 Batch = c.Batch,
+                                 Count = c.Count,
+                                 InputPrice = c.InputPrice,
+                                 Total = c.Count * c.InputPrice,
+                                 DueDate = c.DueDate,
+                                 UnitName = s.Unit.Name
                              }).AsQueryable();
 
                 var config = new MapperConfiguration(cfg => cfg.CreateMissingTypeMaps = true);
@@ -79,12 +85,17 @@ namespace Phoenix.Server.Services.MainServices
             {
                 var query = (from c in _dataContext.MedicineItems
                              join s in _dataContext.Medicines on c.Medicine_Id equals s.IdMedicine
+                             join i in _dataContext.InputInfos on c.Medicine_Id equals i.IdMedicine
                              select new
                              {
                                  Id = c.Id,
                                  MedicineId = s.IdMedicine,
                                  MedicineName = s.Name,
-                                 RegistrationNumber = s.RegistrationNumber
+                                 Batch = i.IdBatch,
+                                 Count = i.Count,
+                                 InputPrice = i.InputPrice,
+                                 Total = i.Count * i.InputPrice,
+                                 DueDate = i.DueDate
                              }).AsQueryable();
 
                 if (Id > 0)

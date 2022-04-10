@@ -897,6 +897,7 @@
                 </VisualStateGroupList>
             </Setter>
         </Style>
+        
     </Application.Resources>
 
 </Application>

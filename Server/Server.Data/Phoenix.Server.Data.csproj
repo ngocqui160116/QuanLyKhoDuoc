@@ -55,8 +55,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entity\DocumentType.cs" />
-    <Compile Include="Entity\StockInfo.cs" />
-    <Compile Include="Entity\Stock.cs" />
     <Compile Include="Entity\Inventory.cs" />
     <Compile Include="Entity\InventoryTags.cs" />
     <Compile Include="Entity\MedicineItem.cs" />

@@ -130,13 +130,13 @@
     <EmbeddedResource Update="Pages\Common\AddInputInfoPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Common\AddInputPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Pages\Common\AddOutputPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\Common\AddSupplierPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Pages\Common\AddInputPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\Common\AddMedicinePage.xaml">
@@ -196,9 +196,6 @@
   <ItemGroup>
     <Compile Update="Pages\Common\AddSupplierPage.xaml.cs">
       <DependentUpon>AddSupplierPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Pages\Common\AddInputPage.xaml.cs">
-      <DependentUpon>AddInputPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Pages\Common\SupplierPage.xaml.cs">
       <DependentUpon>SupplierPage.xaml</DependentUpon>

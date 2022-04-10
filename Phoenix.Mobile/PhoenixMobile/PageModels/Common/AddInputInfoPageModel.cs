@@ -147,7 +147,7 @@ namespace Phoenix.Mobile.PageModels.Common
                     InputPrice = InputPrice,
                     DueDate = HSD
                 });
-                //await CoreMethods.PushPageModel<AddInputPageModel>();
+                await CoreMethods.PushPageModel<AddInputPageModel>();
                 //await _dialogService.AlertAsync("Cập nhật thành công");
                 IsBusy = false;
 

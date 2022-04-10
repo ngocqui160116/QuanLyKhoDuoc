@@ -21,5 +21,6 @@ namespace Phoenix.Server.Data.Entity
         public double InputPrice { get; set; }
         public double Total { get; set; }
         public DateTime DueDate { get; set; }
+        public string UnitName { get; set; }
     }
 }

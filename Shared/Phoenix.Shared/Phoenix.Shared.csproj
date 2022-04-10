@@ -65,10 +65,6 @@
     <Compile Include="Core\ResultDto.cs" />
     <Compile Include="DocumentType\DocumentTypeDto.cs" />
     <Compile Include="DocumentType\DocumentTypeRequest.cs" />
-    <Compile Include="StockInfo\StockInfoDto.cs" />
-    <Compile Include="StockInfo\StockInfoRequest.cs" />
-    <Compile Include="Stock\StockDto.cs" />
-    <Compile Include="Stock\StockRequest.cs" />
     <Compile Include="Input\InputContentDto.cs" />
     <Compile Include="InventoryTags\InventoryTagsDto.cs" />
     <Compile Include="InventoryTags\InventoryTagsRequest.cs" />

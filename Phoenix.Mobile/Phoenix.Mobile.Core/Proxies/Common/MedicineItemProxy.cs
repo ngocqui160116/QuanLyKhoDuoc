@@ -19,6 +19,7 @@ namespace Phoenix.Mobile.Core.Proxies.Common
         Task<CrudResult> AddMedicineItem(MedicineItemRequest request);
         Task<CrudResult> AddItemInventory(MedicineItemRequest request);
         Task<CrudResult> UpdateMedicineItem(int Id, MedicineItemRequest request);
+        Task<CrudResult> RemoveMedicineItem(int Id);
     }
 
     public class MedicineItemProxy : BaseProxy, IMedicineItemProxy
@@ -100,6 +101,22 @@ namespace Phoenix.Mobile.Core.Proxies.Common
             }
         }
 
+        public async Task<CrudResult> RemoveMedicineItem(int Id)
+        {
+            try
+            {
+                var api = RestService.For<IMedicineItemApi>(GetHttpClient());
+                var result = await api.RemoveMedicineItem(Id);
+                if (result == null) return new CrudResult();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler.Handle(new NetworkException(ex), true);
+                return new CrudResult();
+            }
+        }
+
         public interface IMedicineItemApi
         {
             [Post("/MedicineItem/GetAllMedicineItems")]
@@ -116,6 +133,9 @@ namespace Phoenix.Mobile.Core.Proxies.Common
 
             [Post("/MedicineItem/UpdateMedicineItem")]
             Task<CrudResult> UpdateMedicineItem(int Id, MedicineItemRequest request);
+
+            [Delete("/MedicineItem/RemoveMedicineItem")]
+            Task<CrudResult> RemoveMedicineItem(int Id);
         }
 
     }

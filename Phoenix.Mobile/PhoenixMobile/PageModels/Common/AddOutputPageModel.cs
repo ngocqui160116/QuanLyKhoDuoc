@@ -63,22 +63,22 @@ namespace Phoenix.Mobile.PageModels.Common
 
         private async Task LoadData()
         {
-           
+            Names = "Nhan";
+        
+        //ListMedicine = new List<InputInfoModel>()
+        //    {
+        //       new InputInfoModel()
+        //       {
+        //           IdMedicine = InputInfo.IdMedicine,
+        //           MedicineName = InputInfo.MedicineName,
+        //           Count = InputInfo.Count,
+        //           DueDate = InputInfo.DueDate
+        //       }
 
-            //ListMedicine = new List<InputInfoModel>()
-            //    {
-            //       new InputInfoModel()
-            //       {
-            //           IdMedicine = InputInfo.IdMedicine,
-            //           MedicineName = InputInfo.MedicineName,
-            //           Count = InputInfo.Count,
-            //           DueDate = InputInfo.DueDate
-            //       }
+        //    };
 
-            //    };
-
-            #region MedicineItem
-            var data2 = await _medicineItemService.GetAllMedicineItem(MedicineItemRequest);
+        #region MedicineItem
+        var data2 = await _medicineItemService.GetAllMedicineItem(MedicineItemRequest);
             if (data2 == null)
             {
                 await _dialogService.AlertAsync("Lỗi kết nối mạng!", "Lỗi", "OK");
@@ -90,6 +90,7 @@ namespace Phoenix.Mobile.PageModels.Common
             }
             #endregion
 
+            #region Reason
             var data = await _reasonService.GetAllReason(request);
             if (data == null)
             {
@@ -101,6 +102,9 @@ namespace Phoenix.Mobile.PageModels.Common
                 //RaisePropertyChanged("Vendors");
                 RaisePropertyChanged(nameof(Reasons));
             }
+            #endregion
+
+            #region Staff
 
             var data1 = await _staffService.GetAllStaff(StaffRequest);
             if (data1 == null)
@@ -114,7 +118,11 @@ namespace Phoenix.Mobile.PageModels.Common
                 //RaisePropertyChanged("Vendors");
                 RaisePropertyChanged(nameof(Staffs));
             }
+
+            #endregion
         }
+
+            
 
         #region properties
         public List<MedicineItemModel> MedicineItems { get; set; } = new List<MedicineItemModel>();
@@ -136,7 +144,31 @@ namespace Phoenix.Mobile.PageModels.Common
         public bool IsClose { get; set; } = false;
         public bool IsOpen { get; set; } = true;
         public int IdMedicine { get; set; }
-        public string Name { get; set; }
+        public string Names { get; set; } = "Nahn";
+        //public int SoLuong { get; set; }
+
+        string _name;
+        string _surname;
+
+        //public string Names
+        //{
+        //    get { return _name; }
+        //    set
+        //    {
+        //        _name = value;
+
+        //    }
+        //}
+
+        public string Surname
+        {
+            get { return _surname; }
+            set
+            {
+                _surname = value;
+
+            }
+        }
         public int IdReason { get; set; }
         public int IdStaff { get; set; }
         public DateTime HSD { get; set; } = DateTime.Now;
@@ -184,6 +216,29 @@ namespace Phoenix.Mobile.PageModels.Common
         }
         #endregion
 
+        //#region DeleteMedicineItemCommand
+        //public Command DeleteMedicineItemCommand => new Command(async (p) => await DeleteMedicineItemExecute(), (p) => !IsBusy);
+        //private async Task DeleteMedicineItemExecute()
+        //{
+        //    //await CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn:" + IdMedicine, "Đóng");
+        //    try
+        //    {
+        //        if (IsBusy) return;
+        //        IsBusy = true;
+
+        //        var data = await _medicineItemService.RemoveMedicineItem(Id);
+        //        await CoreMethods.PushPageModel<MedicinePageModel>();
+        //        await _dialogService.AlertAsync("Xóa thành công");
+        //        IsBusy = false;
+
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        await _dialogService.AlertAsync("Xóa thất bại");
+        //    }
+        //}
+        //#endregion
+
         #region SelectItem
 
         public Command<MedicineItemModel> SelectItemCommand
@@ -194,6 +249,40 @@ namespace Phoenix.Mobile.PageModels.Common
                 {
                     //CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn: " +MedicineItemModel.MedicineName, "Đóng");
                     CoreMethods.PushPageModel<AddInputInfoPageModel>(MedicineItemModel);
+
+                });
+            }
+        }
+        #endregion
+
+        #region RemoveItem
+
+        public Command<MedicineItemModel> RemoveItemCommand
+        {
+            get
+            {
+                return new Command<MedicineItemModel>(async (MedicineItemModel) =>
+                {
+                try
+                {
+                    if (IsBusy) return;
+                    IsBusy = true;
+
+                        //CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn: " + MedicineItemModel.Id, "Đóng");
+
+                        var data = await _medicineItemService.RemoveMedicineItem(MedicineItemModel.Id);
+                       // await CoreMethods.PushPageModel<AddOutputPageModel>();
+                        await _dialogService.AlertAsync("Xóa thành công");
+                        LoadData();
+                        IsBusy = false;
+
+                    }
+                catch (Exception e)
+                {
+                    await _dialogService.AlertAsync("Xóa thất bại");
+                }
+                    //CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn: " +MedicineItemModel.Id, "Đóng");
+                   // CoreMethods.PushPageModel<AddInputInfoPageModel>(MedicineItemModel);
 
                 });
             }
@@ -236,5 +325,7 @@ namespace Phoenix.Mobile.PageModels.Common
             }
         }
         #endregion
+
+       
     }
 }
