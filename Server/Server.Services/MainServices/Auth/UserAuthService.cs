@@ -15,6 +15,8 @@ using Phoenix.Shared.Common;
 using Falcon.Web.Core.Caching;
 using Falcon.Web.Core.Security;
 using Phoenix.Shared.Core;
+using Phoenix.Shared;
+using Falcon.Web.Core.Helpers;
 
 namespace Phoenix.Server.Services.MainServices.Auth
 {
@@ -93,7 +95,7 @@ namespace Phoenix.Server.Services.MainServices.Auth
 
             var customerId = int.Parse(refreshToken.Split('.').First());
             var customer = _dataContext.Users.Find(customerId);
-            if (customer == null || !customer.Active ) return result;
+            if (customer == null || !customer.Active) return result;
             var securitySettings = _settingService.LoadSetting<SecuritySettings>();
             result.ExpiresIn = securitySettings.TokenLifeTime * 30;
             result.AccessToken = TokenHelper.CreateToken(_tokenValidation.GetEncryptKey(),
@@ -145,6 +147,7 @@ namespace Phoenix.Server.Services.MainServices.Auth
             return result;
         }
 
+        
         public async Task<bool> ChangePassword(string userName, string password)
         {
             var user = _dataContext.Users.FirstOrDefault(x => x.UserName == userName && x.Active);
@@ -230,6 +233,8 @@ namespace Phoenix.Server.Services.MainServices.Auth
 
             return claim.Distinct().ToList();
         }
+
+        public UserDto GetUserById(int id) => _dataContext.Users.Find(id).MapTo<UserDto>();
 
         //public async Task<CrudResult> ForgotPassword(string phone, string newPass)
         //{

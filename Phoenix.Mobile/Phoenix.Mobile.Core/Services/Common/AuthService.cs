@@ -1,4 +1,5 @@
 ﻿using Phoenix.Mobile.Core.Proxies;
+using Phoenix.Shared;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,6 +13,9 @@ namespace Phoenix.Mobile.Core.Services
         Task<bool> ExternalAuth(string provider, string email, string avatar, string lastName);
         Task<bool> Login(string farmerCode, string password);
         void LogOut();
+
+        Task<UserDto> GetUserFromToken();
+
     }
 
     public class AuthService : IAuthService
@@ -25,7 +29,10 @@ namespace Phoenix.Mobile.Core.Services
             _workContext = workContext;
         }
 
-
+        public Task<UserDto> GetUserFromToken()
+        {
+            return _authProxy.GetUserFromToken();
+        }
 
         public Task<bool> Login(string farmerCode, string password)
         {

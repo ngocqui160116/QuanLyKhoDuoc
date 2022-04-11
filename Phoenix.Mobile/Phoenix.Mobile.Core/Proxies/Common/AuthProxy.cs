@@ -7,6 +7,7 @@ using Phoenix.Mobile.Core.Framework;
 using Phoenix.Framework.Core;
 using Phoenix.Shared.Auth;
 using Phoenix.Framework.Extensions;
+using Phoenix.Shared;
 
 namespace Phoenix.Mobile.Core.Proxies
 {
@@ -14,6 +15,8 @@ namespace Phoenix.Mobile.Core.Proxies
     {
         Task<bool> Authenticate(string userName, string password);
         Task<bool> ExternalAuth(string provider, string email, string avatar, string lastName);
+
+        Task<UserDto> GetUserFromToken();
     }
 
     public class AuthProxy : BaseProxy, IAuthProxy
@@ -97,6 +100,22 @@ namespace Phoenix.Mobile.Core.Proxies
             }
         }
 
+        public async Task<UserDto> GetUserFromToken()
+        {
+            try
+            {
+                var api = RestService.For<IAuthApi>(GetHttpClient());
+                var result = await api.GetUserFromToken();
+                if (result == null) return new UserDto();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler.Handle(new NetworkException(ex), true);
+                return new UserDto();
+            }
+        }
+
         public interface IAuthApi
         {
             [Post("/auth/login")]
@@ -104,6 +123,10 @@ namespace Phoenix.Mobile.Core.Proxies
 
             [Post("/auth/externallogin")]
             Task<TokenResponse> ExternalLogin([Body] ExternalTokenRequest request);
+
+            [Get("/auth/GetUserFromToKen")]
+            [Headers("Authorization: Bearer")]
+            Task<UserDto> GetUserFromToken();
         }
     }
 }

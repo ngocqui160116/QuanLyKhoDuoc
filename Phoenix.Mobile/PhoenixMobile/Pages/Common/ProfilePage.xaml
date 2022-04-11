@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common" 
+             x:DataType="common:ProfilePageModel"
+             x:Class="Phoenix.Mobile.Pages.Common.ProfilePage">
+    <ContentPage.Content>
+        <Frame CornerRadius="15">
+            <StackLayout  BackgroundColor="White">
+                <Grid IsEnabled="{Binding }" 
+                          x:Name="Grid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.3*"/>
+                        <ColumnDefinition Width="0.7*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label  Grid.Row="1"
+                                Grid.Column="0" 
+                                Margin="10,5,0,0"                               
+                                WidthRequest="100" 
+                                FontSize="Medium" 
+                                Text="Mã NCC"/>
+                    <Entry  Grid.Row="1"
+                                Grid.Column="1"
+                                TextColor="Black"
+                                IsReadOnly="True"
+                                Text="{Binding Users.Id}"
+                                WidthRequest="200"/>
+
+                    <Label  Grid.Row="2"
+                                Grid.Column="0" 
+                                Margin="10,5,0,0"                               
+                                WidthRequest="100" 
+                                FontSize="Medium" 
+                                Text="Tên NCC*"/>
+                    <Entry  Grid.Row="2"
+                                Grid.Column="1"
+                                TextColor="Black"
+                                Placeholder="Nhập tên nhà cung cấp"
+                                Text="{Binding Users.Name}"
+                                WidthRequest="200"/>
+
+                    <Label  Grid.Row="3"
+                                Grid.Column="0" 
+                                Margin="10,5,0,0" 
+                                WidthRequest="100" 
+                                FontSize="Medium" 
+                                Text="Điện thoại"/>
+                    <Entry  Grid.Row="3"
+                                Grid.Column="1"
+                                TextColor="Black"
+                                Placeholder="Nhập số điện thoại"
+                                Text="{Binding Users.UserName}"
+                                WidthRequest="200" 
+                                Keyboard="Numeric"/>
+
+                    <Label  Grid.Row="4"
+                                Grid.Column="0" 
+                                Margin="10,5,0,0" 
+                                WidthRequest="100" 
+                                FontSize="Medium" 
+                                Text="Email"/>
+                    <Entry  Grid.Row="4"
+                                Grid.Column="1"
+                                TextColor="Black"
+                                Placeholder="Nhập email"
+                                Text="{Binding Users.Password}"
+                                WidthRequest="200" 
+                                Keyboard="Email"/>
+
+                    <Label  Grid.Row="5"
+                                Grid.Column="0" 
+                                Margin="10,5,0,0" 
+                                WidthRequest="95" 
+                                FontSize="Medium" 
+                                Text="Địa chỉ"/>
+                    <Entry  Grid.Row="5"
+                                Grid.Column="1"
+                                TextColor="Black"
+                                Placeholder="Nhập địa chỉ"
+                                Text="{Binding Users.Roles}"
+                                WidthRequest="200"                         
+                                Keyboard="Text"/>
+                </Grid>
+            </StackLayout>
+        </Frame>
+    </ContentPage.Content>
+</ContentPage>

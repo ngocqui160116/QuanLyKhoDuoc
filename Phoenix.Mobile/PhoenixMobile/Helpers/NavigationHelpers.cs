@@ -29,7 +29,7 @@ namespace Phoenix.Mobile.Helpers
                 
                // mainPage.AddTab<EndowPageModel>(string.Empty, "ic_act_code");
                 //mainPage.AddTab<PluginPageModel>(string.Empty, "ic_act_idea");
-                //mainPage.AddTab<AccountPageModel>(string.Empty, "ic_act_more");
+                mainPage.AddTab<AccountPageModel>(string.Empty, "ic_act_more");
                 mainPage.BarTextColor = Color.White;
                 mainPage.BarBackgroundColor = Color.FromHex("#4AACC5");
                 Application.Current.MainPage = mainPage;

@@ -12,5 +12,6 @@ namespace Phoenix.Shared.Staff
         public string Address { get; set; }
         public string Authority { get; set; }
         public bool Deleted { get; set; }
+        public int User_Id { get; set; }
     }
 }

@@ -2,81 +2,22 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Phoenix.Mobile.Pages.Common.AccountPage"
-              xmlns:behaviors="clr-namespace:Phoenix.Framework.Core;assembly=Phoenix.Framework"
-             xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
-             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             xmlns:controls="clr-namespace:Phoenix.Mobile.Controls" 
-             xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common" xmlns:input="clr-namespace:Phoenix.Mobile.Core.Models.Input;assembly=Phoenix.Mobile.Core"
-             x:DataType="common:AccountPageModel"
-             ControlTemplate="{StaticResource FullScreenHasBack}">
+             xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common" 
+             x:DataType="common:AccountPageModel">
     <ContentPage.Content>
-        <StackLayout>
-            <StackLayout HeightRequest="25"
-                         WidthRequest="50">
-                <Label Text="Thông tin"
-                       FontSize="Small"
-                       Margin="5,2,0,0"
-                       FontAttributes="Bold"
-                       VerticalOptions="Center"/>
-            </StackLayout>
-            <Frame CornerRadius="15" >
-                <StackLayout  BackgroundColor="White">
-                    <Grid x:DataType="input:InputModel">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.3*"/>
-                            <ColumnDefinition Width="0.7*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Label  Grid.Row="1"
-                                Grid.Column="0" 
-                                Margin="10,5,0,0" 
-                                WidthRequest="115" 
-                                FontSize="Medium" 
-                                Text="Lý do"/>
-                        <Picker x:DataType="common:AddOutputPageModel"
-                                ItemsSource="{Binding Reasons}"
-                                Grid.Row="1"
-                                Grid.Column="1"
-                                Title="----- Chọn lý do xuất kho -----"
-                                ItemDisplayBinding="{Binding Name}"/>
-
-                        <Label  Grid.Row="2"
-                                Grid.Column="0" 
-                                Margin="10,5,0,0" 
-                                WidthRequest="95" 
-                                FontSize="Medium" 
-                                Text="Ngày xuất"/>
-                        <DatePicker x:DataType="common:AddOutputPageModel" 
-                                    Grid.Row="2"
-                                    Grid.Column="1"
-                                    Date="{Binding HSD}"
-                                    Format="dd/MM/yyyy"
-                                    WidthRequest="200" />
-
-                        <Label  Grid.Row="3"
-                                Grid.Column="0" 
-                                Margin="10,5,0,0" 
-                                WidthRequest="115" 
-                                FontSize="Medium" 
-                                Text="Người tạo"/>
-                        <Picker x:DataType="common:AddOutputPageModel"
-                                ItemsSource="{Binding Staffs}"
-                                Grid.Row="3"
-                                Grid.Column="1"
-                                Title="----- Chọn Người tạo -----"
-                                ItemDisplayBinding="{Binding Name}"/>
-                    </Grid>
-                </StackLayout>
-            </Frame>
-        </StackLayout>
+        <TableView Intent="Form">
+            <TableRoot>
+                <TableSection>
+                    <ImageCell Text="Thông tin tài khoản"
+                               Command="{Binding ProfileCommand}"
+                               ImageSource="camera.png" />
+                    <ImageCell Text="Đổi mật khẩu"  
+                               ImageSource="xamarin_logo.png" />
+                    <ImageCell Text="Đăng xuất" 
+                               ImageSource="xamarin_logo.png" />
+                </TableSection>
+            </TableRoot>
+        </TableView>
 
     </ContentPage.Content>
 </ContentPage>

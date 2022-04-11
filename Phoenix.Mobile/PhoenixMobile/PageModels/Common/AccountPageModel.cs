@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Phoenix.Mobile.PageModels.Common
@@ -13,12 +14,22 @@ namespace Phoenix.Mobile.PageModels.Common
         {
             base.Init(initData);
             NavigationPage.SetHasNavigationBar(CurrentPage, false);
-            CurrentPage.Title = "Thêm nhà cung cấp";
+            CurrentPage.Title = "Cài đặt";
         }
         protected override async void ViewIsAppearing(object sender, EventArgs e)
         {
             base.ViewIsAppearing(sender, e);
         }
+
+        #region ProfileCommand
+
+        public Command ProfileCommand => new Command(async (p) => await ProfileExecute(), (p) => !IsBusy);
+
+        private async Task ProfileExecute()
+        {
+            await CoreMethods.PushPageModel<ProfilePageModel>();
+        }
+        #endregion
     }
 
 }

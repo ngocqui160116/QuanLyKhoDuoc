@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Falcon.Web.Core.Auth;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -16,5 +17,8 @@ namespace Phoenix.Server.Data.Entity
         public string Address { get; set; }
         public string Authority { get; set; }
         public bool Deleted { get; set; }
+        public int User_Id { get; set; }
+        [ForeignKey("User_Id")]
+        public virtual User User { get; set; }
     }
 }

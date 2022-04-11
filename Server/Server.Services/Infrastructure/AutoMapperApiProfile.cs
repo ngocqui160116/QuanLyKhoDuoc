@@ -15,6 +15,8 @@ using Phoenix.Shared.InputInfo;
 using Phoenix.Shared.InventoryTags;
 using Phoenix.Shared.DocumentType;
 using Phoenix.Shared.MedicineItem;
+using Phoenix.Shared;
+using Falcon.Web.Core.Auth;
 
 namespace Phoenix.Server.Services.Infrastructure
 {
@@ -22,6 +24,8 @@ namespace Phoenix.Server.Services.Infrastructure
     {
         public AutoMapperApiProfile()
         {
+            CreateMap<User, UserDto>()
+                 .ForMember(d => d.UserName, o => o.MapFrom(s => s.UserClaims));
             CreateMap<Vendor, VendorDto>()
                 .ForMember(d => d.ImageUrl, o => o.MapFrom(s => s.Medicine_Image.AbsolutePath));
 
@@ -54,7 +58,8 @@ namespace Phoenix.Server.Services.Infrastructure
                 //.ForMember(d => d.InputPrice, o => o.MapFrom(s => s.InputInfo.InputPrice))
                 //.ForMember(d => d.MedicineName, o => o.MapFrom(s => s.Medicine.Name));
 
-            CreateMap<Staff, StaffDto>();
+            CreateMap<Staff, StaffDto>()
+                .ForMember(d => d.User_Id, o => o.MapFrom(s => s.User.Id));
 
             CreateMap<Supplier, SupplierDto>();
 
