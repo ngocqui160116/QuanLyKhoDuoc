@@ -24,8 +24,7 @@ namespace Phoenix.Server.Services.Infrastructure
     {
         public AutoMapperApiProfile()
         {
-            CreateMap<User, UserDto>()
-                 .ForMember(d => d.UserName, o => o.MapFrom(s => s.UserClaims));
+            CreateMap<User, UserDto>();
             CreateMap<Vendor, VendorDto>()
                 .ForMember(d => d.ImageUrl, o => o.MapFrom(s => s.Medicine_Image.AbsolutePath));
 
@@ -59,6 +58,8 @@ namespace Phoenix.Server.Services.Infrastructure
                 //.ForMember(d => d.MedicineName, o => o.MapFrom(s => s.Medicine.Name));
 
             CreateMap<Staff, StaffDto>()
+                .ForMember(d => d.UserName, o => o.MapFrom(s => s.User.UserName))
+                .ForMember(d => d.Roles, o => o.MapFrom(s => s.User.Roles))
                 .ForMember(d => d.User_Id, o => o.MapFrom(s => s.User.Id));
 
             CreateMap<Supplier, SupplierDto>();

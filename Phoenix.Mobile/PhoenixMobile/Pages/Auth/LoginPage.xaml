@@ -75,6 +75,20 @@
                         IsRunning="true"
                         HorizontalOptions="Center"
                         VerticalOptions="Center" />
+            <StackLayout  VerticalOptions="EndAndExpand"
+                          HorizontalOptions="Center" Orientation="Horizontal">
+                <Label Text="Bạn chưa có tài khoản?" 
+                       FontSize="15"
+                       VerticalOptions="EndAndExpand"
+                       HorizontalOptions="Center"
+                       TextColor="Black"/>
+                <Label Text="  Đăng ký ngay" 
+                       FontSize="15"
+                       VerticalOptions="EndAndExpand"
+                       HorizontalOptions="Center"
+                       TextColor="Black"/>
+            </StackLayout>
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

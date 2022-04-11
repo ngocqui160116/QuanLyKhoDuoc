@@ -18,6 +18,8 @@ namespace Phoenix.Server.Services.MainServices
         Task<CrudResult> CreateStaff(StaffRequest request);
         Task<CrudResult> UpdateStaff(int IdStaff, StaffRequest request);
         Task<CrudResult> DeleteStaff(int IdStaff);
+        StaffDto GetStaffById(int User_Id);
+
     }
     public class StaffService : IStaffService
     {
@@ -62,6 +64,57 @@ namespace Phoenix.Server.Services.MainServices
 
             return result;
         }
+
+        //public StaffDto GetStaffById(int User_Id)
+        //{
+
+        //        // setup query
+        //        var query = _dataContext.Staffs.ToList().FindIndex( d=> d.User_Id == User_Id);
+
+
+        //    var ada = query.Equals(StaffDto);
+
+        //    return query.MapTo<StaffDto>();
+
+
+
+        //}
+
+        public StaffDto GetStaffById(int User_Id)
+        {
+            var staff = _dataContext.Staffs.ToList().FindLast(d => d.User_Id == User_Id);
+
+
+              return  staff.MapTo<StaffDto>();
+        }
+        //public StaffDto GetStaffById(int User_Id)
+        //{
+        //    var result = new StaffDto();
+        //    try
+        //    {
+        //        // setup query
+        //        var query = _dataContext.Staffs.AsQueryable().MapTo<StaffDto>();
+
+
+        //        // filter
+
+        //        if (!string.IsNullOrEmpty(User_Id.ToString()))
+        //        {
+        //            query = query.Where(d => d.User_Id.ToString().Contains(User_Id.ToString()));
+        //        }
+
+        //        query = query.OrderByDescending(d => d.IdStaff);
+
+        //        return query.MapTo<StaffDto>();
+               
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //    }
+
+        //    //return data;
+        //}
 
         // Task<CrudResult> CreateStaff(StaffRequest request);
         public async Task<CrudResult> CreateStaff(StaffRequest request)

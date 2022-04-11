@@ -2,95 +2,168 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common" 
+             xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
+             xmlns:staff="clr-namespace:Phoenix.Mobile.Core.Models.Staff;assembly=Phoenix.Mobile.Core" 
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:DataType="common:ProfilePageModel"
+             xmlns:controls="clr-namespace:Phoenix.Mobile.Controls"
+             xmlns:converters="clr-namespace:Phoenix.Framework.Converters;assembly=Phoenix.Framework"
              x:Class="Phoenix.Mobile.Pages.Common.ProfilePage">
     <ContentPage.Content>
-        <Frame CornerRadius="15">
-            <StackLayout  BackgroundColor="White">
-                <Grid IsEnabled="{Binding }" 
-                          x:Name="Grid">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.3*"/>
-                        <ColumnDefinition Width="0.7*"/>
-                    </Grid.ColumnDefinitions>
+        <StackLayout BackgroundColor="WhiteSmoke">
 
-                    <Label  Grid.Row="1"
+            <StackLayout HeightRequest="15"
+                        WidthRequest="50" 
+                        BackgroundColor="WhiteSmoke">
+
+            </StackLayout>
+
+            <Frame CornerRadius="15"  IsEnabled="{Binding IsEnabled}" >
+                <StackLayout  BackgroundColor="White">
+                    <Grid
+                                IsEnabled="{Binding IsEnabled}"                      
+                        x:Name="Grid">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.3*"/>
+                            <ColumnDefinition Width="0.7*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label  Grid.Row="1"
                                 Grid.Column="0" 
                                 Margin="10,5,0,0"                               
                                 WidthRequest="100" 
                                 FontSize="Medium" 
-                                Text="Mã NCC"/>
-                    <Entry  Grid.Row="1"
+                                Text="Tên"/>
+                        <Entry  Grid.Row="1"
                                 Grid.Column="1"
                                 TextColor="Black"
-                                IsReadOnly="True"
-                                Text="{Binding Users.Id}"
+                                Text="{Binding Name}"
+                                Placeholder="VN-001"
                                 WidthRequest="200"/>
 
-                    <Label  Grid.Row="2"
+                        <Label  Grid.Row="2"
                                 Grid.Column="0" 
                                 Margin="10,5,0,0"                               
+                                WidthRequest="115" 
+                                FontSize="Medium" 
+                                Text="Giới tính"/>
+                        <Picker 
+                                Grid.Row="2"
+                                Grid.Column="1" 
+                                x:Name="picker"
+                                Title="{Binding Gender}"
+                                TitleColor="Black">
+                            <Picker.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>Nam</x:String>
+                                    <x:String>Nữ</x:String>
+                                </x:Array>
+                            </Picker.ItemsSource>
+                        </Picker>
+
+                        <Label  Grid.Row="3"
+                                Grid.Column="0" 
+                                Margin="10,5,0,0" 
                                 WidthRequest="100" 
                                 FontSize="Medium" 
-                                Text="Tên NCC*"/>
-                    <Entry  Grid.Row="2"
+                                Text="Ngày sinh"/>
+                        <controls:CustomDatePicker 
+                                Grid.Row="3"
                                 Grid.Column="1"
+                                FontSize="18"
+                                Margin="2,0,0,0"
                                 TextColor="Black"
-                                Placeholder="Nhập tên nhà cung cấp"
-                                Text="{Binding Users.Name}"
+                                Date="{Binding Birth}"
+                                Format="dd/MM/yyyy"
                                 WidthRequest="200"/>
 
-                    <Label  Grid.Row="3"
+                        <Label  Grid.Row="4"
                                 Grid.Column="0" 
                                 Margin="10,5,0,0" 
                                 WidthRequest="100" 
                                 FontSize="Medium" 
                                 Text="Điện thoại"/>
-                    <Entry  Grid.Row="3"
+                        <Entry  Grid.Row="4"
                                 Grid.Column="1"
                                 TextColor="Black"
-                                Placeholder="Nhập số điện thoại"
-                                Text="{Binding Users.UserName}"
-                                WidthRequest="200" 
-                                Keyboard="Numeric"/>
+                                Text="{Binding PhoneNumber}"
+                                WidthRequest="200"                         
+                                Keyboard="Text"/>
 
-                    <Label  Grid.Row="4"
+                        <Label  Grid.Row="5"
                                 Grid.Column="0" 
                                 Margin="10,5,0,0" 
                                 WidthRequest="100" 
                                 FontSize="Medium" 
-                                Text="Email"/>
-                    <Entry  Grid.Row="4"
-                                Grid.Column="1"
-                                TextColor="Black"
-                                Placeholder="Nhập email"
-                                Text="{Binding Users.Password}"
-                                WidthRequest="200" 
-                                Keyboard="Email"/>
-
-                    <Label  Grid.Row="5"
-                                Grid.Column="0" 
-                                Margin="10,5,0,0" 
-                                WidthRequest="95" 
-                                FontSize="Medium" 
                                 Text="Địa chỉ"/>
-                    <Entry  Grid.Row="5"
+                        <Entry  Grid.Row="5"
                                 Grid.Column="1"
                                 TextColor="Black"
-                                Placeholder="Nhập địa chỉ"
-                                Text="{Binding Users.Roles}"
+                                Text="{Binding Address}"
                                 WidthRequest="200"                         
                                 Keyboard="Text"/>
+
+                        <Label  Grid.Row="6"
+                                Grid.Column="0" 
+                                Margin="10,5,0,0" 
+                                WidthRequest="100" 
+                                FontSize="Medium" 
+                                Text="Quyền"/>
+                        <Entry  Grid.Row="6"
+                                Grid.Column="1"
+                                TextColor="Black"
+                                IsReadOnly="True"
+                                Text="{Binding Authority}"
+                                WidthRequest="200"                         
+                                Keyboard="Text"/>
+                    </Grid>
+                </StackLayout>
+            </Frame>
+            <StackLayout  Margin="0,50,0,0" 
+                          IsVisible="{Binding IsBusy, Converter={x:Static converters:InverseBoolConverter.Instance}}">
+                <Grid>
+                    
+                    <AbsoluteLayout 
+                                    HorizontalOptions="Center">
+                        <Grid xe:TouchEffect.Color="AliceBlue"
+                              IsVisible="true">
+                            <forms:CachedImage Source="btn_Save" 
+                                               Grid.Row="0"
+                                               xe:Commands.Tap="{Binding EditCommand}"
+                                               HeightRequest="50"/>
+                            <Label 
+                                   FontSize="Medium"
+                                   HorizontalOptions="Center"
+                                   FontAttributes="Bold"
+                                   TextColor="#fff"
+                                   Text="Sửa"/>
+                        </Grid>
+
+                        <Grid xe:TouchEffect.Color="AliceBlue"
+                              IsVisible="{Binding IsEnabled}"
+                             >
+                            <forms:CachedImage Source="btn_Save" 
+                                               
+                                               xe:Commands.Tap="{Binding UpdateStaffCommand}"
+                                               HeightRequest="50"/>
+                            <Label
+                                   FontSize="Medium"
+                                   HorizontalOptions="Center"
+                                   FontAttributes="Bold"
+                                   TextColor="#fff"
+                                   Text="Cập nhật"/>
+                        </Grid>
+                    </AbsoluteLayout>
                 </Grid>
             </StackLayout>
-        </Frame>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

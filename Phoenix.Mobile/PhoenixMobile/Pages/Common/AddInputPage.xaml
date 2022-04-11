@@ -2,7 +2,6 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             
              xmlns:converters="clr-namespace:Phoenix.Framework.Converters;assembly=Phoenix.Framework"
              xmlns:medicineItem="clr-namespace:Phoenix.Mobile.Core.Models.MedicineItem;assembly=Phoenix.Mobile.Core" 
              xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common" 

@@ -14,6 +14,7 @@
                     <ImageCell Text="Đổi mật khẩu"  
                                ImageSource="xamarin_logo.png" />
                     <ImageCell Text="Đăng xuất" 
+                               Command="{Binding LogOutCommand}"
                                ImageSource="xamarin_logo.png" />
                 </TableSection>
             </TableRoot>
