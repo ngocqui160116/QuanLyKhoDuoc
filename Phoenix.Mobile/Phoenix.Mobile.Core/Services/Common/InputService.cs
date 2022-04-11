@@ -10,7 +10,7 @@ namespace Phoenix.Mobile.Core.Services.Common
     public interface IInputService
     {
         Task<List<InputModel>> GetAllInput(InputRequest request);
-        Task<List<InputModel>> Search(string Id);
+        List<InputModel> Search(string Id);
         Task<List<InputModel>> Create(InputRequest request);
         Task<InputModel> AddInput(InputRequest request);
     }
@@ -28,10 +28,10 @@ namespace Phoenix.Mobile.Core.Services.Common
             return input.Data.MapTo<InputModel>();
         }
 
-        public async Task<List<InputModel>> Search(string Id)
+        public  List<InputModel> Search(string Id)
         {
-            var input = await _InputProxy.Search(Id);
-            return input.Data.MapTo<InputModel>();
+            var input =  _InputProxy.Search(Id);
+            return input.MapTo<InputModel>();
         }
 
         public async Task<List<InputModel>> Create(InputRequest request)

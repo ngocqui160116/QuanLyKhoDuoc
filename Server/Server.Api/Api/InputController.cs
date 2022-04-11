@@ -50,9 +50,9 @@ namespace Phoenix.Server.Api.Api
 
         [HttpPost]
         [Route("Search")]
-        public async Task<BaseResponse<InputDto>> Search(string Id)
+        public List<InputDto> Search(string Id)
         {
-            return await _InputService.Search(Id);
+            return _InputService.Search(Id);
         }
     }
 }

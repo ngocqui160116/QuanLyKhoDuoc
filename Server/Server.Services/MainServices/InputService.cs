@@ -150,28 +150,10 @@ namespace Phoenix.Server.Services.MainServices
         #region Search
         public List<InputDto> Search(string Id)
         {
-            try
-            {
-                // setup query
-                var query = _dataContext.Inputs.AsQueryable();
+            // setup query
+            var data = _dataContext.Inputs.Where(x =>x.Id.ToString().Contains(Id)).ToList();
 
-                //if (!string.IsNullOrEmpty(request.Id))
-                //{
-                //    query = query.Where(d => d.Id.Contains(request.Id));
-                //}
-
-
-                query = query.OrderByDescending(d => d.Id);
-
-                var data = await query.ToListAsync();
-                result.Data = data.MapTo<InputDto>();
-            }
-            catch (Exception ex)
-            {
-
-            }
-
-            return result;
+             return data.MapTo<InputDto>();
         }
         #endregion
 

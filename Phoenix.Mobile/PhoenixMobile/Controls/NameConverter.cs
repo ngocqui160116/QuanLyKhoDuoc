@@ -12,7 +12,7 @@ namespace Phoenix.Mobile.PageModels.Common
 
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            return $"{values[0]}";
+            return $"{values[0]} {values[1]}";
         }
 
 

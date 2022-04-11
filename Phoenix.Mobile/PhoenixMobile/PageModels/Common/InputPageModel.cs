@@ -112,7 +112,7 @@ namespace Phoenix.Mobile.PageModels.Common
 
         private async Task SearchInputExecute()
         {
-            var data = await _InputService.Search(Id);
+            var data =  _InputService.Search(Id);
             if (data == null)
             {
                 await _dialogService.AlertAsync("Lỗi kết nối mạng!", "Lỗi", "OK");
@@ -134,12 +134,12 @@ namespace Phoenix.Mobile.PageModels.Common
         });
 
 
-        public List<InputModel> GetSearchResults(string queryString)
+        public  List<InputModel> GetSearchResults(string queryString)
         {
 
-            var normalizedQuery = queryString.ToLower() ?? "";
-            var data = _InputService.Search(normalizedQuery);
-            return data;
+            var normalizedQuery = queryString;
+            return Inputs.Where(f => f.Id.ToString().Contains(normalizedQuery)).ToList();
+         
         }
 
         //List<InputInfoModel> searchResults = InputInfos;

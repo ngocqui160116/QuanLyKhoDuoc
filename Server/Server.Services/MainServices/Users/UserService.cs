@@ -6,6 +6,8 @@ using Phoenix.Shared.Auth;
 using Falcon.Services.Users;
 using System.Linq;
 using Falcon.Web.Core.Auth;
+using System.Threading.Tasks;
+using Phoenix.Shared.Core;
 
 namespace Phoenix.Server.Services.MainServices.Users
 {
@@ -20,6 +22,7 @@ namespace Phoenix.Server.Services.MainServices.Users
         private readonly DataContext _dataContext;
         private readonly IEncryptionService _encryptionService;
         private readonly UserAuthService _userAuthService;
+
         public UserService(DataContext dataContext, IEncryptionService encryptionService, UserAuthService userAuthService)
         {
             _dataContext = dataContext;
