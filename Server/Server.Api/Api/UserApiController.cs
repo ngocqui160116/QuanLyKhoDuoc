@@ -1,5 +1,7 @@
 ﻿using Falcon.Web.Core.Auth;
 using Phoenix.Server.Services.MainServices.Auth;
+using Phoenix.Server.Services.MainServices.Users;
+using Phoenix.Shared;
 using Phoenix.Shared.Core;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -11,9 +13,11 @@ namespace Phoenix.Server.Api.Api
     public class UserApiController : BaseApiController
     {
         private readonly UserAuthService _userAuthService;
-        public UserApiController(UserAuthService userAuthService)
+        private readonly UserService _userService;
+        public UserApiController(UserAuthService userAuthService, UserService userService)
         {
             _userAuthService = userAuthService;
+            _userService = userService;
         }
 
         [HttpPost]
@@ -26,7 +30,11 @@ namespace Phoenix.Server.Api.Api
         //[Route("forgotpwd")]
         //public async Task<CrudResult> ForgotPassword(string phone, string newPwd) => await _userAuthService.ForgotPassword(phone, newPwd);
 
-        
-
+        [HttpPost]
+        [Route("CreateUser")]
+        public Task<CrudResult> CreateUser([FromBody] UserRequest request)
+        {
+            return _userService.CreateUser(request);
+        }
     }
 }

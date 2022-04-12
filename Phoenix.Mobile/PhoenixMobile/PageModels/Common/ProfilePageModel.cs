@@ -88,8 +88,8 @@ namespace Phoenix.Mobile.PageModels.Common
 
         public int IdStaff { get; set; }
         public string Name { get; set; }
-        public DateTime Birth { get; set; }
-        public string Gender { get; set; }
+        public DateTime Birth { get; set; } = DateTime.Today;
+        public string Gender { get; set; } = "Nam";
         public string PhoneNumber { get; set; }
         public string Address { get; set; }
         public string Authority { get; set; }

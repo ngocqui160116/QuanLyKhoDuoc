@@ -102,10 +102,19 @@ namespace Phoenix.Mobile.PageModels.Auth
         }
         #endregion
 
+        #region RegisterCommand
 
+        public Command RegisterCommand => new Command(async (p) => await RegisterExecute(), (p) => !IsBusy);
 
+        private async Task RegisterExecute()
+        {
+            IsBusy = true;
+            await CoreMethods.PushPageModel<RegisterPageModel>();
+            IsBusy = false;
+        }
         #endregion
 
+        #endregion
 
     }
 }

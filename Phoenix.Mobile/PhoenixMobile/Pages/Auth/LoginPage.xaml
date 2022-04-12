@@ -75,6 +75,7 @@
                         IsRunning="true"
                         HorizontalOptions="Center"
                         VerticalOptions="Center" />
+
             <StackLayout  VerticalOptions="EndAndExpand"
                           HorizontalOptions="Center" Orientation="Horizontal">
                 <Label Text="Bạn chưa có tài khoản?" 
@@ -84,9 +85,10 @@
                        TextColor="Black"/>
                 <Label Text="  Đăng ký ngay" 
                        FontSize="15"
+                       Style="{StaticResource LabelUrlStyle}"
                        VerticalOptions="EndAndExpand"
                        HorizontalOptions="Center"
-                       TextColor="Black"/>
+                       behaviors:TappedGestureAttached.Command="{Binding RegisterCommand}"/>
             </StackLayout>
             
         </StackLayout>

@@ -96,6 +96,7 @@
     <Compile Include="Medicine\MedicineDto.cs" />
     <Compile Include="Medicine\MedicineRequest.cs" />
     <Compile Include="UserDto.cs" />
+    <Compile Include="UserRequest.cs" />
     <Compile Include="Vendor\VendorDto.cs" />
     <Compile Include="Vendor\VendorRequest.cs" />
   </ItemGroup>

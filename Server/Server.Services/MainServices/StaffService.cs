@@ -1,6 +1,7 @@
 ﻿using Falcon.Web.Core.Helpers;
 using Phoenix.Server.Data.Entity;
 using Phoenix.Server.Services.Database;
+using Phoenix.Shared;
 using Phoenix.Shared.Common;
 using Phoenix.Shared.Core;
 using Phoenix.Shared.Staff;
@@ -20,6 +21,7 @@ namespace Phoenix.Server.Services.MainServices
         Task<CrudResult> DeleteStaff(int IdStaff);
         StaffDto GetStaffById(int User_Id);
 
+       
     }
     public class StaffService : IStaffService
     {
@@ -87,36 +89,7 @@ namespace Phoenix.Server.Services.MainServices
 
               return  staff.MapTo<StaffDto>();
         }
-        //public StaffDto GetStaffById(int User_Id)
-        //{
-        //    var result = new StaffDto();
-        //    try
-        //    {
-        //        // setup query
-        //        var query = _dataContext.Staffs.AsQueryable().MapTo<StaffDto>();
-
-
-        //        // filter
-
-        //        if (!string.IsNullOrEmpty(User_Id.ToString()))
-        //        {
-        //            query = query.Where(d => d.User_Id.ToString().Contains(User_Id.ToString()));
-        //        }
-
-        //        query = query.OrderByDescending(d => d.IdStaff);
-
-        //        return query.MapTo<StaffDto>();
-               
-        //    }
-        //    catch (Exception ex)
-        //    {
-
-        //    }
-
-        //    //return data;
-        //}
-
-        // Task<CrudResult> CreateStaff(StaffRequest request);
+      
         public async Task<CrudResult> CreateStaff(StaffRequest request)
         {
             var Staff = new Staff();
@@ -126,11 +99,13 @@ namespace Phoenix.Server.Services.MainServices
             Staff.PhoneNumber = request.PhoneNumber;
             Staff.Address = request.Address;
             Staff.Authority = request.Authority;
-
+            Staff.User_Id = 1 ;
             _dataContext.Staffs.Add(Staff);
             await _dataContext.SaveChangesAsync();
             return new CrudResult() { IsOk = true };
         }
+
+       
 
         //Task<CrudResult> UpdateStaff(int IdStaff, StaffRequest request);
         //Task<CrudResult> DeleteStaff(int IdStaff);
