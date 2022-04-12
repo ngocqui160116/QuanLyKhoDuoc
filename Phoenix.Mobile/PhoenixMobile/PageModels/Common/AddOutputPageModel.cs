@@ -43,15 +43,7 @@ namespace Phoenix.Mobile.PageModels.Common
             base.Init(initData);
             IsClose = true;
             IsOpen = false;
-            //if (initData != null)
-            //{
-            //    Medicine = (MedicineModel)initData;
-            //}
-            //else
-            //{
-            //    Medicine = new MedicineModel();
-
-            //}
+           
             NavigationPage.SetHasNavigationBar(CurrentPage, false);
             CurrentPage.Title = "Thêm phiếu xuất";
         }
@@ -59,6 +51,7 @@ namespace Phoenix.Mobile.PageModels.Common
         {
             base.ViewIsAppearing(sender, e);
             await LoadData();
+            
         }
 
         private async Task LoadData()
@@ -216,28 +209,7 @@ namespace Phoenix.Mobile.PageModels.Common
         }
         #endregion
 
-        //#region DeleteMedicineItemCommand
-        //public Command DeleteMedicineItemCommand => new Command(async (p) => await DeleteMedicineItemExecute(), (p) => !IsBusy);
-        //private async Task DeleteMedicineItemExecute()
-        //{
-        //    //await CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn:" + IdMedicine, "Đóng");
-        //    try
-        //    {
-        //        if (IsBusy) return;
-        //        IsBusy = true;
-
-        //        var data = await _medicineItemService.RemoveMedicineItem(Id);
-        //        await CoreMethods.PushPageModel<MedicinePageModel>();
-        //        await _dialogService.AlertAsync("Xóa thành công");
-        //        IsBusy = false;
-
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        await _dialogService.AlertAsync("Xóa thất bại");
-        //    }
-        //}
-        //#endregion
+        
 
         #region SelectItem
 

@@ -17,6 +17,6 @@ namespace Phoenix.Shared.InputInfo
 
         //Add
         public string MedicineName { get; set; }
-        public string InputName { get; set; }
+        public string UnitName { get; set; }
     }
 }

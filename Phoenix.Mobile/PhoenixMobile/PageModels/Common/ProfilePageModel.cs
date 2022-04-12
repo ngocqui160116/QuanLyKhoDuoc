@@ -44,8 +44,8 @@ namespace Phoenix.Mobile.PageModels.Common
             if (IsBusy) return;
             IsBusy = true;
 
-           
 
+            Gender = "Nam";
 
         #region Users
         var data = await _authService.GetUserFromToken();
@@ -84,12 +84,12 @@ namespace Phoenix.Mobile.PageModels.Common
             #endregion
             IsBusy = false;
         }
-        #region propertiesCODE
+        #region properties
 
         public int IdStaff { get; set; }
         public string Name { get; set; }
         public DateTime Birth { get; set; } = DateTime.Today;
-        public string Gender { get; set; } = "Nam";
+        public string Gender { get; set; }
         public string PhoneNumber { get; set; }
         public string Address { get; set; }
         public string Authority { get; set; }
@@ -137,7 +137,7 @@ namespace Phoenix.Mobile.PageModels.Common
                 //await CoreMethods.PushPageModel<SupplierPageModel>();
                 await _dialogService.AlertAsync("Cập nhật thành công");
                 IsBusy = false;
-
+                IsEnabled = false;
             }
             catch (Exception e)
             {

@@ -21,7 +21,7 @@
 
             <Frame CornerRadius="15"  IsEnabled="{Binding IsEnabled}" >
                 <StackLayout  BackgroundColor="White">
-                    <Grid
+                    <Grid  x:DataType="common:ProfilePageModel"
                                 IsEnabled="{Binding IsEnabled}"                      
                         x:Name="Grid">
                         <Grid.RowDefinitions>

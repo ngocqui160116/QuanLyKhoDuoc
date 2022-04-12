@@ -5,7 +5,7 @@
              ControlTemplate="{StaticResource FullScreenHasBack}"
              xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" 
              xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common" 
-             xmlns:inputinfo="clr-namespace:Phoenix.Shared.InputInfo;assembly=Phoenix.Shared" 
+             xmlns:inputinfo="clr-namespace:Phoenix.Shared.InputInfo;assembly=Phoenix.Shared" xmlns:controls="clr-namespace:Phoenix.Mobile.Controls"
              x:DataType="common:InputInfoPageModel"
              x:Class="Phoenix.Mobile.Pages.Common.InputInfoPage">
     <ContentPage.Content>
@@ -98,6 +98,7 @@
             <StackLayout>
                 <ListView ItemsSource="{Binding InputInfos}"
                           HasUnevenRows="True"
+                          HeightRequest="320"
                           BackgroundColor="#ecf0f1"
                           SeparatorVisibility="None"
                           HorizontalOptions="FillAndExpand"
@@ -123,7 +124,7 @@
                                                        FontSize="Large" />
                                             <StackLayout Orientation="Horizontal">
                                                 <Label Text="Số Lô:"
-                                                       Margin="8,2,8,4"
+                                                       Margin="8,2,2,4"
                                                        FontSize="Small" />
                                                 <Label Text="{Binding IdBatch}"
                                                        Margin="2,2,8,4"
@@ -132,10 +133,30 @@
                                                 <Label Text="HSD:"
                                                        Margin="8,2,8,4"
                                                        FontSize="Small" />
-                                                <Label Text="{Binding DueDate}"
+                                                <controls:CustomDatePicker  
+                                                       Date="{Binding DueDate}" 
                                                        Margin="2,2,8,4"
                                                        TextColor="DarkSlateGray"  
-                                                       FontSize="Small" />
+                                                       FontSize="15" />
+                                            </StackLayout>
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label Text="Số lượng:"
+                                                                Margin="0,2,8,4"
+                                                                FontSize="Small" />
+                                                <Label Text="{Binding Count}"
+                                                                Margin="2,2,8,4"
+                                                                FontSize="Small"
+                                                                FontAttributes="Bold"
+                                                                TextColor="Red"/>
+                                                <Label Text="/"
+                                                                Margin="0,2,0,4"
+                                                                FontSize="Small"
+                                                                TextColor="Black"/>
+                                                <Label Text="{Binding InputName}"
+                                                                Margin="2,2,8,4"
+                                                                FontSize="Small"
+                                                                FontAttributes="Bold"
+                                                                TextColor="Black"/>
                                             </StackLayout>
                                         </StackLayout>
                                     </StackLayout>
@@ -144,7 +165,46 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+                <StackLayout  Margin="0,50,0,0">
+                    <Grid>
+                        <AbsoluteLayout Grid.Row="0"
+                                    Grid.Column="0" 
+                                    HorizontalOptions="Center">
+                            <Grid xe:TouchEffect.Color="AliceBlue">
+                                <forms:CachedImage Source="btn_delete" 
+                                               Grid.Row="0"
+                                               Grid.Column="0"
+                                               xe:Commands.Tap="{Binding AddInput}"
+                                               HeightRequest="50"/>
+                                <Label Grid.Row="0"
+                                   Grid.Column="0"
+                                   FontSize="Medium"
+                                   HorizontalOptions="Center"
+                                   FontAttributes="Bold"
+                                   TextColor="#fff"
+                                   Text="Lưu"/>
+                            </Grid>
+                        </AbsoluteLayout>
+                        <AbsoluteLayout Grid.Row="0"
+                                    Grid.Column="1" 
+                                    HorizontalOptions="Center">
+                            <Grid xe:TouchEffect.Color="AliceBlue">
+                                <forms:CachedImage Source="btn_Save" 
+                                               Grid.Row="0"
+                                               HeightRequest="50"
+                                               xe:Commands.Tap="{Binding AddInventoryCommand}"/>
+                                <Label Grid.Row="0"
+                                   FontSize="Medium"
+                                   HorizontalOptions="Center"
+                                   FontAttributes="Bold"
+                                   TextColor="#fff"
+                                   Text="Hoàn thành"/>
+                            </Grid>
+                        </AbsoluteLayout>
+                    </Grid>
+                </StackLayout>
             </StackLayout>
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

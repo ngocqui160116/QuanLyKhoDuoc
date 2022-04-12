@@ -71,7 +71,7 @@
                                      BackgroundColor="WhiteSmoke">
                                 <ListView ItemsSource="{Binding MedicineItems}"
                                       HasUnevenRows="True"
-                                     HeightRequest="200"
+                                     HeightRequest="350"
                                       BackgroundColor="#ecf0f1"
                                       SeparatorVisibility="None"
                                      
