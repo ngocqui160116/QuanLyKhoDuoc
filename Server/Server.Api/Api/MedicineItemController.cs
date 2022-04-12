@@ -66,7 +66,14 @@ namespace Phoenix.Server.Api.Api
             return _MedicineItemService.RemoveMedicineItem(Id);
         }
 
-        //[HttpDelete]
+        [HttpDelete]
+        [Route("DeleteAll")]
+        public Task<CrudResult> DeleteAll()
+
+        {
+            return _MedicineItemService.DeleteAll();
+        }
+        //[HttpDelete]Task<CrudResult> DeleteAll(MedicineItemRequest request)
         //[Route("ClearCart")]
         //public Task<CrudResult> ClearCart(int User_Id)
 
@@ -74,6 +81,6 @@ namespace Phoenix.Server.Api.Api
         //    return _MedicineItemService.ClearCart(User_Id);
         //}
 
-       
+
     }
 }

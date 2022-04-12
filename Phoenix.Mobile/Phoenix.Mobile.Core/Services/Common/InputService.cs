@@ -1,6 +1,7 @@
 ﻿using Phoenix.Mobile.Core.Models.Input;
 using Phoenix.Mobile.Core.Proxies.Common;
 using Phoenix.Mobile.Core.Utils;
+using Phoenix.Shared.Core;
 using Phoenix.Shared.Input;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -11,8 +12,9 @@ namespace Phoenix.Mobile.Core.Services.Common
     {
         Task<List<InputModel>> GetAllInput(InputRequest request);
         List<InputModel> Search(string Id);
-        Task<List<InputModel>> Create(InputRequest request);
-        Task<InputModel> AddInput(InputRequest request);
+        Task<List<InputModel>> CreateInput(InputRequest request);
+       
+        Task<CrudResult> UpdateStatus(int Id, InputRequest request);
     }
 
     public class InputService : IInputService
@@ -34,16 +36,16 @@ namespace Phoenix.Mobile.Core.Services.Common
             return input.MapTo<InputModel>();
         }
 
-        public async Task<List<InputModel>> Create(InputRequest request)
+        public async Task<List<InputModel>> CreateInput(InputRequest request)
         {
-            var input = await _InputProxy.Create(request);
+            var input = await _InputProxy.CreateInput(request);
             return input.Data.MapTo<InputModel>();
         }
 
-        public async Task<InputModel> AddInput(InputRequest request)
+
+        public Task<CrudResult> UpdateStatus(int Id, InputRequest request)
         {
-            var data = await _InputProxy.AddInput(request);
-            return data.MapTo<InputModel>();
+            return _InputProxy.UpdateStatus(Id, request);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Phoenix.Framework.Core;
 using Phoenix.Mobile.Core.Framework;
 using Phoenix.Shared.Common;
+using Phoenix.Shared.Core;
 using Phoenix.Shared.Input;
 using Refit;
 using System;
@@ -14,8 +15,9 @@ namespace Phoenix.Mobile.Core.Proxies.Common
     {
         Task<BaseResponse<InputDto>> GetAllInput(InputRequest request);
         List<InputDto> Search(string Id);
-        Task<BaseResponse<InputDto>> Create(InputRequest request);
-        Task<InputDto> AddInput(InputRequest request);
+        Task<BaseResponse<InputDto>> CreateInput(InputRequest request);
+       //Task<InputDto> AddInput(InputRequest request);
+        Task<CrudResult> UpdateStatus(int Id, InputRequest request);
     }
 
     public class InputProxy : BaseProxy, IInputProxy
@@ -50,13 +52,13 @@ namespace Phoenix.Mobile.Core.Proxies.Common
             }
         }
 
-        public async Task<BaseResponse<InputDto>> Create(InputRequest request)
+        public async Task<BaseResponse<InputDto>> CreateInput(InputRequest request)
         {
             try
             {
                 var api = RestService.For<IInputApi>(GetHttpClient());
 
-                return await api.Create(request);
+                return await api.CreateInput(request);
             }
             catch (Exception ex)
             {
@@ -65,19 +67,35 @@ namespace Phoenix.Mobile.Core.Proxies.Common
             }
         }
 
-        public async Task<InputDto> AddInput(InputRequest request)
+        //public async Task<InputDto> AddInput(InputRequest request)
+        //{
+        //    try
+        //    {
+        //        var api = RestService.For<IInputApi>(GetHttpClient());
+        //        var result = await api.AddInput(request);
+        //        if (result == null) return new InputDto();
+        //        return result;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ExceptionHandler.Handle(new NetworkException(ex), true);
+        //        return new InputDto();
+        //    }
+        //}
+
+        public async Task<CrudResult> UpdateStatus(int Id, InputRequest request)
         {
             try
             {
                 var api = RestService.For<IInputApi>(GetHttpClient());
-                var result = await api.AddInput(request);
-                if (result == null) return new InputDto();
+                var result = await api.UpdateStatus(Id, request);
+                if (result == null) return new CrudResult();
                 return result;
             }
             catch (Exception ex)
             {
                 ExceptionHandler.Handle(new NetworkException(ex), true);
-                return new InputDto();
+                return new CrudResult();
             }
         }
 
@@ -89,15 +107,14 @@ namespace Phoenix.Mobile.Core.Proxies.Common
             [Post("/input/Search")]
             List<InputDto> Search(string Id);
 
-            [Post("/input/Create")]
-            Task<BaseResponse<InputDto>> Create([Body] InputRequest request);
-
-
             [Post("/input/GetInput")]
             Task<List<InputDto>> GetInput(string Id);
 
             [Post("/input/CreateInput")]
-            Task<InputDto> AddInput([Body] InputRequest request);
+            Task<BaseResponse<InputDto>> CreateInput(InputRequest request);
+
+            [Post("/input/UpdateStatus")]
+            Task<CrudResult> UpdateStatus(int Id, InputRequest request);
         }
 
     }

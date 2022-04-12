@@ -22,6 +22,7 @@ namespace Phoenix.Server.Services.MainServices
         Task<CrudResult> AddMedicineItem(MedicineItemRequest request);
         Task<CrudResult> AddItemInventory(MedicineItemRequest request);
         Task<CrudResult> RemoveMedicineItem(int Id);
+        Task<CrudResult> DeleteAll( );
 
         //Task<CrudResult> UpdateCart(int Id, MedicineItemRequest request);
     }
@@ -177,6 +178,26 @@ namespace Phoenix.Server.Services.MainServices
             else
             {
                 _dataContext.MedicineItems.Remove(MedicineItem);
+                await _dataContext.SaveChangesAsync();
+                return new CrudResult() { IsOk = true };
+            }
+        }
+
+        public async Task<CrudResult> DeleteAll()
+        {
+            var MedicineItems = _dataContext.MedicineItems.AsQueryable();
+            if (MedicineItems == null)
+            {
+                return new CrudResult()
+                {
+                    ErrorCode = CommonErrorStatus.KeyNotFound,
+                    ErrorDescription = "Xóa không thành công."
+                };
+            }
+            else
+            {
+
+                _dataContext.MedicineItems.RemoveRange(MedicineItems);
                 await _dataContext.SaveChangesAsync();
                 return new CrudResult() { IsOk = true };
             }

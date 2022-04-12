@@ -106,6 +106,7 @@ namespace Phoenix.Mobile.PageModels.Common
             }
         }
         #endregion
+
         #region Search
 
         public Command SearchInputCommand => new Command(async (p) => await SearchInputExecute(), (p) => !IsBusy);
@@ -126,6 +127,7 @@ namespace Phoenix.Mobile.PageModels.Common
             }
         }
         #endregion
+
         #region Search
 
         public ICommand PerformSearch => new Command<string>((string query) =>
@@ -158,18 +160,5 @@ namespace Phoenix.Mobile.PageModels.Common
 
         #endregion
 
-        //public ICommand RefreshCommand
-        //{
-        //    get {
-        //        return new Command(async () =>
-        //        {
-        //            IsRefreshing = true;
-
-        //            await LoadData();
-
-        //            IsRefreshing = false;
-        //        });
-        //    }
-        //}
     }
 }

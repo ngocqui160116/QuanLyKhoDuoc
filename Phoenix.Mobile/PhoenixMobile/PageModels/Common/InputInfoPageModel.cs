@@ -3,6 +3,7 @@ using Phoenix.Mobile.Core.Models.Input;
 using Phoenix.Mobile.Core.Models.InputInfo;
 using Phoenix.Mobile.Core.Services.Common;
 using Phoenix.Mobile.Helpers;
+using Phoenix.Shared.Input;
 using Phoenix.Shared.InputInfo;
 using System;
 using System.Collections.Generic;
@@ -15,10 +16,11 @@ namespace Phoenix.Mobile.PageModels.Common
     public class InputInfoPageModel : BasePageModel
     {
         private readonly IInputInfoService _inputInfoService;
+        private readonly IInputService _inputService;
         private readonly IDialogService _dialogService;
-        public InputInfoPageModel(IInputInfoService inputInfoService, IDialogService dialogService)
+        public InputInfoPageModel(IInputService inputService, IInputInfoService inputInfoService, IDialogService dialogService)
         {
-
+            _inputService = inputService;
             _inputInfoService = inputInfoService;
             _dialogService = dialogService;
 
@@ -45,26 +47,32 @@ namespace Phoenix.Mobile.PageModels.Common
 
         private async Task LoadData()
         {
+
+
             if (IsBusy) return;
             IsBusy = true;
 #if DEBUG
             InputInfos = Input.InputInfo;
-
             IdInput = Input.Id;
             SupplierName = Input.SupplierName;
             NameStaff = Input.NameStaff;
             DateInput = Input.DateInput;
-
+            Status = Input.Status;
 #endif
             IsBusy = false;
+
+            if(Status == "Đã lưu")
+            {
+                IsEnabled = true;
+            }    
 
         }
 
 
         #region properties
+        public bool IsEnabled { get; set; }
         public InputModel Input { get; set; }
         public List<InputInfoDto> InputInfos { get; set; }
-
         public string SearchText { get; set; }
         public int IdInput { get; set; }
         public string SupplierName { get; set; }
@@ -72,6 +80,33 @@ namespace Phoenix.Mobile.PageModels.Common
         public DateTime DateInput { get; set; }
         public string NameStaff { get; set; }
         public double Total { get; set; }
+        public Color color { get; set; }
+        #endregion
+
+        #region UpdateStatusCommand
+        public Command UpdateStatusCommand => new Command(async (p) => await UpdateStatusExecute(), (p) => !IsBusy);
+        private async Task UpdateStatusExecute()
+        {
+            try
+            {
+                if (IsBusy) return;
+                IsBusy = true;
+
+                var data = await _inputService.UpdateStatus(IdInput, new InputRequest
+                {
+                    Status = "Đã hủy"                 
+                });
+                IsEnabled = false;
+                await CoreMethods.PushPageModel<InputPageModel>();
+                await _dialogService.AlertAsync("Cập nhật thành công");
+                IsBusy = false;
+
+            }
+            catch (Exception e)
+            {
+                await _dialogService.AlertAsync("Cập nhật thất bại");
+            }
+        }
         #endregion
     }
 }

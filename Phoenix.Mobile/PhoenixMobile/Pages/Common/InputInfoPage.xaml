@@ -5,7 +5,8 @@
              ControlTemplate="{StaticResource FullScreenHasBack}"
              xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" 
              xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common" 
-             xmlns:inputinfo="clr-namespace:Phoenix.Shared.InputInfo;assembly=Phoenix.Shared" xmlns:controls="clr-namespace:Phoenix.Mobile.Controls"
+             xmlns:inputinfo="clr-namespace:Phoenix.Shared.InputInfo;assembly=Phoenix.Shared"
+             xmlns:controls="clr-namespace:Phoenix.Mobile.Controls"
              x:DataType="common:InputInfoPageModel"
              x:Class="Phoenix.Mobile.Pages.Common.InputInfoPage">
     <ContentPage.Content>
@@ -103,10 +104,11 @@
                           SeparatorVisibility="None"
                           HorizontalOptions="FillAndExpand"
                           VerticalOptions="FillAndExpand">
-                    <ListView.ItemTemplate>
-                        <DataTemplate x:DataType="inputinfo:InputInfoDto">
-                            <ViewCell>
+                    <ListView.ItemTemplate  >
+                        <DataTemplate x:DataType="inputinfo:InputInfoDto" >
+                            <ViewCell >
                                 <StackLayout Margin="6,4,6,4"
+                                             
                                              BackgroundColor="White">
                                     <StackLayout Orientation="Horizontal" 
                                                  HorizontalOptions="StartAndExpand" >
@@ -137,6 +139,7 @@
                                                        Date="{Binding DueDate}" 
                                                        Margin="2,2,8,4"
                                                        TextColor="DarkSlateGray"  
+                                                       Format="dd/MM/yyyy"
                                                        FontSize="15" />
                                             </StackLayout>
                                             <StackLayout Orientation="Horizontal">
@@ -152,7 +155,7 @@
                                                                 Margin="0,2,0,4"
                                                                 FontSize="Small"
                                                                 TextColor="Black"/>
-                                                <Label Text="{Binding InputName}"
+                                                <Label Text="{Binding UnitName}"
                                                                 Margin="2,2,8,4"
                                                                 FontSize="Small"
                                                                 FontAttributes="Bold"
@@ -169,12 +172,13 @@
                     <Grid>
                         <AbsoluteLayout Grid.Row="0"
                                     Grid.Column="0" 
+                                    IsVisible="{Binding IsEnabled}"
                                     HorizontalOptions="Center">
                             <Grid xe:TouchEffect.Color="AliceBlue">
                                 <forms:CachedImage Source="btn_delete" 
                                                Grid.Row="0"
                                                Grid.Column="0"
-                                               xe:Commands.Tap="{Binding AddInput}"
+                                               xe:Commands.Tap="{Binding UpdateStatusCommand}"
                                                HeightRequest="50"/>
                                 <Label Grid.Row="0"
                                    Grid.Column="0"
@@ -182,17 +186,18 @@
                                    HorizontalOptions="Center"
                                    FontAttributes="Bold"
                                    TextColor="#fff"
-                                   Text="Lưu"/>
+                                   Text="Hủy phiếu"/>
                             </Grid>
                         </AbsoluteLayout>
                         <AbsoluteLayout Grid.Row="0"
-                                    Grid.Column="1" 
-                                    HorizontalOptions="Center">
+                                        Grid.Column="1" 
+                                        IsVisible="{Binding IsEnabled}"
+                                        HorizontalOptions="Center">
                             <Grid xe:TouchEffect.Color="AliceBlue">
                                 <forms:CachedImage Source="btn_Save" 
                                                Grid.Row="0"
                                                HeightRequest="50"
-                                               xe:Commands.Tap="{Binding AddInventoryCommand}"/>
+                                               xe:Commands.Tap="{Binding }"/>
                                 <Label Grid.Row="0"
                                    FontSize="Medium"
                                    HorizontalOptions="Center"

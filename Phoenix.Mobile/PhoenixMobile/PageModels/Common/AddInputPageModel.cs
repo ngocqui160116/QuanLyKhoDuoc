@@ -28,7 +28,6 @@ namespace Phoenix.Mobile.PageModels.Common
     {
         private readonly IMedicineItemService _medicineItemService;
         private readonly ISupplierService _supplierService;
-
         private readonly IStaffService _staffService;
         private readonly IInputService _inputService;
         private readonly IInputInfoService _inputInfoService;
@@ -190,6 +189,7 @@ namespace Phoenix.Mobile.PageModels.Common
         }
         #endregion
 
+
         #region AddInput
         public Command AddInput => new Command(async (p) => await AddInputExecute(), (p) => !IsBusy);
         private async Task AddInputExecute()
@@ -198,12 +198,12 @@ namespace Phoenix.Mobile.PageModels.Common
             {
                 if (IsBusy) return;
                 IsBusy = true;
-                if (infoModel.IdMedicine == 0)
-                {
-                    await _dialogService.AlertAsync("Vui lòng nhập thông tin thuốc");
-                    IsBusy = false;
-                    return;
-                }
+                //if (infoModel.IdMedicine == 0)
+                //{
+                //    await _dialogService.AlertAsync("Vui lòng nhập thông tin thuốc");
+                //    IsBusy = false;
+                //    return;
+                //}
 
                 if (IdSupplier.Equals(0))
                 {
@@ -218,13 +218,16 @@ namespace Phoenix.Mobile.PageModels.Common
                     return;
                 }
 
-                var data = _inputService.Create(new InputRequest
+                var data = _inputService.CreateInput(new InputRequest
                 {
                     IdStaff = IdStaff,
                     IdSupplier = IdSupplier,
                     DateInput = DateInput,
                     Status = "Đã Lưu",
                 });
+
+             //   var data1 = await _medicineItemService.DeleteAll();
+
                 await CoreMethods.PushPageModel<InputPageModel>();
                 await _dialogService.AlertAsync("Thêm thành công");
             }
@@ -232,6 +235,8 @@ namespace Phoenix.Mobile.PageModels.Common
             {
                 await _dialogService.AlertAsync("Thêm thất bại");
             }
+
+           
         }
         #endregion
 

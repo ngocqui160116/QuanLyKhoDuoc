@@ -19,7 +19,7 @@ namespace Phoenix.Server.Services.MainServices
         //Mobile
         Task<BaseResponse<InputDto>> GetAllInput(InputRequest request);
         Task<BaseResponse<InputDto>> CreateInput(InputRequest request);
-        Task<CrudResult> UpdateInput(string Id, InputRequest request);
+        Task<CrudResult> UpdateStatus(int Id, InputRequest request);
         Task<CrudResult> DeleteInput(string Id);
         List<InputDto> Search(string Id);
         
@@ -119,12 +119,11 @@ namespace Phoenix.Server.Services.MainServices
         }
         #endregion
 
-        #region UpdateInput
-        public async Task<CrudResult> UpdateInput(string Id, InputRequest request)
+        #region UpdateStatus
+        public async Task<CrudResult> UpdateStatus(int Id, InputRequest request)
         {
             var Input = _dataContext.Inputs.Find(Id);
-            Input.IdStaff = request.IdStaff;
-            Input.DateInput = request.DateInput;
+            Input.Status = "Đã hủy";
 
             await _dataContext.SaveChangesAsync();
             return new CrudResult() { IsOk = true };

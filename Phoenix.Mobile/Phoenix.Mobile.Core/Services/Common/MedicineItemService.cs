@@ -20,6 +20,7 @@ namespace Phoenix.Mobile.Core.Services.Common
         Task<CrudResult> AddItemInventory(MedicineItemRequest request);
         Task<CrudResult> UpdateMedicineItem(int Id, MedicineItemRequest request);
         Task<CrudResult> RemoveMedicineItem(int Id);
+        Task<CrudResult> DeleteAll();
     }
 
     public class MedicineItemService : IMedicineItemService
@@ -57,6 +58,11 @@ namespace Phoenix.Mobile.Core.Services.Common
         public Task<CrudResult> RemoveMedicineItem(int Id)
         {
             return _MedicineItemProxy.RemoveMedicineItem(Id);
+        }
+
+        public Task<CrudResult> DeleteAll()
+        {
+            return _MedicineItemProxy.DeleteAll();
         }
 
     }

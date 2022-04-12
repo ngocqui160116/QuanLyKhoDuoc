@@ -138,6 +138,7 @@
                                                                 <controls:CustomDatePicker 
                                                                 Date="{Binding DueDate}"
                                                                 Margin="2,2,8,4"
+                                                                    Format="dd/MM/yyyy"
                                                                 FontSize="15"
                                                                 TextColor="DarkSlateGray"/>
                                                             </StackLayout>

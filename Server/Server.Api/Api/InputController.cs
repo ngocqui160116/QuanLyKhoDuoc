@@ -34,10 +34,10 @@ namespace Phoenix.Server.Api.Api
         }
 
         [HttpPost]
-        [Route("UpdateInput")]
-        public Task<CrudResult> UpdateInput(string Id, [FromBody] InputRequest request)
+        [Route("UpdateStatus")]
+        public Task<CrudResult> UpdateStatus(int Id,[FromBody] InputRequest request)
         {
-            return _InputService.UpdateInput(Id, request);
+            return _InputService.UpdateStatus(Id, request);
         }
 
         [HttpDelete]

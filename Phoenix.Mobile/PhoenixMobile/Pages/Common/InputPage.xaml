@@ -32,9 +32,6 @@
                       SeparatorVisibility="None"
                       HorizontalOptions="FillAndExpand"
                       VerticalOptions="FillAndExpand"
-                      IsPullToRefreshEnabled="True"
-                      RefreshCommand="{Binding }"
-                      IsRefreshing="{Binding IsRefreshing}"
                       SelectedItem="{Binding SelectedInput}">
 
                 <ListView.ItemTemplate>
@@ -64,6 +61,7 @@
                                            Margin="8,2,8,4"
                                            FontSize="Small" />
                                     <controls:CustomDatePicker  
+                                        Format="dd/MM/yyyy"
                                             Date="{Binding DateInput}"
                                            HorizontalOptions="EndAndExpand"
                                            Margin="2"
