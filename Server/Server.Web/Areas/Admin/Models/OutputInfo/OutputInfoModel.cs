@@ -7,6 +7,7 @@ namespace Phoenix.Server.Web.Areas.Admin.Models.InputInfo
 {
     public class OutputInfoModel
     {
+        public int Id { get; set; }
         public string IdOutput { get; set; }
         public int IdMedicine { get; set; }
         public int IdCustomer { get; set; }

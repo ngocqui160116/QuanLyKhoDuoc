@@ -90,16 +90,12 @@ namespace Phoenix.Server.Services.MainServices
             try
             {
                 // setup query
-                //var query = _dataContext.Inventories.AsQueryable();
-                //var c = query.Count();
-                // filter
+                var query = _dataContext.Inventories.AsQueryable();
                 //những thuốc sắp hết trong kho có số lượng nhỏ hơn 10
-                //query = query.Where(d => d.Count < 10);
-                //query = query.OrderByDescending(d => d.IdMedicine);
-                var i = _dataContext.Inventories.Where(d => d.Count < 10);
-                var cc = i.Count();
-                var data = await i.ToListAsync();
-                //result.DataCount = (int)((await i.CountAsync()) / request.PageSize) + 1;
+                query = query.Where(d => d.Count < 10);
+                var v = query.Count();
+                query = query.OrderByDescending(d => d.Id);
+                var data = await query.ToListAsync();
                 result.Data = data.MapTo<InventoryDto>();
 
             }

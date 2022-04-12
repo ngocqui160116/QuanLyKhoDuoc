@@ -9,15 +9,35 @@
         </h2>
         <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
             <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
-                <a href="@Html.Raw(Url.Action("Index"))" class="button w-32 mr-2 mb-2 flex items-center justify-center bg-theme-7 text-white">
-                    <i data-feather="x-octagon" class="w-4 h-4 mr-2"></i> Hủy phiếu nhập
+                <a href="javascript:;" data-toggle="modal" data-target="#cancel-modal" class="btn btn-danger text-white shadow-md mr-2">
+                    <i data-feather="x-octagon" class="w-4 h-4 mr-2"></i> Hủy phiếu xuất
                 </a>
-                <button type="submit" class="button w-32 mr-2 mb-2 flex items-center justify-center bg-theme-9 text-white">
-                    <i data-feather="save" class="w-4 h-4 mr-2"></i>Lưu
-                </button>
             </div>
+            <button type="submit" class="btn btn-success">
+                <i data-feather="save" class="w-4 h-4 mr-2"></i>Lưu
+            </button>
         </div>
     </div>
     @Html.Partial("_CreateOrUpdate", Model)
 }
 
+<div id="cancel-modal" class="modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body p-0">
+                <div class="p-5 text-center">
+                    <i data-feather="x" class="w-16 h-16 text-theme-21 mx-auto mt-3"></i>
+                    <div class="text-3xl mt-5">Bạn muốn hủy xuất kho?</div>
+                    <div class="text-gray-600 mt-2">Phiếu xuất sẽ bị hủy!</div>
+                </div>
+                @using (Html.BeginForm("Index", "Input"))
+                {
+                    <div class="px-5 pb-8 text-center">
+                        <button type="button" data-dismiss="modal" class="btn btn-outline-secondary w-24 dark:border-dark-5 dark:text-gray-300 mr-1">Thoát</button>
+                        <button type="submit" class="btn btn-primary w-24">Đồng ý</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

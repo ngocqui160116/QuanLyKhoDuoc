@@ -51,7 +51,7 @@
             ajaxURL: "@Html.Raw(Url.Action("List", "Output"))",
             ajaxConfig: "post",
             ajaxRequesting: function (url, params) {
-                params.Name = $('#Name').val();
+                params.NameReason = $('#NameReason').val();
             },
             ajaxResponse: function (url, params, response) {
                 return response;
@@ -71,25 +71,23 @@
             placeholder: "Chưa có dữ liệu",
             columns: [
                 { title: "Mã hóa đơn", field: "Id", sorter: "string", width: 180 },
-                { title: "Loại xuất", field: "NameReason", sorter: "string", width: 250 },
+                {
+                    title: "Loại xuất", field: "NameReason", sorter: "string", width: 250, formatter(cell, formatterParams){
+                        return `<a href="../Admin/OutputInfo/Detail/${cell.getData().Id}" class="text-theme-1 dark:text-theme-10"> ${cell.getData().NameReason}</a>`
+                    }
+                },
                 {
                     title: "Ngày tạo", field: "DateOutput", sorter: "date", width: 180, formatter: dateFormatter
                 },
                 { title: "Người tạo", field: "NameStaff", sorter: "string", width: 220 },
-                { title: "Trạng thái", field: "Status", sorter: "string", width: 200 },
-                @*{
-                    title: "Ngày tạo", field: "CreatedAt", sorter: "date", width: 180, formatter: dateFormatter
-                },
-                {
-                    title: "Ngày cập nhật", field: "UpdatedAt", sorter: "date", width: 180, formatter: dateFormatter
-                },*@
+                { title: "Trạng thái", field: "Status", sorter: "string", width: 200 }
             ],
         });
         let onSearch = (e) => {
             table.setData();
         }
         let onResetSearch = (e) => {
-            $('#MedicineName').val('');
+            $('#Name').val('');
             table.setData();
         }
     </script>

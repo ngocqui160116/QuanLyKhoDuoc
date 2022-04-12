@@ -43,5 +43,28 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
             };
             return Json(gridModel);
         }
+        public ActionResult Detail(int Id)
+        {
+            var model = new OutputInfoModel();
+            model.Id = Id;
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Detail(DataSourceRequest command, OutputInfoModel model)
+        {
+            var inputinfos = await _outputinfoService.GetAllOutputInfoById(model.Id, new OutputInfoRequest()
+            {
+                Page = command.Page - 1,
+                PageSize = command.PageSize
+            });
+
+            var gridModel = new DataSourceResult
+            {
+                Data = inputinfos.Data,
+                Total = inputinfos.DataCount
+            };
+            return Json(gridModel);
+        }
     }
 }

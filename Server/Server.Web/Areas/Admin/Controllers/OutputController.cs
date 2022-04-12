@@ -51,7 +51,7 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
             DataContext db = new DataContext();
             ViewBag.IdStaff = new SelectList(db.Staffs.OrderBy(n => n.Name), "IdStaff", "Name", selectedId);
             ViewBag.IdReason = new SelectList(db.Reasons.OrderBy(n => n.NameReason), "IdReason", "NameReason", selectedId);
-            ViewBag.IdMedicine = new SelectList(db.Inventories.OrderBy(n => n.IdMedicine), "IdMedicine", "Count", "LotNumber", selectedId);
+            ViewBag.IdMedicine = new SelectList(db.Inventories.OrderBy(n => n.IdMedicine), "IdMedicine", "Count", selectedId);
         }
 
         // Create Vendor

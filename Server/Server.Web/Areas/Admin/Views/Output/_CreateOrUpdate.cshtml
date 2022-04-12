@@ -75,7 +75,7 @@
             <div class="mt-3">
                 <label">Thuốc</label>
                 <div class="mt-2">
-                    @Html.DropDownList("IdMedicine", null, "Vui lòng chọn thuốc cần nhập", new { @class = "form-control input input--switch border" })
+                    @Html.DropDownList("IdMedicine", null, "Vui lòng chọn thuốc cần xuất", new { @class = "form-control input input--switch border" })
                 </div>
             </div>
         </div>
@@ -120,18 +120,21 @@
 
 <script>
     $("#IdMedicine").on("change", function (e) {
-        console.log("idmedicine >> " + $('#IdMedicine option:selected').text() + "   lotnumber >>" + $("#LotNumber").val())
-        tableContent.push({
-            inventoryId: $("#IdMedicine option:selected").val(),
-            medicineName: $('#IdMedicine option:selected').val(),
-            DueDate: new Date(), //hạn sử dụng
-            LotNumber: $('#IdMedicine option:selected').text(), //lô
-            InventoryCount: $("#IdMedicine option:selected").text(), //số lượng tồn
-            Count: 0,  //số lượng xuất
-            InputPrice: 200, //giá mới nhất của phiếu nhập
-            Total: 0, //tổng tiền = giá * số lượng xuất
-        });
-        render_tbody();
+        if ($("#IdMedicine option:selected").val() > 0) {
+            console.log("idmedicine >> " + $('#IdMedicine option:selected').text() + "   lotnumber >>" + $("#IdMedicine ").val())
+            tableContent.push({
+                inventoryId: $("#IdMedicine option:selected").val(),
+                medicineName: $('#IdMedicine option:selected').val(),
+                DueDate: new Date(), //hạn sử dụng
+                LotNumber: $('#Count option:selected').val(), //lô
+                InventoryCount: $("#IdMedicine option:selected").text(), //số lượng tồn
+                Count: 0,  //số lượng xuất
+                InputPrice: 200, //giá mới nhất của phiếu nhập
+                Total: 0, //tổng tiền = giá * số lượng xuất
+            });
+            render_tbody();
+        }
+        
         //JSON.stringify(tableContent)
     })
 </script>

@@ -772,6 +772,7 @@
     <Content Include="Areas\Admin\Views\InputInfo\Expired.cshtml" />
     <Content Include="Areas\Admin\Views\Inventory\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Inventory\OutOfInventory.cshtml" />
+    <Content Include="Areas\Admin\Views\OutputInfo\Detail.cshtml" />
     <None Include="assets\js\kendo\2019.3.1023\kendo.all-vsdoc.js" />
     <None Include="assets\js\kendo\2019.3.1023\kendo.all.min.intellisense.js" />
     <Content Include="assets\js\kendo\2019.3.1023\kendo.all.min.js" />

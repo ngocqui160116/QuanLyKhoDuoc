@@ -19,6 +19,9 @@ namespace Phoenix.Server.Services.MainServices
         Task<BaseResponse<OutputInfoDto>> GetAllOutputInfo(OutputInfoRequest request);
         Task<CrudResult> CreateOutputInventory(OutputInfoRequest request);
         Task<CrudResult> CreateOutputInfo(OutputInfoRequest request);
+
+        ///
+        Task<BaseResponse<OutputInfoDto>> GetAllOutputInfoById(int Id, OutputInfoRequest request);
     }
     public class OutputInfoService : IOutputInfoService
     {
@@ -139,6 +142,30 @@ namespace Phoenix.Server.Services.MainServices
             await _dataContext.SaveChangesAsync();
 
             return new CrudResult() { IsOk = true };
+        }
+
+
+        ///web
+        public async Task<BaseResponse<OutputInfoDto>> GetAllOutputInfoById(int Id, OutputInfoRequest request)
+        {
+            var result = new BaseResponse<OutputInfoDto>();
+            try
+            {
+                var query = _dataContext.InputInfos.AsQueryable();
+
+                query = query.OrderByDescending(d => d.Id);
+                query = query.OrderByDescending(d => d.IdBatch);
+                //var get = GetInputInfoById(Id);
+                var list = _dataContext.OutputInfos.Where(p => p.IdOutput.Equals(Id));
+
+                var data = await list.ToListAsync();
+                result.Data = data.MapTo<OutputInfoDto>();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return result;
         }
     }
 }
