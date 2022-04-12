@@ -311,9 +311,10 @@ namespace Phoenix.Server.Services.MainServices
             try
             {
                 var query = _dataContext.InputInfos.AsQueryable();
-                /*if(){
-
-                }*/
+                if (request.DueDate.CompareTo(DateTime.Now) < 0)
+                {
+                    query = query.Where(d => d.DueDate.Equals(request.DueDate));
+                }
                 query = query.OrderByDescending(d => d.Id);
                 query = query.OrderByDescending(d => d.IdBatch);
 

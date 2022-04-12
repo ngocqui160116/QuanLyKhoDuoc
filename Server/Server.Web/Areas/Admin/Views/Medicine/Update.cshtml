@@ -14,7 +14,7 @@
             <button type="submit" class="button w-32 mr-2 mb-2 flex items-center justify-center bg-theme-9 text-white">
                 <i data-feather="save" class="w-4 h-4 mr-2"></i>Lưu
             </button>
-            @if (Model.Status == "nghỉ bán")
+            @if (Model.Status == "Nghỉ bán" || Model.Status == "nghỉ bán")
             {
                 <a href="javascript:;" data-toggle="modal" data-target="#again-modal-preview" class="button w-32 mr-2 mb-2 flex items-center justify-center bg-theme-7 text-white">
                     <i data-feather="play" class="w-4 h-4 mr-2"></i> Kinh doanh lại

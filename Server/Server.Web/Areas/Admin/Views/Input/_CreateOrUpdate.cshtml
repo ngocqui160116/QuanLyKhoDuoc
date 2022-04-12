@@ -151,26 +151,12 @@
     $("#IdMedicine").on("change", function (e) {
         //console.log("name >> " + $('#IdMedicine option:selected').text() + "   val >>" + $("#IdMedicine").val())
         if ($("#IdMedicine").val() > 0) {
-            const picker = new Litepicker({
-                element: document.getElementById('datepicker'),
-                startDate: new Date(),
-                setup: (picker) => {
-
-                    picker.on('show', () => {
-                        let date = picker.getDate();
-                        if (date) {
-                            date.setMonth(date.getMonth() - 1);
-                            picker.gotoDate(date);
-                        }
-                    });
-
-                }
-            })
+            
             tableContent.push({
                 medicineId: $("#IdMedicine").val(),
                 medicineName: $('#IdMedicine option:selected').text(),
                 Batch: 0,
-                DueDate: picker,
+                DueDate: new Date(),
                 InputPrice: 0,
                 Count: 0,
                 Total: 0,
