@@ -34,12 +34,7 @@ namespace Phoenix.Server.Api.Api
             return _InputInfoService.CreateInputInfo( request);
         }
 
-        [HttpPost]
-        [Route("CreateInventory")]
-        public Task<CrudResult> CreateInventory([FromBody] InputInfoRequest request)
-        {
-            return _InputInfoService.CreateInventory(request);
-        }
+        
 
         [HttpPost]
         [Route("Complete")]

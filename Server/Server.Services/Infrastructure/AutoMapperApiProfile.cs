@@ -32,6 +32,7 @@ namespace Phoenix.Server.Services.Infrastructure
 
             CreateMap<Group, GroupDto>();
             CreateMap<InventoryTags, InventoryTagsDto>()
+                .ForMember(d => d.DocumentTypeName, o => o.MapFrom(s => s.documentType.Name))
                 .ForMember(d => d.MedicineName, o => o.MapFrom(s => s.Medicine.Name));
             CreateMap<DocumentType, DocumentTypeDto>();
             CreateMap<Inventory, InventoryDto>()
@@ -52,10 +53,10 @@ namespace Phoenix.Server.Services.Infrastructure
             CreateMap<Output, OutputDto>()
                 .ForMember(d => d.NameReason, o => o.MapFrom(s => s.Reason.NameReason))
                 .ForMember(d => d.NameStaff, o => o.MapFrom(s => s.Staff.Name));
-            CreateMap<OutputInfo, OutputInfoDto>();
-                //.ForMember(d => d.DueDate, o => o.MapFrom(s => s.InputInfo.DueDate))
-                //.ForMember(d => d.InputPrice, o => o.MapFrom(s => s.InputInfo.InputPrice))
-                //.ForMember(d => d.MedicineName, o => o.MapFrom(s => s.Medicine.Name));
+            CreateMap<OutputInfo, OutputInfoDto>()
+                .ForMember(d => d.Inventory_Id, o => o.MapFrom(s => s.Inventory.Id))
+                .ForMember(d => d.DueDate, o => o.MapFrom(s => s.Inventory.UnitPrice))
+                .ForMember(d => d.MedicineName, o => o.MapFrom(s => s.Inventory.Medicine.Name));
 
             CreateMap<Staff, StaffDto>()
                 .ForMember(d => d.UserName, o => o.MapFrom(s => s.User.UserName))

@@ -18,5 +18,6 @@ namespace Phoenix.Shared.MedicineItem
         public double Total { get; set; }
         public DateTime DueDate { get; set; }
         public string UnitName { get; set; }
+        public int? Inventory_Id { get; set; }
     }
 }

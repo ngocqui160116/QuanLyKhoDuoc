@@ -27,12 +27,12 @@ namespace Phoenix.Server.Api.Api
             return await _OutputInfoService.GetAllOutputInfo(request);
         }
 
-        //[HttpPost]
-        //[Route("CreateOutputInfo")]
-        //public Task<CrudResult> CreateOutputInfo([FromBody] OutputInfoRequest request)
-        //{
-        //    return _OutputInfoService.CreateOutputInfo(request);
-        //}
+        [HttpPost]
+        [Route("CreateOutputInfo")]
+        public Task<BaseResponse<OutputInfoDto>> CreateOutputInfo(OutputInfoRequest request)
+        {
+            return _OutputInfoService.CreateOutputInfo(request);
+        }
 
         [HttpPost]
         [Route("CreateOutputInventory")]

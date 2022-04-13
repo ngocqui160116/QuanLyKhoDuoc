@@ -99,7 +99,7 @@ namespace Phoenix.Server.Services.MainServices
                     outputinfos.IdMedicine = item.Medicine_Id;
                     outputinfos.Count = item.Count;
                     outputinfos.Total = item.Count * item.InputPrice;
-                    
+                    outputinfos.Inventory_Id = item.Inventory_Id;
 
                     _dataContext.OutputInfos.Add(outputinfos);
                     await _dataContext.SaveChangesAsync();
@@ -122,7 +122,8 @@ namespace Phoenix.Server.Services.MainServices
                         //cập nhật lại số lượng tồn trong kho
                        
                         inventory.Count = inventory.Count - item.Count;
-                        inventory.IdInputInfo = item.Id;
+                        
+                        inventory.IdInputInfo = item.Inventory.IdInputInfo;
                         await _dataContext.SaveChangesAsync();
 
                         //thêm chi tiết hóa đơn nhập vào thẻ kho

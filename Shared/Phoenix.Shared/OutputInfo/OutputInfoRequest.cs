@@ -12,6 +12,7 @@ namespace Phoenix.Shared.OutputInfo
         public double Total { get; set; }
         public string Status { get; set; }
         public int IdBatch { get; set; }
+        public int? Inventory_Id { get; set; }
         //Output
         public int IdStaff { get; set; }
         public int IdReason { get; set; }
