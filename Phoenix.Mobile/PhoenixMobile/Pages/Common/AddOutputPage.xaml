@@ -11,13 +11,6 @@
              xmlns:input="clr-namespace:Phoenix.Mobile.Core.Models.Input;assembly=Phoenix.Mobile.Core" 
              xmlns:medicine="clr-namespace:Phoenix.Mobile.Core.Models.Medicine;assembly=Phoenix.Mobile.Core" xmlns:inputinfo="clr-namespace:Phoenix.Mobile.Core.Models.InputInfo;assembly=Phoenix.Mobile.Core" xmlns:medicineItem="clr-namespace:Phoenix.Mobile.Core.Models.MedicineItem;assembly=Phoenix.Mobile.Core"
              ControlTemplate="{StaticResource FullScreenHasBack}">
-    <ContentPage.Resources>
-        <ResourceDictionary>
-
-            <common:NameConverter x:Key="NameConverter" />
-
-        </ResourceDictionary>
-    </ContentPage.Resources>
     <ContentPage.Content>
         
         <StackLayout BackgroundColor="WhiteSmoke">
@@ -159,9 +152,9 @@
                                                                 TextColor="Red"/>
                                                             </StackLayout>
                                                             <StackLayout Orientation="Horizontal">
-                                                                <Label Text="0"
+                                                                <Label Text="{Binding Amount}"
                                                                 Margin="5,2,0,4"
-                                                                       HorizontalTextAlignment="Center"
+                                                                HorizontalTextAlignment="Center"
                                                                 WidthRequest="30"
                                                                 BackgroundColor="WhiteSmoke"
                                                                 FontSize="Small"
@@ -252,6 +245,7 @@
                                 ItemsSource="{Binding Reasons}"
                                 Grid.Row="1"
                                 Grid.Column="1"
+                                SelectedItem="{Binding SelectedReason}"
                                 Title="----- Chọn lý do xuất kho -----"
                                 ItemDisplayBinding="{Binding NameReason}"/>
 
@@ -278,6 +272,7 @@
                                 ItemsSource="{Binding Staffs}"
                                 Grid.Row="3"
                                 Grid.Column="1"
+                                SelectedItem="{Binding SelectedStaff}"
                                 Title="----- Chọn Người tạo -----"
                                 ItemDisplayBinding="{Binding Name}"/>
                     </Grid>
@@ -290,7 +285,7 @@
             <StackLayout Margin="0,10,0,5">
                 <AbsoluteLayout HorizontalOptions="Center">
                     <Grid xe:TouchEffect.Color="AliceBlue"
-                          xe:Commands.Tap="{Binding }">
+                          xe:Commands.Tap="{Binding AddOutputCommand}">
                         <forms:CachedImage Source="btn_Save" 
                                            Grid.Row="0"
                                            Grid.Column="0"

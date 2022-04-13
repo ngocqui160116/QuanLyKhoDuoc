@@ -96,43 +96,87 @@ namespace Phoenix.Mobile.PageModels.Common
         }
         #endregion
 
-        #region SelectMedicine
+        #region SelectItem
 
-        MedicineModel _selectedMedicine;
-
-        public MedicineModel SelectedMedicine
+        public Command<MedicineModel> SelectItemCommand
         {
             get
             {
-                return _selectedMedicine;
-            }
-            set
-            {
-                _selectedMedicine = value;
-                if (value != null)
-                MedicineSelected.Execute(value);
-                
-            }
-            
-        }
-
-        public Command<MedicineModel> MedicineSelected
-        {
-            get
-            {
-                return new Command<MedicineModel>(async (Medicine) =>
+                return new Command<MedicineModel>(async (MedicineModel) =>
                 {
-                    var data = _medicineItemService.AddMedicineItem(new MedicineItemRequest
+                    try
                     {
-                        Medicine_Id = Medicine.IdMedicine
-                    });
-                    CoreMethods.PushPageModel<AddInputPageModel>(Medicine);
-                   
+
+                        var data = await _medicineItemService.AddMedicineItem(new MedicineItemRequest
+                        {
+                            Medicine_Id = MedicineModel.IdMedicine
+                        });
+                        await CoreMethods.PushPageModel<AddInputPageModel>();
+
+                        // await _dialogService.AlertAsync("Lưu thành công");
+                        IsBusy = false;
+
+                    }
+                    catch (Exception e)
+                    {
+                        //await _dialogService.AlertAsync("Lưu thất bại");
+                    }
+
+                });
+            }
+        }
+        #endregion
+
+        #region EditItem
+
+        public Command<MedicineModel> EditItemCommand
+        {
+            get
+            {
+                return new Command<MedicineModel>(async (MedicineModel) =>
+                {
+                    //CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn: " +MedicineItemModel.MedicineName, "Đóng");
+                    CoreMethods.PushPageModel<EditMedicinePageModel>(MedicineModel);
+
+                });
+            }
+        }
+        #endregion
+
+        #region RemoveItem
+
+        public Command<MedicineModel> RemoveItemCommand
+        {
+            get
+            {
+                return new Command<MedicineModel>(async (MedicineModel) =>
+                {
+                    try
+                    {
+                        if (IsBusy) return;
+                        IsBusy = true;
+
+                        //CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn: " + MedicineItemModel.Id, "Đóng");
+
+                        var data = await _medicineService.DeleteMedicine(MedicineModel.IdMedicine);
+                        // await CoreMethods.PushPageModel<AddOutputPageModel>();
+                        await _dialogService.AlertAsync("Xóa thành công");
+                        LoadData();
+                        IsBusy = false;
+
+                    }
+                    catch (Exception e)
+                    {
+                        await _dialogService.AlertAsync("Xóa thất bại");
+                    }
+                    //CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn: " +MedicineItemModel.Id, "Đóng");
+                    // CoreMethods.PushPageModel<AddInputInfoPageModel>(MedicineItemModel);
+
                 });
             }
         }
 
-#endregion
+        #endregion
 
         #region properties
         public MedicineModel Medicine { get; set; }

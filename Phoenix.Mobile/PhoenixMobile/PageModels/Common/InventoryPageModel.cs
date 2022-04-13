@@ -122,7 +122,10 @@ namespace Phoenix.Mobile.PageModels.Common
                         Batch = Inventory.LotNumber,
                         Count = Inventory.Count,
                         DueDate = Inventory.HSD,
-                        InputPrice = Inventory.UnitPrice
+                        InputPrice = Inventory.UnitPrice,
+                        Inventory_Id = Inventory.Id,
+                        Amount = 0
+                        
                     });
                     CoreMethods.PushPageModel<AddOutputPageModel>(Inventory);
 

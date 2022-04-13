@@ -48,7 +48,7 @@ namespace Phoenix.Mobile.PageModels.Common
             if (IsBusy) return;
             IsBusy = true;
 #if DEBUG
-           // OutputInfos = Output.OutputInfo;
+            OutputInfos = Output.OutputInfo;
 
             IdOutput = Output.Id;
             NameReason = Output.NameReason;
@@ -64,11 +64,12 @@ namespace Phoenix.Mobile.PageModels.Common
         #region properties
         public OutputModel Output { get; set; }
         public List<OutputInfoDto> OutputInfos { get; set; }
-
+      
         public string SearchText { get; set; }
         public int IdOutput { get; set; }
         public string NameReason { get; set; }
         public string Status { get; set; }
+        public string SupplierName { get; set; }
         public DateTime DateOutput { get; set; }
         public string NameStaff { get; set; }
         public double Total { get; set; }

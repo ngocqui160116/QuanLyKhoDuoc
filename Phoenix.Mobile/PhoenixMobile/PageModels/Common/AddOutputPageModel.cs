@@ -155,34 +155,33 @@ namespace Phoenix.Mobile.PageModels.Common
         public DateTime HSD { get; set; } = DateTime.Now;
         #endregion
 
-        //#region AddOutputCommand
-        //public Command AddOutputCommand => new Command(async (p) => await AddOutputExecute(), (p) => !IsBusy);
-        //private async Task AddOutputExecute()
-        //{
-        //    try
-        //    {
+        #region AddOutputCommand
+        public Command AddOutputCommand => new Command(async (p) => await AddOutputExecute(), (p) => !IsBusy);
+        private async Task AddOutputExecute()
+        {
+            try
+            {
 
-        //        var data = await _outputInfoService.CreateOutputInfo( new OutputInfoRequest
-        //        {
-        //            IdReason = SelectedReason.IdReason,
-        //            IdStaff = SelectedStaff.IdStaff,
-        //            Count = 100,
-        //            DateOutput = HSD
-        //        });
-        //        //await CoreMethods.PushPageModel<OutputPageModel>();
+                var data = await _outputInfoService.CreateOutputInfo(new OutputInfoRequest
+                {
+                    IdReason = IdReason,
+                    IdStaff = IdStaff,
+                    DateOutput = HSD
+                });
+                await CoreMethods.PushPageModel<OutputPageModel>();
 
-        //        CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn" +SelectedReason.IdReason +SelectedStaff.IdStaff, "Đóng");
+                //CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn" + SelectedReason.IdReason + SelectedStaff.IdStaff, "Đóng");
 
-        //        await _dialogService.AlertAsync("Thêm thành công");
-        //        IsBusy = false;
+                await _dialogService.AlertAsync("Thêm thành công");
+                IsBusy = false;
 
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        await _dialogService.AlertAsync("Thêm thất bại");
-        //    }
-        //}
-        //#endregion
+            }
+            catch (Exception e)
+            {
+                await _dialogService.AlertAsync("Thêm thất bại");
+            }
+        }
+        #endregion
 
         #region AddMedicineCommand
 
@@ -194,8 +193,6 @@ namespace Phoenix.Mobile.PageModels.Common
         }
         #endregion
 
-        
-
         #region SelectItem
 
         public Command<MedicineItemModel> SelectItemCommand
@@ -205,7 +202,7 @@ namespace Phoenix.Mobile.PageModels.Common
                 return new Command<MedicineItemModel>(async (MedicineItemModel) =>
                 {
                     //CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn: " +MedicineItemModel.MedicineName, "Đóng");
-                    CoreMethods.PushPageModel<AddInputInfoPageModel>(MedicineItemModel);
+                    CoreMethods.PushPageModel<AddOutputInfoPageModel>(MedicineItemModel);
 
                 });
             }

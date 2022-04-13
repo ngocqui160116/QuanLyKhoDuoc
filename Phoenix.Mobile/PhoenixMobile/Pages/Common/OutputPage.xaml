@@ -47,6 +47,12 @@
                                     <Label Text="{Binding Id}"
                                        FontAttributes="Bold"
                                        FontSize="Medium" />
+                                    <Label Text="{Binding Status}"
+                                           HorizontalOptions="EndAndExpand"
+                                           TextColor="Red"
+                                           FontAttributes="Bold"
+                                           Margin="2"
+                                           FontSize="Small" />
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal">
                                     <Label Text="Người tạo:"

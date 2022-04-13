@@ -97,8 +97,8 @@ namespace Phoenix.Server.Services.MainServices
                 {
                     outputinfos.IdOutput = Latest.Id;
                     outputinfos.IdMedicine = item.Medicine_Id;
-                    outputinfos.Count = item.Count;
-                    outputinfos.Total = item.Count * item.InputPrice;
+                    outputinfos.Count = item.Amount;
+                    outputinfos.Total = item.Amount * item.InputPrice;
                     outputinfos.Inventory_Id = item.Inventory_Id;
 
                     _dataContext.OutputInfos.Add(outputinfos);
@@ -136,7 +136,7 @@ namespace Phoenix.Server.Services.MainServices
                         inventoryTags.ExpiredDate = DateTime.Now;
                         inventoryTags.Qty_Before = 0;
                         inventoryTags.Qty = item.Count;
-                        inventoryTags.Qty_After = inventory.Count - item.Count;
+                        inventoryTags.Qty_After = inventory.Count;
                         inventoryTags.UnitPrice = item.Inventory.UnitPrice;
                         inventoryTags.TotalPrice = item.Total;
 

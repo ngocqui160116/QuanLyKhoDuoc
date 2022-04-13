@@ -127,7 +127,8 @@ namespace Phoenix.Server.Services.MainServices
             MedicineItem.InputPrice = 0;
             MedicineItem.Total = request.InputPrice * request.Count;
             MedicineItem.DueDate = DateTime.Now;
-
+            MedicineItem.Inventory_Id = request.Inventory_Id;
+            MedicineItem.Amount = 0;
 
             _dataContext.MedicineItems.Add(MedicineItem);
             await _dataContext.SaveChangesAsync();
@@ -143,7 +144,8 @@ namespace Phoenix.Server.Services.MainServices
             MedicineItem.InputPrice = request.InputPrice;
             MedicineItem.Total = request.InputPrice * request.Count;
             MedicineItem.DueDate = DateTime.Now;
-
+            MedicineItem.Inventory_Id = request.Inventory_Id;
+            MedicineItem.Amount = 0;
 
             _dataContext.MedicineItems.Add(MedicineItem);
             await _dataContext.SaveChangesAsync();
@@ -159,6 +161,7 @@ namespace Phoenix.Server.Services.MainServices
             MedicineItem.InputPrice = request.InputPrice;
             MedicineItem.Total = request.InputPrice * request.Count;
             MedicineItem.DueDate = request.DueDate;
+            MedicineItem.Amount = request.Amount;
 
             await _dataContext.SaveChangesAsync();
             return new CrudResult() { IsOk = true };

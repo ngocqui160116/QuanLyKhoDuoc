@@ -23,5 +23,6 @@ namespace Phoenix.Server.Data.Entity
         public DateTime DueDate { get; set; }
         public string UnitName { get; set; }
         public int? Inventory_Id { get; set; }
+        public int Amount { get; set; }
     }
 }
