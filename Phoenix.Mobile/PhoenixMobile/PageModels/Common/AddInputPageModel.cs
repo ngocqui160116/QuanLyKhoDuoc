@@ -145,12 +145,12 @@ namespace Phoenix.Mobile.PageModels.Common
 
                 if (IsBusy) return;
                 IsBusy = true;
-                if (infoModel.IdMedicine == 0)
-                {
-                    await _dialogService.AlertAsync("Vui lòng nhập thông tin thuốc");
-                    IsBusy = false;
-                    return;
-                }
+                //if (infoModel.IdMedicine == 0)
+                //{
+                //    await _dialogService.AlertAsync("Vui lòng nhập thông tin thuốc");
+                //    IsBusy = false;
+                //    return;
+                //}
 
                 if (IdSupplier.Equals(0))
                 {
@@ -165,26 +165,22 @@ namespace Phoenix.Mobile.PageModels.Common
                     return;
                 }
 
-                var data = await _inputInfoService.AddInventory(new InputInfoRequest
+                var data = await _inputInfoService.AddInputInfo(new InputInfoRequest
                 {
-                    IdMedicine = infoModel.IdMedicine,
-                    IdSupplier = IdSupplier,
-                    IdBatch = infoModel.IdBatch,
                     IdStaff = IdStaff,
+                    IdSupplier = IdSupplier,
                     DateInput = DateInput,
-                    DueDate = infoModel.DueDate,
-                    Count = infoModel.Count,
-                    InputPrice = infoModel.InputPrice
+                    Status = "Đã hoàn thành",
                 });
                 await CoreMethods.PushPageModel<InputPageModel>();
 
-                await _dialogService.AlertAsync("Lưu thành công");
+                await _dialogService.AlertAsync("Thêm thành công");
                 IsBusy = false;
 
             }
             catch (Exception e)
             {
-                await _dialogService.AlertAsync("Lưu thất bại");
+                await _dialogService.AlertAsync("Thêm thất bại");
             }
         }
         #endregion
@@ -229,11 +225,11 @@ namespace Phoenix.Mobile.PageModels.Common
              //   var data1 = await _medicineItemService.DeleteAll();
 
                 await CoreMethods.PushPageModel<InputPageModel>();
-                await _dialogService.AlertAsync("Thêm thành công");
+                await _dialogService.AlertAsync("Lưu thành công");
             }
             catch (Exception e)
             {
-                await _dialogService.AlertAsync("Thêm thất bại");
+                await _dialogService.AlertAsync("Lưu thất bại");
             }
 
            

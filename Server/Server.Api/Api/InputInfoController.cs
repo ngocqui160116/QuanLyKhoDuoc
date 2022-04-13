@@ -27,10 +27,9 @@ namespace Phoenix.Server.Api.Api
             return await _InputInfoService.GetAllInputInfo(request);
         }
 
-
         [HttpPost]
         [Route("CreateInputInfo")]
-        public Task<CrudResult> CreateInputInfo([FromBody] InputInfoRequest request)
+        public Task<BaseResponse<InputInfoDto>> CreateInputInfo(InputInfoRequest request)
         {
             return _InputInfoService.CreateInputInfo( request);
         }
@@ -41,5 +40,13 @@ namespace Phoenix.Server.Api.Api
         {
             return _InputInfoService.CreateInventory(request);
         }
+
+        [HttpPost]
+        [Route("Complete")]
+        public Task<BaseResponse<InputInfoDto>> Complete(int Id, InputInfoRequest request)
+        {
+            return _InputInfoService.Complete(Id , request);
+        }
+        
     }
 }

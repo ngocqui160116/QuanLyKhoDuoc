@@ -13,8 +13,9 @@ namespace Phoenix.Mobile.Core.Proxies.Common
     public interface IInputInfoProxy
     {
         Task<BaseResponse<InputInfoDto>> GetAllInputInfo(InputInfoRequest request);
-        Task<InputInfoDto> AddInputInfo(InputInfoRequest request);
+        Task<BaseResponse<InputInfoDto>> CreateInputInfo(InputInfoRequest request);
         Task<InputInfoDto> AddInventory(InputInfoRequest request);
+        Task<BaseResponse<InputInfoDto>> Complete(int Id, InputInfoRequest request);
     }
 
     public class InputInfoProxy : BaseProxy, IInputInfoProxy
@@ -34,19 +35,33 @@ namespace Phoenix.Mobile.Core.Proxies.Common
             }
         }
 
-        public async Task<InputInfoDto> AddInputInfo(InputInfoRequest request)
+        public async Task<BaseResponse<InputInfoDto>> CreateInputInfo(InputInfoRequest request)
         {
             try
             {
+
                 var api = RestService.For<IInputInfoApi>(GetHttpClient());
-                var result = await api.AddInputInfo(request);
-                if (result == null) return new InputInfoDto();
-                return result;
+
+                return await api.CreateInputInfo(request);
             }
             catch (Exception ex)
             {
                 ExceptionHandler.Handle(new NetworkException(ex), true);
-                return new InputInfoDto();
+                return null;
+            }
+        }
+
+        public async Task<BaseResponse<InputInfoDto>> Complete(int Id, InputInfoRequest request)
+        {
+            try
+            {
+                var api = RestService.For<IInputInfoApi>(GetHttpClient());
+                return await api.Complete(Id, request);
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler.Handle(new NetworkException(ex), true);
+                return null;
             }
         }
 
@@ -72,10 +87,13 @@ namespace Phoenix.Mobile.Core.Proxies.Common
             Task<BaseResponse<InputInfoDto>> GetAllInputInfo([Body] InputInfoRequest request);
 
             [Post("/inputInfo/CreateInputInfo")]
-            Task<InputInfoDto> AddInputInfo([Body] InputInfoRequest request);
+            Task<BaseResponse<InputInfoDto>> CreateInputInfo(InputInfoRequest request);
 
             [Post("/inputInfo/CreateInventory")]
             Task<InputInfoDto> AddInventory([Body] InputInfoRequest request);
+
+            [Post("/inputInfo/Complete")]
+            Task<BaseResponse<InputInfoDto>> Complete(int Id, InputInfoRequest request);
         }
 
     }
