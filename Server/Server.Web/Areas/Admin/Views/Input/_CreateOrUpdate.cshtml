@@ -1,6 +1,6 @@
 ﻿@using Falcon.Web.Mvc.HtmlExtensions
 @model Phoenix.Server.Web.Areas.Admin.Models.Input.InputModel
-
+<script src="https://cdn.jsdelivr.net/npm/litepicker/dist/litepicker.js"></script>
 <script>
 
     var tableContent = [];
@@ -20,9 +20,7 @@
                             <td class="border-b dark:border-dark-5">
                                 <input type="text" class="form-control" aria-label="Price" aria-describedby="input-group-price" value="${count}" onchange="onCountChange(${id}, this.value)" />
                             </td>
-                                <td class="border-b dark:border-dark-5">
-                                <input type="text" class="form-control" aria-label="Total" aria-describedby="input-group-price" value="${total}"/>
-                            </td>
+                            <td class="border-b dark:border-dark-5">${total}</td>
                             <td class="border-b dark:border-dark-5">
                                 <button id="delete" data-toggle="modal-cancel" data-target="#custom-content-tooltip" class="btn btn-danger mr-1 mb-2" onclick="onDeleteChange(${id})">
                                     <i data-feather="trash" class="w-5 h-5"> </i>
@@ -85,7 +83,7 @@
         tableContent = tableContent.filter(e => e.medicineId != medicineId)
         render_tbody()
     }
-    
+
     $(document).ready(function () {
         render_tbody()
 
@@ -123,7 +121,7 @@
         <div class="mt-3">
             <label for="modal-form-1" class="form-label">Thuốc</label>
             <div class="mt-2">
-                @Html.DropDownList("IdMedicine", null,"Vui lòng chọn thuốc cần nhập", new { @class = "form-control input input--switch border" })
+                @Html.DropDownList("IdMedicine", null, "Vui lòng chọn thuốc cần nhập", new { @class = "form-control input input--switch border" })
             </div>
         </div>
     </div>
@@ -151,22 +149,37 @@
     $("#IdMedicine").on("change", function (e) {
         //console.log("name >> " + $('#IdMedicine option:selected').text() + "   val >>" + $("#IdMedicine").val())
         if ($("#IdMedicine").val() > 0) {
-            
+
             tableContent.push({
                 medicineId: $("#IdMedicine").val(),
                 medicineName: $('#IdMedicine option:selected').text(),
                 Batch: 0,
-                DueDate: new Date(),
+                DueDate: "",
+                    @*new Litepicker({
+                    element: document.getElementById('datepicker'),
+                    startDate: new Date(),
+                    setup: (picker) => {
+
+                        picker.on('show', () => {
+                            let date = picker.getDate();
+                            if (date) {
+                                date.setMonth(date.getMonth() - 1);
+                                picker.gotoDate(date);
+                            }
+                        });
+
+                    }
+                }),*@
                 InputPrice: 0,
                 Count: 0,
                 Total: 0,
             });
             render_tbody();
         }
-        
+
         //JSON.stringify(tableContent)
     })
-    
+
 </script>
 @*<div class="content">
         <div class="form-horizontal">
@@ -499,57 +512,57 @@
             }
         </div>
     </div>*@@*
-<script>
-$("#IdStaff").kendoComboBox({
-    dataTextField: "Name",
-    dataValueField: "IdStaff",
-    dataSource: {
-        type: "json",
-        transport: {
-            read: {
-                url: "@Html.Raw(Url.Action("List", "Staff"))",
-                type: "POST",
-                datatype: "json"
+    <script>
+    $("#IdStaff").kendoComboBox({
+        dataTextField: "Name",
+        dataValueField: "IdStaff",
+        dataSource: {
+            type: "json",
+            transport: {
+                read: {
+                    url: "@Html.Raw(Url.Action("List", "Staff"))",
+                    type: "POST",
+                    datatype: "json"
+                }
+            },
+            schema: {
+                data: "Data",
+                total: "Total",
+                error: "Error"
             }
-        },
-        schema: {
-            data: "Data",
-            total: "Total",
-            error: "Error"
         }
-    }
-});
-$("#IdStaff").closest('.k-combobox').addClass("form-control");
-/////////
-$("#IdSupplier").kendoComboBox({
-    dataTextField: "Name",
-    dataValueField: "IdSupplier",
-    dataSource: {
-        type: "json",
-        transport: {
-            read: {
-                url: "@Html.Raw(Url.Action("List", "Supplier"))",
-                type: "POST",
-                datatype: "json"
+    });
+    $("#IdStaff").closest('.k-combobox').addClass("form-control");
+    /////////
+    $("#IdSupplier").kendoComboBox({
+        dataTextField: "Name",
+        dataValueField: "IdSupplier",
+        dataSource: {
+            type: "json",
+            transport: {
+                read: {
+                    url: "@Html.Raw(Url.Action("List", "Supplier"))",
+                    type: "POST",
+                    datatype: "json"
+                }
+            },
+            schema: {
+                data: "Data",
+                total: "Total",
+                error: "Error"
             }
-        },
-        schema: {
-            data: "Data",
-            total: "Total",
-            error: "Error"
         }
-    }
-});
-$("#IdSupplier").closest('.k-combobox').addClass("form-control");
-//$("#ProductTypeId").kendoComboBox({
-//    dataTextField: "Name",
-//    dataValueField: "Id",
-//    dataSource:
-//        [{ Id: 1, Name: "A" },
-//            {Id: 1, Name: "B"}
-//        ]
+    });
+    $("#IdSupplier").closest('.k-combobox').addClass("form-control");
+    //$("#ProductTypeId").kendoComboBox({
+    //    dataTextField: "Name",
+    //    dataValueField: "Id",
+    //    dataSource:
+    //        [{ Id: 1, Name: "A" },
+    //            {Id: 1, Name: "B"}
+    //        ]
 
-//});
-//$("#ProductTypeId").closest('.k-combobox').addClass("form-control");
-</script>*@
+    //});
+    //$("#ProductTypeId").closest('.k-combobox').addClass("form-control");
+    </script>*@
 

@@ -4,6 +4,7 @@ using Phoenix.Server.Services.MainServices;
 using Phoenix.Server.Web.Areas.Admin.Models.Output;
 using Phoenix.Shared.Common;
 using Phoenix.Shared.Input;
+using Phoenix.Shared.Inventory;
 using Phoenix.Shared.Output;
 using System;
 using System.Collections.Generic;
@@ -18,9 +19,11 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
     {
         // GET: Admin/Customer
         private readonly IOutputService _outputService;
+        private readonly IInventoryService _InventoryService;
 
-        public OutputController(IOutputService outputService)
+        public OutputController(IOutputService outputService, IInventoryService inventoryService)
         {
+            _InventoryService = inventoryService;
             _outputService = outputService;
         }
 
@@ -49,14 +52,21 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
         public void SetViewBag(long? selectedId = null)
         {
             DataContext db = new DataContext();
+            
             ViewBag.IdStaff = new SelectList(db.Staffs.OrderBy(n => n.Name), "IdStaff", "Name", selectedId);
             ViewBag.IdReason = new SelectList(db.Reasons.OrderBy(n => n.NameReason), "IdReason", "NameReason", selectedId);
             ViewBag.IdMedicine = new SelectList(db.Inventories.OrderBy(n => n.IdMedicine), "IdMedicine", "Count", selectedId);
+            
         }
 
         // Create Vendor
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
+            var inputs = await _InventoryService.GetAll(new InventoryRequest()
+            {
+                Page = 1,
+                PageSize =9999
+            });
             SetViewBag();
             var model = new OutputModel();
 

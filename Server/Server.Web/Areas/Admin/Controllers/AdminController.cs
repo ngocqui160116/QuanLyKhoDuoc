@@ -92,5 +92,60 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
             FormsAuthentication.SignOut();
             return RedirectToAction("Login", "Admin");
         }
+
+        public ActionResult Register(string returnUrl = "")
+        {
+            return View(new LoginModel() { ReturnUrl = returnUrl });
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Register(LoginModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var ticket = await _userAuthService.Validate(model.UserName, model.Password);
+                if (ticket.UserId > 0)
+                {
+                    //log user in
+                    ticket.IsPersistent = model.RememberMe;
+                    int cookieExpires = 24 * 365; //TODO make configurable
+                    ticket.Expiration = DateTime.Now.AddHours(cookieExpires);
+                    var encryptedTicket = new WebContextHelper().CreateCookie(ticket);
+                    var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
+                    cookie.HttpOnly = true;
+                    if (ticket.IsPersistent)
+                    {
+                        cookie.Expires = ticket.Expiration;
+                    }
+                    cookie.Secure = FormsAuthentication.RequireSSL;
+                    cookie.Path = FormsAuthentication.FormsCookiePath;
+                    if (FormsAuthentication.CookieDomain != null)
+                    {
+                        cookie.Domain = FormsAuthentication.CookieDomain;
+                    }
+                    Response.Cookies.Add(cookie);
+                    var currentUser = _userService.GetUserById(ticket.UserId);
+                    if (currentUser != null)
+                    {
+                        Session.Add("CurrentUser", currentUser.DisplayName);
+                        Session.Add("Role", currentUser.Roles);
+                        Session.Add("UserId", currentUser.Id);
+                        if (currentUser.AvatarUrl != null)
+                        {
+                            Session.Add("Avatar", currentUser.AvatarUrl);
+                        }
+                    }
+
+                    if (Url.IsLocalUrl(model.ReturnUrl))
+                    {
+                        return Redirect(model.ReturnUrl);
+                    }
+                    return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+                }
+                ModelState.AddModelError("", "Mật khẩu hoặc tài khoản không hợp lệ");
+            }
+            //error
+            return View(model);
+        }
     }
 }

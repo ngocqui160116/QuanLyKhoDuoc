@@ -122,6 +122,7 @@
     $("#IdMedicine").on("change", function (e) {
         if ($("#IdMedicine option:selected").val() > 0) {
             console.log("idmedicine >> " + $('#IdMedicine option:selected').text() + "   lotnumber >>" + $("#IdMedicine ").val())
+            console.log(e)
             tableContent.push({
                 inventoryId: $("#IdMedicine option:selected").val(),
                 medicineName: $('#IdMedicine option:selected').val(),

@@ -310,16 +310,18 @@ namespace Phoenix.Server.Services.MainServices
             var result = new BaseResponse<InputInfoDto>();
             try
             {
+                var i = _dataContext.InputInfos.ToList();
                 var query = _dataContext.InputInfos.AsQueryable();
+                
+                query = query.OrderByDescending(d => d.Id);
+                query = query.OrderByDescending(d => d.IdBatch);
                 if (request.DueDate.CompareTo(DateTime.Now) < 0)
                 {
                     query = query.Where(d => d.DueDate.Equals(request.DueDate));
+                    var data = await query.ToListAsync();
+                    result.Data = data.MapTo<InputInfoDto>();
                 }
-                query = query.OrderByDescending(d => d.Id);
-                query = query.OrderByDescending(d => d.IdBatch);
-
-                var data = await query.ToListAsync();
-                result.Data = data.MapTo<InputInfoDto>();
+                
             }
             catch (Exception ex)
             {
@@ -327,7 +329,6 @@ namespace Phoenix.Server.Services.MainServices
             }
             return result;
         }
-
         public async Task<BaseResponse<InputInfoDto>> Complete(int Id, InputInfoRequest request)
         {
             var result = new BaseResponse<InputInfoDto>();
@@ -359,6 +360,7 @@ namespace Phoenix.Server.Services.MainServices
                         {
                             inventory.Count = inventory.Count + item.Count;
                         }
+                        inventory.UnitPrice = item.InputPrice;
                         inventory.IdInputInfo = item.Id;
                         await _dataContext.SaveChangesAsync();
 
@@ -386,6 +388,7 @@ namespace Phoenix.Server.Services.MainServices
                         inventory2.IdMedicine = item.IdMedicine;
                         inventory2.Count = item.Count;
                         inventory2.LotNumber = item.IdBatch;
+                        inventory2.UnitPrice = item.InputPrice;
                         inventory2.IdInputInfo = item.Id;
 
                         _dataContext.Inventories.Add(inventory2);

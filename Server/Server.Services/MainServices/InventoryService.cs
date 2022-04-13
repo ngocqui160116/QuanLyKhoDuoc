@@ -93,7 +93,7 @@ namespace Phoenix.Server.Services.MainServices
                 var query = _dataContext.Inventories.AsQueryable();
                 //những thuốc sắp hết trong kho có số lượng nhỏ hơn 10
                 query = query.Where(d => d.Count < 10);
-                var v = query.Count();
+                //var v = query.Count();
                 query = query.OrderByDescending(d => d.Id);
                 var data = await query.ToListAsync();
                 result.Data = data.MapTo<InventoryDto>();
