@@ -20,7 +20,8 @@ namespace Phoenix.Server.Services.MainServices
 
         Task<BaseResponse<InventoryDto>> GetAllInventory(InventoryRequest request);
 
-        ///
+        /// 
+        Task<BaseResponse<InventoryDto>> GetInventory();
         Task<BaseResponse<InventoryDto>> GetAll(InventoryRequest request);
         Task<BaseResponse<InventoryDto>> GetMedicineOutOfInventory(InventoryRequest request);
     }
@@ -57,7 +58,27 @@ namespace Phoenix.Server.Services.MainServices
             return result;
         }
 
-        ///
+        /// 
+        public async Task<BaseResponse<InventoryDto>> GetInventory()
+        {
+            var result = new BaseResponse<InventoryDto>();
+
+            try
+            {
+                // setup query
+                var query = _dataContext.Inventories.AsQueryable();
+                query = query.OrderByDescending(d => d.Id);
+                var data = await query.ToListAsync();
+                result.Data = data.MapTo<InventoryDto>();
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return result;
+        }
         public async Task<BaseResponse<InventoryDto>> GetAll(InventoryRequest request)
         {
             var result = new BaseResponse<InventoryDto>();
@@ -69,8 +90,8 @@ namespace Phoenix.Server.Services.MainServices
 
                 // filter
 
-                query = query.OrderByDescending(d => d.IdMedicine);
-
+                query = query.OrderByDescending(d => d.Id);
+                var i = query.Count();
                 var data = await query.Skip(request.Page * request.PageSize).Take(request.PageSize).ToListAsync();
                 result.DataCount = (int)((await query.CountAsync()) / request.PageSize) + 1;
                 result.Data = data.MapTo<InventoryDto>();

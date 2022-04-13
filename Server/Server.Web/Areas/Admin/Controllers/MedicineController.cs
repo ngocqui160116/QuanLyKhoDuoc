@@ -93,8 +93,12 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
         }
         public ActionResult Update(int id)
         {
-            SetViewBag();
+            //SetViewBag();
+            DataContext db = new DataContext();
             var medicineDto = _medicineService.GetMedicineById(id);
+            ViewBag.IdGroup = new SelectList(db.Groups.OrderBy(n => n.Name), "IdGroup", "Name", medicineDto.IdGroup);
+            ViewBag.IdUnit = new SelectList(db.Units.OrderBy(n => n.Name), "Id", "Name", medicineDto.IdUnit);
+            //var medicineDto = _medicineService.GetMedicineById(id);
             if (medicineDto == null)
             {
                 return RedirectToAction("Index");
