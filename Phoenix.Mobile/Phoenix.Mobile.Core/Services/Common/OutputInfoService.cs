@@ -10,7 +10,7 @@ namespace Phoenix.Mobile.Core.Services.Common
     public interface IOutputInfoService
     {
         Task<List<OutputInfoModel>> GetAllOutputInfo(OutputInfoRequest request);
-        Task<OutputInfoModel> AddOutputInfo(OutputInfoRequest request);
+        Task<List<OutputInfoModel>> CreateOutputInfo(int Inventory_Id, OutputInfoRequest request);
     }
 
     public class OutputInfoService : IOutputInfoService
@@ -26,10 +26,10 @@ namespace Phoenix.Mobile.Core.Services.Common
             return outputinfo.Data.MapTo<OutputInfoModel>();
         }
 
-        public async Task<OutputInfoModel> AddOutputInfo(OutputInfoRequest request)
+        public async Task<List<OutputInfoModel>> CreateOutputInfo(int Inventory_Id, OutputInfoRequest request)
         {
-            var data = await _OutputInfoProxy.AddOutputInfo(request);
-            return data.MapTo<OutputInfoModel>();
+            var outputinfo = await _OutputInfoProxy.CreateOutputInfo(Inventory_Id, request);
+            return outputinfo.Data.MapTo<OutputInfoModel>();
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Phoenix.Mobile.Core.Proxies.Common
     public interface IOutputInfoProxy
     {
         Task<BaseResponse<OutputInfoDto>> GetAllOutputInfo(OutputInfoRequest request);
-        Task<OutputInfoDto> AddOutputInfo(OutputInfoRequest request);
+        Task<BaseResponse<OutputInfoDto>> CreateOutputInfo(int Inventory_Id, OutputInfoRequest request);
     }
 
     public class OutputInfoProxy : BaseProxy, IOutputInfoProxy
@@ -32,21 +32,22 @@ namespace Phoenix.Mobile.Core.Proxies.Common
                 return null;
             }
         }
-        public async Task<OutputInfoDto> AddOutputInfo(OutputInfoRequest request)
+        
+        public async Task<BaseResponse<OutputInfoDto>> CreateOutputInfo(int Inventory_Id, OutputInfoRequest request)
         {
             try
             {
                 var api = RestService.For<IOutputInfoApi>(GetHttpClient());
-                var result = await api.AddOutputInfo(request);
-                if (result == null) return new OutputInfoDto();
-                return result;
+
+                return await api.CreateOutputInfo(Inventory_Id, request);
             }
             catch (Exception ex)
             {
                 ExceptionHandler.Handle(new NetworkException(ex), true);
-                return new OutputInfoDto();
+                return null;
             }
         }
+        
 
         public interface IOutputInfoApi
         {
@@ -54,7 +55,7 @@ namespace Phoenix.Mobile.Core.Proxies.Common
             Task<BaseResponse<OutputInfoDto>> GetAllOutputInfo([Body] OutputInfoRequest request);
 
             [Post("/outputInfo/CreateOutputInfo")]
-            Task<OutputInfoDto> AddOutputInfo([Body] OutputInfoRequest request);
+            Task<BaseResponse<OutputInfoDto>> CreateOutputInfo(int Inventory_Id, OutputInfoRequest request);
         }
 
     }

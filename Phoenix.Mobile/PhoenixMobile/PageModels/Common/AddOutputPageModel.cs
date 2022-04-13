@@ -56,8 +56,7 @@ namespace Phoenix.Mobile.PageModels.Common
 
         private async Task LoadData()
         {
-            Names = "Nhan";
-        
+
    
         #region MedicineItem
         var data2 = await _medicineItemService.GetAllMedicineItem(MedicineItemRequest);
@@ -156,37 +155,34 @@ namespace Phoenix.Mobile.PageModels.Common
         public DateTime HSD { get; set; } = DateTime.Now;
         #endregion
 
-        #region AddOutputCommand
-        public Command AddOutputCommand => new Command(async (p) => await AddOutputExecute(), (p) => !IsBusy);
-        private async Task AddOutputExecute()
-        {
-            try
-            {
+        //#region AddOutputCommand
+        //public Command AddOutputCommand => new Command(async (p) => await AddOutputExecute(), (p) => !IsBusy);
+        //private async Task AddOutputExecute()
+        //{
+        //    try
+        //    {
 
-                var data = await _outputInfoService.AddOutputInfo(new OutputInfoRequest
-                {
-                    //IdMedicine = InputInfo.IdMedicine,
-                    //IdInputInfo = 1,
-                    IdReason = SelectedReason.IdReason,
-                    //Total = 2000,
-                    IdStaff = SelectedStaff.IdStaff,
-                    Count = 100,
-                    DateOutput = HSD
-                });
-                //await CoreMethods.PushPageModel<OutputPageModel>();
+        //        var data = await _outputInfoService.CreateOutputInfo( new OutputInfoRequest
+        //        {
+        //            IdReason = SelectedReason.IdReason,
+        //            IdStaff = SelectedStaff.IdStaff,
+        //            Count = 100,
+        //            DateOutput = HSD
+        //        });
+        //        //await CoreMethods.PushPageModel<OutputPageModel>();
 
-                CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn" +SelectedReason.IdReason +SelectedStaff.IdStaff, "Đóng");
+        //        CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn" +SelectedReason.IdReason +SelectedStaff.IdStaff, "Đóng");
 
-                await _dialogService.AlertAsync("Thêm thành công");
-                IsBusy = false;
+        //        await _dialogService.AlertAsync("Thêm thành công");
+        //        IsBusy = false;
 
-            }
-            catch (Exception e)
-            {
-                await _dialogService.AlertAsync("Thêm thất bại");
-            }
-        }
-        #endregion
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        await _dialogService.AlertAsync("Thêm thất bại");
+        //    }
+        //}
+        //#endregion
 
         #region AddMedicineCommand
 
