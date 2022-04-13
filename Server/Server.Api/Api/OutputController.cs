@@ -26,12 +26,12 @@ namespace Phoenix.Server.Api.Api
             return await _OutputService.GetAllOutput(request);
         }
 
-        [HttpPost]
-        [Route("CreateOutput")]
-        public Task<CrudResult> CreateOutput([FromBody] OutputRequest request)
-        {
-            return _OutputService.CreateOutput(request);
-        }
+        //[HttpPost]
+        //[Route("CreateOutput")]
+        //public Task<CrudResult> CreateOutput([FromBody] OutputRequest request)
+        //{
+        //    return _OutputService.CreateOutput(request);
+        //}
 
         [HttpPost]
         [Route("UpdateOutput")]

@@ -18,8 +18,8 @@ namespace Phoenix.Server.Services.MainServices
     {
         Task<BaseResponse<OutputInfoDto>> GetAllOutputInfo(OutputInfoRequest request);
         Task<CrudResult> CreateOutputInventory(OutputInfoRequest request);
-        Task<CrudResult> CreateOutputInfo(OutputInfoRequest request);
-
+        Task<BaseResponse<OutputInfoDto>> CreateOutputInfo(OutputInfoRequest request);
+       // Task<BaseResponse<OutputInfoDto>> Complete(int Id, OutputInfoRequest request);
         ///
         Task<BaseResponse<OutputInfoDto>> GetAllOutputInfoById(int Id, OutputInfoRequest request);
     }
@@ -60,32 +60,103 @@ namespace Phoenix.Server.Services.MainServices
             return result;
         }
 
-
-        // Task<CrudResult> CreateOutputInfo(OutputInfoRequest request);
-        public async Task<CrudResult> CreateOutputInfo(OutputInfoRequest request)
+        #region GetLatestOutput
+        public Output GetLatestOutput()
         {
-            var Output = new Output();
+            var query = _dataContext.Outputs.AsQueryable();
 
-            Output.IdStaff = request.IdStaff;
-            Output.DateOutput = request.DateOutput;
-            Output.IdReason = request.IdReason;
-            Output.Status = request.Status;
-
-            _dataContext.Outputs.Add(Output);
-            await _dataContext.SaveChangesAsync();
-
-            var OutputInfo = new OutputInfo();
-
-            OutputInfo.IdOutput = Output.Id;
-            OutputInfo.IdMedicine = request.IdMedicine;
-            
-            OutputInfo.Count = request.Count;
-            OutputInfo.Total = request.Total;
-
-            _dataContext.OutputInfos.Add(OutputInfo);
-            await _dataContext.SaveChangesAsync();
-            return new CrudResult() { IsOk = true };
+            query = query.OrderByDescending(d => d.Id);
+            var da = query.FirstOrDefault();
+            return da;
         }
+
+        #endregion
+
+        #region CreateOutput
+        public async Task<BaseResponse<OutputInfoDto>> CreateOutputInfo(OutputInfoRequest request)
+        {
+            var result = new BaseResponse<OutputInfoDto>();
+            var medicineItems = _dataContext.MedicineItems.ToList();
+            try
+            {
+                Output outputs = new Output
+                {
+                    IdStaff = request.IdStaff,
+                    DateOutput = request.DateOutput,
+                    IdReason = request.IdReason,
+                    Status = "Đã hoàn thành"
+            };
+
+                _dataContext.Outputs.Add(outputs);
+                await _dataContext.SaveChangesAsync();
+
+                var Latest = GetLatestOutput();
+
+                OutputInfo outputinfos = new OutputInfo();
+                foreach (var item in medicineItems)
+                {
+                    outputinfos.IdOutput = Latest.Id;
+                    outputinfos.IdMedicine = item.Medicine_Id;
+                    outputinfos.Count = item.Count;
+                    outputinfos.Total = item.Count * item.InputPrice;
+                    
+
+                    _dataContext.OutputInfos.Add(outputinfos);
+                    await _dataContext.SaveChangesAsync();
+                }
+                result.Success = true;
+
+                //lấy danh sách các chi tiết hóa đơn nhập
+                var list = _dataContext.OutputInfos.Where(p => p.IdOutput.Equals(outputs.Id));
+                var data = await list.ToListAsync();
+                //thêm chi tiết hóa đơn nhập vào kho
+                foreach (var item in data)
+                {
+                    //Thuốc và lô trong kho trùng với hóa đơn nhập
+                    var inventories = _dataContext.Inventories.ToList()
+                                        .FindAll(d => d.IdMedicine == item.IdMedicine && d.LotNumber == item.Inventory.LotNumber);
+                    //đã có thuốc trong kho
+                    if (inventories.Count != 0)
+                    {
+                        var inventory = inventories.FirstOrDefault();
+                        //cập nhật lại số lượng tồn trong kho
+                       
+                        inventory.Count = inventory.Count - item.Count;
+                        inventory.IdInputInfo = item.Id;
+                        await _dataContext.SaveChangesAsync();
+
+                        //thêm chi tiết hóa đơn nhập vào thẻ kho
+                        InventoryTags inventoryTags = new InventoryTags();
+                        inventoryTags.DocumentId = "PX00" + item.Id;
+                        inventoryTags.DocumentDate = DateTime.Now;
+                        inventoryTags.DocumentType = 2;
+                        inventoryTags.MedicineId = item.IdMedicine;
+                        inventoryTags.LotNumber = (int)item.Inventory.LotNumber;
+                        inventoryTags.ExpiredDate = DateTime.Now;
+                        inventoryTags.Qty_Before = 0;
+                        inventoryTags.Qty = item.Count;
+                        inventoryTags.Qty_After = inventory.Count - item.Count;
+                        inventoryTags.UnitPrice = item.Inventory.UnitPrice;
+                        inventoryTags.TotalPrice = item.Total;
+
+                        _dataContext.InventoryTags.Add(inventoryTags);
+                        await _dataContext.SaveChangesAsync();
+                    }
+                    //chưa có thuốc trong kho
+                    
+                }
+
+                result.Data = data.MapTo<OutputInfoDto>();
+                result.Success = true;
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return result;
+        }
+        #endregion
 
         public async Task<CrudResult> CreateOutputInventory(OutputInfoRequest request)
         {

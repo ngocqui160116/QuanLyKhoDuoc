@@ -81,6 +81,9 @@ namespace Phoenix.Mobile.PageModels.Common
         public string NameStaff { get; set; }
         public double Total { get; set; }
         public Color color { get; set; }
+
+        public List<InputInfoModel> inputInfoModels { get; set; } = new List<InputInfoModel>();
+        public InputInfoRequest request { get; set; } = new InputInfoRequest();
         #endregion
 
         #region UpdateStatusCommand
@@ -105,6 +108,29 @@ namespace Phoenix.Mobile.PageModels.Common
             catch (Exception e)
             {
                 await _dialogService.AlertAsync("Cập nhật thất bại");
+            }
+        }
+        #endregion
+
+        #region UpdateStatusCommand
+        public Command CompleteCommand => new Command(async (p) => await CompleteExecute(), (p) => !IsBusy);
+        private async Task CompleteExecute()
+        {
+            try
+            {
+                if (IsBusy) return;
+                IsBusy = true;
+
+                var data = await _inputInfoService.Complete(IdInput, request);
+                IsEnabled = false;
+                await CoreMethods.PushPageModel<InputPageModel>();
+                await _dialogService.AlertAsync("Thêm thành công");
+                IsBusy = false;
+
+            }
+            catch (Exception e)
+            {
+                await _dialogService.AlertAsync("Thêm thất bại");
             }
         }
         #endregion

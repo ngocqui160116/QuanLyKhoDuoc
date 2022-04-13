@@ -26,7 +26,7 @@ namespace Phoenix.Server.Services.MainServices
         //Web
         Task<BaseResponse<InputDto>> GetAll(InputRequest request);
         Task<BaseResponse<InputDto>> Create(InputRequest request);
-        Input GetInputById(string id);
+        //Input GetInputById(string id);
         //Task<BaseResponse<Input>> Delete(string Id);
     }
     public class InputService : IInputService

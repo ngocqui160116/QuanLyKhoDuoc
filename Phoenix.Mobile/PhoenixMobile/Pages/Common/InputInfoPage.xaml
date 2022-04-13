@@ -197,7 +197,7 @@
                                 <forms:CachedImage Source="btn_Save" 
                                                Grid.Row="0"
                                                HeightRequest="50"
-                                               xe:Commands.Tap="{Binding }"/>
+                                               xe:Commands.Tap="{Binding CompleteCommand}"/>
                                 <Label Grid.Row="0"
                                    FontSize="Medium"
                                    HorizontalOptions="Center"

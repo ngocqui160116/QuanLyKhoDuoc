@@ -58,18 +58,7 @@ namespace Phoenix.Mobile.PageModels.Common
         {
             Names = "Nhan";
         
-        //ListMedicine = new List<InputInfoModel>()
-        //    {
-        //       new InputInfoModel()
-        //       {
-        //           IdMedicine = InputInfo.IdMedicine,
-        //           MedicineName = InputInfo.MedicineName,
-        //           Count = InputInfo.Count,
-        //           DueDate = InputInfo.DueDate
-        //       }
-
-        //    };
-
+   
         #region MedicineItem
         var data2 = await _medicineItemService.GetAllMedicineItem(MedicineItemRequest);
             if (data2 == null)
@@ -176,10 +165,10 @@ namespace Phoenix.Mobile.PageModels.Common
 
                 var data = await _outputInfoService.AddOutputInfo(new OutputInfoRequest
                 {
-                    IdMedicine = InputInfo.IdMedicine,
-                    IdInputInfo = 1,
+                    //IdMedicine = InputInfo.IdMedicine,
+                    //IdInputInfo = 1,
                     IdReason = SelectedReason.IdReason,
-                    Total = 2000,
+                    //Total = 2000,
                     IdStaff = SelectedStaff.IdStaff,
                     Count = 100,
                     DateOutput = HSD
