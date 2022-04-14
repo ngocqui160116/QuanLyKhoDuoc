@@ -40,8 +40,10 @@
         <a href="javascript:;" data-toggle="modal" data-target="#complete-modal" class="btn btn-success text-white shadow-md mr-2">
             <i data-feather="check-circle" class="w-4 h-4 mr-2"></i> Hoàn thành
         </a>
-    </div
-    </br>
+        <a href="javascript:;" data-toggle="modal" data-target="#cancel-modal" class="btn btn-danger text-white shadow-md mr-2">
+            <i data-feather="x-circle" class="w-4 h-4 mr-2"></i> Hủy
+        </a>
+    </div>
     <div id="main-grid"></div>
     <script>
         var dateFormatter = function (cell, formatterParams) {
@@ -106,6 +108,7 @@
         }
     </script>
 </div>
+<!--Modal hoàn thành nhập kho-->
 <div id="complete-modal" class="modal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -120,6 +123,27 @@
                     <div class="px-5 pb-8 text-center">
                         <button type="button" data-dismiss="modal" class="btn btn-outline-secondary w-24 dark:border-dark-5 dark:text-gray-300 mr-1">Thoát</button>
                         <button type="submit" class="btn btn-primary w-24">Đồng ý</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal hủy phiếu nhập-->
+<div id="cancel-modal" class="modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body p-0">
+                <div class="p-5 text-center">
+                    <i data-feather="x" class="w-16 h-16 text-theme-21 mx-auto mt-3"></i>
+                    <div class="text-3xl mt-5">Bạn muốn hủy phiếu nhập ?</div>
+                    <div class="text-gray-600 mt-2">Phiếu nhập kho này sẽ bị hủy!</div>
+                </div>
+                @using (Html.BeginForm("Cancel", "Input", new { id = Model.Id }))
+                {
+                    <div class="px-5 pb-8 text-center">
+                        <button type="button" data-dismiss="modal" class="btn btn-outline-secondary w-24 dark:border-dark-5 dark:text-gray-300 mr-1">Thoát</button>
+                        <button type="submit" class="btn btn-danger w-24">Đồng ý</button>
                     </div>
                 }
             </div>

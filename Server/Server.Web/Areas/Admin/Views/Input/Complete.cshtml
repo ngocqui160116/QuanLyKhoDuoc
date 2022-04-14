@@ -7,22 +7,15 @@
 @section Breadcrumb{
     <div class="-intro-x breadcrumb mr-auto hidden sm:flex">
         <span>Chương trình</span> <i data-feather="chevron-right" class="breadcrumb__icon"></i>
-        <a href="#" class="breadcrumb--active">Nhập kho</a>
+        <a href="#" class="breadcrumb--active">Danh sách phiếu nhập</a>
     </div>
 }
 
 @Html.AntiForgeryToken()
 <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
     <h2 class="text-lg font-medium mr-auto">
-        Nhập kho
+        Phiếu nhập đã hoàn thành
     </h2>
-
-    <!-- BEGIN: Modal Toggle -->
-    <div class="text-center">
-        <a href="@Url.Action("Create","Input")" class="btn btn-primary text-white shadow-md mr-2">Thêm mới</a>
-    </div>
-    <!-- END: Modal Toggle -->
-
 </div>
 <div class="grid gap-6 mt-5">
     <div class="intro-y box p-5">
@@ -58,7 +51,7 @@
         }
         var table = new Tabulator("#main-grid", {
             layout: "fitDataFill",
-            ajaxURL: "@Html.Raw(Url.Action("List", "Input"))",
+            ajaxURL: "@Html.Raw(Url.Action("Complete", "Input"))",
             ajaxConfig: "post",
             ajaxRequesting: function (url, params) {
                 params.Name = $('#Name').val();
@@ -85,7 +78,6 @@
                 { title: "Nhà cung cấp", field: "SupplierName", sorter: "string", width: 300 },
                 { title: "Ngày tạo", field: "DateInput", sorter: "date", width: 180, formatter: dateFormatter },
                 { title: "Trạng thái", field: "Status", sorter: "date", width: 180 },
-                
                 @*{
                     title: "Ngày tạo", field: "CreatedAt", sorter: "date", width: 180, formatter: dateFormatter
                 },

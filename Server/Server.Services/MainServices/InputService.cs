@@ -26,8 +26,11 @@ namespace Phoenix.Server.Services.MainServices
         //Web
         Task<BaseResponse<InputDto>> GetAll(InputRequest request);
         Task<BaseResponse<InputDto>> Create(InputRequest request);
-        //Input GetInputById(string id);
-        //Task<BaseResponse<Input>> Delete(string Id);
+        Task<BaseResponse<InputDto>> GetCompleteInput(InputRequest request);
+        Task<BaseResponse<InputDto>> GetSaveInput(InputRequest request);
+        Task<BaseResponse<InputDto>> GetCancelInput(InputRequest request);
+        Task<BaseResponse<InputDto>> Cancel(int Id);
+        Input GetInputById(int id);
     }
     public class InputService : IInputService
     {
@@ -161,6 +164,7 @@ namespace Phoenix.Server.Services.MainServices
         //Web 
         #region Web
 
+
         #region GetAll
         public async Task<BaseResponse<InputDto>> GetAll(InputRequest request)
         {
@@ -242,18 +246,15 @@ namespace Phoenix.Server.Services.MainServices
         }
         #endregion
 
-        #region GetInputById
-        public Input GetInputById(string id) => _dataContext.Inputs.Find(id);
-
-        /*public async Task<BaseResponse<Input>> Delete(string Id)
+        #region Cancel
+        //thêm hóa đơn nhập và chi tiết hóa đơn nhập
+        public async Task<BaseResponse<InputDto>> Cancel(int Id)
         {
             var result = new BaseResponse<InputDto>();
             try
             {
                 var input = GetInputById(Id);
-
-                //input.Status = True;
-                
+                input.Status = "Đã hủy";
                 await _dataContext.SaveChangesAsync();
 
                 result.Success = true;
@@ -264,7 +265,98 @@ namespace Phoenix.Server.Services.MainServices
                 result.Message = ex.Message;
             }
             return result;
-        }*/
+        }
+        #endregion
+        #region GetInputById
+        public Input GetInputById(int id) => _dataContext.Inputs.Find(id);
+
+        #endregion
+
+        #region GetCompleteInput
+        public async Task<BaseResponse<InputDto>> GetCompleteInput(InputRequest request)
+        {
+            //setup query
+            var result = new BaseResponse<InputDto>();
+            try
+            {
+                // setup query
+                var query = _dataContext.Inputs.AsQueryable();
+
+                if (request.Status == "Đã hoàn thành")
+                {
+                    query = query.Where(d => d.Status.Equals(request.Status));
+                }
+                query = query.OrderByDescending(d => d.Id);
+
+                var data = await query.Skip(request.Page * request.PageSize).Take(request.PageSize).ToListAsync();
+                result.DataCount = (int)((await query.CountAsync()) / request.PageSize) + 1;
+                result.Data = data.MapTo<InputDto>();
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return result;
+        }
+        #endregion
+
+        #region GetSaveInput
+        public async Task<BaseResponse<InputDto>> GetSaveInput(InputRequest request)
+        {
+            //setup query
+            var result = new BaseResponse<InputDto>();
+            try
+            {
+                // setup query
+                var query = _dataContext.Inputs.AsQueryable();
+
+                if (request.Status == "Đã lưu")
+                {
+                    query = query.Where(d => d.Status.Equals(request.Status));
+                }
+                query = query.OrderByDescending(d => d.Id);
+
+                var data = await query.Skip(request.Page * request.PageSize).Take(request.PageSize).ToListAsync();
+                result.DataCount = (int)((await query.CountAsync()) / request.PageSize) + 1;
+                result.Data = data.MapTo<InputDto>();
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return result;
+        }
+        #endregion
+
+        #region GetCancelInput
+        public async Task<BaseResponse<InputDto>> GetCancelInput(InputRequest request)
+        {
+            //setup query
+            var result = new BaseResponse<InputDto>();
+            try
+            {
+                // setup query
+                var query = _dataContext.Inputs.AsQueryable();
+
+                if (request.Status == "Đã hủy")
+                {
+                    query = query.Where(d => d.Status.Equals(request.Status));
+                }
+                query = query.OrderByDescending(d => d.Id);
+
+                var data = await query.Skip(request.Page * request.PageSize).Take(request.PageSize).ToListAsync();
+                result.DataCount = (int)((await query.CountAsync()) / request.PageSize) + 1;
+                result.Data = data.MapTo<InputDto>();
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return result;
+        }
         #endregion
 
         #endregion
