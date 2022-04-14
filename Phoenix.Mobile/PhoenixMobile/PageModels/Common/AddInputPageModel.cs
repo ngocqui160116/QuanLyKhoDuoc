@@ -48,7 +48,7 @@ namespace Phoenix.Mobile.PageModels.Common
 
             base.Init(initData);
             NavigationPage.SetHasNavigationBar(CurrentPage, false);
-            CurrentPage.Title = "Thêm phiếu xuất";
+            CurrentPage.Title = "Thêm phiếu nhập";
         }
         protected override async void ViewIsAppearing(object sender, EventArgs e)
         {
@@ -172,8 +172,9 @@ namespace Phoenix.Mobile.PageModels.Common
                     DateInput = DateInput,
                     Status = "Đã hoàn thành",
                 });
-                await CoreMethods.PushPageModel<InputPageModel>();
+                var data1 = await _medicineItemService.DeleteAll();
 
+                await CoreMethods.PushPageModel<InputPageModel>();
                 await _dialogService.AlertAsync("Thêm thành công");
                 IsBusy = false;
 
@@ -222,7 +223,7 @@ namespace Phoenix.Mobile.PageModels.Common
                     Status = "Đã Lưu",
                 });
 
-             //   var data1 = await _medicineItemService.DeleteAll();
+                var data1 = await _medicineItemService.DeleteAll();
 
                 await CoreMethods.PushPageModel<InputPageModel>();
                 await _dialogService.AlertAsync("Lưu thành công");

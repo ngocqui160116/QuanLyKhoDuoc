@@ -168,8 +168,9 @@ namespace Phoenix.Mobile.PageModels.Common
                     IdStaff = IdStaff,
                     DateOutput = HSD
                 });
-                await CoreMethods.PushPageModel<OutputPageModel>();
 
+                var data1 = await _medicineItemService.DeleteAll();
+                await CoreMethods.PushPageModel<OutputPageModel>();
                 //CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn" + SelectedReason.IdReason + SelectedStaff.IdStaff, "Đóng");
 
                 await _dialogService.AlertAsync("Thêm thành công");

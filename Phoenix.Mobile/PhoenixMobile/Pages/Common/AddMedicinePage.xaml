@@ -13,7 +13,7 @@
     <ContentPage.Content>
 
         <StackLayout BackgroundColor="WhiteSmoke">
-            <StackLayout HeightRequest="50"
+            <!--<StackLayout HeightRequest="50"
                          WidthRequest="50" 
                          Orientation="Horizontal">
                 <Label Text="Hình ảnh thuốc"
@@ -28,9 +28,9 @@
                              WidthRequest="30" 
                              BackgroundColor="WhiteSmoke"
                              xe:Commands.Tap="{Binding TakeImageCommand}"/>
-            </StackLayout>
+            </StackLayout>-->
  
-                <Frame CornerRadius="15" >
+                <!--<Frame CornerRadius="15" >
                     <StackLayout  BackgroundColor="White"
                                   HeightRequest="100">
                     <Image Source="{Binding image}"
@@ -38,7 +38,7 @@
                            HorizontalOptions="Start"
                            Margin="5,10,5,10"/>
                 </StackLayout>
-                </Frame>
+                </Frame>-->
           
             
             <StackLayout HeightRequest="50"
@@ -101,7 +101,7 @@
                                 Grid.Row="4"
                                 Grid.Column="1"
                                 Title="----- Chọn Nhóm thuốc -----"
-                                TitleColor="Black"
+                                
                                 ItemDisplayBinding="{Binding Name}"
                                 SelectedItem="{Binding SelectedGroup}">
                         </Picker>

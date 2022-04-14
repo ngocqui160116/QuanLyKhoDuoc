@@ -6,23 +6,18 @@ using Xamarin.Forms;
 
 namespace Phoenix.Mobile.PageModels.Common
 {
-    public class StorePageModel :BasePageModel
+    public class StockInfoPageModel : BasePageModel
     {
-        public StorePageModel()
-        {
 
-        }
         public override async void Init(object initData)
         {
             base.Init(initData);
             NavigationPage.SetHasNavigationBar(CurrentPage, false);
-            CurrentPage.Title = "Nhập thuốc";
+            CurrentPage.Title = "Chi tiết Kiểm kho";
         }
         protected override async void ViewIsAppearing(object sender, EventArgs e)
         {
             base.ViewIsAppearing(sender, e);
         }
-
-
     }
 }
