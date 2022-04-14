@@ -1,7 +1,7 @@
-﻿/*using Falcon.Web.Framework.Kendoui;
+﻿using Falcon.Web.Framework.Kendoui;
 using Phoenix.Server.Services.Database;
 using Phoenix.Server.Services.MainServices;
-using Phoenix.Shared.Inventory;
+using Phoenix.Server.Web.Areas.Admin.Models.Stock;
 using Phoenix.Shared.Stock;
 using System;
 using System.Collections.Generic;
@@ -29,7 +29,7 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> List(DataSourceRequest command, StockController model)
+        public async Task<ActionResult> List(DataSourceRequest command, StockModel model)
         {
             var inputs = await _stockService.GetAll(new StockRequest()
             {
@@ -55,4 +55,4 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
         }
 
     }
-}*/
+}

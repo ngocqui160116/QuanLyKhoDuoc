@@ -6,6 +6,8 @@ using Phoenix.Server.Web.Areas.Admin.Models.Inventory;
 using Phoenix.Server.Web.Areas.Admin.Models.InventoryTags;
 using Phoenix.Server.Web.Areas.Admin.Models.Medicine;
 using Phoenix.Server.Web.Areas.Admin.Models.Output;
+using Phoenix.Server.Web.Areas.Admin.Models.Stock;
+using Phoenix.Server.Web.Areas.Admin.Models.StockInfo;
 using Phoenix.Server.Web.Areas.Admin.Models.Supplier;
 
 namespace Phoenix.Server.Web.Infrastructure
@@ -22,6 +24,8 @@ namespace Phoenix.Server.Web.Infrastructure
             CreateMap<OutputInfo, OutputInfoModel>();
             CreateMap<InventoryTags, InventoryTagsModel>();
             CreateMap<Inventory, InventoryModel>();
+            CreateMap<Stock, StockModel>();
+            CreateMap<StockInfo, StockInfoModel>();
         }
     }
 }

@@ -1249,6 +1249,7 @@
     <Compile Include="Areas\Admin\Models\Common\LoginModel.cs" />
     <Compile Include="Areas\Admin\Models\Common\MimeTypes.cs" />
     <Compile Include="Areas\Admin\Models\Customer\CustomerModel.cs" />
+    <Compile Include="Areas\Admin\Models\StockInfo\StockInfoModel.cs" />
     <Compile Include="Areas\Admin\Models\Stock\StockModel.cs" />
     <Compile Include="Areas\Admin\Models\Inventory\InventoryModel.cs" />
     <Compile Include="Areas\Admin\Models\InventoryTags\InventoryTagsModel.cs" />

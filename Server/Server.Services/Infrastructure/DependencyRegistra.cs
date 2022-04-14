@@ -48,7 +48,9 @@ namespace Phoenix.Server.Services.Infrastructure
             container.Register<IMedicineService, MedicineService>(Lifestyle.Scoped);
             container.Register<IUnitService, UnitService>(Lifestyle.Scoped);
             container.Register<IMedicineItemService, MedicineItemService>(Lifestyle.Scoped);
-            
+            container.Register<IStockService, StockService>(Lifestyle.Scoped);
+            container.Register<IStockInfoService, StockInfoService>(Lifestyle.Scoped);
+
             EngineContext.Current.Init(new SimpleContainer(container));
         }
         public static void ApiServerRegister(Container container)
