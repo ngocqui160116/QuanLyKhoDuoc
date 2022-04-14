@@ -1,8 +1,8 @@
-﻿using Falcon.Web.Framework.Kendoui;
+﻿/*using Falcon.Web.Framework.Kendoui;
 using Phoenix.Server.Services.Database;
 using Phoenix.Server.Services.MainServices;
-using Phoenix.Server.Web.Areas.Admin.Models.Inventory;
 using Phoenix.Shared.Inventory;
+using Phoenix.Shared.Stock;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,14 +12,14 @@ using System.Web.Mvc;
 
 namespace Phoenix.Server.Web.Areas.Admin.Controllers
 {
-    public class InventoryController : BaseController
+    public class StockController : BaseController
     {
         // GET: Admin/Customer
-        private readonly IInventoryService _inventoryService;
+        private readonly IStockService _stockService;
 
-        public InventoryController(IInventoryService inventoryService)
+        public StockController(IStockService stockService)
         {
-            _inventoryService = inventoryService;
+            _stockService = stockService;
         }
 
         public ActionResult Index()
@@ -29,9 +29,9 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> List(DataSourceRequest command, InventoryModel model)
+        public async Task<ActionResult> List(DataSourceRequest command, StockController model)
         {
-            var inputs = await _inventoryService.GetAll(new InventoryRequest()
+            var inputs = await _stockService.GetAll(new StockRequest()
             {
                 Page = command.Page - 1,
                 PageSize = command.PageSize
@@ -54,27 +54,5 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
             ViewBag.IdMedicine = new SelectList(db.Medicines.OrderBy(n => n.Name), "IdMedicine", "Name", selectedId);
         }
 
-        public ActionResult OutOfInventory()
-        {
-            SetViewBag();
-            return View();
-        }
-        [HttpPost]
-        public async Task<ActionResult> OutOfInventory(DataSourceRequest command, InventoryModel model)
-        {
-            var inputs = await _inventoryService.GetMedicineOutOfInventory(new InventoryRequest()
-            {
-                Page = command.Page - 1,
-                PageSize = command.PageSize
-            });
-
-            var gridModel = new DataSourceResult
-            {
-                Data = inputs.Data,
-                Total = inputs.DataCount
-            };
-            return Json(gridModel);
-        }
-
     }
-}
+}*/

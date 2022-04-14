@@ -412,6 +412,7 @@
     <Compile Include="MainServices\Common\Models\ImageRecordDto.cs" />
     <Compile Include="MainServices\Common\Models\NameValueModel.cs" />
     <Compile Include="MainServices\Common\SettingAdminService.cs" />
+    <Compile Include="MainServices\StockService.cs" />
     <Compile Include="MainServices\InventoryTagsService.cs" />
     <Compile Include="MainServices\MedicineItemService.cs" />
     <Compile Include="MainServices\ReasonService.cs" />

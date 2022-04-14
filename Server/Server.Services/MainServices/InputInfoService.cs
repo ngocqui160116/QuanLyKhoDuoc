@@ -340,10 +340,10 @@ namespace Phoenix.Server.Services.MainServices
                 if (request.DueDate.CompareTo(DateTime.Now) < 0)
                 {
                     query = query.Where(d => d.DueDate.Equals(request.DueDate));
-                    var data = await query.ToListAsync();
-                    result.Data = data.MapTo<InputInfoDto>();
+                    
                 }
-                
+                var data = await query.ToListAsync();
+                result.Data = data.MapTo<InputInfoDto>();
             }
             catch (Exception ex)
             {

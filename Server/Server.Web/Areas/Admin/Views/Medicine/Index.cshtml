@@ -77,7 +77,7 @@
                 {
                     title: "Tên thuốc", field: "Name", sorter: "string", width: 200, formatter(cell, formatterParams)
                     {
-                        return `<a href="../Admin/Medicine/Update/${cell.getData().IdMedicine}" class="btn btn-primary text-white shadow-md mr-2"></a>`
+                        return `<a href="../Admin/Medicine/Update/${cell.getData().IdMedicine}" class="text-theme-1 dark:text-theme-10">${cell.getData().Name}</a>`
                     }
                 },
                 { title: "Số đăng ký", field: "RegistrationNumber", sorter: "string", width: 150 },
