@@ -31,6 +31,10 @@ using Phoenix.Shared.InventoryTags;
 using Phoenix.Mobile.Core.Models.InventoryTags;
 using Phoenix.Shared.MedicineItem;
 using Phoenix.Mobile.Core.Models.MedicineItem;
+using Phoenix.Shared.Stock;
+using Phoenix.Mobile.Core.Models.Stock;
+using Phoenix.Shared.StockInfo;
+using Phoenix.Mobile.Core.Models.StockInfo;
 
 namespace Phoenix.Mobile.Core.Infrastructure
 {
@@ -60,6 +64,8 @@ namespace Phoenix.Mobile.Core.Infrastructure
             CreateMap<InventoryTagsDto, InventoryTagsModel>();
             CreateMap<InventoryDto, InventoryModel>();
             CreateMap<MedicineItemDto, MedicineItemModel>();
+            CreateMap<StockDto, StockModel>();
+            CreateMap<StockInfoDto, StockInfoModel>();
         }
     }
 }

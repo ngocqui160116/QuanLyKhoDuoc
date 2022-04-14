@@ -124,6 +124,7 @@ namespace Phoenix.Mobile.Core.Proxies
             [Post("/auth/externallogin")]
             Task<TokenResponse> ExternalLogin([Body] ExternalTokenRequest request);
 
+
             [Get("/auth/GetUserFromToKen")]
             [Headers("Authorization: Bearer")]
             Task<UserDto> GetUserFromToken();

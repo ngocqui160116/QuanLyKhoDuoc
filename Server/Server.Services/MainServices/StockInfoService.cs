@@ -20,7 +20,7 @@ namespace Phoenix.Server.Services.MainServices
     public interface IStockInfoService
     {
 
-        Task<BaseResponse<StockInfoDto>> GetAllStock(StockInfoRequest request);
+        Task<BaseResponse<StockInfoDto>> GetAllStockInfo(StockInfoRequest request);
 
         /// 
         Task<BaseResponse<StockInfoDto>> GetAll(StockInfoRequest request);
@@ -33,14 +33,14 @@ namespace Phoenix.Server.Services.MainServices
             _dataContext = dataContext;
         }
 
-        public async Task<BaseResponse<StockInfoDto>> GetAllStock(StockInfoRequest request)
+        public async Task<BaseResponse<StockInfoDto>> GetAllStockInfo(StockInfoRequest request)
         {
             var result = new BaseResponse<StockInfoDto>();
 
             try
             {
                 // setup query
-                var query = _dataContext.Stocks.AsQueryable();
+                var query = _dataContext.StockInfos.AsQueryable();
 
                 // filter
                 

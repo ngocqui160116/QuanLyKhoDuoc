@@ -38,6 +38,7 @@ namespace Phoenix.Server.Services.Database
         public virtual DbSet<MedicineItem> MedicineItems { get; set; }
         public virtual DbSet<InventoryTags> InventoryTags { get; set; }
         public virtual DbSet<Stock> Stocks { get; set; }
+        public virtual DbSet<StockInfo> StockInfos { get; set; }
 
         #endregion
 

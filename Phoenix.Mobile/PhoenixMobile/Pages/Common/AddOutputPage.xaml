@@ -9,7 +9,7 @@
              x:DataType="common:AddOutputPageModel"
              xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
              xmlns:input="clr-namespace:Phoenix.Mobile.Core.Models.Input;assembly=Phoenix.Mobile.Core" 
-             xmlns:medicine="clr-namespace:Phoenix.Mobile.Core.Models.Medicine;assembly=Phoenix.Mobile.Core" xmlns:inputinfo="clr-namespace:Phoenix.Mobile.Core.Models.InputInfo;assembly=Phoenix.Mobile.Core" xmlns:medicineItem="clr-namespace:Phoenix.Mobile.Core.Models.MedicineItem;assembly=Phoenix.Mobile.Core"
+             xmlns:medicine="clr-namespace:Phoenix.Mobile.Core.Models.Medicine;assembly=Phoenix.Mobile.Core" xmlns:inputinfo="clr-namespace:Phoenix.Mobile.Core.Models.InputInfo;assembly=Phoenix.Mobile.Core" xmlns:medicineItem="clr-namespace:Phoenix.Mobile.Core.Models.MedicineItem;assembly=Phoenix.Mobile.Core" xmlns:behaviors="clr-namespace:Phoenix.Framework.Core;assembly=Phoenix.Framework"
              ControlTemplate="{StaticResource FullScreenHasBack}">
     <ContentPage.Content>
         
@@ -59,11 +59,11 @@
                         <ScrollView  AbsoluteLayout.LayoutFlags="All" 
                                      AbsoluteLayout.LayoutBounds="0,0,1,1">
                             <StackLayout>
-                                <StackLayout BindableLayout.ItemsSource="{Binding MedicineItems}"
+                                <StackLayout BindableLayout.ItemsSource="{Binding Medicine}"
                                          x:Name="ItemList"
                                          BackgroundColor="WhiteSmoke">
                                     <BindableLayout.ItemTemplate>
-                                        <DataTemplate x:DataType="medicineItem:MedicineItemModel">
+                                        <DataTemplate >
 
                                             <StackLayout Margin="6,4,6,4" 
                                                             BackgroundColor="White"    
@@ -117,7 +117,7 @@
                                                         <StackLayout Orientation="Vertical"
                                                                 Grid.Column="1"
                                                                 Margin="10,0,5,0">
-                                                            <StackLayout Orientation="Horizontal">
+                                                            <StackLayout x:DataType="medicineItem:MedicineItemModel" Orientation="Horizontal">
                                                                 <Label Text="{Binding MedicineName}"
                                                                 Grid.Column="1"
                                                                 FontAttributes="Bold"
@@ -152,18 +152,35 @@
                                                                 TextColor="Red"/>
                                                             </StackLayout>
                                                             <StackLayout Orientation="Horizontal">
-                                                                <Label Text="{Binding Amount}"
-                                                                Margin="5,2,0,4"
-                                                                HorizontalTextAlignment="Center"
-                                                                WidthRequest="30"
-                                                                BackgroundColor="WhiteSmoke"
-                                                                FontSize="Small"
-                                                                TextColor="Black"/>
+                                                                <Label Text="Số lượng:"
+                                                                Margin="0,2,8,4"
+                                                                FontSize="Small" />
+                                                                <Frame CornerRadius="5" HeightRequest="40" >
+                                                                    <controls:BorderlessEntry Keyboard="Numeric"
+                                                                                          WidthRequest="50"
+                                                                                          Text="{Binding MobileNumber, Mode=TwoWay}"
+                                                                                          VerticalTextAlignment="Center"
+                                                                                          HorizontalTextAlignment="Center"
+                                                                                          BackgroundColor="WhiteSmoke"
+                                                                                          HorizontalOptions="Center">
+                                                                        <controls:BorderlessEntry.Behaviors>
+                                                                            <behaviors:EventToCommandBehavior 
+                                                                                    EventName="TextChanged"
+                                                                                    Command="{Binding BindingContext.TextChangedCommand,Source={x:Reference ItemList}}"
+                                                                                    CommandParameter="{Binding .}"/>
+                                                                        </controls:BorderlessEntry.Behaviors>
+
+                                                                    </controls:BorderlessEntry>
+
+                                                                   
+                                                                </Frame>
+                                                                
+                                                                
                                                                 <Label Text="/"
                                                                 Margin="2,2,0,4"
                                                                 FontSize="Small"
                                                                 TextColor="Black"/>
-                                                                <Label Text="{Binding UnitName}"
+                                                                <Label Text="{Binding abc}"
                                                                 Margin="2,2,8,4"
                                                                 FontSize="Small"
                                                                 FontAttributes="Bold"

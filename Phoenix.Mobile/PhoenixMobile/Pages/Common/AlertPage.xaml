@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             
              xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common"
-              xmlns:controls="clr-namespace:Phoenix.Mobile.Controls" 
+              xmlns:controls="clr-namespace:Phoenix.Mobile.Controls" xmlns:behaviors="clr-namespace:Phoenix.Framework.Core;assembly=Phoenix.Framework"
              x:Class="Phoenix.Mobile.Pages.Common.AlertPage"
              x:DataType="common:AlertPageModel">
 
@@ -10,13 +11,25 @@
         <common:AlertPageModel />
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <StackLayout
-            Padding="12">
-            
-            <Label Text="Hello" HorizontalOptions="Center"
-                   VerticalOptions="Center">
-                
-            </Label>
+        <StackLayout>
+            <controls:BorderlessEntry Margin="20,0,20,0"
+                                                                         FontFamily="STC-Bold"
+                                      x:DataType="common:AlertPageModel"
+                                      Text="{Binding MobileNumber,Mode=TwoWay}"                                                           
+                                                                         Keyboard="Numeric"
+                                                                         Placeholder="Enter your line number here"
+                                                                     
+                                                                         ClearButtonVisibility="WhileEditing"
+                                                                                                                                  
+                                                                         VerticalOptions="Center">
+            <controls:BorderlessEntry.Behaviors>
+                <behaviors:EventToCommandBehavior 
+                                                                                EventName="TextChanged"
+                                                                                Command="{Binding TextChangedCommand}"
+                                                                                    CommandParameter="Text"/>
+            </controls:BorderlessEntry.Behaviors>
+
+            </controls:BorderlessEntry>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

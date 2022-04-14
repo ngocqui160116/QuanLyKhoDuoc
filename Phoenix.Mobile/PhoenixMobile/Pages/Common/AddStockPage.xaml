@@ -1,12 +1,279 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Phoenix.Mobile.Pages.Common.AddStockPage">
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" 
+             xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common" 
+             xmlns:input="clr-namespace:Phoenix.Mobile.Core.Models.Input;assembly=Phoenix.Mobile.Core" 
+             xmlns:controls="clr-namespace:Phoenix.Mobile.Controls" 
+             xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
+             xmlns:medicineItem="clr-namespace:Phoenix.Mobile.Core.Models.MedicineItem;assembly=Phoenix.Mobile.Core" 
+             x:DataType="common:AddStockPageModel"
+             x:Class="Phoenix.Mobile.Pages.Common.AddStockPage"
+             ControlTemplate="{StaticResource FullScreenHasBack}">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout BackgroundColor="WhiteSmoke">
+
+            <Frame CornerRadius="10">
+                <StackLayout Orientation="Horizontal" 
+                             BackgroundColor="WhiteSmoke">
+                    <Button Text="Thêm thông tin thuốc"
+                            Command="{Binding AddMedicineCommand}"
+                            WidthRequest="500">
+                    </Button>
+                </StackLayout>
+            </Frame>
+
+            <StackLayout HeightRequest="25">
+                <Label Text="Danh sách thuốc "
+                       FontSize="Small"
+                       Margin="5,2,0,0"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"/>
+            </StackLayout>
+
+            <Frame>
+                <StackLayout>
+                    <AbsoluteLayout HorizontalOptions="Center" 
+                                    VerticalOptions="FillAndExpand" >
+                        <StackLayout HorizontalOptions="Center">
+                            <Frame CornerRadius="15" 
+                               HeightRequest="100"
+                               HorizontalOptions="Center">
+                                <StackLayout>
+                                    <Image Source="@drawable/icon_medicine"
+                                       WidthRequest="50"
+                                       HeightRequest="50"
+                                       Margin="0,10,0,0"
+                                       HorizontalOptions="CenterAndExpand"
+                                       VerticalOptions="StartAndExpand">
+                                    </Image>
+                                    <Label Text="Chưa có thuốc"
+                                       FontSize="15"
+                                       TextColor="Black"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="StartAndExpand"/>
+                                </StackLayout>
+                            </Frame>
+                        </StackLayout>
+                        <ScrollView  AbsoluteLayout.LayoutFlags="All" 
+                                     AbsoluteLayout.LayoutBounds="0,0,1,1">
+                            <StackLayout>
+                                <StackLayout BindableLayout.ItemsSource="{Binding MedicineItems}"
+                                         x:Name="ItemList"
+                                         BackgroundColor="WhiteSmoke">
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate x:DataType="medicineItem:MedicineItemModel">
+
+                                            <StackLayout Margin="6,4,6,4" 
+                                                            BackgroundColor="White"    
+                                                            HorizontalOptions="FillAndExpand"
+                                                            Orientation="Vertical">
+
+                                                <StackLayout Orientation="Horizontal" 
+                                                        HorizontalOptions="FillAndExpand" >
+                                                    <Grid >
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="Auto"/>
+                                                            <RowDefinition Height="Auto"/>
+                                                        </Grid.RowDefinitions>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="50"/>
+                                                            <ColumnDefinition Width="200"/>
+                                                            <ColumnDefinition Width="50"/>
+                                                        </Grid.ColumnDefinitions>
+
+                                                        <Image Source="@drawable/icon_medicine"
+                                                        HorizontalOptions="StartAndExpand"
+                                                        Grid.Column="0"
+                                                        Grid.Row="0"
+                                                        VerticalOptions="CenterAndExpand">
+                                                        </Image>
+
+                                                       
+
+                                                        <StackLayout Orientation="Vertical"
+                                                                Grid.Column="1"
+                                                                Margin="10,0,5,0">
+                                                            <StackLayout Orientation="Horizontal">
+                                                                <Label Text="{Binding MedicineName}"
+                                                                Grid.Column="1"
+                                                                FontAttributes="Bold"
+                                                                FontSize="Large" />
+                                                            </StackLayout>
+
+                                                            <StackLayout Orientation="Horizontal">
+                                                                <Label Text="Số lô:"
+                                                                Margin="0,2,8,4"
+                                                                FontSize="Small" />
+                                                                <Label Text="{Binding Batch}"
+                                                                Margin="2,2,8,4"
+                                                                TextColor="DarkSlateGray"  
+                                                                FontSize="Small" />
+
+                                                                <Label Text="HSD:"
+                                                                Margin="0,2,8,4"
+                                                                FontSize="Small" />
+                                                                <controls:CustomDatePicker 
+                                                                Date="{Binding DueDate}"
+                                                                Margin="2,2,8,4"
+                                                                    Format="dd/MM/yyyy"
+                                                                FontSize="15"
+                                                                TextColor="DarkSlateGray"/>
+                                                            </StackLayout>
+                                                            <StackLayout Orientation="Horizontal">
+                                                                <Label Text="Tồn:"
+                                                                Margin="0,2,8,4"
+                                                                FontSize="Small" />
+                                                                <Label Text="{Binding Count}"
+                                                                Margin="2,2,8,4"
+                                                                FontSize="Small"
+                                                                FontAttributes="Bold"
+                                                                TextColor="Red"/>
+
+
+                                                               
+
+                                                            </StackLayout>
+                                                            <StackLayout Orientation="Horizontal">
+                                                                <Label Text="Thực tế:"
+                                                                Margin="0,2,8,4"
+                                                                FontSize="Small" />
+                                                                <Label Text="{Binding Amount}"
+                                                                Margin="2,2,8,4"
+                                                                FontSize="Small"
+                                                                FontAttributes="Bold"
+                                                                TextColor="Red"/>
+                                                                <Label Text="/"
+                                                                Margin="0,2,0,4"
+                                                                FontSize="Small"
+                                                                TextColor="Black"/>
+                                                                <Label Text="{Binding UnitName}"
+                                                                Margin="2,2,8,4"
+                                                                FontSize="Small"
+                                                                FontAttributes="Bold"
+                                                                TextColor="Black"/>
+                                                            </StackLayout>
+                                                        </StackLayout>
+                                                        <StackLayout Grid.Column="5" 
+                                                                Margin="10,0,5,10"
+                                                                HorizontalOptions="EndAndExpand"
+                                                                VerticalOptions="EndAndExpand">
+                                                            <ImageButton Source="@drawable/icon_edit"
+                                                                    Command="{Binding BindingContext.SelectItemCommand,Source={x:Reference ItemList}}" 
+                                                                    CommandParameter="{Binding .}"
+                                                                    Grid.Column="5"
+                                                                    HorizontalOptions="EndAndExpand"
+                                                                    VerticalOptions="CenterAndExpand">
+
+                                                            </ImageButton>
+                                                        </StackLayout>
+                                                        <StackLayout Grid.Column="6"
+                                                                Margin="10,0,5,10"
+                                                                HorizontalOptions="EndAndExpand"
+                                                                VerticalOptions="EndAndExpand">
+                                                            <ImageButton Source="@drawable/icon_remove"
+                                                                    Command="{Binding BindingContext.RemoveItemCommand,Source={x:Reference ItemList}}" 
+                                                                    CommandParameter="{Binding .}"
+                                                                    Grid.Column="6"
+                                                                    HorizontalOptions="EndAndExpand"
+                                                                    VerticalOptions="CenterAndExpand">
+                                                            </ImageButton>
+                                                        </StackLayout>
+                                                    </Grid>
+                                                </StackLayout>
+                                            </StackLayout>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </StackLayout>
+                            </StackLayout>
+                        </ScrollView>
+                    </AbsoluteLayout>
+                </StackLayout>
+            </Frame>
+            <StackLayout HeightRequest="25"
+                         WidthRequest="50">
+                <Label Text="Thông tin"
+                       FontSize="Small"
+                       Margin="5,2,0,0"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"/>
+            </StackLayout>
+            <Frame CornerRadius="15" >
+                <StackLayout  BackgroundColor="White">
+                    <Grid x:DataType="input:InputModel">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.3*"/>
+                            <ColumnDefinition Width="0.7*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label  Grid.Row="1"
+                                Grid.Column="0" 
+                                Margin="10,5,0,0" 
+                                WidthRequest="120" 
+                                FontSize="Medium" 
+                                Text="Ngày kiểm kho"/>
+                        <DatePicker x:DataType="common:AddStockPageModel"
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    Date="{Binding Date}"
+                                    Format="dd/MM/yyyy"
+                                    WidthRequest="200" />
+
+                        <Label  Grid.Row="2"
+                                Grid.Column="0" 
+                                Margin="10,5,0,0" 
+                                WidthRequest="115" 
+                                FontSize="Medium" 
+                                Text="Người kiểm"/>
+                        <Picker x:DataType="common:AddStockPageModel"
+                                ItemsSource="{Binding Staffs}"
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                Title=" Chọn Người kiểm kho "
+                                ItemDisplayBinding="{Binding Name}"
+                                SelectedItem="{Binding SelectedStaff}"/>
+                        <Label  Grid.Row="3"
+                                Grid.Column="0" 
+                                Margin="10,5,0,0" 
+                                WidthRequest="115" 
+                                FontSize="Medium" 
+                                Text="Ghi chú"/>
+                        <controls:BorderlessEditor Placeholder="Ghi chú" 
+                                                   Grid.Row="3"
+                                                   Grid.Column="1"
+                                                   HeightRequest="50"
+                                                   FontSize="Medium" />
+
+                    </Grid>
+                </StackLayout>
+            </Frame>
+            <StackLayout  Margin="0,50,0,0">
+                <Grid>
+                    <AbsoluteLayout 
+                                    HorizontalOptions="Center">
+                        <Grid xe:TouchEffect.Color="AliceBlue">
+                            <forms:CachedImage Source="btn_Save" 
+                                               Grid.Row="0"
+                                               HeightRequest="50"
+                                               xe:Commands.Tap="{Binding}"/>
+                            <Label Grid.Row="0"
+                                   FontSize="Medium"
+                                   HorizontalOptions="Center"
+                                   FontAttributes="Bold"
+                                   TextColor="#fff"
+                                   Text="Xác nhận"/>
+                        </Grid>
+                    </AbsoluteLayout>
+                </Grid>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

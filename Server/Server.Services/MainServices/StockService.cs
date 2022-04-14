@@ -18,7 +18,6 @@ namespace Phoenix.Server.Services.MainServices
    
     public interface IStockService
     {
-
         Task<BaseResponse<StockDto>> GetAllStock(StockRequest request);
 
         /// 

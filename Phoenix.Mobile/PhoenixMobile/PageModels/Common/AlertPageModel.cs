@@ -3,6 +3,7 @@ using Phoenix.Mobile.Core.Services.Common;
 using Phoenix.Mobile.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Phoenix.Mobile.PageModels.Common
@@ -25,27 +26,25 @@ namespace Phoenix.Mobile.PageModels.Common
             //TestString = "hello world";
         }
 
-        string _name;
-        string _surname;
-
-        public string Name
+        #region Declaration         
+        private string _mobilenumber = null;
+        private int _limit = 8;
+        #endregion
+        public string MobileNumber
         {
-            get { return _name; }
+            get { return _mobilenumber; }
             set
             {
-                _name = value;
-               
+                _mobilenumber = value;
+                TextChangedCommand.Execute(_mobilenumber);
             }
         }
+        public Command TextChangedCommand => new Command<string>(async (_mobilenumber) => await TextChanged(_mobilenumber));
 
-        public string Surname
+        private async Task TextChanged(string p)
         {
-            get { return _surname; }
-            set
-            {
-                _surname = value;
-                
-            }
+            if (p.Length >= _limit)
+                await CoreMethods.DisplayAlert("Your Bill amount ", "Info", "OK");
         }
     }
 }

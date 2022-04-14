@@ -228,6 +228,8 @@
     <Compile Include="Api\InventoryTagsController.cs" />
     <Compile Include="Api\MedicineItemController.cs" />
     <Compile Include="Api\ReasonController.cs" />
+    <Compile Include="Api\StockController.cs" />
+    <Compile Include="Api\StockInfoController.cs" />
     <Compile Include="Api\SupplierController.cs" />
     <Compile Include="Api\OutputController.cs" />
     <Compile Include="Api\OutputInfoController.cs" />

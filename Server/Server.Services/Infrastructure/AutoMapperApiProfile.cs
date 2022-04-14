@@ -17,6 +17,7 @@ using Phoenix.Shared.DocumentType;
 using Phoenix.Shared.MedicineItem;
 using Phoenix.Shared;
 using Falcon.Web.Core.Auth;
+using Phoenix.Shared.Stock;
 
 namespace Phoenix.Server.Services.Infrastructure
 {
@@ -69,7 +70,8 @@ namespace Phoenix.Server.Services.Infrastructure
 
             CreateMap<Unit, UnitDto>();
             CreateMap<MedicineItem, MedicineItemDto>();
-                
+            CreateMap<Stock, StockDto>();
+            CreateMap<StockInfo, StockInfoDto>();
 
         }
     }

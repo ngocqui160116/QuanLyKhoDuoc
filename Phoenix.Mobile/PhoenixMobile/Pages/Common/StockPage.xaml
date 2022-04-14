@@ -3,6 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Phoenix.Mobile.Pages.Common.StockPage"
              xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
+             xmlns:input="clr-namespace:Phoenix.Mobile.Core.Models.Input;assembly=Phoenix.Mobile.Core" 
+             xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common" 
+             xmlns:stock="clr-namespace:Phoenix.Mobile.Core.Models.Stock;assembly=Phoenix.Mobile.Core" 
+             xmlns:controls="clr-namespace:Phoenix.Mobile.Controls" 
+             x:DataType="common:StockPageModel"
              ControlTemplate="{StaticResource FullScreenHasBack}">
     <ContentPage.Content>
         <StackLayout>
@@ -11,62 +16,70 @@
                            HorizontalOptions="Fill"
                            VerticalOptions="CenterAndExpand"
                            Placeholder="Nhập thông tin"
-                           SearchCommand="{Binding PerformSearch}" 
+                           SearchCommand="{Binding }" 
                            SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"/>
                 <ImageButton Margin="5,0,0,0"  
-                             xe:Commands.Tap="{Binding AddInputCommand}"
+                             xe:Commands.Tap="{Binding AddStockCommand}"
                              BackgroundColor="White" 
                              HorizontalOptions="End" 
                              Source="icon_add"/>
             </StackLayout>
 
-            <ListView ItemsSource="{Binding Inputs}"
+            <ListView ItemsSource="{Binding Stocks}"
                       x:Name="searchResults"
                       HasUnevenRows="True"
                       BackgroundColor="#ecf0f1"
                       SeparatorVisibility="None"
                       HorizontalOptions="FillAndExpand"
                       VerticalOptions="FillAndExpand"
-                      SelectedItem="{Binding SelectedInput}">
+                      SelectedItem="{Binding}">
 
                 <ListView.ItemTemplate>
 
-                    <DataTemplate x:DataType="input:InputModel">
+                    <DataTemplate x:DataType="stock:StockModel">
                         <ViewCell>
                             <StackLayout Margin="6,4,6,4"
                                          BackgroundColor="White">
                                 <StackLayout Orientation="Horizontal" HeightRequest="50">
-                                    <Label Text="PN0"
+                                    <Label Text="Mã kiểm kho:"
+                                       Margin="10,0,0,0"
+                                       FontSize="Medium" />
+                                    <!--<Label Text="KT0"
                                        Margin="10,0,0,0"
                                        FontAttributes="Bold"
-                                       FontSize="Medium" />
+                                       FontSize="Medium" />-->
                                     <Label Text="{Binding Id}"
                                        FontAttributes="Bold"
+                                       Margin="10,0,0,0"
                                        FontSize="Medium" />
-                                    <Label Text="{Binding Status}"
+                                    <!--<Label Text="{Binding}"
                                            HorizontalOptions="EndAndExpand"
                                            TextColor="Red"
                                            FontAttributes="Bold"
                                            Margin="2"
-                                           FontSize="Small" />
+                                           FontSize="Small" />-->
                                 </StackLayout>
 
                                 <StackLayout Orientation="Horizontal">
-                                    <Label Text="{Binding SupplierName}"
-                                           Margin="8,2,8,4"
-                                           FontSize="Small" />
-                                    <Label Text="{Binding DateInput}"
+                                    <Label Text="Người tạo:"
+                                       Margin="10,0,0,0"
+                                       FontSize="Medium" />
+                                    <Label Text="{Binding StaffName}"
+                                           Margin="8,0,8,0"
+                                           FontSize="Medium" />
+                                    <!--<Label Text="{Binding Date}"
                                            HorizontalOptions="EndAndExpand"
                                            TextColor="ForestGreen"
                                            FontAttributes="Bold"
                                            Margin="2"
-                                           FontSize="Small" />
-                                    <!--<controls:CustomDatePicker  
+                                           FontSize="Small" />-->
+                                    <controls:CustomDatePicker  
                                            Format="dd/MM/yyyy"
-                                           Date="{Binding DateInput}"
+                                           Date="{Binding Date}"
+                                           TextColor="ForestGreen"
                                            HorizontalOptions="EndAndExpand"
                                            Margin="2"
-                                           FontSize="15" />-->
+                                           FontSize="15" />
                                 </StackLayout>
 
                             </StackLayout>

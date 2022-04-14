@@ -58,7 +58,9 @@ namespace Phoenix.Server.Services.MainServices
                                  InputPrice = c.InputPrice,
                                  Total = c.Count * c.InputPrice,
                                  DueDate = c.DueDate,
-                                 UnitName = s.Unit.Name
+                                 UnitName = s.Unit.Name,
+                                 Inventory_Id = c.Inventory_Id,
+                                 Amount = c.Amount
                              }).AsQueryable();
 
                 var config = new MapperConfiguration(cfg => cfg.CreateMissingTypeMaps = true);
