@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Phoenix.Shared.Inventory
+namespace Phoenix.Shared.Stock
 {
     public class StockRequest : BaseRequest
     {
