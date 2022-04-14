@@ -52,7 +52,7 @@
 
 
             </StackLayout>
-            <StackLayout Margin="5,10,5,10" 
+            <!--<StackLayout Margin="5,10,5,10" 
                          HeightRequest="150" 
                          BackgroundColor="White">
                 <Label Text="Thống kê" 
@@ -146,7 +146,7 @@
 
                     </StackLayout>
                 </Grid>
-            </StackLayout>
+            </StackLayout>-->
         </StackLayout>
        
        

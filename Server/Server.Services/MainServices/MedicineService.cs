@@ -96,11 +96,6 @@ namespace Phoenix.Server.Services.MainServices
             _dataContext.Medicines.Add(Medicine);
             await _dataContext.SaveChangesAsync();
 
-            var inventory = new Inventory();
-            inventory.IdMedicine = Medicine.IdMedicine;
-            inventory.Count = 0;
-
-            _dataContext.Inventories.Add(inventory);
             await _dataContext.SaveChangesAsync();
 
 

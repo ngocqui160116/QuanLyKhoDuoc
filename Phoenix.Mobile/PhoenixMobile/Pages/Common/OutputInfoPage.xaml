@@ -10,7 +10,7 @@
         <StackLayout BackgroundColor="WhiteSmoke">
             <StackLayout HeightRequest="50"
                          WidthRequest="50">
-                <Label Text="Thông tin phiếu nhập"
+                <Label Text="Thông tin phiếu xuất"
                        FontSize="Medium"
                        Margin="5,10,5,10"
                        FontAttributes="Bold"/>
@@ -51,7 +51,7 @@
                                 Margin="10,5,0,0"                               
                                 WidthRequest="115" 
                                 FontSize="Medium" 
-                                Text="Nhà cung cấp"/>
+                                Text="Lý do"/>
                         <Entry  Grid.Row="2"
                                 Grid.Column="1"
                                 TextColor="Black"
@@ -63,7 +63,7 @@
                                 Margin="10,5,0,0" 
                                 WidthRequest="100" 
                                 FontSize="Medium" 
-                                Text="Ngày nhập"/>
+                                Text="Ngày xuất"/>
                         <DatePicker 
                                 Format="dd/MM/yyyy"
                                 Grid.Row="3"

@@ -2,12 +2,80 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Phoenix.Mobile.Pages.Common.StockPage"
+             xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
              ControlTemplate="{StaticResource FullScreenHasBack}">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <StackLayout Orientation="Horizontal">
+                <SearchBar x:Name="searchBar" WidthRequest="420" 
+                           HorizontalOptions="Fill"
+                           VerticalOptions="CenterAndExpand"
+                           Placeholder="Nhập thông tin"
+                           SearchCommand="{Binding PerformSearch}" 
+                           SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"/>
+                <ImageButton Margin="5,0,0,0"  
+                             xe:Commands.Tap="{Binding AddInputCommand}"
+                             BackgroundColor="White" 
+                             HorizontalOptions="End" 
+                             Source="icon_add"/>
+            </StackLayout>
+
+            <ListView ItemsSource="{Binding Inputs}"
+                      x:Name="searchResults"
+                      HasUnevenRows="True"
+                      BackgroundColor="#ecf0f1"
+                      SeparatorVisibility="None"
+                      HorizontalOptions="FillAndExpand"
+                      VerticalOptions="FillAndExpand"
+                      SelectedItem="{Binding SelectedInput}">
+
+                <ListView.ItemTemplate>
+
+                    <DataTemplate x:DataType="input:InputModel">
+                        <ViewCell>
+                            <StackLayout Margin="6,4,6,4"
+                                         BackgroundColor="White">
+                                <StackLayout Orientation="Horizontal" HeightRequest="50">
+                                    <Label Text="PN0"
+                                       Margin="10,0,0,0"
+                                       FontAttributes="Bold"
+                                       FontSize="Medium" />
+                                    <Label Text="{Binding Id}"
+                                       FontAttributes="Bold"
+                                       FontSize="Medium" />
+                                    <Label Text="{Binding Status}"
+                                           HorizontalOptions="EndAndExpand"
+                                           TextColor="Red"
+                                           FontAttributes="Bold"
+                                           Margin="2"
+                                           FontSize="Small" />
+                                </StackLayout>
+
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding SupplierName}"
+                                           Margin="8,2,8,4"
+                                           FontSize="Small" />
+                                    <Label Text="{Binding DateInput}"
+                                           HorizontalOptions="EndAndExpand"
+                                           TextColor="ForestGreen"
+                                           FontAttributes="Bold"
+                                           Margin="2"
+                                           FontSize="Small" />
+                                    <!--<controls:CustomDatePicker  
+                                           Format="dd/MM/yyyy"
+                                           Date="{Binding DateInput}"
+                                           HorizontalOptions="EndAndExpand"
+                                           Margin="2"
+                                           FontSize="15" />-->
+                                </StackLayout>
+
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+
+                </ListView.ItemTemplate>
+            </ListView>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
