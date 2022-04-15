@@ -1,5 +1,6 @@
 ﻿using Phoenix.Shared.Common;
 using System;
+using System.Collections.Generic;
 
 namespace Phoenix.Shared.Output
 {
@@ -10,6 +11,8 @@ namespace Phoenix.Shared.Output
         public DateTime DateOutput { get; set; }
         public int IdReason { get; set; }
         public string Status { get; set; }
+
+        public List<OutputContentDto> List { get; set; }
 
     }
 }

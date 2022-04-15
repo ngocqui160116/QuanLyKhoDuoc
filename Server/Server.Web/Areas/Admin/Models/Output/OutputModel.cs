@@ -12,5 +12,7 @@ namespace Phoenix.Server.Web.Areas.Admin.Models.Output
         public DateTime DateOutput { get; set; }
         public int IdReason { get; set; }
         public string Status { get; set; }
+
+        public string TableContent { get; set; }
     }
 }

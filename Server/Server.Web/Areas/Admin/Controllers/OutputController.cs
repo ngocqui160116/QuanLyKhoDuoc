@@ -1,4 +1,5 @@
 ﻿using Falcon.Web.Framework.Kendoui;
+using Newtonsoft.Json;
 using Phoenix.Server.Services.Database;
 using Phoenix.Server.Services.MainServices;
 using Phoenix.Server.Web.Areas.Admin.Models.Output;
@@ -55,7 +56,7 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
             var inputs = _inventoryService.GetInventory();
             ViewBag.IdStaff = new SelectList(db.Staffs.OrderBy(n => n.Name), "IdStaff", "Name", selectedId);
             ViewBag.IdReason = new SelectList(db.Reasons.OrderBy(n => n.NameReason), "IdReason", "NameReason", selectedId);
-            ViewBag.IdMedicine = new SelectList(db.Inventories.OrderBy(n => n.IdMedicine), "IdMedicine", "Count", selectedId);
+            ViewBag.IdMedicine = new SelectList(db.Inventories.OrderBy(n => n.IdMedicine), "LotNumber", "IdMedicine", selectedId);
             
         }
 
@@ -77,11 +78,11 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
                 return View(model);
             var inputs = await _outputService.Create(new OutputRequest
             {
-                /*IdStaff = model.IdStaff,
-                IdSupplier = model.IdSupplier,
-                DateInput = DateTime.Now,*/
+                IdStaff = model.IdStaff,
+                IdReason = model.IdReason,
+                DateOutput = DateTime.Now,
 
-                //List = JsonConvert.DeserializeObject<List<InputContentDto>>(model.TableContent)
+                List = JsonConvert.DeserializeObject<List<OutputContentDto>>(model.TableContent)
 
             });
             if (!inputs.Success)

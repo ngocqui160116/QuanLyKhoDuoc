@@ -18,7 +18,7 @@ namespace Phoenix.Server.Services.MainServices
        // Task<CrudResult> CreateOutput(OutputRequest request);
         Task<CrudResult> UpdateOutput(string Id, OutputRequest request);
         Task<CrudResult> DeleteOutput(string Id);
-        //Output GetLatestOutput();
+        Output GetLatestOutput();
 
         ///
         Task<BaseResponse<OutputDto>> GetAll(OutputRequest request);
@@ -27,9 +27,13 @@ namespace Phoenix.Server.Services.MainServices
     public class OutputService : IOutputService
     {
         private readonly DataContext _dataContext;
-        public OutputService(DataContext dataContext)
+        private readonly IInventoryService _inventoryService;
+        private readonly IOutputInfoService _outputinfoService;
+        public OutputService(DataContext dataContext, IInventoryService inventoryService, IOutputInfoService outputinfoService)
         {
             _dataContext = dataContext;
+            _inventoryService = inventoryService;
+            _outputinfoService = outputinfoService;
         }
 
         //lấy danh sách nhà cung cấp
@@ -169,17 +173,63 @@ namespace Phoenix.Server.Services.MainServices
             var result = new BaseResponse<OutputDto>();
             try
             {
-                Input inputs = new Input
+                //thêm hóa đơn xuất
+                Output outputs = new Output
                 {
-                    /*IdStaff = request.IdStaff,
-                    IdSupplier = request.IdSupplier,
-                    DateInput = request.DateInput,
-                    Status = request.Status
-*/
+                    IdStaff = request.IdStaff,
+                    IdReason = request.IdReason,
+                    DateOutput = request.DateOutput,
+                    Status = "Đã hoàn thành"
+
                 };
 
-                _dataContext.Inputs.Add(inputs);
+                _dataContext.Outputs.Add(outputs);
                 await _dataContext.SaveChangesAsync();
+
+                var LatestOutput = GetLatestOutput();
+                //thêm chi tiết hóa đơn xuất
+                OutputInfo outputinfos = new OutputInfo();
+                foreach (var item in request.List)
+                {
+                    outputinfos.IdOutput = LatestOutput.Id;
+                    outputinfos.IdMedicine = item.medicineId;
+                    outputinfos.Count = item.Count;
+
+                    _dataContext.OutputInfos.Add(outputinfos);
+                    await _dataContext.SaveChangesAsync();
+                    //cập nhật số lượng xuất vào kho
+                    var inventories = _inventoryService.GetToOutput();
+                    foreach (var i in inventories)
+                    {
+                        if(i.IdMedicine == item.medicineId && i.LotNumber == item.LotNumber)
+                        {
+                            i.Count = i.Count - item.Count;
+                            await _dataContext.SaveChangesAsync();
+                        }
+                    }
+
+                    //thêm thẻ kho
+                    var LatestOutputInfo = _outputinfoService.GetLatestOutputInfo();
+                    InventoryTags inventoryTags = new InventoryTags();
+                    inventoryTags.DocumentId = "PX00" + LatestOutputInfo.Id;
+                    inventoryTags.DocumentDate = DateTime.Now;
+                    if(request.IdReason == 1)
+                    {
+                        inventoryTags.DocumentType = 2;
+                    }else if (request.IdReason == 2)
+                    {
+                        inventoryTags.DocumentType = 3;
+                    }else if (request.IdReason == 3)
+                    {
+                        inventoryTags.DocumentType = 4;
+                    }
+                    inventoryTags.MedicineId = item.medicineId;
+                    inventoryTags.LotNumber = item.LotNumber;
+                    inventoryTags.Qty = item.Count;
+                    _dataContext.InventoryTags.Add(inventoryTags);
+                    await _dataContext.SaveChangesAsync();
+
+                }
                 result.Success = true;
             }
             catch (Exception ex)

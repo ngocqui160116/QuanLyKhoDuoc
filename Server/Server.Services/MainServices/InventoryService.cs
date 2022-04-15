@@ -24,6 +24,7 @@ namespace Phoenix.Server.Services.MainServices
         Task<BaseResponse<InventoryDto>> GetInventory();
         Task<BaseResponse<InventoryDto>> GetAll(InventoryRequest request);
         Task<BaseResponse<InventoryDto>> GetMedicineOutOfInventory(InventoryRequest request);
+        List<Inventory> GetToOutput();
     }
     public class InventoryService : IInventoryService
     {
@@ -78,6 +79,15 @@ namespace Phoenix.Server.Services.MainServices
             }
 
             return result;
+        }
+        public List<Inventory> GetToOutput()
+        {
+            var query = _dataContext.Inventories.AsQueryable();
+
+            query = query.OrderByDescending(d => d.Id);
+            var data = query.ToList();
+            
+            return data;
         }
         public async Task<BaseResponse<InventoryDto>> GetAll(InventoryRequest request)
         {

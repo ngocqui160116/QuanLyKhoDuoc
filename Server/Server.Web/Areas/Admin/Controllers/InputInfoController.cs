@@ -140,7 +140,7 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
                 return View(inputinfomodel);
             }
             SuccessNotification("Thêm mới thành công");
-            return RedirectToAction("Detail/"+inputinfomodel.Id);
+            return RedirectToAction("../Input/Complete");
         }
     }
 }

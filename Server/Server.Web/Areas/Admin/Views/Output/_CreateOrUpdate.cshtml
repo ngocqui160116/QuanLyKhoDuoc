@@ -4,57 +4,47 @@
 <script>
     var tableContent = [];
     function render_tbody() {
-        let template = (stt, id, name, duedate, lotnumber, inventorycount, count, inputprice, total) => `<tr class="bg-gray-200 dark:bg-dark-1">
+        let template = (stt, id, @*name, duedate, lotnumber, *@ lotnumber, count, @*inputprice, total*@) => `<tr class="bg-gray-200 dark:bg-dark-1">
                             <td class="border-b dark:border-dark-5">${stt}</td>
                             <td class="border-b dark:border-dark-5">${id}</td>
-                            <td class="border-b dark:border-dark-5">${name}</td>
-                            <td class="border-b dark:border-dark-5">${duedate}</td>
+                            @*<td class="border-b dark:border-dark-5">{name}</td>
+                            <td class="border-b dark:border-dark-5">{duedate}</td>
+                            <td class="border-b dark:border-dark-5">{lotnumber}</td>*@
                             <td class="border-b dark:border-dark-5">${lotnumber}</td>
-                            <td class="border-b dark:border-dark-5">${inventorycount}</td>
                             <td class="border-b dark:border-dark-5">
-                                <input type="text" class="form-control" aria-label="Count" aria-describedby="input-group-price" value="${count}" onchange="onCountChange(${id}, this.value)" />
+                                <input type="text" class="form-control" aria-label="Count" aria-describedby="input-group-price" value="${count}" onchange="onCountChange(${id}, this.value)"/>
                             </td>
-                            <td class="border-b dark:border-dark-5">${inputprice}</td>
-                            <td class="border-b dark:border-dark-5">${total}</td>
+                            @*<td class="border-b dark:border-dark-5">{inputprice}</td>
+                            <td class="border-b dark:border-dark-5">{total}</td>*@
                             <td class="border-b dark:border-dark-5">
-                                <button href="javascript:;" data-toggle="modal-cancel" data-target="#custom-content-tooltip" type="submit" class="btn btn-danger mr-1 mb-2" onclick="onDeleteClick(${id})">
+                                <button href="javascript:;" data-toggle="modal-cancel" data-target="#custom-content-tooltip" type="submit" class="btn btn-danger mr-1 mb-2" onclick="onDeleteChange(${id})">
                                     <i data-feather="trash" class="w-5 h-5"> </i>
                                 </button>
                             </td>
                         </tr>`;
         let htmlTemplate = "";
         tableContent.map(function (row, index) {
-            htmlTemplate += template(index + 1, row.inventoryId, row.medicineName, row.DueDate, row.LotNumber, row.InventoryCount, row.Count, row.InputPrice, row.Total)
+            htmlTemplate += template(index + 1, row.medicineId, @*row.medicineName, row.DueDate, row.LotNumber, *@row.LotNumber, row.Count @*, row.InputPrice, row.Total*@)
         })
         $("#tbody").html(htmlTemplate)
         $("#tableContent").val(JSON.stringify(tableContent))
     }
-    //tính tổng tiền khi thay đổi số lượng
-    function onCountChange(inventoryId,val) {
-        tableContent = tableContent.map(function (row) {
-            if (row.inventoryId == inventoryId) {
-                row.Count = val;
-                row.Total = val * row.InputPrice;
-            }
-            return row;
-        })
-        render_tbody()
-    }
-    function onPriceChange(medicineId, val) {
+    //cập nhật số lượng
+    function onCountChange(medicineId, val) {
         tableContent = tableContent.map(function (row) {
             if (row.medicineId == medicineId) {
-                row.InputPrice = val;
-                row.Total = val * row.Count;
+                row.Count = val;
             }
             return row;
         })
         render_tbody()
     }
     //button delete item
-    function onDeleteClick(inventoryId) {
-        tableContent = tableContent.filter(e => e.inventoryId != inventoryId)
+    function onDeleteChange(medicineId) {
+        tableContent = tableContent.filter(e => e.medicineId != medicineId)
         render_tbody()
     }
+
     $(document).ready(function () {
         render_tbody()
     })
@@ -103,13 +93,13 @@
             <tr>
                 <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">#</th>
                 <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Mã thuốc</th>
-                <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Tên thuốc</th>
+                 @*<th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Tên thuốc</th>
                 <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">HSD</th>
+                <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Số lô</th>*@
                 <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Số lô</th>
-                <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Tồn</th>
                 <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Số lượng</th>
-                <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Giá</th>
-                <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Thành tiền</th>
+                @*<th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Giá</th>
+                <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Thành tiền</th>*@
                 <th class="border-b-2 dark:border-dark-5 whitespace-nowrap"></th>
             </tr>
         </thead>
@@ -121,17 +111,17 @@
 <script>
     $("#IdMedicine").on("change", function (e) {
         if ($("#IdMedicine option:selected").val() > 0) {
-            console.log("idmedicine >> " + $('#IdMedicine option:selected').text() + "   lotnumber >>" + $("#IdMedicine ").val())
-            console.log(e)
+            //console.log("idmedicine >> " + $('#IdMedicine option:selected').text() + "   lotnumber >>" + $("#IdMedicine ").val())
+            //console.log(e)
             tableContent.push({
-                inventoryId: $("#IdMedicine option:selected").val(),
-                medicineName: $('#IdMedicine option:selected').val(),
-                DueDate: new Date(), //hạn sử dụng
-                LotNumber: $('#Count option:selected').val(), //lô
-                InventoryCount: $("#IdMedicine option:selected").text(), //số lượng tồn
+                medicineId: $("#IdMedicine option:selected").text(),
+                //medicineName: $('#IdMedicine option:selected').val(),
+                //DueDate: new Date(), //hạn sử dụng
+                //LotNumber: $('#Count option:selected').val(), //lô
+                LotNumber: $("#IdMedicine option:selected").val(), //số lượng tồn
                 Count: 0,  //số lượng xuất
-                InputPrice: 200, //giá mới nhất của phiếu nhập
-                Total: 0, //tổng tiền = giá * số lượng xuất
+                //InputPrice: 200, //giá mới nhất của phiếu nhập
+                //Total: 0, //tổng tiền = giá * số lượng xuất
             });
             render_tbody();
         }

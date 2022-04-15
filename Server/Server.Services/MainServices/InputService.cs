@@ -267,6 +267,7 @@ namespace Phoenix.Server.Services.MainServices
             return result;
         }
         #endregion
+
         #region GetInputById
         public Input GetInputById(int id) => _dataContext.Inputs.Find(id);
 

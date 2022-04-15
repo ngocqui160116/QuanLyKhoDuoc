@@ -16,7 +16,7 @@
         Nhập kho
     </h2>
     <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
-        <a href="@Url.Action("Index","Input")" class="btn btn-primary text-white shadow-md mr-2">Quay lại</a>
+        <a href="@Url.Action("Saved","Input")" class="btn btn-primary text-white shadow-md mr-2">Quay lại</a>
     </div>
 </div>
 <div class="grid gap-6 mt-5">
@@ -86,7 +86,7 @@
                         return `<a class="text-theme-1 dark:text-theme-10"> ${cell.getData().MedicineName}</a>`
                     }
                 },
-                { title: "Số lô", field: "IdBatch", sorter: "string", width: 130 },
+                { title: "Số lô", field: "Batch", sorter: "string", width: 130 },
                 { title: "Số lượng", field: "Count", sorter: "string", width: 150 },
                 { title: "Giá nhập", field: "InputPrice", sorter: "string", width: 150 },
                 { title: "Tổng tiển", field: "Total", sorter: "string", width: 150 },

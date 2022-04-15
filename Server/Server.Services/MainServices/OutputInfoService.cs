@@ -22,6 +22,7 @@ namespace Phoenix.Server.Services.MainServices
        // Task<BaseResponse<OutputInfoDto>> Complete(int Id, OutputInfoRequest request);
         ///
         Task<BaseResponse<OutputInfoDto>> GetAllOutputInfoById(int Id, OutputInfoRequest request);
+        OutputInfo GetLatestOutputInfo();
     }
     public class OutputInfoService : IOutputInfoService
     {
@@ -238,6 +239,14 @@ namespace Phoenix.Server.Services.MainServices
 
             }
             return result;
+        }
+        public OutputInfo GetLatestOutputInfo()
+        {
+            var query = _dataContext.OutputInfos.AsQueryable();
+
+            query = query.OrderByDescending(d => d.Id);
+            var da = query.FirstOrDefault();
+            return da;
         }
     }
 }

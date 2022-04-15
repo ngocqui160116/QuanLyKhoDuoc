@@ -15,6 +15,8 @@ namespace Phoenix.Server.Data.Entity
         [ForeignKey("IdOutput")]
         public virtual Output Output { get; set; }
         public int IdMedicine { get; set; }
+        [ForeignKey("IdMedicine")]
+        public virtual Medicine Medicine { get; set; }
         public int? Inventory_Id { get; set; }
         [ForeignKey("Inventory_Id")]
         public virtual Inventory Inventory { get; set; }

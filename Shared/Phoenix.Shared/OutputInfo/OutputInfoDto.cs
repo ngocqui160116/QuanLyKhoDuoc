@@ -18,7 +18,7 @@ namespace Phoenix.Shared.OutputInfo
 
         //add
         public string MedicineName { get; set; }
-        public string Batch { get; set; }
+        public int Batch { get; set; }
         public DateTime DueDate { get; set; }
         public double InputPrice { get; set; }
     }
