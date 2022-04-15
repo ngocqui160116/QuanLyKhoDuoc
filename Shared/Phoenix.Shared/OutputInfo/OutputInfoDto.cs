@@ -1,6 +1,4 @@
-﻿
-
-using Phoenix.Shared.InputInfo;
+﻿using Phoenix.Shared.InputInfo;
 using System;
 using System.Collections.Generic;
 

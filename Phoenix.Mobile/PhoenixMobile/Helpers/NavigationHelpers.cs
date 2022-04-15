@@ -25,8 +25,7 @@ namespace Phoenix.Mobile.Helpers
             {
                 var mainPage = new FreshTabbedNavigationContainer(MainNavigationStack);
                 mainPage.AddTab<HomePageModel>(string.Empty, "ic_act_home");
-                mainPage.AddTab<AlertPageModel>(string.Empty, "ic_act_notify");
-                
+                //mainPage.AddTab<AlertPageModel>(string.Empty, "ic_act_notify");
                // mainPage.AddTab<EndowPageModel>(string.Empty, "ic_act_code");
                 //mainPage.AddTab<PluginPageModel>(string.Empty, "ic_act_idea");
                 mainPage.AddTab<AccountPageModel>(string.Empty, "ic_act_more");

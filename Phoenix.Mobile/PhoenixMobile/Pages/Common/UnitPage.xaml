@@ -73,14 +73,12 @@
                                 Placeholder="{Binding  Packing}"
                                 WidthRequest="200"                         
                                 Keyboard="Numeric"/>
-
                     </Grid>
                 </StackLayout>
             </Frame>
 
             <StackLayout Margin="0,50,0,5">
-                <AbsoluteLayout HorizontalOptions="Center"
->
+                <AbsoluteLayout HorizontalOptions="Center">
                     <Grid xe:TouchEffect.Color="AliceBlue"
                           xe:Commands.Tap="{Binding SaveCommand}">
                         <forms:CachedImage Source="btn_Save" 

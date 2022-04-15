@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
              xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common" 
-             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup" xmlns:medicine="clr-namespace:Phoenix.Mobile.Core.Models.Medicine;assembly=Phoenix.Mobile.Core" xmlns:medicineItem="clr-namespace:Phoenix.Mobile.Core.Models.MedicineItem;assembly=Phoenix.Mobile.Core" x:DataType="common:AddInputInfoPageModel"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" 
+             x:DataType="common:AddInputInfoPageModel"
              x:Class="Phoenix.Mobile.Pages.Common.AddInputInfoPage"
              ControlTemplate="{StaticResource FullScreenHasBack}">
     <ContentPage.Content>
@@ -21,8 +22,8 @@
                            HorizontalOptions="Center"
                            VerticalOptions="CenterAndExpand"/>
                 </StackLayout>
-                
             </Frame>
+            
             <StackLayout HeightRequest="25"
                          WidthRequest="25">
                 <Label Text="Thông tin"
@@ -31,8 +32,8 @@
                        BackgroundColor="WhiteSmoke"
                        FontAttributes="Bold"
                        VerticalOptions="Center"/>
-
             </StackLayout>
+            
             <Frame CornerRadius="15">
                 <StackLayout  BackgroundColor="White">
                     <Grid x:DataType="common:AddInputInfoPageModel">
@@ -48,7 +49,6 @@
                             <ColumnDefinition Width="0.3*"/>
                             <ColumnDefinition Width="0.7*"/>
                         </Grid.ColumnDefinitions>
-
 
                         <Label  Grid.Row="2"
                                 Grid.Column="0" 
@@ -77,7 +77,6 @@
                                     Format="dd/MM/yyyy"
                                     WidthRequest="200" />
 
-
                         <Label  Grid.Row="4"
                                 Grid.Column="0" 
                                 Margin="10,5,0,0" 
@@ -105,14 +104,12 @@
                                 Placeholder="0"
                                 WidthRequest="200"                         
                                 Keyboard="Numeric"/>
-
                     </Grid>
                 </StackLayout>
             </Frame>
 
             <StackLayout Margin="0,50,0,5">
-                <AbsoluteLayout HorizontalOptions="Center"
->
+                <AbsoluteLayout HorizontalOptions="Center">
                     <Grid xe:TouchEffect.Color="AliceBlue"
                           xe:Commands.Tap="{Binding UpdateMedicineItemCommand}">
                         <forms:CachedImage Source="btn_Save" 
@@ -125,7 +122,6 @@
                                TextColor="#fff"
                                Text="Xác nhận"/>
                     </Grid>
-
                 </AbsoluteLayout>
             </StackLayout>
         </StackLayout>

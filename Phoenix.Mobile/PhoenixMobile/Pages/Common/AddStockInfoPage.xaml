@@ -7,7 +7,8 @@
              xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
              xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" 
              x:DataType="common:AddStockInfoPageModel"
-             x:Class="Phoenix.Mobile.Pages.Common.AddStockInfoPage">
+             x:Class="Phoenix.Mobile.Pages.Common.AddStockInfoPage"
+             ControlTemplate="{StaticResource FullScreenHasBack}">
     <ContentPage.Content>
         <StackLayout BackgroundColor="WhiteSmoke">
 
@@ -175,8 +176,7 @@
                                 WidthRequest="100" 
                                 FontSize="Medium" 
                                 Text="Thực tế"/>
-                        <Entry 
-                                Grid.Row="2"
+                        <Entry  Grid.Row="2"
                                 Grid.Column="1"
                                 TextColor="Black"
                                 Text="{Binding Amount}"
@@ -184,11 +184,7 @@
                                 WidthRequest="200"
                                 Keyboard="Numeric"/>
                     </Grid>
-
-
-
                 </StackLayout>
-
             </Frame>
             <StackLayout Margin="0,20,0,5">
                 <AbsoluteLayout HorizontalOptions="Center">
@@ -207,7 +203,6 @@
                                Text="Xác nhận"/>
                     </Grid>
                 </AbsoluteLayout>
-
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

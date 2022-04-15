@@ -103,12 +103,15 @@ namespace Phoenix.Mobile.PageModels.Common
             #endregion
         }
 
+        #region BackCommand
         public Command BackCommand => new Command(async (p) => await Output(), (p) => !IsBusy);
 
         public async Task Output()
         {
             CoreMethods.PushPageModel<OutputPageModel>();
         }
+
+        #endregion
 
         #region properties
         public List<MedicineItemModel> MedicineItems { get; set; } = new List<MedicineItemModel>();

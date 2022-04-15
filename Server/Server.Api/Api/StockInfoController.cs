@@ -37,18 +37,6 @@ namespace Phoenix.Server.Api.Api
             return _StockInfoService.CreateStockInfo(request);
         }
 
-        //[HttpPost]
-        //[Route("UpdateStock")]
-        //public Task<CrudResult> UpdateStock(int IdStock, [FromBody] StockRequest request)
-        //{
-        //    return _StockService.UpdateStock(IdStock, request);
-        //}
-
-        //[HttpDelete]
-        //[Route("DeleteStock")]
-        //public Task<CrudResult> DeleteStock(int IdStock)
-        //{
-        //    return _StockService.DeleteStock(IdStock);
-        //}
+       
     }
 }

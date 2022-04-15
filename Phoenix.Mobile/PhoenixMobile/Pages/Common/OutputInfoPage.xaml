@@ -2,7 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common" 
-             xmlns:Outputinfo="clr-namespace:Phoenix.Shared.OutputInfo;assembly=Phoenix.Shared" xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" xmlns:controls="clr-namespace:Phoenix.Mobile.Controls"
+             xmlns:Outputinfo="clr-namespace:Phoenix.Shared.OutputInfo;assembly=Phoenix.Shared" 
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" 
+             xmlns:controls="clr-namespace:Phoenix.Mobile.Controls"
              x:DataType="common:OutputInfoPageModel"
              ControlTemplate="{StaticResource FullScreenHasBack}"
              x:Class="Phoenix.Mobile.Pages.Common.OutputInfoPage">
@@ -55,7 +57,7 @@
                         <Entry  Grid.Row="2"
                                 Grid.Column="1"
                                 TextColor="Black"
-                               Text="{Binding NameReason}"
+                                Text="{Binding NameReason}"
                                 WidthRequest="200"/>
 
                         <Label  Grid.Row="3"
@@ -104,8 +106,7 @@
                     <ListView.ItemTemplate  >
                         <DataTemplate x:DataType="Outputinfo:OutputInfoDto" >
                             <ViewCell >
-                                <StackLayout Margin="6,4,6,4"
-                                             
+                                <StackLayout Margin="6,4,6,4"                                        
                                              BackgroundColor="White">
                                     <StackLayout Orientation="Horizontal" 
                                                  HorizontalOptions="StartAndExpand" >
@@ -118,9 +119,9 @@
                                         <StackLayout Orientation="Vertical"
                                                      HorizontalOptions="StartAndExpand">
                                             <Label Text="{Binding MedicineName}"
-                                                       Margin="8"
-                                                       FontAttributes="Bold"
-                                                       FontSize="Large" />
+                                                   Margin="8"
+                                                   FontAttributes="Bold"
+                                                   FontSize="Large" />
                                             <StackLayout Orientation="Horizontal">
                                                 <Label Text="Số Lô:"
                                                        Margin="8,2,2,4"
@@ -140,28 +141,28 @@
                                                        FontSize="15" />
 
                                                 <Label Text="Số lượng:"
-                                                                Margin="0,2,8,4"
-                                                                FontSize="Small" />
+                                                       Margin="0,2,8,4"
+                                                       FontSize="Small" />
                                                 <Label Text="{Binding Count}"
-                                                                Margin="2,2,8,4"
-                                                                FontSize="Small"
-                                                                FontAttributes="Bold"
-                                                                TextColor="Red"/>
+                                                       Margin="2,2,8,4"
+                                                       FontSize="Small"
+                                                       FontAttributes="Bold"
+                                                       TextColor="Red"/>
                                             </StackLayout>
                                             <StackLayout Orientation="Horizontal">
                                                 <Label Text="{Binding InputPrice}"
-                                                                Margin="0,2,0,4"
-                                                                FontSize="Small"
-                                                                TextColor="Black"/>
+                                                       Margin="0,2,0,4"
+                                                       FontSize="Small"
+                                                       TextColor="Black"/>
                                                 <Label Text="/"
-                                                                Margin="0,2,0,4"
-                                                                FontSize="Small"
-                                                                TextColor="Black"/>
+                                                       Margin="0,2,0,4"
+                                                       FontSize="Small"
+                                                       TextColor="Black"/>
                                                 <Label Text="{Binding Total}"
-                                                                Margin="2,2,8,4"
-                                                                FontSize="Small"
-                                                                FontAttributes="Bold"
-                                                                TextColor="Black"/>
+                                                       Margin="2,2,8,4"
+                                                       FontSize="Small"
+                                                       FontAttributes="Bold"
+                                                       TextColor="Black"/>
                                             </StackLayout>
                                         </StackLayout>
                                     </StackLayout>
@@ -170,9 +171,7 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-               
             </StackLayout>
-
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

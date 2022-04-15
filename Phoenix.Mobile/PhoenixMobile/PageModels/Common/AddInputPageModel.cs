@@ -335,6 +335,14 @@ namespace Phoenix.Mobile.PageModels.Common
         }
         #endregion
 
-       
+        #region BackCommand
+        public Command BackCommand => new Command(async (p) => await Input(), (p) => !IsBusy);
+
+        public async Task Input()
+        {
+            CoreMethods.PushPageModel<InputPageModel>();
+        }
+
+        #endregion
     }
 }

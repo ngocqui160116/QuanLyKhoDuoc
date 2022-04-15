@@ -30,6 +30,15 @@ namespace Phoenix.Mobile.PageModels.Common
 
         }
 
+        #region BackCommand
+        public Command BackCommand => new Command(async (p) => await Home(), (p) => !IsBusy);
+
+        public async Task Home()
+        {
+            NavigationHelpers.ToMainPage();
+        }
+
+        #endregion
 
         #region StockCommand
 

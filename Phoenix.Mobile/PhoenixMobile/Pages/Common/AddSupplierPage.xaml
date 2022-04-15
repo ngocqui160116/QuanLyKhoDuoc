@@ -2,7 +2,6 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
-             xmlns:supplier="clr-namespace:Phoenix.Mobile.Core.Models.Supplier;assembly=Phoenix.Mobile.Core" 
              xmlns:controls="clr-namespace:Phoenix.Mobile.Controls" 
              xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common"

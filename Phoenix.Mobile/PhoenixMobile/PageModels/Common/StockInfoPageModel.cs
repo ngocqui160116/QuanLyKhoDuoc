@@ -1,6 +1,7 @@
 ﻿using Phoenix.Mobile.Core.Models.Stock;
 using Phoenix.Mobile.Helpers;
 using Phoenix.Shared.Stock;
+using Phoenix.Shared.StockInfo;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -39,10 +40,10 @@ namespace Phoenix.Mobile.PageModels.Common
 #if DEBUG
             StockInfos = Stock.StockInfo;
 
-            IdStock = Stock.Id;
-            NameReason = Stock.NameReason;
-            NameStaff = Stock.NameStaff;
-            DateStock = Stock.DateStock;
+            Stock_Id = Stock.Id;
+            NameStaff = Stock.StaffName;
+            Note = Stock.Note;
+            Date = Stock.Date;
 
 #endif
             IsBusy = false;
@@ -54,11 +55,9 @@ namespace Phoenix.Mobile.PageModels.Common
         public List<StockInfoDto> StockInfos { get; set; }
 
         public string SearchText { get; set; }
-        public int IdStock { get; set; }
-        public string NameReason { get; set; }
-        public string Status { get; set; }
-        public string SupplierName { get; set; }
-        public DateTime DateStock { get; set; }
+        public int Stock_Id { get; set; }
+        public string Note { get; set; }
+        public DateTime Date { get; set; }
         public string NameStaff { get; set; }
         public double Total { get; set; }
         #endregion

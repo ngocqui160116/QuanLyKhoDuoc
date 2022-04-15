@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Phoenix.Mobile.Pages.Common.StockPage"
              xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
-             xmlns:input="clr-namespace:Phoenix.Mobile.Core.Models.Input;assembly=Phoenix.Mobile.Core" 
              xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common" 
              xmlns:stock="clr-namespace:Phoenix.Mobile.Core.Models.Stock;assembly=Phoenix.Mobile.Core" 
              xmlns:controls="clr-namespace:Phoenix.Mobile.Controls" 
@@ -12,11 +11,12 @@
     <ContentPage.Content>
         <StackLayout>
             <StackLayout Orientation="Horizontal">
-                <SearchBar x:Name="searchBar" WidthRequest="420" 
+                <SearchBar x:Name="searchBar" 
+                           WidthRequest="420" 
                            HorizontalOptions="Fill"
                            VerticalOptions="CenterAndExpand"
                            Placeholder="Nhập thông tin"
-                           SearchCommand="{Binding }" 
+                           SearchCommand="{Binding PerformSearch}" 
                            SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"/>
                 <ImageButton Margin="5,0,0,0"  
                              xe:Commands.Tap="{Binding AddStockCommand}"
@@ -32,7 +32,7 @@
                       SeparatorVisibility="None"
                       HorizontalOptions="FillAndExpand"
                       VerticalOptions="FillAndExpand"
-                      SelectedItem="{Binding}">
+                      SelectedItem="{Binding SelectedStock}">
 
                 <ListView.ItemTemplate>
 
@@ -42,37 +42,21 @@
                                          BackgroundColor="White">
                                 <StackLayout Orientation="Horizontal" HeightRequest="50">
                                     <Label Text="Mã kiểm kho:"
-                                       Margin="10,0,0,0"
-                                       FontSize="Medium" />
-                                    <!--<Label Text="KT0"
-                                       Margin="10,0,0,0"
-                                       FontAttributes="Bold"
-                                       FontSize="Medium" />-->
+                                           Margin="10,0,0,0"
+                                           FontSize="Medium" />
                                     <Label Text="{Binding Id}"
-                                       FontAttributes="Bold"
-                                       Margin="10,0,0,0"
-                                       FontSize="Medium" />
-                                    <!--<Label Text="{Binding}"
-                                           HorizontalOptions="EndAndExpand"
-                                           TextColor="Red"
                                            FontAttributes="Bold"
-                                           Margin="2"
-                                           FontSize="Small" />-->
+                                           Margin="10,0,0,0"
+                                           FontSize="Medium" />
                                 </StackLayout>
 
                                 <StackLayout Orientation="Horizontal">
                                     <Label Text="Người tạo:"
-                                       Margin="10,0,0,0"
-                                       FontSize="Medium" />
+                                           Margin="10,0,0,0"
+                                           FontSize="Medium" />
                                     <Label Text="{Binding StaffName}"
                                            Margin="8,0,8,0"
                                            FontSize="Medium" />
-                                    <!--<Label Text="{Binding Date}"
-                                           HorizontalOptions="EndAndExpand"
-                                           TextColor="ForestGreen"
-                                           FontAttributes="Bold"
-                                           Margin="2"
-                                           FontSize="Small" />-->
                                     <controls:CustomDatePicker  
                                            Format="dd/MM/yyyy"
                                            Date="{Binding Date}"
@@ -81,14 +65,11 @@
                                            Margin="2"
                                            FontSize="15" />
                                 </StackLayout>
-
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
-
                 </ListView.ItemTemplate>
             </ListView>
-
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

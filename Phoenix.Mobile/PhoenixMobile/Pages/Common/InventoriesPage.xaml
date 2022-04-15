@@ -3,20 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
              xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common" 
-             xmlns:inputinfo="clr-namespace:Phoenix.Mobile.Core.Models.InputInfo;assembly=Phoenix.Mobile.Core" 
-             xmlns:InventoriesTags="clr-namespace:Phoenix.Mobile.Core.Models.InventoriesTags;assembly=Phoenix.Mobile.Core" 
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design" 
-             xmlns:Inventory="clr-namespace:Phoenix.Mobile.Core.Models.Inventory;assembly=Phoenix.Mobile.Core"
+             xmlns:Inventory="clr-namespace:Phoenix.Mobile.Core.Models.Inventory;assembly=Phoenix.Mobile.Core" 
+             xmlns:controls="clr-namespace:Phoenix.Mobile.Controls"
              x:DataType="common:InventoriesPageModel"
              x:Class="Phoenix.Mobile.Pages.Common.InventoriesPage"
              ControlTemplate="{StaticResource FullScreenHasBack}">
     <ContentPage.Content>
         <StackLayout >
             <StackLayout Orientation="Horizontal">
-                <SearchBar WidthRequest="500"  
-                           x:Name="Search" 
-                           Placeholder="Mã / Tên thuốc">
-                </SearchBar>
+                <SearchBar x:Name="searchBar" 
+                           WidthRequest="420" 
+                           HorizontalOptions="Fill"
+                           VerticalOptions="CenterAndExpand"
+                           Placeholder="Nhập thông tin"
+                           SearchCommand="{Binding PerformSearch}" 
+                           SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"/>
             </StackLayout>
 
             <ListView ItemsSource="{Binding Inventory}"
@@ -59,10 +60,13 @@
                                         <Label Text="HSD:"
                                                Margin="8,2,2,4"
                                                FontSize="Small" />
-                                        <Label Text="{Binding HSD}"
-                                               TextColor="DarkGray"
-                                               Margin="2"
-                                               FontSize="Small" />
+                                        <controls:CustomDatePicker  
+                                               Format="dd/MM/yyyy"
+                                               Date="{Binding HSD}"
+                                               Margin="8,2,2,4"
+                                               TextColor="ForestGreen"
+                                               HorizontalOptions="EndAndExpand"
+                                               FontSize="15" />
                                     </StackLayout>
                                 </StackLayout>
                             </StackLayout>

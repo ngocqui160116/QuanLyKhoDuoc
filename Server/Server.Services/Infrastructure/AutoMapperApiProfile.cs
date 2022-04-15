@@ -18,6 +18,7 @@ using Phoenix.Shared.MedicineItem;
 using Phoenix.Shared;
 using Falcon.Web.Core.Auth;
 using Phoenix.Shared.Stock;
+using Phoenix.Shared.StockInfo;
 
 namespace Phoenix.Server.Services.Infrastructure
 {
@@ -71,7 +72,10 @@ namespace Phoenix.Server.Services.Infrastructure
             CreateMap<Unit, UnitDto>();
             CreateMap<MedicineItem, MedicineItemDto>();
             CreateMap<Stock, StockDto>();
-            CreateMap<StockInfo, StockInfoDto>();
+            CreateMap<StockInfo, StockInfoDto>()
+                .ForMember(d => d.MedicineName, o => o.MapFrom(s => s.Inventory.Medicine.Name))
+                .ForMember(d => d.Batch, o => o.MapFrom(s => s.Inventory.LotNumber))
+                .ForMember(d => d.UnitName, o => o.MapFrom(s => s.Inventory.Medicine.Unit.Name));
 
         }
     }
