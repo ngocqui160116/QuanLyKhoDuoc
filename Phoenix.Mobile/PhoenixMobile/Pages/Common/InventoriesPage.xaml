@@ -3,9 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
              xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common" 
-             xmlns:inputinfo="clr-namespace:Phoenix.Mobile.Core.Models.InputInfo;assembly=Phoenix.Mobile.Core" xmlns:inventoryTags="clr-namespace:Phoenix.Mobile.Core.Models.InventoryTags;assembly=Phoenix.Mobile.Core" xmlns:inventory="clr-namespace:Phoenix.Mobile.Core.Models.Inventory;assembly=Phoenix.Mobile.Core" xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             x:DataType="common:InventoryPageModel"
-             x:Class="Phoenix.Mobile.Pages.Common.InventoryPage"
+             xmlns:inputinfo="clr-namespace:Phoenix.Mobile.Core.Models.InputInfo;assembly=Phoenix.Mobile.Core" 
+             xmlns:InventoriesTags="clr-namespace:Phoenix.Mobile.Core.Models.InventoriesTags;assembly=Phoenix.Mobile.Core" 
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design" 
+             xmlns:Inventory="clr-namespace:Phoenix.Mobile.Core.Models.Inventory;assembly=Phoenix.Mobile.Core"
+             x:DataType="common:InventoriesPageModel"
+             x:Class="Phoenix.Mobile.Pages.Common.InventoriesPage"
              ControlTemplate="{StaticResource FullScreenHasBack}">
     <ContentPage.Content>
         <StackLayout >
@@ -21,11 +24,11 @@
                       BackgroundColor="#ecf0f1"
                       SeparatorVisibility="None"
                       HorizontalOptions="FillAndExpand"
-                      SelectedItem="{Binding SelectedInventory}"
+                      SelectedItem="{Binding SelectedInventories}"
                       VerticalOptions="FillAndExpand">
 
                 <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="inventory:InventoryModel">
+                    <DataTemplate x:DataType="Inventory:InventoryModel">
                         <ViewCell>
                             <StackLayout Margin="6,4,6,4"
                                          BackgroundColor="White">

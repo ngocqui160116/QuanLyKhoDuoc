@@ -29,12 +29,13 @@ namespace Phoenix.Server.Api.Api
             return await _StockInfoService.GetAllStockInfo(request);
         }
 
-        //[HttpPost]
-        //[Route("CreateStock")]
-        //public Task<CrudResult> CreateStock([FromBody] StockRequest request)
-        //{
-        //    return _StockService.CreateStock(request);
-        //}
+
+        [HttpPost]
+        [Route("CreateStockInfo")]
+        public Task<BaseResponse<StockInfoDto>> CreateStockInfo(StockInfoRequest request)
+        {
+            return _StockInfoService.CreateStockInfo(request);
+        }
 
         //[HttpPost]
         //[Route("UpdateStock")]

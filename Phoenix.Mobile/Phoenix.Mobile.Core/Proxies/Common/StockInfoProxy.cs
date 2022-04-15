@@ -15,7 +15,7 @@ namespace Phoenix.Mobile.Core.Proxies.Common
     public interface IStockInfoProxy
     {
         Task<BaseResponse<StockInfoDto>> GetAllStockInfo(StockInfoRequest request);
-        //Task<StockInfoDto> AddStockInfo(StockInfoRequest request);
+        Task<BaseResponse<StockInfoDto>> CreateStockInfo(StockInfoRequest request);
     }
 
     public class StockInfoProxy : BaseProxy, IStockInfoProxy
@@ -35,29 +35,28 @@ namespace Phoenix.Mobile.Core.Proxies.Common
             }
         }
 
-        //public async Task<StockInfoDto> AddStockInfo(StockInfoRequest request)
-        //{
-        //    try
-        //    {
-        //        var api = RestService.For<IStockInfoApi>(GetHttpClient());
-        //        var result = await api.AddStockInfo(request);
-        //        if (result == null) return new StockInfoDto();
-        //        return result;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        ExceptionHandler.Handle(new NetworkException(ex), true);
-        //        return new StockInfoDto();
-        //    }
-        //}
+        public async Task<BaseResponse<StockInfoDto>> CreateStockInfo(StockInfoRequest request)
+        {
+            try
+            {
+                var api = RestService.For<IStockInfoApi>(GetHttpClient());
+
+                return await api.CreateStockInfo(request);
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler.Handle(new NetworkException(ex), true);
+                return null;
+            }
+        }
 
         public interface IStockInfoApi
         {
             [Post("/StockInfo/GetAllStockInfo")]
             Task<BaseResponse<StockInfoDto>> GetAllStockInfo([Body] StockInfoRequest request);
 
-            //[Post("/StockInfo/CreateStockInfo")]
-            //Task<StockInfoDto> AddStockInfo([Body] StockInfoRequest request);
+            [Post("/StockInfo/CreateStockInfo")]
+            Task<BaseResponse<StockInfoDto>> CreateStockInfo(StockInfoRequest request);
 
 
         }

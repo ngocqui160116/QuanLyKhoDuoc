@@ -15,5 +15,8 @@ namespace Phoenix.Shared.Stock
 
         //Mapper
         public string StaffName { get; set; }
+
+        //List
+        public List<StockInfoDto> StockInfo { get; set; }
     }
 }

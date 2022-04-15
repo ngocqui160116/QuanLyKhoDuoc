@@ -2,11 +2,11 @@
 {
     public class ServerAddress
     {
-#if DEBUG        
+#if DEBUG
         //public const string ServerBaseUrl = "http://172.18.132.205:63199/api";
         public const string ServerBaseUrl = "http://192.168.1.99:63199/api";
-        //public const string ServerBaseUrl = "http://172.31.98.215:63199/api";
-       
+        //public const string ServerBaseUrl = "http://172.31.98.236:63199/api";
+        //public const string ServerBaseUrl = "http://localhost:63199/api";
 
 #else
         //public const string ServerBaseUrl = "http://192.168.1.99:2345/api";
