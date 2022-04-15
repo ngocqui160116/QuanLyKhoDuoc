@@ -67,6 +67,16 @@ namespace Phoenix.Mobile.PageModels.Common
         public DateTime DateInput { get; set; }
         #endregion
 
+        #region BackCommand
+        public Command BackCommand => new Command(async (p) => await Home(), (p) => !IsBusy);
+
+        public async Task Home()
+        {
+            CoreMethods.PushPageModel<WarehousePageModel>();
+        }
+
+        #endregion
+
         #region AddInputCommand
 
         public Command AddInputCommand => new Command(async (p) => await AddInputExecute(), (p) => !IsBusy);
@@ -109,27 +119,6 @@ namespace Phoenix.Mobile.PageModels.Common
 
         #region Search
 
-        public Command SearchInputCommand => new Command(async (p) => await SearchInputExecute(), (p) => !IsBusy);
-
-        private async Task SearchInputExecute()
-        {
-            var data =  _InputService.Search(Id);
-            if (data == null)
-            {
-                await _dialogService.AlertAsync("Lỗi kết nối mạng!", "Lỗi", "OK");
-            }
-            else
-            {
-                Inputs = data;
-
-                //RaisePropertyChanged("Vendors");
-                RaisePropertyChanged(nameof(Inputs));
-            }
-        }
-        #endregion
-
-        #region Search
-
         public ICommand PerformSearch => new Command<string>((string query) =>
         {
             Inputs = GetSearchResults(query);
@@ -141,23 +130,7 @@ namespace Phoenix.Mobile.PageModels.Common
 
             var normalizedQuery = queryString;
             return Inputs.Where(f => f.Id.ToString().Contains(normalizedQuery)).ToList();
-         
         }
-
-        //List<InputInfoModel> searchResults = InputInfos;
-        //public List<InputInfoModel> SearchResults
-        //{
-        //    get
-        //    {
-        //        return searchResults;
-        //    }
-        //    set
-        //    {
-        //        searchResults = value;
-
-        //    }
-        //}
-
         #endregion
 
     }

@@ -49,7 +49,7 @@
                                 Margin="10,5,0,0"                               
                                 WidthRequest="100" 
                                 FontSize="Medium" 
-                                Text="Tên NCC*"/>
+                                Text="Tên NCC"/>
                         <Entry  Grid.Row="2"
                                 Grid.Column="1"
                                 TextColor="Black"

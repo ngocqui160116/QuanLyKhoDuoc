@@ -10,8 +10,10 @@ using Phoenix.Shared.MedicineItem;
 using Phoenix.Shared.OutputInfo;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace Phoenix.Mobile.PageModels.Common
@@ -131,6 +133,22 @@ namespace Phoenix.Mobile.PageModels.Common
             }
         }
 
+        #endregion
+
+        #region Search
+
+        public ICommand PerformSearch => new Command<string>((string query) =>
+        {
+            Inventory = GetSearchResults(query);
+        });
+
+
+        public List<InventoryModel> GetSearchResults(string queryString)
+        {
+
+            var normalizedQuery = queryString;
+            return Inventory.Where(f => f.MedicineName.Contains(normalizedQuery)).ToList();
+        }
         #endregion
 
     }

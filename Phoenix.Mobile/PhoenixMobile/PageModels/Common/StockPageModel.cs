@@ -5,8 +5,10 @@ using Phoenix.Mobile.Helpers;
 using Phoenix.Shared.Stock;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace Phoenix.Mobile.PageModels.Common
@@ -59,6 +61,16 @@ namespace Phoenix.Mobile.PageModels.Common
             public DateTime Date { get; set; }
         #endregion
 
+        #region BackCommand
+        public Command BackCommand => new Command(async (p) => await Home(), (p) => !IsBusy);
+
+        public async Task Home()
+        {
+            CoreMethods.PushPageModel<WarehousePageModel>();
+        }
+
+        #endregion
+
         #region AddStockCommand
 
         public Command AddStockCommand => new Command(async (p) => await AddStockExecute(), (p) => !IsBusy);
@@ -96,6 +108,22 @@ namespace Phoenix.Mobile.PageModels.Common
                     await CoreMethods.PushPageModel<StockInfoPageModel>(Stock);
                 });
             }
+        }
+        #endregion
+
+        #region Search
+
+        public ICommand PerformSearch => new Command<string>((string query) =>
+        {
+            Stocks = GetSearchResults(query);
+        });
+
+
+        public List<StockModel> GetSearchResults(string queryString)
+        {
+
+            var normalizedQuery = queryString;
+            return Stocks.Where(f => f.Id.ToString().Contains(normalizedQuery)).ToList();
         }
         #endregion
     }

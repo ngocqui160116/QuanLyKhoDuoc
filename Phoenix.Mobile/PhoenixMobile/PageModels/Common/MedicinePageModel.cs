@@ -196,6 +196,30 @@ namespace Phoenix.Mobile.PageModels.Common
         }
         #endregion
 
-       
+        #region BackCommand
+        public Command BackCommand => new Command(async (p) => await Home(), (p) => !IsBusy);
+
+        public async Task Home()
+        {
+            NavigationHelpers.ToMainPage();
+        }
+
+        #endregion
+
+        #region Search
+
+        public ICommand PerformSearch => new Command<string>((string query) =>
+        {
+            Medicines = GetSearchResults(query);
+        });
+
+
+        public List<MedicineModel> GetSearchResults(string queryString)
+        {
+
+            var normalizedQuery = queryString;
+            return Medicines.Where(f => f.Name.Contains(normalizedQuery)).ToList();
+        }
+        #endregion
     }
 }

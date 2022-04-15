@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Phoenix.Shared.Stock
+namespace Phoenix.Shared.StockInfo
 {
     public class StockInfoDto
     {
@@ -14,5 +14,10 @@ namespace Phoenix.Shared.Stock
         public int Medicine_Id{ get; set; }
         public int Amount { get; set; }
         public int ActualAmount { get; set; }
+
+        //Mapper
+        public string MedicineName { get; set; }
+        public int Batch { get; set; }
+        public string UnitName { get; set; }
     }
 }

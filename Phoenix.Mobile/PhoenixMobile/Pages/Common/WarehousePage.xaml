@@ -39,7 +39,6 @@
                                      Icon="icon_nhapkho.png">
                 </controls:RoundFrame>
                 <controls:RoundFrame WidthRequest="100" 
-                                     
                                      HeightRequest="100" 
                                      Text="Xuất kho" 
                                      Grid.Row="1" 

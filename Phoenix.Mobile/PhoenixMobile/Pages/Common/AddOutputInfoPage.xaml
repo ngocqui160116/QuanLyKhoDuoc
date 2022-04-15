@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:medicineItem="clr-namespace:Phoenix.Mobile.Core.Models.MedicineItem;assembly=Phoenix.Mobile.Core" 
              xmlns:controls="clr-namespace:Phoenix.Mobile.Controls" 
-             xmlns:input="clr-namespace:Phoenix.Mobile.Core.Models.Input;assembly=Phoenix.Mobile.Core" 
              xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common" 
              xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="Phoenix.Mobile.Pages.Common.AddOutputInfoPage"
@@ -177,8 +176,7 @@
                                 WidthRequest="100" 
                                 FontSize="Medium" 
                                 Text="Số lượng"/>
-                        <Entry 
-                                Grid.Row="2"
+                        <Entry  Grid.Row="2"
                                 Grid.Column="1"
                                 TextColor="Black"
                                 Text="{Binding Amount}"
@@ -186,9 +184,6 @@
                                 WidthRequest="200"
                                 Keyboard="Numeric"/>
                     </Grid>
-
-
-
                 </StackLayout>
 
             </Frame>
@@ -209,7 +204,6 @@
                                Text="Xác nhận"/>
                     </Grid>
                 </AbsoluteLayout>
-
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

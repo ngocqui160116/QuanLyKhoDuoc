@@ -5,17 +5,18 @@
              NavigationPage.HasNavigationBar="False"
              xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
              xmlns:common="clr-namespace:Phoenix.Mobile.PageModels.Common" 
-             xmlns:output="clr-namespace:Phoenix.Mobile.Core.Models.Output;assembly=Phoenix.Mobile.Core"
+             xmlns:output="clr-namespace:Phoenix.Mobile.Core.Models.Output;assembly=Phoenix.Mobile.Core" xmlns:controls="clr-namespace:Phoenix.Mobile.Controls"
              x:DataType="common:OutputPageModel"
              ControlTemplate="{StaticResource FullScreenHasBack}">
     <ContentPage.Content>
         <StackLayout >
             <StackLayout Orientation="Horizontal">
-                <SearchBar x:Name="searchBar" WidthRequest="420" 
+                <SearchBar x:Name="searchBar" 
+                           WidthRequest="420" 
                            HorizontalOptions="Fill"
                            VerticalOptions="CenterAndExpand"
                            Placeholder="Nhập thông tin"
-                           SearchCommand="{Binding }" 
+                           SearchCommand="{Binding PerformSearch}" 
                            SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"/>
                 <ImageButton Margin="5,0,0,0"  
                              BackgroundColor="White" 
@@ -41,12 +42,12 @@
                                          BackgroundColor="White">
                                 <StackLayout Orientation="Horizontal" HeightRequest="50">
                                     <Label Text="PX0"
-                                       Margin="10,0,0,0"
-                                       FontAttributes="Bold"
-                                       FontSize="Medium" />
+                                           Margin="10,0,0,0"
+                                           FontAttributes="Bold"
+                                           FontSize="Medium" />
                                     <Label Text="{Binding Id}"
-                                       FontAttributes="Bold"
-                                       FontSize="Medium" />
+                                           FontAttributes="Bold"
+                                           FontSize="Medium" />
                                     <Label Text="{Binding Status}"
                                            HorizontalOptions="EndAndExpand"
                                            TextColor="Red"
@@ -61,12 +62,19 @@
                                     <Label Text="{Binding NameStaff}"
                                            Margin="0,2,8,4"
                                            FontSize="Small" />
-                                    <Label Text="{Binding DateOutput}"
+                                    <controls:CustomDatePicker  
+                                           Format="dd/MM/yyyy"
+                                           Date="{Binding DateOutput}"
+                                           TextColor="ForestGreen"
+                                           HorizontalOptions="EndAndExpand"
+                                           Margin="2"
+                                           FontSize="15" />
+                                    <!--<Label Text="{Binding DateOutput}"
                                            HorizontalOptions="EndAndExpand"
                                            TextColor="ForestGreen"
                                            FontAttributes="Bold"
                                            Margin="2"
-                                           FontSize="Small" />
+                                           FontSize="Small" />-->
                                 </StackLayout>
 
                             </StackLayout>

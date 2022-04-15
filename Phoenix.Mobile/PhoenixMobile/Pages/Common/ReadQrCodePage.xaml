@@ -16,8 +16,7 @@
             <zxing:ZXingDefaultOverlay x:Name="scannerOverlay"
                                        TopText=""
                                        BottomText="Di chuyển camera đến nơi chứa mã QR Code"
-                                       ShowFlashButton="True"
-                                       />
+                                       ShowFlashButton="True"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

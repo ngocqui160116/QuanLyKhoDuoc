@@ -10,15 +10,12 @@
                 <TableSection>
                     <ImageCell Text="Thông tin tài khoản"
                                Command="{Binding ProfileCommand}"
-                               ImageSource="camera.png" />
-                    <ImageCell Text="Đổi mật khẩu"  
-                               ImageSource="xamarin_logo.png" />
+                               ImageSource="icon_account.png" />
                     <ImageCell Text="Đăng xuất" 
                                Command="{Binding LogOutCommand}"
-                               ImageSource="xamarin_logo.png" />
+                               ImageSource="icon_logout.png" />
                 </TableSection>
             </TableRoot>
         </TableView>
-
     </ContentPage.Content>
 </ContentPage>

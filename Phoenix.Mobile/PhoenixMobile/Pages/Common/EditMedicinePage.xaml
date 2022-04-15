@@ -44,7 +44,7 @@
                                 Margin="10,5,0,0"                               
                                 WidthRequest="100" 
                                 FontSize="Medium" 
-                                Text="Tên thuốc*"/>
+                                Text="Tên thuốc"/>
                         <Entry  Grid.Row="2"
                                 Grid.Column="1"
                                 Placeholder="Nhập tên thuốc"
@@ -196,7 +196,6 @@
                         </Grid>
                     </AbsoluteLayout>
                 </Grid>
-
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

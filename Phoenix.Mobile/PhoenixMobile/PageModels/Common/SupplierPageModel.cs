@@ -6,6 +6,7 @@ using Phoenix.Shared.Supplier;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -101,7 +102,30 @@ namespace Phoenix.Mobile.PageModels.Common
         }
         #endregion
 
+        #region BackCommand
+        public Command BackCommand => new Command(async (p) => await Home(), (p) => !IsBusy);
 
-       
+        public async Task Home()
+        {
+            NavigationHelpers.ToMainPage();
+        }
+
+        #endregion
+
+        #region Search
+
+        public ICommand PerformSearch => new Command<string>((string query) =>
+        {
+            Suppliers = GetSearchResults(query);
+        });
+
+
+        public List<SupplierModel> GetSearchResults(string queryString)
+        {
+
+            var normalizedQuery = queryString;
+            return Suppliers.Where(f => f.Name.Contains(normalizedQuery)).ToList();
+        }
+        #endregion
     }
 }

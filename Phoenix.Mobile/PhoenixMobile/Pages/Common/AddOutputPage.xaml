@@ -9,8 +9,6 @@
              x:DataType="common:AddOutputPageModel"
              xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
              xmlns:input="clr-namespace:Phoenix.Mobile.Core.Models.Input;assembly=Phoenix.Mobile.Core" 
-             xmlns:medicine="clr-namespace:Phoenix.Mobile.Core.Models.Medicine;assembly=Phoenix.Mobile.Core" 
-             xmlns:inputinfo="clr-namespace:Phoenix.Mobile.Core.Models.InputInfo;assembly=Phoenix.Mobile.Core" 
              xmlns:medicineItem="clr-namespace:Phoenix.Mobile.Core.Models.MedicineItem;assembly=Phoenix.Mobile.Core" 
              xmlns:behaviors="clr-namespace:Phoenix.Framework.Core;assembly=Phoenix.Framework"
              ControlTemplate="{StaticResource FullScreenHasBack}">
@@ -75,7 +73,7 @@
 
                                                 <StackLayout Orientation="Horizontal" 
                                                              HorizontalOptions="FillAndExpand">
-                                                    <Grid >
+                                                    <Grid>
                                                         <Grid.RowDefinitions>
                                                             <RowDefinition Height="Auto"/>
                                                             <RowDefinition Height="Auto"/>
@@ -158,13 +156,12 @@
                                                                 <Label Text="Số lượng:"
                                                                        Margin="0,2,8,4"
                                                                        FontSize="Small" />
-                                                                <Label 
-                                                                    WidthRequest="50"
-                                                                    Text="{Binding Amount}"
-                                                                    VerticalTextAlignment="Center"
-                                                                    HorizontalTextAlignment="Center"
-                                                                    BackgroundColor="WhiteSmoke"
-                                                                    HorizontalOptions="Center">
+                                                                <Label WidthRequest="50"
+                                                                       Text="{Binding Amount}"
+                                                                       VerticalTextAlignment="Center"
+                                                                       HorizontalTextAlignment="Center"
+                                                                       BackgroundColor="WhiteSmoke"
+                                                                       HorizontalOptions="Center">
                                                                 </Label>
                                                                
                                                                 <Label Text="{Binding UnitName}"
@@ -279,9 +276,6 @@
                                 Title="----- Chọn Người tạo -----"
                                 ItemDisplayBinding="{Binding Name}"/>
                     </Grid>
-                  
-                       
-                   
                 </StackLayout>
                 
             </Frame>
@@ -302,7 +296,6 @@
                                Text="Lưu"/>
                     </Grid>
                 </AbsoluteLayout>
-
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

@@ -108,7 +108,6 @@
                         <DataTemplate x:DataType="inputinfo:InputInfoDto" >
                             <ViewCell >
                                 <StackLayout Margin="6,4,6,4"
-                                             
                                              BackgroundColor="White">
                                     <StackLayout Orientation="Horizontal" 
                                                  HorizontalOptions="StartAndExpand" >
@@ -121,9 +120,9 @@
                                         <StackLayout Orientation="Vertical"
                                                      HorizontalOptions="StartAndExpand">
                                             <Label Text="{Binding MedicineName}"
-                                                       Margin="8"
-                                                       FontAttributes="Bold"
-                                                       FontSize="Large" />
+                                                   Margin="8"
+                                                   FontAttributes="Bold"
+                                                   FontSize="Large" />
                                             <StackLayout Orientation="Horizontal">
                                                 <Label Text="Số Lô:"
                                                        Margin="8,2,2,4"
@@ -144,22 +143,22 @@
                                             </StackLayout>
                                             <StackLayout Orientation="Horizontal">
                                                 <Label Text="Số lượng:"
-                                                                Margin="0,2,8,4"
-                                                                FontSize="Small" />
+                                                       Margin="0,2,8,4"
+                                                       FontSize="Small"/>
                                                 <Label Text="{Binding Count}"
-                                                                Margin="2,2,8,4"
-                                                                FontSize="Small"
-                                                                FontAttributes="Bold"
-                                                                TextColor="Red"/>
+                                                       Margin="2,2,8,4"
+                                                       FontSize="Small"
+                                                       FontAttributes="Bold"
+                                                       TextColor="Red"/>
                                                 <Label Text="/"
-                                                                Margin="0,2,0,4"
-                                                                FontSize="Small"
-                                                                TextColor="Black"/>
+                                                       Margin="0,2,0,4"
+                                                       FontSize="Small"
+                                                       TextColor="Black"/>
                                                 <Label Text="{Binding UnitName}"
-                                                                Margin="2,2,8,4"
-                                                                FontSize="Small"
-                                                                FontAttributes="Bold"
-                                                                TextColor="Black"/>
+                                                       Margin="2,2,8,4"
+                                                       FontSize="Small"
+                                                       FontAttributes="Bold"
+                                                       TextColor="Black"/>
                                             </StackLayout>
                                         </StackLayout>
                                     </StackLayout>
@@ -168,25 +167,25 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                <StackLayout  Margin="0,50,0,0">
+                <StackLayout Margin="0,50,0,0">
                     <Grid>
                         <AbsoluteLayout Grid.Row="0"
-                                    Grid.Column="0" 
-                                    IsVisible="{Binding IsEnabled}"
-                                    HorizontalOptions="Center">
+                                        Grid.Column="0" 
+                                        IsVisible="{Binding IsEnabled}"
+                                        HorizontalOptions="Center">
                             <Grid xe:TouchEffect.Color="AliceBlue">
                                 <forms:CachedImage Source="btn_delete" 
-                                               Grid.Row="0"
-                                               Grid.Column="0"
-                                               xe:Commands.Tap="{Binding UpdateStatusCommand}"
-                                               HeightRequest="50"/>
+                                                   Grid.Row="0"
+                                                   Grid.Column="0"
+                                                   xe:Commands.Tap="{Binding UpdateStatusCommand}"
+                                                   HeightRequest="50"/>
                                 <Label Grid.Row="0"
-                                   Grid.Column="0"
-                                   FontSize="Medium"
-                                   HorizontalOptions="Center"
-                                   FontAttributes="Bold"
-                                   TextColor="#fff"
-                                   Text="Hủy phiếu"/>
+                                       Grid.Column="0"
+                                       FontSize="Medium"
+                                       HorizontalOptions="Center"
+                                       FontAttributes="Bold"
+                                       TextColor="#fff"
+                                       Text="Hủy phiếu"/>
                             </Grid>
                         </AbsoluteLayout>
                         <AbsoluteLayout Grid.Row="0"
@@ -195,21 +194,20 @@
                                         HorizontalOptions="Center">
                             <Grid xe:TouchEffect.Color="AliceBlue">
                                 <forms:CachedImage Source="btn_Save" 
-                                               Grid.Row="0"
-                                               HeightRequest="50"
-                                               xe:Commands.Tap="{Binding CompleteCommand}"/>
+                                                   Grid.Row="0"
+                                                   HeightRequest="50"
+                                                   xe:Commands.Tap="{Binding CompleteCommand}"/>
                                 <Label Grid.Row="0"
-                                   FontSize="Medium"
-                                   HorizontalOptions="Center"
-                                   FontAttributes="Bold"
-                                   TextColor="#fff"
-                                   Text="Hoàn thành"/>
+                                       FontSize="Medium"
+                                       HorizontalOptions="Center"
+                                       FontAttributes="Bold"
+                                       TextColor="#fff"
+                                       Text="Hoàn thành"/>
                             </Grid>
                         </AbsoluteLayout>
                     </Grid>
                 </StackLayout>
             </StackLayout>
-            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

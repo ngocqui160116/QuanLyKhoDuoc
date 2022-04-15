@@ -92,7 +92,17 @@ namespace Phoenix.Mobile.PageModels.Common
         public string Names { get; set; }
         public int IdStaff { get; set; }
         public string Note { get; set; }
-        public DateTime Date { get; set; } = DateTime.Now;
+        public DateTime Date { get; set; } = DateTime.Today;
+        #endregion
+
+        #region BackCommand
+        public Command BackCommand => new Command(async (p) => await Stock(), (p) => !IsBusy);
+
+        public async Task Stock()
+        {
+            CoreMethods.PushPageModel<StockPageModel>();
+        }
+
         #endregion
 
         #region AddStockCommand

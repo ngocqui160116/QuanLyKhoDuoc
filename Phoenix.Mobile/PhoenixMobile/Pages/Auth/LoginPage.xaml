@@ -15,32 +15,31 @@
              x:Class="Phoenix.Mobile.Pages.Auth.LoginPage">
     <ContentPage.Content>
         <StackLayout Style="{StaticResource StackPageWrapper}" Spacing="10" Margin="20,0">
-           
-           
+
             <forms:CachedImage Source="Medicaid" Aspect="AspectFit"
                                HeightRequest="150"
                                HorizontalOptions="Center"
                                Margin="0,20,0,10"/>
-
             <Label Text="Happy Care" 
-                       FontSize="30"
-                       HorizontalOptions="Center"
-                       TextColor="{StaticResource TitleTextColor}"/>
+                   FontSize="30"
+                   HorizontalOptions="Center"
+                   TextColor="{StaticResource TitleTextColor}"/>
 
             <controls:CommonInput Style="{StaticResource CommonInputPrimary}"
                                   IconColor="{DynamicResource PrimaryColor}"
                                   Text="{Binding Username}" Margin="0,15,0,10"
                                   Placeholder="Tên đăng nhập"
                                   ControlPadding="15,0,0,0"
-                                
-                                  IconStart="{StaticResource IconAccount}"></controls:CommonInput>
+                                  IconStart="{StaticResource IconAccount}">
+            </controls:CommonInput>
             <controls:CommonInput Style="{StaticResource CommonInputPrimary}"
                                   IconColor="{DynamicResource PrimaryColor}"
                                   Text="{Binding Password}"
                                   ControlPadding="15,0,0,0"
                                   Placeholder="Mật khẩu"
                                   IsPassword="True"
-                                  IconStart="{StaticResource IconKey}"></controls:CommonInput>
+                                  IconStart="{StaticResource IconKey}">
+            </controls:CommonInput>
 
             <StackLayout  Margin="0,20,0,0"
                          IsVisible="{Binding IsBusy, Converter={x:Static converters:InverseBoolConverter.Instance}}">
@@ -60,24 +59,15 @@
                     </Grid>
                 </AbsoluteLayout>
 
-                <!--<controls:CommonButton  
-                                       Text="Đăng nhập"   
-                                       TextColor="GhostWhite" BackgroundColor="Blue"
-                                       WidthRequest="240"
-                                       Radius="50"
-                                       FontSize="20"
-                                       Command="{Binding LoginCommand}"
-                                       />-->
-
-
             </StackLayout>
             <ActivityIndicator IsVisible="{Binding IsBusy}"
-                        IsRunning="true"
-                        HorizontalOptions="Center"
-                        VerticalOptions="Center" />
+                               IsRunning="true"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center" />
 
             <StackLayout  VerticalOptions="EndAndExpand"
-                          HorizontalOptions="Center" Orientation="Horizontal">
+                          HorizontalOptions="Center" 
+                          Orientation="Horizontal">
                 <Label Text="Bạn chưa có tài khoản?" 
                        FontSize="15"
                        VerticalOptions="EndAndExpand"
@@ -90,7 +80,6 @@
                        HorizontalOptions="Center"
                        behaviors:TappedGestureAttached.Command="{Binding RegisterCommand}"/>
             </StackLayout>
-            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

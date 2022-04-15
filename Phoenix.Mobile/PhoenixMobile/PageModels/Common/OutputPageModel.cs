@@ -70,12 +70,15 @@ namespace Phoenix.Mobile.PageModels.Common
         }
         #endregion
 
+        #region BackCommand
         public Command BackCommand => new Command(async (p) => await Home(), (p) => !IsBusy);
 
         public async Task Home()
         {
             CoreMethods.PushPageModel<WarehousePageModel>();
         }
+
+        #endregion
 
         #region SelectedOutput
 
@@ -108,37 +111,21 @@ namespace Phoenix.Mobile.PageModels.Common
         }
         #endregion
 
+        #region Search
 
-        //#region Search
+        public ICommand PerformSearch => new Command<string>((string query) =>
+        {
+            Outputs = GetSearchResults(query);
+        });
 
-        //public ICommand PerformSearch => new Command<string>((string query) =>
-        //{
-        //    SearchResults = GetSearchResults(query);
-        //});
 
-        //// public static List<OutputModel> Fruits { get; set; } 
-        //public static List<OutputModel> GetSearchResults(string queryString)
-        //{
-        //    var normalizedQuery = queryString?.ToLower() ?? "";
-        //    return Outputs.Where(f => f.Id.ToUpperInvariant().Contains(normalizedQuery)).ToList();
-        //}
+        public List<OutputModel> GetSearchResults(string queryString)
+        {
 
-        //List<OutputModel> searchResults = Outputs;
-        //public List<OutputModel> SearchResults
-        //{
-
-        //    get
-        //    {
-        //        return searchResults;
-        //    }
-        //    set
-        //    {
-        //        searchResults = value;
-
-        //    }
-        //}
-
-        //#endregion
+            var normalizedQuery = queryString;
+            return Outputs.Where(f => f.Id.ToString().Contains(normalizedQuery)).ToList();
+        }
+        #endregion
 
     }
 }
