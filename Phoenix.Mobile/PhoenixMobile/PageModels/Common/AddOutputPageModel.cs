@@ -70,23 +70,6 @@ namespace Phoenix.Mobile.PageModels.Common
             }
             #endregion
 
-            Medicine = MedicineItems.ConvertAll(x => new MedicineItemModel
-            {
-                Id = x.Id,
-                Medicine_Id = x.Medicine_Id,
-                MedicineName = x.MedicineName,
-                Batch = x.Batch,
-                Count = x.Count,
-                InputPrice = x.InputPrice,
-                Total = x.Total,
-                DueDate = x.DueDate,
-                UnitName = x.UnitName,
-                Inventory_Id = x.Inventory_Id,
-                Amount = int.Parse(MobileNumber)
-                
-            });
-
-            
 
             #region Reason
             var data = await _reasonService.GetAllReason(request);
@@ -120,31 +103,16 @@ namespace Phoenix.Mobile.PageModels.Common
             #endregion
         }
 
-        #region Declaration         
-        private string _mobilenumber = "0";
-        private int _limit = 8;
-        #endregion
-        public string MobileNumber
-        {
-            get { return _mobilenumber; }
-            set
-            {
-                _mobilenumber = value;
-                TextChangedCommand.Execute(_mobilenumber);
-            }
-        }
-        public Command<MedicineItemModel> TextChangedCommand => new Command<MedicineItemModel>(async (MedicineItemModel) => await TextChanged(MedicineItemModel));
+        public Command BackCommand => new Command(async (p) => await Output(), (p) => !IsBusy);
 
-        private async Task TextChanged(MedicineItemModel p)
+        public async Task Output()
         {
-           
-                await CoreMethods.DisplayAlert("Your Bill amount ", "ban chon"+p.Amount, "OK");
+            CoreMethods.PushPageModel<OutputPageModel>();
         }
 
         #region properties
         public List<MedicineItemModel> MedicineItems { get; set; } = new List<MedicineItemModel>();
         public MedicineItemRequest MedicineItemRequest { get; set; } = new MedicineItemRequest();
-        public List<MedicineItemModel> Medicine { get; set; } = new List<MedicineItemModel>();
         public List<ReasonModel> Reasons { get; set; } = new List<ReasonModel>();
         public ReasonRequest request { get; set; } = new ReasonRequest();
         public List<StaffModel> Staffs { get; set; } = new List<StaffModel>();
