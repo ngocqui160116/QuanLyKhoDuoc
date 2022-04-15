@@ -12,7 +12,7 @@ namespace Phoenix.Mobile.Core.Services.Common
     public interface IStockInfoService
     {
         Task<List<StockInfoModel>> GetAllStockInfo(StockInfoRequest request);
-        //Task<StockInfoModel> AddStockInfo(StockInfoRequest request);
+        Task<List<StockInfoModel>> CreateStockInfo(StockInfoRequest request);
     }
 
     public class StockInfoService : IStockInfoService
@@ -27,10 +27,10 @@ namespace Phoenix.Mobile.Core.Services.Common
             var StockInfo = await _StockInfoProxy.GetAllStockInfo(request);
             return StockInfo.Data.MapTo<StockInfoModel>();
         }
-        //public async Task<StockInfoModel> AddStockInfo(StockInfoRequest request)
-        //{
-        //    var data = await _StockInfoProxy.AddStockInfo(request);
-        //    return data.MapTo<StockInfoModel>();
-        //}
+        public async Task<List<StockInfoModel>> CreateStockInfo(StockInfoRequest request)
+        {
+            var Stockinfo = await _StockInfoProxy.CreateStockInfo(request);
+            return Stockinfo.Data.MapTo<StockInfoModel>();
+        }
     }
 }

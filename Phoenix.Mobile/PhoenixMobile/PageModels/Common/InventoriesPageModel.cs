@@ -16,7 +16,7 @@ using Xamarin.Forms;
 
 namespace Phoenix.Mobile.PageModels.Common
 {
-    public class InventoryPageModel :BasePageModel
+    public class InventoriesPageModel : BasePageModel
     {
         private readonly IMedicineItemService _medicineItemService;
         private readonly IInputInfoService _inputinfoService;
@@ -24,7 +24,7 @@ namespace Phoenix.Mobile.PageModels.Common
         private readonly IInventoryService _InventoryService;
         private readonly IDialogService _dialogService;
 
-        public InventoryPageModel(IInputInfoService inputinfoService, IMedicineItemService medicineItemService, IInventoryService InventoryService, IOutputInfoService outputinfoService, IDialogService dialogService)
+        public InventoriesPageModel(IInputInfoService inputinfoService, IMedicineItemService medicineItemService, IInventoryService InventoryService, IOutputInfoService outputinfoService, IDialogService dialogService)
         {
             _medicineItemService = medicineItemService;
             _inputinfoService = inputinfoService;
@@ -48,7 +48,7 @@ namespace Phoenix.Mobile.PageModels.Common
 
         private async Task LoadData()
         {
-           
+
 
             var data = await _InventoryService.GetAllInventory(InventoryRequest);
             if (data == null)
@@ -76,59 +76,56 @@ namespace Phoenix.Mobile.PageModels.Common
         }
 
         #region properties
-        public List<InputInfoModel> Inventorys { get; set; } = new List<InputInfoModel>();
-        public InputInfoRequest request { get; set; } = new InputInfoRequest();
+
         public List<InventoryModel> Inventory { get; set; } = new List<InventoryModel>();
         public InventoryRequest InventoryRequest { get; set; } = new InventoryRequest();
 
         public List<OutputInfoModel> OutputInfos { get; set; } = new List<OutputInfoModel>();
         public OutputInfoRequest OutputInfoRequest { get; set; } = new OutputInfoRequest();
 
-        public OutputInfoDto outputInfoDto { get; set; }
         public InventoryModel InventoryModel { get; set; }
 
 
         #endregion
 
+        #region SelectInventories
 
-        #region SelectInventory
+        InventoryModel _selectedInventories;
 
-        InventoryModel _selectedInventory;
-
-        public InventoryModel SelectedInventory
+        public InventoryModel SelectedInventories
         {
             get
             {
-                return _selectedInventory;
+                return _selectedInventories;
             }
             set
             {
-                _selectedInventory = value;
+                _selectedInventories = value;
                 if (value != null)
-                    InventorySelected.Execute(value);
+                    InventoriesSelected.Execute(value);
 
             }
 
         }
 
-        public Command<InventoryModel> InventorySelected
+        public Command<InventoryModel> InventoriesSelected
         {
             get
             {
-                return new Command<InventoryModel>(async (Inventory) =>
+                return new Command<InventoryModel>(async (Inventories) =>
                 {
                     var data = _medicineItemService.AddItemInventory(new MedicineItemRequest
                     {
-                        Medicine_Id = Inventory.IdMedicine,
-                        Batch = (int)Inventory.LotNumber,
-                        Count = (int)Inventory.Count,
-                        DueDate = Inventory.HSD,
-                        InputPrice = (double)Inventory.UnitPrice,
-                        Inventory_Id = Inventory.Id,
+                        Medicine_Id = Inventories.IdMedicine,
+                        Batch = (int)Inventories.LotNumber,
+                        Count = (int)Inventories.Count,
+                        DueDate = Inventories.HSD,
+                        InputPrice = (double)Inventories.UnitPrice,
+                        Inventory_Id = Inventories.Id,
                         Amount = 0
 
                     });
-                    CoreMethods.PushPageModel<AddOutputPageModel>(Inventory);
+                    CoreMethods.PushPageModel<AddStockPageModel>(Inventories);
 
                 });
             }

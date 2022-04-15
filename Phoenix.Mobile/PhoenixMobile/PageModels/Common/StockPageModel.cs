@@ -68,5 +68,35 @@ namespace Phoenix.Mobile.PageModels.Common
             await CoreMethods.PushPageModel<AddStockPageModel>();
         }
         #endregion
+
+        #region SelectStock
+
+        StockModel _selectedStock;
+
+        public StockModel SelectedStock
+        {
+            get
+            {
+                return _selectedStock;
+            }
+            set
+            {
+                _selectedStock = value;
+                if (value != null)
+                    StockSelected.Execute(value);
+            }
+        }
+
+        public Command<StockModel> StockSelected
+        {
+            get
+            {
+                return new Command<StockModel>(async (Stock) => {
+                    //await CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn"+SelectedStock.Id, "Đóng");
+                    await CoreMethods.PushPageModel<StockInfoPageModel>(Stock);
+                });
+            }
+        }
+        #endregion
     }
 }

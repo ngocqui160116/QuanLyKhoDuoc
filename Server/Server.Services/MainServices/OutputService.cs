@@ -58,51 +58,6 @@ namespace Phoenix.Server.Services.MainServices
             return result;
         }
 
-        // Task<CrudResult> CreateOutput(OutputRequest request);
-        //#region CreateInput
-        //public async Task<BaseResponse<OutputDto>> CreateOutput(OutputRequest request)
-        //{
-        //    var result = new BaseResponse<OutputDto>();
-        //    var medicineItems = _dataContext.MedicineItems.ToList();
-        //    try
-        //    {
-        //        Output outputs = new Output
-        //        {
-        //            IdStaff = request.IdStaff,
-        //            //IdSupplier = request.IdSupplier,
-        //            //DateInput = request.DateInput,
-        //           // Status = "Đã lưu"
-        //        };
-
-        //        _dataContext.Outputs.Add(outputs);
-        //        await _dataContext.SaveChangesAsync();
-
-        //        var Latest = GetLatestOutput();
-
-        //        OutputInfo outputinfos = new OutputInfo();
-        //        foreach (var item in medicineItems)
-        //        {
-        //            //inputinfos.IdInput = Latest.Id;
-        //            //inputinfos.IdMedicine = item.Medicine_Id;
-        //            //inputinfos.IdBatch = (int)item.Batch;
-        //            //inputinfos.Count = item.Count;
-        //            //inputinfos.InputPrice = item.InputPrice;
-        //            //inputinfos.Total = item.Count * item.InputPrice;
-        //            //inputinfos.DueDate = item.DueDate;
-
-        //            _dataContext.OutputInfos.Add(outputinfos);
-        //            await _dataContext.SaveChangesAsync();
-        //        }
-        //        result.Success = true;
-        //    }
-        //    catch (Exception ex)
-        //    {
-
-        //    }
-
-        //    return result;
-        //}
-        //#endregion
 
         #region GetLatestOutput
         public Output GetLatestOutput()

@@ -6,6 +6,7 @@ using Phoenix.Mobile.Core.Services.Common;
 using Phoenix.Mobile.Helpers;
 using Phoenix.Shared.MedicineItem;
 using Phoenix.Shared.Staff;
+using Phoenix.Shared.StockInfo;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -18,14 +19,15 @@ namespace Phoenix.Mobile.PageModels.Common
     {
         private readonly IMedicineItemService _medicineItemService;
         private readonly IStaffService _staffService;
+        private readonly IStockInfoService _stockInfoService;
         private readonly IDialogService _dialogService;
 
-        public AddStockPageModel( IMedicineItemService medicineItemService, IStaffService staffService, IDialogService dialogService)
+        public AddStockPageModel( IMedicineItemService medicineItemService, IStockInfoService stockInfoService, IStaffService staffService, IDialogService dialogService)
         {
             _medicineItemService = medicineItemService;
             _staffService = staffService;
+            _stockInfoService = stockInfoService;
             _dialogService = dialogService;
-
         }
 
         public override async void Init(object initData)
@@ -89,7 +91,36 @@ namespace Phoenix.Mobile.PageModels.Common
         public int IdMedicine { get; set; }
         public string Names { get; set; }
         public int IdStaff { get; set; }
+        public string Note { get; set; }
         public DateTime Date { get; set; } = DateTime.Now;
+        #endregion
+
+        #region AddStockCommand
+        public Command AddStockCommand => new Command(async (p) => await AddStockExecute(), (p) => !IsBusy);
+        private async Task AddStockExecute()
+        {
+            try
+            {
+
+                var data = await _stockInfoService.CreateStockInfo(new StockInfoRequest
+                {
+                    Note = Note,
+                    IdStaff = IdStaff,
+                    Date = Date
+                });
+
+                var data1 = await _medicineItemService.DeleteAll();
+                await CoreMethods.PushPageModel<StockPageModel>();
+
+                await _dialogService.AlertAsync("Thêm thành công");
+                IsBusy = false;
+
+            }
+            catch (Exception e)
+            {
+                await _dialogService.AlertAsync("Thêm thất bại");
+            }
+        }
         #endregion
 
         #region AddMedicineCommand
@@ -98,7 +129,7 @@ namespace Phoenix.Mobile.PageModels.Common
 
         private async Task AddMedicineExecute()
         {
-            await CoreMethods.PushPageModel<InventoryPageModel>();
+            await CoreMethods.PushPageModel<InventoriesPageModel>();
         }
         #endregion
 
@@ -129,7 +160,7 @@ namespace Phoenix.Mobile.PageModels.Common
                 return new Command<MedicineItemModel>(async (MedicineItemModel) =>
                 {
                     //CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn: " +MedicineItemModel.MedicineName, "Đóng");
-                    CoreMethods.PushPageModel<Ađ>(MedicineItemModel);
+                    CoreMethods.PushPageModel<AddStockInfoPageModel>(MedicineItemModel);
 
                 });
             }
@@ -152,7 +183,7 @@ namespace Phoenix.Mobile.PageModels.Common
                         //CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn: " + MedicineItemModel.Id, "Đóng");
 
                         var data = await _medicineItemService.RemoveMedicineItem(MedicineItemModel.Id);
-                        // await CoreMethods.PushPageModel<AddOutputPageModel>();
+                        // await CoreMethods.PushPageModel<AddStockPageModel>();
                         await _dialogService.AlertAsync("Xóa thành công");
                         LoadData();
                         IsBusy = false;

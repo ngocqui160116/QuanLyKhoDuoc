@@ -15,5 +15,10 @@ namespace Phoenix.Shared.StockInfo
         public int Medicine_Id { get; set; }
         public int Amount { get; set; }
         public int ActualAmount { get; set; }
+
+        // Stock
+        public int IdStaff { get; set; }
+        public DateTime Date { get; set; }
+        public string Note { get; set; }
     }
 }

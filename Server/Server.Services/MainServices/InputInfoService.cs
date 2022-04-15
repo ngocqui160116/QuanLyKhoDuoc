@@ -195,7 +195,7 @@ namespace Phoenix.Server.Services.MainServices
         }
         #endregion
 
-        #region GetLatestOutput
+        #region GetLatestInput
         public Input GetLatestInput()
         {
             var query = _dataContext.Inputs.AsQueryable();
