@@ -70,6 +70,13 @@ namespace Phoenix.Mobile.PageModels.Common
         }
         #endregion
 
+        public Command BackCommand => new Command(async (p) => await Home(), (p) => !IsBusy);
+
+        public async Task Home()
+        {
+            CoreMethods.PushPageModel<WarehousePageModel>();
+        }
+
         #region SelectedOutput
 
         OutputModel _selectedOutput;

@@ -116,7 +116,7 @@
                                                                        Margin="0,0,10,0"
                                                                        FontSize="Small"
                                                                        TextColor="Black"/>
-                                                                <Label Text="{Binding Total}"
+                                                                <Label Text="{Binding InputPrice}"
                                                                        FontSize="Small"
                                                                        TextColor="Red"
                                                                        FontAttributes="Bold">

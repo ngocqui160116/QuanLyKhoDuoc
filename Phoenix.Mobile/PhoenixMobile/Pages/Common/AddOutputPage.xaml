@@ -9,7 +9,10 @@
              x:DataType="common:AddOutputPageModel"
              xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects" 
              xmlns:input="clr-namespace:Phoenix.Mobile.Core.Models.Input;assembly=Phoenix.Mobile.Core" 
-             xmlns:medicine="clr-namespace:Phoenix.Mobile.Core.Models.Medicine;assembly=Phoenix.Mobile.Core" xmlns:inputinfo="clr-namespace:Phoenix.Mobile.Core.Models.InputInfo;assembly=Phoenix.Mobile.Core" xmlns:medicineItem="clr-namespace:Phoenix.Mobile.Core.Models.MedicineItem;assembly=Phoenix.Mobile.Core" xmlns:behaviors="clr-namespace:Phoenix.Framework.Core;assembly=Phoenix.Framework"
+             xmlns:medicine="clr-namespace:Phoenix.Mobile.Core.Models.Medicine;assembly=Phoenix.Mobile.Core" 
+             xmlns:inputinfo="clr-namespace:Phoenix.Mobile.Core.Models.InputInfo;assembly=Phoenix.Mobile.Core" 
+             xmlns:medicineItem="clr-namespace:Phoenix.Mobile.Core.Models.MedicineItem;assembly=Phoenix.Mobile.Core" 
+             xmlns:behaviors="clr-namespace:Phoenix.Framework.Core;assembly=Phoenix.Framework"
              ControlTemplate="{StaticResource FullScreenHasBack}">
     <ContentPage.Content>
         
@@ -38,40 +41,40 @@
                                     VerticalOptions="FillAndExpand" >
                         <StackLayout HorizontalOptions="Center">
                             <Frame CornerRadius="15" 
-                               HeightRequest="100"
-                               HorizontalOptions="Center">
+                                   HeightRequest="100"
+                                   HorizontalOptions="Center">
                                 <StackLayout>
                                     <Image Source="@drawable/icon_medicine"
-                                       WidthRequest="50"
-                                       HeightRequest="50"
-                                       Margin="0,10,0,0"
-                                       HorizontalOptions="CenterAndExpand"
-                                       VerticalOptions="StartAndExpand">
+                                           WidthRequest="50"
+                                           HeightRequest="50"
+                                           Margin="0,10,0,0"
+                                           HorizontalOptions="CenterAndExpand"
+                                           VerticalOptions="StartAndExpand">
                                     </Image>
                                     <Label Text="Chưa có thuốc"
-                                       FontSize="15"
-                                       TextColor="Black"
-                                       HorizontalOptions="Center"
-                                       VerticalOptions="StartAndExpand"/>
+                                           FontSize="15"
+                                           TextColor="Black"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="StartAndExpand"/>
                                 </StackLayout>
                             </Frame>
                         </StackLayout>
                         <ScrollView  AbsoluteLayout.LayoutFlags="All" 
                                      AbsoluteLayout.LayoutBounds="0,0,1,1">
                             <StackLayout>
-                                <StackLayout BindableLayout.ItemsSource="{Binding Medicine}"
-                                         x:Name="ItemList"
-                                         BackgroundColor="WhiteSmoke">
+                                <StackLayout BindableLayout.ItemsSource="{Binding MedicineItems}"
+                                             x:Name="ItemList"
+                                             BackgroundColor="WhiteSmoke">
                                     <BindableLayout.ItemTemplate>
-                                        <DataTemplate >
+                                        <DataTemplate x:DataType="medicineItem:MedicineItemModel">
 
                                             <StackLayout Margin="6,4,6,4" 
-                                                            BackgroundColor="White"    
-                                                            HorizontalOptions="FillAndExpand"
-                                                            Orientation="Vertical">
+                                                         BackgroundColor="White"    
+                                                         HorizontalOptions="FillAndExpand"
+                                                         Orientation="Vertical">
 
                                                 <StackLayout Orientation="Horizontal" 
-                                                        HorizontalOptions="FillAndExpand" >
+                                                             HorizontalOptions="FillAndExpand">
                                                     <Grid >
                                                         <Grid.RowDefinitions>
                                                             <RowDefinition Height="Auto"/>
@@ -84,138 +87,121 @@
                                                         </Grid.ColumnDefinitions>
 
                                                         <Image Source="@drawable/icon_medicine"
-                                                        HorizontalOptions="StartAndExpand"
-                                                        Grid.Column="0"
-                                                        Grid.Row="0"
-                                                        VerticalOptions="CenterAndExpand">
+                                                               HorizontalOptions="StartAndExpand"
+                                                               Grid.Column="0"
+                                                               Grid.Row="0"
+                                                               VerticalOptions="CenterAndExpand">
                                                         </Image>
 
                                                         <StackLayout Grid.ColumnSpan="7"
-                                                                Margin="0,10,0,0"
-                                                                Orientation="Horizontal"
-                                                                HorizontalOptions="EndAndExpand"
-                                                                VerticalOptions="StartAndExpand">
-                                                            <Label   Grid.Column="6"  
-                                                                Text="{Binding Total}"
-                                                                FontSize="Small"
-                                                                TextColor="Red"
-                                                                FontAttributes="Bold"
-                                                                HorizontalOptions="EndAndExpand"
-                                                                VerticalOptions="StartAndExpand">
+                                                                     Margin="0,10,0,0"
+                                                                     Orientation="Horizontal"
+                                                                     HorizontalOptions="EndAndExpand"
+                                                                     VerticalOptions="StartAndExpand">
+                                                            <Label Grid.Column="6"  
+                                                                   Text="{Binding Total}"
+                                                                   FontSize="Small"
+                                                                   TextColor="Red"
+                                                                   FontAttributes="Bold"
+                                                                   HorizontalOptions="EndAndExpand"
+                                                                   VerticalOptions="StartAndExpand">
                                                             </Label>
-                                                            <Label   Grid.Column="7"
-                                                                Text=" đ"
-                                                                FontSize="Small"
-                                                                TextColor="Red"
-                                                                FontAttributes="Bold"
-                                                                HorizontalOptions="EndAndExpand"
-                                                                VerticalOptions="StartAndExpand">
-
+                                                            <Label Grid.Column="7"
+                                                                   Text=" đ"
+                                                                   FontSize="Small"
+                                                                   TextColor="Red"
+                                                                   FontAttributes="Bold"
+                                                                   HorizontalOptions="EndAndExpand"
+                                                                   VerticalOptions="StartAndExpand">
                                                             </Label>
                                                         </StackLayout>
 
                                                         <StackLayout Orientation="Vertical"
-                                                                Grid.Column="1"
-                                                                Margin="10,0,5,0">
-                                                            <StackLayout x:DataType="medicineItem:MedicineItemModel" Orientation="Horizontal">
+                                                                     Grid.Column="1"
+                                                                     Margin="10,0,5,0">
+                                                            <StackLayout x:DataType="medicineItem:MedicineItemModel" 
+                                                                         Orientation="Horizontal">
                                                                 <Label Text="{Binding MedicineName}"
-                                                                Grid.Column="1"
-                                                                FontAttributes="Bold"
-                                                                FontSize="Large" />
+                                                                       Grid.Column="1"
+                                                                       FontAttributes="Bold"
+                                                                       FontSize="Large" />
                                                             </StackLayout>
 
                                                             <StackLayout Orientation="Horizontal">
                                                                 <Label Text="Số lô:"
-                                                                Margin="0,2,8,4"
-                                                                FontSize="Small" />
+                                                                       Margin="0,2,8,4"
+                                                                       FontSize="Small" />
                                                                 <Label Text="{Binding Batch}"
-                                                                Margin="2,2,8,4"
-                                                                TextColor="DarkSlateGray"  
-                                                                FontSize="Small" />
+                                                                       Margin="2,2,8,4"
+                                                                       TextColor="DarkSlateGray"  
+                                                                       FontSize="Small" />
 
                                                                 <Label Text="HSD:"
-                                                                Margin="0,2,8,4"
-                                                                FontSize="Small" />
+                                                                       Margin="0,2,8,4"
+                                                                       FontSize="Small" />
                                                                 <controls:CustomDatePicker 
-                                                                Date="{Binding DueDate}"
-                                                                Margin="2,2,8,4"
-                                                                    Format="dd/MM/yyyy"
-                                                                FontSize="15"
-                                                                TextColor="DarkSlateGray"/>
+                                                                        Date="{Binding DueDate}"
+                                                                        Margin="2,2,8,4"
+                                                                        Format="dd/MM/yyyy"
+                                                                        FontSize="15"
+                                                                        TextColor="DarkSlateGray"/>
                                                                 <Label Text="Tồn:"
-                                                                Margin="0,2,8,4"
-                                                                FontSize="Small" />
+                                                                       Margin="0,2,8,4"
+                                                                       FontSize="Small" />
                                                                 <Label Text="{Binding Count}"
-                                                                Margin="2,2,8,4"
-                                                                FontSize="Small"
-                                                                FontAttributes="Bold"
-                                                                TextColor="Red"/>
+                                                                       Margin="2,2,8,4"
+                                                                       FontSize="Small"
+                                                                       FontAttributes="Bold"
+                                                                       TextColor="Red"/>
                                                             </StackLayout>
                                                             <StackLayout Orientation="Horizontal">
                                                                 <Label Text="Số lượng:"
-                                                                Margin="0,2,8,4"
-                                                                FontSize="Small" />
-                                                                <Frame CornerRadius="5" HeightRequest="40" >
-                                                                    <controls:BorderlessEntry Keyboard="Numeric"
-                                                                                          WidthRequest="50"
-                                                                                          Text="{Binding MobileNumber, Mode=TwoWay}"
-                                                                                          VerticalTextAlignment="Center"
-                                                                                          HorizontalTextAlignment="Center"
-                                                                                          BackgroundColor="WhiteSmoke"
-                                                                                          HorizontalOptions="Center">
-                                                                        <controls:BorderlessEntry.Behaviors>
-                                                                            <behaviors:EventToCommandBehavior 
-                                                                                    EventName="TextChanged"
-                                                                                    Command="{Binding BindingContext.TextChangedCommand,Source={x:Reference ItemList}}"
-                                                                                    CommandParameter="{Binding .}"/>
-                                                                        </controls:BorderlessEntry.Behaviors>
-
-                                                                    </controls:BorderlessEntry>
-
-                                                                   
-                                                                </Frame>
-                                                                
-                                                                
-                                                                <Label Text="/"
-                                                                Margin="2,2,0,4"
-                                                                FontSize="Small"
-                                                                TextColor="Black"/>
-                                                                <Label Text="{Binding abc}"
-                                                                Margin="2,2,8,4"
-                                                                FontSize="Small"
-                                                                FontAttributes="Bold"
-                                                                TextColor="Black"/>
+                                                                       Margin="0,2,8,4"
+                                                                       FontSize="Small" />
+                                                                <Label 
+                                                                    WidthRequest="50"
+                                                                    Text="{Binding Amount}"
+                                                                    VerticalTextAlignment="Center"
+                                                                    HorizontalTextAlignment="Center"
+                                                                    BackgroundColor="WhiteSmoke"
+                                                                    HorizontalOptions="Center">
+                                                                </Label>
+                                                               
+                                                                <Label Text="{Binding UnitName}"
+                                                                       Margin="2,2,8,4"
+                                                                       FontSize="Small"
+                                                                       FontAttributes="Bold"
+                                                                       TextColor="Black"/>
                                                             </StackLayout>
                                                         </StackLayout>
 
                                                         <StackLayout Grid.ColumnSpan="3"
-                                                                Margin="0,10,0,0"
-                                                                Orientation="Horizontal"
-                                                                HorizontalOptions="EndAndExpand"
-                                                                VerticalOptions="EndAndExpand">
+                                                                     Margin="0,10,0,0"
+                                                                     Orientation="Horizontal"
+                                                                     HorizontalOptions="EndAndExpand"
+                                                                     VerticalOptions="EndAndExpand">
                                                             <ImageButton Source="@drawable/icon_edit"
-                                                                    Command="{Binding BindingContext.SelectItemCommand,Source={x:Reference ItemList}}" 
-                                                                    CommandParameter="{Binding .}"
-                                                                    Grid.Column="5"
-                                                                    Margin="10,5,0,5"
-                                                                    HorizontalOptions="EndAndExpand"
-                                                                    VerticalOptions="CenterAndExpand">
+                                                                         Command="{Binding BindingContext.SelectItemCommand,Source={x:Reference ItemList}}" 
+                                                                         CommandParameter="{Binding .}"
+                                                                         Grid.Column="5"
+                                                                         Margin="10,5,0,5"
+                                                                         HorizontalOptions="EndAndExpand"
+                                                                         VerticalOptions="CenterAndExpand">
 
                                                             </ImageButton>
                                                             <ImageButton Source="@drawable/icon_remove"
-                                                                    Command="{Binding BindingContext.RemoveItemCommand,Source={x:Reference ItemList}}" 
-                                                                    CommandParameter="{Binding .}"
-                                                                    Grid.Column="6"
-                                                                    HorizontalOptions="EndAndExpand"
-                                                                    VerticalOptions="CenterAndExpand">
+                                                                         Command="{Binding BindingContext.RemoveItemCommand,Source={x:Reference ItemList}}" 
+                                                                         CommandParameter="{Binding .}"
+                                                                         Grid.Column="6"
+                                                                         HorizontalOptions="EndAndExpand"
+                                                                         VerticalOptions="CenterAndExpand">
                                                             </ImageButton>
                                                         </StackLayout>
                                                         <StackLayout Grid.ColumnSpan="4"
-                                                                Margin="0,10,0,0"
-                                                                Orientation="Horizontal"
-                                                                HorizontalOptions="EndAndExpand"
-                                                                VerticalOptions="EndAndExpand">
-                                                            
+                                                                     Margin="0,10,0,0"
+                                                                     Orientation="Horizontal"
+                                                                     HorizontalOptions="EndAndExpand"
+                                                                     VerticalOptions="EndAndExpand">
                                                         </StackLayout>
                                                     </Grid>
                                                 </StackLayout>

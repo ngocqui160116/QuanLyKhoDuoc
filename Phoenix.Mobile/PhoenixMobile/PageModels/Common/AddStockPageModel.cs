@@ -120,5 +120,56 @@ namespace Phoenix.Mobile.PageModels.Common
         }
         #endregion
 
+        #region SelectItem
+
+        public Command<MedicineItemModel> SelectItemCommand
+        {
+            get
+            {
+                return new Command<MedicineItemModel>(async (MedicineItemModel) =>
+                {
+                    //CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn: " +MedicineItemModel.MedicineName, "Đóng");
+                    CoreMethods.PushPageModel<Ađ>(MedicineItemModel);
+
+                });
+            }
+        }
+        #endregion
+
+        #region RemoveItem
+
+        public Command<MedicineItemModel> RemoveItemCommand
+        {
+            get
+            {
+                return new Command<MedicineItemModel>(async (MedicineItemModel) =>
+                {
+                    try
+                    {
+                        if (IsBusy) return;
+                        IsBusy = true;
+
+                        //CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn: " + MedicineItemModel.Id, "Đóng");
+
+                        var data = await _medicineItemService.RemoveMedicineItem(MedicineItemModel.Id);
+                        // await CoreMethods.PushPageModel<AddOutputPageModel>();
+                        await _dialogService.AlertAsync("Xóa thành công");
+                        LoadData();
+                        IsBusy = false;
+
+                    }
+                    catch (Exception e)
+                    {
+                        await _dialogService.AlertAsync("Xóa thất bại");
+                    }
+                    //CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn: " +MedicineItemModel.Id, "Đóng");
+                    // CoreMethods.PushPageModel<AddInputInfoPageModel>(MedicineItemModel);
+
+                });
+            }
+        }
+
+        #endregion
+
     }
 }
