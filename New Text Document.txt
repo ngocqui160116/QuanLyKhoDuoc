@@ -1,4 +1,4 @@
-﻿@using Phoenix.Server.Services.Database;
+@using Phoenix.Server.Services.Database;
 @section Scripts{
     <script type="text/javascript" src="~/assets/js/tabulator.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
@@ -6,28 +6,21 @@
 @section Breadcrumb{
     <div class="-intro-x breadcrumb mr-auto hidden sm:flex">
         <span>Chương trình</span> <i data-feather="chevron-right" class="breadcrumb__icon"></i>
-        <a href="#" class="breadcrumb--active">Thuốc</a>
+        <a href="#" class="breadcrumb--active">Khách hàng</a>
     </div>
 }
 @Html.AntiForgeryToken()
 <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
     <h2 class="text-lg font-medium mr-auto">
-        Thuốc
+        Khách hàng
     </h2>
-    <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
-        <a href="@Url.Action("Create","Medicine")" class="btn btn-primary text-white shadow-md mr-2">Thêm mới</a>
-    </div>
 </div>
 <div class="grid gap-6 mt-5">
     <div class="intro-y box p-5">
         <div class="grid grid-cols-12 gap-2">
             <div class="col-span-12 lg:col-span-6">
-                <label>Thuốc</label>
-                <input type="text" id="Name" class="form-control">
-            </div>
-            <div class="col-span-12 lg:col-span-6">
-                <label>Số đăng ký</label>
-                <input type="text" id="RegistrationNumber" class="form-control">
+                <label>Tên khách hàng</label>
+                <input type="text" id="FullName" class="form-control">
             </div>
         </div>
         <div class="grid mt-3">
@@ -52,11 +45,10 @@
         }
         var table = new Tabulator("#main-grid", {
             layout: "fitDataFill",
-            ajaxURL: "@Html.Raw(Url.Action("List", "Medicine"))",
+            ajaxURL: "@Html.Raw(Url.Action("List", "Customer"))",
             ajaxConfig: "post",
             ajaxRequesting: function (url, params) {
-                params.Name = $('#Name').val();
-                params.RegistrationNumber = $('#RegistrationNumber').val();
+                params.FullName = $('#FullName').val();
             },
             ajaxResponse: function (url, params, response) {
                 return response;
@@ -75,27 +67,33 @@
             },
             placeholder: "Chưa có dữ liệu",
             columns: [
-                { title: "Mã thuốc", field: "IdMedicine", sorter: "string", width: 120 },
+                { title: "ID", field: "Id", sorter: "string", width: 100 },
                 {
-                    title: "Tên thuốc", field: "Name", sorter: "string", width: 200, formatter(cell, formatterParams)
+                    title: "Tên khách hàng", field: "FullName", sorter: "string", width: 200, formatter(cell, formatterParams)
                     {
-                        return `<a href="../Admin/Medicine/Update/${cell.getData().IdMedicine}" class="text-theme-1 dark:text-theme-10">${cell.getData().Name}</a>`
+                        return `<a href="../Admin/Customer/Update/${cell.getData().Id}" class="text-theme-1 dark:text-theme-10"> ${cell.getData().FullName}</a>`
                     }
                 },
                 {
-                    title: "Số đăng ký", field: "RegistrationNumber", sorter: "string", width: 150, formatter(cell, formatterParams) {
-                        return `<a href="../Admin/Medicine/Update/${cell.getData().IdMedicine}" class="text-theme-1 dark:text-theme-10">${cell.getData().RegistrationNumber}</a>`
+                    title: "Số điện thoại", field: "Phone", sorter: "string", width: 180, formatter(cell, formatterParams) {
+                        return `<a href="../Admin/Customer/Update/${cell.getData().Id}" class="text-theme-1 dark:text-theme-10"> ${cell.getData().Phone}</a>`
                     }
                 },
-                { title: "Tên nhóm thuốc", field: "GroupName", sorter: "string", width: 300 },
-                { title: "Hoạt chất", field: "Active", sorter: "string", width: 180 },
-                { title: "Hàm lượng", field: "Content", sorter: "string", width: 180 },
-                { title: "Quy cách đóng gói", field: "Packing", sorter: "string", width: 250 },
-                { title: "Hình ảnh", field: "Image", sorter: "string", width: 180 },
-                { title: "Trạng thái", field: "Status", sorter: "string", width: 180 },
+
                 {
-                    title: "", field: "IdMedicine", sorter: "string", width: 80, formatter(cell, formatterParams) {
-                        return `<a href="../Admin/Medicine/Update/${cell.getData().IdMedicine}" class="btn btn-primary text-white shadow-md mr-2">Sửa</a>`
+                    title: "Email", field: "Email", sorter: "string", width: 180, formatter(cell, formatterParams) {
+                        return `<a href="../Admin/Customer/Update/${cell.getData().Id}" class="text-theme-1 dark:text-theme-10"> ${cell.getData().Email}</a>`
+                    }
+                },
+
+                {
+                    title: "Địa chỉ", field: "Address", sorter: "string", width: 180, formatter(cell, formatterParams) {
+                        return `<a href="../Admin/Customer/Update/${cell.getData().Id}" class="text-theme-1 dark:text-theme-10"> ${cell.getData().Address}</a>`
+                    }
+                },
+                {
+                    title: "", field: "", sorter: "string", width: 220, formatter(cell, formatterParams) {
+                        return `<a href="../Admin/Customer/Update/${cell.getData().Id}" class="btn btn-instagram text-white shadow-md mr-2"> Cập nhật thông tin </a>`
                     }
                 },
             ],
@@ -104,10 +102,8 @@
             table.setData();
         }
         let onResetSearch = (e) => {
-            $('#Name').val('');
-            $('#RegistrationNumber').val('');
+            $('#FullName').val('');
             table.setData();
         }
     </script>
 </div>
-

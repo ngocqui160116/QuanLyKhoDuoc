@@ -7,13 +7,13 @@
 @section Breadcrumb{
     <div class="-intro-x breadcrumb mr-auto hidden sm:flex">
         <span>Chương trình</span> <i data-feather="chevron-right" class="breadcrumb__icon"></i>
-        <a href="#" class="breadcrumb--active">Nhập kho</a>
+        <a href="#" class="breadcrumb--active">Kiểm kho</a>
     </div>
 }
 @Html.AntiForgeryToken()
 <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
     <h2 class="text-lg font-medium mr-auto">
-        Nhập kho
+        Chi tiết phiếu kiểm kho
     </h2>
     <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
         <a href="@Url.Action("Saved","Input")" class="btn btn-primary text-white shadow-md mr-2">Quay lại</a>
@@ -23,7 +23,7 @@
     <div class="intro-y box p-5">
         <div class="grid grid-cols-12 gap-2">
             <div class="col-span-12 lg:col-span-6">
-                <label>Hóa đơn nhập</label>
+                <label>Phiếu kiểm kho</label>
                 <input type="text" id="Name" class="form-control">
             </div>
         </div>
@@ -57,7 +57,7 @@
         }
         var table = new Tabulator("#main-grid", {
             layout: "fitDataFill",
-            ajaxURL: "@Html.Raw(Url.Action("Detail", "InputInfo"))",
+            ajaxURL: "@Html.Raw(Url.Action("Detail", "StockInfo"))",
             ajaxConfig: "post",
             ajaxRequesting: function (url, params) {
                 params.Name = $('#MedicineName').val();

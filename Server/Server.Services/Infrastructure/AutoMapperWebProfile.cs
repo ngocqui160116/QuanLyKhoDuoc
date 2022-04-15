@@ -12,6 +12,7 @@ using Phoenix.Shared.Supplier;
 using Phoenix.Shared.Unit;
 using Phoenix.Shared.InventoryTags;
 using Phoenix.Shared.Inventory;
+using Phoenix.Shared.Stock;
 
 namespace Phoenix.Server.Services.Infrastructure
 {
@@ -23,7 +24,6 @@ namespace Phoenix.Server.Services.Infrastructure
             CreateMap<Reason, ReasonDto>();
             CreateMap<Supplier, SupplierDto>();
             CreateMap<Medicine, MedicineDto>()
-                //.ForMember(d => d.SupplierName, o => o.MapFrom(s => s..Name))
                 .ForMember(d => d.GroupName, o => o.MapFrom(s => s.Group.Name));
             CreateMap<Group, GroupDto>();
             CreateMap<Staff, StaffDto>();
@@ -47,9 +47,9 @@ namespace Phoenix.Server.Services.Infrastructure
                 .ForMember(d => d.DocumentTypeName, o => o.MapFrom(s => s.documentType.Name));
             CreateMap<Inventory, InventoryDto>()
                 .ForMember(d => d.MedicineName, o => o.MapFrom(s => s.Medicine.Name));
-                //.ForMember(d => d.SupplierName, o => o.MapFrom(s => s.Supplier.Name));
-            /*CreateMap<Vendor, VendorDto>()
-                .ForMember(d => d.ImageUrl, o => o.MapFrom(s => s.Medicine_Image.AbsolutePath));*/
+            //.ForMember(d => d.SupplierName, o => o.MapFrom(s => s.Supplier.Name));
+            CreateMap<Stock, StockDto>()
+                .ForMember(d => d.StaffName, o => o.MapFrom(s => s.Staff.Name));
         }
     }
 }

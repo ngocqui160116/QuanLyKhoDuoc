@@ -1,5 +1,5 @@
 ﻿@using Phoenix.Server.Services.Database;
-@model Phoenix.Server.Web.Areas.Admin.Models.Inventory.InventoryModel
+@model Phoenix.Server.Web.Areas.Admin.Models.Stock.StockModel
 @Html.ValidationSummary(true)
 @Html.HiddenFor(model => model.Id)
 @section Scripts{
@@ -18,7 +18,7 @@
         Thuốc
     </h2>
     <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
-        <a href="@Url.Action("Create","Medicine")" class="btn btn-primary text-white shadow-md mr-2">Thêm mới</a>
+        <a href="@Url.Action("Create","Stock")" class="btn btn-primary text-white shadow-md mr-2">Thêm mới</a>
     </div>
 </div>
 <div class="grid gap-6 mt-5">
@@ -51,10 +51,10 @@
         }
         var table = new Tabulator("#main-grid", {
             layout: "fitDataFill",
-            ajaxURL: "@Html.Raw(Url.Action("List", "Inventory"))",
+            ajaxURL: "@Html.Raw(Url.Action("List", "Stock"))",
             ajaxConfig: "post",
             ajaxRequesting: function (url, params) {
-                params.Name = $('#Name').val();
+                params.StaffName = $('#StaffName').val();
             },
             ajaxResponse: function (url, params, response) {
                 return response;
@@ -73,11 +73,14 @@
             },
             placeholder: "Chưa có dữ liệu",
             columns: [
-                { title: "Mã thẻ", field: "Id", sorter: "string", width: 120 },
-                { title: "Tên thuốc", field: "MedicineName", sorter: "string", width: 280 },
-                { title: "Số lượng tồn", field: "Count", sorter: "string", width: 200 },
-                { title: "Số lô", field: "LotNumber", sorter: "string", width: 200 },
-                { title: "Giá", field: "UnitPrice", sorter: "string", width: 200 },
+                { title: "Mã phiếu", field: "Id", sorter: "string", width: 120 },
+                {
+                    title: "Tên nhân viên", field: "StaffName", sorter: "string", width: 250, formatter(cell, formatterParams) {
+                        return `<a href="../Admin/Stock/Detail/${cell.getData().Id}" class="text-theme-1 dark:text-theme-10"> ${cell.getData().StaffName}</a>`
+                    }
+                },
+                { title: "Ngày tạo", field: "Date", sorter: "date", width: 200, formatter: dateFormatter},
+                { title: "Ghi chú", field: "Note", sorter: "string", width: 350 },
                 @*{
                     title: "Ngày tạo", field: "CreatedAt", sorter: "date", width: 180, formatter: dateFormatter
                 },

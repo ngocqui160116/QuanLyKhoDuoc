@@ -777,6 +777,10 @@
     <Content Include="Areas\Admin\Views\Input\Complete.cshtml" />
     <Content Include="Areas\Admin\Views\Input\Saved.cshtml" />
     <Content Include="Areas\Admin\Views\Input\Canceled.cshtml" />
+    <Content Include="Areas\Admin\Views\InputInfo\Update.cshtml" />
+    <Content Include="Areas\Admin\Views\StockInfo\Detail.cshtml" />
+    <Content Include="Areas\Admin\Views\Stock\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Stock\_CreateOrUpdate.cshtml" />
     <None Include="assets\js\kendo\2019.3.1023\kendo.all-vsdoc.js" />
     <None Include="assets\js\kendo\2019.3.1023\kendo.all.min.intellisense.js" />
     <Content Include="assets\js\kendo\2019.3.1023\kendo.all.min.js" />
@@ -1231,6 +1235,7 @@
     <Compile Include="Areas\Admin\Controllers\AdminAuthorizeAttribute.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
+    <Compile Include="Areas\Admin\Controllers\StockInfoController.cs" />
     <Compile Include="Areas\Admin\Controllers\InventoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\StockController.cs" />
     <Compile Include="Areas\Admin\Controllers\InventoryTagsController.cs" />

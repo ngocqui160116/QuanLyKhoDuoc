@@ -1,134 +1,65 @@
 ﻿@using Falcon.Web.Mvc.HtmlExtensions
-@model Phoenix.Server.Web.Areas.Admin.Models.Output.OutputModel
-
-<script>
-    var tableContent = [];
-    function render_tbody() {
-        let template = (stt, id, @*name, duedate, lotnumber, *@ lotnumber, count, @*inputprice, total*@) => `<tr class="bg-gray-200 dark:bg-dark-1">
-                            <td class="border-b dark:border-dark-5">${stt}</td>
-                            <td class="border-b dark:border-dark-5">${id}</td>
-                            @*<td class="border-b dark:border-dark-5">{name}</td>
-                            <td class="border-b dark:border-dark-5">{duedate}</td>
-                            <td class="border-b dark:border-dark-5">{lotnumber}</td>*@
-                            <td class="border-b dark:border-dark-5">${lotnumber}</td>
-                            <td class="border-b dark:border-dark-5">
-                                <input type="text" class="form-control" aria-label="Count" aria-describedby="input-group-price" value="${count}" onchange="onCountChange(${id}, this.value)"/>
-                            </td>
-                            @*<td class="border-b dark:border-dark-5">{inputprice}</td>
-                            <td class="border-b dark:border-dark-5">{total}</td>*@
-                            <td class="border-b dark:border-dark-5">
-                                <button href="javascript:;" data-toggle="modal-cancel" data-target="#custom-content-tooltip" type="submit" class="btn btn-danger mr-1 mb-2" onclick="onDeleteChange(${id})">
-                                    <i data-feather="trash" class="w-5 h-5"> </i>
-                                </button>
-                            </td>
-                        </tr>`;
-        let htmlTemplate = "";
-        tableContent.map(function (row, index) {
-            htmlTemplate += template(index + 1, row.medicineId, @*row.medicineName, row.DueDate, row.LotNumber, *@row.LotNumber, row.Count @*, row.InputPrice, row.Total*@)
-        })
-        $("#tbody").html(htmlTemplate)
-        $("#tableContent").val(JSON.stringify(tableContent))
-    }
-    //cập nhật số lượng
-    function onCountChange(medicineId, val) {
-        tableContent = tableContent.map(function (row) {
-            if (row.medicineId == medicineId) {
-                row.Count = val;
-            }
-            return row;
-        })
-        render_tbody()
-    }
-    //button delete item
-    function onDeleteChange(medicineId) {
-        tableContent = tableContent.filter(e => e.medicineId != medicineId)
-        render_tbody()
-    }
-
-    $(document).ready(function () {
-        render_tbody()
-    })
-</script>
-
+@model Phoenix.Server.Web.Areas.Admin.Models.InputInfo.InputInfoModel
 @Html.ValidationSummary(true)
 @Html.HiddenFor(model => model.Id)
-<input type="hidden" id="tableContent" name="tableContent" />
 <div class="grid grid-cols-12 gap-6 mt-5">
     <div class="intro-y col-span-12 lg:col-span-6">
         <div class="intro-y box p-5">
             <div class="mt-3">
-                <label>Tên người tạo </label>
+                <label>Tên </label>
                 <div class="mt-2">
-                    @Html.DropDownList("IdStaff", null, new { @class = "form-control input input--switch border" })
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control w-full" } })
+                    @Html.ValidationMessageFor(model => model.Name)
                 </div>
             </div>
             <div class="mt-3">
-                <label">Thuốc</label>
+                <label>Số đăng ký</label>
                 <div class="mt-2">
-                    @Html.DropDownList("IdMedicine", null, "Vui lòng chọn thuốc cần xuất", new { @class = "form-control input input--switch border" })
+                    @Html.EditorFor(model => model.RegistrationNumber, new { htmlAttributes = new { @class = "form-control w-full" } })
+                    @Html.ValidationMessageFor(model => model.RegistrationNumber)
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="intro-y col-span-12 lg:col-span-6">
-        <div class="intro-y box p-5">
+            @*<div>
+                <label>Nhóm</label>
+                @Html.EditorFor(model => model.IdGroup, new { htmlAttributes = new { @class = "input w-full border mt-2" } })
+                @Html.ValidationMessageFor(model => model.IdGroup)
+                </div>*@
             <div class="mt-3">
-                <label>Ngày xuất</label>
+                <label>Nhóm thuốc</label>
                 <div class="mt-2">
-                    <input class="datepicker form-control w-56 block mx-auto" data-single-mode="true">
+                    @Html.DropDownList("IdGroup", null, new { @class = "form-control input input--switch border" })
                 </div>
             </div>
             <div class="mt-3">
-                <label>Phân loại xuất</label>
+                <label>Hoạt chất</label>
                 <div class="mt-2">
-                    @Html.DropDownList("IdReason", null, new { @class = "form-control input input--switch border" })
+                    @Html.EditorFor(model => model.Active, new { htmlAttributes = new { @class = "form-control w-full" } })
+                    @Html.ValidationMessageFor(model => model.Active)
+                </div>
+            </div>
+            <div class="mt-3">
+                <label>Hàm lượng</label>
+                <div class="mt-2">
+                    @Html.EditorFor(model => model.Content, new { htmlAttributes = new { @class = "form-control w-full" } })
+                    @Html.ValidationMessageFor(model => model.Content)
+                </div>
+            </div>
+            <div class="mt-3">
+                <label>Quy cách đóng gói</label>
+                <div class="mt-2">
+                    @Html.EditorFor(model => model.Packing, new { htmlAttributes = new { @class = "form-control w-full" } })
+                    @Html.ValidationMessageFor(model => model.Packing)
+                </div>
+            </div>
+            <div class="mt-3">
+                <label>Đơn vị tính</label>
+                <div class="mt-2">
+                    @Html.DropDownList("IdUnit", null, new { @class = "form-control input input--switch border" })
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div class="intro-y box p-5 mt-5">
-    <table class="table">
-        <thead>
-            <tr>
-                <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">#</th>
-                <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Mã thuốc</th>
-                 @*<th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Tên thuốc</th>
-                <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">HSD</th>
-                <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Số lô</th>*@
-                <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Số lô</th>
-                <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Số lượng xuất</th>
-                @*<th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Giá</th>
-                <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Thành tiền</th>*@
-                <th class="border-b-2 dark:border-dark-5 whitespace-nowrap"></th>
-            </tr>
-        </thead>
-        <tbody id="tbody">
-        </tbody>
-    </table>
-</div>
-
-<script>
-    $("#IdMedicine").on("change", function (e) {
-        if ($("#IdMedicine option:selected").val() > 0) {
-            //console.log("idmedicine >> " + $('#IdMedicine option:selected').text() + "   lotnumber >>" + $("#IdMedicine ").val())
-            //console.log(e)
-            tableContent.push({
-                medicineId: $("#IdMedicine option:selected").text(),
-                //medicineName: $('#IdMedicine option:selected').val(),
-                //DueDate: new Date(), //hạn sử dụng
-                //LotNumber: $('#Count option:selected').val(), //lô
-                LotNumber: $("#IdMedicine option:selected").val(), //số lượng tồn
-                Count: 0,  //số lượng xuất
-                //InputPrice: 200, //giá mới nhất của phiếu nhập
-                //Total: 0, //tổng tiền = giá * số lượng xuất
-            });
-            render_tbody();
-        }
-        
-        //JSON.stringify(tableContent)
-    })
-</script>
 @*<div class="content">
         <div class="form-horizontal">
             <div class="nav-tabs-custom">
@@ -459,58 +390,6 @@
                 </script>
             }
         </div>
-    </div>*@@*
-<script>
-$("#IdStaff").kendoComboBox({
-    dataTextField: "Name",
-    dataValueField: "IdStaff",
-    dataSource: {
-        type: "json",
-        transport: {
-            read: {
-                url: "@Html.Raw(Url.Action("List", "Staff"))",
-                type: "POST",
-                datatype: "json"
-            }
-        },
-        schema: {
-            data: "Data",
-            total: "Total",
-            error: "Error"
-        }
-    }
-});
-$("#IdStaff").closest('.k-combobox').addClass("form-control");
-/////////
-$("#IdSupplier").kendoComboBox({
-    dataTextField: "Name",
-    dataValueField: "IdSupplier",
-    dataSource: {
-        type: "json",
-        transport: {
-            read: {
-                url: "@Html.Raw(Url.Action("List", "Supplier"))",
-                type: "POST",
-                datatype: "json"
-            }
-        },
-        schema: {
-            data: "Data",
-            total: "Total",
-            error: "Error"
-        }
-    }
-});
-$("#IdSupplier").closest('.k-combobox').addClass("form-control");
-//$("#ProductTypeId").kendoComboBox({
-//    dataTextField: "Name",
-//    dataValueField: "Id",
-//    dataSource:
-//        [{ Id: 1, Name: "A" },
-//            {Id: 1, Name: "B"}
-//        ]
+    </div>*@
 
-//});
-//$("#ProductTypeId").closest('.k-combobox').addClass("form-control");
-</script>*@
 
