@@ -57,58 +57,5 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
             ViewBag.IdMedicine = new SelectList(db.Medicines.OrderBy(n => n.Name), "IdMedicine", "Name", selectedId);
         }
 
-        // Create Vendor
-        /*public ActionResult Create()
-        {
-            SetViewBag();
-            var model = new InputModel();
-            
-            return View(model);
-        }
-
-        [HttpPost]
-        public async Task<ActionResult> Create(InputModel model)
-        {
-            SetViewBag();
-            if (!ModelState.IsValid)
-                return View(model);
-            var inputs = await _inventorytagsService.Create(new InputRequest
-            {
-                IdStaff = model.IdStaff,
-                IdSupplier = model.IdSupplier,
-                DateInput = DateTime.Now,
-
-                *//*IdMedicine = inputinfomodel.IdMedicine,
-                IdInput = inputinfomodel.Id,
-                IdBatch = inputinfomodel.IdBatch,
-                Count = inputinfomodel.Count,
-                InputPrice = inputinfomodel.InputPrice,
-                Total = inputinfomodel.Total,
-                DueDate = inputinfomodel.DueDate,*//*
-                
-                List = JsonConvert.DeserializeObject<List<InputContentDto>>(model.TableContent)
-
-            }) ;
-            if (!inputs.Success)
-            {
-                ErrorNotification("Thêm mới không thành công");
-                return View(model);
-            }
-            SuccessNotification("Thêm mới thành công");
-            return RedirectToAction("Create");
-        }*/
-       
-        /*[HttpPost]
-        public async Task<ActionResult> Delete(string id)
-        {
-            var input = _inputService.GetInputById(id);
-            if (input == null)
-                //No email account found with the specified id
-                return RedirectToAction("Index");
-
-            await _inputService.Delete(input.Id);
-            SuccessNotification("Xóa đại lý thành công");
-            return RedirectToAction("Index");
-        }*/
     }
 }

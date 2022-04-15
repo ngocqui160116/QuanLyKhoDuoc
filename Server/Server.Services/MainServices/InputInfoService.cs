@@ -32,6 +32,8 @@ namespace Phoenix.Server.Services.MainServices
         Task<BaseResponse<InputInfoDto>> GetAllInputInfoById(int Id,InputInfoRequest request);
         Task<BaseResponse<InputInfoDto>> GetExpiredMedicine(InputInfoRequest request);
         Task<BaseResponse<InputInfoDto>> Complete(int Id, InputInfoRequest request);
+        Task<BaseResponse<InputInfoDto>> Update(InputInfoRequest request);
+        List<InputInfo> GetListInputInfo(int Id);
     }
     public class InputInfoService : IInputInfoService
     {
@@ -288,8 +290,17 @@ namespace Phoenix.Server.Services.MainServices
             }
             return result;
         }
-        public InputInfo GetInputInfoById(int Id) => _dataContext.InputInfos.Find(Id);        
-        
+        public InputInfo GetInputInfoById(int Id) => _dataContext.InputInfos.Find(Id);
+        public List<InputInfo> GetListInputInfo(int Id)
+        {
+            var query = _dataContext.InputInfos.AsQueryable();
+            query = query.Where(d => d.IdInput.Equals(Id));
+            query = query.OrderByDescending(d => d.Id);
+            var data = query.ToList();
+
+            return data;
+        }
+
         public async Task<BaseResponse<InputInfoDto>> Create(InputInfoRequest request)
         {
             var result = new BaseResponse<InputInfoDto>();
@@ -451,6 +462,28 @@ namespace Phoenix.Server.Services.MainServices
             }
             return result;
         }
-        
+        #region UpdateInputInfo
+        public async Task<BaseResponse<InputInfoDto>> Update(InputInfoRequest request)
+        {
+            var result = new BaseResponse<InputInfoDto>();
+            try
+            {
+                //Lay du lieu cu
+                var inputinfo = GetInputInfoById(request.Id);
+                inputinfo.IdBatch = request.IdBatch;
+                inputinfo.Count = request.Count;
+                inputinfo.InputPrice = request.InputPrice;
+                inputinfo.Total = request.Count * request.InputPrice;
+                inputinfo.DueDate = request.DueDate;
+                await _dataContext.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                result.Success = false;
+                result.Message = ex.Message;
+            }
+            return result;
+        }
+        #endregion
     }
 }

@@ -9,7 +9,8 @@
 @section Breadcrumb{
     <div class="-intro-x breadcrumb mr-auto hidden sm:flex">
         <span>Chương trình</span> <i data-feather="chevron-right" class="breadcrumb__icon"></i>
-        <a href="#" class="breadcrumb--active">Thuốc</a>
+        <a href="#" class="breadcrumb--active">Quản lý kho</a><i data-feather="chevron-right" class="breadcrumb__icon"></i>
+        <a href="#" class="breadcrumb--active">Tồn kho</a>
     </div>
 }
 @Html.AntiForgeryToken()
@@ -73,7 +74,7 @@
             },
             placeholder: "Chưa có dữ liệu",
             columns: [
-                { title: "Mã thẻ", field: "Id", sorter: "string", width: 120 },
+                { title: "Mã", field: "Id", sorter: "string", width: 120 },
                 { title: "Tên thuốc", field: "MedicineName", sorter: "string", width: 280 },
                 { title: "Số lượng tồn", field: "Count", sorter: "string", width: 200 },
                 { title: "Số lô", field: "LotNumber", sorter: "string", width: 200 },

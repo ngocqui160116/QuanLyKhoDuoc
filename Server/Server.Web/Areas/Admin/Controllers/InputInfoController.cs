@@ -142,36 +142,38 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
             SuccessNotification("Thêm mới thành công");
             return RedirectToAction("../Input/Complete");
         }
+
         public ActionResult Update(int Id)
         {
-            var model = new InputInfoModel();
-            // gán Id hóa đơn vào Id chi tiết hóa đơn
-            model.Id = Id;
-            return View(model);
-        }
-
-        [HttpPost]
-        public async Task<ActionResult> Update(InputInfoModel inputinfomodel, InputModel model)
-        {
-            SetViewBag();
-            if (!ModelState.IsValid)
-                return View(inputinfomodel);
-            //var inputinfos = await _inputinfoService.GetAllInputInfoById(model.Id, new );
-            var inputs = await _inputinfoService.Complete(inputinfomodel.Id, new InputInfoRequest
+            var inputinfoDto = _inputinfoService.GetInputInfoById(Id);
+            if (inputinfoDto == null)
             {
-                IdStaff = model.IdStaff,
-                IdSupplier = model.IdSupplier,
-                DateInput = model.DateInput,
-                Status = model.Status,
+                return RedirectToAction("Detail/" + Id);
+            }
+
+            var inputinfoModel = inputinfoDto.MapTo<InputInfoModel>();
+            return View(inputinfoModel);
+        }
+        [HttpPost]
+        public async Task<ActionResult> Update(InputInfoModel model)
+        {
+            var inputinfo = _inputinfoService.GetInputInfoById(model.Id);
+            if (inputinfo.Count == 0)
+                return RedirectToAction("Detail/" + model.IdInput);
+            if (!ModelState.IsValid)
+                return View(model);
+            var inputinfos = await _inputinfoService.Update(new InputInfoRequest
+            {
+                Id = model.Id,
+                IdBatch = model.IdBatch,
+                Count = model.Count,
+                InputPrice = model.InputPrice,
+                Total = model.Total,
+                DueDate = model.DueDate
 
             });
-            if (!inputs.Success)
-            {
-                ErrorNotification("Thêm mới không thành công");
-                return View(inputinfomodel);
-            }
-            SuccessNotification("Thêm mới thành công");
-            return RedirectToAction("../Input/Complete");
+            SuccessNotification("Chỉnh sửa thông tin chương trình thành công");
+            return RedirectToAction("Update", new { id = model.IdInput });
         }
     }
 }
