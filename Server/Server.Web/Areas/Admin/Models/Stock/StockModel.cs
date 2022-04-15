@@ -11,5 +11,6 @@ namespace Phoenix.Server.Web.Areas.Admin.Models.Stock
         public int IdStaff { get; set; }
         public DateTime Date { get; set; }
         public string Note { get; set; }
+        public string TableContent { get; set; }
     }
 }

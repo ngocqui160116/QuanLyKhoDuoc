@@ -24,6 +24,7 @@ namespace Phoenix.Server.Services.MainServices
 
         /// 
         Task<BaseResponse<StockInfoDto>> GetAll(StockInfoRequest request);
+        StockInfo GetLatestStockInfo();
     }
     public class StockInfoService : IStockInfoService
     {
@@ -84,6 +85,13 @@ namespace Phoenix.Server.Services.MainServices
 
             return result;
         }
-       
+        public StockInfo GetLatestStockInfo()
+        {
+            var query = _dataContext.StockInfos.AsQueryable();
+
+            query = query.OrderByDescending(d => d.Id);
+            var da = query.FirstOrDefault();
+            return da;
+        }
     }
 }

@@ -198,7 +198,7 @@ namespace Phoenix.Server.Services.MainServices
                     _dataContext.OutputInfos.Add(outputinfos);
                     await _dataContext.SaveChangesAsync();
                     //cập nhật số lượng xuất vào kho
-                    var inventories = _inventoryService.GetToOutput();
+                    var inventories = _inventoryService.GetListInventory();
                     foreach (var i in inventories)
                     {
                         if(i.IdMedicine == item.medicineId && i.LotNumber == item.LotNumber)

@@ -1,4 +1,5 @@
 ﻿using Falcon.Web.Framework.Kendoui;
+using Newtonsoft.Json;
 using Phoenix.Server.Services.Database;
 using Phoenix.Server.Services.MainServices;
 using Phoenix.Server.Web.Areas.Admin.Models.Stock;
@@ -63,18 +64,18 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(OutputModel model)
+        public async Task<ActionResult> Create(StockModel model)
         {
             SetViewBag();
             if (!ModelState.IsValid)
                 return View(model);
-            var inputs = await _outputService.Create(new OutputRequest
+            var inputs = await _stockService.Create(new StockRequest
             {
                 IdStaff = model.IdStaff,
-                IdReason = model.IdReason,
-                DateOutput = DateTime.Now,
+                Date = DateTime.Now,
+                Note = model.Note,
 
-                List = JsonConvert.DeserializeObject<List<OutputContentDto>>(model.TableContent)
+                List = JsonConvert.DeserializeObject<List<StockContentDto>>(model.TableContent)
 
             });
             if (!inputs.Success)
