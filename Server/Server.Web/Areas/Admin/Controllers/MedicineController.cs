@@ -36,8 +36,8 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
             {
                 Page = command.Page - 1,
                 PageSize = command.PageSize,
-                IdGroup = model.IdGroup,
-                IdUnit = model.IdUnit
+                RegistrationNumber = model.RegistrationNumber,
+                Name = model.Name
             });
 
             var gridModel = new DataSourceResult

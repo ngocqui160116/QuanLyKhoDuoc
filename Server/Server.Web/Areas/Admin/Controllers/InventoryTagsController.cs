@@ -37,7 +37,7 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
             var inputs = await _inventorytagsService.GetAll(new InventoryTagsRequest()
             {
                 Page = command.Page - 1,
-                PageSize = command.PageSize
+                PageSize = command.PageSize,
             });
 
             var gridModel = new DataSourceResult

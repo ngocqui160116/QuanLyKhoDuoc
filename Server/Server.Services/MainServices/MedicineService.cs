@@ -55,7 +55,6 @@ namespace Phoenix.Server.Services.MainServices
                 {
                     query = query.Where(d => d.RegistrationNumber.Contains(request.RegistrationNumber));
                 }
-
                 if (!string.IsNullOrEmpty(request.Status))
                 {
                     query = query.Where(d => d.Status.Contains(request.Status));
@@ -151,11 +150,6 @@ namespace Phoenix.Server.Services.MainServices
                 if (!string.IsNullOrEmpty(request.RegistrationNumber))
                 {
                     query = query.Where(d => d.RegistrationNumber.Contains(request.RegistrationNumber));
-                }
-
-                if (!string.IsNullOrEmpty(request.Status))
-                {
-                    query = query.Where(d => d.Status.Contains(request.Status));
                 }
                 //if (request.Status.ToString() == "đang bán")
                 /*if(request.Status.Contains(request.Status)

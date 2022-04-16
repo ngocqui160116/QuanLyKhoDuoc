@@ -312,7 +312,7 @@ namespace Phoenix.Server.Services.MainServices
                 // setup query
                 var query = _dataContext.Inputs.AsQueryable();
 
-                if (request.Status == "Đã lưu")
+                if (request.Status == "Chờ duyệt")
                 {
                     query = query.Where(d => d.Status.Equals(request.Status));
                 }

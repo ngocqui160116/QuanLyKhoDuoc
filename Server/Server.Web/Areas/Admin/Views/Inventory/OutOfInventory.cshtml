@@ -11,13 +11,13 @@
         <span>Chương trình</span> <i data-feather="chevron-right" class="breadcrumb__icon"></i>
         <a href="#" class="breadcrumb--active">Quản lý kho</a><i data-feather="chevron-right" class="breadcrumb__icon"></i>
         <a href="#" class="breadcrumb--active">Cảnh báo</a><i data-feather="chevron-right" class="breadcrumb__icon"></i>
-        <a href="#" class="breadcrumb--active">Danh sách thuốc cần nhập</a>
+        <a href="#" class="breadcrumb--active">Thuốc sắp hết trong kho</a>
     </div>
 }
 @Html.AntiForgeryToken()
 <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
     <h2 class="text-lg font-medium mr-auto">
-        Thuốc sắp hết trong kho
+        Danh sách thuốc cần nhập
     </h2>
     <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
         <a href="@Url.Action("Create","Medicine")" class="btn btn-primary text-white shadow-md mr-2">Thêm mới</a>
