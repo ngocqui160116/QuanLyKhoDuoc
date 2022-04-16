@@ -23,5 +23,6 @@ namespace Phoenix.Shared.MedicineItem
         public string UnitName { get; set; }
         public int? Inventory_Id { get; set; }
         public int Amount { get; set; }
+        public int Modify { get; set; }
     }
 }

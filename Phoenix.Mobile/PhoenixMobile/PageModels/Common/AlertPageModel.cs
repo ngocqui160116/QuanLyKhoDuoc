@@ -26,25 +26,5 @@ namespace Phoenix.Mobile.PageModels.Common
             //TestString = "hello world";
         }
 
-        #region Declaration         
-        private string _mobilenumber = null;
-        private int _limit = 8;
-        #endregion
-        public string MobileNumber
-        {
-            get { return _mobilenumber; }
-            set
-            {
-                _mobilenumber = value;
-                TextChangedCommand.Execute(_mobilenumber);
-            }
-        }
-        public Command TextChangedCommand => new Command<string>(async (_mobilenumber) => await TextChanged(_mobilenumber));
-
-        private async Task TextChanged(string p)
-        {
-            if (p.Length >= _limit)
-                await CoreMethods.DisplayAlert("Your Bill amount ", "Info", "OK");
-        }
     }
 }

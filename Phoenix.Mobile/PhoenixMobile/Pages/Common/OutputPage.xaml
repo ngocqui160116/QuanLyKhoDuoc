@@ -73,7 +73,7 @@
                                            HorizontalOptions="EndAndExpand"
                                            TextColor="ForestGreen"
                                            FontAttributes="Bold"
-                                           Margin="2"
+                                           Margin="2"ipconf
                                            FontSize="Small" />-->
                                 </StackLayout>
 

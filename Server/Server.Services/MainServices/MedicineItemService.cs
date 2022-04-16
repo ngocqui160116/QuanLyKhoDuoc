@@ -45,32 +45,70 @@ namespace Phoenix.Server.Services.MainServices
             var result = new BaseResponse<MedicineItemDto>();
             try
             {
-                var query = (from c in _dataContext.MedicineItems
-                             join s in _dataContext.Medicines on c.Medicine_Id equals s.IdMedicine
-                             
-                             select new
-                             {
-                                 Id = c.Id,
-                                 MedicineId = s.IdMedicine,
-                                 MedicineName = s.Name,
-                                 Batch = c.Batch,
-                                 Count = c.Count,
-                                 InputPrice = c.InputPrice,
-                                 Total = c.Count * c.InputPrice,
-                                 DueDate = c.DueDate,
-                                 UnitName = s.Unit.Name,
-                                 Inventory_Id = c.Inventory_Id,
-                                 Amount = c.Amount
-                             }).AsQueryable();
 
-                var config = new MapperConfiguration(cfg => cfg.CreateMissingTypeMaps = true);
-                var mapper = config.CreateMapper();
-                var listcart = query.Select(mapper.Map<MedicineItemDto>).ToList();
+                var me = _dataContext.MedicineItems.AsQueryable();
+                if (request.Count < request.Amount)
+                {
+                    var query = (from c in _dataContext.MedicineItems
+                                 join s in _dataContext.Medicines on c.Medicine_Id equals s.IdMedicine
 
-                //var data = await query.ToListAsync();
+                                 select new
+                                 {
+                                     Id = c.Id,
+                                     MedicineId = s.IdMedicine,
+                                     MedicineName = s.Name,
+                                     Batch = c.Batch,
+                                     Count = c.Count,
+                                     InputPrice = c.InputPrice,
+                                     Total = c.Count * c.InputPrice,
+                                     DueDate = c.DueDate,
+                                     UnitName = s.Unit.Name,
+                                     Inventory_Id = c.Inventory_Id,
+                                     Amount = c.Amount,
+                                     Modify = c.Amount - c.Count
+                                 });
+                    var config = new MapperConfiguration(cfg => cfg.CreateMissingTypeMaps = true);
+                    var mapper = config.CreateMapper();
+                    var listcart = query.Select(mapper.Map<MedicineItemDto>).ToList();
 
-                //result.Data = data.MapTo<MedicineItemDto>();
-                result.Data = listcart.MapTo<MedicineItemDto>();
+                    //var data = await query.ToListAsync();
+
+                    //result.Data = data.MapTo<MedicineItemDto>();
+                    result.Data = listcart.MapTo<MedicineItemDto>();
+                }
+                else
+                {
+                    var query = (from c in _dataContext.MedicineItems
+                                 join s in _dataContext.Medicines on c.Medicine_Id equals s.IdMedicine
+
+                                 select new
+                                 {
+                                     Id = c.Id,
+                                     MedicineId = s.IdMedicine,
+                                     MedicineName = s.Name,
+                                     Batch = c.Batch,
+                                     Count = c.Count,
+                                     InputPrice = c.InputPrice,
+                                     Total = c.Count * c.InputPrice,
+                                     DueDate = c.DueDate,
+                                     UnitName = s.Unit.Name,
+                                     Inventory_Id = c.Inventory_Id,
+                                     Amount = c.Amount,
+                                     Modify = c.Amount - c.Count
+                                 });
+
+                    var config = new MapperConfiguration(cfg => cfg.CreateMissingTypeMaps = true);
+                    var mapper = config.CreateMapper();
+                    var listcart = query.Select(mapper.Map<MedicineItemDto>).ToList();
+
+                    //var data = await query.ToListAsync();
+
+                    //result.Data = data.MapTo<MedicineItemDto>();
+                    result.Data = listcart.MapTo<MedicineItemDto>();
+                }
+
+
+                  
 
             }
             catch (Exception ex)

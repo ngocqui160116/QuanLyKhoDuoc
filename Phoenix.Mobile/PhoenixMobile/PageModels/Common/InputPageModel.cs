@@ -45,6 +45,8 @@ namespace Phoenix.Mobile.PageModels.Common
 
         private async Task LoadData()
         {
+             mau = Color.Red;
+
             var data = await _InputService.GetAllInput(request);
             if (data == null)
             {
@@ -64,6 +66,7 @@ namespace Phoenix.Mobile.PageModels.Common
         public List<InputModel> Inputs { get; set; } = new List<InputModel>();
         public InputRequest request { get; set; } = new InputRequest();
         public string Id { get; set; }
+        public Color mau { get; set; }
         public DateTime DateInput { get; set; }
         #endregion
 

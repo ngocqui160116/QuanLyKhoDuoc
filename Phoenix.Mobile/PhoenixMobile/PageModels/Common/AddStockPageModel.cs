@@ -44,6 +44,7 @@ namespace Phoenix.Mobile.PageModels.Common
 
         private async Task LoadData()
         {
+           
 
             #region MedicineItem
             var data2 = await _medicineItemService.GetAllMedicineItem(MedicineItemRequest);
@@ -57,6 +58,8 @@ namespace Phoenix.Mobile.PageModels.Common
                 RaisePropertyChanged(nameof(MedicineItems));
             }
             #endregion
+
+
 
 
             #region Staff
