@@ -56,6 +56,32 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
             ViewBag.IdSupplier = new SelectList(db.Suppliers.OrderBy(n => n.Name), "IdSupplier", "Name", selectedId);
             ViewBag.IdMedicine = new SelectList(db.Medicines.OrderBy(n => n.Name), "IdMedicine", "Name", selectedId);
         }
+        public ActionResult Detail(int MedicineId, int LotNumber)
+        {
+            //DataContext db = new DataContext();
+            //var inputinfo = db.InputInfos.Where(n => n.IdInput.Equals(Id)).ToList();
+            var model = new InventoryTagsModel();
+            model.Id = MedicineId;
+            model.MedicineId = MedicineId;
+            model.LotNumber = LotNumber;
+            return View(model);
+        }
 
+        [HttpPost]
+        public async Task<ActionResult> Detail(DataSourceRequest command, InventoryTagsModel model)
+        {
+            var inventorytags = await _inventorytagsService.GetAllInventoryTagsById(21,10, new InventoryTagsRequest()
+            {
+                Page = command.Page - 1,
+                PageSize = command.PageSize
+            });
+
+            var gridModel = new DataSourceResult
+            {
+                Data = inventorytags.Data,
+                Total = inventorytags.DataCount
+            };
+            return Json(gridModel);
+        }
     }
 }

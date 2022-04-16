@@ -1,7 +1,5 @@
 ﻿@using Phoenix.Server.Services.Database;
-@model Phoenix.Server.Web.Areas.Admin.Models.Inventory.InventoryModel
-@Html.ValidationSummary(true)
-@Html.HiddenFor(model => model.Id)
+
 @section Scripts{
     <script type="text/javascript" src="~/assets/js/tabulator.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
@@ -9,24 +7,24 @@
 @section Breadcrumb{
     <div class="-intro-x breadcrumb mr-auto hidden sm:flex">
         <span>Chương trình</span> <i data-feather="chevron-right" class="breadcrumb__icon"></i>
-        <a href="#" class="breadcrumb--active">Quản lý kho</a><i data-feather="chevron-right" class="breadcrumb__icon"></i>
-        <a href="#" class="breadcrumb--active">Tồn kho</a>
+        <a href="#" class="breadcrumb--active">Tồn kho</a><i data-feather="chevron-right" class="breadcrumb__icon"></i>
+        <a href="#" class="breadcrumb--active">Thẻ kho</a>
     </div>
 }
 @Html.AntiForgeryToken()
 <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
     <h2 class="text-lg font-medium mr-auto">
-        Thuốc
+        Thẻ kho
     </h2>
     <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
-        <a href="@Url.Action("Create","Medicine")" class="btn btn-primary text-white shadow-md mr-2">Thêm mới</a>
+        <a href="@Url.Action("Saved","Input")" class="btn btn-primary text-white shadow-md mr-2">Quay lại</a>
     </div>
 </div>
 <div class="grid gap-6 mt-5">
     <div class="intro-y box p-5">
         <div class="grid grid-cols-12 gap-2">
             <div class="col-span-12 lg:col-span-6">
-                <label>Thuốc</label>
+                <label>Hóa đơn nhập</label>
                 <input type="text" id="Name" class="form-control">
             </div>
         </div>
@@ -52,10 +50,10 @@
         }
         var table = new Tabulator("#main-grid", {
             layout: "fitDataFill",
-            ajaxURL: "@Html.Raw(Url.Action("List", "Inventory"))",
+            ajaxURL: "@Html.Raw(Url.Action("Detail", "InventoryTags"))",
             ajaxConfig: "post",
             ajaxRequesting: function (url, params) {
-                params.Name = $('#Name').val();
+                params.Name = $('#MedicineName').val();
             },
             ajaxResponse: function (url, params, response) {
                 return response;
@@ -74,15 +72,23 @@
             },
             placeholder: "Chưa có dữ liệu",
             columns: [
-                { title: "Mã", field: "Id", sorter: "string", width: 120 },
+                { title: "Mã hóa đơn", field: "Id", sorter: "string", width: 150 },
                 {
-                    title: "Tên thuốc", field: "MedicineName", sorter: "string", width: 280 , formatter(cell, formatterParams) {
-                        return `<a href="../Admin/InventoryTags/Detail?MedicineId=${cell.getData().IdMedicine}&LotNumber=${cell.getData().LotNumber}" class="text-theme-1 dark:text-theme-10"> ${cell.getData().NameStaff}</a>`
+                    title: "Tên thuốc", field: "MedicineName", sorter: "string", width: 200, formatter(cell, formatterParams)
+                    {
+                        return `<a href="../Update/${cell.getData().Id}" class="text-theme-1 dark:text-theme-10"> ${cell.getData().MedicineName}</a>`
                     }
                 },
-                { title: "Số lượng tồn", field: "Count", sorter: "string", width: 200 },
-                { title: "Số lô", field: "LotNumber", sorter: "string", width: 200 },
-                { title: "Giá", field: "UnitPrice", sorter: "string", width: 200 },
+                { title: "Số lô", field: "IdBatch", sorter: "string", width: 130 },
+                { title: "Số lượng", field: "Count", sorter: "string", width: 130 },
+                { title: "Giá nhập", field: "InputPrice", sorter: "string", width: 150 },
+                { title: "Tổng tiển", field: "Total", sorter: "string", width: 150 },
+                { title: "Hạn sử dụng", field: "DueDate", sorter: "date", width: 180, formatter: dateFormatter },
+                {
+                    title: "", field: "IdInputInfo", sorter: "string", width: 80, formatter(cell, formatterParams) {
+                        return `<a href="../Admin/InputInfo/Update/${cell.getData().Id}" class="btn btn-primary text-white shadow-md mr-2">Sửa</a>`
+                    }
+                }
                 @*{
                     title: "Ngày tạo", field: "CreatedAt", sorter: "date", width: 180, formatter: dateFormatter
                 },
@@ -95,9 +101,8 @@
             table.setData();
         }
         let onResetSearch = (e) => {
-            $('#Name').val('');
+            $('#MedicineName').val('');
             table.setData();
         }
     </script>
 </div>
-
