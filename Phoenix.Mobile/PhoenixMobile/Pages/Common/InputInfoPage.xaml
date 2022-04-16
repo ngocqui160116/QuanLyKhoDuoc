@@ -84,6 +84,19 @@
                                 Text="{Binding NameStaff}"
                                 WidthRequest="200"                         
                                 Keyboard="Text"/>
+                        
+                        <Label  Grid.Row="5"
+                                Grid.Column="0" 
+                                Margin="10,5,0,0" 
+                                WidthRequest="100" 
+                                FontSize="Medium" 
+                                Text="Trạng thái"/>
+                        <Entry  Grid.Row="5"
+                                Grid.Column="1"
+                                Text="{Binding Status}"
+                                TextColor="{Binding color}"
+                                WidthRequest="200"                         
+                                Keyboard="Text"/>
                     </Grid>
                 </StackLayout>
 
@@ -143,17 +156,13 @@
                                             </StackLayout>
                                             <StackLayout Orientation="Horizontal">
                                                 <Label Text="Số lượng:"
-                                                       Margin="0,2,8,4"
+                                                       Margin="8,2,5,4"
                                                        FontSize="Small"/>
                                                 <Label Text="{Binding Count}"
                                                        Margin="2,2,8,4"
                                                        FontSize="Small"
                                                        FontAttributes="Bold"
                                                        TextColor="Red"/>
-                                                <Label Text="/"
-                                                       Margin="0,2,0,4"
-                                                       FontSize="Small"
-                                                       TextColor="Black"/>
                                                 <Label Text="{Binding UnitName}"
                                                        Margin="2,2,8,4"
                                                        FontSize="Small"

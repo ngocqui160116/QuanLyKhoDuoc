@@ -100,6 +100,7 @@
                                                             <Label Grid.Column="6"  
                                                                    Text="{Binding Modify}"
                                                                    FontSize="Small"
+                                                                   Margin="2,2,8,4"
                                                                    TextColor="Red"
                                                                    FontAttributes="Bold"
                                                                    HorizontalOptions="EndAndExpand"

@@ -61,10 +61,19 @@ namespace Phoenix.Mobile.PageModels.Common
 #endif
             IsBusy = false;
 
-            if(Status == "Đã lưu")
+            if(Status == "Chờ duyệt")
             {
                 IsEnabled = true;
-            }    
+                color = Color.Black;
+            }
+            else if(Status == "Đã hủy")
+            {
+                color = Color.Red;
+            }
+            else
+            {
+                color = Color.ForestGreen;
+            }
 
         }
 

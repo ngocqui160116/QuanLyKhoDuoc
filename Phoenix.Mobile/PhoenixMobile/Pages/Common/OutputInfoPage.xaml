@@ -141,7 +141,7 @@
                                                        FontSize="15" />
 
                                                 <Label Text="Số lượng:"
-                                                       Margin="0,2,8,4"
+                                                       Margin="8,2,8,4"
                                                        FontSize="Small" />
                                                 <Label Text="{Binding Count}"
                                                        Margin="2,2,8,4"
@@ -151,7 +151,7 @@
                                             </StackLayout>
                                             <StackLayout Orientation="Horizontal">
                                                 <Label Text="Giá:"
-                                                       Margin="0,2,0,4"
+                                                       Margin="8,2,0,4"
                                                        FontSize="Small"
                                                        TextColor="Black"/>
                                                 <Label Text="{Binding Total, StringFormat='{0:#,##0} đ'}"

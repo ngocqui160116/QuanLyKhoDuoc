@@ -99,15 +99,14 @@ namespace Phoenix.Server.Services.MainServices
                     outputinfos.IdOutput = Latest.Id;
                     outputinfos.IdMedicine = item.Medicine_Id;
                     outputinfos.Count = item.Amount;
-                    if (request.IdReason == 2)
-                    {
-                        outputinfos.OutputPrice = item.InputPrice;
-                    }
-                    else
+                    if (request.IdReason == 3 || request.IdReason == 4)
                     {
                         outputinfos.OutputPrice = 0;
                     }
-                    outputinfos.OutputPrice = item.InputPrice;
+                    else
+                    {
+                        outputinfos.OutputPrice = item.InputPrice;
+                    }
                     outputinfos.Total = outputinfos.Count * outputinfos.OutputPrice;
                     outputinfos.Inventory_Id = item.Inventory_Id;
 

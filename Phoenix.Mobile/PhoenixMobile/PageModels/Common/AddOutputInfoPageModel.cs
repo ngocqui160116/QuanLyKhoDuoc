@@ -36,7 +36,7 @@ namespace Phoenix.Mobile.PageModels.Common
                 MedicineItem = new MedicineItemModel();
             }
             NavigationPage.SetHasNavigationBar(CurrentPage, false);
-            CurrentPage.Title = "Nhập thông tin phiếu nhập";
+            CurrentPage.Title = "Nhập thông tin phiếu xuất";
         }
         protected override async void ViewIsAppearing(object sender, EventArgs e)
         {
@@ -70,7 +70,7 @@ namespace Phoenix.Mobile.PageModels.Common
             NameMedicine = MedicineItem.MedicineName;
             IdBatch = MedicineItem.Batch;
             Count = MedicineItem.Count;
-            InputPrice = MedicineItem.InputPrice;
+            OutputPrice = MedicineItem.InputPrice;
             HSD = MedicineItem.DueDate;
             Total = MedicineItem.Total;
             Amount = MedicineItem.Amount;
@@ -87,7 +87,7 @@ namespace Phoenix.Mobile.PageModels.Common
         public DateTime HSD { get; set; } = DateTime.Now;
         public int Count { get; set; }
         public int Amount { get; set; }
-        public double InputPrice { get; set; }
+        public double OutputPrice { get; set; }
         public double Total { get; set; }
         public string NameUnit { get; set; }
         public string SDK { get; set; }
@@ -111,7 +111,7 @@ namespace Phoenix.Mobile.PageModels.Common
                     Medicine_Id = IdMedicine,
                     Batch = IdBatch,
                     DueDate = HSD,
-                    InputPrice = InputPrice,
+                    InputPrice = OutputPrice,
                     Amount = Amount
                 });
                 await CoreMethods.PushPageModel<AddOutputPageModel>();

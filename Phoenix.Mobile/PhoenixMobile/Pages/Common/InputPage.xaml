@@ -13,7 +13,7 @@
              ControlTemplate="{StaticResource FullScreenHasBack}">
     <ContentPage.Content>
         <StackLayout >
-            <StackLayout Orientation="Horizontal">
+            <StackLayout Orientation="Horizontal" x:Name="root">
                 <SearchBar x:Name="searchBar" 
                            WidthRequest="420" 
                            HorizontalOptions="Fill"
@@ -54,7 +54,7 @@
                                            FontSize="Medium" />
                                     <Label Text="{Binding Status}"
                                            HorizontalOptions="EndAndExpand"
-                                           TextColor="ForestGreen"
+                                           TextColor="{Binding Source={x:Reference root}, Path=BindingContext.color}"
                                            FontAttributes="Bold"
                                            Margin="2"
                                            FontSize="Small" />

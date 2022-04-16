@@ -111,7 +111,7 @@
                                                                        TextColor="Red"/>
                                                             </StackLayout>
                                                             <StackLayout Orientation="Horizontal">
-                                                                <Label Text="Giá:"
+                                                                <Label Text="Giá nhập:"
                                                                        Margin="0,0,10,0"
                                                                        FontSize="Small"
                                                                        TextColor="Black"/>
@@ -169,7 +169,19 @@
                             <ColumnDefinition Width="0.3*"/>
                             <ColumnDefinition Width="0.7*"/>
                         </Grid.ColumnDefinitions>
-
+                        <Label  Grid.Row="1"
+                                Grid.Column="0" 
+                                Margin="10,5,0,0"                               
+                                WidthRequest="100" 
+                                FontSize="Medium" 
+                                Text="Giá"/>
+                        <Entry  Grid.Row="1"
+                                Grid.Column="1"
+                                TextColor="Black"
+                                Text="{Binding OutputPrice}"
+                                Placeholder="Nhập giá"
+                                WidthRequest="200"
+                                Keyboard="Numeric"/>
                         <Label  Grid.Row="2"
                                 Grid.Column="0" 
                                 Margin="10,5,0,0"                               
@@ -179,8 +191,8 @@
                         <Entry  Grid.Row="2"
                                 Grid.Column="1"
                                 TextColor="Black"
+                                Placeholder="Nhập số lượng"
                                 Text="{Binding Amount}"
-                                Placeholder="Số lượng"
                                 WidthRequest="200"
                                 Keyboard="Numeric"/>
                     </Grid>

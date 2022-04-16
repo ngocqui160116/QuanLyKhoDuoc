@@ -45,7 +45,7 @@ namespace Phoenix.Mobile.PageModels.Common
 
         private async Task LoadData()
         {
-             mau = Color.Red;
+            
 
             var data = await _InputService.GetAllInput(request);
             if (data == null)
@@ -60,13 +60,29 @@ namespace Phoenix.Mobile.PageModels.Common
                 RaisePropertyChanged(nameof(Inputs));
             }
 
+            //foreach (var item in Inputs)
+            //{
+            //    if (item.Status == "Chờ duyệt")
+            //    {
+            //        color = Color.Black;
+            //    }
+            //    else if (item.Status == "Đã hủy")
+            //    {
+            //        color = Color.Red;
+            //    }
+            //    else
+            //    {
+            //        color = Color.ForestGreen;
+            //    }
+            //}    
+
         }
 
         #region properties
         public List<InputModel> Inputs { get; set; } = new List<InputModel>();
         public InputRequest request { get; set; } = new InputRequest();
-        public string Id { get; set; }
-        public Color mau { get; set; }
+        public string Status { get; set; }
+        public Color color { get; set; }
         public DateTime DateInput { get; set; }
         #endregion
 
