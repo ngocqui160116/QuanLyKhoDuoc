@@ -54,7 +54,7 @@
                                            FontSize="Medium" />
                                     <Label Text="{Binding Status}"
                                            HorizontalOptions="EndAndExpand"
-                                           TextColor="Red"
+                                           TextColor="ForestGreen"
                                            FontAttributes="Bold"
                                            Margin="2"
                                            FontSize="Small" />
@@ -67,7 +67,7 @@
                                     <controls:CustomDatePicker  
                                            Format="dd/MM/yyyy"
                                            Date="{Binding DateInput}"
-                                           TextColor="ForestGreen"
+                                           TextColor="Black"
                                            HorizontalOptions="EndAndExpand"
                                            Margin="2"
                                            FontSize="15" />

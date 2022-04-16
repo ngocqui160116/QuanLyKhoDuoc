@@ -99,7 +99,16 @@ namespace Phoenix.Server.Services.MainServices
                     outputinfos.IdOutput = Latest.Id;
                     outputinfos.IdMedicine = item.Medicine_Id;
                     outputinfos.Count = item.Amount;
-                    outputinfos.Total = item.Amount * item.InputPrice;
+                    if (request.IdReason == 2)
+                    {
+                        outputinfos.OutputPrice = item.InputPrice;
+                    }
+                    else
+                    {
+                        outputinfos.OutputPrice = 0;
+                    }
+                    outputinfos.OutputPrice = item.InputPrice;
+                    outputinfos.Total = outputinfos.Count * outputinfos.OutputPrice;
                     outputinfos.Inventory_Id = item.Inventory_Id;
 
                     _dataContext.OutputInfos.Add(outputinfos);
@@ -131,14 +140,23 @@ namespace Phoenix.Server.Services.MainServices
                         InventoryTags inventoryTags = new InventoryTags();
                         inventoryTags.DocumentId = "PX00" + item.Id;
                         inventoryTags.DocumentDate = DateTime.Now;
-                        inventoryTags.DocumentType = 2;
+                        inventoryTags.DocumentType = request.IdReason;
                         inventoryTags.MedicineId = item.IdMedicine;
                         inventoryTags.LotNumber = (int)item.Inventory.LotNumber;
                         inventoryTags.ExpiredDate = DateTime.Now;
                         inventoryTags.Qty_Before = 0;
                         inventoryTags.Qty = item.Count;
                         inventoryTags.Qty_After = inventory.Count;
-                        inventoryTags.UnitPrice = item.Inventory.UnitPrice;
+
+                        if(request.IdReason == 2)
+                        {
+                            inventoryTags.UnitPrice = item.OutputPrice;
+                        }    
+                        else
+                        {
+                            inventoryTags.UnitPrice = 0;
+                        }    
+                      
                         inventoryTags.TotalPrice = item.Total;
 
                         _dataContext.InventoryTags.Add(inventoryTags);

@@ -150,16 +150,12 @@
                                                        TextColor="Red"/>
                                             </StackLayout>
                                             <StackLayout Orientation="Horizontal">
-                                                <Label Text="{Binding InputPrice}"
+                                                <Label Text="Giá:"
                                                        Margin="0,2,0,4"
                                                        FontSize="Small"
                                                        TextColor="Black"/>
-                                                <Label Text="/"
-                                                       Margin="0,2,0,4"
-                                                       FontSize="Small"
-                                                       TextColor="Black"/>
-                                                <Label Text="{Binding Total}"
-                                                       Margin="2,2,8,4"
+                                                <Label Text="{Binding Total, StringFormat='{0:#,##0} đ'}"
+                                                       Margin="2,2,2,4"
                                                        FontSize="Small"
                                                        FontAttributes="Bold"
                                                        TextColor="Black"/>

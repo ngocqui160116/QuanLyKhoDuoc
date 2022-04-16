@@ -95,16 +95,9 @@
                                                                      HorizontalOptions="EndAndExpand"
                                                                      VerticalOptions="StartAndExpand">
                                                             <Label Grid.Column="6"  
-                                                                   Text="{Binding Total}"
+                                                                   Text="{Binding Total, StringFormat='{0:#,##0} đ'}"
                                                                    FontSize="Small"
-                                                                   TextColor="Red"
-                                                                   FontAttributes="Bold"
-                                                                   HorizontalOptions="EndAndExpand"
-                                                                   VerticalOptions="StartAndExpand">
-                                                            </Label>
-                                                            <Label Grid.Column="7"
-                                                                   Text=" đ"
-                                                                   FontSize="Small"
+                                                                   
                                                                    TextColor="Red"
                                                                    FontAttributes="Bold"
                                                                    HorizontalOptions="EndAndExpand"
@@ -281,7 +274,7 @@
                                    HorizontalOptions="Center"
                                    FontAttributes="Bold"
                                    TextColor="#fff"
-                                   Text="Lưu"/>
+                                   Text="Lưu tạm"/>
                         </Grid>
                     </AbsoluteLayout>
                     <AbsoluteLayout Grid.Row="0"

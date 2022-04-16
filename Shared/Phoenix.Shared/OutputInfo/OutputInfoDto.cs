@@ -13,11 +13,10 @@ namespace Phoenix.Shared.OutputInfo
         public int Count { get; set; }
         public double Total { get; set; }
         public int? Inventory_Id { get; set; }
-
+        public double OutputPrice { get; set; }
         //add
         public string MedicineName { get; set; }
         public int Batch { get; set; }
         public DateTime DueDate { get; set; }
-        public double InputPrice { get; set; }
     }
 }

@@ -89,7 +89,7 @@ namespace Phoenix.Server.Services.MainServices
                     IdStaff = request.IdStaff,
                     IdSupplier = request.IdSupplier,
                     DateInput = request.DateInput,
-                    Status = "Đã lưu"
+                    Status = "Chờ duyệt"
                 };
 
                 _dataContext.Inputs.Add(inputs);
@@ -312,7 +312,7 @@ namespace Phoenix.Server.Services.MainServices
                 // setup query
                 var query = _dataContext.Inputs.AsQueryable();
 
-                if (request.Status == "Chờ duyệt")
+                if (request.Status == "Đã lưu")
                 {
                     query = query.Where(d => d.Status.Equals(request.Status));
                 }

@@ -97,15 +97,7 @@
                                                                      HorizontalOptions="EndAndExpand"
                                                                      VerticalOptions="StartAndExpand">
                                                             <Label Grid.Column="6"  
-                                                                   Text="{Binding Total}"
-                                                                   FontSize="Small"
-                                                                   TextColor="Red"
-                                                                   FontAttributes="Bold"
-                                                                   HorizontalOptions="EndAndExpand"
-                                                                   VerticalOptions="StartAndExpand">
-                                                            </Label>
-                                                            <Label Grid.Column="7"
-                                                                   Text=" đ"
+                                                                   Text="{Binding Total, StringFormat='{0:#,##0} đ'}"
                                                                    FontSize="Small"
                                                                    TextColor="Red"
                                                                    FontAttributes="Bold"

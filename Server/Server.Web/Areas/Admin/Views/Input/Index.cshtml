@@ -30,12 +30,12 @@
     <div class="intro-y box p-5">
         <div class="grid grid-cols-12 gap-2">
             <div class="col-span-12 lg:col-span-6">
-                <label>Tên người tạo</label>
-                <input type="text" id="NameStaff" class="form-control">
+                <label>Hóa đơn</label>
+                <input type="text" id="Name" class="form-control">
             </div>
             <div class="col-span-12 lg:col-span-6">
-                <label>Nhà cung cấp</label>
-                <input type="text" id="SupplierName" class="form-control">
+                <label>Hóa đơn nhập</label>
+                <input type="text" id="NameStaff" class="form-control">
             </div>
         </div>
         <div class="grid mt-3">
@@ -63,8 +63,7 @@
             ajaxURL: "@Html.Raw(Url.Action("List", "Input"))",
             ajaxConfig: "post",
             ajaxRequesting: function (url, params) {
-                params.NameStaff = $('#NameStaff').val();
-                params.SupplierName = $('#SupplierName').val();
+                params.Name = $('#Name').val();
             },
             ajaxResponse: function (url, params, response) {
                 return response;
@@ -102,7 +101,7 @@
         }
         let onResetSearch = (e) => {
             $('#NameStaff').val('');
-            $('#SupplierName').val('');
+            $('#Name').val('');
             table.setData();
         }
     </script>

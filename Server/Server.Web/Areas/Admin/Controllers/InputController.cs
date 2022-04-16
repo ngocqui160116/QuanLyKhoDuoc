@@ -146,7 +146,7 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
         {
             var inputs = await _inputService.GetSaveInput(new InputRequest()
             {
-                Status = "Chờ duyệt",
+                Status = "Đã lưu",
                 Page = command.Page - 1,
                 PageSize = command.PageSize
             });

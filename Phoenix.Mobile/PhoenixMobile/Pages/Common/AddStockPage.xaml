@@ -90,7 +90,7 @@
                                                         </Image>
                                                         <StackLayout Orientation="Vertical"
                                                                      Grid.Column="1"
-                                                                     Margin="10,0,5,0">
+                                                                     Margin="10,0,5,0" >
                                                             <StackLayout Orientation="Horizontal">
                                                                 <Label Text="{Binding MedicineName}"
                                                                        Grid.Column="1"
@@ -125,6 +125,15 @@
                                                                        FontSize="Small"
                                                                        FontAttributes="Bold"
                                                                        TextColor="Red"/>
+                                                                <!--<Label Text="Chênh lệch:"
+                                                                       Margin="2,2,8,4"
+                                                                       FontSize="Small"
+                                                                       TextColor="Black"/>
+                                                                <Label Text="{Binding }"
+                                                                       Margin="2,2,8,4"
+                                                                       FontSize="Small"
+                                                                       FontAttributes="Bold"
+                                                                       TextColor="Black"/>-->
                                                             </StackLayout>
                                                             <StackLayout Orientation="Horizontal">
                                                                 <Label Text="Thực tế:"
@@ -144,8 +153,10 @@
                                                                        FontSize="Small"
                                                                        FontAttributes="Bold"
                                                                        TextColor="Black"/>
+                                                                
                                                             </StackLayout>
                                                         </StackLayout>
+                                                        
                                                         <StackLayout Grid.Column="5" 
                                                                      Margin="10,0,5,10"
                                                                      HorizontalOptions="EndAndExpand"

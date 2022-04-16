@@ -22,8 +22,7 @@ namespace Phoenix.Server.Data.Entity
         public virtual Inventory Inventory { get; set; }
         public int Count { get; set; }
         public double Total { get; set; }
+        public double OutputPrice { get; set; }
 
-
-      
     }
 }

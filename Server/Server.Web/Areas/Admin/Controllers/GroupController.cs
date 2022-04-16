@@ -32,8 +32,7 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
             var groups = await _groupService.GetAll(new GroupRequest()
             {
                 Page = command.Page - 1,
-                PageSize = command.PageSize,
-                Name = model.Name
+                PageSize = command.PageSize
             });
 
             var gridModel = new DataSourceResult
