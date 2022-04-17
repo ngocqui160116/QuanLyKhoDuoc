@@ -54,7 +54,7 @@
                                            FontSize="Medium" />
                                     <Label Text="{Binding Status}"
                                            HorizontalOptions="EndAndExpand"
-                                           TextColor="{Binding Source={x:Reference root}, Path=BindingContext.color}"
+                                           TextColor="ForestGreen"
                                            FontAttributes="Bold"
                                            Margin="2"
                                            FontSize="Small" />

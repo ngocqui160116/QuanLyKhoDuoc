@@ -176,7 +176,7 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                <StackLayout Margin="0,50,0,0">
+                <StackLayout Margin="0,20,0,0">
                     <Grid>
                         <AbsoluteLayout Grid.Row="0"
                                         Grid.Column="0" 
