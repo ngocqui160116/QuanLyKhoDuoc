@@ -20,7 +20,7 @@
                                HeightRequest="150"
                                HorizontalOptions="Center"
                                Margin="0,20,0,10"/>
-            <Label Text="Happy Care" 
+            <Label Text="NQ Medicine" 
                    FontSize="30"
                    HorizontalOptions="Center"
                    TextColor="{StaticResource TitleTextColor}"/>
