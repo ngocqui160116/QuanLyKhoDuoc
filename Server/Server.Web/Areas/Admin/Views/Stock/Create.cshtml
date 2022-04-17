@@ -1,7 +1,15 @@
-﻿@model Phoenix.Server.Web.Areas.Admin.Models.Output.OutputModel
+﻿@model Phoenix.Server.Web.Areas.Admin.Models.Stock.StockModel
 
 @using (Html.BeginForm())
 {
+    @section Breadcrumb{
+        <div class="-intro-x breadcrumb mr-auto hidden sm:flex">
+            <span>Chương trình</span> <i data-feather="chevron-right" class="breadcrumb__icon"></i>
+            <a href="#" class="breadcrumb--active">Quản lý kho</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i>
+            <a href="#" class="breadcrumb--active">Kiểm kho</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i>
+            <a href="#" class="breadcrumb--active">Thêm phiếu kiểm kho</a>
+        </div>
+    }
     @Html.AntiForgeryToken()
     <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
         <h2 class="text-lg font-medium mr-auto">
@@ -19,6 +27,7 @@
         </div>
     </div>
     @Html.Partial("_CreateOrUpdate", Model)
+
 }
 
 <div id="cancel-modal" class="modal" tabindex="-1" aria-hidden="true">

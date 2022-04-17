@@ -105,7 +105,7 @@ namespace Phoenix.Server.Services.MainServices
             var result = new BaseResponse<StockDto>();
             try
             {
-                //thêm hóa đơn xuất
+                //thêm phiếu kiểm kho
                 Stock stocks = new Stock
                 {
                     IdStaff = request.IdStaff,
@@ -117,27 +117,11 @@ namespace Phoenix.Server.Services.MainServices
                 await _dataContext.SaveChangesAsync();
 
                 var LatestStock = GetLatestStock();
-                //thêm chi tiết phiếu kiểm kho
-                StockInfo stockinfos = new StockInfo();
+                
                 foreach (var item in request.List)
                 {
-                    stockinfos.Stock_Id = LatestStock.Id;
-                    stockinfos.Medicine_Id = item.medicineId;
-                    stockinfos.ActualAmount = item.ActualAmount;
+                    
 
-                    _dataContext.StockInfos.Add(stockinfos);
-                    await _dataContext.SaveChangesAsync();
-
-                    //cập nhật số lượng thực vào kho
-                    var inventories = _inventoryService.GetListInventory();
-                    foreach (var i in inventories)
-                    {
-                        if (i.IdMedicine == item.medicineId && i.LotNumber == item.LotNumber)
-                        {
-                            i.Count = item.ActualAmount;
-                            await _dataContext.SaveChangesAsync();
-                        }
-                    }
 
                     //thêm thẻ kho
                     var LatestStockInfo = _stockinfoService.GetLatestStockInfo();
@@ -147,9 +131,31 @@ namespace Phoenix.Server.Services.MainServices
                     inventoryTags.DocumentType = 5;
                     inventoryTags.MedicineId = item.medicineId;
                     inventoryTags.LotNumber = item.LotNumber;
-                    inventoryTags.Qty = item.ActualAmount;
+                    inventoryTags.Qty = item.Count;
                     _dataContext.InventoryTags.Add(inventoryTags);
                     await _dataContext.SaveChangesAsync();
+
+                    //cập nhật số lượng thực vào kho
+                    var inventories = _inventoryService.GetListInventory();
+                    foreach (var i in inventories)
+                    {
+                        if (i.IdMedicine == item.medicineId && i.LotNumber == item.LotNumber)
+                        {
+                            i.Count = item.Count;
+                            await _dataContext.SaveChangesAsync();
+
+                            //thêm chi tiết phiếu kiểm kho
+                            StockInfo stockinfos = new StockInfo();
+                            stockinfos.Stock_Id = LatestStock.Id;
+                            stockinfos.Medicine_Id = item.medicineId;
+                            stockinfos.ActualAmount = item.Count;
+                            stockinfos.Inventory_Id = i.Id;
+                            _dataContext.StockInfos.Add(stockinfos);
+                            await _dataContext.SaveChangesAsync();
+                        }
+                    }
+
+                    
 
                 }
                 result.Success = true;

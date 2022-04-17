@@ -8,19 +8,18 @@
     <div class="-intro-x breadcrumb mr-auto hidden sm:flex">
         <span>Chương trình</span> <i data-feather="chevron-right" class="breadcrumb__icon"></i>
         <a href="#" class="breadcrumb--active">Quản lý kho</a><i data-feather="chevron-right" class="breadcrumb__icon"></i>
-        <a href="#" class="breadcrumb--active">Xuất kho</a><i data-feather="chevron-right" class="breadcrumb__icon"></i>
-        <a href="#" class="breadcrumb--active">Chi tiết phiếu xuất</a>
+        <a href="#" class="breadcrumb--active">Nhập kho</a><i data-feather="chevron-right" class="breadcrumb__icon"></i>
+        <a href="#" class="breadcrumb--active">Danh sách phiếu nhập đã lưu</a><i data-feather="chevron-right" class="breadcrumb__icon"></i>
+        <a href="#" class="breadcrumb--active">Chi tiết phiếu nhập</a>
     </div>
 }
 @Html.AntiForgeryToken()
 <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
     <h2 class="text-lg font-medium mr-auto">
-        Chi tiết phiếu xuất @Model.Id
+        Chi tiết phiếu nhập
     </h2>
     <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
-        <a href="@Url.Action("Index","Output")" class="btn btn-warning text-white shadow-md mr-2">
-        <i  data-feather="skip-back"></i>
-        Quay lại</a>
+        <a href="@Url.Action("Index","Input")" class="btn btn-primary text-white shadow-md mr-2">Quay lại</a>
     </div>
 </div>
 @*<div class="grid gap-6 mt-5">
@@ -61,7 +60,7 @@
         }
         var table = new Tabulator("#main-grid", {
             layout: "fitDataFill",
-            ajaxURL: "@Html.Raw(Url.Action("Detail", "OutputInfo"))",
+            ajaxURL: "@Html.Raw(Url.Action("DetailInput", "InputInfo"))",
             ajaxConfig: "post",
             ajaxRequesting: function (url, params) {
                 params.Name = $('#MedicineName').val();
@@ -83,10 +82,13 @@
             },
             placeholder: "Chưa có dữ liệu",
             columns: [
-                { title: "Mã chi tiết phiếu", field: "Id", sorter: "string", width: 180 },
-                { title: "Tên thuốc", field: "MedicineName", sorter: "string", width: 250 },
-                { title: "Số lượng", field: "Count", sorter: "string", width: 150 },
-                { title: "Tổng tiển", field: "Total", sorter: "string", width: 150, formatter: priceFormatter },
+                { title: "Mã hóa đơn", field: "Id", sorter: "string", width: 150 },
+                { title: "Tên thuốc", field: "MedicineName", sorter: "string", width: 200},
+                { title: "Số lô", field: "IdBatch", sorter: "string", width: 130 },
+                { title: "Số lượng", field: "Count", sorter: "string", width: 130 },
+                { title: "Giá nhập", field: "InputPrice", sorter: "string", width: 150, formatter: priceFormatter },
+                { title: "Tổng tiển", field: "Total", sorter: "string", width: 150, formatter: priceFormatter},
+                { title: "Hạn sử dụng", field: "DueDate", sorter: "date", width: 180, formatter: dateFormatter },
                 @*{
                     title: "Ngày tạo", field: "CreatedAt", sorter: "date", width: 180, formatter: dateFormatter
                 },
@@ -103,4 +105,46 @@
             table.setData();
         }
     </script>
+</div>
+<!--Modal hoàn thành nhập kho-->
+<div id="complete-modal" class="modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body p-0">
+                <div class="p-5 text-center">
+                    <i data-feather="check" class="w-16 h-16 text-theme-21 mx-auto mt-3"></i>
+                    <div class="text-3xl mt-5">Bạn có đồng ý nhập kho?</div>
+                    <div class="text-gray-600 mt-2">Thuốc sẽ được nhập vào kho!</div>
+                </div>
+                @using (Html.BeginForm("Complete", "InputInfo", new { id = Model.Id }))
+                {
+                    <div class="px-5 pb-8 text-center">
+                        <button type="button" data-dismiss="modal" class="btn btn-outline-secondary w-24 dark:border-dark-5 dark:text-gray-300 mr-1">Thoát</button>
+                        <button type="submit" class="btn btn-primary w-24">Đồng ý</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal hủy phiếu nhập-->
+<div id="cancel-modal" class="modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body p-0">
+                <div class="p-5 text-center">
+                    <i data-feather="x" class="w-16 h-16 text-theme-21 mx-auto mt-3"></i>
+                    <div class="text-3xl mt-5">Bạn muốn hủy phiếu nhập ?</div>
+                    <div class="text-gray-600 mt-2">Phiếu nhập kho này sẽ bị hủy!</div>
+                </div>
+                @using (Html.BeginForm("Cancel", "Input", new { id = Model.Id }))
+                {
+                    <div class="px-5 pb-8 text-center">
+                        <button type="button" data-dismiss="modal" class="btn btn-outline-secondary w-24 dark:border-dark-5 dark:text-gray-300 mr-1">Thoát</button>
+                        <button type="submit" class="btn btn-danger w-24">Đồng ý</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
 </div>

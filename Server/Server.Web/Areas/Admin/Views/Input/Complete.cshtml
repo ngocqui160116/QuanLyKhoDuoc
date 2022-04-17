@@ -18,6 +18,9 @@
     <h2 class="text-lg font-medium mr-auto">
         Phiếu nhập đã hoàn thành
     </h2>
+    <div class="text-center">
+        <a href="@Url.Action("Create","Input")" class="btn btn-primary text-white shadow-md mr-2">Thêm mới</a>
+    </div>
 </div>
 @*<div class="grid gap-6 mt-5">
     <div class="intro-y box p-5">
@@ -75,11 +78,27 @@
             },
             placeholder: "Chưa có dữ liệu",
             columns: [
-                { title: "Mã hóa đơn", field: "Id", sorter: "string", width: 180 },
-                { title: "Tên người tạo", field: "NameStaff", sorter: "string", width: 250 },
-                { title: "Nhà cung cấp", field: "SupplierName", sorter: "string", width: 300 },
+                {
+                    title: "Mã hóa đơn", field: "Id", sorter: "string", width: 180, formatter(cell, formatterParams) {
+                        return `<a href="../Admin/InputInfo/DetailInput/${cell.getData().Id}" class="text-theme-1 dark:text-theme-10"> ${cell.getData().Id}</a>`
+                    }
+                },
+                {
+                    title: "Tên người tạo", field: "NameStaff", sorter: "string", width: 250, formatter(cell, formatterParams) {
+                        return `<a href="../Admin/InputInfo/DetailInput/${cell.getData().Id}" class="text-theme-1 dark:text-theme-10"> ${cell.getData().NameStaff}</a>`
+                    }
+                },
+                {
+                    title: "Nhà cung cấp", field: "SupplierName", sorter: "string", width: 300, formatter(cell, formatterParams) {
+                        return `<a href="../Admin/InputInfo/DetailInput/${cell.getData().Id}" class="text-theme-1 dark:text-theme-10"> ${cell.getData().SupplierName}</a>`
+                    }
+                },
                 { title: "Ngày tạo", field: "DateInput", sorter: "date", width: 180, formatter: dateFormatter },
-                { title: "Trạng thái", field: "Status", sorter: "date", width: 180 },
+                {
+                    title: "Trạng thái", field: "Status", sorter: "date", width: 180, formatter(cell, formatterParams) {
+                        return `<a href="../Admin/InputInfo/DetailInput/${cell.getData().Id}" class="text-theme-1 dark:text-theme-10"> ${cell.getData().Status}</a>`
+                    }
+                },
                 @*{
                     title: "Ngày tạo", field: "CreatedAt", sorter: "date", width: 180, formatter: dateFormatter
                 },

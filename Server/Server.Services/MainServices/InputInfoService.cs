@@ -474,7 +474,7 @@ namespace Phoenix.Server.Services.MainServices
                 inputinfo.Count = request.Count;
                 inputinfo.InputPrice = request.InputPrice;
                 inputinfo.Total = request.Count * request.InputPrice;
-                inputinfo.DueDate = request.DueDate;
+                //inputinfo.DueDate = request.DueDate;
                 await _dataContext.SaveChangesAsync();
             }
             catch (Exception ex)

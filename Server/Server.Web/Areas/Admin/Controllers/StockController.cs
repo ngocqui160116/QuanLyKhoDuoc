@@ -52,7 +52,7 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
             DataContext db = new DataContext();
             ViewBag.IdStaff = new SelectList(db.Staffs.OrderBy(n => n.Name), "IdStaff", "Name", selectedId);
             ViewBag.IdSupplier = new SelectList(db.Suppliers.OrderBy(n => n.Name), "IdSupplier", "Name", selectedId);
-            ViewBag.IdMedicine = new SelectList(db.Medicines.OrderBy(n => n.Name), "IdMedicine", "Name", selectedId);
+            ViewBag.IdMedicine = new SelectList(db.Inventories.OrderBy(n => n.IdMedicine), "LotNumber", "IdMedicine", selectedId);
         }
         public async Task<ActionResult> Create()
         {

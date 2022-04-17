@@ -10,7 +10,6 @@ namespace Phoenix.Shared.Stock
     {
         public int medicineId { get; set; }
         public int LotNumber { get; set; }
-        public int ActualAmount { get; set; }
-        public string Note { get; set; }
+        public int Count { get; set; }
     }
 }

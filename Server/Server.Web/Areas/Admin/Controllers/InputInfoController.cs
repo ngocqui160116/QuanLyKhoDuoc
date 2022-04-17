@@ -53,6 +53,31 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
             };
             return Json(gridModel);
         }
+        public ActionResult DetailInput(int Id)
+        {
+            //DataContext db = new DataContext();
+            //var inputinfo = db.InputInfos.Where(n => n.IdInput.Equals(Id)).ToList();
+            var model = new InputInfoModel();
+            model.Id = Id;
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> DetailInput(DataSourceRequest command, InputInfoModel model)
+        {
+            var inputinfos = await _inputinfoService.GetAllInputInfoById(model.Id, new InputInfoRequest()
+            {
+                Page = command.Page - 1,
+                PageSize = command.PageSize
+            });
+
+            var gridModel = new DataSourceResult
+            {
+                Data = inputinfos.Data,
+                Total = inputinfos.DataCount
+            };
+            return Json(gridModel);
+        }
         public void SetViewBag(long? selectedId = null)
         {
             DataContext db = new DataContext();
@@ -169,7 +194,7 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
                 Count = model.Count,
                 InputPrice = model.InputPrice,
                 Total = model.Total,
-                DueDate = model.DueDate
+                //DueDate = model.DueDate
 
             });
             SuccessNotification("Chỉnh sửa thông tin chương trình thành công");

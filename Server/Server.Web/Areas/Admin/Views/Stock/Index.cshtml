@@ -16,18 +16,18 @@
 @Html.AntiForgeryToken()
 <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
     <h2 class="text-lg font-medium mr-auto">
-        Thuốc
+        Danh sách phiếu kiểm kho
     </h2>
     <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
         <a href="@Url.Action("Create","Stock")" class="btn btn-primary text-white shadow-md mr-2">Thêm mới</a>
     </div>
 </div>
-<div class="grid gap-6 mt-5">
+@*<div class="grid gap-6 mt-5">
     <div class="intro-y box p-5">
         <div class="grid grid-cols-12 gap-2">
             <div class="col-span-12 lg:col-span-6">
-                <label>Thuốc</label>
-                <input type="text" id="Name" class="form-control">
+                <label>Mã phiếu</label>
+                <input type="text" id="Id" class="form-control">
             </div>
         </div>
         <div class="grid mt-3">
@@ -37,7 +37,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@
 <div class="intro-y box p-5 mt-5">
     <div id="main-grid"></div>
     <script>
@@ -55,7 +55,7 @@
             ajaxURL: "@Html.Raw(Url.Action("List", "Stock"))",
             ajaxConfig: "post",
             ajaxRequesting: function (url, params) {
-                params.StaffName = $('#StaffName').val();
+                params.Id = $('#Id').val();
             },
             ajaxResponse: function (url, params, response) {
                 return response;
@@ -94,7 +94,7 @@
             table.setData();
         }
         let onResetSearch = (e) => {
-            $('#Name').val('');
+            $('#Id').val('');
             table.setData();
         }
     </script>
