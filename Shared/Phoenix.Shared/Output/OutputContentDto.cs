@@ -11,5 +11,7 @@ namespace Phoenix.Shared.Output
         public int InventoryCount { get; set; }
         public int LotNumber { get; set; }
         public int Count { get; set; }
+        public int OutputPrice { get; set; }
+        public double Total { get; set; }
     }
 }

@@ -2,16 +2,23 @@
 
 @using (Html.BeginForm())
 {
+    @section Breadcrumb{
+        <div class="-intro-x breadcrumb mr-auto hidden sm:flex">
+            <span>Chương trình</span> <i data-feather="chevron-right" class="breadcrumb__icon"></i>
+            <a href="#" class="breadcrumb--active">Nhà cung cấp</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i>
+            <a href="#" class="breadcrumb--active">Thêm nhà cung cấp</a> 
+        </div>
+    }
     @Html.AntiForgeryToken()
     <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
         <h2 class="text-lg font-medium mr-auto">
-            Tạo mới chương trình
+            Thêm nhà cung cấp
         </h2>
         <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
-            <a href="@Html.Raw(Url.Action("Index"))" class="button w-32 mr-2 mb-2 flex items-center justify-center bg-theme-7 text-white">
+            <a href="@Html.Raw(Url.Action("Index"))" class="btn btn-danger text-white shadow-md mr-2">
                 <i data-feather="corner-down-left" class="w-4 h-4 mr-2"></i> Quay lại
             </a>
-            <button type="submit" class="button w-32 mr-2 mb-2 flex items-center justify-center bg-theme-9 text-white">
+            <button type="submit" class="btn btn-success text-white shadow-md mr-2">
                 <i data-feather="save" class="w-4 h-4 mr-2"></i>Lưu
             </button>
         </div>

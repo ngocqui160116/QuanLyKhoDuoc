@@ -105,10 +105,10 @@ namespace Phoenix.Server.Services.MainServices
                 // setup query
                 var query = _dataContext.Outputs.AsQueryable();
 
-                //if (!string.IsNullOrEmpty(request.Id))
-                //{
-                //    query = query.Where(d => d.Id.Contains(request.Id));
-                //}
+                /*if (!int.TryParse(request.Id))
+                {
+                    query = query.Where(d => d.Id.Contains(request.Id));
+                }*/
 
                 query = query.OrderByDescending(d => d.Id);
 
@@ -149,6 +149,16 @@ namespace Phoenix.Server.Services.MainServices
                     outputinfos.IdOutput = LatestOutput.Id;
                     outputinfos.IdMedicine = item.medicineId;
                     outputinfos.Count = item.Count;
+                    if(request.IdReason == 2)
+                    {
+                        outputinfos.OutputPrice = item.OutputPrice;
+                        outputinfos.Total = item.Total;
+                    }
+                    else
+                    {
+                        outputinfos.OutputPrice = 0;
+                        outputinfos.Total = 0;
+                    }
 
                     _dataContext.OutputInfos.Add(outputinfos);
                     await _dataContext.SaveChangesAsync();

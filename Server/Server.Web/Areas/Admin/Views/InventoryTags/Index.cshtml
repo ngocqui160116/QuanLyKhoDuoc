@@ -61,6 +61,7 @@
             ajaxConfig: "post",
             ajaxRequesting: function (url, params) {
                 params.DocumentId = $('#DocumentId').val();
+                params.LotNumber = $('#LotNumber').val();
             },
             ajaxResponse: function (url, params, response) {
                 return response;

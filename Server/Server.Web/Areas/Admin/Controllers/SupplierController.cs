@@ -33,7 +33,9 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
             var suppliers = await _supplierService.GetAll(new SupplierRequest()
             {
                 Page = command.Page - 1,
-                PageSize = command.PageSize
+                PageSize = command.PageSize,
+                Name = model.Name,
+                PhoneNumber = model.PhoneNumber
             });
 
             var gridModel = new DataSourceResult

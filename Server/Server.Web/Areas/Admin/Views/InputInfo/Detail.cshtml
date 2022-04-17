@@ -7,13 +7,16 @@
 @section Breadcrumb{
     <div class="-intro-x breadcrumb mr-auto hidden sm:flex">
         <span>Chương trình</span> <i data-feather="chevron-right" class="breadcrumb__icon"></i>
-        <a href="#" class="breadcrumb--active">Nhập kho</a>
+        <a href="#" class="breadcrumb--active">Quản lý kho</a><i data-feather="chevron-right" class="breadcrumb__icon"></i>
+        <a href="#" class="breadcrumb--active">Nhập kho</a><i data-feather="chevron-right" class="breadcrumb__icon"></i>
+        <a href="#" class="breadcrumb--active">Danh sách phiếu nhập đã lưu</a><i data-feather="chevron-right" class="breadcrumb__icon"></i>
+        <a href="#" class="breadcrumb--active">Chi tiết phiếu nhập</a>
     </div>
 }
 @Html.AntiForgeryToken()
 <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
     <h2 class="text-lg font-medium mr-auto">
-        Nhập kho
+        Chi tiết phiếu nhập
     </h2>
     <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
         <a href="@Url.Action("Saved","Input")" class="btn btn-primary text-white shadow-md mr-2">Quay lại</a>

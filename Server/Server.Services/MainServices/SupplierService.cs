@@ -117,11 +117,11 @@ namespace Phoenix.Server.Services.MainServices
                 // filter
                 if (!string.IsNullOrEmpty(request.Name))
                 {
-                    query = query.Where(d => d.Address.Contains(request.Name));
+                    query = query.Where(d => d.Name.Contains(request.Name));
                 }
-                if (!string.IsNullOrEmpty(request.Address))
+                if (!string.IsNullOrEmpty(request.PhoneNumber))
                 {
-                    query = query.Where(d => d.Address.Contains(request.Address));
+                    query = query.Where(d => d.PhoneNumber.Contains(request.PhoneNumber));
                 }
                 if (request.Deleted == false)
                 {

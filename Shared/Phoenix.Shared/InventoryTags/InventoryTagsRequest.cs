@@ -12,5 +12,6 @@ namespace Phoenix.Shared.InventoryTags
         public int Id { get; set; }
         public string DocumentId { get; set; }
         public DateTime DocumentDate { get; set; }
+        public int LotNumber { get; set; }
     }
 }
