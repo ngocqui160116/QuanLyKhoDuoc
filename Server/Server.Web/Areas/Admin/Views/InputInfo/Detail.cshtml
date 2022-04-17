@@ -19,7 +19,7 @@
         <a href="@Url.Action("Saved","Input")" class="btn btn-primary text-white shadow-md mr-2">Quay lại</a>
     </div>
 </div>
-<div class="grid gap-6 mt-5">
+@*<div class="grid gap-6 mt-5">
     <div class="intro-y box p-5">
         <div class="grid grid-cols-12 gap-2">
             <div class="col-span-12 lg:col-span-6">
@@ -34,7 +34,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@
 <div class="intro-y box p-5 mt-5">
     <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
         <a href="javascript:;" data-toggle="modal" data-target="#complete-modal" class="btn btn-success text-white shadow-md mr-2">
@@ -53,6 +53,14 @@
                 value = moment(value).format("DD/MM/YYYY HH:mm:ss");
             }
 
+            return value;
+        }
+        const priceFormatter = function (cell, formatterParams) {
+            var value = cell.getValue();
+
+            if (value) {
+                value = value.toLocaleString("it-IT", { style: "currency", currency: "VND" });
+            }
             return value;
         }
         var table = new Tabulator("#main-grid", {
@@ -88,12 +96,12 @@
                 },
                 { title: "Số lô", field: "IdBatch", sorter: "string", width: 130 },
                 { title: "Số lượng", field: "Count", sorter: "string", width: 130 },
-                { title: "Giá nhập", field: "InputPrice", sorter: "string", width: 150 },
-                { title: "Tổng tiển", field: "Total", sorter: "string", width: 150 },
+                { title: "Giá nhập", field: "InputPrice", sorter: "string", width: 150, formatter: priceFormatter },
+                { title: "Tổng tiển", field: "Total", sorter: "string", width: 150, formatter: priceFormatter},
                 { title: "Hạn sử dụng", field: "DueDate", sorter: "date", width: 180, formatter: dateFormatter },
                 {
                     title: "", field: "IdInputInfo", sorter: "string", width: 80, formatter(cell, formatterParams) {
-                        return `<a href="../Admin/InputInfo/Update/${cell.getData().Id}" class="btn btn-primary text-white shadow-md mr-2">Sửa</a>`
+                        return `<a href="../Update/${cell.getData().Id}" class="btn btn-primary text-white shadow-md mr-2">Sửa</a>`
                     }
                 }
                 @*{

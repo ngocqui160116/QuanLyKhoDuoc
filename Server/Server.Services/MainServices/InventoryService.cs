@@ -99,7 +99,6 @@ namespace Phoenix.Server.Services.MainServices
                 var query = _dataContext.Inventories.AsQueryable();
 
                 // filter
-
                 query = query.OrderByDescending(d => d.Id);
                 var i = query.Count();
                 var data = await query.Skip(request.Page * request.PageSize).Take(request.PageSize).ToListAsync();
@@ -122,6 +121,7 @@ namespace Phoenix.Server.Services.MainServices
             {
                 // setup query
                 var query = _dataContext.Inventories.AsQueryable();
+
                 //những thuốc sắp hết trong kho có số lượng nhỏ hơn 10
                 query = query.Where(d => d.Count < 10);
                 //var v = query.Count();

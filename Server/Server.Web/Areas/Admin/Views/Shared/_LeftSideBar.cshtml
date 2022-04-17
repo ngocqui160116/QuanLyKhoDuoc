@@ -64,8 +64,8 @@
                         </li>
                         <li>
                             <a href="@Html.Raw(Url.Action("Saved", "Input"))" class="side-menu">
-                                <div class="side-menu__icon"> <i data-feather="save"></i> </div>
-                                <div class="side-menu__title"> Đã lưu </div>
+                                <div class="side-menu__icon"> <i data-feather="pen-tool"></i> </div>
+                                <div class="side-menu__title"> Chờ duyệt </div>
                             </a>
                         </li>
                         <li>
@@ -101,24 +101,10 @@
                     </a>
                 </li>
                 <li>
-                    <a href="javascript:;" class="side-menu">
-                        <div class="side-menu__icon"> <i data-feather="bell"></i> </div>
-                        <div class="side-menu__title"> Cảnh báo <i data-feather="chevron-down" class="side-menu__sub-icon"></i></div>
+                    <a href="@Html.Raw(Url.Action("OutOfInventory", "Inventory"))" class="side-menu">
+                        <div class="side-menu__icon"> <i data-feather="package"></i> </div>
+                        <div class="side-menu__title"> Cảnh báo dưới mức tồn kho </div>
                     </a>
-                    <ul class="">
-                        <li>
-                            <a href="@Html.Raw(Url.Action("Expired", "InputInfo"))" class="side-menu">
-                                <div class="side-menu__icon"> <i data-feather="calendar"></i> </div>
-                                <div class="side-menu__title"> Thuốc đã hết hạn </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="@Html.Raw(Url.Action("OutOfInventory", "Inventory"))" class="side-menu">
-                                <div class="side-menu__icon"> <i data-feather="package"></i> </div>
-                                <div class="side-menu__title"> Thuốc sắp hết trong kho </div>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
             </ul>
         </li>

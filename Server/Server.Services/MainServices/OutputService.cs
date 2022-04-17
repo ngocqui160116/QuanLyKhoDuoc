@@ -168,16 +168,7 @@ namespace Phoenix.Server.Services.MainServices
                     InventoryTags inventoryTags = new InventoryTags();
                     inventoryTags.DocumentId = "PX00" + LatestOutputInfo.Id;
                     inventoryTags.DocumentDate = DateTime.Now;
-                    if(request.IdReason == 1)
-                    {
-                        inventoryTags.DocumentType = 2;
-                    }else if (request.IdReason == 2)
-                    {
-                        inventoryTags.DocumentType = 3;
-                    }else if (request.IdReason == 3)
-                    {
-                        inventoryTags.DocumentType = 4;
-                    }
+                    inventoryTags.DocumentType = request.IdReason;
                     inventoryTags.MedicineId = item.medicineId;
                     inventoryTags.LotNumber = item.LotNumber;
                     inventoryTags.Qty = item.Count;

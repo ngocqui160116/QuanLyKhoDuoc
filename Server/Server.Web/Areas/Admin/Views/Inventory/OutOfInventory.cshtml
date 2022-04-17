@@ -10,25 +10,24 @@
     <div class="-intro-x breadcrumb mr-auto hidden sm:flex">
         <span>Chương trình</span> <i data-feather="chevron-right" class="breadcrumb__icon"></i>
         <a href="#" class="breadcrumb--active">Quản lý kho</a><i data-feather="chevron-right" class="breadcrumb__icon"></i>
-        <a href="#" class="breadcrumb--active">Cảnh báo</a><i data-feather="chevron-right" class="breadcrumb__icon"></i>
-        <a href="#" class="breadcrumb--active">Danh sách thuốc cần nhập</a>
+        <a href="#" class="breadcrumb--active">Danh sách thuốc dưới mức tồn kho</a>
     </div>
 }
 @Html.AntiForgeryToken()
 <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
     <h2 class="text-lg font-medium mr-auto">
-        Thuốc sắp hết trong kho
+        Thuốc dưới mức tồn kho
     </h2>
-    <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
+    @*<div class="w-full sm:w-auto flex mt-4 sm:mt-0">
         <a href="@Url.Action("Create","Medicine")" class="btn btn-primary text-white shadow-md mr-2">Thêm mới</a>
-    </div>
+    </div>*@
 </div>
-<div class="grid gap-6 mt-5">
+@*<div class="grid gap-6 mt-5">
     <div class="intro-y box p-5">
         <div class="grid grid-cols-12 gap-2">
             <div class="col-span-12 lg:col-span-6">
-                <label>Thuốc</label>
-                <input type="text" id="Name" class="form-control">
+                <label>Số lô</label>
+                <input type="text" id="LotNumber" class="form-control">
             </div>
         </div>
         <div class="grid mt-3">
@@ -38,7 +37,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@
 <div class="intro-y box p-5 mt-5">
     <div id="main-grid"></div>
     <script>
@@ -56,7 +55,7 @@
             ajaxURL: "@Html.Raw(Url.Action("OutOfInventory", "Inventory"))",
             ajaxConfig: "post",
             ajaxRequesting: function (url, params) {
-                params.Name = $('#Name').val();
+                params.LotNumber = $('#LotNumber').val();
             },
             ajaxResponse: function (url, params, response) {
                 return response;
@@ -93,7 +92,7 @@
             table.setData();
         }
         let onResetSearch = (e) => {
-            $('#Name').val('');
+            $('#LotNumber').val('');
             table.setData();
         }
     </script>

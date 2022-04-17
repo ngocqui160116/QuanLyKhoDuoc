@@ -76,6 +76,7 @@ namespace Phoenix.Server.Services.MainServices
 
                 query = query.OrderByDescending(d => d.Id);
                 var i = query.Count();
+                //var data = await query.ToListAsync();
                 var data = await query.Skip(request.Page * request.PageSize).Take(request.PageSize).ToListAsync();
                 result.DataCount = (int)((await query.CountAsync()) / request.PageSize) + 1;
                 result.Data = data.MapTo<StockDto>();

@@ -16,18 +16,18 @@
 @Html.AntiForgeryToken()
 <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
     <h2 class="text-lg font-medium mr-auto">
-        Thuốc
+        Tồn kho
     </h2>
-    <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
+   @* <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
         <a href="@Url.Action("Create","Medicine")" class="btn btn-primary text-white shadow-md mr-2">Thêm mới</a>
-    </div>
+    </div>*@
 </div>
-<div class="grid gap-6 mt-5">
+@*<div class="grid gap-6 mt-5">
     <div class="intro-y box p-5">
         <div class="grid grid-cols-12 gap-2">
             <div class="col-span-12 lg:col-span-6">
-                <label>Thuốc</label>
-                <input type="text" id="Name" class="form-control">
+                <label>Số lô</label>
+                <input type="text" id="LotNumber" class="form-control">
             </div>
         </div>
         <div class="grid mt-3">
@@ -37,7 +37,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@
 <div class="intro-y box p-5 mt-5">
     <div id="main-grid"></div>
     <script>
@@ -50,12 +50,20 @@
 
             return value;
         }
+        const priceFormatter = function (cell, formatterParams) {
+            var value = cell.getValue();
+
+            if (value) {
+                value = value.toLocaleString("it-IT", { style: "currency", currency: "VND" });
+            }
+            return value;
+        }
         var table = new Tabulator("#main-grid", {
             layout: "fitDataFill",
             ajaxURL: "@Html.Raw(Url.Action("List", "Inventory"))",
             ajaxConfig: "post",
             ajaxRequesting: function (url, params) {
-                params.Name = $('#Name').val();
+                params.LotNumber = $('#LotNumber').val();
             },
             ajaxResponse: function (url, params, response) {
                 return response;
@@ -73,16 +81,19 @@
                 "last_page": "Total"
             },
             placeholder: "Chưa có dữ liệu",
+            @*var formatter = new Intl.NumberFormat('it-IT', {
+                style: 'currency',
+                currency: 'VND',
+            }),*@
             columns: [
                 { title: "Mã", field: "Id", sorter: "string", width: 120 },
-                {
-                    title: "Tên thuốc", field: "MedicineName", sorter: "string", width: 280 , formatter(cell, formatterParams) {
-                        return `<a href="../Admin/InventoryTags/Detail?MedicineId=${cell.getData().IdMedicine}&LotNumber=${cell.getData().LotNumber}" class="text-theme-1 dark:text-theme-10"> ${cell.getData().NameStaff}</a>`
-                    }
-                },
+                { title: "Tên thuốc", field: "MedicineName", sorter: "string", width: 280 },
                 { title: "Số lượng tồn", field: "Count", sorter: "string", width: 200 },
                 { title: "Số lô", field: "LotNumber", sorter: "string", width: 200 },
-                { title: "Giá", field: "UnitPrice", sorter: "string", width: 200 },
+                //{ title: "Giá", field: "UnitPrice", sorter: "string", width: 200, formatter: "UnitPrice".toLocaleString("it-IT", { style: "currency", currency: "VND" }); },
+                { title: "Giá", field: "UnitPrice", sorter: "string", width: 200, formatter: priceFormatter},
+                //{ title: "Giá", field: "UnitPrice", sorter: "string", width: 200, formatter.format(UnitPrice) },
+
                 @*{
                     title: "Ngày tạo", field: "CreatedAt", sorter: "date", width: 180, formatter: dateFormatter
                 },
@@ -95,7 +106,7 @@
             table.setData();
         }
         let onResetSearch = (e) => {
-            $('#Name').val('');
+            $('#LotNumber').val('');
             table.setData();
         }
     </script>

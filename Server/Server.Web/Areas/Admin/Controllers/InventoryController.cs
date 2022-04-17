@@ -34,7 +34,8 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
             var inputs = await _inventoryService.GetAll(new InventoryRequest()
             {
                 Page = command.Page - 1,
-                PageSize = command.PageSize
+                PageSize = command.PageSize,
+                LotNumber = model.LotNumber
             });
 
             var gridModel = new DataSourceResult

@@ -37,7 +37,8 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
             var inputs = await _inventorytagsService.GetAll(new InventoryTagsRequest()
             {
                 Page = command.Page - 1,
-                PageSize = command.PageSize
+                PageSize = command.PageSize,
+                DocumentId = model.DocumentId
             });
 
             var gridModel = new DataSourceResult
@@ -56,7 +57,7 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
             ViewBag.IdSupplier = new SelectList(db.Suppliers.OrderBy(n => n.Name), "IdSupplier", "Name", selectedId);
             ViewBag.IdMedicine = new SelectList(db.Medicines.OrderBy(n => n.Name), "IdMedicine", "Name", selectedId);
         }
-        public ActionResult Detail(int MedicineId, int LotNumber)
+        /*public ActionResult Detail(int MedicineId, int LotNumber)
         {
             //DataContext db = new DataContext();
             //var inputinfo = db.InputInfos.Where(n => n.IdInput.Equals(Id)).ToList();
@@ -82,6 +83,6 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
                 Total = inventorytags.DataCount
             };
             return Json(gridModel);
-        }
+        }*/
     }
 }

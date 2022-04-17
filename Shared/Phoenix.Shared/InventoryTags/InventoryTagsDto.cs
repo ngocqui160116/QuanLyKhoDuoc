@@ -24,5 +24,6 @@ namespace Phoenix.Shared.InventoryTags
         //
         public string MedicineName { get; set; }
         public string DocumentTypeName { get; set; }
+        //public List<InventoryTagsDto> List { get; set; }
     }
 }
