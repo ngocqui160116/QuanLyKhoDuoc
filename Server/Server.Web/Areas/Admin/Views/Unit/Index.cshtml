@@ -16,14 +16,14 @@
         Đơn vị tính thuốc
     </h2>
     <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
-        <a href="@Url.Action("Create","Project")" class="btn btn-primary text-white shadow-md mr-2">Thêm mới</a>
+        <a href="@Url.Action("Create","Unit")" class="btn btn-primary text-white shadow-md mr-2">Thêm mới</a>
     </div>
 </div>
 <div class="grid gap-6 mt-5">
     <div class="intro-y box p-5">
         <div class="grid grid-cols-12 gap-2">
             <div class="col-span-12 lg:col-span-6">
-                <label>Đơn vị tính thuốc</label>
+                <label>Tên đơn vị tính</label>
                 <input type="text" id="Name" class="form-control">
             </div>
         </div>
@@ -71,11 +71,15 @@
             },
             placeholder: "Chưa có dữ liệu",
             columns: [
-                { title: "Mã đơn vị tính thuốc", field: "Id", sorter: "string", width: 180 },
+                {
+                    title: "Mã đơn vị tính thuốc", field: "Id", sorter: "string", width: 180, formatter(cell, formatterParams) {
+                        return `<a href="../Admin/Unit/Update/${cell.getData().Id}" class="text-theme-1 dark:text-theme-10"> ${cell.getData().Id}</a>`
+                    }
+                },
                 {
                     title: "Tên nhóm", field: "Name", sorter: "string", width: 300, formatter(cell, formatterParams)
                     {
-                        return `<a href="../Project/Update/${cell.getData().Id}" class="text-theme-1 dark:text-theme-10"> ${cell.getData().Name}</a>`
+                        return `<a href="../Admin/Unit/Update/${cell.getData().Id}" class="text-theme-1 dark:text-theme-10"> ${cell.getData().Name}</a>`
                     }
                 },
                 @*{ title: "Số điện thoại", field: "PhoneNumber", sorter: "string", width: 180 },

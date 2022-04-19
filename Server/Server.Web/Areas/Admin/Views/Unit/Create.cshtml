@@ -1,0 +1,29 @@
+﻿@model Phoenix.Server.Web.Areas.Admin.Models.Unit.UnitModel
+
+@using (Html.BeginForm())
+{
+    @section Breadcrumb{
+        <div class="-intro-x breadcrumb mr-auto hidden sm:flex">
+            <span>Chương trình</span> <i data-feather="chevron-right" class="breadcrumb__icon"></i>
+            <a href="#" class="breadcrumb--active">Danh mục</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i>
+            <a href="#" class="breadcrumb--active">Đơn vị tính</a><i data-feather="chevron-right" class="breadcrumb__icon"></i>
+            <a href="#" class="breadcrumb--active">Thêm đơn vị tính</a>
+        </div>
+    }
+    @Html.AntiForgeryToken()
+    <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
+        <h2 class="text-lg font-medium mr-auto">
+            Thêm đơn vị tính
+        </h2>
+        <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
+            <a href="@Html.Raw(Url.Action("Index"))" class="btn btn-danger text-white shadow-md mr-2">
+                <i data-feather="corner-down-left" class="w-4 h-4 mr-2"></i> Quay lại
+            </a>
+            <button type="submit" class="btn btn-success text-white shadow-md mr-2">
+                <i data-feather="save" class="w-4 h-4 mr-2"></i>Lưu
+            </button>
+        </div>
+    </div>
+    @Html.Partial("_CreateOrUpdate", Model)
+}
+

@@ -9,6 +9,7 @@ using Phoenix.Server.Web.Areas.Admin.Models.Output;
 using Phoenix.Server.Web.Areas.Admin.Models.Stock;
 using Phoenix.Server.Web.Areas.Admin.Models.StockInfo;
 using Phoenix.Server.Web.Areas.Admin.Models.Supplier;
+using Phoenix.Server.Web.Areas.Admin.Models.Unit;
 
 namespace Phoenix.Server.Web.Infrastructure
 {
@@ -26,6 +27,7 @@ namespace Phoenix.Server.Web.Infrastructure
             CreateMap<Inventory, InventoryModel>();
             CreateMap<Stock, StockModel>();
             CreateMap<StockInfo, StockInfoModel>();
+            CreateMap<Unit, UnitModel>();
         }
     }
 }

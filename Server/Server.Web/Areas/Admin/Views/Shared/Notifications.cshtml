@@ -36,9 +36,11 @@
 
 @foreach (var message in successMessages)
 {
-    <div class="alert alert-success alert-dismissable mb-5">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        @message
+    <div class="alert alert-success alert-dismissable show flex items-center mb-2" role="alert">
+        <i data-feather="alert-triangle" class="w-6 h-6 mr-2"></i>@message
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+            <i data-feather="x-circle" class="w-4 h-4"></i>
+        </button>
     </div>
 }
 

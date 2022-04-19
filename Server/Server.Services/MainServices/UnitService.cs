@@ -18,6 +18,10 @@ namespace Phoenix.Server.Services.MainServices
         Task<CrudResult> CreateUnit(UnitRequest request);
         Task<CrudResult> UpdateUnit(int Id, UnitRequest request);
         Task<CrudResult> DeleteUnit(int IdUnit);
+        //
+        Task<BaseResponse<UnitDto>> Create(UnitRequest request);
+        Unit GetUnitById(int id);
+        Task<BaseResponse<UnitDto>> Update(UnitRequest request);
     }
     public class UnitService : IUnitService
     {
@@ -47,10 +51,12 @@ namespace Phoenix.Server.Services.MainServices
 
                 var data = await query.ToListAsync();
                 result.Data = data.MapTo<UnitDto>();
+
             }
             catch (Exception ex)
             {
-
+               // result.Success = false;
+                result.Message = ex.Message;
             }
 
             return result;
@@ -89,5 +95,50 @@ namespace Phoenix.Server.Services.MainServices
             return new CrudResult() { IsOk = true };
         }
 
+        //web
+        public async Task<BaseResponse<UnitDto>> Create(UnitRequest request)
+        {
+            var result = new BaseResponse<UnitDto>();
+            try
+            {
+                Unit unit = new Unit
+                {
+                    Name = request.Name
+                };
+                _dataContext.Units.Add(unit);
+                await _dataContext.SaveChangesAsync();
+
+                result.Success = true;
+            }
+            catch
+            {
+
+            }
+            return result;
+        }
+        public Unit GetUnitById(int id) => _dataContext.Units.Find(id);
+        public async Task<BaseResponse<UnitDto>> Update(UnitRequest request)
+        {
+            var result = new BaseResponse<UnitDto>();
+            try
+            {
+                //Lay du lieu cu
+                var unit = GetUnitById(request.Id);
+                //cap nhat
+
+                unit.Name = request.Name;
+                //};
+                //_dataContext.Suppliers.Add(supplier);
+                await _dataContext.SaveChangesAsync();
+
+                result.Success = true;
+            }
+            catch (Exception ex)
+            {
+                result.Success = false;
+                result.Message = ex.Message;
+            }
+            return result;
+        }
     }
 }
