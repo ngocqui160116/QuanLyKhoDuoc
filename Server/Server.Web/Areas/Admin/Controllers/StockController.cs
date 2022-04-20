@@ -32,7 +32,7 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
         [HttpPost]
         public async Task<ActionResult> List(DataSourceRequest command, StockModel model)
         {
-            var inputs = await _stockService.GetAll(new StockRequest()
+            var stocks = await _stockService.GetAll(new StockRequest()
             {
                 Page = command.Page - 1,
                 PageSize = command.PageSize
@@ -40,8 +40,8 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
 
             var gridModel = new DataSourceResult
             {
-                Data = inputs.Data,
-                Total = inputs.DataCount
+                Data = stocks.Data,
+                Total = stocks.DataCount
             };
             return Json(gridModel);
         }

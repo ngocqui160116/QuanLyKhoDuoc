@@ -112,7 +112,7 @@ namespace Phoenix.Server.Services.MainServices
             }
             catch
             {
-
+                //result.Message = ex.Message;
             }
             return result;
         }

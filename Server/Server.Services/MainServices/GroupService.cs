@@ -22,6 +22,9 @@ namespace Phoenix.Server.Services.MainServices
 
         //////
         Task<BaseResponse<GroupDto>> GetAll(GroupRequest request);
+        Task<BaseResponse<GroupDto>> Create(GroupRequest request);
+        Group GetGroupById(int id);
+        Task<BaseResponse<GroupDto>> Update(GroupRequest request);
     }
     public class GroupService : IGroupService
     {
@@ -114,9 +117,53 @@ namespace Phoenix.Server.Services.MainServices
             }
             catch (Exception ex)
             {
-
+                result.Message = ex.Message;
             }
 
+            return result;
+        }
+        public async Task<BaseResponse<GroupDto>> Create(GroupRequest request)
+        {
+            var result = new BaseResponse<GroupDto>();
+            try
+            {
+                Group group = new Group
+                {
+                    Name = request.Name
+                };
+                _dataContext.Groups.Add(group);
+                await _dataContext.SaveChangesAsync();
+
+                result.Success = true;
+            }
+            catch
+            {
+                //sresult.Message = ex.Message;
+            }
+            return result;
+        }
+        public Group GetGroupById(int id) => _dataContext.Groups.Find(id);
+        public async Task<BaseResponse<GroupDto>> Update(GroupRequest request)
+        {
+            var result = new BaseResponse<GroupDto>();
+            try
+            {
+                //Lay du lieu cu
+                var group = GetGroupById(request.IdGroup);
+                //cap nhat
+
+                group.Name = request.Name;
+                //};
+                //_dataContext.Suppliers.Add(supplier);
+                await _dataContext.SaveChangesAsync();
+
+                result.Success = true;
+            }
+            catch (Exception ex)
+            {
+                result.Success = false;
+                result.Message = ex.Message;
+            }
             return result;
         }
     }

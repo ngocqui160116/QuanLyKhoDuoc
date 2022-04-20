@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Phoenix.Server.Data.Entity;
+using Phoenix.Server.Web.Areas.Admin.Models.Group;
 using Phoenix.Server.Web.Areas.Admin.Models.Input;
 using Phoenix.Server.Web.Areas.Admin.Models.InputInfo;
 using Phoenix.Server.Web.Areas.Admin.Models.Inventory;
@@ -28,6 +29,7 @@ namespace Phoenix.Server.Web.Infrastructure
             CreateMap<Stock, StockModel>();
             CreateMap<StockInfo, StockInfoModel>();
             CreateMap<Unit, UnitModel>();
+            CreateMap<Group, GroupModel>();
         }
     }
 }

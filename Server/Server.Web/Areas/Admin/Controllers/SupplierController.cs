@@ -99,7 +99,7 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
                 Email = model.Email,
                 Address = model.Address
             });
-            SuccessNotification("Chỉnh sửa thông tin chương trình thành công");
+            SuccessNotification("Chỉnh sửa thông tin nhà cung cấp thành công");
             return RedirectToAction("Update", new { id = model.IdSupplier });
         }
         [HttpPost]
@@ -111,7 +111,7 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
                 return RedirectToAction("Index");
 
             await _supplierService.Delete(supplier.IdSupplier);
-            SuccessNotification("Xóa đại lý thành công");
+            SuccessNotification("Xóa nhà cung cấp thành công");
             return RedirectToAction("Index");
         }
     }

@@ -58,11 +58,11 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
                 return View(model);
-            var supplier = await _unitService.Create(new UnitRequest
+            var unit = await _unitService.Create(new UnitRequest
             {
                 Name = model.Name
             });
-            if (!supplier.Success)
+            if (!unit.Success)
             {
                 ErrorNotification("Thêm mới đơn vị tính thành công");
                 return View(model);
@@ -95,7 +95,7 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
                 Id = model.Id,
                 Name = model.Name
             });
-            SuccessNotification("Chỉnh sửa thông tin chương trình thành công");
+            SuccessNotification("Chỉnh sửa thông tin đơn vị tính thành công");
             return RedirectToAction("Index");
         }
     }
