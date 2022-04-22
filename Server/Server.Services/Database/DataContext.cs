@@ -20,7 +20,7 @@ namespace Phoenix.Server.Services.Database
         public virtual DbSet<UserClaim> UserClaims { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Setting> Settings { get; set; }
-        //modules
+        //modules   
      
         public virtual DbSet<Vendor> Vendors { get; set; }
         public virtual DbSet<Reason> Reasons { get; set; }

@@ -129,7 +129,7 @@ namespace Phoenix.Server.Services.MainServices
                         InventoryTags inventoryTags = new InventoryTags();
                         inventoryTags.DocumentId = "PK00" + item.Id;
                         inventoryTags.DocumentDate = DateTime.Now;
-                        inventoryTags.DocumentType = 2;
+                        inventoryTags.DocumentType = 5;
                         inventoryTags.MedicineId = item.Medicine_Id;
                         inventoryTags.LotNumber = (int)item.Inventory.LotNumber;
                         inventoryTags.ExpiredDate = DateTime.Now;

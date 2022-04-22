@@ -23,7 +23,7 @@
                                   IconColor="{DynamicResource PrimaryColor}"
                                   Text="{Binding UserName}" 
                                   Margin="0,15,0,5"
-                                  Placeholder="Tên đăng nhập *"
+                                  Placeholder="Tên đăng nhập"
                                   ControlPadding="15,0,0,0"
                                   IconStart="{StaticResource IconAccount}">
             </controls:CommonInput>
@@ -32,7 +32,7 @@
                                   Text="{Binding Password}"
                                   Margin="0,0,0,5"
                                   ControlPadding="15,0,0,0"
-                                  Placeholder="Mật khẩu *"
+                                  Placeholder="Mật khẩu"
                                   IsPassword="True"
                                   IconStart="{StaticResource IconKey}">
             </controls:CommonInput>
@@ -42,7 +42,7 @@
                                   Text="{Binding Name}"
                                   Margin="0,0,0,5"
                                   ControlPadding="15,0,0,0"
-                                  Placeholder="Họ tên *"
+                                  Placeholder="Họ tên"
                                   IconStart="{StaticResource IconAccountCircle}">
             </controls:CommonInput>
             <controls:CommonInput Style="{StaticResource CommonInputPrimary}"
