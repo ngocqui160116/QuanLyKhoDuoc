@@ -36,7 +36,8 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
             var stocks = await _stockService.GetAll(new StockRequest()
             {
                 Page = command.Page - 1,
-                PageSize = command.PageSize
+                PageSize = command.PageSize,
+                Note = model.Note
             });
 
             var gridModel = new DataSourceResult
@@ -86,31 +87,6 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
             }
             SuccessNotification("Thêm mới thành công");
             return RedirectToAction("Index");
-        }
-        public ActionResult Detail(int Id)
-        {
-            //DataContext db = new DataContext();
-            //var inputinfo = db.InputInfos.Where(n => n.IdInput.Equals(Id)).ToList();
-            var model = new StockInfoModel();
-            model.Id = Id;
-            return View(model);
-        }
-
-        [HttpPost]
-        public async Task<ActionResult> Detail(DataSourceRequest command, StockInfoModel model)
-        {
-            var stockinfos = await _stockService.GetAllStockInfoById(model.Id, new StockRequest()
-            {
-                Page = command.Page - 1,
-                PageSize = command.PageSize
-            });
-
-            var gridModel = new DataSourceResult
-            {
-                Data = stockinfos.Data,
-                Total = stockinfos.DataCount
-            };
-            return Json(gridModel);
         }
     }
 }

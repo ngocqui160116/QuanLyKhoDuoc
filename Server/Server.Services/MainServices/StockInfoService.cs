@@ -17,7 +17,7 @@ namespace Phoenix.Server.Services.MainServices
         Task<BaseResponse<StockInfoDto>> GetAllStockInfo(StockInfoRequest request);
         Task<BaseResponse<StockInfoDto>> CreateStockInfo(StockInfoRequest request);
         /// 
-        Task<BaseResponse<StockInfoDtoWeb>> GetAll(int Id,StockInfoRequest request);
+        Task<BaseResponse<StockInfoDto>> GetAll(int Id,StockInfoRequest request);
         StockInfo GetLatestStockInfo();
         Task<BaseResponse<StockInfoDto>> GetAllStockInfoById(int Id, StockInfoRequest request);
     }
@@ -150,9 +150,9 @@ namespace Phoenix.Server.Services.MainServices
         #endregion
 
         /// 
-        public async Task<BaseResponse<StockInfoDtoWeb>> GetAll(int Id,StockInfoRequest request)
+        public async Task<BaseResponse<StockInfoDto>> GetAll(int Id,StockInfoRequest request)
         {
-            var result = new BaseResponse<StockInfoDtoWeb>();
+            var result = new BaseResponse<StockInfoDto>();
 
             try
             {
@@ -165,7 +165,7 @@ namespace Phoenix.Server.Services.MainServices
                 var i = query.Count();
                 var data = await query.Skip(request.Page * request.PageSize).Take(request.PageSize).ToListAsync();
                 result.DataCount = (int)((await query.CountAsync()) / request.PageSize) + 1;
-                result.Data = data.MapTo<StockInfoDtoWeb>();
+                result.Data = data.MapTo<StockInfoDto>();
 
 
             }

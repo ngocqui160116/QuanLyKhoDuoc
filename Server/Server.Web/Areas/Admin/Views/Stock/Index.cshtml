@@ -22,12 +22,12 @@
         <a href="@Url.Action("Create","Stock")" class="btn btn-primary text-white shadow-md mr-2">Thêm mới</a>
     </div>
 </div>
-@*<div class="grid gap-6 mt-5">
+<div class="grid gap-6 mt-5">
     <div class="intro-y box p-5">
         <div class="grid grid-cols-12 gap-2">
             <div class="col-span-12 lg:col-span-6">
-                <label>Mã phiếu</label>
-                <input type="text" id="Id" class="form-control">
+                <label>Ghi chú</label>
+                <input type="text" id="Note" class="form-control">
             </div>
         </div>
         <div class="grid mt-3">
@@ -37,7 +37,7 @@
             </div>
         </div>
     </div>
-</div>*@
+</div>
 <div class="intro-y box p-5 mt-5">
     <div id="main-grid"></div>
     <script>
@@ -55,7 +55,7 @@
             ajaxURL: "@Html.Raw(Url.Action("List", "Stock"))",
             ajaxConfig: "post",
             ajaxRequesting: function (url, params) {
-                params.Id = $('#Id').val();
+                params.Note = $('#Note').val();
             },
             ajaxResponse: function (url, params, response) {
                 return response;
@@ -74,7 +74,11 @@
             },
             placeholder: "Chưa có dữ liệu",
             columns: [
-                { title: "Mã phiếu", field: "Id", sorter: "string", width: 120 },
+                {
+                    title: "Mã phiếu", field: "Id", sorter: "string", width: 120, formatter(cell, formatterParams) {
+                        return `<a href="../Admin/StockInfo/Detail/${cell.getData().Id}" class="text-theme-1 dark:text-theme-10"> ${cell.getData().Id}</a>`
+                    }
+                },
                 {
                     title: "Tên nhân viên", field: "StaffName", sorter: "string", width: 250, formatter(cell, formatterParams) {
                         return `<a href="../Admin/StockInfo/Detail/${cell.getData().Id}" class="text-theme-1 dark:text-theme-10"> ${cell.getData().StaffName}</a>`
@@ -83,7 +87,7 @@
                 { title: "Ngày tạo", field: "Date", sorter: "date", width: 200, formatter: dateFormatter},
                 {
                     title: "Ghi chú", field: "Note", sorter: "string", width: 350, formatter(cell, formatterParams) {
-                        return `<a href="../Stock/Detail/${cell.getData().Id}" class="text-theme-1 dark:text-theme-10"> ${cell.getData().Note}</a>`
+                        return `<a href="../Admin/StockInfo/Detail/${cell.getData().Id}" class="text-theme-1 dark:text-theme-10"> ${cell.getData().Note}</a>`
                     }
                 },
                 @*{
@@ -98,7 +102,7 @@
             table.setData();
         }
         let onResetSearch = (e) => {
-            $('#Id').val('');
+            $('#Note').val('');
             table.setData();
         }
     </script>

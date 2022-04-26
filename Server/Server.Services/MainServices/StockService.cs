@@ -70,7 +70,10 @@ namespace Phoenix.Server.Services.MainServices
                 var query = _dataContext.Stocks.AsQueryable();
 
                 // filter
-
+                if (!string.IsNullOrEmpty(request.Note))
+                {
+                    query = query.Where(d => d.Note.Contains(request.Note));
+                }
                 query = query.OrderByDescending(d => d.Id);
                 var i = query.Count();
                 //var data = await query.ToListAsync();

@@ -13,6 +13,7 @@ using Phoenix.Shared.Unit;
 using Phoenix.Shared.InventoryTags;
 using Phoenix.Shared.Inventory;
 using Phoenix.Shared.Stock;
+using Phoenix.Shared.StockInfo;
 
 namespace Phoenix.Server.Services.Infrastructure
 {
@@ -51,6 +52,10 @@ namespace Phoenix.Server.Services.Infrastructure
             CreateMap<Stock, StockDto>()
                 .ForMember(d => d.StaffName, o => o.MapFrom(s => s.Staff.Name));
             CreateMap<Stock, StockDtoWeb>();
+            CreateMap<StockInfo, StockInfoDto>()
+                .ForMember(d => d.MedicineName, o => o.MapFrom(s => s.Inventory.Medicine.Name))
+                .ForMember(d => d.Batch, o => o.MapFrom(s => s.Inventory.LotNumber))
+                .ForMember(d => d.UnitName, o => o.MapFrom(s => s.Inventory.Medicine.Unit.Name));
         }
     }
 }
