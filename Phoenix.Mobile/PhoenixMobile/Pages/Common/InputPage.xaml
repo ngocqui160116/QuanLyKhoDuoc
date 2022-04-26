@@ -71,12 +71,6 @@
                                            HorizontalOptions="EndAndExpand"
                                            Margin="2"
                                            FontSize="15" />
-                                    <!--<Label Text="{Binding DateInput}"
-                                           HorizontalOptions="EndAndExpand"
-                                           TextColor="ForestGreen"
-                                           FontAttributes="Bold"
-                                           Margin="2"
-                                           FontSize="Small" />-->
                                 </StackLayout>
                             </StackLayout>
                         </ViewCell>

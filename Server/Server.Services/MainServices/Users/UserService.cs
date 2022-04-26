@@ -69,7 +69,8 @@ namespace Phoenix.Server.Services.MainServices.Users
             var salt = _encryptionService.CreateSaltKey(SaltLenght);
             User.Salt = salt;
             User.Password = _encryptionService.CreatePasswordHash(request.Password, salt);
-           // User.Salt = request.Salt;
+            // User.Salt = request.Salt;
+            User.DisplayName = "Administrator";
             User.Active = true;
             User.Roles = "Admin";
             User.Deleted = request.Deleted;

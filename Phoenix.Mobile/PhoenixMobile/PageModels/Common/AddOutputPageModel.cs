@@ -129,6 +129,19 @@ namespace Phoenix.Mobile.PageModels.Common
         {
             try
             {
+                if (IdReason.Equals(0))
+                {
+                    await _dialogService.AlertAsync("Vui lòng chọn lý do");
+                    IsBusy = false;
+                    return;
+                }
+                if (IdStaff.Equals(0))
+                {
+                    await _dialogService.AlertAsync("Vui lòng chọn người tạo");
+                    IsBusy = false;
+                    return;
+                }
+
                 var data = await _outputInfoService.CreateOutputInfo(new OutputInfoRequest
                 {
                     IdReason = IdReason,
@@ -138,13 +151,12 @@ namespace Phoenix.Mobile.PageModels.Common
 
                 var data1 = await _medicineItemService.DeleteAll();
                 await CoreMethods.PushPageModel<OutputPageModel>();
-                //CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn" + SelectedReason.IdReason + SelectedStaff.IdStaff, "Đóng");
-                await _dialogService.AlertAsync("Thêm thành công");
+                await _dialogService.AlertAsync("Xuất kho thành công");
                 IsBusy = false;
             }
             catch (Exception e)
             {
-                await _dialogService.AlertAsync("Thêm thất bại");
+                await _dialogService.AlertAsync("Xuất kho thất bại");
             }
         }
         #endregion
@@ -188,10 +200,7 @@ namespace Phoenix.Mobile.PageModels.Common
                     if (IsBusy) return;
                     IsBusy = true;
 
-                        //CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn: " + MedicineItemModel.Id, "Đóng");
-
                         var data = await _medicineItemService.RemoveMedicineItem(MedicineItemModel.Id);
-                       // await CoreMethods.PushPageModel<AddOutputPageModel>();
                         await _dialogService.AlertAsync("Xóa thành công");
                         LoadData();
                         IsBusy = false;
@@ -201,8 +210,6 @@ namespace Phoenix.Mobile.PageModels.Common
                 {
                     await _dialogService.AlertAsync("Xóa thất bại");
                 }
-                    //CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn: " +MedicineItemModel.Id, "Đóng");
-                   // CoreMethods.PushPageModel<AddInputInfoPageModel>(MedicineItemModel);
 
                 });
             }

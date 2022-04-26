@@ -106,7 +106,13 @@ namespace Phoenix.Mobile.PageModels.Common
         {
             try
             {
-
+                if (IdStaff.Equals(0))
+                {
+                    await _dialogService.AlertAsync("Vui lòng Chọn người kiểm");
+                    IsBusy = false;
+                    return;
+                }
+               
                 var data = await _stockInfoService.CreateStockInfo(new StockInfoRequest
                 {
                     Note = Note,
@@ -117,13 +123,13 @@ namespace Phoenix.Mobile.PageModels.Common
                 var data1 = await _medicineItemService.DeleteAll();
                 await CoreMethods.PushPageModel<StockPageModel>();
 
-                await _dialogService.AlertAsync("Thêm thành công");
+                await _dialogService.AlertAsync("Kiểm kho thành công");
                 IsBusy = false;
 
             }
             catch (Exception e)
             {
-                await _dialogService.AlertAsync("Thêm thất bại");
+                await _dialogService.AlertAsync("Kiểm kho thất bại");
             }
         }
         #endregion

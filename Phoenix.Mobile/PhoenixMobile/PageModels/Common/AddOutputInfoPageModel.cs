@@ -99,6 +99,12 @@ namespace Phoenix.Mobile.PageModels.Common
             {
                 if (IsBusy) return;
                 IsBusy = true;
+                if (IdBatch.Equals(0))
+                {
+                    await _dialogService.AlertAsync("Vui lòng nhập số lượng lớn hơn 0");
+                    IsBusy = false;
+                    return;
+                }
 
                 var data = await _medicineItemService.UpdateMedicineItem(Id, new MedicineItemRequest
                 {

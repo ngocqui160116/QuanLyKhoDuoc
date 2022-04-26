@@ -1,4 +1,5 @@
-﻿using Phoenix.Mobile.Core.Infrastructure;
+﻿using Phoenix.Framework.Extensions;
+using Phoenix.Mobile.Core.Infrastructure;
 using Phoenix.Mobile.Core.Models.Supplier;
 using Phoenix.Mobile.Core.Services.Common;
 using Phoenix.Mobile.Helpers;
@@ -83,6 +84,31 @@ namespace Phoenix.Mobile.PageModels.Common
             {
                 if (IsBusy) return;
                 IsBusy = true;
+                if (Name.IsNullOrEmpty())
+                {
+                    await _dialogService.AlertAsync("Vui lòng nhập tên nhà cung cấp");
+                    IsBusy = false;
+                    return;
+                }
+
+                if (PhoneNumber.IsNullOrEmpty())
+                {
+                    await _dialogService.AlertAsync("Vui lòng nhập số điện thoại");
+                    IsBusy = false;
+                    return;
+                }
+                if (Email.IsNullOrEmpty())
+                {
+                    await _dialogService.AlertAsync("Vui lòng nhập email");
+                    IsBusy = false;
+                    return;
+                }
+                if (Address.IsNullOrEmpty())
+                {
+                    await _dialogService.AlertAsync("Vui lòng nhập địa chỉ");
+                    IsBusy = false;
+                    return;
+                }
 
                 var data = await _supplierService.UpdateSupplier(IdSupplier, new SupplierRequest
                 {
