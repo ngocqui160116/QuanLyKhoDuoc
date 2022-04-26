@@ -21,7 +21,6 @@ namespace Phoenix.Server.Api.Api
 
         [HttpPost]
         [Route("GetAllMedicineItems")]
-        //public async Task<BaseResponse<MedicineItemDto>> GetAllMedicineItems(MedicineItemRequest request)
         public async Task<BaseResponse<MedicineItemDto>> GetAllMedicineItems(MedicineItemRequest request)
         {
             return await _MedicineItemService.GetAllMedicineItems(request);
@@ -29,7 +28,6 @@ namespace Phoenix.Server.Api.Api
 
         [HttpPost]
         [Route("GetMedicineItemById")]
-        //public async Task<BaseResponse<MedicineItemDto>> GetAllMedicineItems(MedicineItemRequest request)
         public async Task<BaseResponse<MedicineItemDto>> GetMedicineItemById(int Id)
         {
             return await _MedicineItemService.GetMedicineItemById(Id);
@@ -73,14 +71,5 @@ namespace Phoenix.Server.Api.Api
         {
             return _MedicineItemService.DeleteAll();
         }
-        //[HttpDelete]Task<CrudResult> DeleteAll(MedicineItemRequest request)
-        //[Route("ClearCart")]
-        //public Task<CrudResult> ClearCart(int User_Id)
-
-        //{
-        //    return _MedicineItemService.ClearCart(User_Id);
-        //}
-
-
     }
 }

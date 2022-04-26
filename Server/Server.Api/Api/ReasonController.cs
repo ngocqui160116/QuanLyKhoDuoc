@@ -13,7 +13,6 @@ namespace Phoenix.Server.Api.Api
     [RoutePrefix("api/reason")]
     public class ReasonController : BaseApiController
     {
-      
 
         private readonly IReasonService _ReasonService;
         public ReasonController(IReasonService ReasonService)
@@ -27,13 +26,6 @@ namespace Phoenix.Server.Api.Api
         {
             return await _ReasonService.GetAllReason(request);
         }
-
-        //[HttpPost]
-        //[Route("CreateReason")]
-        //public Task<CrudResult> CreateReason([FromBody] ReasonRequest request)
-        //{
-        //    return _ReasonService.CreateReason(request);
-        //}
 
     }
 }

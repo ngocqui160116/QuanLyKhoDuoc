@@ -18,7 +18,6 @@ namespace Phoenix.Shared
         public bool Active { get; set; }
         public string Roles { get; set; }
         public bool Deleted { get; set; }
-
         public string Name { get; set; }
     }
 }

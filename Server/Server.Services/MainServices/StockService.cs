@@ -15,11 +15,9 @@ using Phoenix.Shared.Stock;
 
 namespace Phoenix.Server.Services.MainServices
 {
-   
     public interface IStockService
     {
         Task<BaseResponse<StockDto>> GetAllStock(StockRequest request);
-
         /// 
         Task<BaseResponse<StockDto>> GetAll(StockRequest request);
         Task<BaseResponse<StockDto>> Create(StockRequest request);
@@ -46,19 +44,16 @@ namespace Phoenix.Server.Services.MainServices
                 // setup query
                 var query = _dataContext.Stocks.AsQueryable();
 
-                // filter
-                
+                // filter             
                 query = query.OrderByDescending(d => d.Id);
 
                 var data = await query.ToListAsync();
                 result.Data = data.MapTo<StockDto>();
-
             }
             catch (Exception ex)
             {
 
             }
-
             return result;
         }
 
@@ -73,7 +68,6 @@ namespace Phoenix.Server.Services.MainServices
                 var query = _dataContext.Stocks.AsQueryable();
 
                 // filter
-
                 query = query.OrderByDescending(d => d.Id);
                 var i = query.Count();
                 //var data = await query.ToListAsync();
@@ -89,6 +83,7 @@ namespace Phoenix.Server.Services.MainServices
 
             return result;
         }
+
         #region GetLatestStock
         public Stock GetLatestStock()
         {
@@ -100,6 +95,7 @@ namespace Phoenix.Server.Services.MainServices
         }
 
         #endregion
+
         public async Task<BaseResponse<StockDto>> Create(StockRequest request)
         {
             var result = new BaseResponse<StockDto>();
@@ -120,8 +116,6 @@ namespace Phoenix.Server.Services.MainServices
                 
                 foreach (var item in request.List)
                 {
-                    
-
 
                     //thêm thẻ kho
                     var LatestStockInfo = _stockinfoService.GetLatestStockInfo();
@@ -154,9 +148,6 @@ namespace Phoenix.Server.Services.MainServices
                             await _dataContext.SaveChangesAsync();
                         }
                     }
-
-                    
-
                 }
                 result.Success = true;
             }
@@ -164,7 +155,6 @@ namespace Phoenix.Server.Services.MainServices
             {
 
             }
-
             return result;
         }
     }

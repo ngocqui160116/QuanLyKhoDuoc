@@ -17,8 +17,6 @@ namespace Phoenix.Shared.Medicine
 
         //Add
         public int Count { get; set; }
-
-        //public string SupplierName { get; set; }
         public string GroupName { get; set; }
         public string NameUnit { get; set; }
         public string ImageUrl { get; set; }

@@ -13,7 +13,6 @@ namespace Phoenix.Server.Api.Api
     [RoutePrefix("api/unit")]
     public class UnitController : BaseApiController
     {
-      
 
         private readonly IUnitService _UnitService;
         public UnitController(IUnitService UnitService)

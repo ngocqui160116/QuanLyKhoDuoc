@@ -16,7 +16,6 @@ namespace Phoenix.Server.Api.Api
     public class StockController : BaseApiController
     {
 
-
         private readonly IStockService _StockService;
         public StockController(IStockService StockService)
         {
@@ -29,26 +28,5 @@ namespace Phoenix.Server.Api.Api
         {
             return await _StockService.GetAllStock(request);
         }
-
-        //[HttpPost]
-        //[Route("CreateStock")]
-        //public Task<CrudResult> CreateStock([FromBody] StockRequest request)
-        //{
-        //    return _StockService.CreateStock(request);
-        //}
-
-        //[HttpPost]
-        //[Route("UpdateStock")]
-        //public Task<CrudResult> UpdateStock(int IdStock, [FromBody] StockRequest request)
-        //{
-        //    return _StockService.UpdateStock(IdStock, request);
-        //}
-
-        //[HttpDelete]
-        //[Route("DeleteStock")]
-        //public Task<CrudResult> DeleteStock(int IdStock)
-        //{
-        //    return _StockService.DeleteStock(IdStock);
-        //}
     }
 }

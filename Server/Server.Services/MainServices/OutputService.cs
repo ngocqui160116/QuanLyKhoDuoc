@@ -15,11 +15,9 @@ namespace Phoenix.Server.Services.MainServices
     public interface IOutputService
     {
         Task<BaseResponse<OutputDto>> GetAllOutput(OutputRequest request);
-       // Task<CrudResult> CreateOutput(OutputRequest request);
         Task<CrudResult> UpdateOutput(string Id, OutputRequest request);
         Task<CrudResult> DeleteOutput(string Id);
         Output GetLatestOutput();
-
         ///
         Task<BaseResponse<OutputDto>> GetAll(OutputRequest request);
         Task<BaseResponse<OutputDto>> Create(OutputRequest request);
@@ -57,7 +55,6 @@ namespace Phoenix.Server.Services.MainServices
             }
             return result;
         }
-
 
         #region GetLatestOutput
         public Output GetLatestOutput()
@@ -135,7 +132,6 @@ namespace Phoenix.Server.Services.MainServices
                     IdReason = request.IdReason,
                     DateOutput = request.DateOutput,
                     Status = "Đã hoàn thành"
-
                 };
 
                 _dataContext.Outputs.Add(outputs);

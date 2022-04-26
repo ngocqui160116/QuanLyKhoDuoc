@@ -13,7 +13,6 @@ namespace Phoenix.Server.Api.Api
     [RoutePrefix("api/inventory")]
     public class InventoryController : BaseApiController
     {
-      
 
         private readonly IInventoryService _InventoryService;
         public InventoryController(IInventoryService InventoryService)

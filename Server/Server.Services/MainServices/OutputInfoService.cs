@@ -19,7 +19,6 @@ namespace Phoenix.Server.Services.MainServices
         Task<BaseResponse<OutputInfoDto>> GetAllOutputInfo(OutputInfoRequest request);
         Task<CrudResult> CreateOutputInventory(OutputInfoRequest request);
         Task<BaseResponse<OutputInfoDto>> CreateOutputInfo(OutputInfoRequest request);
-       // Task<BaseResponse<OutputInfoDto>> Complete(int Id, OutputInfoRequest request);
         ///
         Task<BaseResponse<OutputInfoDto>> GetAllOutputInfoById(int Id, OutputInfoRequest request);
         OutputInfo GetLatestOutputInfo();
@@ -32,20 +31,16 @@ namespace Phoenix.Server.Services.MainServices
             _dataContext = dataContext;
         }
 
-        //lấy danh sách nhà cung cấp
+        //lấy danh sách
         public async Task<BaseResponse<OutputInfoDto>> GetAllOutputInfo(OutputInfoRequest request)
         {
             var result = new BaseResponse<OutputInfoDto>();
             try
             {
-
                 // setup query
                 var query = _dataContext.OutputInfos.AsQueryable();
 
                 // filter
-               
-                //query = query.Where(d => d.Count.Equals(Soluong));
-
                 query = query.OrderByDescending(d => d.Id);
 
                 var data = await query.ToListAsync();
@@ -55,8 +50,6 @@ namespace Phoenix.Server.Services.MainServices
             {
 
             }
-
-
 
             return result;
         }
@@ -161,7 +154,6 @@ namespace Phoenix.Server.Services.MainServices
                         _dataContext.InventoryTags.Add(inventoryTags);
                         await _dataContext.SaveChangesAsync();
                     }
-                    //chưa có thuốc trong kho
                     
                 }
 
@@ -177,6 +169,7 @@ namespace Phoenix.Server.Services.MainServices
         }
         #endregion
 
+        #region CreateOutputInventory
         public async Task<CrudResult> CreateOutputInventory(OutputInfoRequest request)
         {
             var Output = new Output();
@@ -207,7 +200,6 @@ namespace Phoenix.Server.Services.MainServices
             inventory.IdMedicine = request.IdMedicine;
             inventory.Count = inventory.Count - request.Count;
             inventory.LotNumber = inventory.LotNumber;
-            //inventory.IdInputInfo = null;
 
             await _dataContext.SaveChangesAsync();
 
@@ -218,11 +210,8 @@ namespace Phoenix.Server.Services.MainServices
             InventoryTags.LotNumber = (int)inventory.LotNumber;
             InventoryTags.UnitPrice = 2;
             InventoryTags.TotalPrice = 2;
-            //InventoryTags.SupplierId = 32;
-
             InventoryTags.DocumentType = request.IdReason;
             InventoryTags.MedicineId = request.IdMedicine;
-
             InventoryTags.Qty_After = inventory.Count;
             InventoryTags.Qty = request.Count;
             InventoryTags.Qty_Before = 0;
@@ -233,7 +222,7 @@ namespace Phoenix.Server.Services.MainServices
 
             return new CrudResult() { IsOk = true };
         }
-
+        #endregion
 
         ///web
         public async Task<BaseResponse<OutputInfoDto>> GetAllOutputInfoById(int Id, OutputInfoRequest request)

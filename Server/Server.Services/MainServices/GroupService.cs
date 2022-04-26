@@ -34,7 +34,7 @@ namespace Phoenix.Server.Services.MainServices
             _dataContext = dataContext;
         }
 
-        //lấy danh sách nhà cung cấp
+        //lấy danh sách nhóm thuốc
         public async Task<BaseResponse<GroupDto>> GetAllGroup(GroupRequest request)
         {
             var result = new BaseResponse<GroupDto>();
@@ -64,14 +64,13 @@ namespace Phoenix.Server.Services.MainServices
         public async Task<CrudResult> CreateGroup(GroupRequest request)
         {
             var Group = new Group();
-            Group.Name = request.Name;      
+            Group.Name = request.Name;  
+            
             _dataContext.Groups.Add(Group);
             await _dataContext.SaveChangesAsync();
             return new CrudResult() { IsOk = true };
         }
 
-        //Task<CrudResult> UpdateGroup(int IdGroup, GroupRequest request);
-        //Task<CrudResult> DeleteGroup(int IdGroup);
         public async Task<CrudResult> UpdateGroup(int IdGroup, GroupRequest request)
         {
             var Group = _dataContext.Groups.Find(IdGroup);

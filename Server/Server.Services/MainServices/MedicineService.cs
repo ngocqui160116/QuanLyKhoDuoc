@@ -60,11 +60,7 @@ namespace Phoenix.Server.Services.MainServices
                 {
                     query = query.Where(d => d.Status.Contains(request.Status));
                 }
-                //if (request.Status.ToString() == "đang bán")
-                /*if(request.Status.Contains(request.Status)
-                {
-                    query = query.Where(d => d.Status.Contains(request.Status));
-                }*/
+
                 query = query.OrderByDescending(d => d.IdMedicine);
 
                 var data = await query.ToListAsync();
@@ -78,7 +74,6 @@ namespace Phoenix.Server.Services.MainServices
             return result;
         }
 
-        // Task<CrudResult> CreateMedicine(MedicineRequest request);
         public async Task<CrudResult> CreateMedicine(MedicineRequest request)
         {
             var Medicine = new Medicine();
@@ -102,8 +97,6 @@ namespace Phoenix.Server.Services.MainServices
             return new CrudResult() { IsOk = true };
         }
 
-        //Task<CrudResult> UpdateMedicine(int IdMedicine, MedicineRequest request);
-        //Task<CrudResult> DeleteMedicine(int IdMedicine);
         public async Task<CrudResult> UpdateMedicine(int IdMedicine, MedicineRequest request)
         {
             var Medicine = _dataContext.Medicines.Find(IdMedicine);

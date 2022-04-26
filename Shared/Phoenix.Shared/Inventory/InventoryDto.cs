@@ -12,7 +12,7 @@ namespace Phoenix.Shared.Inventory
         public int IdMedicine { get; set; }
         public int? Count { get; set; }
         public int? IdInputInfo { get; set; }
-    //
+        //
         public string MedicineName { get; set; }
         public int? LotNumber { get; set; }
         public double? UnitPrice { get; set; }

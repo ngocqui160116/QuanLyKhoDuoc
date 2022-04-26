@@ -15,7 +15,6 @@ namespace Phoenix.Server.Services.MainServices
 {
     public interface IDashboardService
     {
-
         Task<BaseResponse<MedicineDto>> GetAllMedicine(MedicineRequest request);
     }
     public class DashboardService : IDashboardService

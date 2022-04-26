@@ -1,11 +1,7 @@
 ﻿using Phoenix.Server.Services.MainServices;
 using Phoenix.Shared.Common;
 using Phoenix.Shared.InventoryTags;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Http;
 
 namespace Phoenix.Server.Api.Api

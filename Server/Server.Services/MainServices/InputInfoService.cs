@@ -4,7 +4,6 @@ using Phoenix.Server.Data.Entity;
 using Phoenix.Server.Services.Database;
 using Phoenix.Shared.Common;
 using Phoenix.Shared.Core;
-using Phoenix.Shared.Input;
 using Phoenix.Shared.InputInfo;
 using System;
 using System.Collections.Generic;
@@ -23,7 +22,6 @@ namespace Phoenix.Server.Services.MainServices
         Task<BaseResponse<InputInfoDto>> CreateInputInfo(InputInfoRequest request);
         Task<CrudResult> UpdateInputInfo(int Id, InputInfoRequest request);
         Task<CrudResult> DeleteInputInfo(int Id);
-
 
         //Web
         Task<BaseResponse<InputInfoDto>> GetAll(InputInfoRequest request);
@@ -208,7 +206,6 @@ namespace Phoenix.Server.Services.MainServices
         }
 
         #endregion
-
 
         #region UpdateInputInfo
         public async Task<CrudResult> UpdateInputInfo(int Id, InputInfoRequest request)

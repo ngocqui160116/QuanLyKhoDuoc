@@ -15,7 +15,6 @@ namespace Phoenix.Server.Services.MainServices
 {
     public interface IMedicineItemService
     {
-        //Task<BaseResponse<MedicineItemDto>> GetAllMedicineItems(MedicineItemRequest request);
         Task<BaseResponse<MedicineItemDto>> GetAllMedicineItems(MedicineItemRequest request);
         Task<BaseResponse<MedicineItemDto>> GetMedicineItemById(int Id);
         Task<CrudResult> UpdateMedicineItem(int Medicine_Id, MedicineItemRequest request);
@@ -36,22 +35,18 @@ namespace Phoenix.Server.Services.MainServices
             _dataContext = dataContext;
         }
 
-
-
-        // Lấy danh sách nhà cung cấp
+        // Lấy danh sách
         
         public async Task<BaseResponse<MedicineItemDto>> GetAllMedicineItems(MedicineItemRequest request)
         {
             var result = new BaseResponse<MedicineItemDto>();
             try
             {
-
                 var me = _dataContext.MedicineItems.AsQueryable();
                 if (request.Count < request.Amount)
                 {
                     var query = (from c in _dataContext.MedicineItems
                                  join s in _dataContext.Medicines on c.Medicine_Id equals s.IdMedicine
-
                                  select new
                                  {
                                      Id = c.Id,
@@ -67,20 +62,16 @@ namespace Phoenix.Server.Services.MainServices
                                      Amount = c.Amount,
                                      Modify = c.Amount - c.Count
                                  });
+
                     var config = new MapperConfiguration(cfg => cfg.CreateMissingTypeMaps = true);
                     var mapper = config.CreateMapper();
                     var listcart = query.Select(mapper.Map<MedicineItemDto>).ToList();
-
-                    //var data = await query.ToListAsync();
-
-                    //result.Data = data.MapTo<MedicineItemDto>();
                     result.Data = listcart.MapTo<MedicineItemDto>();
                 }
                 else
                 {
                     var query = (from c in _dataContext.MedicineItems
                                  join s in _dataContext.Medicines on c.Medicine_Id equals s.IdMedicine
-
                                  select new
                                  {
                                      Id = c.Id,
@@ -100,16 +91,8 @@ namespace Phoenix.Server.Services.MainServices
                     var config = new MapperConfiguration(cfg => cfg.CreateMissingTypeMaps = true);
                     var mapper = config.CreateMapper();
                     var listcart = query.Select(mapper.Map<MedicineItemDto>).ToList();
-
-                    //var data = await query.ToListAsync();
-
-                    //result.Data = data.MapTo<MedicineItemDto>();
                     result.Data = listcart.MapTo<MedicineItemDto>();
-                }
-
-
-                  
-
+                }               
             }
             catch (Exception ex)
             {

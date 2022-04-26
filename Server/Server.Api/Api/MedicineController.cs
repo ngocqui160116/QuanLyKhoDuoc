@@ -1,10 +1,7 @@
-﻿using Phoenix.Server.Data.Entity;
-using Phoenix.Server.Services.MainServices;
-using Phoenix.Server.Services.MainServices.Auth;
+﻿using Phoenix.Server.Services.MainServices;
 using Phoenix.Shared.Common;
 using Phoenix.Shared.Core;
 using Phoenix.Shared.Medicine;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -21,7 +18,6 @@ namespace Phoenix.Server.Api.Api
 
         [HttpPost]
         [Route("GetAllMedicine")]
-
         public async Task<BaseResponse<MedicineDto>> GetAllMedicine([FromBody] MedicineRequest request)
         {
             return await _medicineService.GetAllMedicine(request);

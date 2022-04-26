@@ -20,8 +20,6 @@ namespace Phoenix.Server.Services.MainServices
         Task<CrudResult> UpdateStaff(int IdStaff, StaffRequest request);
         Task<CrudResult> DeleteStaff(int IdStaff);
         StaffDto GetStaffById(int User_Id);
-
-       
     }
     public class StaffService : IStaffService
     {
@@ -67,27 +65,11 @@ namespace Phoenix.Server.Services.MainServices
             return result;
         }
 
-        //public StaffDto GetStaffById(int User_Id)
-        //{
-
-        //        // setup query
-        //        var query = _dataContext.Staffs.ToList().FindIndex( d=> d.User_Id == User_Id);
-
-
-        //    var ada = query.Equals(StaffDto);
-
-        //    return query.MapTo<StaffDto>();
-
-
-
-        //}
-
         public StaffDto GetStaffById(int User_Id)
         {
             var staff = _dataContext.Staffs.ToList().FindLast(d => d.User_Id == User_Id);
-
-
-              return  staff.MapTo<StaffDto>();
+            
+            return  staff.MapTo<StaffDto>();
         }
       
         public async Task<CrudResult> CreateStaff(StaffRequest request)
@@ -105,10 +87,6 @@ namespace Phoenix.Server.Services.MainServices
             return new CrudResult() { IsOk = true };
         }
 
-       
-
-        //Task<CrudResult> UpdateStaff(int IdStaff, StaffRequest request);
-        //Task<CrudResult> DeleteStaff(int IdStaff);
         public async Task<CrudResult> UpdateStaff(int IdStaff, StaffRequest request)
         {
             var Staff = _dataContext.Staffs.Find(IdStaff);

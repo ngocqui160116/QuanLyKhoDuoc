@@ -48,19 +48,12 @@ namespace Phoenix.Server.Services.MainServices
         public async Task<BaseResponse<InputDto>> GetAllInput(InputRequest request)
         {
 
-         
             //setup query
             var result = new BaseResponse<InputDto>();
             try
             {
                 // setup query
                 var query = _dataContext.Inputs.AsQueryable();
-
-                //if (!string.IsNullOrEmpty(request.Id))
-                //{
-                //    query = query.Where(d => d.Id.Contains(request.Id));
-                //}
-
 
                 query = query.OrderByDescending(d => d.Id);
 

@@ -14,7 +14,6 @@ namespace Phoenix.Server.Api.Api
     public class GroupController : BaseApiController
     {
       
-
         private readonly IGroupService _GroupService;
         public GroupController(IGroupService GroupService)
         {

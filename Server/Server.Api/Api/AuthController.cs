@@ -28,18 +28,6 @@ namespace Phoenix.Server.Api.Api
             return res;
         }
 
-        //[HttpGet]
-        //[Route("GetUserFromToKen")]
-        //public async Task<User> GetUserFromToken()
-        //{
-        //    var identity = User.Identity as ClaimsIdentity;
-
-        //    if (identity == null) return null;
-        //    var userId = identity.FindFirst("UserId").Value;
-        //    var user = _userService.GetUserById(int.Parse(userId));
-        //    return user;
-        //}
-
         [HttpGet]
         [Route("GetUserFromToKen")]
         public async Task<UserDto> GetUserFromToken()

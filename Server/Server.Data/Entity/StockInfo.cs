@@ -17,7 +17,6 @@ namespace Phoenix.Server.Data.Entity
         [ForeignKey("Inventory_Id")]
         public virtual Inventory Inventory { get; set; }
         public int Medicine_Id { get; set; }
-      
         public int Amount { get; set; }
         public int ActualAmount { get; set; }
     }

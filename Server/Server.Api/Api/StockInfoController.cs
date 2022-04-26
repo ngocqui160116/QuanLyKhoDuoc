@@ -15,7 +15,6 @@ namespace Phoenix.Server.Api.Api
     public class StockInfoController : BaseApiController
     {
 
-
         private readonly IStockInfoService _StockInfoService;
         public StockInfoController(IStockInfoService StockInfoService)
         {
@@ -29,14 +28,12 @@ namespace Phoenix.Server.Api.Api
             return await _StockInfoService.GetAllStockInfo(request);
         }
 
-
         [HttpPost]
         [Route("CreateStockInfo")]
         public Task<BaseResponse<StockInfoDto>> CreateStockInfo(StockInfoRequest request)
         {
             return _StockInfoService.CreateStockInfo(request);
         }
-
-       
+ 
     }
 }

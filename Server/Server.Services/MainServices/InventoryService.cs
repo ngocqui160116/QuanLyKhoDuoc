@@ -14,12 +14,9 @@ using System.Collections.ObjectModel;
 
 namespace Phoenix.Server.Services.MainServices
 {
-   
     public interface IInventoryService
     {
-
         Task<BaseResponse<InventoryDto>> GetAllInventory(InventoryRequest request);
-
         /// 
         Task<BaseResponse<InventoryDto>> GetInventory();
         Task<BaseResponse<InventoryDto>> GetAll(InventoryRequest request);
@@ -55,7 +52,6 @@ namespace Phoenix.Server.Services.MainServices
             {
 
             }
-
             return result;
         }
 

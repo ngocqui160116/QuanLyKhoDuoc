@@ -14,7 +14,5 @@ namespace Phoenix.Server.Data.Entity
         [Key]
         public int IdReason { get; set; }
         public string NameReason { get; set; }
-
     }
-  
 }

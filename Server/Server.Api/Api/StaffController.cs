@@ -48,19 +48,11 @@ namespace Phoenix.Server.Api.Api
             return _StaffService.DeleteStaff(IdStaff);
         }
 
-        //[HttpPost]
-        //[Route("GetStaffById")]
-
-        //public async Task<BaseResponse<StaffDto>> GetStaffById(int User_Id)
-        //{
-        //    return await _StaffService.GetStaffById(User_Id);
-        //}
 
         [HttpPost]
         [Route("GetStaffById")]
         public async Task<StaffDto> GetStaffById(int User_Id)
         {
-
             var user = _StaffService.GetStaffById(User_Id);
             return user;
         }

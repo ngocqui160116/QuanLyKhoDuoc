@@ -2,25 +2,18 @@
 using Phoenix.Server.Data.Entity;
 using Phoenix.Server.Services.Database;
 using Phoenix.Shared.StockInfo;
-using Phoenix.Shared.Inventory;
-using System.Collections.Generic;
 using System.Linq;
 using Phoenix.Shared.Common;
 using System.Threading.Tasks;
 using System;
 using System.Data.Entity;
-using AutoMapper;
-using System.Collections.ObjectModel;
-using Phoenix.Shared.Stock;
-using Phoenix.Shared.StockInfo;
-using Phoenix.Shared.Core;
+
 
 namespace Phoenix.Server.Services.MainServices
 {
    
     public interface IStockInfoService
     {
-
         Task<BaseResponse<StockInfoDto>> GetAllStockInfo(StockInfoRequest request);
         Task<BaseResponse<StockInfoDto>> CreateStockInfo(StockInfoRequest request);
         /// 
@@ -44,8 +37,7 @@ namespace Phoenix.Server.Services.MainServices
                 // setup query
                 var query = _dataContext.StockInfos.AsQueryable();
 
-                // filter
-                
+                // filter               
                 query = query.OrderByDescending(d => d.Id);
 
                 var data = await query.ToListAsync();
@@ -142,8 +134,6 @@ namespace Phoenix.Server.Services.MainServices
                         _dataContext.InventoryTags.Add(inventoryTags);
                         await _dataContext.SaveChangesAsync();
                     }
-                    //chưa có thuốc trong kho
-
                 }
 
                 result.Data = data.MapTo<StockInfoDto>();

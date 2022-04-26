@@ -6,7 +6,6 @@ namespace Phoenix.Shared.Output
 {
     public class OutputContentDto
     {
-        
         public int medicineId { get; set; }
         public int InventoryCount { get; set; }
         public int LotNumber { get; set; }

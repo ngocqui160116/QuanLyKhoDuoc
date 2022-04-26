@@ -21,7 +21,6 @@ namespace Phoenix.Server.Services.Database
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Setting> Settings { get; set; }
         //modules   
-     
         public virtual DbSet<Vendor> Vendors { get; set; }
         public virtual DbSet<Reason> Reasons { get; set; }
         public virtual DbSet<Group> Groups { get; set; }

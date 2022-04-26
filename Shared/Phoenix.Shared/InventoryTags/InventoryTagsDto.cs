@@ -20,10 +20,9 @@ namespace Phoenix.Shared.InventoryTags
         public int Qty_After { get; set; }
         public double UnitPrice { get; set; }
         public double TotalPrice { get; set; }
-
         //
         public string MedicineName { get; set; }
         public string DocumentTypeName { get; set; }
-        //public List<InventoryTagsDto> List { get; set; }
+
     }
 }

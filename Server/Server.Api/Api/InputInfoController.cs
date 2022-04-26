@@ -34,14 +34,11 @@ namespace Phoenix.Server.Api.Api
             return _InputInfoService.CreateInputInfo( request);
         }
 
-        
-
         [HttpPost]
         [Route("Complete")]
         public Task<BaseResponse<InputInfoDto>> Complete(int Id, InputInfoRequest request)
         {
             return _InputInfoService.Complete(Id , request);
-        }
-        
+        }    
     }
 }

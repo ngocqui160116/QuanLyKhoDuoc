@@ -23,6 +23,5 @@ namespace Phoenix.Server.Data.Entity
         public int Count { get; set; }
         public double Total { get; set; }
         public double OutputPrice { get; set; }
-
     }
 }

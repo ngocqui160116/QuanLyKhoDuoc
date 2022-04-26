@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace Phoenix.Shared.DocumentType
 {
- 
     public class DocumentTypeRequest : BaseRequest
     {
         public string Name { get; set; }

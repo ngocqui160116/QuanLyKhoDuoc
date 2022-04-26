@@ -27,7 +27,6 @@ namespace Phoenix.Server.Api.Api
             return await _SupplierService.GetAllSupplier(request);
         }
 
-      
         [HttpPost]
         [Route("CreateSupplier")]
         public Task<CrudResult> CreateSupplier([FromBody] SupplierRequest request)

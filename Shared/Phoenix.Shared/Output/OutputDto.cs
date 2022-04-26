@@ -5,8 +5,7 @@ using System.Collections.Generic;
 namespace Phoenix.Shared.Output
 {
     public class OutputDto
-    {
-        
+    {    
         public int Id { get; set; }
         public int IdStaff { get; set; }
         public DateTime DateOutput { get; set; }
