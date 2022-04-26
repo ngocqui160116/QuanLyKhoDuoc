@@ -17,8 +17,9 @@ namespace Phoenix.Server.Services.MainServices
         Task<BaseResponse<StockInfoDto>> GetAllStockInfo(StockInfoRequest request);
         Task<BaseResponse<StockInfoDto>> CreateStockInfo(StockInfoRequest request);
         /// 
-        Task<BaseResponse<StockInfoDto>> GetAll(StockInfoRequest request);
+        Task<BaseResponse<StockInfoDtoWeb>> GetAll(int Id,StockInfoRequest request);
         StockInfo GetLatestStockInfo();
+        Task<BaseResponse<StockInfoDto>> GetAllStockInfoById(int Id, StockInfoRequest request);
     }
     public class StockInfoService : IStockInfoService
     {
@@ -149,14 +150,14 @@ namespace Phoenix.Server.Services.MainServices
         #endregion
 
         /// 
-        public async Task<BaseResponse<StockInfoDto>> GetAll(StockInfoRequest request)
+        public async Task<BaseResponse<StockInfoDtoWeb>> GetAll(int Id,StockInfoRequest request)
         {
-            var result = new BaseResponse<StockInfoDto>();
+            var result = new BaseResponse<StockInfoDtoWeb>();
 
             try
             {
                 // setup query
-                var query = _dataContext.Stocks.AsQueryable();
+                var query = _dataContext.StockInfos.Where(p => p.Stock_Id.Equals(Id));
 
                 // filter
 
@@ -164,7 +165,8 @@ namespace Phoenix.Server.Services.MainServices
                 var i = query.Count();
                 var data = await query.Skip(request.Page * request.PageSize).Take(request.PageSize).ToListAsync();
                 result.DataCount = (int)((await query.CountAsync()) / request.PageSize) + 1;
-                result.Data = data.MapTo<StockInfoDto>();
+                result.Data = data.MapTo<StockInfoDtoWeb>();
+
 
             }
             catch (Exception ex)
@@ -181,6 +183,26 @@ namespace Phoenix.Server.Services.MainServices
             query = query.OrderByDescending(d => d.Id);
             var da = query.FirstOrDefault();
             return da;
+        }
+        public async Task<BaseResponse<StockInfoDto>> GetAllStockInfoById(int Id, StockInfoRequest request)
+        {
+            var result = new BaseResponse<StockInfoDto>();
+            try
+            {
+                //var query = _dataContext.StockInfos.AsQueryable();
+
+                //query = query.OrderByDescending(d => d.Id);
+                //var get = GetInputInfoById(Id);
+                var list = _dataContext.StockInfos.Where(p => p.Stock_Id.Equals(Id));
+
+                var data = await list.ToListAsync();
+                result.Data = data.MapTo<StockInfoDto>();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return result;
         }
     }
 }

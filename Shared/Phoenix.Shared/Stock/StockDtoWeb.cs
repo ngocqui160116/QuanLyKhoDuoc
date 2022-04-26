@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Phoenix.Shared.Stock
 {
-    public class StockDto
+    public class StockDtoWeb
     {
         public int Id { get; set; }
         public int IdStaff { get; set; }

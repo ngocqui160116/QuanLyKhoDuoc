@@ -30,7 +30,7 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
         {
             return View();
         }
-        /*public ActionResult Detail(int Id)
+        public ActionResult Detail(int Id)
         {
             //DataContext db = new DataContext();
             //var inputinfo = db.InputInfos.Where(n => n.IdInput.Equals(Id)).ToList();
@@ -42,7 +42,7 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
         [HttpPost]
         public async Task<ActionResult> Detail(DataSourceRequest command, StockInfoModel model)
         {
-            var stockinfos = await _stockinfoService.GetAllInputInfoById(model.Id,new StockInfoRequest()
+            var stockinfos = await _stockinfoService.GetAll(model.Id, new StockInfoRequest()
             {
                 Page = command.Page - 1,
                 PageSize = command.PageSize
@@ -54,7 +54,7 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
                 Total = stockinfos.DataCount
             };
             return Json(gridModel);
-        }*/
+        }
         public void SetViewBag(long? selectedId = null)
         {
             DataContext db = new DataContext();

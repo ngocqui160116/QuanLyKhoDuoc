@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Phoenix.Server.Services.Database;
 using Phoenix.Server.Services.MainServices;
 using Phoenix.Server.Web.Areas.Admin.Models.Stock;
+using Phoenix.Server.Web.Areas.Admin.Models.StockInfo;
 using Phoenix.Shared.Stock;
 using System;
 using System.Collections.Generic;
@@ -85,6 +86,31 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
             }
             SuccessNotification("Thêm mới thành công");
             return RedirectToAction("Index");
+        }
+        public ActionResult Detail(int Id)
+        {
+            //DataContext db = new DataContext();
+            //var inputinfo = db.InputInfos.Where(n => n.IdInput.Equals(Id)).ToList();
+            var model = new StockInfoModel();
+            model.Id = Id;
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Detail(DataSourceRequest command, StockInfoModel model)
+        {
+            var stockinfos = await _stockService.GetAllStockInfoById(model.Id, new StockRequest()
+            {
+                Page = command.Page - 1,
+                PageSize = command.PageSize
+            });
+
+            var gridModel = new DataSourceResult
+            {
+                Data = stockinfos.Data,
+                Total = stockinfos.DataCount
+            };
+            return Json(gridModel);
         }
     }
 }

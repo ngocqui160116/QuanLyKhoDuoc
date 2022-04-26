@@ -12,6 +12,7 @@ using System.Data.Entity;
 using AutoMapper;
 using System.Collections.ObjectModel;
 using Phoenix.Shared.Stock;
+using Phoenix.Shared.StockInfo;
 
 namespace Phoenix.Server.Services.MainServices
 {
@@ -19,8 +20,9 @@ namespace Phoenix.Server.Services.MainServices
     {
         Task<BaseResponse<StockDto>> GetAllStock(StockRequest request);
         /// 
-        Task<BaseResponse<StockDto>> GetAll(StockRequest request);
+        Task<BaseResponse<StockDtoWeb>> GetAll(StockRequest request);
         Task<BaseResponse<StockDto>> Create(StockRequest request);
+        Task<BaseResponse<StockInfoDto>> GetAllStockInfoById(int Id, StockRequest request);
         Stock GetLatestStock();
     }
     public class StockService : IStockService
@@ -58,9 +60,9 @@ namespace Phoenix.Server.Services.MainServices
         }
 
         /// 
-        public async Task<BaseResponse<StockDto>> GetAll(StockRequest request)
+        public async Task<BaseResponse<StockDtoWeb>> GetAll(StockRequest request)
         {
-            var result = new BaseResponse<StockDto>();
+            var result = new BaseResponse<StockDtoWeb>();
 
             try
             {
@@ -68,12 +70,17 @@ namespace Phoenix.Server.Services.MainServices
                 var query = _dataContext.Stocks.AsQueryable();
 
                 // filter
+<<<<<<< HEAD
+                //if()
+
+=======
+>>>>>>> 06e928393ac59d4afe06ccc0aefa73eb5529597f
                 query = query.OrderByDescending(d => d.Id);
                 var i = query.Count();
                 //var data = await query.ToListAsync();
                 var data = await query.Skip(request.Page * request.PageSize).Take(request.PageSize).ToListAsync();
                 result.DataCount = (int)((await query.CountAsync()) / request.PageSize) + 1;
-                result.Data = data.MapTo<StockDto>();
+                result.Data = data.MapTo<StockDtoWeb>();
 
             }
             catch (Exception ex)
@@ -113,10 +120,13 @@ namespace Phoenix.Server.Services.MainServices
                 await _dataContext.SaveChangesAsync();
 
                 var LatestStock = GetLatestStock();
-                
+
                 foreach (var item in request.List)
                 {
+<<<<<<< HEAD
+=======
 
+>>>>>>> 06e928393ac59d4afe06ccc0aefa73eb5529597f
                     //thêm thẻ kho
                     var LatestStockInfo = _stockinfoService.GetLatestStockInfo();
                     InventoryTags inventoryTags = new InventoryTags();
@@ -148,8 +158,34 @@ namespace Phoenix.Server.Services.MainServices
                             await _dataContext.SaveChangesAsync();
                         }
                     }
+<<<<<<< HEAD
+
+
+
+=======
+>>>>>>> 06e928393ac59d4afe06ccc0aefa73eb5529597f
                 }
                 result.Success = true;
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return result;
+        }
+        public async Task<BaseResponse<StockInfoDto>> GetAllStockInfoById(int Id,StockRequest request)
+        {
+            var result = new BaseResponse<StockInfoDto>();
+            try
+            {
+                //var query = _dataContext.StockInfos.AsQueryable();
+
+                //query = query.OrderByDescending(d => d.Id);
+                //var get = GetInputInfoById(Id);
+                var list = _dataContext.StockInfos.Where(p => p.Stock_Id.Equals(Id));
+
+                var data = await list.ToListAsync();
+                result.Data = data.MapTo<StockInfoDto>();
             }
             catch (Exception ex)
             {

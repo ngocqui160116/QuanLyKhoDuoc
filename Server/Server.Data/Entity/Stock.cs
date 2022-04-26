@@ -17,6 +17,7 @@ namespace Phoenix.Server.Data.Entity
         public DateTime Date { get; set; }
         public string Note { get; set; }
 
+
         //List
         public virtual ICollection<StockInfo> StockInfo { get; set; }
     }

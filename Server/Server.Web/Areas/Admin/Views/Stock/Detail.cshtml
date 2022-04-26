@@ -1,7 +1,5 @@
 ﻿@using Phoenix.Server.Services.Database;
-@model Phoenix.Server.Web.Areas.Admin.Models.Stock.StockModel
-@Html.ValidationSummary(true)
-@Html.HiddenFor(model => model.Id)
+
 @section Scripts{
     <script type="text/javascript" src="~/assets/js/tabulator.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
@@ -9,25 +7,24 @@
 @section Breadcrumb{
     <div class="-intro-x breadcrumb mr-auto hidden sm:flex">
         <span>Chương trình</span> <i data-feather="chevron-right" class="breadcrumb__icon"></i>
-        <a href="#" class="breadcrumb--active">Quản lý kho</a><i data-feather="chevron-right" class="breadcrumb__icon"></i>
         <a href="#" class="breadcrumb--active">Kiểm kho</a>
     </div>
 }
 @Html.AntiForgeryToken()
 <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
     <h2 class="text-lg font-medium mr-auto">
-        Danh sách phiếu kiểm kho
+        Chi tiết phiếu kiểm kho
     </h2>
     <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
-        <a href="@Url.Action("Create","Stock")" class="btn btn-primary text-white shadow-md mr-2">Thêm mới</a>
+        <a href="@Url.Action("Index","Stock")" class="btn btn-primary text-white shadow-md mr-2">Quay lại</a>
     </div>
 </div>
-@*<div class="grid gap-6 mt-5">
+<div class="grid gap-6 mt-5">
     <div class="intro-y box p-5">
         <div class="grid grid-cols-12 gap-2">
             <div class="col-span-12 lg:col-span-6">
-                <label>Mã phiếu</label>
-                <input type="text" id="Id" class="form-control">
+                <label>Phiếu kiểm kho</label>
+                <input type="text" id="Name" class="form-control">
             </div>
         </div>
         <div class="grid mt-3">
@@ -37,7 +34,7 @@
             </div>
         </div>
     </div>
-</div>*@
+</div>
 <div class="intro-y box p-5 mt-5">
     <div id="main-grid"></div>
     <script>
@@ -52,10 +49,10 @@
         }
         var table = new Tabulator("#main-grid", {
             layout: "fitDataFill",
-            ajaxURL: "@Html.Raw(Url.Action("List", "Stock"))",
+            ajaxURL: "@Html.Raw(Url.Action("Detail", "Stock"))",
             ajaxConfig: "post",
             ajaxRequesting: function (url, params) {
-                params.Id = $('#Id').val();
+                params.Name = $('#MedicineName').val();
             },
             ajaxResponse: function (url, params, response) {
                 return response;
@@ -74,18 +71,23 @@
             },
             placeholder: "Chưa có dữ liệu",
             columns: [
-                { title: "Mã phiếu", field: "Id", sorter: "string", width: 120 },
+                { title: "Mã hóa đơn", field: "IdInput", sorter: "string", width: 150 },
                 {
-                    title: "Tên nhân viên", field: "StaffName", sorter: "string", width: 250, formatter(cell, formatterParams) {
-                        return `<a href="../Admin/StockInfo/Detail/${cell.getData().Id}" class="text-theme-1 dark:text-theme-10"> ${cell.getData().StaffName}</a>`
+                    title: "Tên thuốc", field: "MedicineName", sorter: "string", width: 200, formatter(cell, formatterParams)
+                    {
+                        return `<a class="text-theme-1 dark:text-theme-10"> ${cell.getData().MedicineName}</a>`
                     }
                 },
-                { title: "Ngày tạo", field: "Date", sorter: "date", width: 200, formatter: dateFormatter},
+                { title: "Số lô", field: "IdBatch", sorter: "string", width: 130 },
+                { title: "Số lượng", field: "Count", sorter: "string", width: 130 },
+                { title: "Giá nhập", field: "InputPrice", sorter: "string", width: 150 },
+                { title: "Tổng tiển", field: "Total", sorter: "string", width: 150 },
+                { title: "Hạn sử dụng", field: "DueDate", sorter: "date", width: 180, formatter: dateFormatter },
                 {
-                    title: "Ghi chú", field: "Note", sorter: "string", width: 350, formatter(cell, formatterParams) {
-                        return `<a href="../Stock/Detail/${cell.getData().Id}" class="text-theme-1 dark:text-theme-10"> ${cell.getData().Note}</a>`
+                    title: "", field: "IdInputInfo", sorter: "string", width: 80, formatter(cell, formatterParams) {
+                        return `<a href="../Admin/InputInfo/Update/${cell.getData().Id}" class="btn btn-primary text-white shadow-md mr-2">Sửa</a>`
                     }
-                },
+                }
                 @*{
                     title: "Ngày tạo", field: "CreatedAt", sorter: "date", width: 180, formatter: dateFormatter
                 },
@@ -98,9 +100,8 @@
             table.setData();
         }
         let onResetSearch = (e) => {
-            $('#Id').val('');
+            $('#MedicineName').val('');
             table.setData();
         }
     </script>
 </div>
-
