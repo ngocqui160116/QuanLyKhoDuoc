@@ -66,6 +66,19 @@ namespace Phoenix.Mobile.PageModels.Auth
                     IsBusy = false;
                     return;
                 }
+                if (Password.Length < 6)
+                {
+                    await CoreMethods.DisplayAlert("Lỗi", "Mật khẩu phải lớn hơn 6 ký tự", "OK");
+                    IsBusy = false;
+                    return;
+                }
+
+                if (Phone.CheckPhoneNumber() == false)
+                {
+                    await CoreMethods.DisplayAlert("Lỗi", "Vui lòng nhập đúng số điện thoại", "OK");
+                    IsBusy = false;
+                    return;
+                }
 
                 var data = await _userService.CreateUser(new UserRequest
                 {
@@ -76,8 +89,6 @@ namespace Phoenix.Mobile.PageModels.Auth
                 });
                 await CoreMethods.PopPageModel();
                 _dialogService.Toast("Đăng ký thành công");
-                //await CoreMethods.PushPageModel<LoginPageModel>();
-                //await _dialogService.AlertAsync("Đăng ký thành công");
                 IsBusy = false;
 
             }

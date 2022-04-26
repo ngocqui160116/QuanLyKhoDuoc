@@ -127,6 +127,28 @@ namespace Phoenix.Mobile.PageModels.Common
                     IsBusy = false;
                     return;
                 }
+
+                if (Active.IsNullOrEmpty())
+                {
+                    await _dialogService.AlertAsync("Vui lòng nhập hoạt chất thuốc");
+                    IsBusy = false;
+                    return;
+                }
+
+                if (Content.IsNullOrEmpty())
+                {
+                    await _dialogService.AlertAsync("Vui lòng nhập hàm lượng thuốc");
+                    IsBusy = false;
+                    return;
+                }
+
+                if (Packing.IsNullOrEmpty())
+                {
+                    await _dialogService.AlertAsync("Vui lòng nhập QC đóng gói");
+                    IsBusy = false;
+                    return;
+                }
+
                 if (IdUnit.Equals(0))
                 {
                     await _dialogService.AlertAsync("Vui lòng Chọn Đơn vị tính");

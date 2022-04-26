@@ -47,7 +47,7 @@
                                 Grid.Column="1"
                                 TextColor="Black"
                                 Text="{Binding Name}"
-                                Placeholder="VN-001"
+                                Placeholder="Họ tên"
                                 WidthRequest="200"/>
 
                         <Label  Grid.Row="2"
@@ -94,6 +94,7 @@
                         <Entry  Grid.Row="4"
                                 Grid.Column="1"
                                 TextColor="Black"
+                                Placeholder="Điện thoại"
                                 Text="{Binding PhoneNumber}"
                                 WidthRequest="200"                         
                                 Keyboard="Text"/>

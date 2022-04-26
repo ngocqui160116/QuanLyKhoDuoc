@@ -1,4 +1,5 @@
-﻿using Phoenix.Mobile.Core.Infrastructure;
+﻿using Phoenix.Framework.Extensions;
+using Phoenix.Mobile.Core.Infrastructure;
 using Phoenix.Mobile.Core.Models.Group;
 using Phoenix.Mobile.Core.Models.Medicine;
 using Phoenix.Mobile.Core.Models.Unit;
@@ -141,6 +142,40 @@ namespace Phoenix.Mobile.PageModels.Common
             {
                 if (IsBusy) return;
                 IsBusy = true;
+                if (Name.IsNullOrEmpty())
+                {
+                    await _dialogService.AlertAsync("Vui lòng nhập tên thuốc");
+                    IsBusy = false;
+                    return;
+                }
+
+                if (SDK.IsNullOrEmpty())
+                {
+                    await _dialogService.AlertAsync("Vui lòng nhập số đăng ký");
+                    IsBusy = false;
+                    return;
+                }
+
+                if (Active.IsNullOrEmpty())
+                {
+                    await _dialogService.AlertAsync("Vui lòng nhập hoạt chất thuốc");
+                    IsBusy = false;
+                    return;
+                }
+
+                if (Content.IsNullOrEmpty())
+                {
+                    await _dialogService.AlertAsync("Vui lòng nhập hàm lượng thuốc");
+                    IsBusy = false;
+                    return;
+                }
+
+                if (Packing.IsNullOrEmpty())
+                {
+                    await _dialogService.AlertAsync("Vui lòng nhập QC đóng gói");
+                    IsBusy = false;
+                    return;
+                }
 
                 var data = await _medicineService.UpdateMedicine(IdMedicine, new MedicineRequest
                 {

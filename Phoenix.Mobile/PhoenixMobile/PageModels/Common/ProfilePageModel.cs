@@ -1,10 +1,13 @@
-﻿using Phoenix.Mobile.Core.Infrastructure;
+﻿using Phoenix.Framework.Extensions;
+using Phoenix.Mobile.Core.Infrastructure;
+using Phoenix.Mobile.Core.Models.Vendor;
 using Phoenix.Mobile.Core.Services;
 using Phoenix.Mobile.Core.Services.Common;
 using Phoenix.Mobile.Helpers;
 using Phoenix.Shared;
 using Phoenix.Shared.Staff;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -42,7 +45,7 @@ namespace Phoenix.Mobile.PageModels.Common
             IsBusy = true;
 
             Gender = "Nam";
-
+        
             #region Users
             var data = await _authService.GetUserFromToken();
             if (data == null)
@@ -67,6 +70,7 @@ namespace Phoenix.Mobile.PageModels.Common
                 Staffs = data1;
                 RaisePropertyChanged(nameof(Staffs));
             }
+            #endregion
 
             IdStaff = Staffs.IdStaff;
             Name = Staffs.Name;
@@ -77,7 +81,7 @@ namespace Phoenix.Mobile.PageModels.Common
             Authority = Staffs.Authority;
             User_Id = Staffs.User_Id;
 
-            #endregion
+            IsBusy = false;
         }
         #region properties
 
@@ -89,7 +93,6 @@ namespace Phoenix.Mobile.PageModels.Common
         public string Address { get; set; }
         public string Authority { get; set; }
         public int User_Id { get; set; }
-
         #endregion
 
         #region properties
@@ -97,7 +100,6 @@ namespace Phoenix.Mobile.PageModels.Common
         public UserDto Users { get; set; } = new UserDto();
         public StaffDto Staffs { get; set; } = new StaffDto();
         public StaffRequest StaffRequest { get; set; } = new StaffRequest();
-
         #endregion
 
         #region EditCommand
@@ -117,6 +119,33 @@ namespace Phoenix.Mobile.PageModels.Common
             {
                 if (IsBusy) return;
                 IsBusy = true;
+                if (Name.IsNullOrEmpty())
+                {
+                    await _dialogService.AlertAsync("Vui lòng nhập họ tên");
+                    IsBusy = false;
+                    return;
+                }
+                
+                if (PhoneNumber.IsNullOrEmpty())
+                {
+                    await _dialogService.AlertAsync("Vui lòng nhập số điện thoại");
+                    IsBusy = false;
+                    return;
+                }
+
+                if (PhoneNumber.CheckPhoneNumber() == false)
+                {
+                    await CoreMethods.DisplayAlert("Lỗi", "Vui lòng nhập đúng số điện thoại", "OK");
+                    IsBusy = false;
+                    return;
+                }
+
+                if (Address.IsNullOrEmpty())
+                {
+                    await _dialogService.AlertAsync("Vui lòng nhập địa chỉ");
+                    IsBusy = false;
+                    return;
+                }
 
                 var data = await _staffService.UpdateStaff(IdStaff, new StaffRequest
                 {
@@ -129,7 +158,7 @@ namespace Phoenix.Mobile.PageModels.Common
                     Authority = Authority,
                     User_Id = User_Id
                  });
-                //await CoreMethods.PushPageModel<SupplierPageModel>();
+
                 await _dialogService.AlertAsync("Cập nhật thành công");
                 IsBusy = false;
                 IsEnabled = false;

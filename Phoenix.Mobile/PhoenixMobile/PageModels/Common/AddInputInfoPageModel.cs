@@ -130,6 +130,18 @@ namespace Phoenix.Mobile.PageModels.Common
             {
                 if (IsBusy) return;
                 IsBusy = true;
+                if (IdBatch.Equals(0))
+                {
+                    await _dialogService.AlertAsync("Vui lòng nhập số lô");
+                    IsBusy = false;
+                    return;
+                }
+                if (Count.Equals(0))
+                {
+                    await _dialogService.AlertAsync("Vui lòng nhập số lượng");
+                    IsBusy = false;
+                    return;
+                }
 
                 var data = await _medicineItemService.UpdateMedicineItem(Id, new MedicineItemRequest
                 {

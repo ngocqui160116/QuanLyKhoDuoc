@@ -51,7 +51,7 @@
                                 </StackLayout>
 
                                 <StackLayout Orientation="Horizontal">
-                                    <Label Text="Người tạo:"
+                                    <Label Text="Người kiểm:"
                                            Margin="10,0,0,0"
                                            FontSize="Medium" />
                                     <Label Text="{Binding StaffName}"

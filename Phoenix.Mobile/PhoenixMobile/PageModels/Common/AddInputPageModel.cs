@@ -136,12 +136,6 @@ namespace Phoenix.Mobile.PageModels.Common
 
                 if (IsBusy) return;
                 IsBusy = true;
-                //if (infoModel.IdMedicine == 0)
-                //{
-                //    await _dialogService.AlertAsync("Vui lòng nhập thông tin thuốc");
-                //    IsBusy = false;
-                //    return;
-                //}
 
                 if (IdSupplier.Equals(0))
                 {
@@ -166,13 +160,13 @@ namespace Phoenix.Mobile.PageModels.Common
                 var data1 = await _medicineItemService.DeleteAll();
 
                 await CoreMethods.PushPageModel<InputPageModel>();
-                await _dialogService.AlertAsync("Thêm thành công");
+                await _dialogService.AlertAsync("Nhập kho thành công");
                 IsBusy = false;
 
             }
             catch (Exception e)
             {
-                await _dialogService.AlertAsync("Thêm thất bại");
+                await _dialogService.AlertAsync("Nhập kho thất bại");
             }
         }
         #endregion
@@ -185,12 +179,6 @@ namespace Phoenix.Mobile.PageModels.Common
             {
                 if (IsBusy) return;
                 IsBusy = true;
-                //if (infoModel.IdMedicine == 0)
-                //{
-                //    await _dialogService.AlertAsync("Vui lòng nhập thông tin thuốc");
-                //    IsBusy = false;
-                //    return;
-                //}
 
                 if (IdSupplier.Equals(0))
                 {
