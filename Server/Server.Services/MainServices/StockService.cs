@@ -70,11 +70,7 @@ namespace Phoenix.Server.Services.MainServices
                 var query = _dataContext.Stocks.AsQueryable();
 
                 // filter
-<<<<<<< HEAD
-                //if()
 
-=======
->>>>>>> 06e928393ac59d4afe06ccc0aefa73eb5529597f
                 query = query.OrderByDescending(d => d.Id);
                 var i = query.Count();
                 //var data = await query.ToListAsync();
@@ -123,10 +119,6 @@ namespace Phoenix.Server.Services.MainServices
 
                 foreach (var item in request.List)
                 {
-<<<<<<< HEAD
-=======
-
->>>>>>> 06e928393ac59d4afe06ccc0aefa73eb5529597f
                     //thêm thẻ kho
                     var LatestStockInfo = _stockinfoService.GetLatestStockInfo();
                     InventoryTags inventoryTags = new InventoryTags();
@@ -158,12 +150,6 @@ namespace Phoenix.Server.Services.MainServices
                             await _dataContext.SaveChangesAsync();
                         }
                     }
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> 06e928393ac59d4afe06ccc0aefa73eb5529597f
                 }
                 result.Success = true;
             }
