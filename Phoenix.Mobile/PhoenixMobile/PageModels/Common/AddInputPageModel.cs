@@ -2,7 +2,6 @@
 using Phoenix.Mobile.Core.Models.InputInfo;
 using Phoenix.Mobile.Core.Models.Medicine;
 using Phoenix.Mobile.Core.Models.MedicineItem;
-using Phoenix.Mobile.Core.Models.Reason;
 using Phoenix.Mobile.Core.Models.Staff;
 using Phoenix.Mobile.Core.Models.Supplier;
 using Phoenix.Mobile.Core.Services.Common;
@@ -10,15 +9,10 @@ using Phoenix.Mobile.Helpers;
 using Phoenix.Shared.Input;
 using Phoenix.Shared.InputInfo;
 using Phoenix.Shared.MedicineItem;
-using Phoenix.Shared.OutputInfo;
-using Phoenix.Shared.Reason;
 using Phoenix.Shared.Staff;
 using Phoenix.Shared.Supplier;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -45,7 +39,6 @@ namespace Phoenix.Mobile.PageModels.Common
         }
         public override async void Init(object initData)
         {
-
             base.Init(initData);
             NavigationPage.SetHasNavigationBar(CurrentPage, false);
             CurrentPage.Title = "Thêm phiếu nhập";
@@ -59,7 +52,6 @@ namespace Phoenix.Mobile.PageModels.Common
 
         private async Task LoadData()
         {
-            
             #region MedicineItem
             var data2 = await _medicineItemService.GetAllMedicineItem(MedicineItemRequest);
             if (data2 == null)
@@ -107,8 +99,6 @@ namespace Phoenix.Mobile.PageModels.Common
             #endregion
         }
 
-            
-
         #region properties
         public List<MedicineItemModel> MedicineItems { get; set; } = new List<MedicineItemModel>();
         public MedicineItemRequest MedicineItemRequest { get; set; } = new MedicineItemRequest();
@@ -134,6 +124,7 @@ namespace Phoenix.Mobile.PageModels.Common
         public int IdSupplier { get; set; }
         public int IdStaff { get; set; }
         public DateTime DateInput { get; set; } = DateTime.Now;
+
         #endregion
 
         #region AddInventoryCommand
@@ -186,7 +177,6 @@ namespace Phoenix.Mobile.PageModels.Common
         }
         #endregion
 
-
         #region AddInput
         public Command AddInput => new Command(async (p) => await AddInputExecute(), (p) => !IsBusy);
         private async Task AddInputExecute()
@@ -233,7 +223,6 @@ namespace Phoenix.Mobile.PageModels.Common
                 await _dialogService.AlertAsync("Lưu thất bại");
             }
 
-           
         }
         #endregion
 

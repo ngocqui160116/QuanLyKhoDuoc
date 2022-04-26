@@ -9,7 +9,6 @@ using Phoenix.Shared.Staff;
 using Phoenix.Shared.StockInfo;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -44,8 +43,6 @@ namespace Phoenix.Mobile.PageModels.Common
 
         private async Task LoadData()
         {
-           
-
             #region MedicineItem
             var data2 = await _medicineItemService.GetAllMedicineItem(MedicineItemRequest);
             if (data2 == null)
@@ -59,21 +56,16 @@ namespace Phoenix.Mobile.PageModels.Common
             }
             #endregion
 
-
-
-
             #region Staff
 
             var data1 = await _staffService.GetAllStaff(StaffRequest);
             if (data1 == null)
             {
                 await _dialogService.AlertAsync("Lỗi kết nối mạng!", "Lỗi", "OK");
-
             }
             else
             {
                 Staffs = data1;
-                //RaisePropertyChanged("Vendors");
                 RaisePropertyChanged(nameof(Staffs));
             }
 
@@ -174,7 +166,6 @@ namespace Phoenix.Mobile.PageModels.Common
                 {
                     //CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn: " +MedicineItemModel.MedicineName, "Đóng");
                     CoreMethods.PushPageModel<AddStockInfoPageModel>(MedicineItemModel);
-
                 });
             }
         }
@@ -214,6 +205,5 @@ namespace Phoenix.Mobile.PageModels.Common
         }
 
         #endregion
-
     }
 }

@@ -1,5 +1,4 @@
-﻿using Phoenix.Framework.Extensions;
-using Phoenix.Mobile.Core.Infrastructure;
+﻿using Phoenix.Mobile.Core.Infrastructure;
 using Phoenix.Mobile.Core.Models.InputInfo;
 using Phoenix.Mobile.Core.Models.Medicine;
 using Phoenix.Mobile.Core.Models.MedicineItem;
@@ -8,7 +7,6 @@ using Phoenix.Mobile.Helpers;
 using Phoenix.Shared.MedicineItem;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -18,7 +16,6 @@ namespace Phoenix.Mobile.PageModels.Common
     public class AddInputInfoPageModel : BasePageModel
     {
         private readonly IMedicineItemService _medicineItemService;
-       
         private readonly IDialogService _dialogService;
 
         public AddInputInfoPageModel(IMedicineItemService medicineItemService, IDialogService dialogService)
@@ -30,7 +27,6 @@ namespace Phoenix.Mobile.PageModels.Common
 
         public override async void Init(object initData)
         {
-
             if (initData != null)
             {
                 MedicineItem = (MedicineItemModel)initData;
@@ -50,7 +46,6 @@ namespace Phoenix.Mobile.PageModels.Common
         private async Task LoadData()
         {
             HSD = DateTime.Now;
-
             Id = MedicineItem.Id;
             IdMedicine = MedicineItem.Medicine_Id;
             NameMedicine = MedicineItem.MedicineName;
@@ -59,8 +54,6 @@ namespace Phoenix.Mobile.PageModels.Common
             InputPrice = MedicineItem.InputPrice;
             HSD = MedicineItem.DueDate;
             Total = MedicineItem.Total;
-
-
         }
 
         #region properties

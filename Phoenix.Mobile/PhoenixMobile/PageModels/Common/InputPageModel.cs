@@ -45,7 +45,6 @@ namespace Phoenix.Mobile.PageModels.Common
 
         private async Task LoadData()
         {
-            
 
             var data = await _InputService.GetAllInput(request);
             if (data == null)
@@ -55,27 +54,8 @@ namespace Phoenix.Mobile.PageModels.Common
             else
             {
                 Inputs = data;
-                
-                //RaisePropertyChanged("Vendors");
                 RaisePropertyChanged(nameof(Inputs));
             }
-
-            //foreach (var item in Inputs)
-            //{
-            //    if (item.Status == "Chờ duyệt")
-            //    {
-            //        color = Color.Black;
-            //    }
-            //    else if (item.Status == "Đã hủy")
-            //    {
-            //        color = Color.Red;
-            //    }
-            //    else
-            //    {
-            //        color = Color.ForestGreen;
-            //    }
-            //}    
-
         }
 
         #region properties
@@ -137,12 +117,10 @@ namespace Phoenix.Mobile.PageModels.Common
         #endregion
 
         #region Search
-
         public ICommand PerformSearch => new Command<string>((string query) =>
         {
             Inputs = GetSearchResults(query);
         });
-
 
         public  List<InputModel> GetSearchResults(string queryString)
         {

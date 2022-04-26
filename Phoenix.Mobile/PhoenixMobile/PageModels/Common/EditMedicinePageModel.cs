@@ -1,5 +1,4 @@
-﻿using FreshMvvm;
-using Phoenix.Mobile.Core.Infrastructure;
+﻿using Phoenix.Mobile.Core.Infrastructure;
 using Phoenix.Mobile.Core.Models.Group;
 using Phoenix.Mobile.Core.Models.Medicine;
 using Phoenix.Mobile.Core.Models.Unit;
@@ -10,9 +9,6 @@ using Phoenix.Shared.Medicine;
 using Phoenix.Shared.Unit;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -31,7 +27,6 @@ namespace Phoenix.Mobile.PageModels.Common
             _groupService = groupService;
             _unitService = unitService;
             _dialogService = dialogService;
-
         }
 
         public override async void Init(object initData)
@@ -73,6 +68,7 @@ namespace Phoenix.Mobile.PageModels.Common
 #endif
             IsBusy = false;
 
+            #region Group
 
             var data = await _groupService.GetAllGroup(request);
             if (data == null)
@@ -82,10 +78,11 @@ namespace Phoenix.Mobile.PageModels.Common
             else
             {
                 Groups = data;
-                //RaisePropertyChanged("Vendors");
                 RaisePropertyChanged(nameof(Groups));
             }
+            #endregion
 
+            #region Unit
             var data1 = await _unitService.GetAllUnit(unitrequest);
             if (data1 == null)
             {
@@ -94,9 +91,9 @@ namespace Phoenix.Mobile.PageModels.Common
             else
             {
                 Units = data1;
-                //RaisePropertyChanged("Vendors");
                 RaisePropertyChanged(nameof(Units));
             }
+            #endregion
         }
 
         #region properties
@@ -106,7 +103,6 @@ namespace Phoenix.Mobile.PageModels.Common
         GroupModel _selectedGroup;
 
         UnitModel _selectedUnit;
-
         public List<GroupModel> Groups { get; set; } = new List<GroupModel>();
         public List<UnitModel> Units { get; set; } = new List<UnitModel>();
         public GroupRequest request { get; set; } = new GroupRequest();
@@ -133,8 +129,7 @@ namespace Phoenix.Mobile.PageModels.Common
         public Command EditCommand => new Command(async (p) => await EditExecute(), (p) => !IsBusy);
         private async Task EditExecute()
         {
-            IsEnabled = true;
-            
+            IsEnabled = true;  
         }
         #endregion
 
@@ -169,8 +164,6 @@ namespace Phoenix.Mobile.PageModels.Common
             }
         }
         #endregion
-
-       
 
         #region SelectedGroup
         public GroupModel SelectedGroup
@@ -226,6 +219,5 @@ namespace Phoenix.Mobile.PageModels.Common
             }
         }
         #endregion
-
     }
 }

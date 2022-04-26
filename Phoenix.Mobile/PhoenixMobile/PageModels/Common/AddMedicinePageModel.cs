@@ -25,7 +25,6 @@ namespace Phoenix.Mobile.PageModels.Common
     public class AddMedicinePageModel : BasePageModel
     {
         private readonly IGroupService _groupService;
-        private readonly ICameraService _cameraService;
         private readonly IUnitService _unitService;
         private readonly IMedicineService _medicineService;
         private readonly IDialogService _dialogService;
@@ -36,7 +35,6 @@ namespace Phoenix.Mobile.PageModels.Common
             _groupService = groupService;
             _unitService = unitService;
             _dialogService = dialogService;
-
         }
 
         public override async void Init(object initData)
@@ -52,7 +50,6 @@ namespace Phoenix.Mobile.PageModels.Common
         }
         private async Task LoadData()
         {
-
             var data = await _groupService.GetAllGroup(request);
             if (data == null)
             {
@@ -61,7 +58,6 @@ namespace Phoenix.Mobile.PageModels.Common
             else
             {
                 Groups = data;
-                //RaisePropertyChanged("Vendors");
                 RaisePropertyChanged(nameof(Groups));
             }
 
@@ -73,10 +69,36 @@ namespace Phoenix.Mobile.PageModels.Common
             else
             {
                 Units = data1;
-                //RaisePropertyChanged("Vendors");
                 RaisePropertyChanged(nameof(Units));
             }
         }
+        #region properties
+        public string SearchText { get; set; }
+        public int IdMedicine { get; set; }
+        public string SDK { get; set; }
+        public string Name { get; set; }
+        public int IdGroup { get; set; }
+        public string Active { get; set; }
+        public string Content { get; set; }
+        public string Packing { get; set; }
+        public int IdUnit { get; set; }
+        public string NameGroup { get; set; }
+        public string NameUnit { get; set; }
+
+        #endregion
+
+        #region properties
+        public List<GroupModel> Groups { get; set; } = new List<GroupModel>();
+        public List<UnitModel> Units { get; set; } = new List<UnitModel>();
+        public GroupRequest request { get; set; } = new GroupRequest();
+        public UnitRequest unitrequest { get; set; } = new UnitRequest();
+
+        GroupModel _selectedGroup;
+
+        UnitModel _selectedUnit;
+        public ImageSource image { get; set; }
+
+        #endregion
 
         #region AddMedicineCommand
         public Command AddMedicineCommand => new Command(async (p) => await AddMedicineExecute(), (p) => !IsBusy);
@@ -130,40 +152,43 @@ namespace Phoenix.Mobile.PageModels.Common
             catch (Exception e)
             {
                 await _dialogService.AlertAsync("Thêm thất bại");
-             
+
             }
         }
         #endregion
 
+        #region SelectedGroup
+        public GroupModel SelectedGroup
+        {
+            get
+            {
 
-
-        #region properties
-        public string SearchText { get; set; }
-        public int IdMedicine { get; set; }
-        public string SDK { get; set; }
-        public string Name { get; set; }
-        public int IdGroup { get; set; }
-        public string Active { get; set; }
-        public string Content { get; set; }
-        public string Packing { get; set; }
-        public int IdUnit { get; set; }
-        public string NameGroup { get; set; }
-        public string NameUnit { get; set; }
-
+                return _selectedGroup;
+            }
+            set
+            {
+                _selectedGroup = value;
+                if (value != null)
+                    IdGroup = value.IdGroup;
+            }
+        }
         #endregion
 
-        #region properties
-        public List<GroupModel> Groups { get; set; } = new List<GroupModel>();
-        public List<UnitModel> Units { get; set; } = new List<UnitModel>();
-        public GroupRequest request { get; set; } = new GroupRequest();
-        public UnitRequest unitrequest { get; set; } = new UnitRequest();
+        #region SelectedUnit
 
-        GroupModel _selectedGroup;
-
-        UnitModel _selectedUnit;
-        public ImageSource image { get; set; }
-
-
+        public UnitModel SelectedUnit
+        {
+            get
+            { 
+                return _selectedUnit;
+            }
+            set
+            {
+                 _selectedUnit = value;
+                if (value != null)
+                    IdUnit = value.Id;   
+            }
+        }
         #endregion
 
         #region TakeCameraCommand
@@ -202,18 +227,8 @@ namespace Phoenix.Mobile.PageModels.Common
                 file.Dispose();
                 return stream;
             });
-
-            //using (var ms = new MemoryStream())
-            //{
-            //    file.GetStream().CopyTo(ms);
-            //    result.Path = file.Path;
-            //    result.Content = ms.ToArray();
-            //    //result.Ext = file.Path.GetFileType();
-            //}
-
         }
         #endregion
-
 
         #region TakeImageCommand
 
@@ -245,36 +260,5 @@ namespace Phoenix.Mobile.PageModels.Common
         }
         #endregion
 
-        public GroupModel SelectedGroup
-        {
-            get
-            {
-
-                return _selectedGroup;
-            }
-            set
-            {
-                _selectedGroup = value;
-                if (value != null)
-                    IdGroup = value.IdGroup;
-            }
-        }
-
-       
-        public UnitModel SelectedUnit
-        {
-            get
-            { 
-                return _selectedUnit;
-            }
-            set
-            {
-                 _selectedUnit = value;
-                if (value != null)
-                    IdUnit = value.Id;   
-            }
-        }
-
-        
     }
 }

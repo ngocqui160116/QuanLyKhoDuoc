@@ -18,13 +18,10 @@ namespace Phoenix.Mobile.PageModels.Common
         private readonly IStockService _StockService;
         private readonly IDialogService _dialogService;
 
-        // public ObservableCollection<StockDto> Stock { get; set; }
-
         public StockPageModel(IStockService StockService, IDialogService dialogService)
         {
             _StockService = StockService;
             _dialogService = dialogService;
-
         }
 
         public override async void Init(object initData)
@@ -49,16 +46,15 @@ namespace Phoenix.Mobile.PageModels.Common
             else
             {
                 Stocks = data;
-
-                //RaisePropertyChanged("Vendors");
                 RaisePropertyChanged(nameof(Stocks));
             }
         }
-            #region properties
-            public List<StockModel> Stocks { get; set; } = new List<StockModel>();
-            public StockRequest request { get; set; } = new StockRequest();
-            public string Id { get; set; }
-            public DateTime Date { get; set; }
+
+        #region properties
+        public List<StockModel> Stocks { get; set; } = new List<StockModel>();
+        public StockRequest request { get; set; } = new StockRequest();
+        public string Id { get; set; }
+        public DateTime Date { get; set; }
         #endregion
 
         #region BackCommand

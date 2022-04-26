@@ -5,7 +5,6 @@ using Phoenix.Mobile.Helpers;
 using Phoenix.Shared.MedicineItem;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -14,7 +13,6 @@ namespace Phoenix.Mobile.PageModels.Common
     public class AddStockInfoPageModel : BasePageModel
     {
         private readonly IMedicineItemService _medicineItemService;
-
         private readonly IDialogService _dialogService;
 
         public AddStockInfoPageModel(IMedicineItemService medicineItemService, IDialogService dialogService)
@@ -76,7 +74,6 @@ namespace Phoenix.Mobile.PageModels.Common
         }
 
         #region properties
-
         public MedicineItemModel MedicineItem { get; set; }
         public List<MedicineItemModel> MedicineItems { get; set; }
         public int Id { get; set; }
@@ -116,7 +113,6 @@ namespace Phoenix.Mobile.PageModels.Common
                 await CoreMethods.PushPageModel<AddStockPageModel>();
                 //await _dialogService.AlertAsync("Cập nhật thành công");
                 IsBusy = false;
-
             }
             catch (Exception e)
             {

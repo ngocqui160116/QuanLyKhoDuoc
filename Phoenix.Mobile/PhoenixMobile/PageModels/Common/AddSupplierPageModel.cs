@@ -4,8 +4,6 @@ using Phoenix.Mobile.Core.Services.Common;
 using Phoenix.Mobile.Helpers;
 using Phoenix.Shared.Supplier;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -93,7 +91,6 @@ namespace Phoenix.Mobile.PageModels.Common
             }
         }
         #endregion
-
 
         #region properties
         public string SearchText { get; set; }

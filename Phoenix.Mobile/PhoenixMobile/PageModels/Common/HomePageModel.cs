@@ -1,11 +1,7 @@
 ﻿using Phoenix.Mobile.Core.Infrastructure;
-using Phoenix.Mobile.Core.Models.Vendor;
 using Phoenix.Mobile.Core.Services.Common;
 using Phoenix.Mobile.Helpers;
-using Phoenix.Mobile.Pages.Auth;
-using Phoenix.Mobile.Pages.Common;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -32,7 +28,6 @@ namespace Phoenix.Mobile.PageModels.Common
 
         }
 
-
         #region SupplierCommand
 
         public Command SupplierCommand => new Command(async (p) => await SupplierExecute(), (p) => !IsBusy);
@@ -42,7 +37,6 @@ namespace Phoenix.Mobile.PageModels.Common
             await CoreMethods.PushPageModel<SupplierPageModel>();
         }
         #endregion
-
 
         #region MedicineCommand
 

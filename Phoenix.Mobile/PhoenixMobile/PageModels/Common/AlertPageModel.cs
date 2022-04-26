@@ -10,10 +10,7 @@ namespace Phoenix.Mobile.PageModels.Common
 {
     public class AlertPageModel : BasePageModel
     {
-        public AlertPageModel()
-        {
-            
-        }
+
         public override async void Init(object initData)
         {
             base.Init(initData);

@@ -2,8 +2,6 @@
 using Phoenix.Mobile.Core.Services;
 using Phoenix.Mobile.Helpers;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -33,7 +31,6 @@ namespace Phoenix.Mobile.PageModels.Common
         }
 
         #region ProfileCommand
-
         public Command ProfileCommand => new Command(async (p) => await ProfileExecute(), (p) => !IsBusy);
 
         private async Task ProfileExecute()

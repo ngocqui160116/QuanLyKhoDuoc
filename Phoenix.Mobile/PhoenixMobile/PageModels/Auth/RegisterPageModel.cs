@@ -5,8 +5,6 @@ using Phoenix.Mobile.Core.Services.Common;
 using Phoenix.Mobile.Helpers;
 using Phoenix.Shared;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -15,7 +13,6 @@ namespace Phoenix.Mobile.PageModels.Auth
    
     public class RegisterPageModel : BasePageModel
     {
-
         private readonly IDialogService _dialogService;
         private readonly IUserService _userService;
 
@@ -33,8 +30,7 @@ namespace Phoenix.Mobile.PageModels.Auth
         }
         protected override async void ViewIsAppearing(object sender, EventArgs e)
         {
-            base.ViewIsAppearing(sender, e);
-            
+            base.ViewIsAppearing(sender, e); 
         }
 
         #region AddUserCommand
@@ -94,14 +90,11 @@ namespace Phoenix.Mobile.PageModels.Auth
         #endregion
 
         #region Properties
-      
         public string UserName { get; set; }
         public string Password { get; set; }
         public string Name { get; set; }
         public string Phone { get; set; }
 
         #endregion
-
-
     }
 }

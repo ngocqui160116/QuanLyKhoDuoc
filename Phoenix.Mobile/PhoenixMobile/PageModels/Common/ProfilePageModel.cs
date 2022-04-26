@@ -1,13 +1,10 @@
 ﻿using Phoenix.Mobile.Core.Infrastructure;
-using Phoenix.Mobile.Core.Models.Staff;
 using Phoenix.Mobile.Core.Services;
 using Phoenix.Mobile.Core.Services.Common;
 using Phoenix.Mobile.Helpers;
 using Phoenix.Shared;
 using Phoenix.Shared.Staff;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -44,11 +41,10 @@ namespace Phoenix.Mobile.PageModels.Common
             if (IsBusy) return;
             IsBusy = true;
 
-
             Gender = "Nam";
 
-        #region Users
-        var data = await _authService.GetUserFromToken();
+            #region Users
+            var data = await _authService.GetUserFromToken();
             if (data == null)
             {
                 await _dialogService.AlertAsync("Lỗi kết nối mạng!", "Lỗi", "OK");
@@ -82,7 +78,6 @@ namespace Phoenix.Mobile.PageModels.Common
             User_Id = Staffs.User_Id;
 
             #endregion
-            IsBusy = false;
         }
         #region properties
 

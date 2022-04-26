@@ -24,7 +24,6 @@ namespace Phoenix.Mobile.PageModels.Common
         private readonly IMedicineService _medicineService;
         private readonly IMedicineItemService _medicineItemService;
         private readonly IDialogService _dialogService;
-        //public ObservableCollection<MedicineModel> Medicine { get; set; }
 
         public MedicinePageModel(IMedicineService medicineService, IMedicineItemService medicineItemService, IDialogService dialogService)
         {
@@ -35,7 +34,6 @@ namespace Phoenix.Mobile.PageModels.Common
 
         public override async void Init(object initData)
         {
-            // Medicine = new ObservableCollection<MedicineModel>(Medicines);
             if (initData != null)
             {
                 Medicine = (MedicineModel)initData;
@@ -57,6 +55,8 @@ namespace Phoenix.Mobile.PageModels.Common
 
         private async Task LoadData()
         {
+            #region Medicine
+
             var data = await _medicineService.GetAllMedicine(request);
             if (data == null)
             {
@@ -65,29 +65,25 @@ namespace Phoenix.Mobile.PageModels.Common
             else
             {
                 Medicines = data;
-                //RaisePropertyChanged("Vendors");
                 RaisePropertyChanged(nameof(Medicines));
             }
+            #endregion
         }
 
         #region AddMedicineItemCommand
         public Command AddMedicineItemCommand => new Command(async (p) => await AddMedicineItemExecute(), (p) => !IsBusy);
         private async Task AddMedicineItemExecute()
         {
-
             try
             {
-              
-
                 var data = await _medicineItemService.AddMedicineItem(new MedicineItemRequest
                 {
                    Medicine_Id = Medicine.IdMedicine
                 });
-                await CoreMethods.PushPageModel<AddInputPageModel>();
 
+                await CoreMethods.PushPageModel<AddInputPageModel>();
                // await _dialogService.AlertAsync("Lưu thành công");
                 IsBusy = false;
-
             }
             catch (Exception e)
             {
@@ -212,11 +208,8 @@ namespace Phoenix.Mobile.PageModels.Common
         {
             Medicines = GetSearchResults(query);
         });
-
-
         public List<MedicineModel> GetSearchResults(string queryString)
         {
-
             var normalizedQuery = queryString;
             return Medicines.Where(f => f.Name.Contains(normalizedQuery)).ToList();
         }

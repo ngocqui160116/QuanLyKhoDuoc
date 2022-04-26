@@ -50,7 +50,7 @@ namespace Phoenix.Mobile.PageModels.Common
 
         private async Task LoadData()
         {
-           
+            #region Inventory
 
             var data = await _InventoryService.GetAllInventory(InventoryRequest);
             if (data == null)
@@ -60,9 +60,11 @@ namespace Phoenix.Mobile.PageModels.Common
             else
             {
                 Inventory = data;
-                //RaisePropertyChanged("Vendors");
                 RaisePropertyChanged(nameof(Inventory));
             }
+            #endregion
+
+            #region OutputInfo
 
             var data1 = await _outputinfoService.GetAllOutputInfo(OutputInfoRequest);
             if (data1 == null)
@@ -72,9 +74,10 @@ namespace Phoenix.Mobile.PageModels.Common
             else
             {
                 OutputInfos = data1;
-                //RaisePropertyChanged("Vendors");
                 RaisePropertyChanged(nameof(OutputInfos));
             }
+
+            #endregion
         }
 
         #region properties
@@ -82,13 +85,10 @@ namespace Phoenix.Mobile.PageModels.Common
         public InputInfoRequest request { get; set; } = new InputInfoRequest();
         public List<InventoryModel> Inventory { get; set; } = new List<InventoryModel>();
         public InventoryRequest InventoryRequest { get; set; } = new InventoryRequest();
-
         public List<OutputInfoModel> OutputInfos { get; set; } = new List<OutputInfoModel>();
         public OutputInfoRequest OutputInfoRequest { get; set; } = new OutputInfoRequest();
-
         public OutputInfoDto outputInfoDto { get; set; }
         public InventoryModel InventoryModel { get; set; }
-
 
         #endregion
 

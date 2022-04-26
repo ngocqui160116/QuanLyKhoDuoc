@@ -1,14 +1,11 @@
 ﻿using Phoenix.Mobile.Core.Infrastructure;
 using Phoenix.Mobile.Core.Models.Output;
-using Phoenix.Mobile.Core.Models.OutputInfo;
 using Phoenix.Mobile.Core.Services.Common;
 using Phoenix.Mobile.Helpers;
 using Phoenix.Shared.Output;
-using Phoenix.Shared.OutputInfo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -41,6 +38,8 @@ namespace Phoenix.Mobile.PageModels.Common
 
         private async Task LoadData()
         {
+            #region Output
+
             var data = await _OutputService.GetAllOutput(request);
             if (data == null)
             {
@@ -49,9 +48,9 @@ namespace Phoenix.Mobile.PageModels.Common
             else
             {
                 Outputs = data;
-                //RaisePropertyChanged("Vendors");
                 RaisePropertyChanged(nameof(Outputs));
             }
+            #endregion
         }
 
         #region properties

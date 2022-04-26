@@ -5,7 +5,6 @@ using Phoenix.Mobile.Helpers;
 using Phoenix.Shared.OutputInfo;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -18,10 +17,8 @@ namespace Phoenix.Mobile.PageModels.Common
         private readonly IDialogService _dialogService;
         public OutputInfoPageModel(IOutputInfoService OutputInfoService, IDialogService dialogService)
         {
-
             _OutputInfoService = OutputInfoService;
             _dialogService = dialogService;
-
         }
         public override async void Init(object initData)
         {
@@ -49,23 +46,17 @@ namespace Phoenix.Mobile.PageModels.Common
             IsBusy = true;
 #if DEBUG
             OutputInfos = Output.OutputInfo;
-
             IdOutput = Output.Id;
             NameReason = Output.NameReason;
             NameStaff = Output.NameStaff;
             DateOutput = Output.DateOutput;
-
 #endif
             IsBusy = false;
-
         }
-
 
         #region properties
         public OutputModel Output { get; set; }
         public List<OutputInfoDto> OutputInfos { get; set; }
-      
-        public string SearchText { get; set; }
         public int IdOutput { get; set; }
         public string NameReason { get; set; }
         public string Status { get; set; }

@@ -20,7 +20,6 @@ namespace Phoenix.Mobile.PageModels.Common
         {
             _unitService = unitService;
             _dialogService = dialogService;
-
         }
       
         public override async void Init(object initData)
@@ -45,7 +44,6 @@ namespace Phoenix.Mobile.PageModels.Common
             else
             {
                 Units = data;
-                //RaisePropertyChanged("Vendors");
                 RaisePropertyChanged(nameof(Units));
             }
         }

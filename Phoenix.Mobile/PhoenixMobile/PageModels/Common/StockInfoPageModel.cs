@@ -12,7 +12,6 @@ namespace Phoenix.Mobile.PageModels.Common
 {
     public class StockInfoPageModel : BasePageModel
     {
-
         public override async void Init(object initData)
         {
             if (initData != null)
@@ -39,22 +38,17 @@ namespace Phoenix.Mobile.PageModels.Common
             IsBusy = true;
 #if DEBUG
             StockInfos = Stock.StockInfo;
-
             Stock_Id = Stock.Id;
             NameStaff = Stock.StaffName;
             Note = Stock.Note;
             Date = Stock.Date;
-
 #endif
             IsBusy = false;
-
         }
 
         #region properties
         public StockModel Stock { get; set; }
         public List<StockInfoDto> StockInfos { get; set; }
-
-        public string SearchText { get; set; }
         public int Stock_Id { get; set; }
         public string Note { get; set; }
         public DateTime Date { get; set; }

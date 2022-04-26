@@ -7,7 +7,6 @@ using Phoenix.Shared.Input;
 using Phoenix.Shared.InputInfo;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -23,7 +22,6 @@ namespace Phoenix.Mobile.PageModels.Common
             _inputService = inputService;
             _inputInfoService = inputInfoService;
             _dialogService = dialogService;
-
         }
         public override async void Init(object initData)
         {
@@ -77,7 +75,6 @@ namespace Phoenix.Mobile.PageModels.Common
 
         }
 
-
         #region properties
         public bool IsEnabled { get; set; }
         public InputModel Input { get; set; }
@@ -90,7 +87,6 @@ namespace Phoenix.Mobile.PageModels.Common
         public string NameStaff { get; set; }
         public double Total { get; set; }
         public Color color { get; set; }
-
         public List<InputInfoModel> inputInfoModels { get; set; } = new List<InputInfoModel>();
         public InputInfoRequest request { get; set; } = new InputInfoRequest();
         #endregion

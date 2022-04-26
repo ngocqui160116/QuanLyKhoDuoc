@@ -1,21 +1,15 @@
 ﻿using Phoenix.Mobile.Core.Infrastructure;
-using Phoenix.Mobile.Core.Models.InputInfo;
-using Phoenix.Mobile.Core.Models.Medicine;
 using Phoenix.Mobile.Core.Models.MedicineItem;
 using Phoenix.Mobile.Core.Models.Reason;
 using Phoenix.Mobile.Core.Models.Staff;
-using Phoenix.Mobile.Core.Models.Supplier;
 using Phoenix.Mobile.Core.Services.Common;
 using Phoenix.Mobile.Helpers;
 using Phoenix.Shared.MedicineItem;
 using Phoenix.Shared.OutputInfo;
 using Phoenix.Shared.Reason;
 using Phoenix.Shared.Staff;
-using Phoenix.Shared.Supplier;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -28,7 +22,6 @@ namespace Phoenix.Mobile.PageModels.Common
         private readonly IStaffService _staffService;
         private readonly IOutputInfoService _outputInfoService;
         private readonly IDialogService _dialogService;
-
         public AddOutputPageModel(IReasonService reasonService, IMedicineItemService medicineItemService, IStaffService staffService, IOutputInfoService outputInfoService , IDialogService dialogService)
         {
             _reasonService = reasonService;
@@ -43,15 +36,13 @@ namespace Phoenix.Mobile.PageModels.Common
             base.Init(initData);
             IsClose = true;
             IsOpen = false;
-           
             NavigationPage.SetHasNavigationBar(CurrentPage, false);
             CurrentPage.Title = "Thêm phiếu xuất";
         }
         protected override async void ViewIsAppearing(object sender, EventArgs e)
         {
             base.ViewIsAppearing(sender, e);
-            await LoadData();
-            
+            await LoadData(); 
         }
 
         private async Task LoadData()
@@ -70,7 +61,6 @@ namespace Phoenix.Mobile.PageModels.Common
             }
             #endregion
 
-
             #region Reason
             var data = await _reasonService.GetAllReason(request);
             if (data == null)
@@ -80,7 +70,6 @@ namespace Phoenix.Mobile.PageModels.Common
             else
             {
                 Reasons = data;
-                //RaisePropertyChanged("Vendors");
                 RaisePropertyChanged(nameof(Reasons));
             }
             #endregion
@@ -96,22 +85,11 @@ namespace Phoenix.Mobile.PageModels.Common
             else
             {
                 Staffs = data1;
-                //RaisePropertyChanged("Vendors");
                 RaisePropertyChanged(nameof(Staffs));
             }
 
             #endregion
         }
-
-        #region BackCommand
-        public Command BackCommand => new Command(async (p) => await Output(), (p) => !IsBusy);
-
-        public async Task Output()
-        {
-            CoreMethods.PushPageModel<OutputPageModel>();
-        }
-
-        #endregion
 
         #region properties
         public List<MedicineItemModel> MedicineItems { get; set; } = new List<MedicineItemModel>();
@@ -125,7 +103,6 @@ namespace Phoenix.Mobile.PageModels.Common
         #region properties
         public bool IsClose { get; set; } = false;
         public bool IsOpen { get; set; } = true;
-        //
         public string abc { get; set; }
         public int Id { get; set; }
         public int Medicine_Id { get; set; }
@@ -138,8 +115,6 @@ namespace Phoenix.Mobile.PageModels.Common
         public string UnitName { get; set; }
         public int? Inventory_Id { get; set; }
         public int Amount { get; set; }
-        //
-
         public int IdMedicine { get; set; }
         public string Names { get; set; }
         public string Name { get; set; }
@@ -154,7 +129,6 @@ namespace Phoenix.Mobile.PageModels.Common
         {
             try
             {
-
                 var data = await _outputInfoService.CreateOutputInfo(new OutputInfoRequest
                 {
                     IdReason = IdReason,
@@ -165,10 +139,8 @@ namespace Phoenix.Mobile.PageModels.Common
                 var data1 = await _medicineItemService.DeleteAll();
                 await CoreMethods.PushPageModel<OutputPageModel>();
                 //CoreMethods.DisplayAlert("Thông báo", "Bạn đã chọn" + SelectedReason.IdReason + SelectedStaff.IdStaff, "Đóng");
-
                 await _dialogService.AlertAsync("Thêm thành công");
                 IsBusy = false;
-
             }
             catch (Exception e)
             {
@@ -238,6 +210,16 @@ namespace Phoenix.Mobile.PageModels.Common
 
         #endregion
 
+        #region BackCommand
+        public Command BackCommand => new Command(async (p) => await Output(), (p) => !IsBusy);
+
+        public async Task Output()
+        {
+            CoreMethods.PushPageModel<OutputPageModel>();
+        }
+
+        #endregion
+
         #region SelectReason
 
         ReasonModel _selectedReason;
@@ -273,7 +255,5 @@ namespace Phoenix.Mobile.PageModels.Common
             }
         }
         #endregion
-
-       
     }
 }

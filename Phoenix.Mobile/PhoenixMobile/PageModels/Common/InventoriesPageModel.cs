@@ -1,17 +1,14 @@
 ﻿using Phoenix.Mobile.Core.Infrastructure;
-using Phoenix.Mobile.Core.Models.InputInfo;
 using Phoenix.Mobile.Core.Models.Inventory;
 using Phoenix.Mobile.Core.Models.OutputInfo;
 using Phoenix.Mobile.Core.Services.Common;
 using Phoenix.Mobile.Helpers;
-using Phoenix.Shared.InputInfo;
 using Phoenix.Shared.Inventory;
 using Phoenix.Shared.MedicineItem;
 using Phoenix.Shared.OutputInfo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -33,7 +30,6 @@ namespace Phoenix.Mobile.PageModels.Common
             _outputinfoService = outputinfoService;
             _InventoryService = InventoryService;
             _dialogService = dialogService;
-
         }
 
         public override async void Init(object initData)
@@ -50,7 +46,7 @@ namespace Phoenix.Mobile.PageModels.Common
 
         private async Task LoadData()
         {
-
+            #region Inventory
 
             var data = await _InventoryService.GetAllInventory(InventoryRequest);
             if (data == null)
@@ -60,9 +56,11 @@ namespace Phoenix.Mobile.PageModels.Common
             else
             {
                 Inventory = data;
-                //RaisePropertyChanged("Vendors");
                 RaisePropertyChanged(nameof(Inventory));
             }
+            #endregion
+
+            #region OutputInfo
 
             var data1 = await _outputinfoService.GetAllOutputInfo(OutputInfoRequest);
             if (data1 == null)
@@ -72,22 +70,17 @@ namespace Phoenix.Mobile.PageModels.Common
             else
             {
                 OutputInfos = data1;
-                //RaisePropertyChanged("Vendors");
                 RaisePropertyChanged(nameof(OutputInfos));
             }
+            #endregion
         }
 
         #region properties
-
         public List<InventoryModel> Inventory { get; set; } = new List<InventoryModel>();
         public InventoryRequest InventoryRequest { get; set; } = new InventoryRequest();
-
         public List<OutputInfoModel> OutputInfos { get; set; } = new List<OutputInfoModel>();
         public OutputInfoRequest OutputInfoRequest { get; set; } = new OutputInfoRequest();
-
         public InventoryModel InventoryModel { get; set; }
-
-
         #endregion
 
         #region SelectInventories
@@ -136,12 +129,10 @@ namespace Phoenix.Mobile.PageModels.Common
         #endregion
 
         #region Search
-
         public ICommand PerformSearch => new Command<string>((string query) =>
         {
             Inventory = GetSearchResults(query);
         });
-
 
         public List<InventoryModel> GetSearchResults(string queryString)
         {

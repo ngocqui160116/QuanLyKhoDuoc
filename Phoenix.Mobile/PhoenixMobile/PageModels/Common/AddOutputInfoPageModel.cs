@@ -5,7 +5,6 @@ using Phoenix.Mobile.Helpers;
 using Phoenix.Shared.MedicineItem;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -14,19 +13,16 @@ namespace Phoenix.Mobile.PageModels.Common
     public class AddOutputInfoPageModel : BasePageModel
     {
         private readonly IMedicineItemService _medicineItemService;
-
         private readonly IDialogService _dialogService;
 
         public AddOutputInfoPageModel(IMedicineItemService medicineItemService, IDialogService dialogService)
         {
             _medicineItemService = medicineItemService;
             _dialogService = dialogService;
-
         }
 
         public override async void Init(object initData)
         {
-
             if (initData != null)
             {
                 MedicineItem = (MedicineItemModel)initData;

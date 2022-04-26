@@ -48,13 +48,13 @@ namespace Phoenix.Mobile.PageModels.Common
             else
             {
                 Suppliers = data;
-                //RaisePropertyChanged("Suppliers");
                 RaisePropertyChanged(nameof(Suppliers));
             }
         }
 
-        SupplierModel _selectedSupplier;
+        #region SelectedSupplier
 
+        SupplierModel _selectedSupplier;
         public SupplierModel SelectedSupplier
         {
             get
@@ -78,13 +78,11 @@ namespace Phoenix.Mobile.PageModels.Common
                 });
             }
         }
+        #endregion
 
         #region properties
         public List<SupplierModel> Suppliers { get; set; } = new List<SupplierModel>();
-
         public SupplierRequest request { get; set; } = new SupplierRequest();
-
-        public string SearchText { get; set; }
         public string Name { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
@@ -119,10 +117,8 @@ namespace Phoenix.Mobile.PageModels.Common
             Suppliers = GetSearchResults(query);
         });
 
-
         public List<SupplierModel> GetSearchResults(string queryString)
         {
-
             var normalizedQuery = queryString;
             return Suppliers.Where(f => f.Name.Contains(normalizedQuery)).ToList();
         }
