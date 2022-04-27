@@ -115,15 +115,11 @@
                                                                        Margin="0,0,10,0"
                                                                        FontSize="Small"
                                                                        TextColor="Black"/>
-                                                                <Label Text="{Binding InputPrice}"
+                                                                <Label Text="{Binding InputPrice, StringFormat='{0:#,##0} đ'}"
                                                                        FontSize="Small"
                                                                        TextColor="Red"
                                                                        FontAttributes="Bold">
                                                                 </Label>
-                                                                <Label Text=" đ"
-                                                                       FontSize="Small"
-                                                                       TextColor="Red"
-                                                                       FontAttributes="Bold"/>
                                                                 <Label Text="/"
                                                                        Margin="5,2,0,4"
                                                                        FontSize="Small"

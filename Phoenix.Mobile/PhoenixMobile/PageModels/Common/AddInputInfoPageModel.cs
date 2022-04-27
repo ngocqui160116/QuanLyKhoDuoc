@@ -150,6 +150,7 @@ namespace Phoenix.Mobile.PageModels.Common
                     Batch = IdBatch,
                     Count = Count,
                     InputPrice = InputPrice,
+                    Total = Count * InputPrice,
                     DueDate = HSD
                 });
                 await CoreMethods.PushPageModel<AddInputPageModel>();

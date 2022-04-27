@@ -155,9 +155,18 @@
                                                                        BackgroundColor="WhiteSmoke"
                                                                        HorizontalOptions="Center">
                                                                 </Label>
-                                                               
+                                                                <Label Text="Giá:"
+                                                                       Margin="5,2,5,4"
+                                                                       FontSize="Small"
+                                                                       TextColor="Black"/>
+                                                                <Label Text="{Binding InputPrice, StringFormat='{0:#,##0} đ /'}"
+                                                                       Margin="2,2,5,4"
+                                                                       FontSize="Small"
+                                                                       FontAttributes="Bold"
+                                                                       TextColor="Black"/>
+                                                                
                                                                 <Label Text="{Binding UnitName}"
-                                                                       Margin="2,2,8,4"
+                                                                       Margin="2,2,2,4"
                                                                        FontSize="Small"
                                                                        FontAttributes="Bold"
                                                                        TextColor="Black"/>
@@ -165,7 +174,7 @@
                                                         </StackLayout>
 
                                                         <StackLayout Grid.ColumnSpan="3"
-                                                                     Margin="0,10,0,0"
+                                                                     Margin="0,10,5,0"
                                                                      Orientation="Horizontal"
                                                                      HorizontalOptions="EndAndExpand"
                                                                      VerticalOptions="EndAndExpand">
@@ -173,7 +182,8 @@
                                                                          Command="{Binding BindingContext.SelectItemCommand,Source={x:Reference ItemList}}" 
                                                                          CommandParameter="{Binding .}"
                                                                          Grid.Column="5"
-                                                                         Margin="10,5,0,5"
+                                                                         Margin="10,5,10,5"
+                                                                         IsVisible="{Binding BindingContext.IsEnabled,Source={x:Reference ItemList}}"
                                                                          HorizontalOptions="EndAndExpand"
                                                                          VerticalOptions="CenterAndExpand">
 
@@ -182,6 +192,7 @@
                                                                          Command="{Binding BindingContext.RemoveItemCommand,Source={x:Reference ItemList}}" 
                                                                          CommandParameter="{Binding .}"
                                                                          Grid.Column="6"
+                                                                          Margin="5,5,5,5"
                                                                          HorizontalOptions="EndAndExpand"
                                                                          VerticalOptions="CenterAndExpand">
                                                             </ImageButton>

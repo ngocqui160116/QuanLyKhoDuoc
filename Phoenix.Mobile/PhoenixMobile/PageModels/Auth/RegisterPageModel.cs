@@ -80,6 +80,17 @@ namespace Phoenix.Mobile.PageModels.Auth
                     return;
                 }
 
+                var data1 = await _userService.GetAllUser(userRequest);
+                foreach (var item in data1)
+                {
+                    if (UserName == item.UserName)
+                    {
+                        await _dialogService.AlertAsync("Người dùng đã tồn tại");
+                        IsBusy = false;
+                        return;
+                    }
+                }
+
                 var data = await _userService.CreateUser(new UserRequest
                 {
                     UserName = UserName,
@@ -105,7 +116,8 @@ namespace Phoenix.Mobile.PageModels.Auth
         public string Password { get; set; }
         public string Name { get; set; }
         public string Phone { get; set; }
-
+        public UserRequest request { get; set; } = new UserRequest();
+        public UserRequest userRequest { get; set; } = new UserRequest();
         #endregion
     }
 }

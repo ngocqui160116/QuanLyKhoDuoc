@@ -88,6 +88,7 @@ namespace Phoenix.Mobile.PageModels.Common
         #endregion
 
         #region properties
+        public MedicineRequest medicineRequest { get; set; } = new MedicineRequest();
         public List<GroupModel> Groups { get; set; } = new List<GroupModel>();
         public List<UnitModel> Units { get; set; } = new List<UnitModel>();
         public GroupRequest request { get; set; } = new GroupRequest();
@@ -154,6 +155,17 @@ namespace Phoenix.Mobile.PageModels.Common
                     await _dialogService.AlertAsync("Vui lòng Chọn Đơn vị tính");
                     IsBusy = false;
                     return;
+                }
+
+                var data1 = await _medicineService.GetAllMedicine(medicineRequest);
+                foreach (var item in data1)
+                {
+                    if (Name == item.Name || SDK == item.RegistrationNumber)
+                    {
+                        await _dialogService.AlertAsync("Thuốc đã tồn tại");
+                        IsBusy = false;
+                        return;
+                    }
                 }
 
                 var data = await _medicineService.AddMedicine(new MedicineRequest

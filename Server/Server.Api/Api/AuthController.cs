@@ -6,6 +6,7 @@ using Phoenix.Shared;
 using System.Security.Claims;
 using Falcon.Web.Core.Auth;
 using Phoenix.Server.Services.MainServices.Users;
+using Phoenix.Shared.Common;
 
 namespace Phoenix.Server.Api.Api
 {
@@ -38,6 +39,13 @@ namespace Phoenix.Server.Api.Api
             var userId = identity.FindFirst("UserId").Value;
             var user = _authService.GetUserById(int.Parse(userId));
             return user;
+        }
+
+        [HttpPost]
+        [Route("GetAllUser")]
+        public async Task<BaseResponse<UserDto>> GetAllCustomer([FromBody] UserRequest request)
+        {
+            return await _userService.GetAllUser(request);
         }
     }
 }

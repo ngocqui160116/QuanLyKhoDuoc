@@ -67,6 +67,7 @@ namespace Phoenix.Server.Services.Infrastructure
                 .ForMember(d => d.Inventory_Id, o => o.MapFrom(s => s.Inventory.Id))
                 .ForMember(d => d.Batch, o => o.MapFrom(s => s.Inventory.LotNumber))
                 .ForMember(d => d.DueDate, o => o.MapFrom(s => s.Inventory.InputInfo.DueDate))
+                .ForMember(d => d.UnitName, o => o.MapFrom(s => s.Medicine.Unit.Name))
                 .ForMember(d => d.MedicineName, o => o.MapFrom(s => s.Inventory.Medicine.Name));
 
             CreateMap<Staff, StaffDto>()

@@ -118,11 +118,21 @@
 
                                         <StackLayout Orientation="Vertical"
                                                      HorizontalOptions="StartAndExpand">
-                                            <Label Text="{Binding MedicineName}"
+                                            <StackLayout Orientation="Horizontal" WidthRequest="450">
+                                                <Label Text="{Binding MedicineName}"
                                                    Margin="8"
                                                    FontAttributes="Bold"
                                                    FontSize="Large" />
+                                                <Label HorizontalOptions="EndAndExpand" 
+                                                       Margin="0,20,20,10"
+                                                        Text="{Binding Total, StringFormat='{0:#,##0} đ'}"
+                                                        FontSize="Small"
+                                                        TextColor="Red"
+                                                        FontAttributes="Bold"/>
+                                            </StackLayout>
+                                           
                                             <StackLayout Orientation="Horizontal">
+                                               
                                                 <Label Text="Số Lô:"
                                                        Margin="8,2,2,4"
                                                        FontSize="Small" />
@@ -140,6 +150,9 @@
                                                        Format="dd/MM/yyyy"
                                                        FontSize="15" />
 
+                                               
+                                            </StackLayout>
+                                            <StackLayout Orientation="Horizontal">
                                                 <Label Text="Số lượng:"
                                                        Margin="8,2,8,4"
                                                        FontSize="Small" />
@@ -148,13 +161,16 @@
                                                        FontSize="Small"
                                                        FontAttributes="Bold"
                                                        TextColor="Red"/>
-                                            </StackLayout>
-                                            <StackLayout Orientation="Horizontal">
+                                                <Label Text="{Binding UnitName}"
+                                                       Margin="2,2,8,4"
+                                                       FontSize="Small"
+                                                       FontAttributes="Bold"
+                                                       TextColor="Black"/>
                                                 <Label Text="Giá:"
-                                                       Margin="8,2,0,4"
+                                                       Margin="8,2,5,4"
                                                        FontSize="Small"
                                                        TextColor="Black"/>
-                                                <Label Text="{Binding Total, StringFormat='{0:#,##0} đ'}"
+                                                <Label Text="{Binding OutputPrice, StringFormat='{0:#,##0} đ'}"
                                                        Margin="2,2,2,4"
                                                        FontSize="Small"
                                                        FontAttributes="Bold"

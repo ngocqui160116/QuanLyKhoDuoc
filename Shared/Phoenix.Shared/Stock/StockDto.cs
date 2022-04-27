@@ -18,6 +18,6 @@ namespace Phoenix.Shared.Stock
         public string StaffName { get; set; }
 
         //List
-        //public List<StockInfoDto> StockInfo { get; set; }
+        public List<StockInfoDto> StockInfo { get; set; }
     }
 }

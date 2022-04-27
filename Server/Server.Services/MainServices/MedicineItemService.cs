@@ -18,6 +18,7 @@ namespace Phoenix.Server.Services.MainServices
         Task<BaseResponse<MedicineItemDto>> GetAllMedicineItems(MedicineItemRequest request);
         Task<BaseResponse<MedicineItemDto>> GetMedicineItemById(int Id);
         Task<CrudResult> UpdateMedicineItem(int Medicine_Id, MedicineItemRequest request);
+        Task<CrudResult> UpdateItemInventory(int Medicine_Id, MedicineItemRequest request);
         Task<CrudResult> AddMedicineItem(MedicineItemRequest request);
         Task<CrudResult> AddItemInventory(MedicineItemRequest request);
         Task<CrudResult> RemoveMedicineItem(int Id);
@@ -55,7 +56,7 @@ namespace Phoenix.Server.Services.MainServices
                                      Batch = c.Batch,
                                      Count = c.Count,
                                      InputPrice = c.InputPrice,
-                                     Total = c.Count * c.InputPrice,
+                                     Total = c.Total,
                                      DueDate = c.DueDate,
                                      UnitName = s.Unit.Name,
                                      Inventory_Id = c.Inventory_Id,
@@ -80,7 +81,7 @@ namespace Phoenix.Server.Services.MainServices
                                      Batch = c.Batch,
                                      Count = c.Count,
                                      InputPrice = c.InputPrice,
-                                     Total = c.Count * c.InputPrice,
+                                     Total = c.Total,
                                      DueDate = c.DueDate,
                                      UnitName = s.Unit.Name,
                                      Inventory_Id = c.Inventory_Id,
@@ -165,7 +166,7 @@ namespace Phoenix.Server.Services.MainServices
             MedicineItem.Batch = request.Batch;
             MedicineItem.Count = request.Count;
             MedicineItem.InputPrice = request.InputPrice;
-            MedicineItem.Total = request.InputPrice * request.Count;
+            MedicineItem.Total = request.InputPrice * request.Amount;
             MedicineItem.DueDate = DateTime.Now;
             MedicineItem.Inventory_Id = request.Inventory_Id;
             MedicineItem.Amount = 0;
@@ -183,6 +184,21 @@ namespace Phoenix.Server.Services.MainServices
             MedicineItem.Count = request.Count;
             MedicineItem.InputPrice = request.InputPrice;
             MedicineItem.Total = request.InputPrice * request.Count;
+            MedicineItem.DueDate = request.DueDate;
+            MedicineItem.Amount = request.Amount;
+
+            await _dataContext.SaveChangesAsync();
+            return new CrudResult() { IsOk = true };
+        }
+
+        public async Task<CrudResult> UpdateItemInventory(int Id, MedicineItemRequest request)
+        {
+            var MedicineItem = _dataContext.MedicineItems.Find(Id);
+            MedicineItem.Medicine_Id = request.Medicine_Id;
+            MedicineItem.Batch = request.Batch;
+            MedicineItem.Count = request.Count;
+            MedicineItem.InputPrice = request.InputPrice;
+            MedicineItem.Total = request.InputPrice * request.Amount;
             MedicineItem.DueDate = request.DueDate;
             MedicineItem.Amount = request.Amount;
 

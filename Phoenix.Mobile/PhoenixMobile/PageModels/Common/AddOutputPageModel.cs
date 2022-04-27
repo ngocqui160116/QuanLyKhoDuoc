@@ -103,7 +103,7 @@ namespace Phoenix.Mobile.PageModels.Common
         #region properties
         public bool IsClose { get; set; } = false;
         public bool IsOpen { get; set; } = true;
-        public string abc { get; set; }
+        public bool IsEnabled { get; set; } = true;
         public int Id { get; set; }
         public int Medicine_Id { get; set; }
         public string MedicineName { get; set; }
@@ -239,8 +239,18 @@ namespace Phoenix.Mobile.PageModels.Common
             set
             {
                 _selectedReason = value;
-                if (value != null)
+                //if (value != null)
+                if (value.IdReason != 2)
+                {
+                    IsEnabled = false;
                     IdReason = value.IdReason;
+                }       
+                else
+                {
+                    IsEnabled = true;
+                    IdReason = value.IdReason;
+                }    
+                    
             }
         }
         #endregion

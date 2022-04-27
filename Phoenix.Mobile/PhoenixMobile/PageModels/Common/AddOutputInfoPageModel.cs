@@ -106,7 +106,7 @@ namespace Phoenix.Mobile.PageModels.Common
                     return;
                 }
 
-                var data = await _medicineItemService.UpdateMedicineItem(Id, new MedicineItemRequest
+                var data = await _medicineItemService.UpdateItemInventory(Id, new MedicineItemRequest
                 {
                     Id = Id,
                     Count = Count,

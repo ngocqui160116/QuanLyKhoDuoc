@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Phoenix.Shared;
+using Phoenix.Shared.Common;
 
 namespace Phoenix.Mobile.Core.Proxies.Common
 {
@@ -15,6 +16,7 @@ namespace Phoenix.Mobile.Core.Proxies.Common
         Task<CrudResult> ChangePassword(string phone, string oldPwd, string newPwd);
         Task<CrudResult> ForgotPassword(string phone, string newPwd);
         Task<CrudResult> CreateUser(UserRequest request);
+        Task<BaseResponse<UserDto>> GetAllUser(UserRequest request);
     }
 
     public class UserProxy : BaseProxy, IUserProxy
@@ -51,6 +53,21 @@ namespace Phoenix.Mobile.Core.Proxies.Common
             }
         }
 
+        public async Task<BaseResponse<UserDto>> GetAllUser(UserRequest request)
+        {
+            try
+            {
+                var api = RestService.For<IUserApi>(GetHttpClient());
+
+                return await api.GetAllUser(request);
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler.Handle(new NetworkException(ex), true);
+                return null;
+            }
+        }
+
         public async Task<CrudResult> CreateUser(UserRequest request)
         {
             try
@@ -75,6 +92,9 @@ namespace Phoenix.Mobile.Core.Proxies.Common
 
             [Post("/user/forgotpwd")]
             Task<CrudResult> ForgotPassword(string phone, string newPwd);
+
+            [Post("/auth/GetAllUser")]
+            Task<BaseResponse<UserDto>> GetAllUser([Body] UserRequest request);
 
             [Post("/user/CreateUser")]
             Task<CrudResult> CreateUser(UserRequest request);

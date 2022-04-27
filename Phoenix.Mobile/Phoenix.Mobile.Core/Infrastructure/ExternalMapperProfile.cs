@@ -35,6 +35,8 @@ using Phoenix.Shared.Stock;
 using Phoenix.Mobile.Core.Models.Stock;
 using Phoenix.Shared.StockInfo;
 using Phoenix.Mobile.Core.Models.StockInfo;
+using Phoenix.Shared;
+using Phoenix.Mobile.Core.Models.User;
 
 namespace Phoenix.Mobile.Core.Infrastructure
 {
@@ -66,6 +68,7 @@ namespace Phoenix.Mobile.Core.Infrastructure
             CreateMap<MedicineItemDto, MedicineItemModel>();
             CreateMap<StockDto, StockModel>();
             CreateMap<StockInfoDto, StockInfoModel>();
+            CreateMap<UserDto, UserModel>();
         }
     }
 }

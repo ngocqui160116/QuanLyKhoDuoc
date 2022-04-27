@@ -11,6 +11,9 @@ using Phoenix.Shared.Core;
 using Phoenix.Shared;
 using Phoenix.Server.Data.Entity;
 using System;
+using Phoenix.Shared.Common;
+using System.Data.Entity;
+using Falcon.Web.Core.Helpers;
 
 namespace Phoenix.Server.Services.MainServices.Users
 {
@@ -18,6 +21,7 @@ namespace Phoenix.Server.Services.MainServices.Users
     {
         User GetUserById(int id);
         Task<CrudResult> CreateUser(UserRequest request);
+        Task<BaseResponse<UserDto>> GetAllUser(UserRequest request);
     }
 
     public class UserService : IUserService
@@ -60,6 +64,34 @@ namespace Phoenix.Server.Services.MainServices.Users
         private FalconUserLoginResults ValidateFalconUser(string username, string password)
         {
             return FalconUserLoginResults.Successful;
+        }
+
+        //lấy danh sách nhóm thuốc
+        public async Task<BaseResponse<UserDto>> GetAllUser(UserRequest request)
+        {
+            var result = new BaseResponse<UserDto>();
+            try
+            {
+                // setup query
+                var query = _dataContext.Users.AsQueryable();
+
+                // filter
+                if (!string.IsNullOrEmpty(request.UserName))
+                {
+                    query = query.Where(d => d.UserName.Contains(request.UserName));
+                }
+
+                query = query.OrderByDescending(d => d.Id);
+
+                var data = await query.ToListAsync();
+                result.Data = data.MapTo<UserDto>();
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return result;
         }
 
         public async Task<CrudResult> CreateUser(UserRequest request)
