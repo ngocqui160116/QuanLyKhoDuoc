@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -8,6 +9,7 @@ namespace Phoenix.Server.Web.Areas.Admin.Models.Medicine
     public class MedicineModel
     {
         public int IdMedicine { get; set; }
+        [Required(ErrorMessage = "Số đăng ký không được bỏ trống")]
         public string RegistrationNumber { get; set; }
         public string Name { get; set; }
         public int IdGroup { get; set; }         //

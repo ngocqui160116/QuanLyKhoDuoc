@@ -20,7 +20,7 @@ namespace Phoenix.Server.Services.MainServices
     {
         Task<BaseResponse<StockDto>> GetAllStock(StockRequest request);
         /// 
-        Task<BaseResponse<StockDtoWeb>> GetAll(StockRequest request);
+        Task<BaseResponse<StockDto>> GetAll(StockRequest request);
         Task<BaseResponse<StockDto>> Create(StockRequest request);
         Task<BaseResponse<StockInfoDto>> GetAllStockInfoById(int Id, StockRequest request);
         Stock GetLatestStock();
@@ -60,9 +60,9 @@ namespace Phoenix.Server.Services.MainServices
         }
 
         /// 
-        public async Task<BaseResponse<StockDtoWeb>> GetAll(StockRequest request)
+        public async Task<BaseResponse<StockDto>> GetAll(StockRequest request)
         {
-            var result = new BaseResponse<StockDtoWeb>();
+            var result = new BaseResponse<StockDto>();
 
             try
             {
@@ -79,7 +79,7 @@ namespace Phoenix.Server.Services.MainServices
                 //var data = await query.ToListAsync();
                 var data = await query.Skip(request.Page * request.PageSize).Take(request.PageSize).ToListAsync();
                 result.DataCount = (int)((await query.CountAsync()) / request.PageSize) + 1;
-                result.Data = data.MapTo<StockDtoWeb>();
+                result.Data = data.MapTo<StockDto>();
 
             }
             catch (Exception ex)

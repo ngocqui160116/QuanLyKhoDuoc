@@ -51,7 +51,6 @@ namespace Phoenix.Server.Services.Infrastructure
             //.ForMember(d => d.SupplierName, o => o.MapFrom(s => s.Supplier.Name));
             CreateMap<Stock, StockDto>()
                 .ForMember(d => d.StaffName, o => o.MapFrom(s => s.Staff.Name));
-            CreateMap<Stock, StockDtoWeb>();
             CreateMap<StockInfo, StockInfoDto>()
                 .ForMember(d => d.MedicineName, o => o.MapFrom(s => s.Inventory.Medicine.Name))
                 .ForMember(d => d.Batch, o => o.MapFrom(s => s.Inventory.LotNumber))

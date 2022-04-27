@@ -1,5 +1,15 @@
 ﻿@using Falcon.Web.Mvc.HtmlExtensions
 @model Phoenix.Server.Web.Areas.Admin.Models.Medicine.MedicineModel
+<style>
+    .field-validation-error {
+        color: #ff0000;
+        font-weight: bold;
+    }
+
+    input.input-validation-error {
+        border: 1px solid #ff0000;
+    }
+</style>
 @Html.ValidationSummary(true)
 @Html.HiddenFor(model => model.IdMedicine)
 <div class="grid grid-cols-12 gap-6 mt-5">
@@ -390,57 +400,57 @@
             }
         </div>
     </div>*@
-<script>
-    $("#IdGroup").kendoComboBox({
-        dataTextField: "Name",
-        dataValueField: "IdGroup",
-        dataSource: {
-            type: "json",
-            transport: {
-                read: {
-                    url: "@Html.Raw(Url.Action("List", "Group"))",
-                    type: "POST",
-                    datatype: "json"
+@*<script>
+        $("#IdGroup").kendoComboBox({
+            dataTextField: "Name",
+            dataValueField: "IdGroup",
+            dataSource: {
+                type: "json",
+                transport: {
+                    read: {
+                        url: "@Html.Raw(Url.Action("List", "Group"))",
+                        type: "POST",
+                        datatype: "json"
+                    }
+                },
+                schema: {
+                    data: "Data",
+                    total: "Total",
+                    error: "Error"
                 }
-            },
-            schema: {
-                data: "Data",
-                total: "Total",
-                error: "Error"
             }
-        }
-    });
-    $("#IdGroup").closest('.k-combobox').addClass("form-control");
-    /////////
-    $("#IdUnit").kendoComboBox({
-        dataTextField: "Name",
-        dataValueField: "IdUnit",
-        dataSource: {
-            type: "json",
-            transport: {
-                read: {
-                    url: "@Html.Raw(Url.Action("List", "Unit"))",
-                    type: "POST",
-                    datatype: "json"
+        });
+        $("#IdGroup").closest('.k-combobox').addClass("form-control");
+        /////////
+        $("#IdUnit").kendoComboBox({
+            dataTextField: "Name",
+            dataValueField: "IdUnit",
+            dataSource: {
+                type: "json",
+                transport: {
+                    read: {
+                        url: "@Html.Raw(Url.Action("List", "Unit"))",
+                        type: "POST",
+                        datatype: "json"
+                    }
+                },
+                schema: {
+                    data: "Data",
+                    total: "Total",
+                    error: "Error"
                 }
-            },
-            schema: {
-                data: "Data",
-                total: "Total",
-                error: "Error"
             }
-        }
-    });
-    $("#Id").closest('.k-combobox').addClass("form-control");
-    //$("#ProductTypeId").kendoComboBox({
-    //    dataTextField: "Name",
-    //    dataValueField: "Id",
-    //    dataSource:
-    //        [{ Id: 1, Name: "A" },
-    //            {Id: 1, Name: "B"}
-    //        ]
+        });
+        $("#Id").closest('.k-combobox').addClass("form-control");
+        //$("#ProductTypeId").kendoComboBox({
+        //    dataTextField: "Name",
+        //    dataValueField: "Id",
+        //    dataSource:
+        //        [{ Id: 1, Name: "A" },
+        //            {Id: 1, Name: "B"}
+        //        ]
 
-    //});
-    //$("#ProductTypeId").closest('.k-combobox').addClass("form-control");
-</script>
+        //});
+        //$("#ProductTypeId").closest('.k-combobox').addClass("form-control");
+    </script>*@
 
