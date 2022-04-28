@@ -45,7 +45,7 @@
             var value = cell.getValue();
 
             if (value) {
-                value = moment(value).format("DD/MM/YYYY HH:mm:ss");
+                value = moment(value).format("DD/MM/YYYY");
             }
 
             return value;
@@ -86,12 +86,12 @@
                 currency: 'VND',
             }),*@
             columns: [
-                { title: "Mã", field: "Id", sorter: "string", width: 120 },
                 { title: "Tên thuốc", field: "MedicineName", sorter: "string", width: 280 },
                 { title: "Số lượng tồn", field: "Count", sorter: "string", width: 200 },
                 { title: "Số lô", field: "LotNumber", sorter: "string", width: 200 },
-                //{ title: "Giá", field: "UnitPrice", sorter: "string", width: 200, formatter: "UnitPrice".toLocaleString("it-IT", { style: "currency", currency: "VND" }); },
-                { title: "Giá", field: "UnitPrice", sorter: "string", width: 200, formatter: priceFormatter},
+                {
+                    title: "Hạn sử dụng", field: "HSD", sorter: "date", width: 180, formatter: dateFormatter
+                },
                 //{ title: "Giá", field: "UnitPrice", sorter: "string", width: 200, formatter.format(UnitPrice) },
 
                 @*{
