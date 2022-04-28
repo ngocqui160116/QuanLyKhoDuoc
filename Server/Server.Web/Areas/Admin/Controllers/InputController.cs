@@ -108,7 +108,7 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
 
             await _inputService.Cancel(model.Id);
             SuccessNotification("Đã hủy phiếu nhập");
-            return RedirectToAction("InputInfo/Detail/" + model.Id);
+            return RedirectToAction("Index");
         }
         //lấy ds hóa đơn đã hoàn thành
         public ActionResult Complete()

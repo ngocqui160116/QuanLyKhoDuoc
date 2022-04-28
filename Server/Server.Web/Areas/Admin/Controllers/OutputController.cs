@@ -81,7 +81,7 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
             {
                 IdStaff = model.IdStaff,
                 IdReason = model.IdReason,
-                DateOutput = DateTime.Now,
+                DateOutput = model.DateOutput,
 
                 List = JsonConvert.DeserializeObject<List<OutputContentDto>>(model.TableContent)
 

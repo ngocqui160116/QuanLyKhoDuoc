@@ -6,17 +6,9 @@
     <div class="intro-y col-span-12 lg:col-span-6">
         <div class="intro-y box p-5">
             <div class="mt-3">
-                <label for="regular-form-1" class="form-label">Mã hóa đơn</label>
-                <input id="regular-form-1" type="text" class="form-control"  @Html.EditorFor(model => model.IdInput, new { htmlAttributes = new { @class = "form-control" } })
-            </div>
-            <div class="mt-3">
                 <label for="regular-form-1" class="form-label">Lô</label>
                 <input id="regular-form-1" type="text" class="form-control"  @Html.EditorFor(model => model.IdBatch, new { htmlAttributes = new { @class = "form-control" } })
             </div>
-        </div>
-    </div>
-    <div class="intro-y col-span-12 lg:col-span-6">
-        <div class="intro-y box p-5">
             <div class="mt-3">
                 <label for="regular-form-1" class="form-label">Số lượng</label>
                 <input id="regular-form-1" type="text" class="form-control" @Html.EditorFor(model => model.Count, new { htmlAttributes = new { @class = "form-control" } })

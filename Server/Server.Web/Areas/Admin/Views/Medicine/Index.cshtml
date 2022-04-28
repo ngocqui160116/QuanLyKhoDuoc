@@ -78,7 +78,7 @@
             columns: [
                 {
                     title: "Mã thuốc", field: "IdMedicine", sorter: "string", width: 120, formatter(cell, formatterParams) {
-                        return `<a href="../Admin/Medicine/Update/${cell.getData().IdMedicine}" class="text-theme-1 dark:text-theme-10">${cell.getData().Name}</a>`
+                        return `<a href="../Admin/Medicine/Update/${cell.getData().IdMedicine}" class="text-theme-1 dark:text-theme-10">${cell.getData().IdMedicine}</a>`
                     }
                 },
                 {
@@ -94,27 +94,27 @@
                 },
                 {
                     title: "Tên nhóm thuốc", field: "GroupName", sorter: "string", width: 300, formatter(cell, formatterParams) {
-                        return `<a href="../Admin/Medicine/Update/${cell.getData().IdMedicine}" class="text-theme-1 dark:text-theme-10">${cell.getData().RegistrationNumber}</a>`
+                        return `<a href="../Admin/Medicine/Update/${cell.getData().IdMedicine}" class="text-theme-1 dark:text-theme-10">${cell.getData().GroupName}</a>`
                     }
                 },
                 {
                     title: "Hoạt chất", field: "Active", sorter: "string", width: 180, formatter(cell, formatterParams) {
-                        return `<a href="../Admin/Medicine/Update/${cell.getData().IdMedicine}" class="text-theme-1 dark:text-theme-10">${cell.getData().RegistrationNumber}</a>`
+                        return `<a href="../Admin/Medicine/Update/${cell.getData().IdMedicine}" class="text-theme-1 dark:text-theme-10">${cell.getData().Active}</a>`
                     }
                 },
                 {
                     title: "Hàm lượng", field: "Content", sorter: "string", width: 180, formatter(cell, formatterParams) {
-                        return `<a href="../Admin/Medicine/Update/${cell.getData().IdMedicine}" class="text-theme-1 dark:text-theme-10">${cell.getData().RegistrationNumber}</a>`
+                        return `<a href="../Admin/Medicine/Update/${cell.getData().IdMedicine}" class="text-theme-1 dark:text-theme-10">${cell.getData().Content}</a>`
                     }
                 },
                 {
                     title: "Quy cách đóng gói", field: "Packing", sorter: "string", width: 250, formatter(cell, formatterParams) {
-                        return `<a href="../Admin/Medicine/Update/${cell.getData().IdMedicine}" class="text-theme-1 dark:text-theme-10">${cell.getData().RegistrationNumber}</a>`
+                        return `<a href="../Admin/Medicine/Update/${cell.getData().IdMedicine}" class="text-theme-1 dark:text-theme-10">${cell.getData().Packing}</a>`
                     }
                 },
                 {
                     title: "Trạng thái", field: "Status", sorter: "string", width: 180, formatter(cell, formatterParams) {
-                        return `<a href="../Admin/Medicine/Update/${cell.getData().IdMedicine}" class="text-theme-1 dark:text-theme-10">${cell.getData().RegistrationNumber}</a>`
+                        return `<a href="../Admin/Medicine/Update/${cell.getData().IdMedicine}" class="text-theme-1 dark:text-theme-10">${cell.getData().Status}</a>`
                     }
                 },
                 {
