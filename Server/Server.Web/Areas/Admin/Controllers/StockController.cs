@@ -36,8 +36,7 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
             var stocks = await _stockService.GetAll(new StockRequest()
             {
                 Page = command.Page - 1,
-                PageSize = command.PageSize,
-                Note = model.Note
+                PageSize = command.PageSize
             });
 
             var gridModel = new DataSourceResult
