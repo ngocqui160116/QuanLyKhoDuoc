@@ -74,7 +74,7 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
             var inputs = await _stockService.Create(new StockRequest
             {
                 IdStaff = model.IdStaff,
-                Date = DateTime.Now,
+                Date = model.Date,
                 Note = model.Note,
 
                 List = JsonConvert.DeserializeObject<List<StockContentDto>>(model.TableContent)

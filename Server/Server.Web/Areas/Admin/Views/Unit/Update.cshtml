@@ -13,11 +13,11 @@
     @Html.AntiForgeryToken()
     <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
         <h2 class="text-lg font-medium mr-auto">
-            Tên đơn vị tính : @Model.Name
+            Chi tiết đơn vị tính : @Model.Name
         </h2>
         <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
             <a href="@Html.Raw(Url.Action("Index"))" class="btn btn-primary text-white shadow-md mr-2">
-                <i data-feather="skip-back" class="w-4 h-4 mr-2"></i> Quay lại
+                <i data-feather="corner-down-left" class="w-4 h-4 mr-2"></i> Quay lại
             </a>
             <button type="submit" class="btn btn-success text-white shadow-md mr-2">
                 <i data-feather="save" class="w-4 h-4 mr-2"></i>Lưu

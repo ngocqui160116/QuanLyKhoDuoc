@@ -100,7 +100,7 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
                 Address = model.Address
             });
             SuccessNotification("Chỉnh sửa thông tin nhà cung cấp thành công");
-            return RedirectToAction("Update", new { id = model.IdSupplier });
+            return RedirectToAction("Index");
         }
         [HttpPost]
         public async Task<ActionResult> Delete(int id)

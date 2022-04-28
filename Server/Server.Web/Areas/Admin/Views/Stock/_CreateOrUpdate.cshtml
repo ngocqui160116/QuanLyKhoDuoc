@@ -79,6 +79,12 @@
                     @Html.ValidationMessageFor(model => model.Note)
                 </div>
             </div>
+            <div class="mt-3">
+                <label>Ngày kiểm kho</label>
+                <div class="mt-2">
+                    <input class="datepicker form-control w-56 block mx-auto" data-single-mode="true" @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class="datepicker form-control w-56 block mx-auto" } })
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -111,7 +111,7 @@ namespace Phoenix.Server.Services.MainServices
                 Stock stocks = new Stock
                 {
                     IdStaff = request.IdStaff,
-                    Date = DateTime.Now,
+                    Date = request.Date,
                     Note = request.Note
                 };
 
@@ -126,7 +126,7 @@ namespace Phoenix.Server.Services.MainServices
                     var LatestStockInfo = _stockinfoService.GetLatestStockInfo();
                     InventoryTags inventoryTags = new InventoryTags();
                     inventoryTags.DocumentId = "PKT00" + LatestStockInfo.Id;
-                    inventoryTags.DocumentDate = DateTime.Now;
+                    inventoryTags.DocumentDate = request.Date;
                     inventoryTags.DocumentType = 5;
                     inventoryTags.MedicineId = item.medicineId;
                     inventoryTags.LotNumber = item.LotNumber;
@@ -140,16 +140,20 @@ namespace Phoenix.Server.Services.MainServices
                     {
                         if (i.IdMedicine == item.medicineId && i.LotNumber == item.LotNumber)
                         {
-                            i.Count = item.Count;
-                            await _dataContext.SaveChangesAsync();
+                           
 
                             //thêm chi tiết phiếu kiểm kho
                             StockInfo stockinfos = new StockInfo();
                             stockinfos.Stock_Id = LatestStock.Id;
                             stockinfos.Medicine_Id = item.medicineId;
+                            stockinfos.Amount = i.Count;
                             stockinfos.ActualAmount = item.Count;
                             stockinfos.Inventory_Id = i.Id;
                             _dataContext.StockInfos.Add(stockinfos);
+                            await _dataContext.SaveChangesAsync();
+                            
+                            //cập nhật số lượng thực
+                            i.Count = item.Count;
                             await _dataContext.SaveChangesAsync();
                         }
                     }

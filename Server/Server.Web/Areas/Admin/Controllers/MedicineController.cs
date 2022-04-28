@@ -36,8 +36,8 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
             {
                 Page = command.Page - 1,
                 PageSize = command.PageSize,
-                IdGroup = model.IdGroup,
-                IdUnit = model.IdUnit
+                Name = model.Name,
+                RegistrationNumber = model.RegistrationNumber
             });
 
             var gridModel = new DataSourceResult
@@ -131,7 +131,7 @@ namespace Phoenix.Server.Web.Areas.Admin.Controllers
                 Status = model.Status
             });
             SuccessNotification("Chỉnh sửa thông tin chương trình thành công");
-            return RedirectToAction("Index", new { id = model.IdMedicine });
+            return RedirectToAction("Index");
         }
         [HttpPost]
         public async Task<ActionResult> Pause(int id)
